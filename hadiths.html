@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Noor Al Huda — Hadiths</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: "Segoe UI", sans-serif; margin:0; background:#fff; color:#1f2937; }
+    header { background:#136f3c; color:#fff; padding:1rem; display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
+    header h1 { margin:0; font-size:1.2rem; flex:1; }
+    header input, header select { padding:0.4rem; border-radius:6px; border:1px solid #ccc; }
+    header button { padding:0.4rem 0.8rem; border:none; border-radius:6px; background:#fff; color:#136f3c; cursor:pointer; }
+    header button:hover { background:#f0fdf4; }
+    main { max-width:1100px; margin:1.5rem auto; padding:0 1rem; }
+    .hadith { border-bottom:1px solid #e5e7eb; padding:1rem 0; display:flex; gap:1rem; }
+    .meta { font-size:0.85rem; color:#6b7280; margin-bottom:0.25rem; flex-basis:100%; }
+    .arabic { flex:1; font-size:1.05rem; line-height:1.6; direction:rtl; border-left:1px solid #ddd; padding-left:1rem; }
+    .translation { flex:1; font-size:1rem; line-height:1.6; direction:ltr; }
+    .pager { margin-top:1rem; display:flex; gap:0.5rem; }
+    .pager button { padding:0.4rem 0.8rem; border:1px solid #ccc; border-radius:6px; cursor:pointer; }
+    .pager button:hover { background:#f9fafb; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Noor Al Huda — Al‑Kafi</h1>
+    <input id="searchBox" placeholder="Search hadiths…" />
+    <button onclick="searchHadiths()">Search</button>
+    <button onclick="resetSearch()">Reset</button>
+    <select id="langSelect" onchange="changeLanguage()">
+      <option value="en" selected>English</option>
+      <option value="ur">Urdu</option>
+    </select>
+  </header>
+
+  <main id="hadithContainer">
+    <p>Loading hadiths…</p>
+  </main>
+
+  <script>
+    const container = document.getElementById("hadithContainer");
+    let allHadiths = [];
+    let filtered = [];
+    let currentPage = 1;
+    const perPage = 10;
+    let currentLang = "en";
+    const translationCache = {};
+
+    // Load JSON
+    fetch("data/alkafi.json")
+      .then(res => res.json())
+      .then(data => {
+        allHadiths = data;
+        filtered = allHadiths;
+        renderPage(1);
+      })
+      .catch(err => {
+        container.innerHTML = "<p style='color:red'>Could not load data/alkafi.json</p>";
+      });
+
+    function renderPage(page) {
+      currentPage = page;
+      container.innerHTML = "";
+      const start = (page-1) * perPage;
+      const end = start + perPage;
+      const slice = filtered.slice(start, end);
+
+      if (slice.length === 0) {
+        container.innerHTML = "<p>No hadiths found.</p>";
+        return;
+      }
+
+      slice.forEach(h => {
+        const div = document.createElement("div");
+        div.className = "hadith";
+        div.innerHTML = `
+          <div class="arabic">
+            <div class="meta">
+              Volume: ${h.volume || ""} | Chapter: ${h.chapter || ""} | Section: ${h.section || ""} | Number: ${h.number || ""}
+            </div>
+            <div>${h.text || ""}</div>
+          </div>
+          <div class="translation" id="t-${h.number}">Translating...</div>
+        `;
+        container.appendChild(div);
+
+        translateHadith(h.text, currentLang, `t-${h.number}`);
+      });
+
+      const pager = document.createElement("div");
+      pager.className = "pager";
+      if (page > 1) pager.innerHTML += `<button onclick="renderPage(${page-1})">⬅ Prev</button>`;
+      if (end < filtered.length) pager.innerHTML += `<button onclick="renderPage(${page+1})">Next ➡</button>`;
+      container.appendChild(pager);
+    }
+
+    function searchHadiths() {
+      const q = document.getElementById("searchBox").value.trim().toLowerCase();
+      if (!q) return;
+      filtered = allHadiths.filter(h =>
+        (h.text && h.text.toLowerCase().includes(q)) ||
+        (h.chapter && h.chapter.toLowerCase().includes(q)) ||
+        (h.section && h.section.toLowerCase().includes(q))
+      );
+      renderPage(1);
+    }
+
+    function resetSearch() {
+      document.getElementById("searchBox").value = "";
+      filtered = allHadiths;
+      renderPage(1);
+    }
+
+    function changeLanguage() {
+      currentLang = document.getElementById("langSelect").value;
+      renderPage(currentPage);
+    }
+
+    async function translateHadith(arabicText, lang, elementId) {
+      const key = arabicText + "|" + lang;
+      if (translationCache[key]) {
+        document.getElementById(elementId).innerText = translationCache[key];
+        return;
+      }
+      try {
+        const res = await fetch("https://api.mymemory.translated.net/get?q=" 
+                                + encodeURIComponent(arabicText) 
+                                + "&langpair=ar|" + lang);
+        const data = await res.json();
+        const translated = data.responseData.translatedText;
+        translationCache[key] = translated;
+        document.getElementById(elementId).innerText = translated;
+      } catch (e) {
+        document.getElementById(elementId).innerText = "[Translation failed]";
+      }
+    }
+  </script>
+</body>
+</html>

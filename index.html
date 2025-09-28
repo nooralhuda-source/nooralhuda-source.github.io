@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Noor Al Huda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --green:#136f3c;        /* header green */
+      --bg:#ffffff;           /* white background */
+      --text:#1f2937;         /* neutral text */
+      --muted:#6b7280;        /* secondary text */
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --accent:#0ea5e9;       /* accent for small elements */
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text)}
+
+    /* Header */
+    header{
+      background:var(--green);color:#fff;padding:1rem 1.25rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem
+    }
+    header .brand{display:flex;align-items:center;gap:0.75rem}
+    .brand h1{margin:0;font-size:1.25rem;font-weight:700}
+    .brand small{opacity:0.9}
+    .controls{display:flex;align-items:center;gap:0.6rem}
+    .select, .btn{
+      appearance:none;background:#fff;color:#0b3d21;border:1px solid var(--border);
+      padding:0.45rem 0.65rem;border-radius:8px;font-weight:600;cursor:pointer
+    }
+    .btn{display:inline-flex;align-items:center;gap:0.4rem}
+    .btn:hover{filter:brightness(1.05)}
+
+    /* Container */
+    .container{max-width:1100px;margin:0 auto;padding:1.25rem}
+
+    /* Hero */
+    .hero{
+      background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius);
+      padding:1.5rem;display:flex;gap:1.25rem;align-items:center;justify-content:space-between
+    }
+    .hero h2{margin:0 0 0.5rem 0}
+    .hero p{margin:0;color:var(--muted)}
+    .hero-actions{margin-top:0.75rem;display:flex;gap:0.6rem;flex-wrap:wrap}
+    .primary{
+      background:#ffffff;color:var(--green);border:1px solid var(--green)
+    }
+
+    /* Grid cards */
+    .section{margin-top:1.75rem}
+    .section h3{margin:0 0 0.75rem 0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}}
+
+    .card{
+      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+      padding:1rem;display:flex;flex-direction:column;gap:0.5rem;box-shadow:0 2px 6px rgba(0,0,0,0.05)
+    }
+    .card h4{margin:0}
+    .card p{margin:0;color:var(--muted)}
+    .card a{
+      margin-top:auto;align-self:flex-start;text-decoration:none;color:var(--green);font-weight:700
+    }
+    .card a:hover{text-decoration:underline}
+
+    /* Footer */
+    footer{margin-top:2rem;padding:1.5rem 0;text-align:center;color:var(--muted);font-size:0.95rem}
+
+    /* Dark mode overrides */
+body.dark-mode {
+  --bg:#111827;        /* dark background */
+  --text:#f9fafb;      /* light text */
+  --muted:#9ca3af;     /* softer gray for secondary text */
+  --card:#1f2937;      /* dark card background */
+  --border:#374151;    /* darker border */
+}
+
+  </style>
+</head>
+<script>
+  // On page load, check saved preference
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    // Save preference
+    if (document.body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+</script>
+
+
+<style>
+#chatWidget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  font-family: Nunito, sans-serif;
+  z-index: 9999;
+}
+#chatHeader {
+  background: var(--green);
+  color: #fff;
+  padding: 0.6rem;
+  border-radius: 12px 12px 0 0;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+}
+#chatBody {
+  display: none;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+#chatMessages {
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+#chatMessages div {
+  margin-bottom: 0.3rem;
+}
+#chatInput {
+  width: 70%;
+  padding: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+#chatBody button {
+  padding: 0.4rem 0.6rem;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+}
+</style>
+
+<script>
+function toggleChat() {
+  const body = document.getElementById("chatBody");
+  body.style.display = body.style.display === "none" ? "block" : "none";
+}
+
+async function sendChat() {
+  const input = document.getElementById("chatInput");
+  const message = input.value.trim();
+  if (!message) return;
+  input.value = "";
+
+  const messagesDiv = document.getElementById("chatMessages");
+  messagesDiv.innerHTML += `<div><b>You:</b> ${message}</div>`;
+
+  const res = await fetch("/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message })
+  });
+  const data = await res.json();
+  messagesDiv.innerHTML += `<div><b>AI:</b> ${data.reply}</div>`;
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+</script>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true">
+        <path d="M12 2l7 5v10l-7 5-7-5V7l7-5zm0 3.2L7 8v8l5 3.2L17 16V8l-5-2.8z"/>
+      </svg>
+      <div>
+        <h1 id="title">Noor Al Huda</h1>
+        <small id="subtitle">Personal Islamic companion • Shia Ithna Ashari</small>
+      </div>
+    </div>
+    <div class="controls">
+      <select id="lang" class="select" aria-label="Language">
+        <option value="en" selected>English</option>
+        <option value="ur">اردو</option>
+        <option value="ar">العربية</option>
+        <option value="fa">فارسی</option>
+      </select>
+      <button class="btn" onclick="location.href='settings.html'">⚙️ Settings</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div>
+        <h2 id="heroTitle">Illuminate your day with guidance</h2>
+        <p id="heroDesc">Explore Qur’an, Hadiths, Duas, Calendar, and Salah in a calm, modern interface.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="/quran" id="heroAction">Start reading Qur’an</a>
+        </div>
+      </div>
+      <div aria-hidden="true">
+        <svg width="220" height="140" viewBox="0 0 220 140" role="img">
+          <rect x="0" y="0" width="220" height="140" fill="#e6f4ea" rx="16"></rect>
+          <circle cx="70" cy="70" r="34" fill="#cdebd6"></circle>
+          <circle cx="150" cy="55" r="22" fill="#b9e3c5"></circle>
+          <rect x="32" y="110" width="156" height="10" fill="#cdebd6" rx="5"></rect>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Quick access cards -->
+    <section class="section">
+      <h3 id="sectionTitle">Quick access</h3>
+      <div class="grid">
+        <article class="card">
+          <h4 id="quranCardTitle">📖 Qur’an</h4>
+          <p id="quranCardDesc">Read and reflect on the Holy Qur’an.</p>
+          <a href="/quran">📖 Qur’an</a>
+        </article>
+
+        <article class="card">
+          <h4 id="hadithCardTitle">📜 Hadiths</h4>
+          <p id="hadithCardDesc">Books like Al‑Kafi, Tahdhib, and Faqih.</p>
+          <a href="hadiths-home.html" id="hadithLink">Explore</a>
+        </article>
+
+        <article class="card">
+          <h4 id="duasCardTitle">🤲 Duas</h4>
+          <p id="duasCardDesc">Separate duas like Dua Nudbah.</p>
+          <a href="duas.html" id="duasLink">View</a>
+        </article>
+
+        <article class="card">
+          <h4 id="calendarCardTitle">📅 Calendar</h4>
+          <p id="calendarCardDesc">Islamic dates and Shia events.</p>
+          <a href="calendar.html" id="calendarLink">See calendar</a>
+        </article>
+
+        <article class="card">
+          <h4 id="salahCardTitle">🕋 Salah</h4>
+          <p id="salahCardDesc">Prayer times and guidance.</p>
+          <a href="salah.html" id="salahLink">Check</a>
+        </article>
+
+      </div>
+    </section>
+    
+  </main>
+
+  <footer>
+    © 2025 Noor Al Huda — Personal Islamic Companion (Shia Ithna Ashari)
+  </footer>
+
+  <script>
+    // Simple language strings for UI labels (English, Urdu, Arabic, Farsi)
+    const i18n = {
+      en: {
+        subtitle: "Personal Islamic companion • Shia Ithna Ashari",
+        heroTitle: "Illuminate your day with guidance",
+        heroDesc: "Explore Qur’an, Hadiths, Duas, Calendar, and Salah in a calm, modern interface.",
+        heroAction: "Start reading Qur’an",
+        sectionTitle: "Quick access",
+        quran: ["📖 Qur’an", "Read and reflect on the Holy Qur’an.", "Open"],
+        hadiths: ["📜 Hadiths", "Books like Al‑Kafi, Tahdhib, and Faqih.", "Explore"],
+        duas: ["🤲 Duas", "Separate duas like Dua Nudbah.", "View"],
+        calendar: ["📅 Calendar", "Islamic dates and Shia events.", "See calendar"],
+        salah: ["🕋 Salah", "Prayer times and guidance.", "Check"]
+      },
+      ur: {
+        subtitle: "ذاتی اسلامی ساتھی • شیعہ اثنا عشری",
+        heroTitle: "ہدایت سے اپنے دن کو روشن کریں",
+        heroDesc: "قرآن، احادیث، دعائیں، اسلامی کیلنڈر اور نماز — آسان اور خوبصورت انداز میں۔",
+        heroAction: "قرآن پڑھنا شروع کریں",
+        sectionTitle: "فوری رسائی",
+        quran: ["📖 قرآن", "قرآنِ مجید پڑھیں اور غور کریں۔", "کھولیں"],
+        hadiths: ["📜 احادیث", "الکافی، تہذیب، فقہ جیسے کتب۔", "دیکھیں"],
+        duas: ["🤲 دعائیں", "دعائے ندبہ جیسی الگ دعائیں۔", "دیکھیں"],
+        calendar: ["📅 کیلنڈر", "اسلامی تاریخیں اور شیعہ ایام۔", "کیلنڈر دیکھیں"],
+        salah: ["🕋 نماز", "نماز کے اوقات اور رہنمائی۔", "چیک کریں"]
+      },
+      ar: {
+        subtitle: "رفيق إسلامي شخصي • شيعة اثنا عشري",
+        heroTitle: "أنر يومك بالهداية",
+        heroDesc: "اقرأ القرآن والأحاديث والأدعية وتقويماً إسلامياً والصلاة بواجهة هادئة.",
+        heroAction: "ابدأ قراءة القرآن",
+        sectionTitle: "وصول سريع",
+        quran: ["📖 القرآن", "اقرأ وتأمل في القرآن الكريم.", "افتح"],
+        hadiths: ["📜 الأحاديث", "كتب مثل الكافي، التهذيب، والفقيه.", "استكشف"],
+        duas: ["🤲 الأدعية", "أدعية منفصلة مثل دعاء الندبة.", "عرض"],
+        calendar: ["📅 التقويم", "تواريخ إسلامية وأحداث شيعية.", "اعرض التقويم"],
+        salah: ["🕋 الصلاة", "أوقات الصلاة والإرشاد.", "تحقق"]
+      },
+      fa: {
+        subtitle: "همراه اسلامی شخصی • شیعه دوازده‌امامی",
+        heroTitle: "روزت را با هدایت روشن کن",
+        heroDesc: "قرآن، احادیث، دعاها، تقویم اسلامی و نماز در رابط کاربری آرام و مدرن.",
+        heroAction: "خواندن قرآن را آغاز کن",
+        sectionTitle: "دسترسی سریع",
+        quran: ["📖 قرآن", "قرآن کریم را بخوان و تدبر کن.", "باز کن"],
+        hadiths: ["📜 احادیث", "کتاب‌هایی مانند الکافی، تهذیب و فقیه.", "کاوش"],
+        duas: ["🤲 دعاها", "دعاهای مجزا مثل دعای ندبه.", "مشاهده"],
+        calendar: ["📅 تقویم", "تاریخ‌های اسلامی و رویدادهای شیعی.", "مشاهده تقویم"],
+        salah: ["🕋 نماز", "اوقات نماز و راهنما.", "بررسی"]
+      }
+    };
+
+    const $ = id => document.getElementById(id);
+    const applyLang = code => {
+      const t = i18n[code] || i18n.en;
+      $("subtitle").textContent = t.subtitle;
+      $("heroTitle").textContent = t.heroTitle;
+      $("heroDesc").textContent = t.heroDesc;
+      $("heroAction").textContent = t.heroAction;
+      $("sectionTitle").textContent = t.sectionTitle;
+
+      $("quranCardTitle").textContent = t.quran[0];
+      $("quranCardDesc").textContent = t.quran[1];
+      $("quranLink").textContent = t.quran[2];
+
+      $("hadithCardTitle").textContent = t.hadiths[0];
+      $("hadithCardDesc").textContent = t.hadiths[1];
+      $("hadithLink").textContent = t.hadiths[2];
+
+      $("duasCardTitle").textContent = t.duas[0];
+      $("duasCardDesc").textContent = t.duas[1];
+      $("duasLink").textContent = t.duas[2];
+
+      $("calendarCardTitle").textContent = t.calendar[0];
+      $("calendarCardDesc").textContent = t.calendar[1];
+      $("calendarLink").textContent = t.calendar[2];
+
+      $("salahCardTitle").textContent = t.salah[0];
+      $("salahCardDesc").textContent = t.salah[1];
+      $("salahLink").textContent = t.salah[2];
+
+      // Optional RTL switch for Arabic
+      document.documentElement.dir = (code === "ar") ? "rtl" : "ltr";
+    };
+
+    // Init language from select / persist in localStorage
+    const select = document.getElementById("lang");
+    const saved = localStorage.getItem("nuh-lang");
+    if (saved && i18n[saved]) {
+      select.value = saved;
+      applyLang(saved);
+    } else {
+      applyLang(select.value);
+    }
+    select.addEventListener("change", () => {
+      localStorage.setItem("nuh-lang", select.value);
+      applyLang(select.value);
+    });
+  </script>
+  <!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-4756be11-aa31-4de3-a9dc-988953b54e19" data-elfsight-app-lazy></div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Noor Al Huda - Surah Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: "Segoe UI", sans-serif; background:#f9f9f9; color:#222; margin:0; padding:0; }
+    header { background:#004080; color:#fff; padding:1rem; text-align:center; }
+    .back-links { margin:1rem; text-align:center; }
+    .back-links a { margin:0 1rem; color:#004080; text-decoration:none; }
+    .surah-info { text-align:center; margin:1rem 0; }
+    .surah-info h2 { margin:0.5rem 0; }
+    .arabic { font-family:'Amiri Quran', serif; font-size:2rem; text-align:right; direction:rtl; }
+    .ayah { background:#fff; margin:1rem auto; padding:1rem; border-radius:8px; max-width:800px; }
+    .translation { margin-top:0.5rem; font-size:1rem; color:#444; }
+    body.quran-only .translation { display:none; }
+    .controls { text-align:center; margin:1rem; }
+    .controls input[type="text"] { padding:0.5rem; width:250px; }
+    .translation-options { max-width:800px; margin:1rem auto; padding:1rem; background:#eee; border-radius:8px; }
+    .translation-options h4 { margin-top:0; }
+    .translation-options label { display:block; margin:0.25rem 0; }
+    body.dark { background:#1a1a1a; color:#eee; }
+    body.dark .ayah { background:#2a2a2a; }
+    body.dark .translation-options { background:#333; }
+  </style>
+</head>
+<script>
+  // On page load, check saved preference
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    // Save preference
+    if (document.body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+</script>
+
+<body>
+  <header>
+    <h1>Noor Al Huda - Surah Viewer</h1>
+  </header>
+
+  <div class="back-links">
+    <a href="index.html">⬅ Back to Home</a>
+    <a href="quran.html">⬅ Back to Qur’an</a>
+  </div>
+
+  <!-- Surah info block -->
+  <div class="surah-info">
+    <h2 id="surahName">Loading...</h2>
+    <h3 id="surahMeaning"></h3>
+    <p id="surahHistory"></p>
+    <audio id="surahAudio" controls></audio>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button id="quranOnlyBtn">📖 Qur’an Only</button>
+    <button id="darkModeBtn">🌙 Dark Mode</button>
+    <input type="text" id="searchBox" placeholder="Search translations...">
+  </div>
+
+  <!-- Translation checkboxes -->
+  <div class="translation-options" id="translationOptions">
+    <h4>Translations</h4>
+    <strong>English</strong>
+    <label><input type="checkbox" value="en.haleem" checked> M.A.S. Abdel Haleem</label>
+    <label><input type="checkbox" value="en.yusufali"> A Yusuf Ali</label>
+    <label><input type="checkbox" value="en.pickthall"> M. Pickthall</label>
+    <br>
+    <strong>Urdu</strong>
+    <label><input type="checkbox" value="ur.jalandhry"> Fateh Muhammad Jalandhry</label>
+    <br>
+    <strong>Farsi</strong>
+    <label><input type="checkbox" value="fa.ansarian"> Ansarian</label>
+    <br>
+    <strong>Arabic (Modern Standard)</strong>
+    <label><input type="checkbox" value="ar.muyassar"> Al-Muyassar</label>
+  </div>
+
+  <!-- Ayahs will be injected here -->
+  <div id="ayahContainer"></div>
+
+  <!-- Scripts -->
+  <script src="main.js"></script>
+</body>
+</html>

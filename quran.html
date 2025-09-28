@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Noor Al Huda — Qur’an</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Link to unified stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Apply saved theme on load
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark-mode");
+    }
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle("dark-mode");
+      if (document.documentElement.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+      } else {
+        localStorage.setItem("theme", "light");
+      }
+      updateThemeIcon();
+    }
+    function updateThemeIcon() {
+      const btn = document.getElementById("themeToggle");
+      if (btn) {
+        btn.textContent = document.documentElement.classList.contains("dark-mode") ? "☀️" : "🌙";
+      }
+    }
+    function toggleMenu() {
+      document.getElementById("mainNav").classList.toggle("open");
+    }
+  </script>
+  <style>
+    /* Surah grid styles (kept minimal, uses CSS variables) */
+    .surah-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .surah-card {
+      background: var(--card);
+      padding: 1rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    }
+    .surah-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .surah-card h3 {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      color: var(--text);
+    }
+    .surah-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .search-bar {
+      margin: 1rem auto;
+      max-width: 400px;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .search-bar button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--green);
+      color: #fff;
+      cursor: pointer;
+    }
+    .search-bar button:hover {
+      filter: brightness(1.1);
+    }
+  </style>
+</head>
+<body onload="updateThemeIcon()">
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <!-- fixed logo path -->
+      <img src="images/logo.png" alt="Noor Al Huda Logo">
+      <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
+    </div>
+
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+
+    <nav id="mainNav">
+      <a href="quran.html">📖 Qur’an</a>
+      <a href="duas.html">🤲 Duas</a>
+      <a href="hadiths-home.html">📜 Hadiths</a>
+      <a href="calendar.html">📅 Calendar</a>
+      <a href="salah.html">🕌 Salah</a>
+
+      <!-- Utility links with bigger gap -->
+      <a href="index.html" class="utility">🏠 Home</a>
+      <a href="settings.html" class="utility">⚙ Settings</a>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="container">
+    <h2 style="text-align:center;">Select a Surah</h2>
+
+    <!-- Search bar -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search Surah by name (English or Arabic)">
+      <button onclick="searchSurahs()">Search</button>
+    </div>
+
+    <div class="surah-grid" id="surahGrid"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Noor Al Huda — Personal Islamic Companion (Shifa thru Ayahs)
+  </footer>
+
+  <script>
+    // Add more surahs here as needed
+    const surahs = [
+      { number: 1, name_en: "Al-Fatiha", name_ar: "الفاتحة" },
+      { number: 2, name_en: "Al-Baqarah", name_ar: "البقرة" },
+      { number: 3, name_en: "Aal-E-Imran", name_ar: "آل عمران" },
+      { number: 4, name_en: "An-Nisa", name_ar: "النساء" },
+      { number: 5, name_en: "Al-Ma'idah", name_ar: "المائدة" },
+       { number:6, name_en:"Al-An'am", name_ar:"الأنعام" },
+  { number:7, name_en:"Al-A'raf", name_ar:"الأعراف" },
+  { number:8, name_en:"Al-Anfal", name_ar:"الأنفال" },
+  { number:9, name_en:"At-Tawbah", name_ar:"التوبة" },
+  { number:10, name_en:"Yunus", name_ar:"يونس" },
+  { number:11, name_en:"Hud", name_ar:"هود" },
+  { number:12, name_en:"Yusuf", name_ar:"يوسف" },
+  { number:13, name_en:"Ar-Ra'd", name_ar:"الرعد" },
+  { number:14, name_en:"Ibrahim", name_ar:"ابراهيم" },
+  { number:15, name_en:"Al-Hijr", name_ar:"الحجر" },
+  { number:16, name_en:"An-Nahl", name_ar:"النحل" },
+  { number:17, name_en:"Al-Isra", name_ar:"الإسراء" },
+  { number:18, name_en:"Al-Kahf", name_ar:"الكهف" },
+  { number:19, name_en:"Maryam", name_ar:"مريم" },
+  { number:20, name_en:"Ta-Ha", name_ar:"طه" },
+  { number:21, name_en:"Al-Anbiya", name_ar:"الأنبياء" },
+  { number:22, name_en:"Al-Hajj", name_ar:"الحج" },
+  { number:23, name_en:"Al-Mu’minun", name_ar:"المؤمنون" },
+  { number:24, name_en:"An-Nur", name_ar:"النور" },
+  { number:25, name_en:"Al-Furqan", name_ar:"الفرقان" },
+  { number:26, name_en:"Ash-Shu'ara", name_ar:"الشعراء" },
+  { number:27, name_en:"An-Naml", name_ar:"النمل" },
+  { number:28, name_en:"Al-Qasas", name_ar:"القصص" },
+  { number:29, name_en:"Al-Ankabut", name_ar:"العنكبوت" },
+  { number:30, name_en:"Ar-Rum", name_ar:"الروم" },
+  { number:31, name_en:"Luqman", name_ar:"لقمان" },
+  { number:32, name_en:"As-Sajda", name_ar:"السجدة" },
+  { number:33, name_en:"Al-Ahzab", name_ar:"الأحزاب" },
+  { number:34, name_en:"Saba", name_ar:"سبأ" },
+  { number:35, name_en:"Fatir", name_ar:"فاطر" },
+  { number:36, name_en:"Ya-Sin", name_ar:"يس" },
+  { number:37, name_en:"As-Saffat", name_ar:"الصافات" },
+  { number:38, name_en:"Sad", name_ar:"ص" },
+  { number:39, name_en:"Az-Zumar", name_ar:"الزمر" },
+  { number:40, name_en:"Ghafir", name_ar:"غافر" },
+  { number:41, name_en:"Fussilat", name_ar:"فصلت" },
+  { number:42, name_en:"Ash-Shura", name_ar:"الشورى" },
+  { number:43, name_en:"Az-Zukhruf", name_ar:"الزخرف" },
+  { number:44, name_en:"Ad-Dukhan", name_ar:"الدخان" },
+  { number:45, name_en:"Al-Jathiya", name_ar:"الجاثية" },
+  { number:46, name_en:"Al-Ahqaf", name_ar:"الأحقاف" },
+  { number:47, name_en:"Muhammad", name_ar:"محمد" },
+  { number:48, name_en:"Al-Fath", name_ar:"الفتح" },
+  { number:49, name_en:"Al-Hujurat", name_ar:"الحجرات" },
+  { number:50, name_en:"Qaf", name_ar:"ق" },
+  { number:51, name_en:"Adh-Dhariyat", name_ar:"الذاريات" },
+  { number:52, name_en:"At-Tur", name_ar:"الطور" },
+  { number:53, name_en:"An-Najm", name_ar:"النجم" },
+  { number:54, name_en:"Al-Qamar", name_ar:"القمر" },
+  { number:55, name_en:"Ar-Rahman", name_ar:"الرحمن" },
+  { number:56, name_en:"Al-Waqia", name_ar:"الواقعة" },
+  { number:57, name_en:"Al-Hadid", name_ar:"الحديد" },
+  { number:58, name_en:"Al-Mujadila", name_ar:"المجادلة" },
+  { number:59, name_en:"Al-Hashr", name_ar:"الحشر" },
+  { number:60, name_en:"Al-Mumtahina", name_ar:"الممتحنة" },
+  { number:61, name_en:"As-Saff", name_ar:"الصف" },
+  { number:62, name_en:"Al-Jumua", name_ar:"الجمعة" },
+  { number:63, name_en:"Al-Munafiqoon", name_ar:"المنافقون" },
+  { number:64, name_en:"At-Taghabun", name_ar:"التغابن" },
+  { number:65, name_en:"At-Talaq", name_ar:"الطلاق" },
+  { number:66, name_en:"At-Tahrim", name_ar:"التحريم" },
+  { number:67, name_en:"Al-Mulk", name_ar:"الملك" },
+  { number:68, name_en:"Al-Qalam", name_ar:"القلم" },
+  { number:69, name_en:"Al-Haaqqa", name_ar:"الحاقة" },
+  { number:70, name_en:"Al-Maarij", name_ar:"المعارج" },
+  { number:71, name_en:"Nuh", name_ar:"نوح" },
+  { number:72, name_en:"Al-Jinn", name_ar:"الجن" },
+  { number:73, name_en:"Al-Muzzammil", name_ar:"المزمل" },
+  { number:74, name_en:"Al-Muddathir", name_ar:"المدثر" },
+  { number:75, name_en:"Al-Qiyama", name_ar:"القيامة" },
+  { number:76, name_en:"Al-Insan", name_ar:"الانسان" },
+  { number:77, name_en:"Al-Mursalat", name_ar:"المرسلات" },
+  { number:78, name_en:"An-Naba", name_ar:"النبأ" },
+  { number:79, name_en:"An-Nazi'at", name_ar:"النازعات" },
+  { number:80, name_en:"Abasa", name_ar:"عبس" },
+  { number:81, name_en:"At-Takwir", name_ar:"التكوير" },
+  { number:82, name_en:"Al-Infitar", name_ar:"الإنفطار" },
+  { number:83, name_en:"Al-Mutaffifin", name_ar:"المطففين" },
+  { number:84, name_en:"Al-Inshiqaq", name_ar:"الإنشقاق" },
+  { number:85, name_en:"Al-Burooj", name_ar:"البروج" },
+  { number:86, name_en:"At-Tariq", name_ar:"الطارق" },
+  { number:87, name_en:"Al-Ala", name_ar:"الأعلى" },
+  { number:88, name_en:"Al-Ghashiya", name_ar:"الغاشية" },
+  { number:89, name_en:"Al-Fajr", name_ar:"الفجر" },
+  { number:90, name_en:"Al-Balad", name_ar:"البلد" },
+  { number:91, name_en:"Ash-Shams", name_ar:"الشمس" },
+  { number:92, name_en:"Al-Lail", name_ar:"الليل" },
+  { number:93, name_en:"Ad-Duhaa", name_ar:"الضحى" },
+  { number:94, name_en:"Ash-Sharh", name_ar:"الشرح" },
+  { number:95, name_en:"At-Tin", name_ar:"التين" },
+  { number:96, name_en:"Al-Alaq", name_ar:"العلق" },
+  { number:97, name_en:"Al-Qadr", name_ar:"القدر" },
+  { number:98, name_en:"Al-Bayyina", name_ar:"البينة" },
+  { number:99, name_en:"Az-Zalzalah", name_ar:"الزلزلة" },
+  { number:100, name_en:"Al-Adiyat", name_ar:"العاديات" },
+  { number:101, name_en:"Al-Qari'a", name_ar:"القارعة" },
+  { number:102, name_en:"At-Takathur", name_ar:"التكاثر" },
+  { number:103, name_en:"Al-Asr", name_ar:"العصر" },
+  { number:104, name_en:"Al-Humazah", name_ar:"الهمزة" },
+  { number:105, name_en:"Al-Fil", name_ar:"الفيل" },
+  { number:106, name_en:"Quraish", name_ar:"قريش" },
+  { number:107, name_en:"Al-Ma'un", name_ar:"الماعون" },
+  { number:108, name_en:"Al-Kawthar", name_ar:"الكوثر" },
+  { number:109, name_en:"Al-Kafiroon", name_ar:"الكافرون" },
+  { number:110, name_en:"An-Nasr", name_ar:"النصر" },
+  { number:111, name_en:"Al-Masad", name_ar:"المسد" },
+  { number:112, name_en:"Al-Ikhlas", name_ar:"الإخلاص" },
+  { number:113, name_en:"Al-Falaq", name_ar:"الفلق" },
+  { number:114, name_en:"An-Nas", name_ar:"الناس" }
+      
+    ];
+
+    const grid = document.getElementById("surahGrid");
+
+    function renderSurahs(list) {
+      grid.innerHTML = "";
+      list.forEach(surah => {
+        const card = document.createElement("div");
+        card.className = "surah-card";
+        card.innerHTML = `
+          <h3>${surah.number}. ${surah.name_en}</h3>
+          <p>${surah.name_ar}</p>
+        `;
+        card.onclick = () => {
+          // fixed case-sensitive filename
+          window.location.href = `Surah.html?id=${surah.number}`;
+        };
+        grid.appendChild(card);
+      });
+    }
+
+    function searchSurahs() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = surahs.filter(s =>
+        s.name_en.toLowerCase().includes(query) ||
+        s.name_ar.includes(query)
+      );
+      renderSurahs(filtered);
+    }
+
+    // Initial render
+    renderSurahs(surahs);
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

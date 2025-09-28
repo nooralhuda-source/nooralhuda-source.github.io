@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Noor Al Huda — Hadiths</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    // Theme handling
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark-mode");
+    }
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle("dark-mode");
+      localStorage.setItem("theme",
+        document.documentElement.classList.contains("dark-mode") ? "dark" : "light"
+      );
+      updateThemeIcon();
+    }
+    function updateThemeIcon() {
+      const btn = document.getElementById("themeToggle");
+      if (btn) {
+        btn.textContent = document.documentElement.classList.contains("dark-mode") ? "☀️" : "🌙";
+      }
+    }
+    function toggleMenu() {
+      document.getElementById("mainNav").classList.toggle("open");
+    }
+  </script>
+
+  <style>
+    .search-bar {
+      margin: 1rem auto;
+      max-width: 400px;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+    }
+    .search-bar button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--green);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .search-bar button:hover {
+      filter: brightness(1.1);
+    }
+  </style>
+</head>
+
+<body onload="updateThemeIcon()">
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <img src="images/logo.png" alt="Noor Al Huda Logo">
+      <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
+    </div>
+
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+
+    <nav id="mainNav">
+      <a href="quran.html">📖 Qur’an</a>
+      <a href="duas.html">🤲 Duas</a>
+      <a href="hadiths-home.html">📜 Hadiths</a>
+      <a href="calendar.html">📅 Calendar</a>
+      <a href="salah.html">🕌 Salah</a>
+      <a href="index.html" class="utility">🏠</a>
+      <a href="settings.html" class="utility">⚙</a>
+      <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="container">
+    <h2 style="text-align:center;">Select a Hadith Book</h2>
+
+    <!-- Search bar -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search Hadith book by name (English or Arabic)">
+      <button onclick="searchBooks()">Search</button>
+    </div>
+
+    <div class="grid" id="bookGrid"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Noor Al Huda — Personal Islamic Companion (Wisdom thru Ahlul Bayt)
+  </footer>
+
+  <script>
+    const books = [
+      { id: "al-kafi", name_en: "Al-Kafi", name_ar: "الكافي" },
+      { id: "man-la", name_en: "Man La Yahduruhu al-Faqih", name_ar: "من لا يحضره الفقيه" },
+      { id: "tahdhib", name_en: "Tahdhib al-Ahkam", name_ar: "تهذيب الأحكام" },
+      { id: "istibsar", name_en: "Al-Istibsar", name_ar: "الاستبصار" },
+      { id: "nahj", name_en: "Nahj al-Balagha", name_ar: "نهج البلاغة" },
+      { id: "sahifa", name_en: "Sahifa Sajjadiya", name_ar: "الصحيفة السجادية" }
+    ];
+
+    const grid = document.getElementById("bookGrid");
+
+    function renderBooks(list) {
+      grid.innerHTML = "";
+      list.forEach(book => {
+        const card = document.createElement("div");
+        card.className = "card";
+        // Special case: Al-Kafi goes to hadiths.html
+        const link = book.id === "al-kafi" ? "hadiths.html" : `hadiths-${book.id}.html`;
+        card.innerHTML = `
+          <h4>${book.name_en}</h4>
+          <p>${book.name_ar}</p>
+          <a href="${link}">View Hadiths →</a>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function searchBooks() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = books.filter(b =>
+        b.name_en.toLowerCase().includes(query) ||
+        b.name_ar.includes(query)
+      );
+      renderBooks(filtered);
+    }
+
+    // Initial render
+    renderBooks(books);
+  </script>
+</body>
+</html>
