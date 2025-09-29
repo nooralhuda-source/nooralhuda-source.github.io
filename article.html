@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<header>
+  <div class="logo">
+    <img src="your-logo.png" alt="Noor Al Huda Logo">
+    <span>Noor Al Huda</span>
+  </div>
+  <nav>
+    <a href="quran.html">📖 Qur’an</a>
+    <a href="hadiths.html">📜 Hadith</a>
+    <a href="duas.html">🤲 Dua</a>
+    <a href="news.html">📰 News</a>
+  </nav>
+  <div class="header-actions">
+    <button id="themeToggle">🌙</button>
+    <button onclick="window.location.href='settings.html'">Settings</button>
+  </div>
+</header>
+
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Article - Noor Al Huda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg-light: #f9f9f9;
+      --text-light: #222;
+      --bg-dark: #1a1a1a;
+      --text-dark: #f1f1f1;
+      --accent: #4a90e2;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .controls {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem;
+      justify-content: center;
+    }
+
+    button {
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    .article {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    body.dark .article {
+      background: #2a2a2a;
+    }
+
+    .article img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<script>
+  // On page load, check saved preference
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    // Save preference
+    if (document.body.classList.contains("dark-mode")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  }
+</script>
+
+<body>
+  <header>
+    <h1 id="title">Noor Al Huda</h1>
+    <nav>
+      <a href="index.html">🏠 Home</a>
+    </nav>
+  </header>
+
+  <div class="controls">
+    <button id="themeToggle">🌙</button>
+    <button id="langToggle">AR</button>
+  </div>
+
+  <div class="article">
+    <h2 id="articleTitle"></h2>
+    <img id="articleImage" alt="">
+    <p id="articleBody"></p>
+    <a href="index.html" class="back">⬅ Back to Home</a>
+  </div>
+
+  <script>
+    // Articles with English + Arabic
+    const articles = [
+      {
+        title_en:"Ashura Procession in Karbala",
+        body_en:"Millions of pilgrims gather in Karbala to commemorate Ashura...",
+        title_ar:"موكب عاشوراء في كربلاء",
+        body_ar:"ملايين الزوار يتجمعون في كربلاء لإحياء ذكرى عاشوراء...",
+        img:"https://www.middleeasteye.net/sites/default/files/Screenshot%202021-08-09%20at%2014.28.26.jpg"
+      },
+      {
+        title_en:"Shia Conference in London",
+        body_en:"Scholars from across the world attended the conference...",
+        title_ar:"مؤتمر شيعي في لندن",
+        body_ar:"شارك علماء من مختلف أنحاء العالم في المؤتمر...",
+        img:"https://source.unsplash.com/600x400/?conference"
+      },
+      {
+        title_en:"Political Developments in Iraq",
+        body_en:"Leaders discuss new political strategies...",
+        title_ar:"التطورات السياسية في العراق",
+        body_ar:"ناقش القادة استراتيجيات سياسية جديدة...",
+        img:"https://source.unsplash.com/600x400/?iraq"
+      },
+      {
+        title_en:"Global Shia Unity Gathering",
+        body_en:"A historic event bringing communities together worldwide...",
+        title_ar:"تجمع عالمي لوحدة الشيعة",
+        body_ar:"حدث تاريخي جمع المجتمعات الشيعية من مختلف أنحاء العالم...",
+        img:"https://source.unsplash.com/600x400/?people"
+      },
+      {
+        title_en:"Commemoration of Arbaeen",
+        body_en:"Pilgrims walk from Najaf to Karbala for Arbaeen rituals...",
+        title_ar:"إحياء ذكرى الأربعين",
+        body_ar:"يسير الزوار من النجف إلى كربلاء لإحياء شعائر الأربعين...",
+        img:"https://source.unsplash.com/600x400/?pilgrimage"
+      },
+      {
+        title_en:"Dua Kumayl Gathering",
+        body_en:"Believers gathered for Dua Kumayl recitation on Thursday night...",
+        title_ar:"مجلس دعاء كميل",
+        body_ar:"اجتمع المؤمنون لقراءة دعاء كميل ليلة الخميس...",
+        img:"https://via.placeholder.com/400x200?text=Dua+Kumayl"
+      }
+    ];
+
+    const texts = {
+      en: { title: "Noor Al Huda" },
+      ar: { title: "نور الهدى" }
+    };
+
+    let currentLang = "en";
+
+    // Theme toggle
+    const themeBtn = document.getElementById("themeToggle");
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      themeBtn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    });
+
+    // Language toggle
+    const langBtn = document.getElementById("langToggle");
+    langBtn.addEventListener("click", () => {
+      currentLang = currentLang === "en" ? "ar" : "en";
+      document.getElementById("title").textContent = texts[currentLang].title;
+      langBtn.textContent = currentLang === "en" ? "AR" : "EN";
+      document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+      renderArticle();
+    });
+
+    // Get article id from URL
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    function renderArticle() {
+      if (id !== null && articles[id]) {
+        const article = articles[id];
+        document.getElementById("articleTitle").textContent = article[`title_${currentLang}`];
+        document.getElementById("articleImage").src = article.img;
+        document.getElementById("articleImage").alt = article[`title_${currentLang}`];
+        document.getElementById("articleBody").textContent = article[`body_${currentLang}`];
+      } else {
+        document.querySelector(".article").innerHTML = "<h2>Article not found</h2>";
+      }
+    }
+
+    renderArticle();
+  </script>
+  <script>
+  (function applyGlobalSettings() {
+    // Theme
+    const theme = localStorage.getItem("theme") || "light";
+    if (theme === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+
+    // Font size
+    const fontSize = localStorage.getItem("fontSize") || "medium";
+    if (fontSize === "small") {
+      document.body.style.fontSize = "14px";
+    } else if (fontSize === "large") {
+      document.body.style.fontSize = "20px";
+    } else {
+      document.body.style.fontSize = "16px";
+    }
+
+    // Language (placeholder for later)
+    const lang = localStorage.getItem("lang") || "en";
+    document.documentElement.lang = lang;
+
+    // Qur’an script (placeholder for later)
+    const script = localStorage.getItem("script") || "uthmani";
+    document.body.setAttribute("data-quran-script", script);
+  })();
+</script>
+
+</body>
+</html>

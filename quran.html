@@ -4,131 +4,79 @@
   <meta charset="UTF-8">
   <title>Noor Al Huda — Qur’an</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Link to unified stylesheet -->
+  <!-- Unified stylesheet -->
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f4f6f9;
+      color: #222;
+    }
+
+    /* Page heading */
+    main h2 {
+      text-align: center;
+      margin: 2rem 0 1rem;
+      font-size: 1.8rem;
+      color: #2c3e50;
+    }
+
+    /* Surah grid */
+    .surah-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem 2rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Surah card */
+    .surah-card {
+      background: #fff;
+      padding: 1.5rem 1rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .surah-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+    }
+
+    .surah-card h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #0a3d62;
+    }
+
+    .surah-card p {
+      margin: 0.5rem 0 0;
+      font-size: 1.4rem;
+      font-family: 'Amiri', serif;
+      color: #2c3e50;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #2c3e50;
+      color: #fff;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
   <script>
-    // Apply saved theme on load
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.classList.add("dark-mode");
-    }
-    function toggleDarkMode() {
-      document.documentElement.classList.toggle("dark-mode");
-      if (document.documentElement.classList.contains("dark-mode")) {
-        localStorage.setItem("theme", "dark");
-      } else {
-        localStorage.setItem("theme", "light");
-      }
-      updateThemeIcon();
-    }
-    function updateThemeIcon() {
-      const btn = document.getElementById("themeToggle");
-      if (btn) {
-        btn.textContent = document.documentElement.classList.contains("dark-mode") ? "☀️" : "🌙";
-      }
-    }
     function toggleMenu() {
       document.getElementById("mainNav").classList.toggle("open");
     }
-  </script>
-  <style>
-    /* Surah grid styles (kept minimal, uses CSS variables) */
-    .surah-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1rem;
-    }
-    .surah-card {
-      background: var(--card);
-      padding: 1rem;
-      border-radius: var(--radius);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-    }
-    .surah-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
-    .surah-card h3 {
-      margin: 0.5rem 0;
-      font-size: 1rem;
-      color: var(--text);
-    }
-    .surah-card p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    .search-bar {
-      margin: 1rem auto;
-      max-width: 400px;
-      display: flex;
-      gap: 0.5rem;
-    }
-    .search-bar input {
-      flex: 1;
-      padding: 0.5rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-    .search-bar button {
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 8px;
-      background: var(--green);
-      color: #fff;
-      cursor: pointer;
-    }
-    .search-bar button:hover {
-      filter: brightness(1.1);
-    }
-  </style>
-</head>
-<body onload="updateThemeIcon()">
-  <!-- Header -->
-  <header>
-    <div class="brand">
-      <!-- fixed logo path -->
-      <img src="images/logo.png" alt="Noor Al Huda Logo">
-      <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
-    </div>
 
-    <button class="hamburger" onclick="toggleMenu()">☰</button>
-
-    <nav id="mainNav">
-      <a href="quran.html">📖 Qur’an</a>
-      <a href="duas.html">🤲 Duas</a>
-      <a href="hadiths-home.html">📜 Hadiths</a>
-      <a href="calendar.html">📅 Calendar</a>
-      <a href="salah.html">🕌 Salah</a>
-
-      <!-- Utility links with bigger gap -->
-      <a href="index.html" class="utility">🏠 Home</a>
-      <a href="settings.html" class="utility">⚙ Settings</a>
-    </nav>
-  </header>
-
-  <!-- Main -->
-  <main class="container">
-    <h2 style="text-align:center;">Select a Surah</h2>
-
-    <!-- Search bar -->
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search Surah by name (English or Arabic)">
-      <button onclick="searchSurahs()">Search</button>
-    </div>
-
-    <div class="surah-grid" id="surahGrid"></div>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    © 2025 Noor Al Huda — Personal Islamic Companion (Shifa thru Ayahs)
-  </footer>
-
-  <script>
-    // Add more surahs here as needed
+    // Example Surah data
     const surahs = [
       { number: 1, name_en: "Al-Fatiha", name_ar: "الفاتحة" },
       { number: 2, name_en: "Al-Baqarah", name_ar: "البقرة" },
@@ -244,56 +192,67 @@
   { number:112, name_en:"Al-Ikhlas", name_ar:"الإخلاص" },
   { number:113, name_en:"Al-Falaq", name_ar:"الفلق" },
   { number:114, name_en:"An-Nas", name_ar:"الناس" }
-      
     ];
 
-    const grid = document.getElementById("surahGrid");
-
-    function renderSurahs(list) {
-      grid.innerHTML = "";
-      list.forEach(surah => {
+    window.onload = function() {
+      const grid = document.getElementById("surahGrid");
+      surahs.forEach(surah => {
         const card = document.createElement("div");
         card.className = "surah-card";
         card.innerHTML = `
           <h3>${surah.number}. ${surah.name_en}</h3>
           <p>${surah.name_ar}</p>
         `;
-        card.onclick = () => {
-          // fixed case-sensitive filename
-          window.location.href = `Surah.html?id=${surah.number}`;
-        };
+        card.onclick = () => window.location.href = `surah.html?id=${surah.number}`;
         grid.appendChild(card);
       });
     }
 
-    function searchSurahs() {
-      const query = document.getElementById("searchInput").value.toLowerCase();
-      const filtered = surahs.filter(s =>
-        s.name_en.toLowerCase().includes(query) ||
-        s.name_ar.includes(query)
-      );
-      renderSurahs(filtered);
+    // Dark mode toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
     }
 
-    // Initial render
-    renderSurahs(surahs);
+    // Load saved theme
+    window.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+      }
+    });
   </script>
+</head>
+<body>
+  <!-- Header (your locked-in version) -->
+  <header>
+    <div class="brand">
+      <img src="logo.png.png" alt="Noor Al Huda Logo">
+      <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
+    </div>
+
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+
+    <nav id="mainNav">
+      <a href="quran.html">📖 Qur’an</a>
+      <a href="duas.html">🤲 Duas</a>
+      <a href="hadiths-home.html">📜 Hadiths</a>
+      <a href="calendar.html">📅 Calendar</a>
+      <a href="salah.html">🕌 Salah</a>
+      <a href="index.html" class="utility">🏠</a>
+      <a href="settings.html" class="utility">⚙</a>
+      <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="container">
+    <h2>Select a Surah</h2>
+    <div class="surah-grid" id="surahGrid"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Noor Al Huda — Personal Islamic Companion (Shifa thru Ayahs)
+  </footer>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

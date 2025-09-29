@@ -1,94 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda - Surah Viewer</title>
+  <title>Noor Al Huda — Surah Viewer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Global stylesheet -->
+  <link rel="stylesheet" href="style.css">
   <style>
-    body { font-family: "Segoe UI", sans-serif; background:#f9f9f9; color:#222; margin:0; padding:0; }
-    header { background:#004080; color:#fff; padding:1rem; text-align:center; }
-    .back-links { margin:1rem; text-align:center; }
-    .back-links a { margin:0 1rem; color:#004080; text-decoration:none; }
-    .surah-info { text-align:center; margin:1rem 0; }
-    .surah-info h2 { margin:0.5rem 0; }
-    .arabic { font-family:'Amiri Quran', serif; font-size:2rem; text-align:right; direction:rtl; }
-    .ayah { background:#fff; margin:1rem auto; padding:1rem; border-radius:8px; max-width:800px; }
-    .translation { margin-top:0.5rem; font-size:1rem; color:#444; }
-    body.quran-only .translation { display:none; }
-    .controls { text-align:center; margin:1rem; }
-    .controls input[type="text"] { padding:0.5rem; width:250px; }
-    .translation-options { max-width:800px; margin:1rem auto; padding:1rem; background:#eee; border-radius:8px; }
-    .translation-options h4 { margin-top:0; }
-    .translation-options label { display:block; margin:0.25rem 0; }
+    body { font-family: 'Inter', sans-serif; background:#f4f6f9; color:#222; margin:0; }
+
+    /* Keep your exact header structure; only color override */
+    header { background:#0b7d40; color:#fff; } /* green menu */
+    #mainNav a, #mainNav button { color:#fff; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 1rem; }
+
+    .surah-info { text-align:center; margin: 1.5rem 0 1rem; }
+    .surah-info h2 { font-size:1.8rem; margin:0.25rem 0; color:#0a3d62; }
+    .surah-meta { color:#666; margin-bottom: 0.75rem; }
+
+    /* Audio panel */
+    .audio-panel { max-width: 700px; margin: 0.75rem auto; display:grid; grid-template-columns: 1fr auto; gap:0.75rem; align-items:center; }
+    .audio-panel audio { width:100%; }
+    .audio-controls { display:flex; gap:0.5rem; align-items:center; }
+    .audio-controls button { padding:0.4rem 0.7rem; border:none; border-radius:8px; background:#004080; color:#fff; cursor:pointer; }
+
+    /* Translation checkboxes */
+    .translation-options { max-width: 900px; margin: 1rem auto; padding: 1rem; background:#fff; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.06); }
+    .translation-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:0.5rem 1rem; }
+    .translation-item { display:flex; gap:0.5rem; align-items:center; }
+
+    /* Ayah cards */
+    .ayah { background:#fff; margin: 0.75rem auto; padding: 1rem 1.25rem; border-radius:12px; max-width: 900px; box-shadow:0 4px 12px rgba(0,0,0,0.06); }
+    .ayah-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; color:#666; font-size:0.9rem; }
+    .arabic { font-family:'Amiri', serif; font-size:1.6rem; text-align:right; direction:rtl; color:#222; }
+    .translations { margin-top:0.5rem; display:grid; gap:0.35rem; }
+    .translation-line { font-size:1rem; color:#444; }
+    .translation-line strong { color:#0a3d62; margin-right:0.25rem; }
+
+    /* Dark mode */
     body.dark { background:#1a1a1a; color:#eee; }
-    body.dark .ayah { background:#2a2a2a; }
-    body.dark .translation-options { background:#333; }
+    body.dark .ayah { background:#2a2a2a; color:#eee; }
+    body.dark .translation-options { background:#2a2a2a; color:#eee; }
+    body.dark .audio-controls button { background:#333; }
   </style>
 </head>
-<script>
-  // On page load, check saved preference
-  if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-  }
-
-  function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-    // Save preference
-    if (document.body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-</script>
-
 <body>
-  <header>
-    <h1>Noor Al Huda - Surah Viewer</h1>
-  </header>
-
-  <div class="back-links">
-    <a href="index.html">⬅ Back to Home</a>
-    <a href="quran.html">⬅ Back to Qur’an</a>
+  <!-- Header: EXACT structure you provided -->
+     <header>
+  <div class="brand">
+    <img src="images/logo.png" alt="Noor Al Huda Logo">
+    <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
   </div>
 
-  <!-- Surah info block -->
-  <div class="surah-info">
-    <h2 id="surahName">Loading...</h2>
-    <h3 id="surahMeaning"></h3>
-    <p id="surahHistory"></p>
-    <audio id="surahAudio" controls></audio>
-  </div>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
 
-  <!-- Controls -->
-  <div class="controls">
-    <button id="quranOnlyBtn">📖 Qur’an Only</button>
-    <button id="darkModeBtn">🌙 Dark Mode</button>
-    <input type="text" id="searchBox" placeholder="Search translations...">
-  </div>
+  <nav id="mainNav">
+    <a href="quran.html">📖 Qur’an</a>
+    <a href="duas.html">🤲 Duas</a>
+    <a href="hadiths-home.html">📜 Hadiths</a>
+    <a href="calendar.html">📅 Calendar</a>
+    <a href="salah.html">🕌 Salah</a>
+    <a href="index.html" class="utility">🏠</a>
+    <a href="settings.html" class="utility">⚙</a>
+    <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+  </nav>
+</header>
 
-  <!-- Translation checkboxes -->
-  <div class="translation-options" id="translationOptions">
-    <h4>Translations</h4>
-    <strong>English</strong>
-    <label><input type="checkbox" value="en.haleem" checked> M.A.S. Abdel Haleem</label>
-    <label><input type="checkbox" value="en.yusufali"> A Yusuf Ali</label>
-    <label><input type="checkbox" value="en.pickthall"> M. Pickthall</label>
-    <br>
-    <strong>Urdu</strong>
-    <label><input type="checkbox" value="ur.jalandhry"> Fateh Muhammad Jalandhry</label>
-    <br>
-    <strong>Farsi</strong>
-    <label><input type="checkbox" value="fa.ansarian"> Ansarian</label>
-    <br>
-    <strong>Arabic (Modern Standard)</strong>
-    <label><input type="checkbox" value="ar.muyassar"> Al-Muyassar</label>
-  </div>
+  <main class="container">
+    <!-- Surah Info -->
+    <section class="surah-info">
+      <h2 id="surahName">Loading…</h2>
+      <div class="surah-meta" id="surahMeta"></div>
+    </section>
 
-  <!-- Ayahs will be injected here -->
-  <div id="ayahContainer"></div>
+    <!-- Audio: full-surah MP3 (Alafasy) -->
+    <section class="audio-panel">
+      <audio id="surahAudio" controls>
+        <source id="audioSource" src="" type="audio/mpeg">
+      </audio>
+      <div class="audio-controls">
+        <label>Speed
+          <select id="audioSpeed">
+            <option value="0.75">0.75x</option>
+            <option value="1" selected>1x</option>
+            <option value="1.25">1.25x</option>
+            <option value="1.5">1.5x</option>
+            <option value="2">2x</option>
+          </select>
+        </label>
+        <button id="audioPlay">▶</button>
+        <button id="audioPause">⏸</button>
+        <button id="audioStop">⏹</button>
+      </div>
+    </section>
 
-  <!-- Scripts -->
-  <script src="main.js"></script>
+    <!-- Translation checkboxes -->
+    <section class="translation-options">
+      <h4>Translations to show</h4>
+      <div class="translation-grid" id="translationGrid">
+        <label class="translation-item"><input type="checkbox" value="ar.uthmani"> Arabic (MSA — Uthmani)</label>
+        <label class="translation-item"><input type="checkbox" value="en.hilali"> English (Hilali-Khan)</label>
+        <label class="translation-item"><input type="checkbox" value="en.asad"> English (Muhammad Asad)</label>
+        <label class="translation-item"><input type="checkbox" value="ur.jalandhry"> Urdu (Jalandhry)</label>
+        <label class="translation-item"><input type="checkbox" value="fa.ansarian"> Farsi (Iran — Ansarian)</label>
+        <label class="translation-item"><input type="checkbox" value="fa.makarem"> Farsi (Iran — Makarem)</label>
+        <label class="translation-item"><input type="checkbox" value="fa_AF.dari"> Farsi (Afghanistan — Dari)</label>
+        <label class="translation-item"><input type="checkbox" value="pa_AR.punjabi"> Punjabi (Arabic script)</label>
+      </div>
+    </section>
+
+    <!-- Ayahs -->
+    <section id="ayahContainer"></section>
+  </main>
+
+  <script>
+    // Theme persistence
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    }
+
+    // Mobile menu toggle (keeps your header logic intact)
+    function toggleMenu() { document.getElementById("mainNav").classList.toggle("open"); }
+
+    // Surah from URL (?id=1..114)
+    const surahId = Number(new URLSearchParams(window.location.search).get("id")) || 1;
+
+    // Editions: Cloud API + Fawaz fallbacks
+    const EDITIONS = {
+      "ar.uthmani":    { type:"cloud", id:"quran-uthmani",      label:"Arabic (Uthmani)" },
+      "en.hilali":     { type:"cloud", id:"en.hilali",          label:"English (Hilali-Khan)" },
+      "en.asad":       { type:"cloud", id:"en.asad",            label:"English (Muhammad Asad)" },
+      "ur.jalandhry":  { type:"cloud", id:"ur.jalandhry",       label:"Urdu (Jalandhry)" },
+      "fa.ansarian":   { type:"cloud", id:"fa.ansarian",        label:"Farsi (Iran — Ansarian)" },
+      "fa.makarem":    { type:"cloud", id:"fa.makarem",         label:"Farsi (Iran — Makarem)" },
+      "fa_AF.dari":    { type:"fawaz", id:"prs-ayyub",          label:"Farsi (Afghanistan — Dari)" },
+      "pa_AR.punjabi": { type:"fawaz", id:"pan-abdulrahman",    label:"Punjabi (Arabic script)" }
+    };
+
+    // Preferences
+    function getSavedTranslations() {
+      const saved = localStorage.getItem("surahTranslations");
+      return saved ? JSON.parse(saved) : ["ar.uthmani","en.hilali","ur.jalandhry","fa.ansarian"];
+    }
+    function saveTranslations(arr) { localStorage.setItem("surahTranslations", JSON.stringify(arr)); }
+
+    // Init checkboxes
+    const checkboxes = Array.from(document.querySelectorAll("#translationGrid input[type=checkbox]"));
+    const saved = getSavedTranslations();
+    checkboxes.forEach(cb => cb.checked = saved.includes(cb.value));
+
+    // Live toggle translations (tick = show, untick = hide)
+    checkboxes.forEach(cb => {
+      cb.addEventListener("change", () => {
+        const selected = checkboxes.filter(c=>c.checked).map(c=>c.value);
+        saveTranslations(selected);
+        loadSurah();
+      });
+    });
+
+    // Audio player controls
+    const audioEl = document.getElementById("surahAudio");
+    const audioSourceEl = document.getElementById("audioSource");
+    document.getElementById("audioPlay").onclick = () => audioEl.play();
+    document.getElementById("audioPause").onclick = () => audioEl.pause();
+    document.getElementById("audioStop").onclick = () => { audioEl.pause(); audioEl.currentTime = 0; };
+    document.getElementById("audioSpeed").onchange = e => audioEl.playbackRate = parseFloat(e.target.value);
+
+    function pad3(n) { return String(n).padStart(3,"0"); }
+    function setFullSurahAudio(id) {
+      const file = pad3(id);
+      audioSourceEl.src = `https://download.quranicaudio.com/quran/mishaari_raashid_al_3afaasee/${file}.mp3`;
+      audioEl.load();
+    }
+
+    // Bismillah separate (except Surah 9)
+    function renderBismillahIfApplicable(id, container) {
+      if (id === 9) return;
+      const card = document.createElement("div");
+      card.className = "ayah";
+      card.innerHTML = `
+        <div class="ayah-header"><span>Bismillah</span></div>
+        <div class="arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      `;
+      container.appendChild(card);
+    }
+
+    async function loadSurah() {
+      try {
+        const cloudBase = "https://api.alquran.cloud/v1/surah/";
+        const fawazBase = "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/";
+
+        // Arabic + meta
+        const arResp = await fetch(`${cloudBase}${surahId}/quran-uthmani`);
+        const arJson = await arResp.json();
+        const ar = arJson.data;
+
+        // Header info
+        document.getElementById("surahName").textContent = `${ar.englishName} (${ar.name})`;
+        document.getElementById("surahMeta").textContent =
+          `Verses: ${ar.numberOfAyahs} • Revelation: ${ar.revelationType} • Chapter: ${ar.number}`;
+
+        // Audio
+        setFullSurahAudio(surahId);
+
+        // Selected translations
+        const selected = getSavedTranslations();
+
+        // Fetch translations
+        const transData = {};
+        for (const key of selected) {
+          const ed = EDITIONS[key];
+          if (!ed) continue;
+
+          if (ed.type === "cloud") {
+            const resp = await fetch(`${cloudBase}${surahId}/${ed.id}`);
+            const json = await resp.json();
+            transData[key] = (json.data?.ayahs || []).map(a => a.text);
+          } else if (ed.type === "fawaz") {
+            const resp = await fetch(`${fawazBase}${ed.id}/${surahId}.json`);
+            const json = await resp.json();
+            const verses = json.result?.verses || json.verses || json.result || [];
+            transData[key] = verses.map(v => v.text || v.translation || "");
+          }
+        }
+
+        // Render ayahs
+        const container = document.getElementById("ayahContainer");
+        container.innerHTML = "";
+
+        renderBismillahIfApplicable(surahId, container);
+
+        (ar.ayahs || []).forEach((ayah, i) => {
+          const card = document.createElement("div");
+          card.className = "ayah";
+
+          const header = document.createElement("div");
+          header.className = "ayah-header";
+          header.innerHTML = `<span>Ayah ${i+1}</span>`;
+          card.appendChild(header);
+
+          const arabicEl = document.createElement("div");
+          arabicEl.className = "arabic";
+          arabicEl.textContent = ayah.text;
+          card.appendChild(arabicEl);
+
+          const translationsEl = document.createElement("div");
+          translationsEl.className = "translations";
+
+          for (const key of selected) {
+            if (key === "ar.uthmani") continue; // Arabic already shown
+            const ed = EDITIONS[key];
+            const arr = transData[key];
+            if (!ed || !arr || !arr[i]) continue;
+            const line = document.createElement("div");
+            line.className = "translation-line";
+            line.innerHTML = `<strong>${ed.label}:</strong> ${arr[i]}`;
+            translationsEl.appendChild(line);
+          }
+
+          card.appendChild(translationsEl);
+          container.appendChild(card);
+        });
+
+      } catch (e) {
+        console.error("Failed to load surah:", e);
+        document.getElementById("ayahContainer").innerHTML =
+          `<div class="ayah">Error loading Surah. Please check your connection or try again.</div>`;
+      }
+    }
+
+    // Initial load
+    loadSurah();
+  </script>
 </body>
 </html>

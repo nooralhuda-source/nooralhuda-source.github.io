@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Noor Al Huda — Calendar</title>
+<style>
+  body { margin:0; font-family:Arial,sans-serif; background:#f4f6f8; color:#222; }
+  header { background:#2e7d32; color:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; }
+  header .brand { display:flex; align-items:center; gap:10px; }
+  header .brand img { height:40px; }
+  header h1 { margin:0; font-size:1.2rem; }
+  header .arabic { font-family:"Amiri",serif; }
+  #mainNav { display:flex; gap:0.5rem; }
+  #mainNav a, #mainNav button {
+    background:#fff; color:#0b7d40; padding:0.4rem 0.9rem;
+    border-radius:20px; font-weight:600; text-decoration:none;
+    border:none; cursor:pointer; transition:background 0.2s,color 0.2s;
+  }
+  #mainNav a:hover, #mainNav button:hover { background:#065c2f; color:#fff; }
+  .hamburger { display:none; font-size:1.5rem; background:none; border:none; color:#fff; cursor:pointer; }
+  @media(max-width:768px){
+    #mainNav{display:none;flex-direction:column;background:#0b7d40;position:absolute;top:60px;right:0;padding:1rem;}
+    #mainNav.open{display:flex;}
+    .hamburger{display:block;}
+  }
+
+  .calendar { max-width:1000px; margin:20px auto; background:#fff; border:1px solid #d8dee4; border-radius:8px; padding:20px; }
+  .cal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+  .controls button { background:#2e7d32; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; }
+  .controls button:hover { background:#256428; }
+  .grid { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
+  .cell { min-height:90px; border:1px solid #d8dee4; border-radius:6px; padding:6px; background:#fff; cursor:pointer; display:flex; flex-direction:column; gap:4px; }
+  .cell.today { background:#fffde7; border-color:#fbc02d; }
+  .greg { font-weight:bold; }
+  .hijri { font-size:0.8rem; color:#2e7d32; }
+  .event-tag { font-size:0.75rem; color:#c62828; }
+  .dim { opacity:0.45; }
+
+  /* Dark mode */
+  body.dark-mode { background:#0f1216; color:#e7ebf0; }
+  body.dark-mode header { background:#1f6a28; }
+  body.dark-mode #mainNav a, body.dark-mode #mainNav button { background:#1e2430; color:#e7ebf0; }
+  body.dark-mode #mainNav a:hover, body.dark-mode #mainNav button:hover { background:#4fb477; color:#fff; }
+  body.dark-mode .calendar { background:#161a20; border-color:#2a3140; }
+  body.dark-mode .cell { background:#121621; border-color:#2a3140; }
+  body.dark-mode .hijri { color:#4fb477; }
+  body.dark-mode .event-tag { color:#e86a6a; }
+
+  /* Modal */
+  .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); align-items:center; justify-content:center; z-index:1000; }
+  .modal-card { background:#fff; padding:16px; border-radius:8px; max-width:420px; width:92%; border:1px solid #d8dee4; }
+  body.dark-mode .modal-card { background:#1e2430; color:#e7ebf0; border-color:#2a3140; }
+  .modal-card h3 { margin-top:0; }
+  .modal-card button { margin-top:12px; background:#2e7d32; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="logo.png" alt="Noor Al Huda Logo">
+    <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+  <nav id="mainNav">
+    <a href="quran.html">📖 Qur’an</a>
+    <a href="duas.html">🤲 Duas</a>
+    <a href="hadiths-home.html">📜 Hadiths</a>
+    <a href="calendar.html" class="active">📅 Calendar</a>
+    <a href="salah.html">🕌 Salah</a>
+    <a href="index.html" class="utility">🏠</a>
+    <a href="settings.html" class="utility">⚙</a>
+    <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+  </nav>
+</header>
+
+<div class="calendar">
+  <div class="cal-header">
+    <h2 id="title"></h2>
+    <div class="controls">
+      <button id="prevBtn">← Prev</button>
+      <button id="todayBtn">Today</button>
+      <button id="nextBtn">Next →</button>
+    </div>
+  </div>
+  <div class="grid" id="calendarGrid"></div>
+</div>
+
+<div class="modal" id="eventModal">
+  <div class="modal-card">
+    <h3 id="modalDate"></h3>
+    <div id="modalEvents"></div>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+/* Nav + theme */
+function toggleMenu(){document.getElementById("mainNav").classList.toggle("open");}
+function toggleDarkMode(){
+  document.body.classList.toggle("dark-mode");
+  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+}
+if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark-mode");}
+
+/* Hijri conversion */
+function gregorianToJDN(y,m,d){const a=Math.floor((14-m)/12);const y2=y+4800-a;const m2=m+12*a-3;return d+Math.floor((153*m2+2)/5)+365*y2+Math.floor(y2/4)-Math.floor(y2/100)+Math.floor(y2/400)-32045;}
+function islamicToJDN(y,m,d){return d+Math.ceil(29.5*(m-1))+(y-1)*354+Math.floor((3+11*y)/30)+1948440-1;}
+function jdnToIslamic(jdn){
+  const jd=Math.floor(jdn);
+  const year=Math.floor((30*(jd-1948439)+10646)/10631);
+  const firstOfYear=islamicToJDN(year,1,1);
+  let month=Math.floor((jd-firstOfYear)/29.5)+1;
+  if(month<1)month=1;
+  if(month>12)month=12;
+  const firstOfMonth=islamicToJDN(year,month,1);
+  const day=jd-firstOfMonth+1;
+  return{year,month,day};
+}
+
+/* Names + events */
+const G_MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const H_MONTHS=["Muharram","Safar","Rabiʿ al-Awwal","Rabiʿ al-Thani","Jumada al-Ula","Jumada al-Thani","Rajab","Shaʿban","Ramadan","Shawwal","Dhu al-Qaʿdah","Dhu al-Hijjah"];
+const EVENTS_HIJRI={
+  "8-15":["15 Sha'ban (Mid-Sha'ban)"],
+  "9-17":["Battle of Badr"],
+  "9-19":["Imam Ali struck"],
+  "9-21":["Shahadat Imam Ali"],
+  "10-1":["Eid al-Fitr"],
+  "12-10":["Eid al-Adha"],
+  "1-10":["Ashura"],
+  "12-18":["Eid al-Ghadir"]
+};
+
+/* State */
+let view=(function(){
+  const t=new Date();
+  return{
+    year:t.getFullYear(),
+    month:t.getMonth(),
+    todayY:t.getFullYear(),
+    todayM:t.getMonth(),
+    todayD:t.getDate(),
+    offsetK:parseInt(localStorage.getItem("offset_khamenei")||"0",10),
+    offsetS:parseInt(localStorage.getItem("offset_sistani")||"0",10)
+  };
+})();
+
+/* Build a single day cell */
+function makeCell(y,mZeroBased,d,dim){
+  let y2=y,m2=mZeroBased;
+  if(m2<0){m2=11;y2--;}
+  if(m2>11){m2=0;y2++;}
+
+  const cell=document.createElement("div");
+  cell.className="cell"+(dim?" dim":"");
+
+  if(!dim && y2===view.todayY && m2===view.todayM && d===view.todayD){
+    cell.classList.add("today");
+  }
+
+  const gEl=document.createElement("div");
+  gEl.className="greg";
+  gEl.textContent=d;
+  cell.appendChild(gEl);
+
+  const jdn=gregorianToJDN(y2,m2+1,d);
+  const hK=jdnToIslamic(jdn+view.offsetK);
+  const hS=jdnToIslamic(jdn+view.offsetS);
+
+  const hEl=document.createElement("div");
+  hEl.className="hijri";
+  hEl.textContent=`Khamenei: ${hK.day} ${H_MONTHS[hK.month-1]} | Sistani: ${hS.day} ${H_MONTHS[hS.month-1]}`;
+  cell.appendChild(hEl);
+
+  const keyK=`${hK.month}-${hK.day}`;
+  const keyS=`${hS.month}-${hS.day}`;
+  const eventsPreview=[];
+  if(EVENTS_HIJRI[keyK]) eventsPreview.push(...EVENTS_HIJRI[keyK].map(e=>`[K] ${e}`));
+  if(EVENTS_HIJRI[keyS]) eventsPreview.push(...EVENTS_HIJRI[keyS].map(e=>`[S] ${e}`));
+
+  if(eventsPreview.length){
+    const tag=document.createElement("div");
+    tag.className="event-tag";
+    tag.textContent=eventsPreview[0]+(eventsPreview.length>1?` (+${eventsPreview.length-1})`:"");
+    cell.appendChild(tag);
+  }
+
+  cell.addEventListener("click",()=>{
+    const title=`${G_MONTHS[m2]} ${d}, ${y2}`;
+    openModal(title,eventsPreview);
+  });
+
+  return cell;
+}
+
+/* Render month grid */
+function render(){
+  document.getElementById("title").textContent=`${G_MONTHS[view.month]} ${view.year}`;
+  const grid=document.getElementById("calendarGrid");
+  grid.innerHTML="";
+
+  const firstDate=new Date(view.year,view.month,1);
+  const firstWeekday=(firstDate.getDay()+6)%7; // Monday start
+  const daysInMonth=new Date(view.year,view.month+1,0).getDate();
+  const prevMonthDays=new Date(view.year,view.month,0).getDate();
+
+  // Leading
+  for(let i=0;i<firstWeekday;i++){
+    grid.appendChild(makeCell(view.year,view.month-1,prevMonthDays-firstWeekday+i+1,true));
+  }
+  // Current
+  for(let d=1;d<=daysInMonth;d++){
+    grid.appendChild(makeCell(view.year,view.month,d,false));
+  }
+  // Trailing
+  const cellsCount=firstWeekday+daysInMonth;
+  const trailing=(cellsCount%7===0)?0:(7-(cellsCount%7));
+  for(let i=1;i<=trailing;i++){
+    grid.appendChild(makeCell(view.year,view.month+1,i,true));
+  }
+}
+
+/* Modal controls */
+function openModal(dateLabel,events){
+  document.getElementById("modalDate").textContent=dateLabel;
+  const box=document.getElementById("modalEvents");
+  box.innerHTML="";
+  if(!events||events.length===0){
+    const p=document.createElement("p");
+    p.textContent="No events for this day.";
+    box.appendChild(p);
+  }else{
+    const ul=document.createElement("ul");
+    events.forEach(e=>{
+      const li=document.createElement("li");
+      li.textContent=e;
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+  }
+  document.getElementById("eventModal").style.display="flex";
+}
+function closeModal(){document.getElementById("eventModal").style.display="none";}
+
+/* Navigation buttons */
+document.getElementById("prevBtn").addEventListener("click",()=>{
+  view.month--;
+  if(view.month<0){view.month=11;view.year--;}
+  render();
+});
+document.getElementById("nextBtn").addEventListener("click",()=>{
+  view.month++;
+  if(view.month>11){view.month=0;view.year++;}
+  render();
+});
+document.getElementById("todayBtn").addEventListener("click",()=>{
+  const now=new Date();
+  view.year=now.getFullYear();
+  view.month=now.getMonth();
+  render();
+});
+
+/* Start */
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+/* =========================
+   Theme Variables
+   ========================= */
+:root {
+  --green: #136f3c;
+  --bg: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 18px;
+}
+
+body.dark-mode {
+  --bg: #111827;
+  --text: #f9fafb;
+  --muted: #9ca3af;
+  --card: #1f2937;
+  --border: #374151;
+}
+
+/* =========================
+   Base Styles
+   ========================= */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Nunito", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* =========================
+   Header
+   ========================= */
+/* Full-width green header */
+header {
+  background:#0b7d40; /* deep green */
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0.5rem 1rem;
+}
+
+/* Brand (logo + title) */
+header .brand {
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+}
+header .brand h1 {
+  margin:0;
+  font-size:1.3rem;
+  color:#fff; /* keep title white */
+}
+header .brand h1 .arabic {
+  color:#fff;
+}
+
+/* Nav links styled as rounded buttons */
+#mainNav {
+  display:flex;
+  gap:0.5rem;
+}
+#mainNav a,
+#mainNav button {
+  background:#fff;          /* white button background */
+  color:#0b7d40;            /* green text */
+  padding:0.4rem 0.9rem;
+  border-radius:20px;       /* rounded pill shape */
+  font-weight:600;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  transition:background 0.2s, color 0.2s;
+}
+#mainNav a:hover,
+#mainNav button:hover {
+  background:#065c2f;       /* darker green on hover */
+  color:#fff;               /* invert text to white */
+}
+
+/* Hamburger (mobile) */
+.hamburger {
+  display:none;
+  font-size:1.5rem;
+  background:none;
+  border:none;
+  color:#fff;
+  cursor:pointer;
+}
+@media (max-width:768px) {
+  #mainNav { display:none; flex-direction:column; background:#0b7d40; position:absolute; top:60px; right:0; padding:1rem; }
+  #mainNav.open { display:flex; }
+  .hamburger { display:block; }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.brand img {
+  height: 24px;
+}
+.brand h1 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.brand .arabic {
+  font-size: 0.9rem;
+  margin-left: 0.3rem;
+}
+
+/* Nav buttons */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+nav a {
+  background: #fff;
+  color: var(--green);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: background 0.2s, color 0.2s;
+}
+nav a:hover {
+  background: var(--green);
+  color: #fff;
+}
+
+/* Utility links (Home + Settings) */
+nav a.utility {
+  margin-left: 3rem;
+}
+
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  font-size: 1.2rem;
+  background: #fff;
+  color: var(--green);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.5rem;
+    gap: 0.5rem;
+  }
+  nav.open {
+    display: flex;
+  }
+  .hamburger {
+    display: block;
+  }
+}
+
+/* =========================
+   Containers & Cards
+   ========================= */
+.container { max-width: 1100px; margin: 0 auto; padding: 1rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 0.8rem;
+}
+@media (max-width:900px){ .grid{ grid-template-columns:repeat(2,1fr);} }
+@media (max-width:640px){ .grid{ grid-template-columns:1fr;} }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: background 0.3s, color 0.3s;
+}
+.card h4 { margin: 0; font-size: 0.9rem; }
+.card p { margin: 0; color: var(--muted); font-size: 0.8rem; }
+.card a {
+  margin-top: auto;
+  align-self: flex-start;
+  text-decoration: none;
+  color: var(--green);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.card a:hover { text-decoration: underline; }
+
+/* =========================
+   Footer
+   ========================= */
+footer {
+  margin-top: 1.5rem;
+  padding: 1rem 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}

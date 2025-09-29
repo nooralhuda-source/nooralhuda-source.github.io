@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Noor Al Huda — Duas</title>
+<style>
+  body { margin:0; font-family:Arial,sans-serif; background:#f4f6f8; color:#222; transition:background 0.3s,color 0.3s; }
+  header { background:#2e7d32; color:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; }
+  header .brand { display:flex; align-items:center; gap:10px; }
+  header .brand img { height:40px; }
+  header h1 { margin:0; font-size:1.2rem; }
+  header .arabic { font-family:"Amiri",serif; }
+  #mainNav { display:flex; gap:0.5rem; }
+  #mainNav a, #mainNav button {
+    background:#fff; color:#0b7d40; padding:0.4rem 0.9rem; border-radius:20px; font-weight:600;
+    text-decoration:none; border:none; cursor:pointer; transition:background 0.2s,color 0.2s;
+  }
+  #mainNav a:hover, #mainNav button:hover { background:#065c2f; color:#fff; }
+  .hamburger { display:none; font-size:1.5rem; background:none; border:none; color:#fff; cursor:pointer; }
+  @media(max-width:768px){
+    #mainNav{display:none;flex-direction:column;background:#0b7d40;position:absolute;top:60px;right:0;padding:1rem;}
+    #mainNav.open{display:flex;}
+    .hamburger{display:block;}
+  }
+
+  .container { max-width:1050px; margin:20px auto; padding:20px; }
+  .page-title { margin:0 0 12px; }
+  .search { display:flex; gap:10px; margin-bottom:16px; }
+  .search input { flex:1; padding:10px; border:1px solid #cfd7e3; border-radius:8px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+  .card {
+    background:#fff; border:1px solid #d8dee4; border-radius:8px; padding:14px;
+    cursor:pointer; transition:box-shadow 0.2s, border-color 0.2s;
+  }
+  .card:hover { box-shadow:0 4px 16px rgba(0,0,0,0.08); border-color:#0b7d40; }
+  .card h3 { margin:0; font-size:1rem; color:#0b7d40; }
+  .tag { font-size:0.75rem; background:#e0f2f1; color:#00695c; padding:2px 6px; border-radius:4px; display:inline-block; margin-top:6px; }
+
+  /* Expand panels */
+  .panel {
+    display:none; margin-top:8px; border-left:3px solid #0b7d40;
+    background:#fff; border:1px solid #d8dee4; border-radius:8px; padding:16px;
+  }
+  .panel.open { display:block; }
+  .panel .arabic { font-family:"Amiri",serif; font-size:1.2rem; line-height:1.7; direction:rtl; text-align:right; }
+  .panel .english { margin-top:10px; color:#333; }
+  .panel .note { margin-top:6px; font-size:0.85rem; color:#6b7280; }
+
+  /* Dark mode */
+  body.dark-mode { background:#0f1216; color:#e7ebf0; }
+  body.dark-mode header { background:#1f6a28; }
+  body.dark-mode #mainNav a, body.dark-mode #mainNav button { background:#1e2430; color:#e7ebf0; }
+  body.dark-mode #mainNav a:hover, body.dark-mode #mainNav button:hover { background:#4fb477; color:#fff; }
+  body.dark-mode .card { background:#121621; border-color:#2a3140; }
+  body.dark-mode .card h3 { color:#4fb477; }
+  body.dark-mode .panel { background:#161a20; border-color:#2a3140; }
+  body.dark-mode .panel .english { color:#cfd8e3; }
+  body.dark-mode .tag { background:#2e7d32; color:#fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="logo.png" alt="Noor Al Huda Logo">
+    <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+  <nav id="mainNav">
+    <a href="quran.html">📖 Qur’an</a>
+    <a href="duas.html" class="active">🤲 Duas</a>
+    <a href="hadiths-home.html">📜 Hadiths</a>
+    <a href="calendar.html">📅 Calendar</a>
+    <a href="salah.html">🕌 Salah</a>
+    <a href="index.html" class="utility">🏠</a>
+    <a href="settings.html" class="utility">⚙</a>
+    <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+  </nav>
+</header>
+
+<div class="container" id="content" style="font-size:16px">
+  <h2 class="page-title">Select a Dua</h2>
+  <div class="search">
+    <input id="searchInput" type="search" placeholder="Search duas by name or Arabic..." />
+  </div>
+
+  <div class="grid" id="duaGrid">
+    <!-- Cards are clickable; each has a matching panel by id -->
+    <div class="card" data-target="panel-morning">
+      <h3>Dua for Morning</h3>
+      <span class="tag">Morning</span>
+    </div>
+    <div class="panel" id="panel-morning">
+      <div class="arabic">اللَّهُمَّ أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ</div>
+      <div class="english">O Allah, we have entered the morning and the dominion belongs to You.</div>
+      <div class="note">Recommended after Fajr. Builds gratitude and tawakkul.</div>
+    </div>
+
+    <div class="card" data-target="panel-protection">
+      <h3>Dua for Protection</h3>
+      <span class="tag">Protection</span>
+    </div>
+    <div class="panel" id="panel-protection">
+      <div class="arabic">أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ</div>
+      <div class="english">I seek refuge in the perfect words of Allah from the evil of what He has created.</div>
+      <div class="note">Use during travel or distress; repeat three times.</div>
+    </div>
+
+    <div class="card" data-target="panel-sleep">
+      <h3>Dua before Sleep</h3>
+      <span class="tag">Sleep</span>
+    </div>
+    <div class="panel" id="panel-sleep">
+      <div class="arabic">بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي وَبِكَ أَرْفَعُهُ</div>
+      <div class="english">In Your name, my Lord, I lay down my side and by You I raise it.</div>
+      <div class="note">Say before lying down; calms the heart.</div>
+    </div>
+
+    <div class="card" data-target="panel-forgiveness">
+      <h3>Dua for Forgiveness</h3>
+      <span class="tag">Forgiveness</span>
+    </div>
+    <div class="panel" id="panel-forgiveness">
+      <div class="arabic">رَبِّ اغْفِرْ لِي وَارْحَمْنِي</div>
+      <div class="english">My Lord, forgive me and have mercy on me.</div>
+      <div class="note">Short, powerful; repeat in sujood and after salah.</div>
+    </div>
+
+    <div class="card" data-target="panel-anxiety">
+      <h3>Dua for Anxiety</h3>
+      <span class="tag">Relief</span>
+    </div>
+    <div class="panel" id="panel-anxiety">
+      <div class="arabic">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ</div>
+      <div class="english">O Allah, I seek refuge in You from worry and grief.</div>
+      <div class="note">Use during hardship; pair with deep breathing.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Header interactions + theme */
+function toggleMenu(){document.getElementById("mainNav").classList.toggle("open");}
+function toggleDarkMode(){
+  document.body.classList.toggle("dark-mode");
+  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+}
+(function restoreTheme(){
+  if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark-mode");}
+})();
+
+/* Expand/collapse behavior */
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const id = card.getAttribute('data-target');
+    const panel = document.getElementById(id);
+    // close others
+    document.querySelectorAll('.panel.open').forEach(p=>p.classList.remove('open'));
+    // toggle current
+    panel.classList.toggle('open');
+    // scroll into view
+    panel.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+});
+
+/* Search filter */
+document.getElementById('searchInput').addEventListener('input', (e)=>{
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll('#duaGrid .card').forEach(card=>{
+    const title = card.querySelector('h3').textContent.toLowerCase();
+    const tag = (card.querySelector('.tag')?.textContent || '').toLowerCase();
+    const targetId = card.getAttribute('data-target');
+    const panelText = document.getElementById(targetId).textContent.toLowerCase();
+    const match = title.includes(q) || tag.includes(q) || panelText.includes(q);
+    card.style.display = match ? '' : 'none';
+    document.getElementById(targetId).style.display = match ? (document.getElementById(targetId).classList.contains('open') ? 'block':'none') : 'none';
+  });
+});
+</script>
+</body>
+</html>

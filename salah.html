@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Noor Al Huda — Salah</title>
+<style>
+  body { margin:0; font-family:Arial,sans-serif; background:#f4f6f8; color:#222; transition:background 0.3s,color 0.3s; }
+  header { background:#2e7d32; color:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; }
+  header .brand { display:flex; align-items:center; gap:10px; }
+  header .brand img { height:40px; }
+  header h1 { margin:0; font-size:1.2rem; }
+  header .arabic { font-family:"Amiri",serif; }
+  #mainNav { display:flex; gap:0.5rem; }
+  #mainNav a, #mainNav button {
+    background:#fff; color:#0b7d40; padding:0.4rem 0.9rem; border-radius:20px; font-weight:600;
+    text-decoration:none; border:none; cursor:pointer; transition:background 0.2s,color 0.2s;
+  }
+  #mainNav a:hover, #mainNav button:hover { background:#065c2f; color:#fff; }
+  .hamburger { display:none; font-size:1.5rem; background:none; border:none; color:#fff; cursor:pointer; }
+  @media(max-width:768px){
+    #mainNav{display:none;flex-direction:column;background:#0b7d40;position:absolute;top:60px;right:0;padding:1rem;}
+    #mainNav.open{display:flex;}
+    .hamburger{display:block;}
+  }
+
+  .container { max-width:900px; margin:20px auto; background:#fff; border:1px solid #d8dee4; border-radius:8px; padding:20px; }
+  .controls { display:flex; gap:10px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
+  .controls select { padding:6px 10px; border-radius:6px; border:1px solid #cfd7e3; }
+  .card { border:1px solid #d8dee4; border-radius:8px; padding:12px; background:#fff; }
+  .card h3 { margin:0 0 8px; font-size:1rem; color:#0b7d40; }
+  .row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed #e5e7eb; }
+  .row:last-child { border-bottom:none; }
+
+  /* Dark mode */
+  body.dark-mode { background:#0f1216; color:#e7ebf0; }
+  body.dark-mode header { background:#1f6a28; }
+  body.dark-mode #mainNav a, body.dark-mode #mainNav button { background:#1e2430; color:#e7ebf0; }
+  body.dark-mode #mainNav a:hover, body.dark-mode #mainNav button:hover { background:#4fb477; color:#fff; }
+  body.dark-mode .container { background:#161a20; border-color:#2a3140; }
+  body.dark-mode .card { background:#121621; border-color:#2a3140; }
+  body.dark-mode .card h3 { color:#4fb477; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="logo.png" alt="Noor Al Huda Logo">
+    <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+  <nav id="mainNav">
+    <a href="quran.html">📖 Qur’an</a>
+    <a href="duas.html">🤲 Duas</a>
+    <a href="hadiths-home.html">📜 Hadiths</a>
+    <a href="calendar.html">📅 Calendar</a>
+    <a href="salah.html" class="active">🕌 Salah</a>
+    <a href="index.html" class="utility">🏠</a>
+    <a href="settings.html" class="utility">⚙</a>
+    <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+  </nav>
+</header>
+
+<div class="container" id="content" style="font-size:16px">
+  <div class="controls">
+    <label>
+      <strong>City:</strong>
+      <select id="citySelect">
+        <!-- Values match internal keys; labels show country -->
+        <option value="London">London (UK)</option>
+        <option value="Bedford">Bedford (UK)</option>
+        <option value="Islamabad">Islamabad (Pakistan)</option>
+        <option value="Tehran">Tehran (Iran)</option>
+        <option value="Karbala">Karbala (Iraq)</option>
+      </select>
+    </label>
+    <span id="tzLabel"></span>
+    <span id="dateLabel"></span>
+  </div>
+
+  <div class="card">
+    <h3 id="cityTitle">Salah times</h3>
+    <div class="row"><span>Fajr</span><span id="fajr">—</span></div>
+    <div class="row"><span>Sunrise</span><span id="sunrise">—</span></div>
+    <div class="row"><span>Dhuhr</span><span id="dhuhr">—</span></div>
+    <div class="row"><span>Asr</span><span id="asr">—</span></div>
+    <div class="row"><span>Maghrib</span><span id="maghrib">—</span></div>
+    <div class="row"><span>Isha</span><span id="isha">—</span></div>
+  </div>
+</div>
+
+<script>
+/* Header interactions + theme */
+function toggleMenu(){document.getElementById("mainNav").classList.toggle("open");}
+function toggleDarkMode(){
+  document.body.classList.toggle("dark-mode");
+  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+}
+(function restoreTheme(){
+  if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark-mode");}
+})();
+
+/* Settings integration: font size + country default */
+(function applySettings(){
+  const font = parseInt(localStorage.getItem("font_size")||"16",10);
+  document.getElementById("content").style.fontSize = Math.min(Math.max(font, 12), 22) + "px";
+  const country = localStorage.getItem("country") || "United Kingdom";
+  const citySelect = document.getElementById("citySelect");
+  if(country==="United Kingdom"){ citySelect.value="Bedford"; }
+})();
+
+/* City coordinates + timezone rules */
+const CITIES = {
+  London:   { lat:51.5074, lon:-0.1278, tz:"Europe/London" },
+  Bedford:  { lat:52.1364, lon:-0.4670, tz:"Europe/London" },
+  Islamabad:{ lat:33.6844, lon:73.0479, tz:"Asia/Karachi" },   // UTC+5
+  Tehran:   { lat:35.6892, lon:51.3890, tz:"Asia/Tehran" },    // UTC+3:30
+  Karbala:  { lat:32.6160, lon:44.0246, tz:"Asia/Baghdad" }    // UTC+3
+};
+
+/* Timezone offset (minutes) per date */
+function tzOffsetMinutes(tz, date){
+  // UK DST: last Sunday in March → last Sunday in October (01:00 UTC switch)
+  const y = date.getUTCFullYear();
+  function lastSunday(month){
+    const d = new Date(Date.UTC(y, month+1, 0));
+    const day = d.getUTCDay();
+    d.setUTCDate(d.getUTCDate() - day);
+    return d;
+  }
+  if(tz==="Europe/London"){
+    const startDST = lastSunday(2);
+    const endDST   = lastSunday(9);
+    const nowUTC = Date.UTC(y, date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes());
+    const sUTC = Date.UTC(y, startDST.getUTCMonth(), startDST.getUTCDate(), 1, 0);
+    const eUTC = Date.UTC(y, endDST.getUTCMonth(), endDST.getUTCDate(), 1, 0);
+    return (nowUTC>=sUTC && nowUTC<eUTC) ? 60 : 0;
+  }
+  if(tz==="Asia/Karachi") return 300;
+  if(tz==="Asia/Tehran")  return 210;
+  if(tz==="Asia/Baghdad") return 180;
+  return -date.getTimezoneOffset();
+}
+
+/* Astronomy helpers */
+const RAD = Math.PI/180;
+function toRad(x){return x*RAD;}
+function toDeg(x){return x/RAD;}
+function normalizeAngle(a){a%=360;return a<0?a+360:a;}
+function julianDay(date){
+  const t = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 0, 0, 0)/86400000 + 2440587.5;
+  return t;
+}
+function solarMeanAnomaly(d){return toRad(normalizeAngle(357.5291 + 0.98560028 * d));}
+function eclipticLongitude(M){
+  const C = toRad(1.9148)*Math.sin(M) + toRad(0.0200)*Math.sin(2*M) + toRad(0.0003)*Math.sin(3*M);
+  const P = toRad(102.9372);
+  return M + C + P + Math.PI;
+}
+function declination(L){
+  const e = toRad(23.4397);
+  return Math.asin(Math.sin(e)*Math.sin(L));
+}
+function equationOfTime(M,L){
+  const e = toRad(23.4397);
+  const y = Math.tan(e/2); const y2 = y*y;
+  const sin2L = Math.sin(2*L), cos2L = Math.cos(2*L);
+  const sinM = Math.sin(M), cos2M = Math.cos(2*M);
+  return toDeg(y2*sin2L - 2*0.0167*sinM + 4*0.0167*y2*sinM*cos2L - 0.5*y2*y2*sin2L - 1.25*0.0167*0.0167*sin2M) * 4;
+}
+function hourAngle(lat, dec, altitudeDeg){
+  const h = toRad(altitudeDeg);
+  const phi = toRad(lat);
+  const cosH = (Math.sin(h) - Math.sin(phi)*Math.sin(dec)) / (Math.cos(phi)*Math.cos(dec));
+  if(cosH<-1 || cosH>1) return null;
+  return Math.acos(cosH);
+}
+
+/* Core times (UTC minutes from midnight) using Ja'fari parameters */
+function solarTimesUTC(date, lat, lon){
+  const JD = julianDay(date);
+  const d = JD - 2451545.0;
+  const M = solarMeanAnomaly(d);
+  const L = eclipticLongitude(M);
+  const dec = declination(L);
+
+  const E = equationOfTime(M, L);
+  const noonUTCmin = 720 - 4*lon - E;
+
+  // Sunrise/Sunset at apparent altitude -0.833°
+  const H0 = hourAngle(lat, dec, -0.833);
+  let srUTC = null, ssUTC = null;
+  if(H0!==null){
+    const H0deg = toDeg(H0);
+    srUTC = noonUTCmin - 4*H0deg;
+    ssUTC = noonUTCmin + 4*H0deg;
+  }
+
+  // Ja'fari: Fajr 17.7°, Isha 14°
+  const Hf = hourAngle(lat, dec, -17.7);
+  const Hi = hourAngle(lat, dec, -14.0);
+  let fajrUTC = null, ishaUTC = null;
+  if(Hf!==null){ fajrUTC = noonUTCmin - 4*toDeg(Hf); }
+  if(Hi!==null){ ishaUTC = noonUTCmin + 4*toDeg(Hi); }
+
+  // Asr (shadow factor 1)
+  const phi = toRad(lat);
+  const n = 1;
+  const altAsr = toDeg(Math.atan(1/(n + Math.tan(Math.abs(phi - dec)))));
+  const Ha = hourAngle(lat, dec, altAsr);
+  let asrUTC = null;
+  if(Ha!==null){ asrUTC = noonUTCmin + 4*toDeg(Ha); }
+
+  // Dhuhr at solar noon; Maghrib = sunset + 12 min
+  const dhuhrUTC = noonUTCmin;
+  const maghribUTC = ssUTC!==null ? (ssUTC + 12) : null;
+
+  return { fajrUTC, sunriseUTC: srUTC, dhuhrUTC, asrUTC, maghribUTC, ishaUTC };
+}
+
+/* High-latitude fallback (night-fraction method) */
+function ensureTwilightFallback(t){
+  if(t.sunriseUTC===null || t.maghribUTC===null) return t;
+  const night = ((24*60) - t.maghribUTC) + t.sunriseUTC;
+  if(t.fajrUTC===null){ t.fajrUTC = t.sunriseUTC - night*(1/7); }
+  if(t.ishaUTC===null){ t.ishaUTC = t.maghribUTC + night*(1/7); }
+  return t;
+}
+
+/* Formatting */
+function toLocalTimeStr(utcMinutes, offsetMin){
+  if(utcMinutes===null) return "—";
+  let m = Math.round(utcMinutes + offsetMin);
+  m = (m%(24*60)+24*60)%(24*60);
+  const hh = Math.floor(m/60), mm = m%60;
+  return String(hh).padStart(2,"0")+":"+String(mm).padStart(2,"0");
+}
+
+/* Safe city resolver (handles label/value mismatches) */
+function resolveCity(key){
+  if(CITIES[key]) return key;
+  const map = {
+    "London (UK)":"London",
+    "Bedford (UK)":"Bedford",
+    "Islamabad (Pakistan)":"Islamabad",
+    "Tehran (Iran)":"Tehran",
+    "Karbala (Iraq)":"Karbala"
+  };
+  return map[key] || "Bedford";
+}
+
+/* Render city for a given date */
+function renderCity(name, date){
+  const key = resolveCity(name);
+  const city = CITIES[key];
+  const offsetMin = tzOffsetMinutes(city.tz, date);
+
+  let t = solarTimesUTC(date, city.lat, city.lon);
+  t = ensureTwilightFallback(t);
+
+  document.getElementById("cityTitle").textContent = `Salah times — ${key}`;
+  document.getElementById("tzLabel").textContent = city.tz;
+  document.getElementById("dateLabel").textContent = new Date(date.getTime()).toLocaleDateString();
+
+  document.getElementById("fajr").textContent    = toLocalTimeStr(t.fajrUTC, offsetMin);
+  document.getElementById("sunrise").textContent = toLocalTimeStr(t.sunriseUTC, offsetMin);
+  document.getElementById("dhuhr").textContent   = toLocalTimeStr(t.dhuhrUTC, offsetMin);
+  document.getElementById("asr").textContent     = toLocalTimeStr(t.asrUTC, offsetMin);
+  document.getElementById("maghrib").textContent = toLocalTimeStr(t.maghribUTC, offsetMin);
+  document.getElementById("isha").textContent    = toLocalTimeStr(t.ishaUTC, offsetMin);
+}
+
+/* City selector */
+document.getElementById("citySelect").addEventListener("change", e => {
+  renderCity(e.target.value, new Date());
+});
+
+/* Auto-update: refresh every minute and reschedule at 00:05 local time */
+(function enableAutoUpdates(){
+  let lastDay = null;
+
+  function refreshNow(){
+    const value = document.getElementById("citySelect").value;
+    const now = new Date();
+    renderCity(value, now);
+    lastDay = now.toDateString();
+  }
+
+  setInterval(() => {
+    const now = new Date();
+    if (lastDay !== now.toDateString()) {
+      refreshNow();
+    } else {
+      refreshNow();
+    }
+  }, 60 * 1000);
+
+  function scheduleMidnightRefresh(){
+    const now = new Date();
+    const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 5, 0, 0);
+    const ms = next.getTime() - now.getTime();
+    setTimeout(() => {
+      refreshNow();
+      scheduleMidnightRefresh();
+    }, ms);
+  }
+
+  refreshNow();
+  scheduleMidnightRefresh();
+})();
+</script>
+</body>
+</html>

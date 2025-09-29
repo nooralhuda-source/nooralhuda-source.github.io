@@ -1,0 +1,23 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/quran"
+  to = "/quran.html"
+  status = 200
+[[redirects]]
+  from = "/hadiths-home"
+  to = "/hadiths-home.html"
+  status = 200
+[[redirects]]
+  from = "/duas"
+  to = "/duas.html"
+  status = 200
+[[redirects]]
+  from = "/calendar"
+  to = "/calendar.html"
+  status = 200
+[[redirects]]
+  from = "/salah"
+  to = "/salah.html"
+  status = 200

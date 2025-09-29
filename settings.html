@@ -1,196 +1,200 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Settings - Noor Al Huda</title>
+  <title>Settings – Noor Al Huda</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"> <!-- shared CSS -->
+  <!-- Global stylesheet for header/nav/theme -->
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap&family=Amiri&display=swap" rel="stylesheet">
   <style>
+    /* Settings page specific styles */
     .settings-container {
-      max-width: 700px;
+      max-width: 900px;
       margin: 2rem auto;
-      background: var(--card-light, #fff);
-      padding: 1.5rem;
+      padding: 2rem;
+      background: var(--card-bg, #fff);
       border-radius: 12px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
-    body.dark .settings-container { background: var(--card-dark, #2a2a2a); }
-    .settings-container h2 { margin-top: 0; }
-    .setting-group { margin-bottom: 1.5rem; }
-    .setting-group label { display: block; font-weight: bold; margin-bottom: 0.5rem; }
-    .setting-group select, .setting-group input, .setting-group button {
-      width: 100%; padding: 0.6rem; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;
+
+    .settings-container h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: var(--primary-color, #004080);
     }
-    .reset-btn { background: #e74c3c; color: white; border: none; cursor: pointer; font-weight: bold; }
-    .reset-btn:hover { background: #c0392b; }
-    .account-section { margin-top: 2rem; border-top: 1px solid #ddd; padding-top: 1.5rem; }
+
+    .settings-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .settings-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .settings-group select,
+    .settings-group input[type="range"],
+    .settings-group input[type="checkbox"] {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .toggle-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .about {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--card-bg, #fff);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .about h2 {
+      margin-bottom: 1rem;
+      color: var(--primary-color, #004080);
+    }
+
+    .about p {
+      line-height: 1.6;
+      color: var(--text-color, #444);
+    }
+
+    /* Dark mode overrides */
+    body.dark .settings-container,
+    body.dark .about {
+      background: #2a2a2a;
+      color: #eee;
+    }
+
+    body.dark .settings-group select,
+    body.dark .settings-group input {
+      background: #333;
+      color: #eee;
+      border: 1px solid #555;
+    }
   </style>
 </head>
 <body>
+  <!-- Shared header from style.css -->
   <header>
-    <div class="logo">
-      <img src="your-logo.png" alt="Noor Al Huda Logo">
-      <span>Noor Al Huda</span>
+    <div class="brand">
+      <img src="images/logo.png" alt="Noor Al Huda Logo">
+      <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
     </div>
-    <nav>
+
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+
+    <nav id="mainNav">
       <a href="quran.html">📖 Qur’an</a>
-      <a href="hadiths.html">📜 Hadith</a>
-      <a href="duas.html">🤲 Dua</a>
-      <a href="news.html">📰 News</a>
+      <a href="duas.html">🤲 Duas</a>
+      <a href="hadiths-home.html">📜 Hadiths</a>
+      <a href="calendar.html">📅 Calendar</a>
+      <a href="salah.html">🕌 Salah</a>
+      <a href="index.html" class="utility">🏠</a>
+      <a href="settings.html" class="utility">⚙</a>
+      <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
     </nav>
-    <div class="header-actions">
-      <button onclick="window.location.href='settings.html'">Settings</button>
-    </div>
   </header>
+  <main>
+    <div class="settings-container">
+      <h2>Settings</h2>
 
-  <div class="settings-container">
-    <h2>⚙️ Settings</h2>
-
-    <!-- Language -->
-    <div class="setting-group">
-      <label for="languageSelect">Language</label>
-      <select id="languageSelect">
-        <option value="en">English</option>
-        <option value="ur">Urdu</option>
-        <option value="ar">Arabic</option>
-      </select>
-    </div>
-
-    <!-- Theme -->
-    <div class="setting-group">
-      <label for="themeSelect">Theme</label>
-      <select id="themeSelect">
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-    </div>
-
-    <!-- Font size -->
-    <div class="setting-group">
-      <label for="fontSizeSelect">Font Size</label>
-      <select id="fontSizeSelect">
-        <option value="small">Small</option>
-        <option value="medium" selected>Medium</option>
-        <option value="large">Large</option>
-      </select>
-    </div>
-
-    <!-- Qur’an script -->
-    <div class="setting-group">
-      <label for="scriptSelect">Qur’an Script</label>
-      <select id="scriptSelect">
-        <option value="uthmani">Uthmani</option>
-        <option value="indopak">IndoPak</option>
-        <option value="simple">Simple</option>
-      </select>
-    </div>
-
-    <!-- Reset -->
-    <div class="setting-group">
-      <button class="reset-btn" id="resetBtn">Reset to Default</button>
-    </div>
-
-    <!-- Account creation -->
-    <div class="account-section">
-      <h2>👤 Create Account</h2>
-      <div class="setting-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" placeholder="Enter username">
+      <!-- Language -->
+      <div class="settings-group">
+        <label for="languageSelect">Language</label>
+        <select id="languageSelect">
+          <option value="en">English</option>
+          <option value="ur">Urdu</option>
+          <option value="ar">Arabic</option>
+        </select>
       </div>
-      <div class="setting-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter email">
+
+      <!-- Qur’anic Script -->
+      <div class="settings-group">
+        <label for="scriptSelect">Qur’anic Script</label>
+        <select id="scriptSelect">
+          <option value="uthmani">Uthmani</option>
+          <option value="indopak">Indo-Pak</option>
+          <option value="simple">Simple Arabic</option>
+        </select>
       </div>
-      <div class="setting-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter password">
+
+      <!-- Font Size -->
+      <div class="settings-group">
+        <label for="fontSize">Font Size</label>
+        <input type="range" id="fontSize" min="16" max="32" value="20">
       </div>
-      <div class="setting-group">
-        <button id="createAccountBtn">Create Account</button>
+
+      <!-- Dark Mode -->
+      <div class="settings-group toggle-switch">
+        <label for="darkModeToggle">Dark Mode</label>
+        <input type="checkbox" id="darkModeToggle">
+      </div>
+
+      <!-- Country -->
+      <div class="settings-group">
+        <label for="countrySelect">Country (for Calendar & Salaah)</label>
+        <select id="countrySelect">
+          <option value="uk">United Kingdom</option>
+          <option value="pk">Pakistan</option>
+          <option value="ir">Iran</option>
+          <option value="iq">Iraq</option>
+        </select>
       </div>
     </div>
-  </div>
+
+    <!-- About Section -->
+    <div class="about">
+      <h2>About Noor Al Huda</h2>
+      <p>
+        Noor Al Huda is your personal Islamic companion, designed to bring the Qur’an, Hadith, Duas, and daily guidance into one accessible platform. 
+        Our aim is to provide a modern, user-friendly experience while preserving the timeless beauty of Islamic knowledge. 
+        Whether you are seeking spiritual growth, daily reminders, or scholarly references, Noor Al Huda is here to illuminate your path.
+      </p>
+    </div>
+  </main>
 
   <script>
-    // Load saved settings
-    function loadSettings() {
-      const lang = localStorage.getItem("lang") || "en";
-      const theme = localStorage.getItem("theme") || "light";
-      const fontSize = localStorage.getItem("fontSize") || "medium";
-      const script = localStorage.getItem("script") || "uthmani";
+    // Load saved preferences
+    window.onload = () => {
+      ["languageSelect","scriptSelect","fontSize","countrySelect"].forEach(id => {
+        const el = document.getElementById(id);
+        const saved = localStorage.getItem(id);
+        if (saved) el.value = saved;
+        el.addEventListener("change", () => {
+          localStorage.setItem(id, el.value);
+          applySettings();
+        });
+      });
 
-      document.getElementById("languageSelect").value = lang;
-      document.getElementById("themeSelect").value = theme;
-      document.getElementById("fontSizeSelect").value = fontSize;
-      document.getElementById("scriptSelect").value = script;
-
-      applyTheme(theme);
-      applyFontSize(fontSize);
-    }
-
-    // Apply theme
-    function applyTheme(theme) {
-      if (theme === "dark") {
+      // Dark mode
+      if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark");
-      } else {
-        document.body.classList.remove("dark");
+        document.getElementById("darkModeToggle").checked = true;
       }
+      document.getElementById("darkModeToggle").addEventListener("change", e => {
+        document.body.classList.toggle("dark", e.target.checked);
+        localStorage.setItem("theme", e.target.checked ? "dark" : "light");
+      });
+
+      applySettings();
+    };
+
+    function applySettings() {
+      // Apply font size globally
+      const fontSize = localStorage.getItem("fontSize") || 20;
+      document.body.style.fontSize = fontSize + "px";
+      // Language, script, and country can be used by other pages
+      // Example: console.log(localStorage.getItem("languageSelect"));
     }
-
-    // Apply font size
-    function applyFontSize(size) {
-      if (size === "small") {
-        document.body.style.fontSize = "14px";
-      } else if (size === "large") {
-        document.body.style.fontSize = "20px";
-      } else {
-        document.body.style.fontSize = "16px";
-      }
-    }
-
-    // Save settings
-    document.getElementById("languageSelect").addEventListener("change", e => {
-      localStorage.setItem("lang", e.target.value);
-    });
-    document.getElementById("themeSelect").addEventListener("change", e => {
-      localStorage.setItem("theme", e.target.value);
-      applyTheme(e.target.value);
-    });
-    document.getElementById("fontSizeSelect").addEventListener("change", e => {
-      localStorage.setItem("fontSize", e.target.value);
-      applyFontSize(e.target.value);
-    });
-    document.getElementById("scriptSelect").addEventListener("change", e => {
-      localStorage.setItem("script", e.target.value);
-    });
-
-    // Reset
-    document.getElementById("resetBtn").addEventListener("click", () => {
-      localStorage.clear();
-      loadSettings();
-      alert("Settings reset to default.");
-    });
-
-    // Account creation (front-end only)
-    document.getElementById("createAccountBtn").addEventListener("click", () => {
-      const username = document.getElementById("username").value;
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      if (!username || !email || !password) {
-        alert("Please fill in all fields.");
-        return;
-      }
-
-      // Save locally for now (not secure, just demo)
-      localStorage.setItem("account_username", username);
-      localStorage.setItem("account_email", email);
-      alert("Account created! (Demo only — connect to backend later)");
-    });
-
-    loadSettings();
   </script>
-  
 </body>
 </html>
