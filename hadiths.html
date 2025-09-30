@@ -23,7 +23,7 @@
 </head>
 <body>
   <header>
-    <h1>Noor Al Huda — Al‑Kafi</h1>
+    <h1>Noor Al Huda — Al-Kafi</h1>
     <input id="searchBox" placeholder="Search hadiths…" />
     <button onclick="searchHadiths()">Search</button>
     <button onclick="resetSearch()">Reset</button>
@@ -38,34 +38,44 @@
   </main>
 
   <script>
+    // Path to your Al-Kafi JSON file (adjust if you keep it somewhere else)
+    const DATA_PATH = "data/alkafi.json";
+
     const container = document.getElementById("hadithContainer");
-    let allHadiths = [];
-    let filtered = [];
-    let currentPage = 1;
-    const perPage = 10;
-    let currentLang = "en";
+    let allHadiths = [], filtered = [];
+    let currentPage = 1, perPage = 10, currentLang = "en";
     const translationCache = {};
 
-    // Load JSON
-    fetch("data/alkafi.json")
-      .then(res => res.json())
+    // 1) OPTIONAL: swallow analytics.json errors so they can't break the page
+    fetch("analytics.json")
+      .then(r => r.json())
+      .then(() => {/* you can init analytics here if needed */})
+      .catch(_ => console.warn("analytics.json missing – continuing without analytics"));
+
+    // 2) Load your hadith data
+    fetch(DATA_PATH)
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to fetch");
+        return res.json();
+      })
       .then(data => {
         allHadiths = data;
         filtered = allHadiths;
         renderPage(1);
       })
       .catch(err => {
-        container.innerHTML = "<p style='color:red'>Could not load data/alkafi.json</p>";
+        console.error(err);
+        container.innerHTML = "<p style='color:red'>Could not load " + DATA_PATH + "</p>";
       });
 
+    // Render a page of hadiths
     function renderPage(page) {
       currentPage = page;
       container.innerHTML = "";
-      const start = (page-1) * perPage;
-      const end = start + perPage;
+      const start = (page-1)*perPage, end = start + perPage;
       const slice = filtered.slice(start, end);
 
-      if (slice.length === 0) {
+      if (!slice.length) {
         container.innerHTML = "<p>No hadiths found.</p>";
         return;
       }
@@ -76,20 +86,20 @@
         div.innerHTML = `
           <div class="arabic">
             <div class="meta">
-              Volume: ${h.volume || ""} | Chapter: ${h.chapter || ""} | Section: ${h.section || ""} | Number: ${h.number || ""}
+              Volume: ${h.volume||""} | Chapter: ${h.chapter||""} | Section: ${h.section||""} | Number: ${h.number||""}
             </div>
-            <div>${h.text || ""}</div>
+            <div>${h.text||""}</div>
           </div>
           <div class="translation" id="t-${h.number}">Translating...</div>
         `;
         container.appendChild(div);
-
         translateHadith(h.text, currentLang, `t-${h.number}`);
       });
 
+      // Pager
       const pager = document.createElement("div");
       pager.className = "pager";
-      if (page > 1) pager.innerHTML += `<button onclick="renderPage(${page-1})">⬅ Prev</button>`;
+      if (page > 1)       pager.innerHTML += `<button onclick="renderPage(${page-1})">⬅ Prev</button>`;
       if (end < filtered.length) pager.innerHTML += `<button onclick="renderPage(${page+1})">Next ➡</button>`;
       container.appendChild(pager);
     }
@@ -98,9 +108,9 @@
       const q = document.getElementById("searchBox").value.trim().toLowerCase();
       if (!q) return;
       filtered = allHadiths.filter(h =>
-        (h.text && h.text.toLowerCase().includes(q)) ||
-        (h.chapter && h.chapter.toLowerCase().includes(q)) ||
-        (h.section && h.section.toLowerCase().includes(q))
+        (h.text||"").toLowerCase().includes(q) ||
+        (h.chapter||"").toLowerCase().includes(q) ||
+        (h.section||"").toLowerCase().includes(q)
       );
       renderPage(1);
     }
@@ -123,14 +133,14 @@
         return;
       }
       try {
-        const res = await fetch("https://api.mymemory.translated.net/get?q=" 
-                                + encodeURIComponent(arabicText) 
-                                + "&langpair=ar|" + lang);
+        const res = await fetch("https://api.mymemory.translated.net/get?q=" +
+                                encodeURIComponent(arabicText) +
+                                "&langpair=ar|" + lang);
         const data = await res.json();
         const translated = data.responseData.translatedText;
         translationCache[key] = translated;
         document.getElementById(elementId).innerText = translated;
-      } catch (e) {
+      } catch {
         document.getElementById(elementId).innerText = "[Translation failed]";
       }
     }
