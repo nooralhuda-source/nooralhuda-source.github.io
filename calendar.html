@@ -59,7 +59,7 @@
 
 <header>
   <div class="brand">
-    <img src="logo.png" alt="Noor Al Huda Logo">
+    <img src="logo.png.png" alt="Noor Al Huda Logo">
     <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
   </div>
   <button class="hamburger" onclick="toggleMenu()">☰</button>
@@ -122,15 +122,80 @@ function jdnToIslamic(jdn){
 /* Names + events */
 const G_MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
 const H_MONTHS=["Muharram","Safar","Rabiʿ al-Awwal","Rabiʿ al-Thani","Jumada al-Ula","Jumada al-Thani","Rajab","Shaʿban","Ramadan","Shawwal","Dhu al-Qaʿdah","Dhu al-Hijjah"];
-const EVENTS_HIJRI={
-  "8-15":["15 Sha'ban (Mid-Sha'ban)"],
+const EVENTS_HIJRI = {
+  // Muharram
+  "1-1":["Islamic New Year – start of mourning"],
+  "1-2":["Imam Husayn (as) arrives in Karbala"],
+  "1-7":["Water supply cut off from Imam Husayn’s camp"],
+  "1-9":["Tasuʿa (eve of Ashura)"],
+  "1-10":["Ashura – Martyrdom of Imam Husayn (as) and companions"],
+  "1-11":["Captives taken after Karbala"],
+  "1-12":["Burial of Karbala martyrs"],
+  "1-25":["Martyrdom of Imam Zayn al‑Abidin (as)"],
+
+  // Safar
+  "2-7":["Martyrdom of Imam Hasan (as)","Birth of Imam Musa al‑Kazim (as)"],
+  "2-13":["Death of Bibi Sakina (sa)"],
+  "2-17":["Martyrdom of Imam Ridha (as)"],
+  "2-20":["Arbaeen (40th of Imam Husayn, as)"],
+  "2-28":["Demise of Prophet Muhammad (saw)"],
+
+  // Rabi al‑Awwal
+  "3-8":["Martyrdom of Imam Hasan al‑Askari (as)"],
+  "3-9":["Eid‑e‑Zahra (sa)"],
+  "3-17":["Birth of Prophet Muhammad (saw)","Birth of Imam Jaʿfar al‑Sadiq (as)"],
+
+  // Rabi al‑Thani
+  "4-8":["Martyrdom of Lady Fatima Zahra (sa) (tradition)"],
+  "4-10":["Martyrdom of Lady Masuma of Qom (sa)"],
+
+  // Jumada al‑Ula
+  "5-5":["Birth of Lady Zaynab (sa)"],
+  "5-13":["Martyrdom of Lady Fatima Zahra (sa) (second narration)"],
+  "5-15":["Birth of Imam Zayn al‑Abidin (as)"],
+
+  // Jumada al‑Thani
+  "6-3":["Martyrdom of Lady Fatima Zahra (sa) (third narration)"],
+  "6-20":["Birth of Lady Fatima Zahra (sa)"],
+
+  // Rajab
+  "7-1":["Birth of Imam Muhammad al‑Baqir (as)"],
+  "7-3":["Martyrdom of Imam Ali al‑Naqi (as)"],
+  "7-10":["Birth of Imam Muhammad al‑Taqi (as)"],
+  "7-13":["Birth of Imam Ali (as)"],
+  "7-25":["Martyrdom of Imam Musa al‑Kazim (as)"],
+  "7-26":["Death of Abu Talib (as)"],
+  "7-27":["Mabʿath / Miʿraj (Prophet’s mission)"],
+
+  // Shaʿban
+  "8-3":["Birth of Imam Husayn (as)"],
+  "8-4":["Birth of Hazrat Abbas (as)"],
+  "8-5":["Birth of Imam Zayn al‑Abidin (as)"],
+  "8-15":["Birth of Imam al‑Mahdi (aj)"],
+
+  // Ramadan
+  "9-10":["Death of Lady Khadija (sa)"],
+  "9-15":["Birth of Imam Hasan al‑Mujtaba (as)"],
   "9-17":["Battle of Badr"],
-  "9-19":["Imam Ali struck"],
-  "9-21":["Shahadat Imam Ali"],
-  "10-1":["Eid al-Fitr"],
-  "12-10":["Eid al-Adha"],
-  "1-10":["Ashura"],
-  "12-18":["Eid al-Ghadir"]
+  "9-19":["Imam Ali (as) struck in Kufa","Laylat al‑Qadr (possible)"],
+  "9-21":["Martyrdom of Imam Ali (as)","Laylat al‑Qadr (possible)"],
+  "9-23":["Laylat al‑Qadr (possible)"],
+
+  // Shawwal
+  "10-8":["Destruction of Jannat al‑Baqi"],
+  "10-25":["Martyrdom of Imam Jaʿfar al‑Sadiq (as)"],
+
+  // Dhu al‑Qaʿdah
+  "11-11":["Birth of Imam Ali al‑Ridha (as)"],
+  "11-23":["Martyrdom of Imam Ridha (as)"],
+  "11-29":["Martyrdom of Imam Muhammad al‑Taqi (as)"],
+
+  // Dhu al‑Hijjah
+  "12-7":["Martyrdom of Imam Muhammad al‑Baqir (as)"],
+  "12-9":["Martyrdom of Muslim ibn Aqil (as)"],
+  "12-10":["Eid al‑Adha"],
+  "12-18":["Eid al‑Ghadir"],
+  "12-24":["Eid al‑Mubahila"]
 };
 
 /* State */
