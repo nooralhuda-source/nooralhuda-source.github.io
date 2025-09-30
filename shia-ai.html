@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🕌 Shia-Only AI Chat (PyScript Prototype)</title>
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 2rem auto; }
+    select, input[type="text"] { width: 100%; padding: .5rem; margin: .5rem 0; }
+    button { padding: .5rem 1rem; margin: .5rem 0; }
+    #results p { background: #f8f8f8; padding: .75rem; border-radius: 4px; }
+    #results small { color: #555; }
+  </style>
+</head>
+<body>
+  <h1>🕌 Shia-Only AI Chat</h1>
+  
+  <p>Select sources, then click <strong>Load Content</strong>:</p>
+  <select id="sourceSelect" multiple size="7">
+    <option value="thaqalayn">thaqalayn.net</option>
+    <option value="duas_org">duas.org</option>
+    <option value="al_islam">al-islam.org</option>
+    <option value="quran_com">quran.com</option>
+    <option value="shiatv">shiatv.net</option>
+    <option value="nooralhuda">nooralhuda.co.uk</option>
+    <option value="hyder_ai">hyder.ai</option>
+  </select>
+  <button id="loadBtn">Load Content</button>
+  <p>Paragraphs loaded: <span id="contentCount">0</span></p>
+  
+  <p>
+    <input type="text" id="queryInput" placeholder="Ask an Islamic question…" />
+    <button id="searchBtn">Search</button>
+  </p>
+  
+  <div id="results"></div>
+  
+  <py-script>
+import asyncio
+from js import fetch, DOMParser, document
+
+# 1) Source URLs
+URLS = {
+  "thaqalayn":   "https://thaqalayn.net/library",
+  "duas_org":    "https://www.duas.org/",
+  "al_islam":    "https://www.al-islam.org/nahjul-balagha-part-1-sermons",
+  "quran_com":   "https://quran.com/1",
+  "shiatv":      "https://shiatv.net/",
+  "nooralhuda":  "https://nooralhuda.co.uk/",
+  "hyder_ai":    "https://hyder.ai/"
+}
+
+# 2) Storage for paragraphs + their source tag
+all_paras = []  # each item: {"text": str, "source": key}
+
+# 3) Islamic keywords for refusal logic
+ISLAMIC_KEYWORDS = {
+    "allah","islam","quran","hadith","imam","du'a","dua",
+    "shia","karbala","ashura","hussain","ali","muhammad"
+}
+
+def is_islamic_question(q: str) -> bool:
+    ql = q.lower()
+    return any(word in ql for word in ISLAMIC_KEYWORDS)
+
+# 4) Determine which sources to search based on query mentioning site name
+def pick_sources(q: str):
+    ql = q.lower()
+    selected = []
+    for key in URLS:
+        if key.replace("_","") in ql or key.split("_")[0] in ql:
+            selected.append(key)
+    return selected or list(URLS.keys())
+
+# 5) Fetch & parse paragraphs from one URL
+async def fetch_paras(key):
+    try:
+        resp = await fetch(URLS[key])
+        html = await resp.text()
+        doc = DOMParser.new().parseFromString(html, "text/html")
+        ps = doc.getElementsByTagName("p")
+        return [{"text": p.textContent.strip(), "source": key} 
+                for p in ps if p.textContent.strip()]
+    except Exception as e:
+        print(f"Error loading {key}: {e}")
+        return []
+
+# 6) Load content for selected sources
+async def load_content(evt):
+    global all_paras
+    all_paras.clear()
+    sel = document.getElementById("sourceSelect")
+    keys = [opt.value for opt in sel.selectedOptions]
+    for key in keys:
+        paras = await fetch_paras(key)
+        all_paras.extend(paras)
+        document.getElementById("contentCount").textContent = str(len(all_paras))
+
+# 7) Simple term-frequency score
+def score(p, q):
+    return p.lower().count(q.lower())
+
+# 8) Search handler
+def search(evt):
+    q = document.getElementById("queryInput").value.strip()
+    res_div = document.getElementById("results")
+    res_div.innerHTML = ""
+    
+    # 8a) Refuse non-Islamic questions
+    if not is_islamic_question(q):
+        res_div.innerHTML = "<p>I’m specialized in Islamic/Shia questions only.</p>"
+        return
+    
+    # 8b) Pick relevant sources
+    keys = pick_sources(q)
+    pool = [p for p in all_paras if p["source"] in keys]
+    
+    # 8c) Score & pick top5
+    scored = [(p, score(p["text"], q)) for p in pool]
+    scored = [item for item in scored if item[1] > 0]
+    scored.sort(key=lambda x: x[1], reverse=True)
+    top5 = scored[:5]
+    
+    # 8d) Display
+    if not top5:
+        res_div.innerHTML = "<p>No relevant answer found in selected sources.</p>"
+        return
+    for p, _ in top5:
+        el = document.createElement("p")
+        el.textContent = p["text"]
+        src = document.createElement("small")
+        src.textContent = f"Source: {p['source']}"
+        res_div.appendChild(el)
+        res_div.appendChild(src)
+
+# 9) Wire up buttons
+document.getElementById("loadBtn") \
+    .addEventListener("click", lambda e: asyncio.ensure_future(load_content(e)))
+document.getElementById("searchBtn") \
+    .addEventListener("click", search)
+  </py-script>
+</body>
+</html>
