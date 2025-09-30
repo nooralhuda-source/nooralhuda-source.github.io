@@ -148,7 +148,7 @@
     document.getElementById("audioStop").onclick = () => { audioEl.pause(); audioEl.currentTime = 0; };
     document.getElementById("audioSpeed").onchange = e => audioEl.playbackRate = parseFloat(e.target.value);
 
-    function pad3(n) { return String(n).padStart(3,"0"); }
+     function pad3(n) { return String(n).padStart(3,"0"); }
     function setFullSurahAudio(id) {
       const file = pad3(id);
       audioSourceEl.src = `https://download.quranicaudio.com/quran/mishaari_raashid_al_3afaasee/${file}.mp3`;
@@ -172,6 +172,11 @@
       try {
         const cloudBase = "https://api.alquran.cloud/v1/surah/";
         const fawazBase = "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/";
+
+        // Ensure surahId is valid (fix for NaN issue)
+        if (!surahId || isNaN(surahId) || surahId < 1 || surahId > 114) {
+          surahId = 1;
+        }
 
         // Arabic + meta
         const arResp = await fetch(`${cloudBase}${surahId}/quran-uthmani`);
@@ -237,14 +242,12 @@
           card.appendChild(translationsEl);
           container.appendChild(card);
         });
-
       } catch (e) {
         console.error("Failed to load surah:", e);
         document.getElementById("ayahContainer").innerHTML =
           `<div class="ayah">Error loading Surah. Please check your connection or try again.</div>`;
       }
     }
-
     // Initial load
     loadSurah();
   </script>
