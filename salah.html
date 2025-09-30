@@ -67,7 +67,6 @@
     <label>
       <strong>City:</strong>
       <select id="citySelect">
-        <!-- Values match internal keys; labels show country -->
         <option value="London">London (UK)</option>
         <option value="Bedford">Bedford (UK)</option>
         <option value="Islamabad">Islamabad (Pakistan)</option>
@@ -110,32 +109,29 @@ function toggleDarkMode(){
   if(country==="United Kingdom"){ citySelect.value="Bedford"; }
 })();
 
-/* City coordinates + timezone rules */
+/* City data */
 const CITIES = {
   London:   { lat:51.5074, lon:-0.1278, tz:"Europe/London" },
   Bedford:  { lat:52.1364, lon:-0.4670, tz:"Europe/London" },
-  Islamabad:{ lat:33.6844, lon:73.0479, tz:"Asia/Karachi" },   // UTC+5
-  Tehran:   { lat:35.6892, lon:51.3890, tz:"Asia/Tehran" },    // UTC+3:30
-  Karbala:  { lat:32.6160, lon:44.0246, tz:"Asia/Baghdad" }    // UTC+3
+  Islamabad:{ lat:33.6844, lon:73.0479, tz:"Asia/Karachi" },
+  Tehran:   { lat:35.6892, lon:51.3890, tz:"Asia/Tehran" },
+  Karbala:  { lat:32.6160, lon:44.0246, tz:"Asia/Baghdad" }
 };
 
-/* Timezone offset (minutes) per date */
+/* Timezone offset */
 function tzOffsetMinutes(tz, date){
-  // UK DST: last Sunday in March → last Sunday in October (01:00 UTC switch)
   const y = date.getUTCFullYear();
-  function lastSunday(month){
-    const d = new Date(Date.UTC(y, month+1, 0));
-    const day = d.getUTCDay();
-    d.setUTCDate(d.getUTCDate() - day);
+  function lastSunday(m){
+    const d = new Date(Date.UTC(y, m+1, 0));
+    d.setUTCDate(d.getUTCDate() - d.getUTCDay());
     return d;
   }
   if(tz==="Europe/London"){
-    const startDST = lastSunday(2);
-    const endDST   = lastSunday(9);
-    const nowUTC = Date.UTC(y, date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes());
-    const sUTC = Date.UTC(y, startDST.getUTCMonth(), startDST.getUTCDate(), 1, 0);
-    const eUTC = Date.UTC(y, endDST.getUTCMonth(), endDST.getUTCDate(), 1, 0);
-    return (nowUTC>=sUTC && nowUTC<eUTC) ? 60 : 0;
+    const s = lastSunday(2), e = lastSunday(9);
+    const now = Date.UTC(y,date.getUTCMonth(),date.getUTCDate(),date.getUTCHours(),date.getUTCMinutes());
+    const sUTC = Date.UTC(y,s.getUTCMonth(),s.getUTCDate(),1,0);
+    const eUTC = Date.UTC(y,e.getUTCMonth(),e.getUTCDate(),1,0);
+    return (now>=sUTC && now<eUTC)?60:0;
   }
   if(tz==="Asia/Karachi") return 300;
   if(tz==="Asia/Tehran")  return 210;
@@ -143,171 +139,119 @@ function tzOffsetMinutes(tz, date){
   return -date.getTimezoneOffset();
 }
 
-/* Astronomy helpers */
-const RAD = Math.PI/180;
+/* Astronomical helpers */
+const RAD=Math.PI/180;
 function toRad(x){return x*RAD;}
 function toDeg(x){return x/RAD;}
 function normalizeAngle(a){a%=360;return a<0?a+360:a;}
-function julianDay(date){
-  const t = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 0, 0, 0)/86400000 + 2440587.5;
-  return t;
+function julianDay(d){
+  return Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),0,0)/86400000+2440587.5;
 }
-function solarMeanAnomaly(d){return toRad(normalizeAngle(357.5291 + 0.98560028 * d));}
+function solarMeanAnomaly(d){return toRad(normalizeAngle(357.5291+0.98560028*d));}
 function eclipticLongitude(M){
-  const C = toRad(1.9148)*Math.sin(M) + toRad(0.0200)*Math.sin(2*M) + toRad(0.0003)*Math.sin(3*M);
-  const P = toRad(102.9372);
-  return M + C + P + Math.PI;
+  const C=toRad(1.9148)*Math.sin(M)+toRad(0.0200)*Math.sin(2*M)+toRad(0.0003)*Math.sin(3*M);
+  return M+C+toRad(102.9372)+Math.PI;
 }
-function declination(L){
-  const e = toRad(23.4397);
-  return Math.asin(Math.sin(e)*Math.sin(L));
-}
+function declination(L){return Math.asin(Math.sin(toRad(23.4397))*Math.sin(L));}
 function equationOfTime(M,L){
-  const e = toRad(23.4397);
-  const y = Math.tan(e/2); const y2 = y*y;
-  const sin2L = Math.sin(2*L), cos2L = Math.cos(2*L);
-  const sinM = Math.sin(M), cos2M = Math.cos(2*M);
-  return toDeg(y2*sin2L - 2*0.0167*sinM + 4*0.0167*y2*sinM*cos2L - 0.5*y2*y2*sin2L - 1.25*0.0167*0.0167*sin2M) * 4;
+  const e=toRad(23.4397), y=Math.tan(e/2), y2=y*y;
+  return toDeg(y2*Math.sin(2*L)-2*0.0167*Math.sin(M)+4*0.0167*y2*Math.sin(M)*Math.cos(2*L)
+    -0.5*y2*y2*Math.sin(2*L)-1.25*0.0167*0.0167*Math.sin(2*M))*4;
 }
-function hourAngle(lat, dec, altitudeDeg){
-  const h = toRad(altitudeDeg);
-  const phi = toRad(lat);
-  const cosH = (Math.sin(h) - Math.sin(phi)*Math.sin(dec)) / (Math.cos(phi)*Math.cos(dec));
-  if(cosH<-1 || cosH>1) return null;
-  return Math.acos(cosH);
+function hourAngle(lat,dec,alt){
+  const h=toRad(alt), p=toRad(lat);
+  const c=(Math.sin(h)-Math.sin(p)*Math.sin(dec))/(Math.cos(p)*Math.cos(dec));
+  if(c<-1||c>1) return null;
+  return Math.acos(c);
 }
 
-/* Core times (UTC minutes from midnight) using Ja'fari parameters */
-function solarTimesUTC(date, lat, lon){
-  const JD = julianDay(date);
-  const d = JD - 2451545.0;
-  const M = solarMeanAnomaly(d);
-  const L = eclipticLongitude(M);
-  const dec = declination(L);
-
-  const E = equationOfTime(M, L);
-  const noonUTCmin = 720 - 4*lon - E;
-
-  // Sunrise/Sunset at apparent altitude -0.833°
-  const H0 = hourAngle(lat, dec, -0.833);
-  let srUTC = null, ssUTC = null;
-  if(H0!==null){
-    const H0deg = toDeg(H0);
-    srUTC = noonUTCmin - 4*H0deg;
-    ssUTC = noonUTCmin + 4*H0deg;
-  }
-
-  // Ja'fari: Fajr 17.7°, Isha 14°
-  const Hf = hourAngle(lat, dec, -17.7);
-  const Hi = hourAngle(lat, dec, -14.0);
-  let fajrUTC = null, ishaUTC = null;
-  if(Hf!==null){ fajrUTC = noonUTCmin - 4*toDeg(Hf); }
-  if(Hi!==null){ ishaUTC = noonUTCmin + 4*toDeg(Hi); }
-
-  // Asr (shadow factor 1)
-  const phi = toRad(lat);
-  const n = 1;
-  const altAsr = toDeg(Math.atan(1/(n + Math.tan(Math.abs(phi - dec)))));
-  const Ha = hourAngle(lat, dec, altAsr);
-  let asrUTC = null;
-  if(Ha!==null){ asrUTC = noonUTCmin + 4*toDeg(Ha); }
-
-  // Dhuhr at solar noon; Maghrib = sunset + 12 min
-  const dhuhrUTC = noonUTCmin;
-  const maghribUTC = ssUTC!==null ? (ssUTC + 12) : null;
-
-  return { fajrUTC, sunriseUTC: srUTC, dhuhrUTC, asrUTC, maghribUTC, ishaUTC };
+/* Compute solar times UTC-min */
+function solarTimesUTC(date,lat,lon){
+  const JD=julianDay(date)-2451545.0;
+  const M=solarMeanAnomaly(JD), L=eclipticLongitude(M), dec=declination(L);
+  const E=equationOfTime(M,L), noon=720-4*lon-E;
+  let H0=hourAngle(lat,dec,-0.833), sr=null, ss=null;
+  if(H0!==null){const d=toDeg(H0); sr=noon-4*d; ss=noon+4*d;}
+  const Hf=hourAngle(lat,dec,-17.7), Hi=hourAngle(lat,dec,-14.0);
+  const fajr = Hf!==null ? noon-4*toDeg(Hf) : null;
+  const isha = Hi!==null ? noon+4*toDeg(Hi) : null;
+  const phi=toRad(lat), n=1;
+  const Ha=hourAngle(lat,dec,toDeg(Math.atan(1/(n+Math.tan(Math.abs(phi-dec))))));
+  const asr  = Ha!==null ? noon+4*toDeg(Ha) : null;
+  const dhuhr=noon, maghrib=ss!==null?ss+12:null;
+  return { fajrUTC:fajr, sunriseUTC:sr, dhuhrUTC:dhuhr, asrUTC:asr, maghribUTC:maghrib, ishaUTC:isha };
 }
 
-/* High-latitude fallback (night-fraction method) */
+/* Fallback for polar extremes */
 function ensureTwilightFallback(t){
-  if(t.sunriseUTC===null || t.maghribUTC===null) return t;
-  const night = ((24*60) - t.maghribUTC) + t.sunriseUTC;
-  if(t.fajrUTC===null){ t.fajrUTC = t.sunriseUTC - night*(1/7); }
-  if(t.ishaUTC===null){ t.ishaUTC = t.maghribUTC + night*(1/7); }
+  if(t.sunriseUTC===null||t.maghribUTC===null) return t;
+  const night=((24*60)-t.maghribUTC)+t.sunriseUTC;
+  if(t.fajrUTC===null) t.fajrUTC=t.sunriseUTC-night*(1/7);
+  if(t.ishaUTC===null)t.ishaUTC=t.maghribUTC+night*(1/7);
   return t;
 }
 
-/* Formatting */
-function toLocalTimeStr(utcMinutes, offsetMin){
-  if(utcMinutes===null) return "—";
-  let m = Math.round(utcMinutes + offsetMin);
-  m = (m%(24*60)+24*60)%(24*60);
-  const hh = Math.floor(m/60), mm = m%60;
+/* Format to hh:mm */
+function toLocalTimeStr(u,m){
+  if(u===null) return "—";
+  let total=Math.round(u+m)%(24*60);
+  if(total<0) total+=24*60;
+  const hh=Math.floor(total/60), mm=total%60;
   return String(hh).padStart(2,"0")+":"+String(mm).padStart(2,"0");
 }
 
-/* Safe city resolver (handles label/value mismatches) */
+/* Normalize labels to keys */
 function resolveCity(key){
   if(CITIES[key]) return key;
-  const map = {
-    "London (UK)":"London",
-    "Bedford (UK)":"Bedford",
-    "Islamabad (Pakistan)":"Islamabad",
-    "Tehran (Iran)":"Tehran",
-    "Karbala (Iraq)":"Karbala"
+  const map={
+    "london (uk)":"London",
+    "bude (uk)":"Bedford",
+    "bedford (uk)":"Bedford",
+    "islamabad (pakistan)":"Islamabad",
+    "tehran (iran)":"Tehran",
+    "karbala (iraq)":"Karbala"
   };
-  return map[key] || "Bedford";
+  return map[key.toLowerCase()]||"Bedford";
 }
 
-/* Render city for a given date */
-function renderCity(name, date){
-  const key = resolveCity(name);
-  const city = CITIES[key];
-  const offsetMin = tzOffsetMinutes(city.tz, date);
-
-  let t = solarTimesUTC(date, city.lat, city.lon);
-  t = ensureTwilightFallback(t);
-
-  document.getElementById("cityTitle").textContent = `Salah times — ${key}`;
-  document.getElementById("tzLabel").textContent = city.tz;
-  document.getElementById("dateLabel").textContent = new Date(date.getTime()).toLocaleDateString();
-
-  document.getElementById("fajr").textContent    = toLocalTimeStr(t.fajrUTC, offsetMin);
-  document.getElementById("sunrise").textContent = toLocalTimeStr(t.sunriseUTC, offsetMin);
-  document.getElementById("dhuhr").textContent   = toLocalTimeStr(t.dhuhrUTC, offsetMin);
-  document.getElementById("asr").textContent     = toLocalTimeStr(t.asrUTC, offsetMin);
-  document.getElementById("maghrib").textContent = toLocalTimeStr(t.maghribUTC, offsetMin);
-  document.getElementById("isha").textContent    = toLocalTimeStr(t.ishaUTC, offsetMin);
+/* Render a city’s times */
+function renderCity(raw, date){
+  const key=resolveCity(raw), city=CITIES[key];
+  const off=tzOffsetMinutes(city.tz, date);
+  let t=solarTimesUTC(date,city.lat,city.lon);
+  t=ensureTwilightFallback(t);
+  document.getElementById("cityTitle").textContent=`Salah times — ${key}`;
+  document.getElementById("tzLabel").textContent=city.tz;
+  document.getElementById("dateLabel").textContent=date.toLocaleDateString();
+  document.getElementById("fajr").textContent    =toLocalTimeStr(t.fajrUTC,off);
+  document.getElementById("sunrise").textContent =toLocalTimeStr(t.sunriseUTC,off);
+  document.getElementById("dhuhr").textContent   =toLocalTimeStr(t.dhuhrUTC,off);
+  document.getElementById("asr").textContent     =toLocalTimeStr(t.asrUTC,off);
+  document.getElementById("maghrib").textContent =toLocalTimeStr(t.maghribUTC,off);
+  document.getElementById("isha").textContent    =toLocalTimeStr(t.ishaUTC,off);
 }
 
 /* City selector */
-document.getElementById("citySelect").addEventListener("change", e => {
-  renderCity(e.target.value, new Date());
+document.getElementById("citySelect").addEventListener("change", e=>{
+  renderCity(e.target.value,new Date());
 });
 
-/* Auto-update: refresh every minute and reschedule at 00:05 local time */
-(function enableAutoUpdates(){
-  let lastDay = null;
-
-  function refreshNow(){
-    const value = document.getElementById("citySelect").value;
-    const now = new Date();
-    renderCity(value, now);
-    lastDay = now.toDateString();
+/* Auto-update */
+(function autoUpdate(){
+  let lastDay=null;
+  function upd(){
+    const sel=document.getElementById("citySelect").value;
+    const now=new Date();
+    renderCity(sel,now);
+    lastDay=now.toDateString();
   }
-
-  setInterval(() => {
-    const now = new Date();
-    if (lastDay !== now.toDateString()) {
-      refreshNow();
-    } else {
-      refreshNow();
-    }
-  }, 60 * 1000);
-
-  function scheduleMidnightRefresh(){
-    const now = new Date();
-    const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 5, 0, 0);
-    const ms = next.getTime() - now.getTime();
-    setTimeout(() => {
-      refreshNow();
-      scheduleMidnightRefresh();
-    }, ms);
+  setInterval(upd,60*1000);
+  function sched(){
+    const n=new Date();
+    const nxt=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1,0,5);
+    setTimeout(()=>{upd();sched();},nxt - n);
   }
-
-  refreshNow();
-  scheduleMidnightRefresh();
+  upd();sched();
 })();
 </script>
 </body>
