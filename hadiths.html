@@ -93,11 +93,13 @@
 
 
   <script>
-    fetch("https://www.thaqalayn-api.net/api/v2/1/all")
-      .then(res => res.json())
-      .then(data => {
+    async function loadHadiths() {
+      try {
+        const res = await fetch("https://thaqalayn-api.net/api/v2/1/all");
+        const data = await res.json();
         const container = document.getElementById("hadiths");
         container.innerHTML = "";
+
         data.slice(0, 10).forEach(h => {
           container.innerHTML += `
             <div class="hadith">
@@ -106,11 +108,13 @@
             </div>
           `;
         });
-      })
-      .catch(err => {
+      } catch (err) {
         document.getElementById("hadiths").innerHTML = "⚠️ Failed to load hadiths.";
-        console.error(err);
-      });
+        console.error("Error loading hadiths:", err);
+      }
+    }
+
+    loadHadiths();
   </script>
 
 
