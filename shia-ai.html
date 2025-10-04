@@ -2,143 +2,173 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🕌 Shia-Only AI Chat (PyScript Prototype)</title>
-  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  <title>Shia Islam AI Chatbot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: sans-serif; max-width: 800px; margin: 2rem auto; }
-    select, input[type="text"] { width: 100%; padding: .5rem; margin: .5rem 0; }
-    button { padding: .5rem 1rem; margin: .5rem 0; }
-    #results p { background: #f8f8f8; padding: .75rem; border-radius: 4px; }
-    #results small { color: #555; }
+    /* Basic Shia Chatbot Styling */
+    #shia-chatbot-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 350px;
+      max-width: 96vw;
+      font-family: 'Tahoma', 'Arial', sans-serif;
+      z-index: 9999;
+      box-shadow: 0 0 18px rgba(0,0,0,0.12);
+      border-radius: 14px 14px 10px 10px;
+      background: #fff;
+      border: 1.5px solid #005f4b;
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+      overflow: hidden;
+    }
+    #shia-chatbot-header {
+      background: #005f4b;
+      color: #fff;
+      padding: 14px 20px;
+      font-weight: 600;
+      text-align: left;
+      font-size: 1.2em;
+    }
+    #shia-chat-history {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      background: #f8f8fa;
+      border-bottom: 1px solid #eee;
+    }
+    .shia-msg {
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+    .user-msg {
+      text-align: right;
+      color: #2d8a7a;
+      font-weight: 500;
+    }
+    .bot-msg {
+      background: #f3f6f5;
+      color: #222;
+      border-radius: 7px;
+      padding: 12px 16px;
+      text-align: left;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .msg-source {
+      font-size: 0.92em;
+      color: #51806a;
+      margin-top: 4px;
+    }
+    #shia-chat-form {
+      display: flex;
+      border-top: 1px solid #ddd;
+      background: #fff;
+    }
+    #shia-chat-input {
+      flex: 1;
+      padding: 10px 12px;
+      border: none;
+      outline: none;
+      font-size: 1em;
+      background: transparent;
+    }
+    #shia-chat-send {
+      background: #005f4b;
+      color: #fff;
+      border: none;
+      padding: 0 18px;
+      font-size: 1em;
+      font-weight: 600;
+      border-radius: 0 0 10px 0;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #shia-chat-send:disabled {
+      background: #889;
+      cursor: not-allowed;
+    }
+    @media (max-width: 500px) {
+      #shia-chatbot-container { width: 100vw; right: 0; left: 0; bottom: 0; border-radius: 0; }
+      #shia-chat-history { padding: 10px; }
+    }
   </style>
 </head>
 <body>
-  <h1>🕌 Shia-Only AI Chat</h1>
-  
-  <p>Select sources, then click <strong>Load Content</strong>:</p>
-  <select id="sourceSelect" multiple size="7">
-    <option value="thaqalayn">thaqalayn.net</option>
-    <option value="duas_org">duas.org</option>
-    <option value="al_islam">al-islam.org</option>
-    <option value="quran_com">quran.com</option>
-    <option value="shiatv">shiatv.net</option>
-    <option value="nooralhuda">nooralhuda.co.uk</option>
-    <option value="hyder_ai">hyder.ai</option>
-  </select>
-  <button id="loadBtn">Load Content</button>
-  <p>Paragraphs loaded: <span id="contentCount">0</span></p>
-  
-  <p>
-    <input type="text" id="queryInput" placeholder="Ask an Islamic question…" />
-    <button id="searchBtn">Search</button>
-  </p>
-  
-  <div id="results"></div>
-  
-  <py-script>
-import asyncio
-from js import fetch, DOMParser, document
 
-# 1) Source URLs
-URLS = {
-  "thaqalayn":   "https://thaqalayn.net/library",
-  "duas_org":    "https://www.duas.org/",
-  "al_islam":    "https://www.al-islam.org/nahjul-balagha-part-1-sermons",
-  "quran_com":   "https://quran.com/1",
-  "shiatv":      "https://shiatv.net/",
-  "nooralhuda":  "https://nooralhuda.co.uk/",
-  "hyder_ai":    "https://hyder.ai/"
-}
+<!-- Chatbot Widget -->
+<div id="shia-chatbot-container" aria-live="polite">
+  <div id="shia-chatbot-header">
+    <span>🕋 Shia Islam AI Chatbot</span>
+  </div>
+  <div id="shia-chat-history">
+    <div class="shia-msg bot-msg">
+      Salam! I am a Shia AI assistant. <br>
+      Ask me anything about Shia beliefs, Quran, Ahlul Bayt, duas, or hadith.
+      <div class="msg-source" style="color:#e0aa36;">Auth. sources: thaqalayn.net, al-islam.org, ...</div>
+    </div>
+  </div>
+  <form id="shia-chat-form" autocomplete="off">
+    <input id="shia-chat-input" type="text" placeholder="Type your question…" aria-label="Ask about Shia Islam" />
+    <button id="shia-chat-send" type="submit">Send</button>
+  </form>
+</div>
 
-# 2) Storage for paragraphs + their source tag
-all_paras = []  # each item: {"text": str, "source": key}
+<script>
+(function() {
+  // Backend endpoint (use your custom endpoint here)
+  const API_URL = "/api/shiachat"; // Change this if needed!
 
-# 3) Islamic keywords for refusal logic
-ISLAMIC_KEYWORDS = {
-    "allah","islam","quran","hadith","imam","du'a","dua",
-    "shia","karbala","ashura","hussain","ali","muhammad"
-}
+  const chatHistory = document.getElementById('shia-chat-history');
+  const chatForm = document.getElementById('shia-chat-form');
+  const chatInput = document.getElementById('shia-chat-input');
+  const chatSend = document.getElementById('shia-chat-send');
 
-def is_islamic_question(q: str) -> bool:
-    ql = q.lower()
-    return any(word in ql for word in ISLAMIC_KEYWORDS)
+  function appendMessage(text, sender="bot", source="") {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `shia-msg ${sender}-msg bot-msg`;
+    msgDiv.innerHTML = text;
+    if (source) {
+      const srcDiv = document.createElement('div');
+      srcDiv.className = 'msg-source';
+      srcDiv.innerText = "Source: " + source;
+      msgDiv.appendChild(srcDiv);
+    }
+    chatHistory.appendChild(msgDiv);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+  }
 
-# 4) Determine which sources to search based on query mentioning site name
-def pick_sources(q: str):
-    ql = q.lower()
-    selected = []
-    for key in URLS:
-        if key.replace("_","") in ql or key.split("_")[0] in ql:
-            selected.append(key)
-    return selected or list(URLS.keys())
+  chatForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const question = chatInput.value.trim();
+    if (!question) return;
+    appendMessage(question, "user");
+    chatInput.value = "";
+    chatSend.disabled = true;
+    appendMessage("<em>Thinking...</em>", "bot");
+    try {
+      // POST the user message to the backend
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type":"application/json" },
+        body: JSON.stringify({ question })
+      });
+      if (!res.ok) throw new Error("API error");
+      const data = await res.json();
+      // Remove "Thinking..." dummy message
+      chatHistory.lastChild.remove();
+      // Display answer and source (if provided)
+      appendMessage(data.answer, "bot", data.source || "");
+    } catch (err) {
+      chatHistory.lastChild.remove();
+      appendMessage("<span style='color:red;'>Sorry, there was an error. Please try again later.</span>", "bot");
+    }
+    chatSend.disabled = false;
+    chatInput.focus();
+  });
 
-# 5) Fetch & parse paragraphs from one URL
-async def fetch_paras(key):
-    try:
-        resp = await fetch(URLS[key])
-        html = await resp.text()
-        doc = DOMParser.new().parseFromString(html, "text/html")
-        ps = doc.getElementsByTagName("p")
-        return [{"text": p.textContent.strip(), "source": key} 
-                for p in ps if p.textContent.strip()]
-    except Exception as e:
-        print(f"Error loading {key}: {e}")
-        return []
-
-# 6) Load content for selected sources
-async def load_content(evt):
-    global all_paras
-    all_paras.clear()
-    sel = document.getElementById("sourceSelect")
-    keys = [opt.value for opt in sel.selectedOptions]
-    for key in keys:
-        paras = await fetch_paras(key)
-        all_paras.extend(paras)
-        document.getElementById("contentCount").textContent = str(len(all_paras))
-
-# 7) Simple term-frequency score
-def score(p, q):
-    return p.lower().count(q.lower())
-
-# 8) Search handler
-def search(evt):
-    q = document.getElementById("queryInput").value.strip()
-    res_div = document.getElementById("results")
-    res_div.innerHTML = ""
-    
-    # 8a) Refuse non-Islamic questions
-    if not is_islamic_question(q):
-        res_div.innerHTML = "<p>I’m specialized in Islamic/Shia questions only.</p>"
-        return
-    
-    # 8b) Pick relevant sources
-    keys = pick_sources(q)
-    pool = [p for p in all_paras if p["source"] in keys]
-    
-    # 8c) Score & pick top5
-    scored = [(p, score(p["text"], q)) for p in pool]
-    scored = [item for item in scored if item[1] > 0]
-    scored.sort(key=lambda x: x[1], reverse=True)
-    top5 = scored[:5]
-    
-    # 8d) Display
-    if not top5:
-        res_div.innerHTML = "<p>No relevant answer found in selected sources.</p>"
-        return
-    for p, _ in top5:
-        el = document.createElement("p")
-        el.textContent = p["text"]
-        src = document.createElement("small")
-        src.textContent = f"Source: {p['source']}"
-        res_div.appendChild(el)
-        res_div.appendChild(src)
-
-# 9) Wire up buttons
-document.getElementById("loadBtn") \
-    .addEventListener("click", lambda e: asyncio.ensure_future(load_content(e)))
-document.getElementById("searchBtn") \
-    .addEventListener("click", search)
-  </py-script>
+})();
+</script>
 </body>
 </html>

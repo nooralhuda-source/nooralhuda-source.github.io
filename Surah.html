@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Noor Al Huda — Surah Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Global stylesheet (keeps your header/nav design) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- High-quality Arabic fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap">
+
+  <style>
+    .container { max-width: 1100px; margin: 0 auto; padding: 1rem; }
+
+    .surah-info { text-align:center; margin: 1.5rem 0 1rem; }
+    .surah-info h2 { font-size:1.9rem; margin:0.25rem 0; color:var(--green); }
+    .surah-meta { color:var(--muted); margin-bottom: 0.75rem; }
+
+    .status-bar {
+      max-width: 900px; margin: 0.5rem auto; padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--card); color: var(--text); display:none; gap:0.6rem; align-items:center;
+    }
+    .status-bar .fail { color:#c62828; font-weight:600; }
+    .status-bar button {
+      margin-left:auto; padding:0.35rem 0.6rem; border:none; border-radius:8px;
+      background:var(--green); color:#fff; cursor:pointer;
+    }
+
+    .audio-panel { max-width: 700px; margin: 0.75rem auto; display:grid; grid-template-columns: 1fr auto; gap:0.75rem; align-items:center; }
+    .audio-panel audio { width:100%; }
+    .audio-controls { display:flex; gap:0.5rem; align-items:center; }
+    .audio-controls button { padding:0.4rem 0.7rem; border:none; border-radius:8px; background:var(--green); color:#fff; cursor:pointer; }
+
+    .translation-options { max-width: 900px; margin: 1rem auto; padding: 1rem; background:var(--card); border-radius:var(--radius); box-shadow:0 2px 6px rgba(0,0,0,0.06); }
+    .translation-options h4 { margin:0 0 0.5rem; }
+    .translation-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:0.5rem 1rem; }
+    .translation-item { display:flex; gap:0.5rem; align-items:center; }
+
+    .ayah { background:var(--card); margin: 0.75rem auto; padding: 1.05rem 1.25rem; border-radius:var(--radius); max-width: 900px; box-shadow:0 4px 12px rgba(0,0,0,0.06); }
+    .ayah-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; color:var(--muted); font-size:0.9rem; }
+    .arabic {
+      font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+      font-size:1.7rem; line-height:2.2rem;
+      text-align:right; direction:rtl; color:var(--text);
+    }
+    .translations { margin-top:0.6rem; display:grid; gap:0.4rem; }
+    .translation-line { font-size:1rem; color:var(--text); }
+    .translation-line strong { color:var(--green); margin-right:0.25rem; }
+  </style>
+</head>
+<body>
+  <!-- Header and nav styled by global style.css -->
+  <header>
+    <div class="brand">
+      <img src="logo.png.png" alt="Noor Al Huda Logo">
+      <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <nav id="mainNav">
+      <a href="quran.html">📖 Qur’an</a>
+      <a href="duas.html">🤲 Duas</a>
+      <a href="hadiths-home.html">📜 Hadiths</a>
+      <a href="calendar.html">📅 Calendar</a>
+      <a href="salah.html">🕌 Salah</a>
+      <a href="index.html" class="utility">🏠</a>
+      <a href="settings.html" class="utility">⚙</a>
+      <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="surah-info">
+      <h2 id="surahName">Loading…</h2>
+      <div class="surah-meta" id="surahMeta"></div>
+    </section>
+
+    <section id="statusBar" class="status-bar">
+      <span class="fail" id="statusText"></span>
+      <button id="retryBtn">Retry failed</button>
+    </section>
+
+    <section class="audio-panel">
+      <audio id="surahAudio" controls>
+        <source id="audioSource" src="" type="audio/mpeg">
+      </audio>
+      <div class="audio-controls">
+        <label>Speed
+          <select id="audioSpeed">
+            <option value="0.75">0.75x</option>
+            <option value="1" selected>1x</option>
+            <option value="1.25">1.25x</option>
+            <option value="1.5">1.5x</option>
+            <option value="2">2x</option>
+          </select>
+        </label>
+        <button id="audioPlay">▶</button>
+        <button id="audioPause">⏸</button>
+        <button id="audioStop">⏹</button>
+      </div>
+    </section>
+
+    <section class="translation-options">
+      <h4>Translations to show</h4>
+      <div class="translation-grid" id="translationGrid">
+        <label class="translation-item"><input type="checkbox" value="ar.uthmani"> Arabic (MSA — Uthmani)</label>
+        <label class="translation-item"><input type="checkbox" value="en.hilali"> English (Hilali-Khan)</label>
+        <label class="translation-item"><input type="checkbox" value="en.asad"> English (Muhammad Asad)</label>
+        <label class="translation-item"><input type="checkbox" value="ur.jalandhry"> Urdu (Jalandhry)</label>
+        <label class="translation-item"><input type="checkbox" value="fa.ansarian"> Farsi (Iran — Ansarian)</label>
+        <label class="translation-item"><input type="checkbox" value="fa.makarem"> Farsi (Iran — Makarem)</label>
+        <label class="translation-item"><input type="checkbox" value="fa_AF.dari"> Farsi (Afghanistan — Dari)</label>
+        <label class="translation-item"><input type="checkbox" value="pa_AR.punjabi"> Punjabi (Arabic script)</label>
+      </div>
+    </section>
+
+    <section id="ayahContainer"></section>
+  </main>
+
+  <script>
+    // Theme persistence + nav
+    if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+    }
+    function toggleMenu() {
+      document.getElementById("mainNav").classList.toggle("open");
+    }
+
+    // SURAH ID: from ?id=… or path like /file-6
+    let surahId = Number(new URLSearchParams(window.location.search).get("id"));
+    if (!surahId) {
+      const m = window.location.pathname.match(/(\d+)(?=\D*$)/);
+      surahId = m ? Number(m[1]) : 1;
+    }
+    if (isNaN(surahId) || surahId < 1 || surahId > 114) surahId = 1;
+
+    // Audio
+    const audioEl = document.getElementById("surahAudio");
+    const audioSourceEl = document.getElementById("audioSource");
+    document.getElementById("audioPlay").onclick = () => audioEl.play();
+    document.getElementById("audioPause").onclick = () => audioEl.pause();
+    document.getElementById("audioStop").onclick = () => { audioEl.pause(); audioEl.currentTime = 0; };
+    document.getElementById("audioSpeed").onchange = e => audioEl.playbackRate = parseFloat(e.target.value);
+    function pad3(n) { return String(n).padStart(3,"0"); }
+    function setFullSurahAudio(id) {
+      audioSourceEl.src = `https://download.quranicaudio.com/quran/mishaari_raashid_al_3afaasee/${pad3(id)}.mp3`;
+      audioEl.load();
+    }
+
+    // Bismillah (except Surah 9)
+    function renderBismillahIfApplicable(id, container) {
+      if (id === 9) return;
+      const card = document.createElement("div");
+      card.className = "ayah";
+      card.innerHTML = `
+        <div class="ayah-header"><span>Bismillah</span></div>
+        <div class="arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      `;
+      container.appendChild(card);
+    }
+
+    // Editions mapping with cloud-first, fawaz-second fallback
+    const EDITIONS = {
+      "ar.uthmani": { label: "Arabic (Uthmani)", cloudId: "quran-uthmani" }, // base text
+      "en.hilali": { label: "English (Hilali-Khan)", cloudId: "en.hilali", fawazId: "en.hilali" },
+      "en.asad": { label: "English (Muhammad Asad)", cloudId: "en.asad", fawazId: "en.asad" },
+      "ur.jalandhry": { label: "Urdu (Jalandhry)", cloudId: "ur.jalandhry", fawazId: "ur.jalandhry" },
+      "fa.ansarian": { label: "Farsi (Iran — Ansarian)", cloudId: "fa.ansarian", fawazId: "fa.ansarian" },
+      "fa.makarem": { label: "Farsi (Iran — Makarem)", cloudId: "fa.makarem", fawazId: "fa.makarem" },
+      "fa_AF.dari": { label: "Farsi (Afghanistan — Dari)", cloudId: "fa.daryabadi", fawazId: "fa_AF.dari" }, // fallback guess if cloud ID differs
+      "pa_AR.punjabi": { label: "Punjabi (Arabic script)", cloudId: null, fawazId: "pa_AR.punjabi" }
+    };
+
+    // Persist translations
+    function getSavedTranslations() {
+      const saved = JSON.parse(localStorage.getItem("surah_translations") || "[]");
+      return (Array.isArray(saved) && saved.length) ? saved : ["ar.uthmani","en.hilali","en.asad"];
+    }
+    function setSavedTranslations(arr) {
+      localStorage.setItem("surah_translations", JSON.stringify(arr));
+    }
+    (function initTranslationCheckboxes() {
+      const selected = new Set(getSavedTranslations());
+      document.querySelectorAll('#translationGrid input[type="checkbox"]').forEach(cb => {
+        cb.checked = selected.has(cb.value);
+        cb.addEventListener("change", () => {
+          const vals = Array.from(document.querySelectorAll('#translationGrid input[type="checkbox"]:checked')).map(i => i.value);
+          setSavedTranslations(vals);
+          loadSurah();
+        });
+      });
+    })();
+
+    // Resilient fetch with timeout + retry
+    async function fetchJSON(url, { timeout = 12000, retries = 1 } = {}) {
+      for (let attempt = 0; attempt <= retries; attempt++) {
+        const ctrl = new AbortController();
+        const t = setTimeout(() => ctrl.abort(), timeout);
+        try {
+          const res = await fetch(url, { signal: ctrl.signal });
+          clearTimeout(t);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return await res.json();
+        } catch (err) {
+          clearTimeout(t);
+          if (attempt === retries) throw err;
+          await new Promise(r => setTimeout(r, 600));
+        }
+      }
+    }
+
+    // Status bar
+    const statusBar = document.getElementById("statusBar");
+    const statusText = document.getElementById("statusText");
+    const retryBtn = document.getElementById("retryBtn");
+    let lastFailedKeys = [];
+    function showFailures(failedMap) {
+      lastFailedKeys = Object.keys(failedMap);
+      if (!lastFailedKeys.length) { statusBar.style.display = "none"; statusText.textContent = ""; return; }
+      const labels = lastFailedKeys.map(k => EDITIONS[k]?.label || k).join(", ");
+      statusText.textContent = `Failed: ${labels}`;
+      statusBar.style.display = "flex";
+    }
+    retryBtn.addEventListener("click", async () => {
+      if (!lastFailedKeys.length) return;
+      await loadTranslations(lastFailedKeys, true);
+    });
+
+    async function loadArabicAndMeta() {
+      const cloudBase = "https://api.alquran.cloud/v1/surah/";
+      const arJson = await fetchJSON(`${cloudBase}${surahId}/quran-uthmani`, { timeout: 15000, retries: 1 });
+      if (!arJson?.data?.ayahs || !Array.isArray(arJson.data.ayahs)) throw new Error("Arabic payload invalid");
+      return arJson.data;
+    }
+
+    async function loadTranslations(keys, isRetry = false) {
+      const cloudBase = "https://api.alquran.cloud/v1/surah/";
+      const fawazBase = "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/editions/";
+
+      const results = await Promise.all(keys.map(async key => {
+        if (key === "ar.uthmani") return { key, ok: true, arr: [] };
+        const ed = EDITIONS[key];
+        if (!ed) return { key, ok: false, err: "Edition not defined", arr: [] };
+
+        // Try cloud first if available
+        if (ed.cloudId) {
+          try {
+            const j = await fetchJSON(`${cloudBase}${surahId}/${ed.cloudId}`, { timeout: 12000, retries: isRetry ? 2 : 1 });
+            const arr = (j?.data?.ayahs || []).map(a => a.text);
+            if (arr.length) return { key, ok: true, arr };
+          } catch (e) { /* fall through to fawaz */ }
+        }
+        // Fallback to fawaz
+        if (ed.fawazId) {
+          try {
+            const j = await fetchJSON(`${fawazBase}${ed.fawazId}/${surahId}.json`, { timeout: 12000, retries: isRetry ? 2 : 1 });
+            const verses = j.result?.verses || j.verses || j.result || [];
+            const arr = Array.isArray(verses) ? verses.map(v => v.text || v.translation || "") : [];
+            if (arr.length) return { key, ok: true, arr };
+          } catch (e) {
+            return { key, ok: false, err: String(e.message || e), arr: [] };
+          }
+        }
+        return { key, ok: false, err: "No source available", arr: [] };
+      }));
+
+      return results;
+    }
+
+    async function loadSurah() {
+      const container = document.getElementById("ayahContainer");
+      container.innerHTML = "<div class='ayah'>Loading…</div>";
+      statusBar.style.display = "none";
+      statusText.textContent = "";
+      lastFailedKeys = [];
+
+      try {
+        if (!surahId || isNaN(surahId) || surahId < 1 || surahId > 114) surahId = 1;
+
+        // Arabic + meta
+        const ar = await loadArabicAndMeta();
+
+        // Header + audio
+        document.getElementById("surahName").textContent = `${ar.englishName} (${ar.name})`;
+        document.getElementById("surahMeta").textContent =
+          `Verses: ${ar.numberOfAyahs} • Revelation: ${ar.revelationType} • Chapter: ${ar.number}`;
+        setFullSurahAudio(surahId);
+
+        // Selected translations
+        const selected = getSavedTranslations();
+
+        // Fetch translations with fallback
+        const transResults = await loadTranslations(selected);
+        const transData = {};
+        const failed = {};
+        transResults.forEach(r => {
+          if (r.ok) transData[r.key] = r.arr;
+          else failed[r.key] = r.err || "Failed";
+        });
+        showFailures(failed);
+
+        // Render
+        container.innerHTML = "";
+        renderBismillahIfApplicable(surahId, container);
+
+        ar.ayahs.forEach((ayah, i) => {
+          const card = document.createElement("div");
+          card.className = "ayah";
+
+          const header = document.createElement("div");
+          header.className = "ayah-header";
+          header.innerHTML = `<span>Ayah ${i + 1}</span>`;
+          card.appendChild(header);
+
+          const arabicEl = document.createElement("div");
+          arabicEl.className = "arabic";
+          arabicEl.textContent = ayah.text || "";
+          card.appendChild(arabicEl);
+
+          const translationsEl = document.createElement("div");
+          translationsEl.className = "translations";
+
+          for (const key of selected) {
+            if (key === "ar.uthmani") continue;
+            const ed = EDITIONS[key];
+            const arr = transData[key];
+            const line = document.createElement("div");
+            line.className = "translation-line";
+
+            if (!ed) {
+              line.innerHTML = `<strong>${key}:</strong> [Edition missing]`;
+            } else if (!arr || !arr[i]) {
+              line.innerHTML = `<strong>${ed.label}:</strong> [No text or failed]`;
+            } else {
+              line.innerHTML = `<strong>${ed.label}:</strong> ${arr[i]}`;
+            }
+            translationsEl.appendChild(line);
+          }
+
+          card.appendChild(translationsEl);
+          container.appendChild(card);
+        });
+      } catch (e) {
+        console.error(e);
+        container.innerHTML = `<div class="ayah">Error loading Surah. Please check your connection or try again.</div>`;
+      }
+    }
+
+    // Initial load
+    loadSurah();
+  </script>
+</body>
+</html>
