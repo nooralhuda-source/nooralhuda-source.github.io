@@ -1,149 +1,119 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda — Hadiths</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { font-family: "Segoe UI", sans-serif; margin:0; background:#fff; color:#1f2937; }
-    header { background:#136f3c; color:#fff; padding:1rem; display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
-    header h1 { margin:0; font-size:1.2rem; flex:1; }
-    header input, header select { padding:0.4rem; border-radius:6px; border:1px solid #ccc; }
-    header button { padding:0.4rem 0.8rem; border:none; border-radius:6px; background:#fff; color:#136f3c; cursor:pointer; }
-    header button:hover { background:#f0fdf4; }
-    main { max-width:1100px; margin:1.5rem auto; padding:0 1rem; }
-    .hadith { border-bottom:1px solid #e5e7eb; padding:1rem 0; display:flex; gap:1rem; }
-    .meta { font-size:0.85rem; color:#6b7280; margin-bottom:0.25rem; flex-basis:100%; }
-    .arabic { flex:1; font-size:1.05rem; line-height:1.6; direction:rtl; border-left:1px solid #ddd; padding-left:1rem; }
-    .translation { flex:1; font-size:1rem; line-height:1.6; direction:ltr; }
-    .pager { margin-top:1rem; display:flex; gap:0.5rem; }
-    .pager button { padding:0.4rem 0.8rem; border:1px solid #ccc; border-radius:6px; cursor:pointer; }
-    .pager button:hover { background:#f9fafb; }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Noor Al Huda — Al-Kafi</h1>
-    <input id="searchBox" placeholder="Search hadiths…" />
-    <button onclick="searchHadiths()">Search</button>
-    <button onclick="resetSearch()">Reset</button>
-    <select id="langSelect" onchange="changeLanguage()">
-      <option value="en" selected>English</option>
-      <option value="ur">Urdu</option>
-    </select>
-  </header>
-
-  <main id="hadithContainer">
-    <p>Loading hadiths…</p>
-  </main>
+  <title>Noor Al Huda — Ziyarat Ashura</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
 
   <script>
-    // Path to your Al-Kafi JSON file (adjust if you keep it somewhere else)
-    const DATA_PATH = "data/alkafi.json";
-
-    const container = document.getElementById("hadithContainer");
-    let allHadiths = [], filtered = [];
-    let currentPage = 1, perPage = 10, currentLang = "en";
-    const translationCache = {};
-
-    // 1) OPTIONAL: swallow analytics.json errors so they can't break the page
-    fetch("analytics.json")
-      .then(r => r.json())
-      .then(() => {/* you can init analytics here if needed */})
-      .catch(_ => console.warn("analytics.json missing – continuing without analytics"));
-
-    // 2) Load your hadith data
-    fetch(DATA_PATH)
-      .then(res => {
-        if (!res.ok) throw new Error("Failed to fetch");
-        return res.json();
-      })
-      .then(data => {
-        allHadiths = data;
-        filtered = allHadiths;
-        renderPage(1);
-      })
-      .catch(err => {
-        console.error(err);
-        container.innerHTML = "<p style='color:red'>Could not load " + DATA_PATH + "</p>";
-      });
-
-    // Render a page of hadiths
-    function renderPage(page) {
-      currentPage = page;
-      container.innerHTML = "";
-      const start = (page-1)*perPage, end = start + perPage;
-      const slice = filtered.slice(start, end);
-
-      if (!slice.length) {
-        container.innerHTML = "<p>No hadiths found.</p>";
-        return;
-      }
-
-      slice.forEach(h => {
-        const div = document.createElement("div");
-        div.className = "hadith";
-        div.innerHTML = `
-          <div class="arabic">
-            <div class="meta">
-              Volume: ${h.volume||""} | Chapter: ${h.chapter||""} | Section: ${h.section||""} | Number: ${h.number||""}
-            </div>
-            <div>${h.text||""}</div>
-          </div>
-          <div class="translation" id="t-${h.number}">Translating...</div>
-        `;
-        container.appendChild(div);
-        translateHadith(h.text, currentLang, `t-${h.number}`);
-      });
-
-      // Pager
-      const pager = document.createElement("div");
-      pager.className = "pager";
-      if (page > 1)       pager.innerHTML += `<button onclick="renderPage(${page-1})">⬅ Prev</button>`;
-      if (end < filtered.length) pager.innerHTML += `<button onclick="renderPage(${page+1})">Next ➡</button>`;
-      container.appendChild(pager);
+    // Theme handling
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark-mode");
     }
-
-    function searchHadiths() {
-      const q = document.getElementById("searchBox").value.trim().toLowerCase();
-      if (!q) return;
-      filtered = allHadiths.filter(h =>
-        (h.text||"").toLowerCase().includes(q) ||
-        (h.chapter||"").toLowerCase().includes(q) ||
-        (h.section||"").toLowerCase().includes(q)
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle("dark-mode");
+      localStorage.setItem("theme",
+        document.documentElement.classList.contains("dark-mode") ? "dark" : "light"
       );
-      renderPage(1);
+      updateThemeIcon();
     }
-
-    function resetSearch() {
-      document.getElementById("searchBox").value = "";
-      filtered = allHadiths;
-      renderPage(1);
-    }
-
-    function changeLanguage() {
-      currentLang = document.getElementById("langSelect").value;
-      renderPage(currentPage);
-    }
-
-    async function translateHadith(arabicText, lang, elementId) {
-      const key = arabicText + "|" + lang;
-      if (translationCache[key]) {
-        document.getElementById(elementId).innerText = translationCache[key];
-        return;
+    function updateThemeIcon() {
+      const btn = document.getElementById("themeToggle");
+      if (btn) {
+        btn.textContent = document.documentElement.classList.contains("dark-mode") ? "☀️" : "🌙";
       }
-      try {
-        const res = await fetch("https://api.mymemory.translated.net/get?q=" +
-                                encodeURIComponent(arabicText) +
-                                "&langpair=ar|" + lang);
-        const data = await res.json();
-        const translated = data.responseData.translatedText;
-        translationCache[key] = translated;
-        document.getElementById(elementId).innerText = translated;
-      } catch {
-        document.getElementById(elementId).innerText = "[Translation failed]";
-      }
+    }
+    function toggleMenu() {
+      document.getElementById("mainNav").classList.toggle("open");
     }
   </script>
-</body>
-</html>
+
+  <style>
+    .ziyarat-section {
+      margin: 2rem auto;
+      max-width: 800px;
+      padding: 1.5rem;
+      background: var(--background, #fff);
+      border-radius: var(--radius, 10px);
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .ziyarat-section h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    .arabic {
+      direction: rtl;
+      font-family: 'Scheherazade', serif;
+      font-size: 1.2rem;
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+    .transliteration, .translation {
+      background: #fdfdfd;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+
+<body onload="updateThemeIcon()">
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <img src="logo.png.png" alt="Noor Al Huda Logo">
+      <h1>Noor Al Huda </h1>
+    </div>
+
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+
+    <nav id="mainNav">
+      <a href="quran.html">📖 Qur’an</a>
+      <a href="duas.html">🤲 Duas</a>
+      <a href="hadiths-home.html">📜 Hadiths</a>
+      <a href="calendar.html">📅 Calendar</a>
+      <a href="salah.html">🕌 Salah</a>
+      <a href="index.html" class="utility">🏠</a>
+      <a href="settings.html" class="utility">⚙</a>
+      <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="ziyarat-section">
+    <a href="duas.html" class="back-duas-btn"> Back to Duas Home</a>
+    <h2>Hadith Kisa</h2><br>
+    
+</div>
+
+
+  <script>
+    fetch("https://www.thaqalayn-api.net/api/v2/1/all")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("hadiths");
+        container.innerHTML = "";
+        data.slice(0, 10).forEach(h => {
+          container.innerHTML += `
+            <div class="hadith">
+              <div class="arabic">${h.arabic || "—"}</div>
+              <div class="english">${h.text}</div>
+            </div>
+          `;
+        });
+      })
+      .catch(err => {
+        document.getElementById("hadiths").innerHTML = "⚠️ Failed to load hadiths.";
+        console.error(err);
+      });
+  </script>
+
+
+
+
+
