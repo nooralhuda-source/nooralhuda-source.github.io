@@ -205,6 +205,7 @@ async function sendChat() {
       <button class="btn" onclick="location.href='settings.html'">⚙️ Settings</button>
     </div>
   </header>
+  
 
   <main class="container">
     <!-- Hero -->
@@ -235,6 +236,33 @@ async function sendChat() {
           <p id="quranCardDesc">Read and reflect on the Holy Qur’an.</p>
           <a href="/quran">📖 Qur’an</a>
         </article>
+        <!-- WisQu Shia AI Widget -->
+<div id="wisqu-widget"></div>
+
+<style>
+  #wisqu-widget {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    width: 350px;
+    height: 500px;
+  }
+</style>
+
+<script src="https://wisqu.ai/widget.js"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    WisQu.init({
+      container: "#wisqu-widget",
+      theme: "light",   // or "dark"
+      locale: "en",     // or "ar", "fa"
+      sect: "shia"
+    });
+  });
+</script>
+
+
 
         <article class="card">
           <h4 id="hadithCardTitle">📜 Hadiths</h4>
@@ -266,11 +294,17 @@ async function sendChat() {
           <a href="https://heardle.nooralhuda.co.uk" id="salahLink">play now</a>
         </article>
         
+        <article class="card">
+          <h4 id="Arabic">Arabio</h4>
+          <p id="Arabic">learn how to read the Quran and further.</p>
+          <a href="https://arabic.nooralhuda.co.uk" id="salahLink">Learn</a>
+        </article>
        
 
       </div>
     </section>
-    
+   
+
   </main>
 
   <footer>
