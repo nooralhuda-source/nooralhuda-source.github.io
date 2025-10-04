@@ -95,7 +95,7 @@
   <script>
     async function loadHadiths() {
       try {
-        const res = await fetch("https://thaqalayn-api.net/api/v2/1/all");
+        const res = await fetch("https://www.thaqalayn-api.net/api/v2/query?q=intellect");
         const data = await res.json();
         const container = document.getElementById("hadiths");
         container.innerHTML = "";
