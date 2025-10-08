@@ -13,7 +13,8 @@
     }
     function toggleDarkMode() {
       document.documentElement.classList.toggle("dark-mode");
-      localStorage.setItem("theme",
+      localStorage.setItem(
+        "theme",
         document.documentElement.classList.contains("dark-mode") ? "dark" : "light"
       );
       updateThemeIcon();
@@ -32,19 +33,21 @@
   <style>
     .search-bar {
       margin: 1rem auto;
-      max-width: 400px;
+      max-width: 480px;
       display: flex;
       gap: 0.5rem;
     }
     .search-bar input {
       flex: 1;
-      padding: 0.5rem;
+      padding: 0.6rem;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      background: var(--card-bg);
+      color: var(--text);
     }
     .search-bar button {
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1rem;
       border: none;
       border-radius: var(--radius);
       background: var(--green);
@@ -52,8 +55,47 @@
       font-weight: 600;
       cursor: pointer;
     }
-    .search-bar button:hover {
-      filter: brightness(1.1);
+    .search-bar button:hover { filter: brightness(1.06); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      max-width: 1000px;
+      margin: 1rem auto 2rem;
+      padding: 0 1rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .card h4 {
+      margin: 0;
+      color: var(--text);
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .card a {
+      margin-top: 0.5rem;
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--green);
+    }
+    .card a:hover { text-decoration: underline; }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 1rem;
     }
   </style>
 </head>
@@ -71,7 +113,7 @@
     <nav id="mainNav">
       <a href="quran.html">📖 Qur’an</a>
       <a href="duas.html">🤲 Duas</a>
-      <a href="hadiths-home.html">📜 Hadiths</a>
+      <a href="hadiths-home.html" class="active">📜 Hadiths</a>
       <a href="calendar.html">📅 Calendar</a>
       <a href="salah.html">🕌 Salah</a>
       <a href="index.html" class="utility">🏠</a>
@@ -86,11 +128,12 @@
 
     <!-- Search bar -->
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search Hadith book by name (English or Arabic)">
+      <input type="text" id="searchInput" placeholder="Search Hadith book by name (English or Arabic)" onkeydown="if(event.key==='Enter'){searchBooks()}">
       <button onclick="searchBooks()">Search</button>
     </div>
 
     <div class="grid" id="bookGrid"></div>
+    <div class="empty" id="emptyState" style="display:none;">No books match your search.</div>
   </main>
 
   <!-- Footer -->
@@ -99,42 +142,56 @@
   </footer>
 
   <script>
+    // Book definitions + routes (fixes the broken link generation)
     const books = [
-  { id: "al-kafi", name_en: "Al-Kafi", name_ar: "الكافي" },
-  { id: "man-la", name_en: "Man La Yahduruhu al-Faqih", name_ar: "من لا يحضره الفقيه" },
-  { id: "tahdhib", name_en: "Tahdhib al-Ahkam", name_ar: "تهذيب الأحكام" },
-  { id: "istibsar", name_en: "Al-Istibsar", name_ar: "الاستبصار" },
-  { id: "nahj", name_en: "Nahj al-Balagha", name_ar: "نهج البلاغة" },
-  { id: "Kitab Sulaim", name_en: "Kitab Sulaim bin Qays", name_ar:" كتاب سليم بن قيس"
-
- },
-  { id: "kitab-al-momin", name_en: "Kitab Al Momin", name_ar: "كتاب المؤمن" }
-];
+      { id: "al-kafi", name_en: "Al-Kafi", name_ar: "الكافي", href: "alkafi.html" },
+      { id: "man-la", name_en: "Man La Yahduruhu al-Faqih", name_ar: "من لا يحضره الفقيه", href: "man-la-yahduruhu.html" },
+      { id: "tahdhib", name_en: "Tahdhib al-Ahkam", name_ar: "تهذيب الأحكام", href: "tahdhib.html" },
+      { id: "istibsar", name_en: "Al-Istibsar", name_ar: "الاستبصار", href: "istibsar.html" },
+      { id: "nahj", name_en: "Nahj al-Balagha", name_ar: "نهج البلاغة", href: "nahj-al-balagha.html" },
+      { id: "kitab-sulaim", name_en: "Kitab Sulaim bin Qays", name_ar: "كتاب سليم بن قيس", href: "kitab-sulaim.html" },
+      { id: "kitab-al-momin", name_en: "Kitab Al Momin", name_ar: "كتاب المؤمن", href: "kitab-al-momin.html" }
+    ];
 
     const grid = document.getElementById("bookGrid");
+    const emptyState = document.getElementById("emptyState");
+
+    function normalizeArabic(str) {
+      // Basic normalization: trim, unify Arabic alef forms
+      return (str || "")
+        .trim()
+        .replace(/[إأآ]/g, "ا")
+        .replace(/ى/g, "ي")
+        .replace(/ة/g, "ه");
+    }
 
     function renderBooks(list) {
       grid.innerHTML = "";
+      emptyState.style.display = list.length ? "none" : "block";
+
       list.forEach(book => {
         const card = document.createElement("div");
         card.className = "card";
-        // Special case: Al-Kafi goes to hadiths.html
-        const link = book.id === "al-kafi" ? "hadiths.html" : `hadiths-${book.id}.html`;
         card.innerHTML = `
           <h4>${book.name_en}</h4>
           <p>${book.name_ar}</p>
-          <a href="${link}">View Hadiths →</a>
+          <a href="${book.href}">View Hadiths →</a>
         `;
         grid.appendChild(card);
       });
     }
 
     function searchBooks() {
-      const query = document.getElementById("searchInput").value.toLowerCase();
-      const filtered = books.filter(b =>
-        b.name_en.toLowerCase().includes(query) ||
-        b.name_ar.includes(query)
-      );
+      const queryRaw = document.getElementById("searchInput").value;
+      const qEn = (queryRaw || "").toLowerCase().trim();
+      const qAr = normalizeArabic(queryRaw);
+
+      const filtered = books.filter(b => {
+        const enMatch = b.name_en.toLowerCase().includes(qEn);
+        const arMatch = normalizeArabic(b.name_ar).includes(qAr);
+        return enMatch || arMatch;
+      });
+
       renderBooks(filtered);
     }
 
