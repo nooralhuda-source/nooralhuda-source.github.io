@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Al-Kafi — Volume 1, Chapter 1</title>
+  <title>Al-Kafi — Volume 1, Chapter 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Fonts: Inter (English) + Amiri (Arabic Naskh) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Amiri&display=swap" rel="stylesheet">
@@ -227,7 +227,7 @@
   </header>
 
   <main>
-    <h2 class="title">Volume 1 — Chapter 1: The Book of Intelligence and Ignorance</h2>
+    <h2 class="title">Volume 1 — Chapter 2: The Book on Virtue of Knowledge</h2>
     <div class="meta">Author: Shaykh Muḥammad b. Yaʿqūb al-Kulaynī • Translation: Muhammad Sarwar</div>
 
     <ul id="hadithContainer" class="hadith-list">
@@ -270,6 +270,25 @@
       return en.trim();
     }
 
+    // Robust Chapter 2 matcher: exact name or partial matches (English/Arabic)
+    function isChapter2(entry) {
+      const chap = (entry.chapter || "").trim();
+      const cat = (entry.category || "").trim();
+
+      const exactNames = [
+        "The Book on Virtue of Knowledge",
+        "The Book of Virtue of Knowledge"
+      ];
+      const partials = [
+        "Virtue of Knowledge",
+        "Merits of Knowledge",
+        "فضل العلم"
+      ];
+
+      if (exactNames.includes(chap) || exactNames.includes(cat)) return true;
+      return partials.some(p => chap.includes(p) || cat.includes(p));
+    }
+
     // Render with subchapter headings
     async function loadHadiths() {
       const url = "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/1.json";
@@ -280,13 +299,13 @@
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
 
-        // Filter to Chapter 1 (exact match per dataset)
-        const entries = data.filter(h => h.chapter === "The Book of Intelligence and Ignorance");
+        // Filter to Chapter 2 (robust)
+        const entries = data.filter(isChapter2);
 
         container.innerHTML = "";
 
         if (!entries.length) {
-          container.innerHTML = '<li class="status">No hadiths found for this chapter.</li>';
+          container.innerHTML = '<li class="status">No hadiths found for Chapter 2.</li>';
           return;
         }
 
