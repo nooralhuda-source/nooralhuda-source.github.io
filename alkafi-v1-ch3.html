@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Noor Al Huda — Al-Kafi Volume 1 Chapter 3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    // Theme handling (keeps behavior from your template)
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark-mode");
+    }
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle("dark-mode");
+      localStorage.setItem("theme",
+        document.documentElement.classList.contains("dark-mode") ? "dark" : "light"
+      );
+      updateThemeIcon();
+    }
+    function updateThemeIcon() {
+      const btn = document.getElementById("themeToggle");
+      if (btn) btn.textContent = document.documentElement.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }
+    function toggleMenu() {
+      const nav = document.getElementById("mainNav");
+      if (nav) nav.classList.toggle("open");
+    }
+  </script>
+
+  <style>
+    
+
+    main.container{max-width:920px;margin:28px auto;padding:22px;}
+    .back-btn{display:inline-block;margin-bottom:12px;color:#285f74;text-decoration:none;font-weight:600;}
+    h2.title{text-align:center;font-size:1.4rem;margin:6px 0 12px;color:#374151;}
+    .meta{text-align:center;color:var(--muted);font-size:0.95rem;margin-bottom:14px;}
+
+    .controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;}
+    .controls input[type="text"]{width:360px;max-width:86%;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:0.95rem;}
+    .controls button{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-weight:600;cursor:pointer;}
+
+    .list { margin:0; padding:0; list-style:none; }
+    .subchapter-card{background:#f8f9fb;border:1px dashed var(--border);border-radius:12px;padding:10px 14px;margin:18px 0 8px;}
+    .subchapter-title{font-weight:700;color:#374151;}
+    .subchapter-meta{color:var(--muted);font-size:0.9rem;}
+
+    .hadith-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:16px;margin:12px 0;box-shadow:var(--shadow);}
+    .hadith-header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:8px;}
+    .hadith-number{font-weight:700;color:var(--accent);}
+    .source-link a{color:#285f74;text-decoration:none;font-weight:600;}
+    .isnad{color:var(--isnad);font-size:0.98rem;line-height:1.7;margin:6px 0;}
+
+    .text-ar{font-family:"Amiri",serif;direction:rtl;text-align:justify;font-size:1.18rem;line-height:1.95;word-spacing:1px;margin-top:6px;color:#111827;padding:8px;background:#fbfbfb;border-radius:8px;}
+    .text-en{margin-top:10px;color:#212b36;font-size:1rem;line-height:1.75;}
+
+    .gradings{margin-top:10px;color:var(--muted);font-size:0.92rem;}
+    .grading-pill{display:inline-block;background:#f2f5ff;color:#3949ab;border:1px solid #e3e7ff;border-radius:999px;padding:3px 10px;margin-right:6px;margin-top:6px;font-weight:600;font-size:0.85rem;}
+
+    .status{text-align:center;color:var(--muted);padding:14px 0;}
+
+    footer{border-top:1px solid var(--border);background:var(--card-bg);color:var(--muted);font-size:0.9rem;text-align:center;padding:14px 20px;margin-top:28px;}
+
+    @media (max-width:800px){ .hamburger{display:block;} nav{display:none;} nav.open{display:flex;flex-direction:column;gap:8px;padding:12px;} }
+  </style>
+</head>
+<body onload="updateThemeIcon()">
+  <header>
+    <div class="brand">
+      <img src="logo.png.png" alt="Noor Al Huda Logo">
+      <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
+    </div>
+
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+
+    <nav id="mainNav">
+      <a href="quran.html">📖 Qur’an</a>
+      <a href="duas.html">🤲 Duas</a>
+      <a href="hadiths-home.html" class="active">📜 Hadiths</a>
+      <a href="calendar.html">📅 Calendar</a>
+      <a href="salah.html">🕌 Salah</a>
+      <a href="index.html" class="utility">🏠</a>
+      <a href="settings.html" class="utility">⚙</a>
+      <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+    </nav>
+  </header>
+
+
+  <main class="container">
+    <a class="back-btn" href="alkafi-volume1.html">← Back to Volume 1</a>
+    <h2 class="title">Volume 1 — Chapter 3: The Book on Oneness of Allah</h2>
+    <div class="meta">Author: Shaykh Muḥammad b. Yaʿqūb al-Kulaynī • Translation: Muhammad Sarwar</div>
+
+    <div class="controls">
+      <input id="searchInput" type="text" placeholder="Filter hadith text or isnād (English/Arabic)..." oninput="filterHadiths()">
+      <button onclick="resetFilter()">Reset</button>
+    </div>
+
+    <ul id="hadithList" class="list">
+      <li class="status">Loading hadiths…</li>
+    </ul>
+  </main>
+
+  <footer>© 2025 Noor Al Huda — Personal Islamic Companion (Shia Ithna Ashari)</footer>
+  <script>
+    // keep theme toggle minimal and compatible with your template
+    if (localStorage.getItem("theme") === "dark") document.documentElement.classList.add("dark-mode");
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle("dark-mode");
+      localStorage.setItem("theme", document.documentElement.classList.contains("dark-mode") ? "dark" : "light");
+      updateThemeIcon();
+    }
+    function updateThemeIcon() {
+      const btn = document.getElementById("themeToggle");
+      if (btn) btn.textContent = document.documentElement.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }
+    updateThemeIcon();
+
+    // small helpers (matching earlier code)
+    function safeText(str) {
+      if (str === null || str === undefined) return '';
+      return String(str).replaceAll('<','&lt;').replaceAll('>','&gt;');
+    }
+
+    function extractHadithNumber(entry, fallbackIndex) {
+      const en = (entry.englishText || "").trim();
+      const ar = (entry.arabicText || "").trim();
+      const numMatchEn = en.match(/^(\d+)\s*\./);
+      const numMatchAr = ar.match(/^(\d+)\s*[\.\u066B]/);
+      if (numMatchEn) return Number(numMatchEn[1]);
+      if (numMatchAr) return Number(numMatchAr[1]);
+      if (typeof entry.hadith_number === 'number') return entry.hadith_number;
+      if (typeof entry.id === 'number') return entry.id;
+      return fallbackIndex + 1;
+    }
+    function getIsnad(entry) {
+      if (entry.thaqalaynSanad && entry.thaqalaynSanad.trim()) return entry.thaqalaynSanad.trim();
+      const en = (entry.englishText || "");
+      const q = en.indexOf("“");
+      if (q > 0) return en.slice(0, q).trim();
+      return "";
+    }
+    function getMatn(entry) {
+      if (entry.thaqalaynMatn && entry.thaqalaynMatn.trim()) return entry.thaqalaynMatn.trim();
+      const en = (entry.englishText || "");
+      const qStart = en.indexOf("“");
+      const qEnd = en.lastIndexOf("”");
+      if (qStart >= 0 && qEnd > qStart) return en.slice(qStart, qEnd + 1).trim();
+      return en.trim();
+    }
+
+    // state
+    let all = [], visible = [];
+
+    // create hadith card (keeps markup similar to your working template)
+    function createHadithCard(h, idx) {
+      const num = extractHadithNumber(h, idx);
+      const isnad = getIsnad(h);
+      const matn = getMatn(h);
+      const li = document.createElement('li');
+      li.className = 'hadith-card';
+      li.dataset.search = ((isnad||'') + ' ' + (h.arabicText||'') + ' ' + (matn||'')).toLowerCase();
+
+      li.innerHTML = `
+        <div class="hadith-header">
+          <div class="hadith-number">Hadith ${safeText(num)}</div>
+          <div class="source-link">${h.URL ? `<a href="${safeText(h.URL)}" target="_blank" rel="noopener">Source ↗</a>` : ""}</div>
+        </div>
+        ${isnad ? `<div class="isnad">${safeText(isnad)}</div>` : ""}
+        ${h.arabicText ? `<div class="text-ar" lang="ar">${safeText(h.arabicText)}</div>` : ""}
+        ${matn ? `<div class="text-en">${safeText(matn)}</div>` : ""}
+        ${Array.isArray(h.gradingsFull) && h.gradingsFull.length ? `<div class="gradings">${h.gradingsFull.map(g => {
+          const grade = (g.grade_ar || g.grade_en || "").trim();
+          const author = g.author && (g.author.name_en || "").trim();
+          const ref = (g.reference_en || "").trim();
+          const label = [grade, author].filter(Boolean).join(" — ");
+          return `<span class="grading-pill" title="${safeText(ref)}">${safeText(label)}</span>`;
+        }).join(' ')}</div>` : ""}
+      `;
+      return li;
+    }
+
+    // render list grouped by subchapter, limited to first 35 subchapters (0..34)
+    function renderList(entries) {
+      const ul = document.getElementById('hadithList');
+      ul.innerHTML = '';
+      if (!entries.length) {
+        ul.innerHTML = '<li class="status">No hadiths found for this book or filter.</li>';
+        return;
+      }
+
+      // sort by subchapter then number
+      entries.sort((a,b) => {
+        const sa = Number(a.chapterInCategoryId ?? 0);
+        const sb = Number(b.chapterInCategoryId ?? 0);
+        if (sa !== sb) return sa - sb;
+        const na = Number(a.hadith_number ?? a.id ?? extractHadithNumber(a,0) ?? 0);
+        const nb = Number(b.hadith_number ?? b.id ?? extractHadithNumber(b,0) ?? 0);
+        return na - nb;
+      });
+
+      let currentSub = null;
+      entries.forEach((h, i) => {
+        const subRaw = h.chapterInCategoryId ?? h.chapter_in_category_id ?? h.subchapter ?? null;
+        const subIndex = (subRaw === null || subRaw === undefined) ? null : (Number.isFinite(Number(subRaw)) ? Number(subRaw) : null);
+        // only show subchapters 0..34 (35 subchapters). If subIndex is null, treat as part of current section (no header).
+        if (subIndex !== null && subIndex !== currentSub && subIndex >= 0 && subIndex < 35) {
+          currentSub = subIndex;
+          const heading = document.createElement('li');
+          heading.className = 'subchapter-card';
+          heading.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="subchapter-title">Subchapter ${subIndex + 1}</div>
+            <div class="subchapter-meta">${safeText(h.category || h.chapter || h.book || "")}</div>
+          </div>`;
+          ul.appendChild(heading);
+        }
+        // if subIndex is >=35 then skip rendering this hadith (user requested only first 35 subchapters)
+        if (subIndex !== null && subIndex >= 35) {
+          return;
+        }
+        ul.appendChild(createHadithCard(h, i));
+      });
+    }
+
+    // filtering
+    function filterHadiths() {
+      const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      if (!q) { visible = all.slice(); renderList(visible); return; }
+      visible = all.filter(h => {
+        const text = ((h.thaqalaynSanad||'') + ' ' + (h.arabicText||'') + ' ' + (h.englishText||'') + ' ' + (h.thaqalaynMatn||'')).toLowerCase();
+        return text.includes(q);
+      });
+      renderList(visible);
+    }
+    function resetFilter() { document.getElementById('searchInput').value = ''; filterHadiths(); }
+
+    // load dataset and initialize for Book 3 (categoryId === 3)
+    async function loadBook3() {
+      const url = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/main/V2/ThaqalaynData/1.json';
+      const container = document.getElementById('hadithList');
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+
+        // Attempt common shapes: if data.hadiths exists, use it; otherwise, if data is array use that; else deep-scan
+        let entries = [];
+        if (Array.isArray(data.hadiths)) {
+          entries = data.hadiths.filter(h => Number(h.categoryId) === 3);
+        } else if (Array.isArray(data)) {
+          entries = data.filter(h => {
+            if (!h || typeof h !== 'object') return false;
+            if (Number(h.categoryId) === 3) return true;
+            // also accept chapter title matches
+            const ch = (h.chapter || h.category || h.book || '').toString().toLowerCase();
+            return ch.includes('types') || ch.includes('types of') || ch.includes('people');
+          });
+        } else {
+          // deep search for arrays or objects with categoryId === 3
+          const stack = [data];
+          while (stack.length) {
+            const node = stack.pop();
+            if (!node || typeof node !== 'object') continue;
+            if (Array.isArray(node)) {
+              node.forEach(it => {
+                if (it && typeof it === 'object') {
+                  if (Number(it.categoryId) === 3) entries.push(it);
+                }
+              });
+            } else {
+              for (const k of Object.keys(node)) {
+                const child = node[k];
+                if (child && typeof child === 'object') stack.push(child);
+              }
+            }
+          }
+        }
+
+        // final fallback: try matching chapter name explicitly in top-level array
+        if (!entries.length && Array.isArray(data)) {
+          entries = data.filter(h => (h.chapter || '').toString().toLowerCase().includes('types'));
+        }
+
+        // Keep only hadiths that are in subchapters 0..34 OR have no subchapter assigned (null)
+        // Also ensure entries with subchapter >=35 are excluded.
+        all = entries.filter(h => {
+          const subRaw = h.chapterInCategoryId ?? h.chapter_in_category_id ?? h.subchapter ?? null;
+          if (subRaw === null || subRaw === undefined) return true;
+          const subIndex = Number.isFinite(Number(subRaw)) ? Number(subRaw) : null;
+          return (subIndex === null) || (subIndex >= 0 && subIndex < 35);
+        });
+
+        visible = all.slice();
+        renderList(visible);
+
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = '<li class="status">Error loading hadiths. Please try again later.</li>';
+      }
+    }
+
+    // init
+    window.addEventListener('load', () => {
+      loadBook3();
+      document.getElementById('searchInput')?.addEventListener('input', filterHadiths);
+    });
+  </script>
+</body>
+</html>
