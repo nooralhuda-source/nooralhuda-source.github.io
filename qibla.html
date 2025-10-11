@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Qibla Finder — Noor Al Huda</title>
+<style>
+  :root{
+    --bg:#f4f6f8;
+    --card:#fff;
+    --accent:#0b7d40;
+    --muted:#6b7280;
+    --glass: rgba(255,255,255,0.6);
+  }
+  html,body{height:100%;margin:0;font-family:Arial, Helvetica, sans-serif;background:var(--bg);color:#111}
+  .wrap{max-width:900px;margin:18px auto;padding:18px}
+  header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  header img{height:40px}
+  header h1{margin:0;font-size:1.15rem}
+  .card{background:var(--card);border:1px solid #e6edf0;border-radius:10px;padding:16px;box-shadow:0 6px 18px rgba(10,20,15,0.05)}
+  .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .controls{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+  button,input,select{font:inherit}
+  .btn{background:var(--accent);color:white;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid #cfead4}
+  .note{color:var(--muted);font-size:0.9rem;margin-top:8px}
+  .compass-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:14px}
+  .compass {
+    width:260px;height:260px;border-radius:50%;
+    background:linear-gradient(#ffffff, #f1f6f4);
+    border:8px solid #fff;
+    box-shadow: 0 8px 24px rgba(6,22,10,0.08);
+    position:relative; overflow:visible;
+  }
+  .north-mark{position:absolute;top:8px;left:50%;transform:translateX(-50%);color:var(--muted);font-weight:700}
+  .compass .dial{
+    position:absolute;width:100%;height:100%;top:0;left:0;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;pointer-events:none;
+    transition:transform 220ms linear;
+  }
+  .tick{position:absolute;width:2px;height:12px;background:#222;opacity:0.85}
+  /* Qibla needle */
+  .needle{
+    position:absolute;left:50%;top:50%;transform-origin:50% 80%;width:6px;height:120px;margin-left:-3px;
+    display:flex;align-items:flex-start;justify-content:center;pointer-events:none;transition:transform 250ms cubic-bezier(.2,.8,.2,1);
+  }
+  .needle .shaft{background:var(--accent);width:100%;height:100%;border-radius:6px 6px 2px 2px;box-shadow:0 4px 10px rgba(11,125,64,0.18)}
+  .needle .head{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:16px solid var(--accent)}
+  .needle .tail{position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:#fff;border:3px solid var(--accent)}
+  .info-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+  .info{background:var(--glass);padding:8px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.03);min-width:140px;text-align:center}
+  .big{font-size:1.25rem;font-weight:700}
+  .small{font-size:0.85rem;color:var(--muted)}
+  .fallback{margin-top:12px}
+  .row.center{justify-content:center}
+  /* responsive */
+  @media(max-width:480px){
+    .compass{width:210px;height:210px}
+    .needle{height:95px}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- header kept minimal and consistent -->
+    <header>
+      <img src="logo.png.png" alt="logo" />
+      <h1>Noor Al Huda — Qibla Finder</h1>
+    </header>
+
+    <div class="card">
+      <div class="row controls">
+        <div>
+          <button class="btn" id="btnLocate">Use my location</button>
+          <button class="btn ghost" id="btnCompassPerm">Enable compass</button>
+        </div>
+
+        <div style="display:flex;gap:8px;align-items:center">
+          <label style="font-weight:600">Fallback / manual lat,lon:</label>
+          <input id="manualLat" type="number" step="0.0001" placeholder="lat" style="width:90px;padding:6px;border-radius:6px;border:1px solid #d7e3df" />
+          <input id="manualLon" type="number" step="0.0001" placeholder="lon" style="width:90px;padding:6px;border-radius:6px;border:1px solid #d7e3df" />
+          <button class="btn ghost" id="btnUseManual">Use</button>
+        </div>
+      </div>
+
+      <div class="compass-wrap">
+        <div id="compass" class="compass" aria-hidden="true">
+          <div class="north-mark">N</div>
+          <div id="dial" class="dial" style="transform:rotate(0deg)">
+            <!-- optional tick marks -->
+            <!-- we'll programmatically add ticks -->
+          </div>
+
+          <!-- needle points to Qibla relative to device heading: we will rotate it to (qiblaBearing - heading) -->
+          <div id="needle" class="needle" style="transform:rotate(0deg)">
+            <div class="head"></div>
+            <div class="shaft"></div>
+            <div class="tail"></div>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info">
+            <div class="small">Your location</div>
+            <div id="locText" class="big">—</div>
+            <div class="small" id="locCoords">lat — , lon —</div>
+          </div>
+          <div class="info">
+            <div class="small">Qibla bearing</div>
+            <div id="qiblaDeg" class="big">—°</div>
+            <div class="small">from North (clockwise)</div>
+          </div>
+          <div class="info">
+            <div class="small">Distance</div>
+            <div id="distance" class="big">— km</div>
+            <div class="small">to Kaʿbah (Makkah)</div>
+          </div>
+        </div>
+
+        <div class="fallback row center" id="notes" style="width:100%;max-width:720px">
+          <div class="small" style="color:var(--muted)">
+            Tip: For best results on mobile allow both <strong>Location</strong> and <strong>Device motion/orientation</strong> permissions.
+            If compass doesn't move, try calibrating your device by moving it in a figure-8.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/*
+  Qibla Finder (plain HTML/JS)
+  - Uses Geolocation API to obtain user coordinates
+  - Uses DeviceOrientation API (and webkitCompassHeading where available) to read device heading
+  - Calculates great-circle bearing to Kaaba (21.4225 N, 39.8262 E)
+  - Needle rotates to point toward Qibla relative to device heading
+  - Desktop fallback: user may enter manual coords and use slider simulation (not implemented) — simple manual use provided
+*/
+
+const KAABA = { lat: 21.4225, lon: 39.8262 }; // Kaaba coordinates
+const btnLocate = document.getElementById('btnLocate');
+const btnCompassPerm = document.getElementById('btnCompassPerm');
+const btnUseManual = document.getElementById('btnUseManual');
+const manualLat = document.getElementById('manualLat');
+const manualLon = document.getElementById('manualLon');
+const locText = document.getElementById('locText');
+const locCoords = document.getElementById('locCoords');
+const qiblaDegEl = document.getElementById('qiblaDeg');
+const distanceEl = document.getElementById('distance');
+const needle = document.getElementById('needle');
+const dial = document.getElementById('dial');
+const notes = document.getElementById('notes');
+
+let userPos = null;     // {lat, lon}
+let currentHeading = 0; // device heading in degrees (0 = north)
+let qiblaBearing = 0;   // bearing from user to Kaaba
+let supportsDeviceOrientation = false;
+
+/* Create simple tick marks on the dial (every 30 degrees) */
+function createTicks(){
+  const r = 50; // relative
+  const size = 260;
+  for(let a=0;a<360;a+=30){
+    const tick = document.createElement('div');
+    tick.className = 'tick';
+    // compute position
+    const theta = a * Math.PI/180;
+    const cx = size/2, cy = size/2;
+    const radius = size/2 - 22;
+    const x = cx + Math.cos(theta) * radius;
+    const y = cy + Math.sin(theta) * radius;
+    tick.style.left = (x - 1) + 'px';
+    tick.style.top = (y - 6) + 'px';
+    tick.style.transform = `rotate(${a}deg)`;
+    dial.appendChild(tick);
+  }
+}
+createTicks();
+
+/* Haversine distance (km) */
+function haversineDist(lat1, lon1, lat2, lon2){
+  const R=6371; // km
+  const φ1 = toRad(lat1), φ2 = toRad(lat2);
+  const Δφ = toRad(lat2 - lat1), Δλ = toRad(lon2 - lon1);
+  const a = Math.sin(Δφ/2)**2 + Math.cos(φ1)*Math.cos(φ2)*Math.sin(Δλ/2)**2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R*c;
+}
+
+/* Bearing from (lat1,lon1) to (lat2,lon2) in degrees clockwise from North */
+function bearingTo(lat1, lon1, lat2, lon2){
+  const φ1 = toRad(lat1), φ2 = toRad(lat2);
+  const λ1 = toRad(lon1), λ2 = toRad(lon2);
+  const y = Math.sin(λ2-λ1) * Math.cos(φ2);
+  const x = Math.cos(φ1)*Math.sin(φ2) - Math.sin(φ1)*Math.cos(φ2)*Math.cos(λ2-λ1);
+  return (toDeg(Math.atan2(y,x)) + 360) % 360;
+}
+
+/* Helpers */
+function toRad(d){return d*Math.PI/180;}
+function toDeg(r){return r*180/Math.PI;}
+function round(v, n=2){ return Math.round(v * (10**n)) / (10**n); }
+
+/* Update UI values and needle based on current heading & user position */
+function updateUI(){
+  if(!userPos) return;
+  qiblaBearing = bearingTo(userPos.lat, userPos.lon, KAABA.lat, KAABA.lon);
+  const dist = haversineDist(userPos.lat, userPos.lon, KAABA.lat, KAABA.lon);
+  locText.textContent = (userPos.name ? userPos.name : 'Your Location');
+  locCoords.textContent = `lat ${round(userPos.lat,4)} , lon ${round(userPos.lon,4)}`;
+  qiblaDegEl.textContent = Math.round(qiblaBearing) + '°';
+  distanceEl.textContent = Math.round(dist) + ' km';
+  // Compute needle rotation: we want needle angle such that it points to Qibla relative to device heading
+  // needleAngle = qiblaBearing - heading
+  const needleAngle = (qiblaBearing - currentHeading + 360) % 360;
+  // convert to -180..180 for smoother rotation
+  const short = needleAngle > 180 ? needleAngle - 360 : needleAngle;
+  needle.style.transform = `rotate(${short}deg)`;
+}
+
+/* Geolocation success */
+function onGeoSuccess(pos){
+  const c = pos.coords;
+  userPos = { lat: c.latitude, lon: c.longitude, name: 'Auto' };
+  updateUI();
+  notes.innerHTML = `<div class="small" style="color:var(--muted)">Location acquired. Allow device orientation to enable real-time compass.</div>`;
+}
+
+/* Geolocation error */
+function onGeoError(err){
+  console.warn('Geolocation error', err);
+  notes.innerHTML = `<div class="small" style="color:var(--muted)">Could not get location: ${err.message}. Use manual lat/lon below.</div>`;
+}
+
+/* Request browser geolocation */
+btnLocate.addEventListener('click', () => {
+  if(!navigator.geolocation){
+    notes.innerHTML = `<div class="small" style="color:var(--muted)">Geolocation not supported in this browser.</div>`;
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError, { enableHighAccuracy: true, maximumAge: 60000, timeout: 10000 });
+});
+
+/* manual coords */
+btnUseManual.addEventListener('click', () => {
+  const lat = parseFloat(manualLat.value);
+  const lon = parseFloat(manualLon.value);
+  if(Number.isFinite(lat) && Number.isFinite(lon)){
+    userPos = {lat, lon, name: 'Manual'};
+    updateUI();
+    notes.innerHTML = `<div class="small" style="color:var(--muted)">Using manual coordinates.</div>`;
+  } else {
+    alert('Enter valid latitude and longitude values.');
+  }
+});
+
+/* DeviceOrientation handling */
+function handleOrientationEvent(e){
+  // Some browsers (iOS) provide e.webkitCompassHeading
+  let heading = null;
+  if(e.webkitCompassHeading !== undefined){ // iOS
+    heading = e.webkitCompassHeading;
+  } else if(e.absolute === true && e.alpha !== null){
+    // When absolute is true, alpha is rotation relative to north in some browsers.
+    heading = 360 - e.alpha; // convert to compass heading
+  } else if(e.alpha !== null){
+    // Fallback heuristic
+    heading = 360 - e.alpha;
+  }
+  if(heading === null || isNaN(heading)) return;
+  currentHeading = heading;
+  // rotate the dial so north marker stays top: we will rotate the dial element so that dial rotates with device
+  // but we don't need to rotate dial if needle is computed relative to heading; we rotate needle only.
+  // update UI
+  updateUI();
+}
+
+/* Request permission for DeviceOrientation on iOS 13+ */
+btnCompassPerm.addEventListener('click', async () => {
+  // Some browsers (Safari iOS) require a user gesture and explicit permission request
+  if(typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
+    try{
+      const perm = await DeviceOrientationEvent.requestPermission();
+      if(perm === 'granted'){
+        window.addEventListener('deviceorientation', handleOrientationEvent, true);
+        supportsDeviceOrientation = true;
+        notes.innerHTML = `<div class="small" style="color:var(--muted)">Compass enabled. Move your device slowly to calibrate.</div>`;
+      } else {
+        notes.innerHTML = `<div class="small" style="color:var(--muted)">Compass permission denied.</div>`;
+      }
+    } catch(err){
+      console.warn(err);
+      notes.innerHTML = `<div class="small" style="color:var(--muted)">Compass permission error.</div>`;
+    }
+  } else {
+    // Non-iOS: just add listener
+    if('ondeviceorientationabsolute' in window){
+      window.addEventListener('deviceorientationabsolute', handleOrientationEvent, true);
+    } else if('ondeviceorientation' in window){
+      window.addEventListener('deviceorientation', handleOrientationEvent, true);
+    } else {
+      notes.innerHTML = `<div class="small" style="color:var(--muted)">Device orientation not supported on this device/browser.</div>`;
+    }
+    supportsDeviceOrientation = true;
+    notes.innerHTML = `<div class="small" style="color:var(--muted)">Compass activated (if supported). Move device to calibrate.</div>`;
+  }
+});
+
+/* If device already provides absolute orientation via permissionless APIs, attach automatically */
+if('DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission !== 'function'){
+  // some Android/Chrome allow events without permission
+  window.addEventListener('deviceorientation', handleOrientationEvent, true);
+  supportsDeviceOrientation = true;
+}
+
+/* Small helper to ask for geolocation on load optionally */
+(function tryAutoGeo(){
+  // try quick geolocation silently (non-intrusive)
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(onGeoSuccess, ()=>{}, { maximumAge: 60000, timeout: 5000 });
+  }
+})();
+
+/* Clicking anywhere may help browsers allow audio/autoplay in other pages; not relevant here but helpful UX */
+document.addEventListener('click', ()=>{ /* noop; used to get user gesture if needed */ });
+
+</script>
+</body>
+</html>
