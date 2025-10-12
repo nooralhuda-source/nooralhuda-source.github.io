@@ -1,399 +1,271 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  
-  <link rel="icon" href="logo.png.png" type="image/png">
-
-
-  <meta charset="UTF-8" />
-  <title>Noor Al Huda</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shiatube – Your Foyer</title>
   <style>
-    :root{
-      --green:#136f3c;        /* header green */
-      --bg:#ffffff;           /* white background */
-      --text:#1f2937;         /* neutral text */
-      --muted:#6b7280;        /* secondary text */
-      --card:#ffffff;
-      --border:#e5e7eb;
-      --accent:#0ea5e9;       /* accent for small elements */
-      --radius:14px;
+    :root {
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #ff4e4e;
+      --radius: 10px;
+      --text: #e6eef6;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text)}
-
-    /* Header */
-    header{
-      background:var(--green);color:#fff;padding:1rem 1.25rem;
-      display:flex;align-items:center;justify-content:space-between;gap:1rem
+    [data-theme="light"] {
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --muted: #5b6b78;
+      --accent: #ff4e4e;
+      --text: #0b1220;
     }
-    header .brand{display:flex;align-items:center;gap:0.75rem}
-    .brand h1{margin:0;font-size:1.25rem;font-weight:700}
-    .brand small{opacity:0.9}
-    .controls{display:flex;align-items:center;gap:0.6rem}
-    .select, .btn{
-      appearance:none;background:#fff;color:#0b3d21;border:1px solid var(--border);
-      padding:0.45rem 0.65rem;border-radius:8px;font-weight:600;cursor:pointer
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    .btn{display:inline-flex;align-items:center;gap:0.4rem}
-    .btn:hover{filter:brightness(1.05)}
-
-    /* Container */
-    .container{max-width:1100px;margin:0 auto;padding:1.25rem}
-
-    /* Hero */
-    .hero{
-      background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius);
-      padding:1.5rem;display:flex;gap:1.25rem;align-items:center;justify-content:space-between
+    .site { flex: 1; max-width: 1200px; margin: 0 auto; padding: 16px; }
+    header {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 14px; position: sticky; top: 0; z-index: 60;
+      background: linear-gradient(180deg, rgba(0,0,0,0.25), transparent); padding: 10px 0;
     }
-    .hero h2{margin:0 0 0.5rem 0}
-    .hero p{margin:0;color:var(--muted)}
-    .hero-actions{margin-top:0.75rem;display:flex;gap:0.6rem;flex-wrap:wrap}
-    .primary{
-      background:#ffffff;color:var(--green);border:1px solid var(--green)
-    }
-
-    /* Grid cards */
-    .section{margin-top:1.75rem}
-    .section h3{margin:0 0 0.75rem 0}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){.grid{grid-template-columns:1fr}}
-
-    .card{
-      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-      padding:1rem;display:flex;flex-direction:column;gap:0.5rem;box-shadow:0 2px 6px rgba(0,0,0,0.05)
-    }
-    .card h4{margin:0}
-    .card p{margin:0;color:var(--muted)}
-    .card a{
-      margin-top:auto;align-self:flex-start;text-decoration:none;color:var(--green);font-weight:700
-    }
-    .card a:hover{text-decoration:underline}
-
-    /* Footer */
-    footer{margin-top:2rem;padding:1.5rem 0;text-align:center;color:var(--muted);font-size:0.95rem}
-
-    /* Dark mode overrides */
-body.dark-mode {
-  --bg:#111827;        /* dark background */
-  --text:#f9fafb;      /* light text */
-  --muted:#9ca3af;     /* softer gray for secondary text */
-  --card:#1f2937;      /* dark card background */
-  --border:#374151;    /* darker border */
-}
-
+    .left { display:flex; align-items:center; gap:12px; }
+    .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); display:flex; align-items:center; gap:8px; }
+    .logo .brand { background:linear-gradient(135deg,#1e293b,#0b1220); width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center; font-weight:700;color:var(--accent); box-shadow:0 6px 18px rgba(2,6,23,0.4); }
+    nav { display:flex; align-items:center; gap:12px; }
+    nav a, .header-btn { color: var(--text); text-decoration: none; font-size: 0.95rem; background: transparent; border: none; cursor: pointer; padding:8px 10px; border-radius:8px; }
+    nav a:hover, .header-btn:hover { background: rgba(255,255,255,0.03); color: var(--accent); }
+    .hamburger { display: none; width:40px;height:40px;border-radius:8px;border:none;background:transparent;color:var(--text); font-size:22px;cursor:pointer; }
+    .theme-toggle { display:inline-flex; align-items:center; gap:8px; padding:6px 8px; border-radius:8px; border:none; cursor:pointer; background: rgba(255,255,255,0.02); }
+    .controls { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+    #playlistFilter { width: 100%; max-width: 320px; padding: 8px; font-size: 0.95rem; border-radius: var(--radius); border: none; background: var(--card); color: var(--text); }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(300px,1fr)); gap: 16px; }
+    @media (max-width: 980px) { .grid { grid-template-columns: repeat(2, minmax(220px,1fr)); } .site { padding: 12px; } header { padding: 8px 0; } }
+    @media (max-width: 600px) { .grid { grid-template-columns: 1fr; gap: 12px; } .hamburger { display:block; } nav.desktop-only { display:none; } }
+    .track { background: var(--card); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; position: relative; min-height: 260px; box-shadow: 0 6px 18px rgba(2,6,23,0.6); }
+    .player { position: relative; width:100%; padding-top: 56.25%; background: #000; }
+    .player iframe, .player audio, .player img { position:absolute; top:0; left:0; width:100%; height:100%; border:0; display:block; object-fit:cover; }
+    .card-link { position:absolute; inset:0; z-index:20; text-decoration:none; color:inherit; }
+    .meta { padding: 12px; z-index: 10; }
+    .title { margin: 0 0 8px; font-size: 1rem; line-height: 1.2; color: var(--text); overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+    .small { font-size: 0.8rem; color: var(--muted); }
+    .badge { position:absolute; top:10px; right:10px; background:rgba(0,0,0,0.5); padding:6px 8px;border-radius:8px; font-size:0.85rem; }
+    footer { text-align: center; padding: 12px 0; font-size: 0.8rem; color: var(--muted); }
+    .mobile-menu { position: fixed; top:0; left: -260px; width: 260px; height: 100%; background: var(--card); box-shadow: 6px 0 20px rgba(0,0,0,0.5); transition: left .22s ease; padding: 16px; z-index:120; }
+    .mobile-menu.open { left: 0; }
+    .mobile-menu a { display:block; padding:10px 8px; color:var(--text); text-decoration:none; border-radius:6px; }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.03); color: var(--accent); }
   </style>
 </head>
-<script>
-  // On page load, check saved preference
-  if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-  }
+<body data-theme="dark">
+  <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
+    <a href="index.html">Home</a>
+    <a href="upload.html">Upload</a>
+    <a id="backNoor" href="#">Back to NoorAlHuda</a>
+    <hr style="border:none;border-top:1px solid rgba(255,255,255,0.04);margin:8px 0;">
+    <div style="color:var(--muted);font-size:0.9rem;padding-top:8px">Theme</div>
+    <button id="mobileTheme" class="header-btn" style="margin-top:8px">Toggle theme</button>
+  </div>
 
-  function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-    // Save preference
-    if (document.body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-</script>
-
-
-<style>
-#chatWidget {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 300px;
-  font-family: Nunito, sans-serif;
-  z-index: 9999;
-}
-#chatHeader {
-  background: var(--green);
-  color: #fff;
-  padding: 0.6rem;
-  border-radius: 12px 12px 0 0;
-  cursor: pointer;
-  font-weight: 600;
-  text-align: center;
-}
-#chatBody {
-  display: none;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 12px 12px;
-  padding: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-#chatMessages {
-  max-height: 200px;
-  overflow-y: auto;
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
-}
-#chatMessages div {
-  margin-bottom: 0.3rem;
-}
-#chatInput {
-  width: 70%;
-  padding: 0.4rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-#chatBody button {
-  padding: 0.4rem 0.6rem;
-  background: var(--green);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius);
-  font-weight: 600;
-  cursor: pointer;
-}
-</style>
-
-<script>
-function toggleChat() {
-  const body = document.getElementById("chatBody");
-  body.style.display = body.style.display === "none" ? "block" : "none";
-}
-
-async function sendChat() {
-  const input = document.getElementById("chatInput");
-  const message = input.value.trim();
-  if (!message) return;
-  input.value = "";
-
-  const messagesDiv = document.getElementById("chatMessages");
-  messagesDiv.innerHTML += `<div><b>You:</b> ${message}</div>`;
-
-  const res = await fetch("/chat", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message })
-  });
-  const data = await res.json();
-  messagesDiv.innerHTML += `<div><b>AI:</b> ${data.reply}</div>`;
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
-</script>
-
-<body>
-  <!-- Header -->
-  <header>
-    <div class="brand">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true">
-        <path d="M12 2l7 5v10l-7 5-7-5V7l7-5zm0 3.2L7 8v8l5 3.2L17 16V8l-5-2.8z"/>
-      </svg>
-      <div>
-        <h1 id="title">Noor Al Huda</h1>
-        <small id="subtitle">Personal Islamic companion • Shia Ithna Ashari</small>
-      </div>
-    </div>
-    <div class="controls">
-      <select id="lang" class="select" aria-label="Language">
-        <option value="en" selected>English</option>
-        <option value="ur">اردو</option>
-        <option value="ar">العربية</option>
-        <option value="fa">فارسی</option>
-      </select>
-      <button class="btn" onclick="location.href='settings.html'">⚙️ Settings</button>
-    </div>
-  </header>
-  
-
-  <main class="container">
-    <!-- Hero -->
-    <section class="hero" id="hero">
-      <div>
-        <h2 id="heroTitle">Illuminate your day with guidance</h2>
-        <p id="heroDesc">Explore Qur’an, Hadiths, Duas, Calendar, and Salah in a calm, modern interface.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="/quran" id="heroAction">Start reading Qur’an</a>
+  <div class="site">
+    <header>
+      <div class="left">
+        <button id="hamb" class="hamburger" aria-label="Open menu">☰</button>
+        <div class="logo">
+          <div class="brand">ST</div>
+          <div style="line-height:1;">
+            <div style="font-weight:700">Shiatube</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-top:2px">Latest uploads</div>
+          </div>
         </div>
       </div>
-      <div aria-hidden="true">
-        <svg width="220" height="140" viewBox="0 0 220 140" role="img">
-          <rect x="0" y="0" width="220" height="140" fill="#e6f4ea" rx="16"></rect>
-          <circle cx="70" cy="70" r="34" fill="#cdebd6"></circle>
-          <circle cx="150" cy="55" r="22" fill="#b9e3c5"></circle>
-          <rect x="32" y="110" width="156" height="10" fill="#cdebd6" rx="5"></rect>
-        </svg>
-      </div>
-    </section>
 
-    <!-- Quick access cards -->
-    <section class="section">
-      <h3 id="sectionTitle">Quick access</h3>
-      <div class="grid">
-        <article class="card">
-          <h4 id="quranCardTitle">📖 Qur’an</h4>
-          <p id="quranCardDesc">Read and reflect on the Holy Qur’an.</p>
-          <a href="/quran">📖 Qur’an</a>
-        </article>
-        
+      <nav class="desktop-only">
+        <a class="back-btn" id="backToNoor" href="#" title="Back to Noor Al Huda">← NoorAlHuda</a>
+        <a href="upload.html">Upload</a>
+        <button id="themeToggle" class="theme-toggle" title="Toggle theme">Toggle theme</button>
+      </nav>
+    </header>
 
+    <div class="controls">
+      <select id="playlistFilter">
+        <option value="">All Playlists</option>
+      </select>
 
-        <article class="card">
-          <h4 id="hadithCardTitle">📜 Hadiths</h4>
-          <p id="hadithCardDesc">Books like Al‑Kafi, Tahdhib, and Faqih.</p>
-          <a href="hadiths-home.html" id="hadithLink">Explore</a>
-        </article>
+      <label style="margin-left:auto;display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:0.95rem;">
+        <input id="shortsToggle" type="checkbox" style="transform:scale(1.1);margin-right:6px;">
+        <span style="user-select:none;">Show Shorts</span>
+      </label>
+    </div>
 
-        <article class="card">
-          <h4 id="duasCardTitle">🤲 Duas</h4>
-          <p id="duasCardDesc">Separate duas like Dua Nudbah.</p>
-          <a href="duas.html" id="duasLink">View</a>
-        </article>
+    <div class="slot-header"><div class="slot-title">Shorts</div></div>
+    <div id="shortsGrid" class="grid"><div style="color:var(--muted)">Loading Shorts…</div></div>
 
-        <article class="card">
-          <h4 id="calendarCardTitle">📅 Calendar</h4>
-          <p id="calendarCardDesc">Islamic dates and Shia events.</p>
-          <a href="calendar.html" id="calendarLink">See calendar</a>
-        </article>
+    <div id="audioContainer" class="grid">Loading…</div>
+  </div>
 
-        <article class="card">
-          <h4 id="salahCardTitle">🕋 Salah</h4>
-          <p id="salahCardDesc">Prayer times and guidance.</p>
-          <a href="salah.html" id="salahLink">Check</a>
-        </article>
-
-        <article class="card">
-          <h4 id="heardle">🎧 Heardle</h4>
-          <p id="heardle">Test your memory with Shia latmiyas and nasheeds. Guess the chorus and challenge your ears.</p>
-          <a href="https://heardle.nooralhuda.co.uk" id="salahLink">play now</a>
-        </article>
-        
-        <article class="card">
-          <h4 id="Arabic">Arabic</h4>
-          <p id="Arabic">learn how to read the Quran and further.</p>
-          <a href="https://arabic.nooralhuda.co.uk" id="salahLink">Learn</a>
-        </article>
-
-        <article class="card">
-          <h4 id="Shiatube">ShiaTube</h4>
-          <p id="ShiaTube">listen and watch islamci and shia videos</p>
-          <a href="https://tube.nooralhuda.co.uk" id="salahLink">Watch</a>
-        </article>
-       
-
-      </div>
-    </section>
-   
-
-  </main>
-
-  <footer>
-    © 2025 Noor Al Huda — Personal Islamic Companion (Shia Ithna Ashari)
-  </footer>
+  <footer>© Noor Al Huda</footer>
 
   <script>
-    // Simple language strings for UI labels (English, Urdu, Arabic, Farsi)
-    const i18n = {
-      en: {
-        subtitle: "Personal Islamic companion • Shia Ithna Ashari",
-        heroTitle: "Illuminate your day with guidance",
-        heroDesc: "Explore Qur’an, Hadiths, Duas, Calendar, and Salah in a calm, modern interface.",
-        heroAction: "Start reading Qur’an",
-        sectionTitle: "Quick access",
-        quran: ["📖 Qur’an", "Read and reflect on the Holy Qur’an.", "Open"],
-        hadiths: ["📜 Hadiths", "Books like Al‑Kafi, Tahdhib, and Faqih.", "Explore"],
-        duas: ["🤲 Duas", "Separate duas like Dua Nudbah.", "View"],
-        calendar: ["📅 Calendar", "Islamic dates and Shia events.", "See calendar"],
-        salah: ["🕋 Salah", "Prayer times and guidance.", "Check"]
-      },
-      ur: {
-        subtitle: "ذاتی اسلامی ساتھی • شیعہ اثنا عشری",
-        heroTitle: "ہدایت سے اپنے دن کو روشن کریں",
-        heroDesc: "قرآن، احادیث، دعائیں، اسلامی کیلنڈر اور نماز — آسان اور خوبصورت انداز میں۔",
-        heroAction: "قرآن پڑھنا شروع کریں",
-        sectionTitle: "فوری رسائی",
-        quran: ["📖 قرآن", "قرآنِ مجید پڑھیں اور غور کریں۔", "کھولیں"],
-        hadiths: ["📜 احادیث", "الکافی، تہذیب، فقہ جیسے کتب۔", "دیکھیں"],
-        duas: ["🤲 دعائیں", "دعائے ندبہ جیسی الگ دعائیں۔", "دیکھیں"],
-        calendar: ["📅 کیلنڈر", "اسلامی تاریخیں اور شیعہ ایام۔", "کیلنڈر دیکھیں"],
-        salah: ["🕋 نماز", "نماز کے اوقات اور رہنمائی۔", "چیک کریں"]
-      },
-      ar: {
-        subtitle: "رفيق إسلامي شخصي • شيعة اثنا عشري",
-        heroTitle: "أنر يومك بالهداية",
-        heroDesc: "اقرأ القرآن والأحاديث والأدعية وتقويماً إسلامياً والصلاة بواجهة هادئة.",
-        heroAction: "ابدأ قراءة القرآن",
-        sectionTitle: "وصول سريع",
-        quran: ["📖 القرآن", "اقرأ وتأمل في القرآن الكريم.", "افتح"],
-        hadiths: ["📜 الأحاديث", "كتب مثل الكافي، التهذيب، والفقيه.", "استكشف"],
-        duas: ["🤲 الأدعية", "أدعية منفصلة مثل دعاء الندبة.", "عرض"],
-        calendar: ["📅 التقويم", "تواريخ إسلامية وأحداث شيعية.", "اعرض التقويم"],
-        salah: ["🕋 الصلاة", "أوقات الصلاة والإرشاد.", "تحقق"]
-      },
-      fa: {
-        subtitle: "همراه اسلامی شخصی • شیعه دوازده‌امامی",
-        heroTitle: "روزت را با هدایت روشن کن",
-        heroDesc: "قرآن، احادیث، دعاها، تقویم اسلامی و نماز در رابط کاربری آرام و مدرن.",
-        heroAction: "خواندن قرآن را آغاز کن",
-        sectionTitle: "دسترسی سریع",
-        quran: ["📖 قرآن", "قرآن کریم را بخوان و تدبر کن.", "باز کن"],
-        hadiths: ["📜 احادیث", "کتاب‌هایی مانند الکافی، تهذیب و فقیه.", "کاوش"],
-        duas: ["🤲 دعاها", "دعاهای مجزا مثل دعای ندبه.", "مشاهده"],
-        calendar: ["📅 تقویم", "تاریخ‌های اسلامی و رویدادهای شیعی.", "مشاهده تقویم"],
-        salah: ["🕋 نماز", "اوقات نماز و راهنما.", "بررسی"]
+    // theme
+    const body = document.body;
+    body.setAttribute('data-theme', localStorage.getItem('shiatu_theme') || 'dark');
+    function toggleTheme(){ const cur = body.getAttribute('data-theme')==='dark'?'light':'dark'; body.setAttribute('data-theme',cur); localStorage.setItem('shiatu_theme',cur); }
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    document.getElementById('mobileTheme').addEventListener('click', toggleTheme);
+
+    // mobile menu
+    const hamb = document.getElementById('hamb'), mobileMenu = document.getElementById('mobileMenu');
+    hamb.addEventListener('click', ()=>{ mobileMenu.classList.toggle('open'); mobileMenu.setAttribute('aria-hidden',!mobileMenu.classList.contains('open')); });
+    document.addEventListener('click',(e)=>{ if(!mobileMenu.contains(e.target) && !hamb.contains(e.target)){ mobileMenu.classList.remove('open'); mobileMenu.setAttribute('aria-hidden','true'); }});
+    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ mobileMenu.classList.remove('open'); mobileMenu.setAttribute('aria-hidden','true'); }});
+
+    // back link
+    const backNoor = document.getElementById('backNoor'); backNoor.href = 'https://nooralhuda.co.uk'; document.getElementById('backToNoor').href = backNoor.href;
+
+    // ask for user name once
+    let userName = localStorage.getItem('shiatuUser'); if(!userName){ userName = prompt("Welcome to Shiatube! What's your name?") || 'Guest'; localStorage.setItem('shiatuUser', userName); }
+
+    // constants
+    const SHEET_LONG = "https://opensheet.elk.sh/1kURT57icsGH7FSFe6pyoUzDiu-p7_Izx8pW657DfsBo/Form+Responses+1";
+    const SHEET_SHORTS = "https://opensheet.elk.sh/1_gUqsSzu-L9RSIYjZ2cITCSLGu6j8cFV3aSlr9GQDEM/Form+Responses+1";
+    const STORAGE_KEY = "listenCounts";
+
+    function getListenCounts(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }catch{return {};}}
+    function saveListenCounts(c){ localStorage.setItem(STORAGE_KEY, JSON.stringify(c)); }
+    function recordListen(track){ const c=getListenCounts(); c[track.url]=(c[track.url]||0)+1; saveListenCounts(c); }
+
+    function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+
+    // extract id (supports standard, youtu.be, embed, /v/, and /shorts/)
+    function extractId(url){ if(!url) return ''; const m = url.match(/[?&]v=([^&]+)/) || url.match(/youtu\.be\/([^?&/]+)/) || url.match(/\/embed\/([^?&/]+)/) || url.match(/\/v\/([^?&/]+)/) || url.match(/\/shorts\/([^?&/]+)/); return m ? m[1] : ''; }
+
+    // create main track card
+    function createTrackCard(track){
+      const card=document.createElement('div'); card.className='track';
+      const playerWrap=document.createElement('div'); playerWrap.className='player';
+      if((track.type||'').toLowerCase()==='mp3'){ const audio=document.createElement('audio'); audio.controls=true; audio.src=track.url; playerWrap.appendChild(audio); }
+      else {
+        const id=extractId(track.url);
+        if(id){ const iframe=document.createElement('iframe'); iframe.src=`https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`; iframe.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'); iframe.setAttribute('allowfullscreen',''); playerWrap.appendChild(iframe); }
+        else { const p=document.createElement('div'); p.className='small'; p.textContent='Invalid YouTube link'; playerWrap.appendChild(p); }
       }
-    };
+      const meta=document.createElement('div'); meta.className='meta';
+      const title=document.createElement('h3'); title.className='title'; title.textContent = track.title || 'Untitled';
+      const small=document.createElement('div'); small.className='small'; small.textContent = (track.type||'youtube').toUpperCase();
+      meta.appendChild(title); meta.appendChild(small);
+      const badge=document.createElement('div'); badge.className='badge'; const counts=getListenCounts(); badge.textContent = `${counts[track.url]||0} plays`;
 
-    const $ = id => document.getElementById(id);
-    const applyLang = code => {
-      const t = i18n[code] || i18n.en;
-      $("subtitle").textContent = t.subtitle;
-      $("heroTitle").textContent = t.heroTitle;
-      $("heroDesc").textContent = t.heroDesc;
-      $("heroAction").textContent = t.heroAction;
-      $("sectionTitle").textContent = t.sectionTitle;
+      // Decide target page: if track.type denotes shorts OR URL contains /shorts/ use shorts.html, else video.html
+      const idFor = extractId(track.url);
+      const isShort = ((track.type||'').toLowerCase()==='shorts') || /\/shorts\//i.test(track.url || '');
+      const target = isShort ? 'shorts.html' : 'video.html';
+      const link = document.createElement('a'); link.className='card-link';
+      if (idFor) {
+        link.href = `${target}?id=${encodeURIComponent(idFor)}${isShort && track.url && !/\/shorts\//i.test(track.url) ? `&url=${encodeURIComponent(track.url)}` : ''}`;
+      } else {
+        // fallback: send raw URL as query param
+        link.href = `${target}?url=${encodeURIComponent(track.url || '')}`;
+      }
 
-      $("quranCardTitle").textContent = t.quran[0];
-      $("quranCardDesc").textContent = t.quran[1];
-      $("quranLink").textContent = t.quran[2];
-
-      $("hadithCardTitle").textContent = t.hadiths[0];
-      $("hadithCardDesc").textContent = t.hadiths[1];
-      $("hadithLink").textContent = t.hadiths[2];
-
-      $("duasCardTitle").textContent = t.duas[0];
-      $("duasCardDesc").textContent = t.duas[1];
-      $("duasLink").textContent = t.duas[2];
-
-      $("calendarCardTitle").textContent = t.calendar[0];
-      $("calendarCardDesc").textContent = t.calendar[1];
-      $("calendarLink").textContent = t.calendar[2];
-
-      $("salahCardTitle").textContent = t.salah[0];
-      $("salahCardDesc").textContent = t.salah[1];
-      $("salahLink").textContent = t.salah[2];
-
-      // Optional RTL switch for Arabic
-      document.documentElement.dir = (code === "ar") ? "rtl" : "ltr";
-    };
-
-    // Init language from select / persist in localStorage
-    const select = document.getElementById("lang");
-    const saved = localStorage.getItem("nuh-lang");
-    if (saved && i18n[saved]) {
-      select.value = saved;
-      applyLang(saved);
-    } else {
-      applyLang(select.value);
+      card.appendChild(playerWrap); card.appendChild(meta); card.appendChild(badge); card.appendChild(link);
+      card.addEventListener('click',()=>{ recordListen(track); }, { passive:true });
+      return card;
     }
-    select.addEventListener("change", () => {
-      localStorage.setItem("nuh-lang", select.value);
-      applyLang(select.value);
-    });
+
+    function renderTracks(list, filter=''){
+      const container=document.getElementById('audioContainer'); container.innerHTML='';
+      list.filter(t=>!filter||t.playlist===filter).forEach(track=>container.appendChild(createTrackCard(track)));
+    }
+
+    // load long-form (main grid + playlists)
+    (async function loadLong(){
+      try{
+        const res=await fetch(SHEET_LONG);
+        const rows=await res.json();
+        const tracks=rows.map(r=>({
+          title: r["Title"]||r.title||"Untitled",
+          type: (r["Type"]||r.type||"youtube").toLowerCase(),
+          url: r["URL"]||r.url||"",
+          playlist: r["Playlist"]||r.playlist||"Uncategorized",
+          Thumb: r["Thumb"]||r.thumb||""
+        }));
+        const sel=document.getElementById('playlistFilter');
+        sel.querySelectorAll('option:not(:first-child)').forEach(o=>o.remove());
+        Array.from(new Set(tracks.map(t=>t.playlist))).forEach(pl=>{ const opt=document.createElement('option'); opt.value=pl; opt.textContent=pl; sel.appendChild(opt); });
+        sel.addEventListener('change', ()=>{ const counts=getListenCounts(); const initial=Object.keys(counts).length ? tracks.sort((a,b)=> (counts[b.url]||0)-(counts[a.url]||0)) : shuffle(tracks); renderTracks(initial, sel.value); });
+        const counts=getListenCounts();
+        const initial=Object.keys(counts).length ? tracks.sort((a,b)=> (counts[b.url]||0)-(counts[a.url]||0)) : shuffle(tracks);
+        renderTracks(initial);
+      }catch(err){ document.getElementById("audioContainer").textContent="❌ Failed to load playlist."; console.error(err); }
+    })();
+
+    // Shorts loader using OpenSheet source (filtered by Type === 'shorts' OR Title contains #shorts OR URL contains /shorts/)
+    (function(){
+      const shortsGrid = document.getElementById('shortsGrid');
+      const shortsToggle = document.getElementById('shortsToggle');
+
+      function buildThumbnail(url, thumbField){
+        const id = extractId(url);
+        if(thumbField) return thumbField;
+        return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : '';
+      }
+
+      function buildShortCard(track){
+        const id = extractId(track.URL||track.url||track.url);
+        const card=document.createElement('div'); card.className='track';
+        const thumb = buildThumbnail(track.URL||track.url, track.Thumb||track.thumb);
+        // link goes to shorts.html
+        const linkHref = id ? `shorts.html?id=${encodeURIComponent(id)}${track.URL && !/\/shorts\//i.test(track.URL) ? `&url=${encodeURIComponent(track.URL)}` : ''}` : `shorts.html?url=${encodeURIComponent(track.URL||'')}`;
+        card.innerHTML = `<a class="card-link" href="${linkHref}" data-id="${id}"></a>
+          <div class="player"><img src="${thumb}" alt="${(track.Title||track.title||'Untitled').replace(/"/g,'')}" /></div>
+          <div class="meta"><div class="title">${track.Title||track.title||'Untitled'}</div><div class="small">YouTube • <span class="views-text">0</span> views</div></div>`;
+        const link = card.querySelector('.card-link');
+        const viewsNode = card.querySelector('.views-text');
+        link.addEventListener('click', e=>{ /* allow default navigation */ }, { passive:true });
+        return card;
+      }
+
+      async function loadShorts(){
+        shortsGrid.innerHTML = `<div style="color:var(--muted)">Loading Shorts…</div>`;
+        try{
+          const res = await fetch(SHEET_SHORTS);
+          const rows = await res.json();
+          const shorts = rows.filter(r=>{
+            const ty = (r.Type||r.type||'').toLowerCase();
+            const title = (r.Title||r.title||'').toLowerCase();
+            const url = (r.URL||r.url||'').toString();
+            return ty==='shorts' || /#shorts/i.test(title) || /\/shorts\//i.test(url);
+          }).map(r=>({
+            Title: r.Title||r.title||'Untitled',
+            URL: r.URL||r.url||'',
+            Thumb: r.Thumb||r.thumb||'',
+            id: extractId(r.URL||r.url||''),
+            _rand: Math.random()
+          }));
+          if(shorts.length===0){ shortsGrid.innerHTML = `<div style="color:var(--muted)">No Shorts found</div>`; return; }
+          shorts.sort((a,b)=>(b.views||0)-(a.views||0) || a._rand - b._rand);
+          shortsGrid.innerHTML=''; shorts.forEach(s => shortsGrid.appendChild(buildShortCard(s)));
+        }catch(err){
+          shortsGrid.innerHTML = `<div style="color:var(--muted)">Failed to load Shorts</div>`;
+          console.error(err);
+        }
+      }
+
+      // default on
+      shortsToggle.checked = true;
+      shortsGrid.style.display = shortsToggle.checked ? 'grid' : 'none';
+      if(shortsToggle.checked) loadShorts();
+      shortsToggle.addEventListener('change', ()=>{ shortsGrid.style.display = shortsToggle.checked ? 'grid' : 'none'; if(shortsToggle.checked) loadShorts(); });
+    })();
   </script>
-  <!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-4756be11-aa31-4de3-a9dc-988953b54e19" data-elfsight-app-lazy></div>
 </body>
 </html>

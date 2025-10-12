@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Shorts • Shiatube</title>
+  <style>
+    :root{
+      --bg:#000;
+      --muted:#9aa4b2;
+      --accent:#ff4e4e;
+      --text:#ffffff;
+      --card:rgba(0,0,0,0.35);
+    }
+    [data-theme="light"]{
+      --bg:#fff;
+      --text:#0b1220;
+      --muted:#5b6b78;
+      --card:rgba(255,255,255,0.85);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow:hidden;
+    }
+
+    /* Fullscreen vertical scroller with one short per screen */
+    .viewport{
+      height:100vh;
+      width:100vw;
+      overflow-y:auto;
+      scroll-snap-type:y mandatory;
+      -webkit-overflow-scrolling:touch;
+      background:var(--bg);
+    }
+
+    /* Each short occupies full screen and centers a portrait player */
+    .short{
+      height:100vh;
+      width:100%;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      scroll-snap-align:start;
+      background:var(--bg);
+    }
+
+    /* Portrait player container: keeps 9:16 aspect and not zoomed */
+    .player-card{
+      width: 100%;
+      max-width: 480px; /* good for phones */
+      height: calc(100vh - 120px); /* leaves room for UI */
+      max-height: 853px; /* 480x853 ~ 9:16 */
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    /* iframe sized to portrait area without cropping or zooming */
+    .player-card iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+      object-fit:contain;
+      background:#000;
+    }
+
+    /* overlay meta at bottom of screen */
+    .meta{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:12px;
+      width:calc(100% - 40px);
+      max-width:480px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0.15) 40%, transparent);
+      padding:12px 14px;
+      border-radius:10px;
+      color:var(--text);
+      backdrop-filter: blur(4px);
+    }
+    .title{font-weight:700;font-size:1rem;margin-bottom:6px}
+    .sub{font-size:0.9rem;color:var(--muted)}
+
+    /* simple top-right controls */
+    .controls{
+      position:absolute;
+      top:14px;
+      right:16px;
+      z-index:40;
+      display:flex;
+      gap:8px;
+      flex-direction:column;
+    }
+    .btn{
+      background:var(--card);
+      color:var(--text);
+      border:0;
+      padding:8px 10px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:0.9rem;
+    }
+
+    /* fallback empty state */
+    .empty{
+      color:var(--muted);
+      padding:18px;
+      text-align:center;
+    }
+
+    @media(min-width:900px){
+      .player-card{ max-width:560px; max-height:992px; }
+      .meta{ max-width:560px; }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <div id="viewport" class="viewport" aria-live="polite"></div>
+
+  <script>
+    // Configuration: OpenSheet source containing shorts
+    const SHEET_SHORTS = "https://opensheet.elk.sh/1_gUqsSzu-L9RSIYjZ2cITCSLGu6j8cFV3aSlr9GQDEM/Form+Responses+1";
+
+    // extract id supporting /shorts/ links
+    function extractId(url){
+      if(!url) return '';
+      const m = url.match(/[?&]v=([^&]+)/) ||
+                url.match(/youtu\.be\/([^?&/]+)/) ||
+                url.match(/\/embed\/([^?&/]+)/) ||
+                url.match(/\/v\/([^?&/]+)/) ||
+                url.match(/\/shorts\/([^?&/]+)/);
+      return m ? m[1] : '';
+    }
+
+    // build embed URL; not muted, autoplay requested (note: autoplay with sound may be blocked by browser)
+    function buildEmbedSrc(id){
+      // playsinline helps mobile; autoplay=1 requests start; no mute param is set so sound can play if allowed
+      return `https://www.youtube.com/embed/${encodeURIComponent(id)}?rel=0&modestbranding=1&playsinline=1&autoplay=1`;
+    }
+
+    // create a single short element
+    function makeShortEl(row){
+      const url = (row.URL||row.url||'').toString();
+      const title = row.Title||row.title||'Untitled';
+      const id = extractId(url);
+      const sec = document.createElement('section');
+      sec.className = 'short';
+      sec.dataset.id = id;
+      sec.dataset.url = url;
+
+      const card = document.createElement('div');
+      card.className = 'player-card';
+
+      if(id){
+        const iframe = document.createElement('iframe');
+        iframe.src = buildEmbedSrc(id);
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.setAttribute('allowfullscreen','');
+        card.appendChild(iframe);
+      } else {
+        const placeholder = document.createElement('div');
+        placeholder.style.width='100%';
+        placeholder.style.height='100%';
+        placeholder.style.display='flex';
+        placeholder.style.alignItems='center';
+        placeholder.style.justifyContent='center';
+        placeholder.style.color='var(--muted)';
+        placeholder.textContent = 'Invalid video URL';
+        card.appendChild(placeholder);
+      }
+
+      const controls = document.createElement('div');
+      controls.className = 'controls';
+      const openBtn = document.createElement('button');
+      openBtn.className = 'btn';
+      openBtn.textContent = 'Open';
+      openBtn.addEventListener('click', (e)=>{ e.stopPropagation(); const target = id ? `https://www.youtube.com/watch?v=${id}` : url; window.open(target,'_blank'); });
+
+      const pauseBtn = document.createElement('button');
+      pauseBtn.className = 'btn';
+      pauseBtn.textContent = 'Pause';
+      pauseBtn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const iframe = card.querySelector('iframe');
+        if(!iframe) return;
+        // use postMessage API to pause the YouTube player
+        iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*');
+      });
+
+      const playBtn = document.createElement('button');
+      playBtn.className = 'btn';
+      playBtn.textContent = 'Play';
+      playBtn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const iframe = card.querySelector('iframe');
+        if(!iframe) return;
+        iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+      });
+
+      controls.appendChild(openBtn);
+      controls.appendChild(pauseBtn);
+      controls.appendChild(playBtn);
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.innerHTML = `<div class="title">${escapeHtml(title)}</div><div class="sub">YouTube Short</div>`;
+
+      sec.appendChild(card);
+      sec.appendChild(controls);
+      sec.appendChild(meta);
+
+      // tap navigates to dedicated short view (shorts.html) preserving url/id
+      sec.addEventListener('click', (e)=>{
+        // avoid when clicking controls
+        const t = e.target;
+        if(t.closest('.controls')) return;
+        if(id) location.href = `shorts.html?id=${encodeURIComponent(id)}&url=${encodeURIComponent(url)}`;
+        else location.href = `shorts.html?url=${encodeURIComponent(url)}`;
+      }, { passive: true });
+
+      return sec;
+    }
+
+    // escape html
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    // populate viewport
+    async function populate(){
+      const vp = document.getElementById('viewport');
+      vp.innerHTML = '';
+      try{
+        const res = await fetch(SHEET_SHORTS);
+        const rows = await res.json();
+
+        const items = rows.filter(r=>{
+          const ty = (r.Type||r.type||'').toString().toLowerCase();
+          const url = (r.URL||r.url||'').toString();
+          return ty === 'shorts' || /\/shorts\//i.test(url) || (r.Title||'').toString().toLowerCase().includes('#shorts');
+        });
+
+        if(items.length === 0){
+          // fallback: show any youtube links in sheet
+          const fallback = rows.filter(r => /youtube\.com|youtu\.be/i.test((r.URL||r.url||'').toString()));
+          if(fallback.length === 0){
+            vp.innerHTML = `<div class="empty">No Shorts available</div>`;
+            return;
+          }
+          fallback.forEach(r => vp.appendChild(makeShortEl(r)));
+        } else {
+          items.forEach(r => vp.appendChild(makeShortEl(r)));
+        }
+
+        // enable looping: when user scrolls past last, jump to first
+        setupLooping(vp);
+
+        // ensure the visible iframe receives play command on intersection
+        setupIntersectionPlay(vp);
+
+      }catch(err){
+        console.error(err);
+        vp.innerHTML = `<div class="empty">Failed to load Shorts</div>`;
+      }
+    }
+
+    // loop scroll: simple jump to top when at bottom and vice versa
+    function setupLooping(container){
+      let isJumping = false;
+      const thresholdPx = 120; // when close to ends
+      container.addEventListener('scroll', () => {
+        if(isJumping) return;
+        const scrollTop = container.scrollTop;
+        const max = container.scrollHeight - container.clientHeight;
+        if(scrollTop >= max - thresholdPx){
+          isJumping = true;
+          setTimeout(()=>{ container.scrollTo({ top: 0, behavior: 'auto' }); isJumping = false; }, 200);
+        } else if(scrollTop <= thresholdPx && scrollTop === 0 && container.scrollHeight > container.clientHeight){
+          // no-op for now (jumping to bottom on upward overscroll is inconsistent cross-browser)
+        }
+      });
+    }
+
+    // Intersection observer to tell the visible iframe to play (and pause others)
+    function setupIntersectionPlay(container){
+      const options = { root: container, threshold: 0.6 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const iframe = entry.target.querySelector('iframe');
+          if(!iframe) return;
+          if(entry.isIntersecting){
+            // ensure iframe API ready: enable JS API by adding &enablejsapi=1
+            // if not present, reload with enablejsapi param
+            try{
+              const url = new URL(iframe.src);
+              if(url.searchParams.get('enablejsapi') !== '1'){
+                url.searchParams.set('enablejsapi','1');
+                iframe.src = url.toString();
+                // small delay then play
+                setTimeout(()=> iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*'), 600);
+              } else {
+                iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+              }
+            }catch(e){
+              // best-effort, ignore errors
+            }
+          } else {
+            try{ iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*'); }catch(e){}
+          }
+        });
+      }, options);
+
+      container.querySelectorAll('.short').forEach(s => observer.observe(s));
+      // start scrolled to top
+      container.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
+    // init
+    populate();
+  </script>
+</body>
+</html>
