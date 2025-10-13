@@ -38,9 +38,11 @@ body.dark-mode{--bg:#111827;--text:#f9fafb;--muted:#9ca3af;--card:#1f2937;--bord
 </style>
 </head>
 <body>
-<header>
-  <h1>Noor Al Huda</h1> <button class="btn" onclick="location.href='settings.html'">⚙️ Settings</button>
+<header class="header">
+  <h1>Noor Al Huda</h1>
+  <button class="btn" onclick="location.href='settings.html'">Settings</button>
 </header>
+
 
 <style>
 /* Widget Styles */
@@ -148,7 +150,24 @@ header h1 {
   font-weight: 700;
   margin: 0;
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  flex-wrap: nowrap; /* Prevent wrapping */
+}
 
+.header h1 {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.btn {
+  font-size: 1em;
+  padding: 8px 12px;
+  cursor: pointer;
+}
 header .btn {
   margin-top: 0;  /* remove extra space on larger screens */
 }
