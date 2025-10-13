@@ -1,399 +1,603 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  <link rel="icon" href="logo.png.png" type="image/png">
-
-
-  <meta charset="UTF-8" />
-  <title>Noor Al Huda</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root{
-      --green:#136f3c;        /* header green */
-      --bg:#ffffff;           /* white background */
-      --text:#1f2937;         /* neutral text */
-      --muted:#6b7280;        /* secondary text */
-      --card:#ffffff;
-      --border:#e5e7eb;
-      --accent:#0ea5e9;       /* accent for small elements */
-      --radius:14px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text)}
-
-    /* Header */
-    header{
-      background:var(--green);color:#fff;padding:1rem 1.25rem;
-      display:flex;align-items:center;justify-content:space-between;gap:1rem
-    }
-    header .brand{display:flex;align-items:center;gap:0.75rem}
-    .brand h1{margin:0;font-size:1.25rem;font-weight:700}
-    .brand small{opacity:0.9}
-    .controls{display:flex;align-items:center;gap:0.6rem}
-    .select, .btn{
-      appearance:none;background:#fff;color:#0b3d21;border:1px solid var(--border);
-      padding:0.45rem 0.65rem;border-radius:8px;font-weight:600;cursor:pointer
-    }
-    .btn{display:inline-flex;align-items:center;gap:0.4rem}
-    .btn:hover{filter:brightness(1.05)}
-
-    /* Container */
-    .container{max-width:1100px;margin:0 auto;padding:1.25rem}
-
-    /* Hero */
-    .hero{
-      background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius);
-      padding:1.5rem;display:flex;gap:1.25rem;align-items:center;justify-content:space-between
-    }
-    .hero h2{margin:0 0 0.5rem 0}
-    .hero p{margin:0;color:var(--muted)}
-    .hero-actions{margin-top:0.75rem;display:flex;gap:0.6rem;flex-wrap:wrap}
-    .primary{
-      background:#ffffff;color:var(--green);border:1px solid var(--green)
-    }
-
-    /* Grid cards */
-    .section{margin-top:1.75rem}
-    .section h3{margin:0 0 0.75rem 0}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){.grid{grid-template-columns:1fr}}
-
-    .card{
-      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-      padding:1rem;display:flex;flex-direction:column;gap:0.5rem;box-shadow:0 2px 6px rgba(0,0,0,0.05)
-    }
-    .card h4{margin:0}
-    .card p{margin:0;color:var(--muted)}
-    .card a{
-      margin-top:auto;align-self:flex-start;text-decoration:none;color:var(--green);font-weight:700
-    }
-    .card a:hover{text-decoration:underline}
-
-    /* Footer */
-    footer{margin-top:2rem;padding:1.5rem 0;text-align:center;color:var(--muted);font-size:0.95rem}
-
-    /* Dark mode overrides */
-body.dark-mode {
-  --bg:#111827;        /* dark background */
-  --text:#f9fafb;      /* light text */
-  --muted:#9ca3af;     /* softer gray for secondary text */
-  --card:#1f2937;      /* dark card background */
-  --border:#374151;    /* darker border */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noor Al Huda</title>
+<link rel="icon" href="logo.png.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#136f3c;
+  --bg:#f5f5f7;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --card:#ffffff;
+  --border:#e5e7eb;
+  --accent:#0ea5e9;
+  --radius:16px;
+  --shadow:0 8px 24px rgba(0,0,0,0.12);
 }
-
-  </style>
+body{margin:0;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);}
+header{background:var(--green);color:#fff;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 4px rgba(0,0,0,0.1);}
+header h1{font-size:1.5rem;font-weight:700;}
+header .btn{appearance:none;background:#fff;color:var(--green);border:none;padding:0.5rem 0.8rem;border-radius:var(--radius);font-weight:600;cursor:pointer;}
+header .btn:hover{filter:brightness(1.05);}
+.container{max-width:1200px;margin:2rem auto;padding:0 1rem;}
+.grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+/* Cards / Widgets */
+.card{background:var(--card);border-radius:var(--radius);padding:1.25rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:0.5rem;transition:transform 0.2s ease,box-shadow 0.2s ease;position:relative;}
+.card h4{font-weight:700;}
+.card p, .card li{color:var(--muted);}
+.card a{margin-top:auto;font-weight:700;color:var(--green);text-decoration:none;}
+.card a:hover{text-decoration:underline;}
+.widget-list{list-style:none;padding-left:0;}
+.widget-list li{margin-bottom:0.3rem;}
+footer{margin-top:2rem;padding:1.5rem 0;text-align:center;color:var(--muted);font-size:0.9rem;}
+body.dark-mode{--bg:#111827;--text:#f9fafb;--muted:#9ca3af;--card:#1f2937;--border:#374151;}
+</style>
 </head>
-<script>
-  // On page load, check saved preference
-  if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-  }
-
-  function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-    // Save preference
-    if (document.body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
-    }
-  }
-</script>
-
+<body>
+<header>
+  <h1>Noor Al Huda</h1>
+  <button class="btn" onclick="location.href='settings.html'">⚙️ Settings</button>
+</header>
 
 <style>
-#chatWidget {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 300px;
-  font-family: Nunito, sans-serif;
-  z-index: 9999;
+/* Widget Styles */
+.widget-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
-#chatHeader {
-  background: var(--green);
-  color: #fff;
-  padding: 0.6rem;
-  border-radius: 12px 12px 0 0;
-  cursor: pointer;
+
+.widget-card {
+  border-radius: 20px;
+  padding: 1.25rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.widget-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.25);
+}
+
+#salahWidget {
+  background: linear-gradient(145deg, #dff7e1, #b7ebc4);
+}
+
+#quranWidget {
+  background: linear-gradient(145deg, #fff9e7, #fff3c4);
+}
+
+.widget-card h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
   font-weight: 600;
-  text-align: center;
 }
-#chatBody {
-  display: none;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 12px 12px;
-  padding: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+.widget-card p, .widget-card ul {
+  margin: 0.5rem 0 1rem 0;
+  font-size: 1rem;
+  line-height: 1.4;
 }
-#chatMessages {
-  max-height: 200px;
-  overflow-y: auto;
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
+
+.widget-card a {
+  align-self: flex-start;
+  text-decoration: none;
+  font-weight: 600;
+  color: #0b7d40;
+  background: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  border: 1px solid #c8e6c9;
+  transition: background 0.2s, color 0.2s;
 }
-#chatMessages div {
-  margin-bottom: 0.3rem;
+
+.widget-card a:hover {
+  background: #065c2f;
+  color: #fff;
 }
-#chatInput {
-  width: 70%;
-  padding: 0.4rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+:root {
+  --green: #136f3c;
+  --bg: #f5f5f7;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --accent: #0ea5e9;
+  --radius: 20px;
+  --shadow-light: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 16px 48px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 24px 72px rgba(0, 0, 0, 0.18);
 }
-#chatBody button {
-  padding: 0.4rem 0.6rem;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'San Francisco', 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
   background: var(--green);
   color: #fff;
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+header .btn {
+  background: #fff;
+  color: var(--green);
   border: none;
+  padding: 0.6rem 1rem;
   border-radius: var(--radius);
   font-weight: 600;
   cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-light);
 }
+
+header .btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: var(--shadow-medium);
+}
+
+header .icon {
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+header .icon:hover {
+  transform: scale(1.1);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Widget Grid */
+.widget-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Widget Card */
+.widget-card {
+  position: relative;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-medium);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s;
+  overflow: hidden;
+}
+
+.widget-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.03));
+  transform: rotate(25deg);
+  pointer-events: none;
+}
+
+.widget-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Gradient Widgets */
+#salahWidget {
+  background: linear-gradient(145deg, #dff7e1, #b7ebc4);
+}
+
+#quranWidget {
+  background: linear-gradient(145deg, #fff9e7, #fff3c4);
+}
+
+/* Card Text */
+.widget-card h4 {
+  margin-bottom: 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.widget-card p,
+.widget-card ul {
+  margin: 0.5rem 0 1rem 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.widget-card a {
+  align-self: flex-start;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--green);
+  background: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  border: 1px solid #c8e6c9;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+}
+
+.widget-card a:hover {
+  background: var(--green);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Footer */
+footer {
+  margin-top: 3rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Dark Mode */
+body.dark-mode {
+  --bg: #111827;
+  --text: #f9fafb;
+  --muted: #9ca3af;
+  --card: #1f2937;
+  --border: #374151;
+}
+
+body.dark-mode header {
+  background: #1f6a28;
+}
+
+body.dark-mode .widget-card a {
+  border-color: #4fb477;
+}
+
+body.dark-mode .widget-card a:hover {
+  background: #4fb477;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  header nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  header .btn {
+    padding: 0.45rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .widget-card {
+    padding: 1.5rem 1rem;
+  }
+}
+/* Optional: show pointer on hover */
+.widget-card {
+  cursor: pointer;
+}
+/* Make cards show pointer on hover */
+.widget-card {
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.widget-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: var(--shadow-hover);
+}
+.grid .card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
 </style>
 
-<script>
-function toggleChat() {
-  const body = document.getElementById("chatBody");
-  body.style.display = body.style.display === "none" ? "block" : "none";
-}
+<main class="container">
 
-async function sendChat() {
-  const input = document.getElementById("chatInput");
-  const message = input.value.trim();
-  if (!message) return;
-  input.value = "";
-
-  const messagesDiv = document.getElementById("chatMessages");
-  messagesDiv.innerHTML += `<div><b>You:</b> ${message}</div>`;
-
-  const res = await fetch("/chat", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message })
-  });
-  const data = await res.json();
-  messagesDiv.innerHTML += `<div><b>AI:</b> ${data.reply}</div>`;
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
-</script>
-
-<body>
-  <!-- Header -->
-  <header>
-    <div class="brand">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true">
-        <path d="M12 2l7 5v10l-7 5-7-5V7l7-5zm0 3.2L7 8v8l5 3.2L17 16V8l-5-2.8z"/>
-      </svg>
-      <div>
-        <h1 id="title">Noor Al Huda</h1>
-        <small id="subtitle">Personal Islamic companion • Shia Ithna Ashari</small>
-      </div>
-    </div>
-    <div class="controls">
-      <select id="lang" class="select" aria-label="Language">
-        <option value="en" selected>English</option>
-        <option value="ur">اردو</option>
-        <option value="ar">العربية</option>
-        <option value="fa">فارسی</option>
-      </select>
-      <button class="btn" onclick="location.href='settings.html'">⚙️ Settings</button>
-    </div>
-  </header>
+  <!-- Widgets Section -->
+  <div id="salahWidget" class="widget-card" data-link="https://nooralhuda.co.uk/salah.html">
+  <h4>Salah Widget</h4>
+  <p>Click anywhere to view Salah times.</p>
   
 
-  <main class="container">
-    <!-- Hero -->
-    <section class="hero" id="hero">
-      <div>
-        <h2 id="heroTitle">Illuminate your day with guidance</h2>
-        <p id="heroDesc">Explore Qur’an, Hadiths, Duas, Calendar, and Salah in a calm, modern interface.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="/quran" id="heroAction">Start reading Qur’an</a>
-        </div>
-      </div>
-      <div aria-hidden="true">
-        <svg width="220" height="140" viewBox="0 0 220 140" role="img">
-          <rect x="0" y="0" width="220" height="140" fill="#e6f4ea" rx="16"></rect>
-          <circle cx="70" cy="70" r="34" fill="#cdebd6"></circle>
-          <circle cx="150" cy="55" r="22" fill="#b9e3c5"></circle>
-          <rect x="32" y="110" width="156" height="10" fill="#cdebd6" rx="5"></rect>
-        </svg>
-      </div>
-    </section>
+      <label>
+        <strong>City:</strong>
+        <select id="citySelect">
+          <option value="London">London, UK</option>
+          <option value="Bedford" selected>Bedford, UK</option>
+          <option value="Islamabad">Islamabad, Pakistan</option>
+          <option value="Tehran">Tehran, Iran</option>
+          <option value="Karbala">Karbala, Iraq</option>
+          <option value="Najaf">Najaf, Iraq</option>
+          <option value="Qom">Qom, Iran</option>
+          <option value="Mashhad">Mashhad, Iran</option>
+          <option value="Beirut">Beirut, Lebanon</option>
+          <option value="Dearborn">Dearborn, USA</option>
+          <option value="Mumbai">Mumbai, India</option>
+          <option value="Toronto">Toronto, Canada</option>
+          <option value="NewYork">New York, USA</option>
+          <option value="LosAngeles">Los Angeles, USA</option>
+          <option value="Sydney">Sydney, Australia</option>
+          <option value="Cairo">Cairo, Egypt</option>
+          <option value="Riyadh">Riyadh, Saudi Arabia</option>
+        </select>
+      </label>
+      <ul class="widget-list" id="salahTimes">
+        <li>Fajr — <span id="fajr">—</span></li>
+        <li>Sunrise — <span id="sunrise">—</span></li>
+        <li>Dhuhr — <span id="dhuhr">—</span></li>
+        <li>Asr — <span id="asr">—</span></li>
+        <li>Maghrib — <span id="maghrib">—</span></li>
+        <li>Isha — <span id="isha">—</span></li>
+      </ul>
+      <a href="salah.html">Full Salah Page</a>
+    </article>
+</div>
+    <!-- Quran Daily Verse Widget -->
 
-    <!-- Quick access cards -->
-    <section class="section">
-      <h3 id="sectionTitle">Quick access</h3>
-      <div class="grid">
-        <article class="card">
-          <h4 id="quranCardTitle">📖 Qur’an</h4>
-          <p id="quranCardDesc">Read and reflect on the Holy Qur’an.</p>
-          <a href="/quran">📖 Qur’an</a>
-        </article>
-        
+
+<div id="quranWidget" class="widget-card"id="quranWidget"  data-link="quran.html"> 
+  <article
+      <h4>Daily Quran Verse</h4>
+      <p id="dailyVerse">Loading...</p>
+      <a href="quran.html">Read Quran</a>
+    </article>
+</div>
+
+  </div>
 
 
-        <article class="card">
-          <h4 id="hadithCardTitle">📜 Hadiths</h4>
-          <p id="hadithCardDesc">Books like Al‑Kafi, Tahdhib, and Faqih.</p>
-          <a href="hadiths-home.html" id="hadithLink">Explore</a>
-        </article>
+  <!-- Static Cards Section -->
+  <div class="grid">
+    
+    <article class="card"><h4>Hadiths</h4><p>Books like Al‑Kafi, Tahdhib, and Faqih.</p><a href="hadiths-home.html">Explore</a></article>
+    <article class="card"><h4>Duas</h4><p>Separate duas like Dua Nudbah.</p><a href="duas.html">View</a></article>
+    <article class="card"><h4>Calendar</h4><p>Islamic dates and Shia events.</p><a href="calendar.html">See Calendar</a></article>
+    <article class="card"><h4>Arabic</h4><p>Learn how to read the Quran and more.</p><a href="https://arabic.nooralhuda.co.uk">Learn</a></article>
+    <article class="card"><h4>Heardle</h4><p>Test your memory with Shia nasheeds.</p><a href="https://heardle.nooralhuda.co.uk">Play Now</a></article>
+    <article class="card"><h4>ShiaTube</h4><p>Watch Islamic and Shia videos.</p><a href="https://tube.nooralhuda.co.uk">Watch</a></article>
+  </div>
+</main>
 
-        <article class="card">
-          <h4 id="duasCardTitle">🤲 Duas</h4>
-          <p id="duasCardDesc">Separate duas like Dua Nudbah.</p>
-          <a href="duas.html" id="duasLink">View</a>
-        </article>
 
-        <article class="card">
-          <h4 id="calendarCardTitle">📅 Calendar</h4>
-          <p id="calendarCardDesc">Islamic dates and Shia events.</p>
-          <a href="calendar.html" id="calendarLink">See calendar</a>
-        </article>
+<footer>© 2025 Noor Al Huda — Personal Islamic Companion (Shia Ithna Ashari)</footer>
 
-        <article class="card">
-          <h4 id="salahCardTitle">🕋 Salah</h4>
-          <p id="salahCardDesc">Prayer times and guidance.</p>
-          <a href="salah.html" id="salahLink">Check</a>
-        </article>
+<script>
+/* === Salah Widget JS === */
+const CITY_COUNTRY = {
+  London: {city:"London",country:"United Kingdom"},
+  Bedford:{city:"Bedford",country:"United Kingdom"},
+  Islamabad:{city:"Islamabad",country:"Pakistan"},
+  Tehran:{city:"Tehran",country:"Iran"},
+  Karbala:{city:"Karbala",country:"Iraq"},
+  Najaf:{city:"Najaf",country:"Iraq"},
+  Qom:{city:"Qom",country:"Iran"},
+  Mashhad:{city:"Mashhad",country:"Iran"},
+  Beirut:{city:"Beirut",country:"Lebanon"},
+  Dearborn:{city:"Dearborn",country:"United States"},
+  Mumbai:{city:"Mumbai",country:"India"},
+  Toronto:{city:"Toronto",country:"Canada"},
+  NewYork:{city:"New York",country:"United States"},
+  LosAngeles:{city:"Los Angeles",country:"United States"},
+  Sydney:{city:"Sydney",country:"Australia"},
+  Cairo:{city:"Cairo",country:"Egypt"},
+  Riyadh:{city:"Riyadh",country:"Saudi Arabia"}
+};
+const API_METHOD = 0; // Jafari/Shia
+const DELAY_MINUTES = 3;
 
-        <article class="card">
-          <h4 id="heardle">🎧 Heardle</h4>
-          <p id="heardle">Test your memory with Shia latmiyas and nasheeds. Guess the chorus and challenge your ears.</p>
-          <a href="https://heardle.nooralhuda.co.uk" id="salahLink">play now</a>
-        </article>
-        
-        <article class="card">
-          <h4 id="Arabic">Arabic</h4>
-          <p id="Arabic">learn how to read the Quran and further.</p>
-          <a href="https://arabic.nooralhuda.co.uk" id="salahLink">Learn</a>
-        </article>
+const citySelect = document.getElementById('citySelect');
+const salahTimesList = document.getElementById('salahTimes');
 
-        <article class="card">
-          <h4 id="Shiatube">ShiaTube</h4>
-          <p id="ShiaTube">listen and watch islamci and shia videos</p>
-          <a href="https://tube.nooralhuda.co.uk" id="salahLink">Watch</a>
-        </article>
-       
-
-      </div>
-    </section>
-   
-
-  </main>
-
-  <footer>
-    © 2025 Noor Al Huda — Personal Islamic Companion (Shia Ithna Ashari)
-  </footer>
-
-  <script>
-    // Simple language strings for UI labels (English, Urdu, Arabic, Farsi)
-    const i18n = {
-      en: {
-        subtitle: "Personal Islamic companion • Shia Ithna Ashari",
-        heroTitle: "Illuminate your day with guidance",
-        heroDesc: "Explore Qur’an, Hadiths, Duas, Calendar, and Salah in a calm, modern interface.",
-        heroAction: "Start reading Qur’an",
-        sectionTitle: "Quick access",
-        quran: ["📖 Qur’an", "Read and reflect on the Holy Qur’an.", "Open"],
-        hadiths: ["📜 Hadiths", "Books like Al‑Kafi, Tahdhib, and Faqih.", "Explore"],
-        duas: ["🤲 Duas", "Separate duas like Dua Nudbah.", "View"],
-        calendar: ["📅 Calendar", "Islamic dates and Shia events.", "See calendar"],
-        salah: ["🕋 Salah", "Prayer times and guidance.", "Check"]
-      },
-      ur: {
-        subtitle: "ذاتی اسلامی ساتھی • شیعہ اثنا عشری",
-        heroTitle: "ہدایت سے اپنے دن کو روشن کریں",
-        heroDesc: "قرآن، احادیث، دعائیں، اسلامی کیلنڈر اور نماز — آسان اور خوبصورت انداز میں۔",
-        heroAction: "قرآن پڑھنا شروع کریں",
-        sectionTitle: "فوری رسائی",
-        quran: ["📖 قرآن", "قرآنِ مجید پڑھیں اور غور کریں۔", "کھولیں"],
-        hadiths: ["📜 احادیث", "الکافی، تہذیب، فقہ جیسے کتب۔", "دیکھیں"],
-        duas: ["🤲 دعائیں", "دعائے ندبہ جیسی الگ دعائیں۔", "دیکھیں"],
-        calendar: ["📅 کیلنڈر", "اسلامی تاریخیں اور شیعہ ایام۔", "کیلنڈر دیکھیں"],
-        salah: ["🕋 نماز", "نماز کے اوقات اور رہنمائی۔", "چیک کریں"]
-      },
-      ar: {
-        subtitle: "رفيق إسلامي شخصي • شيعة اثنا عشري",
-        heroTitle: "أنر يومك بالهداية",
-        heroDesc: "اقرأ القرآن والأحاديث والأدعية وتقويماً إسلامياً والصلاة بواجهة هادئة.",
-        heroAction: "ابدأ قراءة القرآن",
-        sectionTitle: "وصول سريع",
-        quran: ["📖 القرآن", "اقرأ وتأمل في القرآن الكريم.", "افتح"],
-        hadiths: ["📜 الأحاديث", "كتب مثل الكافي، التهذيب، والفقيه.", "استكشف"],
-        duas: ["🤲 الأدعية", "أدعية منفصلة مثل دعاء الندبة.", "عرض"],
-        calendar: ["📅 التقويم", "تواريخ إسلامية وأحداث شيعية.", "اعرض التقويم"],
-        salah: ["🕋 الصلاة", "أوقات الصلاة والإرشاد.", "تحقق"]
-      },
-      fa: {
-        subtitle: "همراه اسلامی شخصی • شیعه دوازده‌امامی",
-        heroTitle: "روزت را با هدایت روشن کن",
-        heroDesc: "قرآن، احادیث، دعاها، تقویم اسلامی و نماز در رابط کاربری آرام و مدرن.",
-        heroAction: "خواندن قرآن را آغاز کن",
-        sectionTitle: "دسترسی سریع",
-        quran: ["📖 قرآن", "قرآن کریم را بخوان و تدبر کن.", "باز کن"],
-        hadiths: ["📜 احادیث", "کتاب‌هایی مانند الکافی، تهذیب و فقیه.", "کاوش"],
-        duas: ["🤲 دعاها", "دعاهای مجزا مثل دعای ندبه.", "مشاهده"],
-        calendar: ["📅 تقویم", "تاریخ‌های اسلامی و رویدادهای شیعی.", "مشاهده تقویم"],
-        salah: ["🕋 نماز", "اوقات نماز و راهنما.", "بررسی"]
-      }
-    };
-
-    const $ = id => document.getElementById(id);
-    const applyLang = code => {
-      const t = i18n[code] || i18n.en;
-      $("subtitle").textContent = t.subtitle;
-      $("heroTitle").textContent = t.heroTitle;
-      $("heroDesc").textContent = t.heroDesc;
-      $("heroAction").textContent = t.heroAction;
-      $("sectionTitle").textContent = t.sectionTitle;
-
-      $("quranCardTitle").textContent = t.quran[0];
-      $("quranCardDesc").textContent = t.quran[1];
-      $("quranLink").textContent = t.quran[2];
-
-      $("hadithCardTitle").textContent = t.hadiths[0];
-      $("hadithCardDesc").textContent = t.hadiths[1];
-      $("hadithLink").textContent = t.hadiths[2];
-
-      $("duasCardTitle").textContent = t.duas[0];
-      $("duasCardDesc").textContent = t.duas[1];
-      $("duasLink").textContent = t.duas[2];
-
-      $("calendarCardTitle").textContent = t.calendar[0];
-      $("calendarCardDesc").textContent = t.calendar[1];
-      $("calendarLink").textContent = t.calendar[2];
-
-      $("salahCardTitle").textContent = t.salah[0];
-      $("salahCardDesc").textContent = t.salah[1];
-      $("salahLink").textContent = t.salah[2];
-
-      // Optional RTL switch for Arabic
-      document.documentElement.dir = (code === "ar") ? "rtl" : "ltr";
-    };
-
-    // Init language from select / persist in localStorage
-    const select = document.getElementById("lang");
-    const saved = localStorage.getItem("nuh-lang");
-    if (saved && i18n[saved]) {
-      select.value = saved;
-      applyLang(saved);
-    } else {
-      applyLang(select.value);
-    }
-    select.addEventListener("change", () => {
-      localStorage.setItem("nuh-lang", select.value);
-      applyLang(select.value);
+async function fetchSalahTimes(cityKey){
+  const info = CITY_COUNTRY[cityKey];
+  salahTimesList.innerHTML = "<li>Loading...</li>";
+  try{
+    const resp = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(info.city)}&country=${encodeURIComponent(info.country)}&method=${API_METHOD}`);
+    const data = await resp.json();
+    if(data.code !== 200 || !data.data || !data.data.timings) throw new Error("Invalid API response");
+    const times = data.data.timings;
+    const prayers = ["Fajr","Sunrise","Dhuhr","Asr","Maghrib","Isha"];
+    salahTimesList.innerHTML = "";
+    prayers.forEach(p=>{
+      const li = document.createElement("li");
+      const dtLocal = new Date();
+      const [hh,mm] = times[p].split(":");
+      dtLocal.setHours(hh,mm);
+      dtLocal.setMinutes(dtLocal.getMinutes()+DELAY_MINUTES);
+      li.textContent = `${p}: ${String(dtLocal.getHours()).padStart(2,'0')}:${String(dtLocal.getMinutes()).padStart(2,'0')}`;
+      salahTimesList.appendChild(li);
     });
-  </script>
-  <!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-4756be11-aa31-4de3-a9dc-988953b54e19" data-elfsight-app-lazy></div>
+  }catch(e){
+    console.error(e);
+    salahTimesList.innerHTML="<li>Failed to load Salah times</li>";
+  }
+}
+
+// Init Salah widget
+(function(){
+  const savedCity = localStorage.getItem("salah_city") || "Bedford";
+  if(CITY_COUNTRY[savedCity]) citySelect.value = savedCity;
+  fetchSalahTimes(citySelect.value);
+  citySelect.addEventListener("change",e=>{
+    const val = e.target.value;
+    localStorage.setItem("salah_city", val);
+    fetchSalahTimes(val);
+  });
+  // Refresh every 10 min
+  setInterval(()=>fetchSalahTimes(citySelect.value),10*60*1000);
+})();
+
+/* === Quran Widget JS === */
+const verseEl = document.getElementById('dailyVerse');
+async function fetchQuranVerse(){
+  try{
+    // Example: use day-of-year modulo total ayahs to select a verse
+    const d = new Date();
+    const dayOfYear = Math.floor((d - new Date(d.getFullYear(),0,0)) / 86400000);
+    const resp = await fetch(`https://api.alquran.cloud/v1/ayah/${(dayOfYear%6236)+1}/editions/quran-uthmani,en.asad`);
+    const data = await resp.json();
+    if(data.code !== 200 || !data.data) throw new Error("Invalid response");
+    const ar = data.data[0].text;
+    const en = data.data[1].text;
+    verseEl.innerHTML = `<strong>${ar}</strong><br><em>${en}</em>`;
+  }catch(e){
+    console.error(e);
+    verseEl.textContent="Failed to load verse";
+  }
+}
+fetchQuranVerse();
+// Refresh daily at midnight
+const now = new Date();
+const msUntilMidnight = new Date(now.getFullYear(),now.getMonth(),now.getDate()+1)-now;
+setTimeout(()=>{
+  fetchQuranVerse();
+  setInterval(fetchQuranVerse,24*60*60*1000);
+},msUntilMidnight);
+
+// Fetch Quran daily verse
+async function fetchDailyVerse() {
+  try {
+    // API: random verse (you can change to a fixed "daily" algorithm if you want)
+    const response = await fetch("https://api.alquran.cloud/v1/ayah/random/en.asad"); 
+    if (!response.ok) throw new Error("Network response was not ok");
+    const data = await response.json();
+
+    const verse = data.data.text;       // Arabic text
+    const surahName = data.data.surah.englishName;
+    const ayahNumber = data.data.numberInSurah;
+
+    document.getElementById("dailyVerse").textContent =
+      `"${verse}" — ${surahName} [${ayahNumber}]`;
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById("dailyVerse").textContent =
+      "Could not load verse. Please try again later.";
+  }
+}
+
+// Call on page load
+fetchDailyVerse();
+
+// Optional: refresh daily at midnight
+function scheduleDailyRefresh() {
+  const now = new Date();
+  const millisTillMidnight = new Date(
+    now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0
+  ) - now;
+  setTimeout(() => {
+    fetchDailyVerse();
+    scheduleDailyRefresh(); // schedule next day
+  }, millisTillMidnight);
+}
+scheduleDailyRefresh();
+// Make all cards with data-link clickable
+document.querySelectorAll('.widget-card[data-link]').forEach(card => {
+  card.addEventListener('click', () => {
+    const url = card.getAttribute('data-link');
+    window.location.href = url;
+  });
+});
+// Make the widgets clickable
+document.querySelectorAll('.widget-card[data-link]').forEach(card => {
+  card.addEventListener('click', e => {
+    // Allow inner links (<a>) to work normally
+    if (e.target.tagName.toLowerCase() !== 'a') {
+      window.location.href = card.getAttribute('data-link');
+    }
+  });
+});
+// Make all static cards clickable
+document.querySelectorAll('.grid .card').forEach(card => {
+  card.addEventListener('click', e => {
+    // If user clicks an actual link inside, do nothing (let default happen)
+    if (e.target.tagName.toLowerCase() !== 'a') {
+      const link = card.querySelector('a');
+      if (link) {
+        window.location.href = link.href;
+      }
+    }
+  });
+
+  // Optional: show pointer on hover
+  card.style.cursor = 'pointer';
+});
+
+// Use saved city from localStorage, fallback to default
+const city = localStorage.getItem('salahCity') || 'Bedford';
+
+// Then use `city` in your existing API call
+fetchPrayerTimes(city); // or however your widget fetches the times
+
+</script>
 </body>
 </html>
