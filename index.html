@@ -39,7 +39,7 @@ body.dark-mode{--bg:#111827;--text:#f9fafb;--muted:#9ca3af;--card:#1f2937;--bord
 </head>
 <body>
 <header>
-  <h1>Noor Al Huda</h1>
+  <h1>Noor Al Huda</h1><br>
   <button class="btn" onclick="location.href='settings.html'">⚙️ Settings</button>
 </header>
 
@@ -130,63 +130,47 @@ body {
   line-height: 1.6;
 }
 
-/* Header */
+
 header {
-  background: var(--green);
-  color: #fff;
-  padding: 1.25rem 2rem;
   display: flex;
+  flex-wrap: wrap;       /* allow wrapping on small screens */
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 1.5rem;
+  background: var(--green);
+  color: #fff;
   border-bottom-left-radius: var(--radius);
   border-bottom-right-radius: var(--radius);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 header h1 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
   margin: 0;
 }
 
-header nav {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
 header .btn {
-  background: #fff;
-  color: var(--green);
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius);
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: var(--shadow-light);
+  margin-top: 0;  /* remove extra space on larger screens */
 }
 
-header .btn:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.1);
-  box-shadow: var(--shadow-medium);
+@media (max-width: 480px) {
+  header {
+    flex-direction: row;     /* keep in one row */
+    gap: 0.5rem;             /* space between title and button */
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+    flex: 1;                 /* take remaining space */
+  }
+
+  header .btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
 }
 
-header .icon {
-  font-size: 1.3rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-header .icon:hover {
-  transform: scale(1.1);
-}
 
 /* Container */
 .container {
