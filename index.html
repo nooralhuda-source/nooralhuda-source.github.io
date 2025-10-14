@@ -39,9 +39,10 @@ body.dark-mode{--bg:#111827;--text:#f9fafb;--muted:#9ca3af;--card:#1f2937;--bord
 </head>
 <body>
 <header>
-  <h1>Noor Al Huda</h1>
+  <h1><a href="https://nooralhuda.co.uk">Noor Al Huda</a></h1>
   <button class="btn" onclick="location.href='settings.html'">Settings</button>
 </header>
+
 
 
 <style>
@@ -314,8 +315,30 @@ body.dark-mode .card,
 body.dark-mode .widget-card {
   box-shadow: none;
 }
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  backdrop-filter: blur(14px);
+  background: rgba(18, 90, 47, 0.9);
+  transition: box-shadow 0.3s ease;
+  z-index: 1000;
+}
 
+/* Shadow only when scrolled */
+header.scrolled {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+header h1 a {
+  text-decoration: none;
+  color: inherit;             /* keeps the white/green depending on theme */
+  transition: opacity 0.2s ease;
+}
 
+header h1 a:hover {
+  opacity: 0.8;               /* subtle hover feedback */
+}
 </style>
 
 <main class="container">
@@ -571,7 +594,14 @@ const city = localStorage.getItem('salahCity') || 'Bedford';
 
 // Then use `city` in your existing API call
 fetchPrayerTimes(city); // or however your widget fetches the times
-
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 10) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
 </script>
 </body>
 </html>
