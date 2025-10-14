@@ -38,228 +38,147 @@ body.dark-mode{--bg:#111827;--text:#f9fafb;--muted:#9ca3af;--card:#1f2937;--bord
 </style>
 </head>
 <body>
-<header class="header">
+<header>
   <h1>Noor Al Huda</h1>
-  <button class="btn" onclick="location.href='settings.html'">Settings</button>
+  <button class="btn" onclick="location.href='settings.html'">⚙️ Settings</button>
 </header>
 
 
 <style>
-/* Widget Styles */
-.widget-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
+/* ───────────────────────────────
+   🌙 Noor al-Huda — Refined Apple-like Style
+──────────────────────────────── */
 
-.widget-card {
-  border-radius: 20px;
-  padding: 1.25rem;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.widget-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 36px rgba(0,0,0,0.25);
-}
-
-#salahWidget {
-  background: linear-gradient(145deg, #dff7e1, #b7ebc4);
-}
-
-#quranWidget {
-  background: linear-gradient(145deg, #fff9e7, #fff3c4);
-}
-
-.widget-card h4 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.widget-card p, .widget-card ul {
-  margin: 0.5rem 0 1rem 0;
-  font-size: 1rem;
-  line-height: 1.4;
-}
-
-.widget-card a {
-  align-self: flex-start;
-  text-decoration: none;
-  font-weight: 600;
-  color: #0b7d40;
-  background: #fff;
-  padding: 0.4rem 0.8rem;
-  border-radius: 12px;
-  border: 1px solid #c8e6c9;
-  transition: background 0.2s, color 0.2s;
-}
-
-.widget-card a:hover {
-  background: #065c2f;
-  color: #fff;
-}
 :root {
-  --green: #136f3c;
-  --bg: #f5f5f7;
+  --green: #127a3d;
+  --bg: #f8fafb;
   --text: #1f2937;
   --muted: #6b7280;
   --card: #ffffff;
   --border: #e5e7eb;
-  --accent: #0ea5e9;
   --radius: 20px;
-  --shadow-light: 0 8px 24px rgba(0, 0, 0, 0.06);
-  --shadow-medium: 0 16px 48px rgba(0, 0, 0, 0.12);
-  --shadow-hover: 0 24px 72px rgba(0, 0, 0, 0.18);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Base layout */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  font-family: 'San Francisco', 'Nunito', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: background 0.3s ease, color 0.3s ease;
   line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-
+/* ───────────────────────────────
+   HEADER
+──────────────────────────────── */
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;       /* allow wrapping on small screens */
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
-  background: var(--green);
+  backdrop-filter: blur(14px) saturate(160%);
+  background: rgba(19, 111, 60, 0.9);
   color: #fff;
-  border-bottom-left-radius: var(--radius);
-  border-bottom-right-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  padding: 0.75rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  z-index: 1000;
 }
 
 header h1 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  margin: 0;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  flex-wrap: nowrap; /* Prevent wrapping */
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-.header h1 {
-  font-size: 1.5em;
-  margin: 0;
-}
-
-.btn {
-  font-size: 1em;
-  padding: 8px 12px;
-  cursor: pointer;
-}
 header .btn {
-  margin-top: 0;  /* remove extra space on larger screens */
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--green);
+  border: none;
+  border-radius: 12px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: var(--transition);
 }
 
-@media (max-width: 480px) {
-  header {
-    flex-direction: row;     /* keep in one row */
-    gap: 0.5rem;             /* space between title and button */
-  }
-
-  header h1 {
-    font-size: 1.4rem;
-    flex: 1;                 /* take remaining space */
-  }
-
-  header .btn {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
-  }
+header .btn:hover {
+  transform: translateY(-2px);
+  background: #fff;
 }
 
-
-/* Container */
-.container {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/* Widget Grid */
+/* ───────────────────────────────
+   WIDGET GRID
+──────────────────────────────── */
 .widget-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin: 3rem auto;
+  padding: 0 2rem;
+  max-width: 1200px;
 }
 
-/* Widget Card */
+/* ───────────────────────────────
+   WIDGET CARD
+──────────────────────────────── */
 .widget-card {
   position: relative;
-  background: var(--card);
   border-radius: var(--radius);
-  padding: 2rem 1.5rem;
+  padding: 1.8rem 1.5rem;
+  background: var(--card);
+  box-shadow: var(--shadow-md);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: var(--shadow-medium);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s;
+  transition: var(--transition);
+  cursor: pointer;
   overflow: hidden;
-}
-
-.widget-card::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.03));
-  transform: rotate(25deg);
-  pointer-events: none;
 }
 
 .widget-card:hover {
   transform: translateY(-6px) scale(1.02);
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Gradient Widgets */
+/* Themed Widgets */
 #salahWidget {
-  background: linear-gradient(145deg, #dff7e1, #b7ebc4);
+  background: linear-gradient(145deg, #e3f7e6, #bdeec7);
 }
 
 #quranWidget {
-  background: linear-gradient(145deg, #fff9e7, #fff3c4);
+  background: linear-gradient(145deg, #fff8db, #fff1b8);
 }
 
-/* Card Text */
 .widget-card h4 {
-  margin-bottom: 0.75rem;
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--green);
+  margin-bottom: 0.5rem;
 }
 
 .widget-card p,
 .widget-card ul {
-  margin: 0.5rem 0 1rem 0;
   color: var(--muted);
   font-size: 1rem;
+  margin-bottom: 1rem;
 }
 
 .widget-card a {
@@ -269,22 +188,77 @@ header .btn {
   color: var(--green);
   background: #fff;
   padding: 0.5rem 1rem;
-  border-radius: 16px;
+  border-radius: 14px;
   border: 1px solid #c8e6c9;
-  box-shadow: var(--shadow-light);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
 }
 
 .widget-card a:hover {
   background: var(--green);
   color: #fff;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
 }
 
-/* Footer */
+/* ───────────────────────────────
+   STATIC CARDS (Hadiths, Duas, etc.)
+──────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+  margin: 2rem auto 4rem;
+  padding: 0 2rem;
+  max-width: 1200px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 1.8rem 1.5rem;
+  transition: var(--transition);
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+.card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+
+.card h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.card a {
+  text-decoration: none;
+  color: var(--green);
+  font-weight: 600;
+  background: #f9fff9;
+  padding: 0.4rem 0.9rem;
+  border-radius: 10px;
+  transition: var(--transition);
+}
+
+.card a:hover {
+  background: var(--green);
+  color: #fff;
+}
+
+/* ───────────────────────────────
+   FOOTER
+──────────────────────────────── */
 footer {
-  margin-top: 3rem;
+  margin-top: 4rem;
   padding: 2rem 1rem;
   text-align: center;
   color: var(--muted);
@@ -292,73 +266,55 @@ footer {
   border-top: 1px solid var(--border);
 }
 
-/* Dark Mode */
-body.dark-mode {
-  --bg: #111827;
-  --text: #f9fafb;
-  --muted: #9ca3af;
-  --card: #1f2937;
-  --border: #374151;
-}
-
-body.dark-mode header {
-  background: #1f6a28;
-}
-
-body.dark-mode .widget-card a {
-  border-color: #4fb477;
-}
-
-body.dark-mode .widget-card a:hover {
-  background: #4fb477;
-}
-
-/* Mobile Responsiveness */
+/* ───────────────────────────────
+   RESPONSIVE DESIGN
+──────────────────────────────── */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 1rem 1.5rem;
-  }
-
   header h1 {
-    font-size: 1.5rem;
-  }
-
-  header nav {
-    width: 100%;
-    justify-content: space-between;
+    font-size: 1.1rem;
   }
 
   header .btn {
-    padding: 0.45rem 0.8rem;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.75rem;
   }
 
-  .widget-card {
-    padding: 1.5rem 1rem;
+  .widget-grid,
+  .grid {
+    padding: 0 1rem;
+    gap: 1.25rem;
+  }
+
+  .widget-card,
+  .card {
+    padding: 1.2rem 1rem;
+  }
+
+  .card:hover {
+    transform: translateY(-4px) scale(1.02);
   }
 }
-/* Optional: show pointer on hover */
-.widget-card {
-  cursor: pointer;
-}
-/* Make cards show pointer on hover */
-.widget-card {
-  cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+/* ───────────────────────────────
+   DARK MODE
+──────────────────────────────── */
+body.dark-mode {
+  --bg: #0f172a;
+  --text: #f9fafb;
+  --muted: #94a3b8;
+  --card: #1e293b;
+  --border: #334155;
 }
 
-.widget-card:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: var(--shadow-hover);
+body.dark-mode header {
+  background: rgba(18, 90, 47, 0.9);
 }
-.grid .card:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+body.dark-mode .card,
+body.dark-mode .widget-card {
+  box-shadow: none;
 }
+
 
 </style>
 
@@ -418,15 +374,31 @@ body.dark-mode .widget-card a:hover {
 
 
   <!-- Static Cards Section -->
-  <div class="grid">
-    
-    <article class="card"><h4>Hadiths</h4><p>Books like Al‑Kafi, Tahdhib, and Faqih.</p><a href="hadiths-home.html">Explore</a></article>
-    <article class="card"><h4>Duas</h4><p>Separate duas like Dua Nudbah.</p><a href="duas.html">View</a></article>
-    <article class="card"><h4>Calendar</h4><p>Islamic dates and Shia events.</p><a href="calendar.html">See Calendar</a></article>
-    <article class="card"><h4>Arabic</h4><p>Learn how to read the Quran and more.</p><a href="https://arabic.nooralhuda.co.uk">Learn</a></article>
-    <article class="card"><h4>Heardle</h4><p>Test your memory with Shia nasheeds.</p><a href="https://heardle.nooralhuda.co.uk">Play Now</a></article>
-    <article class="card"><h4>ShiaTube</h4><p>Watch Islamic and Shia videos.</p><a href="https://tube.nooralhuda.co.uk">Watch</a></article>
-  </div>
+<div class="grid">
+    <article class="card" onclick="location.href='hadiths-home.html'">
+      <h4>Hadiths</h4>
+      <p>Books like Al-Kafi, Tahdhib, and Faqih.</p>
+    </article>
+    <article class="card" onclick="location.href='duas.html'">
+      <h4>Duas</h4>
+      <p>Separate duas like Dua Nudbah.</p>
+    </article>
+    <article class="card" onclick="location.href='calendar.html'">
+      <h4>Calendar</h4>
+      <p>Islamic dates and Shia events.</p>
+    </article>
+    <article class="card" onclick="location.href='https://arabic.nooralhuda.co.uk'">
+      <h4>Arabic</h4>
+      <p>Learn how to read the Quran and more.</p>
+    </article>
+    <article class="card" onclick="location.href='https://heardle.nooralhuda.co.uk'">
+      <h4>Heardle</h4>
+      <p>Test your memory with Shia nasheeds.</p>
+    </article>
+    <article class="card" onclick="location.href='https://tube.nooralhuda.co.uk'">
+      <h4>ShiaTube</h4>
+      <p>Watch Islamic and Shia videos.</p>
+    </article>
 </main>
 
 
