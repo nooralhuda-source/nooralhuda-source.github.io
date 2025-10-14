@@ -37,6 +37,8 @@ footer{margin-top:2rem;padding:1.5rem 0;text-align:center;color:var(--muted);fon
 body.dark-mode{--bg:#111827;--text:#f9fafb;--muted:#9ca3af;--card:#1f2937;--border:#374151;}
 </style>
 </head>
+<script src="global.js"></script>
+
 <body>
 <header>
   <h1><a href="https://nooralhuda.co.uk">Noor Al Huda</a></h1>
@@ -339,9 +341,57 @@ header h1 a {
 header h1 a:hover {
   opacity: 0.8;               /* subtle hover feedback */
 }
+
+.page-title {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+/* Image styling */
+.bismillah-img {
+  width: clamp(200px, 40vw, 500px); /* responsive */
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  opacity: 1;
+  transform: translateY(-10px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+
+  /* IMPORTANT: remove any color or filter */
+  filter: none;
+}
+
+/* Site name */
+.site-name {
+  font-family: 'Inter', 'Nunito', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: #007f3f; /* green text beneath */
+  margin-top: 1rem;
+  opacity: 1;
+  transform: translateY(10px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+/* Fade-in trigger */
+.page-title.loaded .bismillah-img,
+.page-title.loaded .site-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
 </style>
 
 <main class="container">
+<div class="page-title">
+  <img src="bismillah.png" alt="Bismillah" class="bismillah-img">
+  <h2 class="site-name">Noor Al Huda</h2>
+</div>
+
 
   <!-- Widgets Section -->
   <div id="salahWidget" class="widget-card" data-link="https://nooralhuda.co.uk/salah.html">
@@ -601,6 +651,9 @@ fetchPrayerTimes(city); // or however your widget fetches the times
     } else {
       header.classList.remove('scrolled');
     }
+  });
+  window.addEventListener('load', () => {
+    document.querySelector('.page-title').classList.add('loaded');
   });
 </script>
 </body>
