@@ -2,201 +2,213 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda — Hadiths</title>
+  <title>Noor Al Huda — Hadith Books</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-
-  <script>
-    // Theme handling
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.classList.add("dark-mode");
-    }
-    function toggleDarkMode() {
-      document.documentElement.classList.toggle("dark-mode");
-      localStorage.setItem(
-        "theme",
-        document.documentElement.classList.contains("dark-mode") ? "dark" : "light"
-      );
-      updateThemeIcon();
-    }
-    function updateThemeIcon() {
-      const btn = document.getElementById("themeToggle");
-      if (btn) {
-        btn.textContent = document.documentElement.classList.contains("dark-mode") ? "☀️" : "🌙";
-      }
-    }
-    function toggleMenu() {
-      document.getElementById("mainNav").classList.toggle("open");
-    }
-  </script>
-
   <style>
-    .search-bar {
-      margin: 1rem auto;
-      max-width: 480px;
-      display: flex;
-      gap: 0.5rem;
-    }
-    .search-bar input {
-      flex: 1;
-      padding: 0.6rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      font-size: 0.95rem;
-      background: var(--card-bg);
-      color: var(--text);
-    }
-    .search-bar button {
-      padding: 0.6rem 1rem;
-      border: none;
-      border-radius: var(--radius);
-      background: var(--green);
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .search-bar button:hover { filter: brightness(1.06); }
+/* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1rem;
-      max-width: 1000px;
-      margin: 1rem auto 2rem;
-      padding: 0 1rem;
-    }
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    .card h4 {
-      margin: 0;
-      color: var(--text);
-    }
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-    .card a {
-      margin-top: 0.5rem;
-      text-decoration: none;
-      font-weight: 700;
-      color: var(--green);
-    }
-    .card a:hover { text-decoration: underline; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
 
-    .empty {
-      text-align: center;
-      color: var(--muted);
-      margin-top: 1rem;
-    }
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
   </style>
 </head>
+<body>
+<header>
+  <div class="brand"><h1><a href="index.html">Noor Al Huda</a></h1></div>
+  <button class="hamburger" aria-label="Open menu">☰</button>
+</header>
 
-<body onload="updateThemeIcon()">
-  <!-- Header -->
-  <header>
-    <div class="brand">
-      <img src="logo.png.png" alt="Noor Al Huda Logo">
-      <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
-    </div>
+<nav id="mainNav">
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="salah.html">Salah</a>
+  <a href="shiatube/index.html">ShiaTube</a>
+  <a href="index.html">Home</a>
+  <a href="settings.html">Settings</a>
+</nav>
 
-    <button class="hamburger" onclick="toggleMenu()">☰</button>
+<main class="container">
+  <h2 style="text-align:center; margin-top:2rem;">Select a Hadith Collection</h2>
+  <div class="surah-search">
+    <input type="text" id="searchBook" placeholder="Search Hadith Book...">
+  </div>
+  <div class="surah-grid" id="bookGrid"></div>
+</main>
 
-    <nav id="mainNav">
-      <a href="quran.html">📖 Qur’an</a>
-      <a href="duas.html">🤲 Duas</a>
-      <a href="hadiths-home.html" class="active">📜 Hadiths</a>
-      <a href="calendar.html">📅 Calendar</a>
-      <a href="salah.html">🕌 Salah</a>
-      <a href="index.html" class="utility">🏠</a>
-      <a href="settings.html" class="utility">⚙</a>
-      <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
-    </nav>
-  </header>
+<footer>
+  © 2025 Noor Al Huda — All in one Shia website
+</footer>
 
-  <!-- Main -->
-  <main class="container">
-    <h2 style="text-align:center;">Select a Hadith Book</h2>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const mainNav = document.getElementById("mainNav");
+  const hamburger = document.querySelector(".hamburger");
+  const grid = document.getElementById("bookGrid");
+  const searchInput = document.getElementById("searchBook");
+const books = [
+  { name_en: "Al-Kafi", name_ar: "الكافي", href: "alkafi.html" },
+  { name_en: "Man La Yahduruhu al-Faqih", name_ar: "من لا يحضره الفقيه", href: "man-la-yahduruhu.html" },
+  { name_en: "Tahdhib al-Ahkam", name_ar: "تهذيب الأحكام", href: "tahdhib.html" },
+  { name_en: "Al-Istibsar", name_ar: "الاستبصار", href: "istibsar.html" },
+  { name_en: "Nahj al-Balagha", name_ar: "نهج البلاغة", href: "nahj-al-balagha.html" },
+  { name_en: "Sahifa al-Sajjadiya", name_ar: "الصحيفة السجادية", href: "sahifa.html" },
+  { name_en: "Bihar al-Anwar", name_ar: "بحار الأنوار", href: "bihar-al-anwar.html" },
+  { name_en: "Wasail al-Shi‘a", name_ar: "وسائل الشيعة", href: "wasail.html" },
+  { name_en: "Kitab Sulaim bin Qays", name_ar: "كتاب سليم بن قيس", href: "kitab-sulaim.html" },
+  { name_en: "Kitab al-Mu’min", name_ar: "كتاب المؤمن", href: "kitab-al-momin.html" }
+];
 
-    <!-- Search bar -->
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search Hadith book by name (English or Arabic)" onkeydown="if(event.key==='Enter'){searchBooks()}">
-      <button onclick="searchBooks()">Search</button>
-    </div>
+books.forEach(book => {
+  const card = document.createElement("div");
+  card.className = "surah-card";
+  card.innerHTML = `
+    <h3>${book.name_en}</h3>
+    <p>${book.name_ar}</p>`;
+  card.addEventListener("click", () => {
+    window.location.href = book.href;
+  });
+  grid.appendChild(card);
+});
 
-    <div class="grid" id="bookGrid"></div>
-    <div class="empty" id="emptyState" style="display:none;">No books match your search.</div>
-  </main>
+hamburger.addEventListener("click", e => {
+  e.stopPropagation();
+  mainNav.classList.toggle("open");
+});
 
-  <!-- Footer -->
-  <footer>
-    © 2025 Noor Al Huda — Personal Islamic Companion (Wisdom thru Ahlul Bayt)
-  </footer>
+document.addEventListener("click", e => {
+  if (!mainNav.contains(e.target) && !hamburger.contains(e.target))
+    mainNav.classList.remove("open");
+});
 
-  <script>
-    // Book definitions + routes (fixes the broken link generation)
-    const books = [
-      { id: "al-kafi", name_en: "Al-Kafi", name_ar: "الكافي", href: "alkafi.html" },
-      { id: "man-la", name_en: "Man La Yahduruhu al-Faqih", name_ar: "من لا يحضره الفقيه", href: "man-la-yahduruhu.html" },
-      { id: "tahdhib", name_en: "Tahdhib al-Ahkam", name_ar: "تهذيب الأحكام", href: "tahdhib.html" },
-      { id: "istibsar", name_en: "Al-Istibsar", name_ar: "الاستبصار", href: "istibsar.html" },
-      { id: "nahj", name_en: "Nahj al-Balagha", name_ar: "نهج البلاغة", href: "nahj-al-balagha.html" },
-      { id: "kitab-sulaim", name_en: "Kitab Sulaim bin Qays", name_ar: "كتاب سليم بن قيس", href: "kitab-sulaim.html" },
-      { id: "kitab-al-momin", name_en: "Kitab Al Momin", name_ar: "كتاب المؤمن", href: "kitab-al-momin.html" }
-    ];
-
-    const grid = document.getElementById("bookGrid");
-    const emptyState = document.getElementById("emptyState");
-
-    function normalizeArabic(str) {
-      // Basic normalization: trim, unify Arabic alef forms
-      return (str || "")
-        .trim()
-        .replace(/[إأآ]/g, "ا")
-        .replace(/ى/g, "ي")
-        .replace(/ة/g, "ه");
-    }
-
-    function renderBooks(list) {
-      grid.innerHTML = "";
-      emptyState.style.display = list.length ? "none" : "block";
-
-      list.forEach(book => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <h4>${book.name_en}</h4>
-          <p>${book.name_ar}</p>
-          <a href="${book.href}">View Hadiths →</a>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    function searchBooks() {
-      const queryRaw = document.getElementById("searchInput").value;
-      const qEn = (queryRaw || "").toLowerCase().trim();
-      const qAr = normalizeArabic(queryRaw);
-
-      const filtered = books.filter(b => {
-        const enMatch = b.name_en.toLowerCase().includes(qEn);
-        const arMatch = normalizeArabic(b.name_ar).includes(qAr);
-        return enMatch || arMatch;
-      });
-
-      renderBooks(filtered);
-    }
-
-    // Initial render
-    renderBooks(books);
-  </script>
+searchInput.addEventListener("input", e => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll(".surah-card").forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(q) ? "" : "none";
+  });
+});
+});
+</script>
 </body>
 </html>
