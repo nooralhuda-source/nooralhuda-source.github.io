@@ -209,6 +209,26 @@ searchInput.addEventListener("input", e => {
   });
 });
 });
+function applyThemeClass(isDark) {
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.remove("dark-mode");
+    }
+  }
+  var savedTheme = localStorage.getItem("theme");
+  applyThemeClass(savedTheme === "dark");
+
+  if (darkToggle) {
+    darkToggle.checked = savedTheme === "dark";
+    darkToggle.addEventListener("change", function (ev) {
+      var isDarkNow = !!ev.target.checked;
+      applyThemeClass(isDarkNow);
+      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+    });
+  }
 </script>
 </body>
 </html>

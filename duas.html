@@ -1,150 +1,255 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Noor Al Huda — Duas</title>
-<style>
-  body { margin:0; font-family:Arial,sans-serif; background:#f4f6f8; color:#222; transition:background 0.3s,color 0.3s; }
-  header { background:#2e7d32; color:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; }
-  header .brand { display:flex; align-items:center; gap:10px; }
-  header .brand img { height:40px; }
-  header h1 { margin:0; font-size:1.2rem; }
-  header .arabic { font-family:"Amiri",serif; }
-  #mainNav { display:flex; gap:0.5rem; }
-  #mainNav a, #mainNav button {
-    background:#fff; color:#0b7d40; padding:0.4rem 0.9rem; border-radius:20px; font-weight:600;
-    text-decoration:none; border:none; cursor:pointer; transition:background 0.2s,color 0.2s;
-  }
-  #mainNav a:hover, #mainNav button:hover { background:#065c2f; color:#fff; }
-  .hamburger { display:none; font-size:1.5rem; background:none; border:none; color:#fff; cursor:pointer; }
-  @media(max-width:768px){
-    #mainNav{display:none;flex-direction:column;background:#0b7d40;position:absolute;top:60px;right:0;padding:1rem;}
-    #mainNav.open{display:flex;}
-    .hamburger{display:block;}
-  }
+  <meta charset="UTF-8">
+  <title>Noor Al Huda — Duas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+/* === MATCHED TO hadiths-home.html — exact fonts & sizes === */
+:root {
+  --green: #276540;
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  .container { max-width:1050px; margin:20px auto; padding:20px; }
-  .page-title { margin:0 0 12px; }
-  .search { display:flex; gap:10px; margin-bottom:16px; }
-  .search input { flex:1; padding:10px; border:1px solid #cfd7e3; border-radius:8px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
-  .card {
-    background:#fff; border:1px solid #d8dee4; border-radius:8px; padding:14px;
-    cursor:pointer; transition:box-shadow 0.2s, border-color 0.2s;
-    text-decoration:none; color:inherit;
-  }
-  .card:hover { box-shadow:0 4px 16px rgba(0,0,0,0.08); border-color:#0b7d40; }
-  .card h3 { margin:0; font-size:1rem; color:#0b7d40; }
-  .tag { font-size:0.75rem; background:#e0f2f1; color:#00695c; padding:2px 6px; border-radius:4px; display:inline-block; margin-top:6px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
 
-  /* Dark mode */
-  body.dark-mode { background:#0f1216; color:#e7ebf0; }
-  body.dark-mode header { background:#1f6a28; }
-  body.dark-mode #mainNav a, body.dark-mode #mainNav button { background:#1e2430; color:#e7ebf0; }
-  body.dark-mode #mainNav a:hover, body.dark-mode #mainNav button:hover { background:#4fb477; color:#fff; }
-  body.dark-mode .card { background:#121621; border-color:#2a3140; }
-  body.dark-mode .card h3 { color:#4fb477; }
-  body.dark-mode .tag { background:#2e7d32; color:#fff; }
-</style>
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+  background: #276540;
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540;
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar (same as hadiths-home) */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+
+/* Cards (same sizes & spacing as hadiths-home) */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+
+/* Dark mode parity */
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+body.dark-mode header { background: rgba(18,90,47,0.95); }
+body.dark-mode .surah-card { box-shadow: none; }
+
+/* Responsive */
+@media (max-width: 720px) {
+  header h1 { font-size: 1rem; }
+  .surah-search { margin: 1rem; }
+}
+  </style>
 </head>
 <body>
-
 <header>
-  <div class="brand">
-    <img src="logo.png.png" alt="Noor Al Huda Logo">
-    <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
-  </div>
-  <button class="hamburger" onclick="toggleMenu()">☰</button>
-  <nav id="mainNav">
-    <a href="quran.html">📖 Qur’an</a>
-    <a href="duas.html" class="active">🤲 Duas</a>
-    <a href="hadiths-home.html">📜 Hadiths</a>
-    <a href="calendar.html">📅 Calendar</a>
-    <a href="salah.html">🕌 Salah</a>
-    <a href="index.html" class="utility">🏠</a>
-    <a href="settings.html" class="utility">⚙</a>
-    <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
-  </nav>
+  <div class="brand"><h1><a href="index.html">Noor Al Huda</a></h1></div>
+  <button class="hamburger" aria-label="Open menu" id="hamburger">☰</button>
 </header>
 
-<div class="container" id="content" style="font-size:16px">
-  <h2 class="page-title">Select a Dua</h2>
-  <div class="search">
-    <input id="searchInput" type="search" placeholder="Search duas by name..." />
+<nav id="mainNav" aria-hidden="true">
+  <a href="quran.html">Quran</a>
+  <a href="duas.html" aria-current="page">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="salah.html">Salah</a>
+  <a href="shiatube/index.html">ShiaTube</a>
+  <a href="index.html">Home</a>
+  <a href="settings.html">Settings</a>
+</nav>
+
+<main class="container">
+  <h2 style="text-align:center; margin-top:2rem;">Select a Dua</h2>
+
+  <div class="surah-search">
+    <input type="text" id="searchDua" placeholder="Search Dua..." />
   </div>
 
- <div class="grid" id="duaGrid">
-  <a class="card" href="dua-kumayl.html">
-    <h3>Dua Kumayl</h3>
-    <span class="tag">Supplication</span>
-  </a>
-  <a class="card" href="dua-nudbah.html">
-    <h3>Dua Nudbah</h3>
-    <span class="tag">Supplication</span>
-  </a>
-  <a class="card" href="ziyarat-ashura.html">
-    <h3>Ziyarat Ashura</h3>
-    <span class="tag">Ziyarat</span>
-  </a>
-  <a class="card" href="dua-tawassul.html">
-    <h3>Dua Tawassul</h3>
-    <span class="tag">Supplication</span>
-  </a>
-  <a class="card" href="hadith-kisa.html">
-    <h3>Hadith Kisa</h3>
-    <span class="tag">Hadith</span>
-  </a>
-  <a class="card" href="dua-sabah.html">
-    <h3>Dua al-Sabah</h3>
-    <span class="tag">Morning</span>
-  </a>
-  <a class="card" href="dua-mashlool.html">
-    <h3>Dua al-Mashlool</h3>
-    <span class="tag">Supplication</span>
-  </a>
-  <a class="card" href="dua-iftitah.html">
-    <h3>Dua al-Iftitah</h3>
-    <span class="tag">Ramadan</span>
-  </a>
-  <a class="card" href="dua-adeela.html">
-    <h3>Dua al-Adeela</h3>
-    <span class="tag">Protection</span>
-  </a>
-  <a class="card" href="dua-hujjah.html">
-    <h3>Dua for Imam al-Hujjah</h3>
-    <span class="tag">Imam Mahdi</span>
-  </a>
-  <a class="card" href="ziyarat-waritha.html">
-    <h3>Ziyarat Waritha</h3>
-    <span class="tag">Ziyarat</span>
-  </a>
-  <a class="card" href="dua-faraj.html">
-    <h3>Dua al-Faraj</h3>
-    <span class="tag">Relief</span>
-  </a>
-</div>
+  <div class="surah-grid" id="duaGrid"></div>
+</main>
 
+<footer>
+  © 2025 Noor Al Huda — All in one Shia website
+</footer>
 
 <script>
-function toggleMenu(){document.getElementById("mainNav").classList.toggle("open");}
-function toggleDarkMode(){
-  document.body.classList.toggle("dark-mode");
-  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-}
-(function restoreTheme(){
-  if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark-mode");}
-})();
+document.addEventListener("DOMContentLoaded", () => {
+  const mainNav = document.getElementById("mainNav");
+  const hamburger = document.getElementById("hamburger");
+  const grid = document.getElementById("duaGrid");
+  const searchInput = document.getElementById("searchDua");
 
-/* Search filter */
-document.getElementById('searchInput').addEventListener('input', (e)=>{
-  const q = e.target.value.trim().toLowerCase();
-  document.querySelectorAll('#duaGrid .card').forEach(card=>{
-    const title = card.querySelector('h3').textContent.toLowerCase();
-    const tag = (card.querySelector('.tag')?.textContent || '').toLowerCase();
-    const match = title.includes(q) || tag.includes(q);
-    card.style.display = match ? '' : 'none';
+  const duas = [
+    { name_en: "Dua Kumayl", name_ar: "دُعاء كميل", href: "dua-kumayl.html" },
+    { name_en: "Dua Nudbah", name_ar: "دُعاء الندبة", href: "dua-nudbah.html" },
+    { name_en: "Ziyarat Ashura", name_ar: "زيارة عاشوراء", href: "ziyarat-ashura.html" },
+    { name_en: "Dua Tawassul", name_ar: "دُعاء التوسل", href: "dua-tawassul.html" },
+    { name_en: "Hadith Kisa", name_ar: "حديث الكساء", href: "hadith-kisa.html" },
+    { name_en: "Dua al-Sabah", name_ar: "دُعاء الصباح", href: "dua-sabah.html" },
+    { name_en: "Dua Jowshan Kabeer", name_ar: "دُعاء الجوشن الكبير", href: "dua-jowshn-kabir.html" },
+    { name_en: "Dua al-Iftitah", name_ar: "دُعاء الافتتاح", href: "dua-iftitah.html" },
+    { name_en: "Dua al-Adeela", name_ar: "دُعاء العديلة", href: "dua-adeela.html" },
+    { name_en: "Dua for Imam al-Hujjah", name_ar: "دُعاء الإمام الحجة", href: "dua-hujjah.html" },
+    { name_en: "Ziyarat Waritha", name_ar: "زيارة وارث", href: "ziyarat-waritha.html" },
+    { name_en: "Dua al-Faraj", name_ar: "دُعاء الفرج", href: "dua-faraj.html" }
+  ];
+
+  // render
+  function render(list) {
+    grid.innerHTML = "";
+    list.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "surah-card";
+      card.innerHTML = `<h3>${item.name_en}</h3><p>${item.name_ar}</p>`;
+      card.addEventListener("click", () => { window.location.href = item.href; });
+      grid.appendChild(card);
+    });
+  }
+
+  render(duas);
+
+  // Hamburger behaviour (same as hadiths-home)
+  hamburger.addEventListener("click", e => {
+    e.stopPropagation();
+    const open = mainNav.classList.toggle("open");
+    hamburger.setAttribute("aria-expanded", open ? "true" : "false");
+    mainNav.setAttribute("aria-hidden", open ? "false" : "true");
   });
+
+  document.addEventListener("click", e => {
+    if (!mainNav.classList.contains("open")) return;
+    if (mainNav.contains(e.target) || hamburger.contains(e.target)) return;
+    mainNav.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    mainNav.setAttribute("aria-hidden", "true");
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && mainNav.classList.contains("open")) {
+      mainNav.classList.remove("open");
+      hamburger.setAttribute("aria-expanded", "false");
+      mainNav.setAttribute("aria-hidden", "true");
+    }
+  });
+
+  // Search/filter
+  searchInput.addEventListener("input", e => {
+    const q = (e.target.value || "").trim().toLowerCase();
+    document.querySelectorAll(".surah-card").forEach(card => {
+      const text = (card.textContent || "").toLowerCase();
+      card.style.display = q === "" || text.indexOf(q) !== -1 ? "" : "none";
+    });
+  });
+
+  // Theme restore (parity)
+  function applyThemeClass(isDark) {
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.remove("dark-mode");
+    }
+  }
+  var savedTheme = localStorage.getItem("theme");
+  applyThemeClass(savedTheme === "dark");
 });
 </script>
 </body>
