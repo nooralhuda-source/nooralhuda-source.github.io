@@ -1,314 +1,659 @@
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Noor Al Huda — Salah</title>
 <style>
-  /* --- KEEP HEADER STYLES AS YOU SENT --- */
-  body { margin:0; font-family:Arial,sans-serif; background:#f4f6f8; color:#222; transition:background 0.3s,color 0.3s; }
-  header { background:#2e7d32; color:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; }
-  header .brand { display:flex; align-items:center; gap:10px; }
-  header .brand img { height:40px; }
-  header h1 { margin:0; font-size:1.2rem; }
-  header .arabic { font-family:"Amiri",serif; }
-  #mainNav { display:flex; gap:0.5rem; }
-  #mainNav a, #mainNav button {
-    background:#fff; color:#0b7d40; padding:0.4rem 0.9rem; border-radius:20px; font-weight:600;
-    text-decoration:none; border:none; cursor:pointer; transition:background 0.2s,color 0.2s;
-  }
-  #mainNav a:hover, #mainNav button:hover { background:#065c2f; color:#fff; }
-  .hamburger { display:none; font-size:1.5rem; background:none; border:none; color:#fff; cursor:pointer; }
-  @media(max-width:768px){
-    #mainNav{display:none;flex-direction:column;background:#0b7d40;position:absolute;top:60px;right:0;padding:1rem;}
-    #mainNav.open{display:flex;}
-    .hamburger{display:block;}
+  :root {
+    --green: #276540;
+    --bg: #f8fafb;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --radius: 20px;
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-md: 0 10px 32px rgba(0,0,0,0.12);
+    --shadow-lg: 0 20px 64px rgba(0,0,0,0.18);
+    --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
   }
 
-  .container { max-width:900px; margin:20px auto; background:#fff; border:1px solid #d8dee4; border-radius:8px; padding:20px; }
-  .controls { display:flex; gap:10px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
-  .controls select { padding:6px 10px; border-radius:6px; border:1px solid #cfd7e3; }
-  .card { border:1px solid #d8dee4; border-radius:8px; padding:12px; background:#fff; }
-  .card h3 { margin:0 0 8px; font-size:1rem; color:#0b7d40; }
-  .row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed #e5e7eb; }
-  .row:last-child { border-bottom:none; }
-  .links { margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
-  .links a { text-decoration:none; color:#0b7d40; background:#fff; padding:.4rem .8rem; border-radius:8px; border:1px solid #c8e6c9; font-weight:600; }
-  .links a:hover { background:#065c2f; color:#fff; }
-  .adhan-toggle { margin-left:auto; display:flex; align-items:center; gap:6px; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Nunito', sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    padding-top:3.5rem;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
 
-  /* Dark mode */
-  body.dark-mode { background:#0f1216; color:#e7ebf0; }
-  body.dark-mode header { background:#1f6a28; }
-  body.dark-mode #mainNav a, body.dark-mode #mainNav button { background:#1e2430; color:#e7ebf0; }
-  body.dark-mode #mainNav a:hover, body.dark-mode #mainNav button:hover { background:#4fb477; color:#fff; }
-  body.dark-mode .container { background:#161a20; border-color:#2a3140; }
-  body.dark-mode .card { background:#121621; border-color:#2a3140; }
-  body.dark-mode .card h3 { color:#4fb477; }
+  header{
+    position:fixed;top:0;left:0;width:100%;
+    display:flex;justify-content:space-between;align-items:center;
+    backdrop-filter: blur(14px) saturate(160%);
+    background: #276540; color:#fff;
+    padding:.75rem 1.25rem; box-shadow:var(--shadow-sm); z-index:1000;
+  }
+  header h1{font-size:1.25rem;font-weight:700}
+  header .hamburger{
+    background: rgba(255,255,255,0.12); color:#fff; border:none;
+    padding:.35rem .7rem; border-radius:10px; cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,0.12); font-weight:700;
+  }
+
+  nav#mainNav{
+    position:fixed; top:0; right:-260px; width:220px; height:100%;
+    background: #276540; padding:1.8rem; display:flex;
+    flex-direction:column; gap:1rem; border-radius:0 0 0 18px;
+    transition:right .35s ease, opacity .35s ease; opacity:0; pointer-events:none; z-index:1050;
+  }
+  nav#mainNav.open{ right:0; opacity:1; pointer-events:auto; }
+  nav#mainNav a{ background:#fff; color:var(--green); padding:.6rem 1rem; border-radius:12px; text-decoration:none; font-weight:600; box-shadow:0 4px 12px rgba(0,0,0,0.08); }
+
+  .page {
+    max-width:1100px; margin:90px auto 60px; padding:0 1rem;
+  }
+
+  .grid{
+    display:grid; grid-template-columns: 1fr 360px; gap:1.6rem;
+  }
+
+  .card{
+    background:var(--card); border-radius:var(--radius);
+    box-shadow:var(--shadow-md); padding:1.6rem; transition:var(--transition);
+  }
+
+  .salah-card h3 { color:var(--green); margin-bottom:12px; font-size:1.05rem }
+  .prayer-row{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px dashed var(--border); font-weight:600; }
+  .prayer-row span.time{ color:var(--green); font-weight:700; }
+
+  .controls{ display:flex; gap:.6rem; align-items:center; margin-bottom:12px; flex-wrap:wrap }
+  select, input[type="checkbox"]{ padding:.4rem .6rem; border-radius:8px; border:1px solid var(--border) }
+  #tzLabel, #dateLabel{ color:var(--muted); margin-left:.5rem; font-size:.95rem }
+
+  /* smart widgets */
+  .smart-widgets{ display:grid; grid-template-columns: 1fr; gap:1rem }
+  .widget-card{ background:var(--card); padding:1rem; border-radius:14px; box-shadow:var(--shadow-sm) }
+  .widget-card h4{ margin-bottom:.6rem; color:var(--green) }
+
+  .links{ margin-top:14px; display:flex; gap:8px; flex-wrap:wrap }
+  .links a{ text-decoration:none; color:var(--green); background:#fff; padding:.4rem .8rem; border-radius:10px; border:1px solid #c8e6c9; font-weight:600 }
+  .links a:hover{ background:var(--green); color:#fff }
+
+  footer{ margin-top:2rem; text-align:center; color:var(--muted); font-size:.9rem; }
+
+  /* responsive */
+  @media (max-width:900px){
+    .grid{ grid-template-columns: 1fr; }
+    nav#mainNav{ width:220px; }
+  }
+
+  /* dark-mode toggle class */
+  body.dark-mode{ background:#0f172a; color:#f8fafb }
+  body.dark-mode .card{ background:#0f172a; box-shadow:none; border:1px solid #19202a }
+
+  /* adhan controls */
+  #adhanControls{ display:flex; gap:.6rem; align-items:center; margin-top:.6rem }
+  #adhanVolume{ width:120px; }
+  .small-muted{ color:var(--muted); font-size:.9rem }
 </style>
 </head>
 <body>
-
-<!-- ==== HEADER: left unchanged ==== -->
 <header>
-  <div class="brand">
-    <img src="logo.png.png" alt="Noor Al Huda Logo">
-    <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
+  <div><h1><a href="index.html" style="color:inherit; text-decoration:none">Noor Al Huda</a></h1></div>
+  <div>
+    <button class="hamburger" id="hamburger" aria-label="menu">☰</button>
   </div>
-  <button class="hamburger" onclick="toggleMenu()">☰</button>
-  <nav id="mainNav">
-    <a href="quran.html">📖 Qur’an</a>
-    <a href="duas.html">🤲 Duas</a>
-    <a href="hadiths-home.html">📜 Hadiths</a>
-    <a href="calendar.html">📅 Calendar</a>
-    <a href="salah.html" class="active">🕌 Salah</a>
-    <a href="index.html" class="utility">🏠</a>
-    <a href="settings.html" class="utility">⚙</a>
-    <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
-  </nav>
 </header>
 
-<!-- ==== MAIN CONTENT ==== -->
-<div class="container" id="content" style="font-size:16px">
-  <div class="controls">
-    <label>
-      <strong>City:</strong>
-      <select id="citySelect">
-        <!-- extended list of cities (value is key used below) -->
-        <option value="London">London, UK</option>
-        <option value="Bedford">Bedford, UK</option>
-        <option value="Islamabad">Islamabad, Pakistan</option>
-        <option value="Tehran">Tehran, Iran</option>
-        <option value="Karbala">Karbala, Iraq</option>
-        <option value="Najaf">Najaf, Iraq</option>
-        <option value="Qom">Qom, Iran</option>
-        <option value="Mashhad">Mashhad, Iran</option>
-        <option value="Beirut">Beirut, Lebanon</option>
-        <option value="Dearborn">Dearborn, USA</option>
-        <option value="Mumbai">Mumbai, India</option>
-        <option value="Toronto">Toronto, Canada</option>
-        <option value="NewYork">New York, USA</option>
-        <option value="LosAngeles">Los Angeles, USA</option>
-        <option value="Sydney">Sydney, Australia</option>
-        <option value="Cairo">Cairo, Egypt</option>
-        <option value="Riyadh">Riyadh, Saudi Arabia</option>
-      </select>
-    </label>
+<nav id="mainNav" aria-hidden="true">
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="salah.html">Salah</a>
+  <a href="shiatube/index.html">ShiaTube</a>
+  <a href="index.html">Home</a>
+  <a href="settings.html">Settings</a>
+</nav>
 
-    <label class="adhan-toggle">
-      <input type="checkbox" id="adhanToggle"/> Adhan On
-    </label>
+<div class="page">
+  <div class="grid">
+    <!-- LEFT: Main Salah card -->
+    <div class="card salah-card">
+      <div class="controls">
+        <label><strong>City:</strong>
+          <select id="citySelect" aria-label="Select city">
+            <option value="London">London, UK</option>
+            <option value="Bedford">Bedford, UK</option>
+            <option value="Islamabad">Islamabad, Pakistan</option>
+            <option value="Tehran">Tehran, Iran</option>
+            <option value="Karbala">Karbala, Iraq</option>
+            <option value="Najaf">Najaf, Iraq</option>
+            <option value="Qom">Qom, Iran</option>
+            <option value="Mashhad">Mashhad, Iran</option>
+            <option value="Beirut">Beirut, Lebanon</option>
+            <option value="Dearborn">Dearborn, United States</option>
+            <option value="Mumbai">Mumbai, India</option>
+            <option value="Toronto">Toronto, Canada</option>
+            <option value="New York">New York, United States</option>
+            <option value="Los Angeles">Los Angeles, United States</option>
+            <option value="Sydney">Sydney, Australia</option>
+            <option value="Cairo">Cairo, Egypt</option>
+            <option value="Riyadh">Riyadh, Saudi Arabia</option>
+            <option value="Perth">Perth, Australia</option>
+          </select>
+        </label>
 
-    <span id="tzLabel" style="margin-left:10px;"></span>
-    <span id="dateLabel" style="margin-left:8px;"></span>
-  </div>
+        <label style="margin-left:auto; display:flex; align-items:center; gap:.4rem;">
+          <input type="checkbox" id="adhanToggle"/>
+          <span class="small-muted">Adhan On</span>
+        </label>
 
-  <div class="card">
-    <h3 id="cityTitle">Salah times</h3>
-    <div class="row"><span>Fajr</span><span id="fajr">—</span></div>
-    <div class="row"><span>Sunrise</span><span id="sunrise">—</span></div>
-    <div class="row"><span>Dhuhr</span><span id="dhuhr">—</span></div>
-    <div class="row"><span>Asr</span><span id="asr">—</span></div>
-    <div class="row"><span>Maghrib</span><span id="maghrib">—</span></div>
-    <div class="row"><span>Isha</span><span id="isha">—</span></div>
-  </div>
+        <span id="tzLabel" class="small-muted"></span>
+        <span id="dateLabel" class="small-muted"></span>
+      </div>
 
-  <!-- Links placed below the card (outside header) as requested -->
-  <div class="links">
-    <a href="qibla.html">🧭 Qibla Direction</a>
-    <a href="https://salahduas.org" target="_blank" rel="noopener">🌐 Salah Duas</a>
-  </div>
+      <h3 id="cityTitle">Salah times</h3>
+      <div id="timesList">
+        <div class="prayer-row"><span>Fajr</span><span class="time" id="fajr">—</span></div>
+        <div class="prayer-row"><span>Sunrise</span><span class="time" id="sunrise">—</span></div>
+        <div class="prayer-row"><span>Dhuhr</span><span class="time" id="dhuhr">—</span></div>
+        <div class="prayer-row"><span>Asr</span><span class="time" id="asr">—</span></div>
+        <div class="prayer-row"><span>Maghrib</span><span class="time" id="maghrib">—</span></div>
+        <div class="prayer-row"><span>Isha</span><span class="time" id="isha">—</span></div>
+      </div>
 
-  <p id="status" style="color:#666; margin-top:12px;"></p>
+      <div class="links" style="margin-top:12px">
+        <a class="card" href="qibla.html">🧭 Qibla Direction</a>
+        <a class="card" href="https://salahduas.org" target="_blank" rel="noopener">🌐 Salah Duas</a>
+      </div>
+
+      <p id="status" class="small-muted" style="margin-top:12px"></p>
+    </div>
+
+    <!-- RIGHT: Smart widgets -->
+    <div style="display:flex; flex-direction:column; gap:1rem;">
+      <div class="widget-card" id="nextPrayerCard">
+        <h4>🕒 Next Prayer</h4>
+        <div><strong id="nextPrayerLabel">—</strong></div>
+        <div id="nextPrayerCountdown" class="small-muted">—</div>
+      </div>
+
+      <div class="widget-card" id="calendarWidget">
+        <h4>📅 Islamic Date</h4>
+        <div id="hijriDate" class="small-muted">—</div>
+        <div id="gregDate" class="small-muted">—</div>
+      </div>
+
+      <div class="widget-card" id="adhanCard">
+        <h4>🔔 Adhan Reminder</h4>
+        <div>Status: <span id="adhanStatus">Muted</span></div>
+        <div id="adhanControls" style="margin-top:.6rem">
+          <button id="toggleAdhan" style="padding:.5rem .8rem;border-radius:10px;border:none;background:var(--green);color:#fff;cursor:pointer">Enable Adhan</button>
+          <label class="small-muted" style="margin-left:8px;">Volume</label>
+          <input type="range" id="adhanVolume" min="0" max="1" step="0.05" value="0.5" aria-label="Adhan volume"/>
+        </div>
+        <div id="adhanInfo" class="small-muted" style="margin-top:.6rem">Adhan plays in-app at the scheduled prayer (Jaʿfarī).</div>
+      </div>
+
+      
+  
+  
+
+    <select id="sectSelect" style=" color:transparent">
+      
+    </select>
+  
 </div>
 
-<!-- Adhan audio (online Shia adhan source). Replace URL if you prefer another recording. -->
+    </div>
+  </div>
+
+  <footer>
+    Noor Al Huda — All in one Shia website
+  </footer>
+</div>
+
+<!-- Shia Adhan audio -->
+<!-- Source chosen to include Shia phrase. Replace with your hosted file if you prefer. -->
 <audio id="adhanAudio" preload="auto" src="https://www.shiasource.com/wp-content/uploads/2018/07/adhan_alhalawaji.mp3"></audio>
 
 <script>
-/* --- keep header interactions and theme behaviour like before --- */
-function toggleMenu(){document.getElementById("mainNav").classList.toggle("open");}
-function toggleDarkMode(){
-  document.body.classList.toggle("dark-mode");
-  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-}
-(function restoreTheme(){ if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark-mode");} })();
-
-/* ===== City -> country mapping for AlAdhan API (timingsByCity) ===== */
+/* =========================
+   Config & constants
+   ========================= */
+const ALADHAN_BASE = "https://api.aladhan.com/v1/timingsByCity";
+const ALADHAN_METHOD = 0; // Ja'farī (Shia)
+const DELAY_MINUTES = 3;   // user requested small delay
 const CITY_COUNTRY = {
-  London:    {city:"London", country:"United Kingdom"},
-  Bedford:   {city:"Bedford", country:"United Kingdom"},
-  Islamabad: {city:"Islamabad", country:"Pakistan"},
-  Tehran:    {city:"Tehran", country:"Iran"},
-  Karbala:   {city:"Karbala", country:"Iraq"},
-  Najaf:     {city:"Najaf", country:"Iraq"},
-  Qom:       {city:"Qom", country:"Iran"},
-  Mashhad:   {city:"Mashhad", country:"Iran"},
-  Beirut:    {city:"Beirut", country:"Lebanon"},
-  Dearborn:  {city:"Dearborn", country:"United States"},
-  Mumbai:    {city:"Mumbai", country:"India"},
-  Toronto:   {city:"Toronto", country:"Canada"},
-  NewYork:   {city:"New York", country:"United States"},
-  LosAngeles:{city:"Los Angeles", country:"United States"},
-  Sydney:    {city:"Sydney", country:"Australia"},
-  Cairo:     {city:"Cairo", country:"Egypt"},
-  Riyadh:    {city:"Riyadh", country:"Saudi Arabia"}
+  "London": {city:"London", country:"United Kingdom"},
+  "Bedford": {city:"Bedford", country:"United Kingdom"},
+  "Islamabad": {city:"Islamabad", country:"Pakistan"},
+  "Tehran": {city:"Tehran", country:"Iran"},
+  "Karbala": {city:"Karbala", country:"Iraq"},
+  "Najaf": {city:"Najaf", country:"Iraq"},
+  "Qom": {city:"Qom", country:"Iran"},
+  "Mashhad": {city:"Mashhad", country:"Iran"},
+  "Beirut": {city:"Beirut", country:"Lebanon"},
+  "Dearborn": {city:"Dearborn", country:"United States"},
+  "Mumbai": {city:"Mumbai", country:"India"},
+  "Toronto": {city:"Toronto", country:"Canada"},
+  "New York": {city:"New York", country:"United States"},
+  "Los Angeles": {city:"Los Angeles", country:"United States"},
+  "Sydney": {city:"Sydney", country:"Australia"},
+  "Cairo": {city:"Cairo", country:"Egypt"},
+  "Riyadh": {city:"Riyadh", country:"Saudi Arabia"},
+  "Perth": {city:"Perth", country:"Australia"}
 };
 
-/* AlAdhan API base */
-const ALADHAN_BASE = "https://api.aladhan.com/v1/timingsByCity";
+/* state */
+let lastPlayed = { date: null, fajr:false, dhuhr:false, asr:false, maghrib:false, isha:false };
+let scheduledAdhanTimeout = null;
 
-/* Jafari method: method=0 (AlAdhan uses 0 for Jafari / Shia Ithna-Ashari) */
-/* We'll ask the API for today's timings for the chosen city and country with method=0 */
-const API_METHOD = 0;
+/* DOM */
+const citySelect = document.getElementById('citySelect');
+const adhanToggle = document.getElementById('adhanToggle');
+const adhanAudio = document.getElementById('adhanAudio');
+const adhanVolumeInput = document.getElementById('adhanVolume');
+const toggleAdhanBtn = document.getElementById('toggleAdhan');
+const adhanStatusEl = document.getElementById('adhanStatus');
+const statusEl = document.getElementById('status');
 
-/* Add a 3-minute delay (user requested) */
-const DELAY_MINUTES = 3;
-
-/* Track last adhan played for each prayer for today to avoid repeat */
-let lastPlayed = { date: null, fajr: false, dhuhr: false, asr: false, maghrib: false, isha: false };
-
-/* Utility: pad */
+/* helpers */
 function pad(n){ return String(n).padStart(2,"0"); }
-
-/* Convert API time "HH:MM" (24h) to Date object for today's local timezone */
+function formatHM(d){
+  return pad(d.getHours()) + ":" + pad(d.getMinutes());
+}
 function timeStrToDateLocal(timeStr){
-  // timeStr expected like "05:12"
-  const [hh,mm] = timeStr.split(":").map(s=>parseInt(s,10));
+  // API times may include ( +XX ) suffix; strip non "HH:MM"
+  const m = timeStr.match(/(\d{1,2}:\d{2})/);
+  if(!m) return null;
+  const [hh,mm] = m[1].split(':').map(s=>parseInt(s,10));
   const d = new Date();
   d.setHours(hh, mm, 0, 0);
   return d;
 }
+function addMinutes(date, mins){ return new Date(date.getTime() + mins*60000); }
 
-/* Add minutes to a Date (in-place) */
-function addMinutes(date, mins){
-  return new Date(date.getTime() + mins*60000);
-}
+/* restore preferences */
+(function restorePrefs(){
+  const savedCity = localStorage.getItem('salah_city');
+  if(savedCity && CITY_COUNTRY[savedCity]) citySelect.value = savedCity;
+  const adhanEnabled = localStorage.getItem('adhan_enabled') === 'true';
+  adhanToggle.checked = adhanEnabled;
+  const savedVol = localStorage.getItem('adhan_vol');
+  if(savedVol !== null) {
+    adhanVolumeInput.value = savedVol;
+    adhanAudio.volume = parseFloat(savedVol);
+  } else adhanAudio.volume = parseFloat(adhanVolumeInput.value || 0.5);
+  // toggles UI button state
+  setAdhanUI(adhanEnabled);
+})();
 
-/* Format date to HH:MM string */
-function formatHM(d){
-  return pad(d.getHours()) + ":" + pad(d.getMinutes());
-}
+/* toggle nav */
+const mainNav = document.getElementById('mainNav');
+const hamburger = document.getElementById('hamburger');
+hamburger.addEventListener('click', e => { e.stopPropagation(); mainNav.classList.toggle('open'); });
+document.addEventListener('click', e => { if(!mainNav.contains(e.target) && !hamburger.contains(e.target)) mainNav.classList.remove('open'); });
 
-/* Update UI with timings (delayed by DELAY_MINUTES) */
-function updateUI(timings){
-  const prayerIds = ["Fajr","Sunrise","Dhuhr","Asr","Maghrib","Isha"];
-  // map keys from API (some APIs use lowercase keys). AlAdhan returns e.g. timings.Fajr
-  const map = { Fajr:"fajr", Sunrise:"sunrise", Dhuhr:"dhuhr", Asr:"asr", Maghrib:"maghrib", Isha:"isha" };
-  prayerIds.forEach(key => {
-    const id = map[key];
-    const apiTime = timings[key]; // "HH:MM"
-    if(!apiTime){ document.getElementById(id).textContent = "—"; return; }
-    // convert to local Date, add delay minutes, format
-    const dtLocal = addMinutes(timeStrToDateLocal(apiTime), DELAY_MINUTES);
-    document.getElementById(id).textContent = formatHM(dtLocal);
-  });
-}
-
-/* Call AlAdhan API for selected city & update page */
+/* ======== Fetching & rendering ======== */
 async function fetchAndRenderForCity(key){
-  const info = CITY_COUNTRY[key];
-  const status = document.getElementById("status");
-  status.textContent = "Fetching prayer times for " + info.city + ", " + info.country + " ...";
   try {
-    const url = `${ALADHAN_BASE}?city=${encodeURIComponent(info.city)}&country=${encodeURIComponent(info.country)}&method=${API_METHOD}`;
+    const info = CITY_COUNTRY[key];
+    if(!info) throw new Error('City unknown');
+    statusEl.textContent = `Fetching prayer times for ${info.city}, ${info.country} ...`;
+    const url = `${ALADHAN_BASE}?city=${encodeURIComponent(info.city)}&country=${encodeURIComponent(info.country)}&method=${ALADHAN_METHOD}`;
     const resp = await fetch(url);
-    if(!resp.ok) throw new Error("API error: " + resp.status);
+    if(!resp.ok) throw new Error('API error ' + resp.status);
     const json = await resp.json();
-    if(json.code !== 200 || !json.data || !json.data.timings) throw new Error("Invalid API response");
+    if(json.code !== 200 || !json.data || !json.data.timings) throw new Error('Invalid API response');
     // update UI
     updateUI(json.data.timings);
-    // update meta info
-    document.getElementById("cityTitle").textContent = "Salah times — " + info.city + ", " + info.country + " (Jaʿfarī)";
-    // timezone and date (api returns meta.timezone)
-    const tz = json.data.meta && json.data.meta.timezone ? json.data.meta.timezone : Intl.DateTimeFormat().resolvedOptions().timeZone;
-    document.getElementById("tzLabel").textContent = tz;
-    document.getElementById("dateLabel").textContent = new Date().toLocaleDateString();
-    status.textContent = "";
+    // update meta
+    const tz = (json.data.meta && json.data.meta.timezone) ? json.data.meta.timezone : Intl.DateTimeFormat().resolvedOptions().timeZone;
+    document.getElementById('tzLabel').textContent = tz;
+    document.getElementById('dateLabel').textContent = new Date().toLocaleDateString();
+    document.getElementById('cityTitle').textContent = `Salah times — ${info.city}, ${info.country} (Jaʿfarī)`;
+    statusEl.textContent = '';
     // reset lastPlayed if date changed
     const todayStr = new Date().toDateString();
-    if(lastPlayed.date !== todayStr){
-      lastPlayed = { date: todayStr, fajr:false, dhuhr:false, asr:false, maghrib:false, isha:false };
-    }
-  } catch (err){
+    if(lastPlayed.date !== todayStr) lastPlayed = { date: todayStr, fajr:false, dhuhr:false, asr:false, maghrib:false, isha:false };
+    // update next prayer and schedule adhan
+    updateNextPrayerAndSchedule(json.data.timings);
+  } catch(err){
     console.error(err);
-    status.textContent = "Could not load API timings — falling back to local calculation (may be less precise).";
-    // fallback: simple rough times (best-effort) using previous local solar algorithm could be implemented here.
-    // For now show dashes
-    ["fajr","sunrise","dhuhr","asr","maghrib","isha"].forEach(id => document.getElementById(id).textContent = "—");
+    statusEl.textContent = "Could not load API timings — showing placeholders.";
+    // show dashes
+    ['fajr','sunrise','dhuhr','asr','maghrib','isha'].forEach(id => document.getElementById(id).textContent = '—');
   }
 }
 
-/* Play Adhan when current time matches any prayer (delayed times) */
-function checkAndPlayAdhan(){
-  if(!document.getElementById("adhanToggle").checked) return;
+function updateUI(timings){
+  const map = { Fajr:'fajr', Sunrise:'sunrise', Dhuhr:'dhuhr', Asr:'asr', Maghrib:'maghrib', Isha:'isha' };
+  Object.keys(map).forEach(k => {
+    const id = map[k];
+    const apiT = timings[k];
+    if(!apiT) { document.getElementById(id).textContent = '—'; return; }
+    const d = addMinutes(timeStrToDateLocal(apiT), DELAY_MINUTES);
+    document.getElementById(id).textContent = formatHM(d);
+  });
+}
+
+/* ===== Next prayer & countdown & scheduling Adhan ===== */
+let countdownInterval = null;
+
+function getNextPrayerTimeFromTimings(timings){
+  const order = ["Fajr","Dhuhr","Asr","Maghrib","Isha"];
   const now = new Date();
-  const hhmm = formatHM(now);
-  // Only check minute precision; match against displayed times
-  const prayers = { fajr: "fajr", dhuhr: "dhuhr", asr: "asr", maghrib: "maghrib", isha: "isha" };
-  const audio = document.getElementById("adhanAudio");
-  for(const key in prayers){
-    const el = document.getElementById(prayers[key]);
+  for(const key of order){
+    const dt = timeStrToDateLocal(timings[key]);
+    if(!dt) continue;
+    const delayed = addMinutes(dt, DELAY_MINUTES);
+    if(now < delayed) return { name:key, time: delayed, raw: dt };
+  }
+  // if none left, tomorrow's fajr
+  const tomorrowFajr = addMinutes(timeStrToDateLocal(timings.Fajr), 24*60 + DELAY_MINUTES);
+  return { name: 'Fajr (Tomorrow)', time: tomorrowFajr, raw: timeStrToDateLocal(timings.Fajr) };
+}
+
+function clearExistingAdhanSchedule(){
+  if(scheduledAdhanTimeout) {
+    clearTimeout(scheduledAdhanTimeout);
+    scheduledAdhanTimeout = null;
+  }
+}
+
+function scheduleAdhanFor(np){
+  clearExistingAdhanSchedule();
+  // schedule only if adhan toggle is checked and browser allows audio (user interaction)
+  if(!adhanToggle.checked) return;
+  const now = new Date();
+  const diff = np.time - now;
+  if(diff <= 0) return; // already passed
+  // Set timeout (but careful: very long timeouts are fine, but page must remain open)
+  scheduledAdhanTimeout = setTimeout(async () => {
+    try {
+      // Only play once per prayer per day
+      const key = np.name.toLowerCase().split(' ')[0]; // 'fajr', 'dhuhr', etc.
+      if(lastPlayed[key]) return;
+      await adhanAudio.play();
+      lastPlayed[key] = true;
+    } catch(err){
+      console.warn("Could not autoplay adhan:", err);
+      statusEl.textContent = "Adhan blocked by browser; tap the page to allow sound.";
+    }
+  }, diff);
+}
+
+function updateCountdownUI(np){
+  const labelEl = document.getElementById('nextPrayerLabel');
+  const countdownEl = document.getElementById('nextPrayerCountdown');
+  labelEl.textContent = `${np.name} at ${formatHM(np.time)}`;
+  if(countdownInterval) clearInterval(countdownInterval);
+  function tick(){
+    const diff = np.time - new Date();
+    if(diff <= 0){ countdownEl.textContent = "Time reached."; return; }
+    const h = Math.floor(diff/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    countdownEl.textContent = `${h}h ${m}m ${s}s`;
+  }
+  tick();
+  countdownInterval = setInterval(tick, 1000);
+}
+
+let lastTimings = null;
+function updateNextPrayerAndSchedule(timings){
+  lastTimings = timings;
+  const np = getNextPrayerTimeFromTimings(timings);
+  updateCountdownUI(np);
+  scheduleAdhanFor(np);
+}
+
+/* Periodic refresh & minute-sync */
+setInterval(async () => {
+  // refresh timings every 10 minutes to avoid overuse
+  const now = new Date();
+  if(now.getMinutes() % 10 === 0){
+    const cityKey = citySelect.value;
+    await fetchAndRenderForCity(cityKey);
+  }
+  // also check if any prayer time equals current HH:MM and play adhan if enabled (backup)
+  checkAndPlayAdhanNow();
+}, 30*1000);
+
+function checkAndPlayAdhanNow(){
+  if(!adhanToggle.checked) return;
+  const nowHM = formatHM(new Date());
+  const mapping = { fajr:'fajr', dhuhr:'dhuhr', asr:'asr', maghrib:'maghrib', isha:'isha' };
+  for(const key in mapping){
+    const el = document.getElementById(mapping[key]);
     if(!el) continue;
-    const t = el.textContent;
-    if(t === hhmm && !lastPlayed[key]){
-      // attempt to play (browsers may require a user gesture to allow sound — user should click Adhan On or interact with page)
-      audio.currentTime = 0;
-      const playPromise = audio.play();
-      if(playPromise !== undefined){
-        playPromise.catch(e => {
-          // autoplay blocked — inform user
-          console.warn("Autoplay blocked:", e);
-          document.getElementById("status").textContent = "Adhan blocked by browser; tap anywhere to allow sound.";
-        });
-      }
+    if(el.textContent === nowHM && !lastPlayed[key]){
+      adhanAudio.play().catch(e => {
+        console.warn('Adhan play blocked', e);
+        statusEl.textContent = 'Adhan blocked by browser; tap the page to enable sound.';
+      });
       lastPlayed[key] = true;
     }
   }
 }
 
-/* Attach events and auto-refresh */
-document.getElementById("citySelect").addEventListener("change", e => {
-  fetchAndRenderForCity(e.target.value);
+/* ===== Hijri date via AlAdhan gToH endpoint ===== */
+async function updateHijriDate(){
+  try {
+    const today = new Date();
+    const d = `${today.getDate()}-${today.getMonth()+1}-${today.getFullYear()}`;
+    const url = `https://api.aladhan.com/v1/gToH?date=${d}`;
+    const resp = await fetch(url);
+    if(!resp.ok) throw new Error('Hijri API error');
+    const json = await resp.json();
+    if(json?.data?.hijri){
+      const h = json.data.hijri;
+      document.getElementById('hijriDate').textContent = `${h.day} ${h.month.en} ${h.year} AH`;
+      document.getElementById('gregDate').textContent = today.toLocaleDateString(undefined, { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+    }
+  } catch(err){
+    console.warn('Hijri fetch failed', err);
+  }
+}
+/* ===== Nearby mosques via Geoapify (in-app list) ===== */
+async function loadNearbyMosques(lat, lon){
+  try {
+    const apiKey = '2f19ca3953a34fb0ab7571fd07306be3'; // your real Geoapify key
+    if(!apiKey || apiKey === '2f19ca3953a34fb0ab7571fd07306be3'){
+      document.getElementById('mosqueList').innerHTML = '<li class="small-muted">Add a valid Geoapify key to show nearby mosques.</li>';
+      return;
+    }
+
+    const url = `https://api.geoapify.com/v2/places?categories=religion.mosque&bias=proximity:${lon},${lat}&limit=15&apiKey=${apiKey}`;
+    const resp = await fetch(url);
+    if(!resp.ok) throw new Error('Places API error');
+    const json = await resp.json();
+
+    const list = document.getElementById('mosqueList');
+    list.innerHTML = '';
+
+    if(!json.features || json.features.length === 0){
+      list.innerHTML = '<li class="small-muted">No nearby mosques found.</li>';
+      return;
+    }
+
+    // get filter value
+    const sect = document.getElementById('sectSelect').value;
+
+    // Define keyword filters
+    const shiaKeywords = [
+      'jaffari','jafari','ahlul','ahlulbayt','ahlul-bayt','imam ali','ali ibn','al-ridha','ridha','husayn','hussain','husain','kadhim','kazim','mahdi','sadiq','zaid','zaynab'
+    ];
+    const sunniKeywords = [
+      'sunnah','jamia','masjid','bukhari','ummah','khalid','abu bakr','umar','uthman','aisha'
+    ];
+
+    // Filter the results
+    const filtered = json.features.filter(f => {
+      const name = (f.properties.name || '').toLowerCase();
+      if(sect === 'shia') return shiaKeywords.some(k => name.includes(k));
+      if(sect === 'sunni') return sunniKeywords.some(k => name.includes(k)) && !shiaKeywords.some(k => name.includes(k));
+      return true; // all
+    });
+
+    if(filtered.length === 0){
+      list.innerHTML = `<li class="small-muted">No ${sect} mosques found nearby.</li>`;
+      return;
+    }
+
+    // Populate the list
+    filtered.forEach(f => {
+      const li = document.createElement('li');
+      li.style.padding = '6px 0';
+      const name = f.properties.name || 'Mosque';
+      const dist = f.properties.distance ? ` • ${Math.round(f.properties.distance)} m` : '';
+      const addr = f.properties.address_line1 || f.properties.street || '';
+      li.innerHTML = `<strong style="color:var(--green)">${name}</strong><div class="small-muted">${addr}${dist}</div>`;
+      list.appendChild(li);
+    });
+
+  } catch(err){
+    console.warn('Nearby mosques error', err);
+    document.getElementById('mosqueList').innerHTML = '<li class="small-muted">Could not load nearby mosques.</li>';
+  }
+}
+
+// Re-load when user changes filter
+document.getElementById('sectSelect').addEventListener('change', () => {
+  if(window.currentLat && window.currentLon){
+    loadNearbyMosques(window.currentLat, window.currentLon);
+  }
 });
 
-/* Initial load: use selection or fallback */
-(function init(){
-  // choose default from local storage or present selection
-  const savedCity = localStorage.getItem("salah_city");
-  if(savedCity && CITY_COUNTRY[savedCity]) document.getElementById("citySelect").value = savedCity;
-  const sel = document.getElementById("citySelect").value;
-  fetchAndRenderForCity(sel);
+// Run once when location found
+navigator.geolocation.getCurrentPosition(pos => {
+  window.currentLat = pos.coords.latitude;
+  window.currentLon = pos.coords.longitude;
+  loadNearbyMosques(window.currentLat, window.currentLon);
+});
 
-  // save selection
-  document.getElementById("citySelect").addEventListener("change", (e)=>{
-    localStorage.setItem("salah_city", e.target.value);
-  });
 
-  // update every 30 seconds to be responsive and check adhan
-  setInterval(async () => {
-    // refresh times every 10 minutes to avoid overusing API, but keep UI checks frequent
-    const now = new Date();
-    const minutes = now.getMinutes();
-    // refresh times at minute 0, 10, 20, 30, 40, 50
-    if(minutes % 10 === 0){
-      const currentCity = document.getElementById("citySelect").value;
-      await fetchAndRenderForCity(currentCity);
-    }
-    checkAndPlayAdhan();
-  }, 30*1000);
+/* ===== Auto-detect location or allow manual city selection ===== */
+async function init(){
+  // city restoration handled earlier
+  const savedCity = localStorage.getItem('salah_city');
+  if(savedCity && CITY_COUNTRY[savedCity]) citySelect.value = savedCity;
 
-  // also run check each minute on the minute to match HH:MM exactly
-  setInterval(checkAndPlayAdhan, 60*1000);
+  // try geolocation first; if successful, reverse-geocode to city and fetch timings for that city
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(async pos => {
+      const { latitude, longitude } = pos.coords;
+      // reverse geocode via Nominatim (free)
+      try {
+        const r = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+        const j = await r.json();
+        const city = j.address.city || j.address.town || j.address.village || j.address.county || null;
+        if(city && CITY_COUNTRY[city]){
+          citySelect.value = city;
+        } else if(city){
+          // if city not in preset list, we'll still use the name (AlAdhan timingsByCity works with many city names)
+          // add a transient mapping for this session
+          CITY_COUNTRY[city] = { city: city, country: j.address.country || '' };
+          // add option to select so user sees it
+          const opt = document.createElement('option');
+          opt.value = city; opt.textContent = `${city}, ${j.address.country || ''}`;
+          citySelect.appendChild(opt);
+          citySelect.value = city;
+        }
+        // fetch for chosen city
+        await fetchAndRenderForCity(citySelect.value);
+      } catch(err){
+        console.warn('Reverse geocode failed', err);
+        await fetchAndRenderForCity(citySelect.value);
+      }
+      // load nearby mosques with coordinates
+      loadNearbyMosques(latitude, longitude);
+    }, async (err) => {
+      // geolocation denied / failed -> fallback to selected city
+      await fetchAndRenderForCity(citySelect.value);
+      // cannot load nearby in-app without coordinates
+      document.getElementById('mosqueList').innerHTML = '<li class="small-muted">Enable location to list nearby places in-app.</li>';
+    }, { maximumAge: 60*60*1000, timeout:5000 });
+  } else {
+    // no geolocation
+    await fetchAndRenderForCity(citySelect.value);
+    document.getElementById('mosqueList').innerHTML = '<li class="small-muted">Geolocation not supported.</li>';
+  }
 
-  // friendly notice about sound
-  document.addEventListener("click", ()=> {
-    // clicking the page may allow audio autoplay afterwards in some browsers
-    if(document.getElementById("status").textContent.includes("blocked")){
-      document.getElementById("status").textContent = "";
-    }
-  });
-})();
+  // initial hijri
+  updateHijriDate();
+}
+
+/* event handlers */
+citySelect.addEventListener('change', async (e) => {
+  localStorage.setItem('salah_city', e.target.value);
+  await fetchAndRenderForCity(e.target.value);
+});
+
+adhanToggle.addEventListener('change', (e) => {
+  const enabled = e.target.checked;
+  localStorage.setItem('adhan_enabled', enabled ? 'true' : 'false');
+  setAdhanUI(enabled);
+  // reschedule using existing lastTimings if available
+  if(lastTimings) updateNextPrayerAndSchedule(lastTimings);
+});
+
+adhanVolumeInput.addEventListener('input', (e) => {
+  const v = e.target.value;
+  adhanAudio.volume = parseFloat(v);
+  localStorage.setItem('adhan_vol', v);
+});
+
+toggleAdhanBtn.addEventListener('click', () => {
+  const current = adhanToggle.checked;
+  adhanToggle.checked = !current;
+  const enabled = adhanToggle.checked;
+  localStorage.setItem('adhan_enabled', enabled ? 'true' : 'false');
+  setAdhanUI(enabled);
+  if(lastTimings) updateNextPrayerAndSchedule(lastTimings);
+});
+
+function setAdhanUI(enabled){
+  adhanStatusEl.textContent = enabled ? 'Active' : 'Muted';
+  toggleAdhanBtn.textContent = enabled ? 'Disable Adhan' : 'Enable Adhan';
+}
+
+/* handle user click to enable audio if browser blocked autoplay */
+document.addEventListener('click', () => {
+  // try to resume audio context by playing silently then pausing (best-effort)
+  if(adhanToggle.checked && adhanAudio.paused){
+    adhanAudio.play().then(() => {
+      adhanAudio.pause();
+      adhanAudio.currentTime = 0;
+    }).catch(()=>{/* still blocked */});
+  }
+  if(statusEl.textContent.includes('blocked')) statusEl.textContent = '';
+});
+
+/* on load */
+init();
+
+/* expose a small manual refresh to ensure data pickup */
+window.refreshSalah = async function(){ await fetchAndRenderForCity(citySelect.value); updateHijriDate(); };
+
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
