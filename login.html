@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Noor Al Huda Login</title>
+<script src="auth.js"></script>
+</head>
+<body>
+<h1>Login / Signup</h1>
+
+<h2>Sign Up</h2>
+<input id="signupName" placeholder="Display Name">
+<input id="signupEmail" placeholder="Email">
+<input id="signupPass" placeholder="Password" type="password">
+<button onclick="try{signup(signupEmail.value,signupPass.value,signupName.value)}catch(e){alert(e.message)}">Sign Up</button>
+
+<h2>Login</h2>
+<input id="loginEmail" placeholder="Email">
+<input id="loginPass" placeholder="Password" type="password">
+<button onclick="try{login(loginEmail.value,loginPass.value);window.location='index.html'}catch(e){alert(e.message)}">Login</button>
+
+<h2>Guest</h2>
+<button onclick="guestLogin();window.location='index.html'">Continue as Guest</button>
+</body>
+</html>
