@@ -478,6 +478,11 @@ header h1 a:hover {
 <footer>© 2025 Noor Al Huda — All in one Shia website</footer>
 
 <script>
+  const darkToggle = document.getElementById("darkModeToggle");
+
+ src="auth.js"
+
+
 /* === Salah Widget JS === */
 const CITY_COUNTRY = {
   London: {city:"London",country:"United Kingdom"},
@@ -655,6 +660,57 @@ fetchPrayerTimes(city); // or however your widget fetches the times
   window.addEventListener('load', () => {
     document.querySelector('.page-title').classList.add('loaded');
   });
+    // Dark mode (support both 'dark' and 'dark-mode' used in your CSS)
+  function applyThemeClass(isDark) {
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.remove("dark-mode");
+    }
+  }
+  var savedTheme = localStorage.getItem("theme");
+  applyThemeClass(savedTheme === "dark");
+
+  if (darkToggle) {
+    darkToggle.checked = savedTheme === "dark";
+    darkToggle.addEventListener("change", function (ev) {
+      var isDarkNow = !!ev.target.checked;
+      applyThemeClass(isDarkNow);
+      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+    });
+  }
+  
+  const user = getCurrentUser();
+  if(!user){
+    // Optional: redirect to login page
+    // window.location='login.html';
+    console.log("No user logged in — show guest widgets only");
+  } else {
+    console.log("Logged in user:", user.displayName, "Role:", user.role);
+  }
+(function() {
+    const storageKey = "visitCount";
+    const loginPage = "/login"; // change to your actual login page path
+
+    // Get current visit count
+    let count = localStorage.getItem(storageKey);
+    count = count ? parseInt(count) : 0;
+
+    // Increment visit count
+    count++;
+    localStorage.setItem(storageKey, count);
+
+    // Redirect on the 3rd visit
+    if (count === 3) {
+        // Optionally reset counter after redirect
+        localStorage.removeItem(storageKey);
+        window.location.href = loginPage;
+    }
+})();
+
+
 </script>
 </body>
 </html>
