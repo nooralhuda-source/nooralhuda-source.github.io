@@ -1,0 +1,1499 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Noor Al Huda - duas style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const mainNav = document.getElementById("mainNav");
+  const hamburger = document.querySelector(".hamburger");
+  const grid = document.getElementById("bookGrid");
+
+
+
+
+
+hamburger.addEventListener("click", e => {
+  e.stopPropagation();
+  mainNav.classList.toggle("open");
+});
+
+document.addEventListener("click", e => {
+  if (!mainNav.contains(e.target) && !hamburger.contains(e.target))
+    mainNav.classList.remove("open");
+});
+
+searchInput.addEventListener("input", e => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll(".surah-card").forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(q) ? "" : "none";
+  });
+});
+});a
+function applyThemeClass(isDark) {
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.remove("dark-mode");
+    }
+  }
+  var savedTheme = localStorage.getItem("theme");
+  applyThemeClass(savedTheme === "dark");
+
+  if (darkToggle) {
+    darkToggle.checked = savedTheme === "dark";
+    darkToggle.addEventListener("change", function (ev) {
+      var isDarkNow = !!ev.target.checked;
+      applyThemeClass(isDarkNow);
+      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+    });
+  }
+  </script>
+
+  <style>
+    /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+    .ziyarat-section {
+      margin: 2rem auto;
+      max-width: 800px;
+      padding: 1.5rem;
+      background: var(--background, #fff);
+      border-radius: var(--radius, 10px);
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .ziyarat-section h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    .arabic {
+      direction: rtl;
+      font-family: 'Scheherazade', serif;
+      font-size: 1.2rem;
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+    .transliteration, .translation {
+      background: #fdfdfd;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+    .back-duas-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  background-color: var(--green);
+  color: white;
+  text-decoration: none; /* removes underline if it's a link */
+
+  border: none;
+  border-radius: 14px;
+  padding: 0.6rem 1.1rem;
+
+  font-family: "SF Pro Rounded", "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Subtle lift and lighter shade on hover */
+.back-duas-btn:hover {
+  background-color: #2db574; /* a lighter version of your green */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Pressed (active) effect: darker and slightly lowered */
+.back-duas-btn:active {
+  background-color: #1e8b58; /* darker tone of your green */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset;
+  transform: translateY(1px);
+}
+
+/* Optional: if you use an arrow or icon */
+.back-duas-btn .icon {
+  font-size: 1.1rem;
+  margin-right: 0.25rem;
+  opacity: 0.9;
+}
+  </style>
+</head>
+
+<body onload="updateThemeIcon()">
+  <!-- Header -->
+ <header>
+  <div class="brand"><h1><a href="index.html">Noor Al Huda</a></h1></div>
+  <button class="hamburger" aria-label="Open menu">☰</button>
+</header>
+
+<nav id="mainNav">
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="salah.html">Salah</a>
+  <a href="shiatube/index.html">ShiaTube</a>
+  <a href="index.html">Home</a>
+  <a href="settings.html">Settings</a>
+</nav>
+
+
+
+
+  <!-- Main -->
+  <main class="ziyarat-section">
+    <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+    <h2>Dua (name)</h2><br>
+    
+</div>
+
+
+
+<audio controls="">
+                                                        <source src="https://youtu.be/2XAmhD7qTGo" type="audio/mpeg">
+                                                        <a href="https://youtu.be/2XAmhD7qTGo">Dua </a>
+                                                    </audio>
+
+
+
+
+
+<article id="fontSize" class="mt-3" style="font-size: 16px;">                     
+						
+				<!-- Pane "one" content begins -->		
+										
+<div class="text-center">
+					    
+					 			
+					    
+					
+									
+					    
+										
+					
+					
+					
+				
+					
+									
+					
+					
+					
+					
+					
+					
+					
+					
+					
+									
+					
+					    
+
+					
+					
+					
+					
+					
+					
+					
+					 
+					<article id="fontSize" class="mt-3" style="font-size: 16px;">   
+						<!-- PANE "ONE" START -->    
+						<div class="tab-content" id="myTabContent" style="font-size: 16px;">
+							
+							<!-- CHECK PANE NUMBER id="one" & aria-labelledby="one-tab"-->
+							<div class="tab-pane fade show active" id="one" role="tabpanel" aria-labelledby="one-tab" style="font-size: 16px;">
+								<section id="content-1-2" class="content-block content-1-2 pad0 pad-bottom0" style="font-size: 16px;">
+									
+									<!-- PANE "ONE" CONTENT -->    
+									<!-- Video Link -->
+									
+									
+									
+									
+									
+									<!-- Pane "one" content begins -->		
+									
+   
+ 
+
+					
+بِسْمِ ٱللَّهِ ٱلرَّحْمٰنِ ٱلرَّحِيمِ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">bismillahi alrrahmani alrrahimi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+In the Name of Allah, the All-beneficent, the All-merciful.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَلْحَمْدُ لِلَّهِ ٱلَّذِي جَعَلَ ٱللَّيلَ لِبَاساً
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">alhamdu lillahi alladhi ja`ala allayla libasan</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+All praise be to Allah Who appointed the night to be a garment, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَٱلنَّوْمَ سُبَاتاً
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">walnnawma subatan</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and sleep for a rest,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَجَعَلَ ٱلنَّهَارَ نُشُوراً
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa ja`ala alnnahara nushuran</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and day He appointed for a rising! </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لَكَ ٱلْحَمْدُ أَنْ بَعَثْتَنِي مِنْ مَرْقَدِي
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">laka alhamdu an ba`athtani min marqadi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+To You belongs praise, for You roused me from my sleep,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَلَوْ شِئْتَ جَعَلْتَهُ سَرْمَداً
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa law shi'ta ja`altahu sarmadan</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and had You willed, You would have made it everlasting;</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+حَمْداً دَائِماً لاَ يَنْقَطِعُ اَبَداً
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">hamdan da'iman la yanqati`u abadan</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+an endless praise that will never be cut off</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَلاَ يُحْصِي لَهُ ٱلخَلائِقُ عَدَداً
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa la yuhsi lahu alkhala'iqu `adadan</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and whose number the creatures will never count!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَللَّهُمَّ لَكَ ٱلْحَمْدُ أَنْ خَلَقْتَ فَسَوَّيْتَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">allahumma laka alhamdu an khalaqta fasawwayta</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah, to You belongs praise, for You created, then fashioned, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَقَدَّرْتَ وَقَضَيْتَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa qaddarta wa qadayta</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+ordained and decreed, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ أَمَتَّ وَ أَحْيَيْتَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa amatta wa ahyayta</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+gave death and bestowed life, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ أَمْرَضْتَ وَشَفَيْتَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa amradta wa shafayta</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+made sick and healed, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَعَافَيْتَ وَ أَبْلَيْتَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa `afayta wa ablayta</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+made well and afflicted, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَعَلَىٰ ٱلْعَرْشِ ٱسْتَوَيْتَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa `ala al`arshi istawayta</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+established the Throne</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَعَلَىٰ ٱلْمُلْكِ ٱحْتَوَيْتَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa `ala almulki ihtawayta</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and encompassed the Kingdom! </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+أَدْعُوكَ دُعَاءَ مَنْ ضَعُفَتْ وَسِيلَتُهُ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">ad`uka du`a'a man da`ufat wasilatuhu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+I supplicate You with the supplication of one whose mediation is weak, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَٱنْقَطَعَتْ حِيلَتُهُ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wanqata`at hilatuhu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+whose stratagems have been cut off, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَٱقْتَرَبَ أَجَلُهُ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">waqtaraba ajaluhu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+whose term has drawn near, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَتَدَانَىٰ فِي ٱلدُّنْيَا أَمَلُهُ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa tadana fi alddunya amaluhu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+whose expectation from this world has shrunk, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَٱشْتَدَّتْ إِلَىٰ رَحْمَتِكَ فَاقَتُهُ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa ishtaddat ila rahmatika faqatuhu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+whose neediness for Your mercy has intensified, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَعَظُمَتْ لِتَفْرِيطِهِ حَسْرَتُهُ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa `azumat litafritihi hasratuhu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+whose remorse for his neglect has become great, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَكَثُرَتْ زَلَّتُهُ وَعَثْرَتُهُ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa kathurat zallatuhu wa `athratuhu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+whose slips and stumbles have become many,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَخَلُصَتْ لِوَجْهِكَ تَوْبَتُهُ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa khalusat liwajhika tawbatuhu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and whose repentance is devoted sincerely to Your face.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَصَلِّ عَلَىٰ مُحَمَّدٍ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">fasalli `ala muhammadin</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+So, bless Muhammad,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+خَاتَمِ النَّبِيّينَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">khatami alnnabiyyina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the Seal of the Prophets,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَعَلَىٰ أَهْلِ بَيْتِهِ ٱلطَّيِّبِينَ ٱلطَّاهِرِينَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa `ala ahli baytihi alttayyibina alttahirina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and his Household, the good, the pure,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَٱرْزُقْنِي شَفَاعَةَ مُحَمَّدٍ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">warzuqni shafa`ata muhammadin</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and provide me with the intercession of Muhammad,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+صَلَّىٰ ٱللَّهُ عَلَيْهِ وَآلِهِ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">salla allahu `alayhi wa alihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Allah bless him and his Household,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَلاَ تَحْرِمْنِي صُحْبَتَهُ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa la tahrimni suhbatahu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and deprive me not of his companionship!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِنَّكَ أَنْتَ أَرْحَمُ ٱلرَّاحِمِينَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">innaka anta arhamu arrahimina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Surely, You are the Most Merciful of all those who show mercy! </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَللَّهُمَّ ٱقْضِ لِي فِي ٱلأَرْبِعَاءِ اَرْبَعاً
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">allahumma iqdi li fil-arbu`a'i arba`an</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah, decree for me on Wednesday four things:</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِجْعَلْ قُوَّتِي فِي طَاعَتِكَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">ij`al quwwati fi ta`atika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Induce me to be strong in obedience to You, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَنَشَاطِي فِي عِبَادَتِكَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa nashati fi `ibadatika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+to be active in worshiping You, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَرَغْبَتِي فِي ثَوَابِكَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa raghbati fi thawabika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+to be desirous for Your reward,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَزُهْدِي فِيمَا يُوجِبُ لِي أَلِيمَ عِقَابِكَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa zuhdi fima yujibu li alima `iqabika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and to abstain from that which would make incumbent upon me Your painful punishment!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِنَّكَ لَطِيفٌ لِمَا تَشَاءُ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">innaka latifun lima tasha'u</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+You are Gentle to whom You will!</t1></div><br>
+
+
+									<!-- PANES "ONE" CONTENT END -->    
+									
+									<!-- Do Not alter -->
+									<a href="#top" style="font-size: 16px;"><button class="btn btn-warning  btn-xs" style="font-size: 14px;"> <i class="fa fa-angle-double-up fa-lg" style="font-size: 18.6666px;"></i></button></a>
+									<br><br><br><br>
+								</section></div>
+								
+								
+								<!-- PANES "TWO" START -->    
+								<div class="tab-pane fade" id="two" role="tabpanel" aria-labelledby="two-tab" style="font-size: 16px;"><d1 style="font-size: 16px;">
+									
+									
+									<!-- Pane "TWO" content Start -->	
+<h5 style="font-size: 20px;">Dua of Syeda Fatima (peace be upon her) for Wednesday<br></h5>
+
+<iframe src="https://youtube.com/embed/4ubyIIkUZD8" frameborder="0" allowfullscreen="" style="font-size: 16px;"></iframe><br>
+<audio controls="">
+<source src="https://mp3.duas.org/Fatima/fatima31.mp3" type="audio/mpeg" style="font-size: 16px;">
+<a href="https://mp3.duas.org/Fatima/fatima31.mp3" style="font-size: 16px;">wednesday syeda fatima (sa)</a> </audio> <br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَللّٰهُمَّ احْرُسْنَا بِعَيْنِكَ الَّتِيْ لَا تَنَامُ، 
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">allaahummah rusnaa be-a’ynekal latee laa tanaamo</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O God, protect us through the eyes that never sleep</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ رُكْنِكَ الَّذِيْ لَا يُرَامُ،
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa ruknekal lazee laa yoraamo, </t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and through that support, which no one can reach.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ بِاَسْمَائِكَ الْعِظَامِ،
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa be-asmaa-ekal e’zaame, </t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And through your great names,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ صَلِّ عَلٰى مُحَمَّدٍ وَ اٰلِهٖ، 
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa salle a’laa mohammadin wa aalehi, </t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O God, have mercy on Muhammad and the progeny of Muhammad </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ احْفَظْ عَلَيْنَا مَا لَوْ حَفِظَهٗ 
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wah faz a’laynaa maa law hafezahu  </t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and keep this faith of ours safe. Which if it had been secured by anyone else, it would have been destroyed</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+غَيْرُكَ ضَاعَ وَ اسْتُرْ عَلَيْنَا مَا لَوْ سَتَرَهٗ غَيْرُكَ شَاعَ،
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">ghayroka zaa-a’ was tur a’laynaa maa law satarahu ghayroka shaa-a’, </t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And conceal our defect. If anyone other than You had concealed them, they would have been divulged </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ اجْعَلْ كُلَّ ذٰلِكَ لَنَا مِطْوَاعًا اِنَّكَ سَمِيْعُ الدُّعَاءِ، 
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">waj a’l kulla zaaleka lanaa mitwaa-a’n innaka samee-u’d do-a’a-e, </t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and make all those things subservient to us, as indeed You are the one, who hears the supplications,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+قَرِيْبٌ مُجِيْبٌ.‏
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">qareebun mojeebun.</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+ nearest to the servants and one who accepts their plea.</t1></div><br>
+
+						
+
+
+									
+									<!-- PANES "TWO" CONTENT END --> 
+									<!-- Do Not alter -->
+									
+								<a href="#top" style="font-size: 16px;"><button class="btn btn-warning  btn-xs" style="font-size: 14px;"> <i class="fa fa-angle-double-up fa-lg" style="font-size: 18.6666px;"></i></button></a>	
+									<br><br>
+								</d1></div>
+								
+								<!-- PANES "THREE" START -->    
+								<div class="tab-pane fade" id="three" role="tabpanel" aria-labelledby="three-tab" style="font-size: 16px;"><d1 style="font-size: 16px;">
+									<!-- Pane "THREE" content Start -->	
+										
+	<a target="_blank" href="https://duas.org/mobile/sahifa-alawia-159-wednesday.html" style="font-size: 16px;"> Seperate page  |</a>
+	<a style="color: rgb(0, 0, 238); font-size: 16px;" href="https://duas.org/alaviya/dua-159.htm"><u style="font-size: 16px;"> Desktop</u></a><hr style="font-size: 16px;">
+			<iframe src="https://youtube.com/embed/ndWMCYGJwNQ" frameborder="0" allowfullscreen="" style="font-size: 16px;"></iframe><br>
+						
+									
+<audio controls="">
+<source src="https://mp3.duas.org/alaviyamp3/sa_wednesday.mp3" type="audio/mpeg" style="font-size: 16px;">
+<a href="https://mp3.duas.org/alaviyamp3/sa_wednesday.mp3" style="font-size: 16px;">sahifa alavia for wednesday</a> </audio> <br>	
+<audio controls="">
+<source src="https://mp3.duas.org/wednesday-sahifa-alavia.mp3" type="audio/mpeg" style="font-size: 16px;">
+<a href="https://mp3.duas.org/wednesday-sahifa-alavia.mp3" style="font-size: 16px;">sahifa alavia for wednesday</a> </audio> <br>
+
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">بِسْمِ اﷲِ الرَّحْمٰنِ الرَّحِیْمِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+In the name of Allah the Beneficent the Merciful.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+اَلْحَمْدُ لِلّٰہِ الَّذِیْ مَرَضَاتُہٗ فِی الطَّلَبِ اِلَیْہِ وَ اِلْتِمَاسِ مَا لَدَیہِ وَسَخْطُہٗ فِیْ تَرْکِ الْاِلْحَاحِ فِیْ الْمَسْئَلَۃِ عَلَیْہِ وَ سُبْحَانَ اﷲِ شَاہِدُ کُلِّ نَجْوٰی بِعِلْمِہٖ وَ مُبَآئِنِ کُلِّ ذِیْ جِسْمٍ بِنَفْسِہٖ وَلَآ اِلٰہَ اِلاَّ اﷲُ الَّذِیْ لاَ یُدْرَکُ بِالْعُیُوْنِ وَالْاَبْصَارِ وَ لاَ یُجْہَلُ بِالْعُقُوْلِ وَالْاَلْبَابِ وَ یُخْلَقُ مِنَ الضَّمِیْرِ
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Praise is for Allah who is pleased with the one who invokes Him and who supplicate to Him and in realizing his stubbornness His wrath is concealed. Pure is Allah who is aware of every whisper due to His knowledge and is different from all the creatures possessing body. 
+
+
+There is no Lord except Allah. He cannot be seen by imagination or with eyes, and cannot be denied due to intellect and reason. Nor he can be created by the heart.
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ یَعْلَمُ خَآئِنَۃَ الْاَعْیَنِ وَمَا تَخْفِی الصُّدُوْرِ وَاﷲُ اَکْبَرُ الْمُتَجَلِّلُ عَنْ صِفَاتِ الْمَخْلُوْقِیْنَ الْمُطِّعُ عَلٰی مَافِیْ قُلُوْبِ الْخَلَآئِقِ اَجْمَعِیْنَ
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+He is aware of the indication of eyes and the secrets of the hearts and Allah is too great and Majestic who is aware of the Qualities of the creation and is aware of the secrets of the entire Universe.
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+اَللّٰہُمَّ اِنِّیْ اَسْئَلُکَ سُؤَالَ مَنْ لاَ یَمِلُّ دُعَآءَ رَبِّہٖ وَ اَتَضَرَّعُ اِلَیْکَ تَضَرَّعُ غَرِیْقٍ یَرْجُوْا کَشْفَ کُرْبِہٖ وَ اَبْتَہِلُ اِلَیْکَ اِبْتِہَالِ تَآئِبٍ مِنْ ذُنُوْبِہٖ وَ خَطَایَاہُ
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah! I seek from You like the one who does not fear his lord while asking from Him, and I beseech You like the one who is drowned in calamities and desires to come out of it.
+
+
+ And I call upon You, so restlessly as the one who is repenting on his sins and errors.
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+&nbsp; وَ اَنْتَ الرَّئُوْفُ الَّذِیْ مَلَکْتَ الْخَلَآئِقَ کَلُّہُمْ وَفَطَرْتَہُمْ اَجْنَاسًا مُخْتَلِفَاتِ الْاَلْوَانِ وَالْاَقْدَارِ عَلٰی مَشِیَّتِکَ وَ قَدَّرْتَ اٰجَالَہُمْ وَ اَرْزَاقَہُمْ فَلَمْ یَتَعَاظَمَکَ خَلْقُ خَلْقٍ حَتّٰی کَوَّنْتَہٗ کَمَا شِئْتَ مُخْتَلِفًا مِمَّا شِئْتَ فَتَعَالَیْتَ وَ تَجَبَّرْتَ عَنِ اتِّخَاذِ وَزِیْرٍ وَ تَعَزَّزْتَ عَنْ مُوَازَرَۃٍ شَرِیْکٍ وَ تَنَزَّہْتَ عَنِ اتِّخَاذِ الْاَبْنَآءِ وَ تَقَدَّسْتَ عَنْ مَلاَمَسَۃِ النِّسَآءِ۔
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And You are the most merciful, lord of the entire creation, creating various creatures by Your Will. You have fixed their life span and their sustenance creating of a creature is not difficult for You and designed them as You desired. 
+
+
+You are above everything so as to be dependent of anything, or that a partner be ascribed to You.
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَلَیْسَتِ الْاَبْصَارُ بِمُدْرِکَۃٍ لَکَ وَ لَیْسَتِ الْاَوْہَامُ بِوَاقِعَۃٍ عَلَیْکَ وَ لَیْسَ لَکَ شَرِیْکٌ وَلاَ نِدٌّ وَلاَ عَدِیْلٌ وَلاَ نَظِیْرٌ وَ اَنْتَ الْفَرْدُ الْوَاحِدُ الدَّآئِمُ الْاَوَّلُ الْاٰخِرُ وَالْعَالِمُ الْاَحَدُ الصَّمَدُ الْقَآئِمُ الَّذِیْ لَمْ تَلِدْ وَلَمْ تُوْلَدْ وَلَمْ یَکُنْ لَکَ کَفُوًا اَحَدٌ-
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+We cannot see You with eyes, no false belief can reach up to You, and You have no partners, no opposite and no equal. 
+
+
+You are one, alone and eternal. You are the first, the last, the Knower, unconcerned and the everlasting, You are not a son of anyone and no one is Your son.
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لاَ تَنَالُ بِوَصْفٍ وَلاَ تُدْرَکُ بِوَہْمٍ وَلاَ تُغَیِّرُکَ فِیْ مَرِّ الدُّہُوْرِ صَرْفٌ کَنْتَ اَزَلِیًّا لَمْ تَزَلْ وَلاَ تَزَالُ وَ عِلْمُکَ بِالْاَشْیَآءِ فِی الْخِفَآءِ کَعِلْمِکَ بِہَا فِی الْاِجْہَادِ وَالْاِعْلاَنِ۔
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+None is like you and no one can understand you by praising or by hallucination. 
+
+
+No time, no rotation of the earth can change You. You were Eternal and will remain everlasting till end. You know what is concealed. Your knowledge is same as it was before.
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+
+&nbsp;فَیَامَنْ ذَلَّتْ لِعَظَمَتِہٖ الْعُظَمَآءُ وَخَضَعَتْ لِعِزَّتِہِ الرُّءَ وسَآءُ 
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O the one! O the one in comparsion of Whose greatness the greatest personalities are nothing.And beforeWhose might the mighty people are helpless. 
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ مَنْ کَلَّتْ عَنْ بُلُوْغِ ذَاتِہٖ اَلْسُنُ الْبُلَغَآءِ وَمَنْ اَحْکَمَ تَدْبِیْرَ الْاَشْیَآءِ وَاسْتَعْجَمَتْ عَنْ اِدْرَاکِہٖ عِبَارَۃِ عُلُوْمِ الْعُلَمَآء</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The words of the litterateurs fail to reach His Being. The One Who has fixed the course of action of everything. And the writings of the eloquent ones fail to express His realities.
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+یَا سَیِّدِیْ اَتُعَذِّبُنِیْ بِالنَّارِ وَ اَنْتَ اَمَلِیْ اَوْ تُسَلِّطُہَا عَلَیَّ بَعْدَ اِقْرَارِیْ لَکَ بِالتَّوْحِیْدِ 
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My Lord! Will you inmate me in the fire? Though You are my wish or you'll subdue the fire of hell on me! as I confess your oneness </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+وَ خُضُوْعِیْ وَ خُشُوْعِیْ لَکَ بِالسُّجُوْدِ اَوْ تُلَجْلِجُ لِسَانِیْ فِیْ الْمَوْقَفِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+ and I assert of my lowliness and bow down my head before You. Or my tongue falter in speech by giving the account, 
+ </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+  وَ قَدْ مَہَّدْتَ لِیْ بِمَنِّکَ سُبُلَ الْوُصُوْلِ اِلٰی التَّسْبِیْحِ وَالتَّحْمِیْدِ وَالتَّمْجِیْدِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+ Through your grace, you have paved for me the means to attain glorification, praise and glorification.
+ 
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+&nbsp;فَیَا غَایَۃَ الطَّالِبِیْنَ وَ اَمَانَ الْخَآئِفِیْنَ وَ عِمَادَ الْمَلْہُوْفِیْنَ وَ غِیَاثَ الْمُسْتَغِیْثِیْنَ 
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O helper of seekers, O protector of frightened people who seek protection, of frightened people who seek protection, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَجَارَ الْمُسْتَجِیْرِیْنَ وَ کَاشِفَ ضُرِّ الْمَکْرُوْبِیْنَ وَ رَبَّ الْعَالَمِیْنَ وَ اَرْحَمَ الرَّاحِمِیْنَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O comforter to remove the sorry of afflicted persons. O cherisher, of learned people and O greatest of all kind of people, O merciful,
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+&nbsp;صَلِّ عَلٰی مُحَمَّدٍ وَ اٰلِ مُحَمَّدٍ وَ تُبْ عَلَیَّ وَ اَلْبِسْنِیْ الْعَافِیَۃِ وَارْزُقْنِیْ مِنْ فَضْلِکَ رِزْقًا وَاسِعًا وَاجْعَلْنِیْ مِنَ التَّوَّابِیْنَ
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O my Lord, bless  Mohammad Mustafa and his progeny. Accept my repentance give me good health and vast sustenance out of your grace and place me among the pious people.&nbsp;
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَللّٰہُمَّ اِنْ کُنْتَ کَتَبْتَنِیْ شَقِیًّا عِنْدَکَ فَاِنِّیْ اَسْئَلُکَ بِمَعَاقِدِ الْعِزِّ مِنْ رَحْمَتِکَ بِالْکِبْرِیَآءِ وَالْعَظَمَۃِ الَّتِیْ لاَ یُقَاوِمُہَا مُتَکَّبِّرٌ وَلاَ عَظِیْمٌ
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+&nbsp;O Allah! You considered me as a sinner, I cry for mercy and quote for the sake of Your grace and honourable places and your grandeur and magnificence that no one can oppose you.
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+&nbsp;اَنْ تُصَلِّیَ عَلٰی مُحَمَّدٍ وَ اٰلِ مُحَمَّدٍ وَ اَنْ تُحَوِّلْنِیْ سَعِیْدًا فَاِنَّکَ تَجْرِی الْاَمُوْرِ عَلٰی اِرَادَتِکَ وَ تَجِیْرُ وَلاَ یُجَارُ عَلَیْکَ وَ اَنْتَ عَلٰی کُلِّ شَیْءٍ قَدِیْرٌ 
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah, send Your blessings on Hazrat Mohammad Mustafa (s.a.w.a.) and his progeny. O My Lord, make me fortunate because all matters are in your possession.
+ You are giving Your protection as there is no one except You who can give protection You have power over all things </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ اَنْتَ الرَّئُوْفُ الرَّحِیْمُ الْخَبِیْرُ تَعْلَمُ مَا فِیْ نَفْسِیْ وَلاَ اَعْلَمُ مَا فِیْ نَفْسِکَ اِنَّکَ اَنْتَ عَلاَّمُ الْغُیُوْبِ فَاَلْطُفْ بِیْ فَقَدِیْمًا لَطُفْتَ بِمُسْرِفٍ عَلٰی نَفْسِہٖ
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+You are Merciful and Knower of all things.  You know what is in my heart but I am not aware what is in your heart.of course you know all secret very well
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+
+&nbsp;فَامْنُنْ عَلَیَّ فَقَدْ مَنَنْتَ عَلٰی غَرِیْقٍ فِیْ بُحُوْرٍ خَطِیْئَۃٍ ہَآئِمًا اَسْلَمْتَہٗ لِلْحُتُوْفِ کَثْرَۃُ زَلَلِہٖ وَ تَطَوُّلْ عَلَیَّ 
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Bestow Your favour on me, as You always bestowed Your blessings on whom who showed high handedness.Do favour on me as You obliged on them who lost in an ocean of errors and their errors caused them to die.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+یَا مُتَطَوِّلاً عَلَی الْمُذْنِبِیْنَ بِالصَّفْحِ وَالْعَفْوِ فَاِنَّکَ لَمْ تَزِلْ اٰخِذًا بِالْفَضْلِ عَلَی الْخَاطِئِیْنَ وَالصَّفْحِ (١) عَلَی الْعَاثِرِیْنَ وَ مَنْ وَجَبَ لَہٗ بِاِجْتِرَآئِہٖ عَلَی الْاٰثَامِ حُلُوْلَ دَارِ الْبَوَارِیَا عَالِمَ الْخَفِیَّاتِ وَالْاَسْرَارِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Lord! You showed Your mercy on sinful person, forgive my sin also as You always bestowed Your favour on sinners and trial them by means of errors, who are abide for the hell, You showed Your forgiveness O Knower of concealed matters,
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+&nbsp;یَا جَبَّارُ یَا قَہَّارُ وَمَا اَلْزَمْتَنِیْہِ مَوْلاَیَ مِنْ فَرْضِ الْاٰبَآءِ وَالْاُمَّہَاتِ وَ وَاجِبِ حُقُوْقِہِمْ مَعَ الْاِخْوَانِ وَالْاَخْوَاتِ فَاحْتَمِلْ ذٰلِکَ عَنِّیْ اِلَیْہِمْ وَ اَدِّہٖ 
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O my Lord ?, the responsibilities of my parents, my brothers and sisters which are connected with me, You Yourself accomplishes them in behalf of me. Take my responsibility on You.
+</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+
+یَا ذَا الْجَلاَلِ وَالْاِکْرَامِ وَاغْفِرْ لِلْمُؤْمِنِیْنَ وَالْمُؤْمِنٰتِ اِنَّکَ عَلٰی کُلِّ شَیْءٍ قَدِیْرٌ۔
+</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Lord of Majesty and Generosity, forgive all believing men and women.
+No doubt You have power over all things.</t1></div><br>
+						
+						
+
+
+
+										<!-- Do Not alter -->
+										<a href="#top" style="font-size: 16px;"><button class="btn btn-warning  btn-xs" style="font-size: 14px;"> <i class="fa fa-angle-double-up fa-lg" style="font-size: 18.6666px;"></i></button></a>
+									<br>
+								<br><br>	</d1></div>
+								
+								<!-- PANE "Three" CONTENT END --> 
+								
+		<!-- PANES "FOUR" START -->    
+								<div class="tab-pane fade" id="four" role="tabpanel" aria-labelledby="four-tab" style="font-size: 16px;">
+									<!-- Pane "Four" content Start -->	
+<h5 style="font-size: 20px;">Ziyarat of 4 Imams- Imam Musa Al Kazim (as) , Imam Ali Ridha (as) , Imam Mohammed Taqi (as) and Imam Ali Naqi(as) </h5>									
+<iframe src="https://youtube.com/embed/VL2OFMuFkNI" frameborder="0" allowfullscreen="" style="font-size: 16px;"></iframe><br>
+
+
+<audio controls="">
+<source src="https://mp3.duas.org/wednesday-ziyarat.mp3" type="audio/mpeg" style="font-size: 16px;">
+<a href="https://mp3.duas.org/wednesday-ziyarat.mp3" style="font-size: 16px;">Wednesday Ziyarah</a> </audio> <br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَلسَّلاَمُ عَلَيْكُمْ يَا أَوْلِيَاءَ ٱللَّهِ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">alssalamu `alaykum ya awliya'a allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Peace be upon you [all], O saints of Allah!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَلسَّلاَمُ عَلَيْكُمْ يَا حُجَجَ ٱللَّهِ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">alssalamu `alaykum ya hujaja allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Peace be upon you, O arguments of Allah!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَلسَّلاَمُ عَلَيْكُمْ يَا نُورَ ٱللَّهِ فِي ظُلُمَاتِ ٱلأَرْضِ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">alssalamu `alaykum ya nura allahi fi zulumati al-ardi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Peace be upon you, O light of Allah in the darkness of the earth!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَلسَّلاَمُ عَلَيْكُمْ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">alssalamu `alaykum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Peace be upon you.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+صَلَوَاتُ ٱللَّهِ عَلَيْكُمْ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">salawatu allahi `alaykum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Blessings of Allah be upon you</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَعَلَىٰ آلِ بَيْتِكُمُ ٱلطَّيِّبِينَ ٱلطَّاهِرِينَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa `ala ali baytikumu alttayyibina alttahirina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and upon your Household, the pure and immaculate.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِأَبِي أَنْتُمْ وَأُمِّي
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">bi-abi antum wa ummi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+May Allah accept my father and mother as ransoms for you!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لَقَدْ عَبَدْتُمُ ٱللَّهَ مُخْلِصِينَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">laqad `abadtumu allaha mukhlisina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Indeed, you worshipped Allah sincerely</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَجَاهَدْتُمْ فِي ٱللَّهِ حَقَّ جِهَادِهِ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa jahadtum fi allahi haqqa jihadihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and strove for His sake with due strife</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+حَتَّىٰ أَتَاكُمُ ٱلْيَقِينُ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">hatta atakumu alyaqinu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+until death came upon you.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَلَعَنَ اللَّهُ أَعْدَاءكُمْ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">fala`ana allahu a`da'akum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+So, may Allah curse all your enemies</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مِنَ ٱلْجِنِّ وَٱلْإِنْسِ أَجْمَعِينَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">mina aljinni wal-insi ajma`ina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+from the jinn and human beings.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَنَا أَبْرَأُ إِلَىٰ ٱللَّهِ وَإِلَيْكُمْ مِنْهُمْ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa ana abra'u ila allahi wa ilaykum minhum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And I release myself before Allah and before you from them (i.e. your enemies).</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يَا مَوْلاَيَ يَا أَبَا إِبْرَاهِيمَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">ya mawlaya ya aba ibrahima</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O my master, O Abu-Ibrahim,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مُوسَىٰ بْنَ جَعْفَرٍ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">musa ibna ja`farin</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Musa, the son of Ja`far!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يَا مَوْلاَيَ يَا أَبَا ٱلْحَسَنِ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">ya mawlaya ya aba alhasani</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O my master, O Abu’l-Hasan,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+عَلِيَّ بْنَ مُوسَىٰ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">`aliyya ibna musa</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+`Ali, the son of Musa!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يَا مَوْلاَيَ يَا أَبَا جَعْفَرٍ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">ya mawlaya ya aba ja`farin</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O my master, O Abu-Ja`far,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مُحَمَّدَ بْنَ عَلِيٍّ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">muhammada ibna `aliyyin</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Muhammad, the son of `Ali!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يَا مَوْلاَيَ يَا أَبَا ٱلْحَسَنِ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">ya mawlaya ya aba alhasani</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O my master, O Abu’l-Hasan,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+عَلِيَّ بْنَ مُحَمَّدٍ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">`aliyya ibna muhammadin</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+`Ali, the son of Muhammad!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+أَنَا مَوْلىٰ لَكُمْ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">ana mawlan lakum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+I am your servant,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مُؤْمِنٌ بِسِرِّكُمْ وَجَهْرِكُمْ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">mu'minun bisirrikum wa jahrikum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+I believe in your secret and open affairs,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مُتَضَيِّفٌ بِكُمْ في يَوْمِكُمْ هٰذَا
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">mutadayyifun bikum fi yawmikum hadha</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and I am staying with you as your guest, on this day,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَهُوَ يَوْمُ ٱلْأَرْبِعَاءِ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa huwa yawmu al-arbi`a'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+which is Wednesday,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَمُسْتَجِيـرٌ بِكُمْ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa mustajirun bikum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and I am in your vicinity;</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَأَضِيفُونِي وَأَجِيرُونِي
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">fa-adifuni wa ajiruni</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+so, receive me as your guest and neighbor,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِآلِ بَيْتِكُمُ ٱلطَّيِّبِينَ ٱلطَّاهِرِينَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">bi-ali baytikumu alttayyibina alttahirina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+[I ask you] by your Household, the pure and immaculate.</t1></div><br>
+									
+									
+									<!-- Do Not alter -->
+									<a href="#top" style="font-size: 16px;"><button class="btn btn-warning  btn-xs" style="font-size: 14px;"> <i class="fa fa-angle-double-up fa-lg" style="font-size: 18.6666px;"></i></button></a>
+								<br>	</div>
+								
+								<!-- PANE "four" CONTENT END --> 															
+			<!-- PANES "FOUR a" START -->    
+								<div class="tab-pane fade" id="foura" role="tabpanel" aria-labelledby="foura-tab" style="font-size: 16px;">
+								
+								<!-- Pane "Four" content Start -->
+						<b style="font-size: 16px;">Tasbih  | </b><a href="#isteaz" style="font-size: 16px;"> Isteaz </a> |<a href="#rizqwed" style="font-size: 16px;">Rizq Wed. dua </a> <hr style="font-size: 16px;">
+<hr style="font-size: 16px;">
+<iframe src="https://youtube.com/embed/BZDDCjf_x1s" frameborder="0" allowfullscreen="" style="font-size: 16px;"></iframe><br>
+								
+							
+								<audio controls="">
+<source src="https://mp3.duas.org/wedtasbih.mp3" type="audio/mpeg" style="font-size: 16px;">
+<a href="https://mp3.duas.org/wedtasbih.mp3" style="font-size: 16px;">Audio Name</a> </audio> <br>
+Tasbih
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِسْمِ اللهِ الرَّحْمنِ الرَّحِيمِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+In the name of Allah, the Beneficent and Merciful.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+‏ سُبْحَانَ مَنْ تُسَبِّحُ لَهُ الْأَنْعَامُ بِأَصْوَاتِهَا يَقُولُونَ سُبُّوحاً قُدُّوساً</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to Him who The Cattles do glory Him with their voice saying: O, the Oft-Praised and Sacred!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَ الْمَلِكِ الْحَقِّ الْمُبِينِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to the Manifest, Truth Master.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَ مَنْ تُسَبِّحُ لَهُ الْبِحَارُ بِأَمْوَاجِهَا </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to Him Who The Seas do glory Him with its waves!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَكَ رَبَّنَا وَ بِحَمْدِكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to you, Our Allah, and Praise in you.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَ مَنْ تُسَبِّحُ لَهُ مَلَائِكَةُ السَّمَاوَاتِ بِأَصْوَاتِهَا</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to Him, Who The Angels of Heavens do Glory him with their voices!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+[سُبْحَانَ اللهِ الْمَحْمُودِ فِي كُلِّ مَقَالَةٍ [مَقَالِهِ‏</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to Allah, who is Praised in every discourse!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَ اللهِ الَّذِي يُسَبِّحُ لَهُ الْكُرْسِيُّ وَ مَا حَوْلَهُ وَ مَا تَحْتَهُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to Allah, who is glorified by The throne from around and under it!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَ الْمَلِكِ الْجَبَّارِ الَّذِي مَلَأَ كُرْسِيُّهُ السَّمَاوَاتِ السَّبْعَ وَ الْأَرَضِينَ السَّبْعَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to The most Powerful Master, who His Throne has filled the seven havens and The seven earths!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَ اللهِ بِعَدَدِ مَا سَبَّحَهُ الْمُسَبِّحُونَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to Allah at the amount of how much the praises do glory Him!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ الْحَمْدُ لِلهِ بِعَدَدِ مَا حَمِدَهُ الْحَامِدُونَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+All praises are to Allah at the amount of how much The Praiser does thanks Him!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ لَا إِلَهَ إِلَّا اللهُ بِعَدَدِ مَا هَلَّلَهُ الْمُهَلِّلُونَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And there is no god but You! at the amount of whom do declare worship only for You.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ اللهُ أَكْبَرُ بِعَدَدِ مَا كَبَّرَهُ الْمُكَبِّرُونَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And Allah is the Magnificent! At the amount of whom do magnify Him!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ أَسْتَغْفِرُ اللهَ بِعَدَدِ مَا اسْتَغْفَرَهُ الْمُسْتَغْفِرُونَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And I ask God's forgiveness! At the number of whom do Implor for His forgiveness!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ لَا حَوْلَ وَ لَا قُوَّةَ إِلَّا بِاللهِ الْعَلِيِّ الْعَظِيمِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And there is no power and strength except with Allah, the Most High, the All-great;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِعَدَدِ مَا قَالَهُ الْقَائِلُونَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+at the number of people who say it!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ صَلَّى اللهُ عَلَى مُحَمَّدٍ وَ آلِ مُحَمَّدٍ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And Allah's Blessings be upon Muhammed and his Household;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِعَدَدِ مَا صَلَّى عَلَيْهِ الْمُصَلُّونَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+at the amount of whom do send their blessings upon Him!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَكَ لَا إِلَهَ إِلَّا أَنْتَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to You, There is no God save you!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ تُسَبِّحُ لَكَ الدَّوَابُّ فِي مَرَاعِيهَا </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The livestock; do glorify you in their rangeland,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ الْوُحُوشُ فِي مَظَانِّهَا</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Wild animals; do glorify you in Their most likely place,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ السِّبَاعُ فِي فَلَوَاتِهَا </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The predatory beasts do glorify you in their landscape,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ الطَّيْرُ فِي وُكُورِهَا</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and The birds do glorify you in their nests!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَكَ لَا إِلَهَ إِلَّا أَنْتَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory to you, There is no God save you,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+تُسَبِّحُ لَكَ الْبِحَارُ بِأَمْوَاجِهَا</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+glorified You are by; The oceans' waves,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ الْحِيتَانُ فِي مِيَاهِهَا</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The whales in its water,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ الْمِيَاهُ [فِي‏] عَلَى مَجَارِيهَا</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The water in its rivers</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ الْهَوَامُّ فِي أَمَاكِنِهَا</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and the vermin in its places!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَكَ لَا إِلَهَ إِلَّا أَنْتَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory to you, There is no God save you;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الْجَوَادُ الَّذِي لَا يَبْخَلُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the Generous Who is never a miser,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الْغَنِيُّ الَّذِي لَا يُعْدِمُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the All-Sufficient who is never missing,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الْجَدِيدُ الَّذِي لَا يَبْلَى </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the Unprecedented who is never worn out!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+الْحَمْدُ لِلهِ الْبَاقِي الَّذِي تَسَرْبَلَ بِالْبَقَاءِ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+All Praise to Allah; The Remaining, who demonstrates Himself through his present.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+الدَّائِمُ الَّذِي لَا يَفْنَى</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Perpetual, Who will never cease to exist!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الْعَزِيزُ الَّذِي لَا يَذِلُّ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Noble, Who will not be humiliated!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الْمَلِكُ الَّذِي لَا يَزُولُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Ruler, who will not be removed!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَكَ لَا إِلَهَ إِلَّا أَنْتَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory to you, There is no God save you;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+الْقَائِمُ الَّذِي لَا يَفْنَى </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Upright, Who is imperishable!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+الدَّائِمُ الَّذِي لَا يَبِيدُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Perpetual, Who is imperishable!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الْعَلِيمُ الَّذِي لَا يَرْتَابُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The All-Knowing, Who will not raise a doubt!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الْبَصِيرُ الَّذِي [لَا يَلْهُو] لَا يَضِلُّ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The All-Seeing, Who will not go astray!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+الْحَلِيمُ الَّذِي لَا يَجْهَلُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Forbearing, Who will not ignore!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَكَ لَا إِلَهَ إِلَّا أَنْتَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory to you, There is no God save you,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الْحَكِيمُ الَّذِي لَا يَحِيفُ الرَّقِيبُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Wise, Who will never be oppressive!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الَّذِي لَا يَسْهُو الْمُحِيطُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Watcher, Who will never forget one thing over another!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الَّذِي لَا يَلْهُو الشَّاهِدُ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Encompasser, Who is never engrossed with a thing to overlook another!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+الَّذِي لَا يَغِيبُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Witness, Who will never is absent!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَكَ لَا إِلَهَ إِلَّا أَنْتَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory to you, There is no God save you;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+الْقَوِيُّ الَّذِي لَا يُرَامُ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The All-Powerful, Who will never be in harm!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+الْعَزِيزُ الَّذِي لَا يُضَامُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Noble, Who is invulnerable!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ السُّلْطَانُ الَّذِي لَا يُغْلَبُ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The King, Who will never be overcome!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+الْمُدْرِكُ الَّذِي لَا يُدْرَكُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Percipient, who will never be perceived!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الطَّالِبُ الَّذِي لَا يَعْجِزُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Demandant, who will never be incapable!</t1></div><br>
+<hr class="black2" style="font-size: 16px;">
+								<h6 id="isteaz" style="font-size: 16px;"></h6>
+								<b style="font-size: 16px;">Seek Protection</b><br>
+								<audio controls="">
+<source src="https://mp3.duas.org/wednesday-isteaz.mp3" type="audio/mpeg" style="font-size: 16px;">
+<a href="https://mp3.duas.org/wednesday-isteaz.mp3" style="font-size: 16px;">Audio Name</a> </audio> <br>
+Seek Protection
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِسْمِ اللهِ الرَّحْمنِ الرَّحِيمِ‏</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+In the Name of Allah, the Merciful, the Compassionate.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+‏ أُعِيذُ نَفْسِي بِالْأَحَدِ الصَّمَدِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+I seek the protection of you; the One, the Refuge,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ مِنْ شَرِّ النَّفَّاثاتِ فِي الْعُقَدِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+from the evil of what is blown on, knotted,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ مِنْ شَرِّ ابْنِ قِتْرَةَ وَ مَا وَلَدَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and from the evil of Abu Mura (Satan) and what he has begotten.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ أَسْتَعِيذُ بِاللهِ الْوَاحِدِ الْأَعْلَى </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+I seek your protection; the One, the Highest,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مِنْ شَرِّ مَا رَأَتْ عَيْنِي وَ مَا لَمْ تَرَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+from that which the eye sees and does not see.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+أَسْتَعِيذُ بِاللهِ الْوَاحِدِ الْفَرْدِ الْكَبِيرِ الْأَعْلَى </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+I seek your protection in the Unequalled, the Great,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مِنْ شَرِّ مَنْ أَرَادَنِي بِأَمْرٍ عَسِيرٍ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+from the evil of what it intends for you (by the decree of the Sovereign).</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَ آلِ مُحَمَّدٍ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah, send blessings upon Muhammed and his Household;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ اجْعَلْنِي فِي جِوَارِكَ وَ حِصْنِكَ الْحَصِينِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Therefore, go, O, to the protection of Allah,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الْعَزِيزِ الْجَبَّارِ الْمَلِكِ الْقُدُّوسِ الْقَهَّارِ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the Mighty, the Omnipotent, the King, the Most Holy, the Subduer,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+السَّلَامِ الْمُؤْمِنِ الْمُهَيْمِنِ الْغَفَّارِ عَالِمِ الْغَيْبِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the Perfect, the Faithful, the Guardian, the Mighty, the All-forgiving, the Knower of the unseen,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ الشَّهَادَةِ الْكَبِيرِ الْمُتَعَالِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and the apparent, the Great and the Most High.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ هُوَ اللهُ هُوَ اللهُ هُوَ اللهُ لَا شَرِيكَ لَهُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+He is Allah; He is Allah; He is Allah; no partner he has;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ مُحَمَّدٌ رَسُولُ اللهِ صَلَّى اللهُ عَلَيْهِ وَ آلِهِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Muhammad is the Messenger of Allah, blessings,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ سَلَّمَ كَثِيراً</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and mercy of Allah on him and his family.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+المصدر<br>
+المصباح للكفعمي
+							
+<br><hr style="font-size: 38px;">
+ثم تتعوذ بعوذة يوم الأحد</a1></div>
+By @haqybatelmomen
+	<h6 id="rizqwed" style="font-size: 16px;"></h6>
+<hr class="black2" style="font-size: 16px;">
+<b style="font-size: 16px;">Perform this ritual every Wednesday.</b>From the proven supplications of Shaykh Mufid for <b style="font-size: 16px;">seeking sustenance</b> <br>
+<b style="font-size: 16px;">Recite the Verse of sustenance 7 seven times</b><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَللهُ لَطِيْفٌ بِعِبَادِهِ يَرْزُقُ مَنْ يَشَآءُ وَ هُوَ الْقَوِيُّ الْعَزِيْزُ.</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">
+Allaahu lat’eefum bi-i’baadihi yarzuqu mayn ya shaa-u wa huwal qaweeyul a’zeez.</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Allah is Benignant to His servants; He gives sustenance to whom He pleases, and He is the Strong, the Mighty.[6]</t1></div><br>
+Also recite the following seven times: [7]<br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَللَّهُمَّ اَدِمْ نِعْمَتَكَ وَ الْطُفْ بِنَا فِيْمَا قَدَّرْتَهُ.</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">
+Allaahumma adim ni’mataka walt’uf binaa feemaa qaddartah.</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah make permanent Your bounty and Your Grace for us in what You have ordained.<br>
+</t1></div><br>
+								 															
+			<!-- Do Not alter --><a href="#top" style="font-size: 16px;"><button class="btn btn-warning  btn-xs" style="font-size: 14px;"> <i class="fa fa-angle-double-up fa-lg" style="font-size: 18.6666px;"></i></button></a>
+									<br>
+								<br><br>	</div>
+								
+								<!-- PANE "foura" CONTENT END --> 							
+													
+								
+								
+								
+								
+								<!-- PANES "FIVE" START -->    
+								<div class="tab-pane fade" id="five" role="tabpanel" aria-labelledby="five-tab" style="font-size: 16px;">
+									<!-- Pane "FIVE" content Start -->		
+SALAATS<br>
+
+
+
+
+Prayer for Wednesday 1<br>
+The prayer for this day is two rakats. In every rakat after Surah Hamd recite Surah Zilzaal once and Surah Tawheed thrice. For one who recites this prayer the Almighty removes the darkness from his grave till Qiyamat.
+<br><br>
+
+Prayer for Wednesday 2<br>
+It is narrated from the Messenger of Allah (s.a.w.a.) that one who recites four rakats prayer on Wednesday and in each rakat after Surah Hamd recites Surah Tawheed and Surah Qadr once the Almighty would accept his repentance, forgive all his sins and marry him to the houries of Paradise.<br><br>
+	
+	
+Prayer for Wednesday evening ( night preceeding thursday) <br>
+The prayer for this eve is two rakats. In every rakat after Surah Hamd recite Ayatul Kursi, Surah Qadr and Surah Nasr once each and Surah Tawheed thrice. The Almighty Allah forgives all the sins of the person who recites this prayer.
+<br><br> 
+
+
+
+
+								
+								<!-- Do Not alter -->
+								<a href="#top" style="font-size: 16px;"><button class="btn btn-warning  btn-xs" style="font-size: 14px;"> <i class="fa fa-angle-double-up fa-lg" style="font-size: 18.6666px;"></i></button></a>
+								<br></div>
+								
+								<!-- PANE "five" CONTENT END -->    
+								
+	<!-- PANES "six" START -->    
+								<div class="tab-pane fade" id="six" role="tabpanel" aria-labelledby="six-tab" style="font-size: 16px;">
+									<!-- Pane "six" content Start -->
+									
+									Salat for Wednesday evening ( night preceeding thursday)<hr style="font-size: 16px;">
+The prayer for this eve is two rakats. In every rakat after Surah Hamd recite Ayatul Kursi, Surah Qadr and Surah Nasr once each and Surah Tawheed thrice. The Almighty Allah forgives all the sins of the person who recites this prayer.<br><hr style="font-size: 16px;">
+<hr style="font-size: 16px;">
+DUA for night<br>
+<audio controls="">
+<source src="https://mp3.duas.org/wednesday-night.mp3" type="audio/mpeg" style="font-size: 16px;">
+<a href="https://mp3.duas.org/wednesday-night.mp3" style="font-size: 16px;">Audio Name</a> </audio> <br>	
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِسْمِ اللهِ الرَّحْمنِ الرَّحِيمِ‏</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+In the name of Allah, the Beneficent, the Merciful.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+‏ سُبْحَانَكَ رَبَّنَا وَ لَكَ الْحَمْدُ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to You, our Lord, and praise for You;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+أَنْتَ الَّذِي بِكَلِمَتِكَ خَلَقْتَ جَمِيعَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+You are, Who created all Your creatures with Your word;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+خَلْقِكَ فَكُلُّ مَشِيَّتِكَ أَتَتْكَ بِلَا لُغُوبٍ أَثْبَتَّ مَشِيَّتَكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+thereupon Your will came without burdening ascertained Your will.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ لَمْ تَأَنَّ فِيهَا لِمَئُونَةٍ وَ لَمْ تَنْصِبْ فِيهَا لِمَشَقَّةٍ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And You did not consider careful on it for intent nor arrange over it for hardship!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ كَانَ عَرْشُكَ عَلَى الْمَاءِ وَ الظُّلْمَةُ فِي [عَلَى‏] الْهَوَاءِ وَ الْمَلَائِكَةُ يَحْمِلُونَ عَرْشَكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And Your throne was above the water; darkness in the air and the Angels will bear Your throne.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ عَرْشَ النُّورِ وَ الْكَرَامَةِ وَ يُسَبِّحُونَ بِحَمْدِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The throne of light and Glory, glorifying with Your praise,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ الْخَلْقُ مُطِيعٌ لَكَ خَاشِعٌ مِنْ خَوْفِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and the creatures are obedient toward You; humble of You fear,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لَا يُرَى فِيهِ نُورٌ إِلَّا نُورُكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+can't be seen in it a light other than Your light</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ لَا يُسْمَعُ فِيهِ صَوْتٌ إِلَّا صَوْتُكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+nor be heard a voice other than Your voice,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ حَقِيقٌ بِمَا لَا يَحِقُّ إِلَّا لَكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+entitled in what is not ascertain to other than You!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+‏ خَالِقُ الْخَلْقِ وَ مُبْتَدِعُهُ تَوَحَّدْتَ بِأَمْرِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The Creator of creatures and their originator, You are one and alone with Your decisions;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ تَفَرَّدْتَ بِمُلْكِكَ وَ تَعَظَّمْتَ بِكِبْرِيَائِكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+you showed Your Uniqueness through Your kingdom. And verily; You showed Your Greatness through Your pride,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ تَعَزَّزْتَ بِجَبَرُوتِكَ وَ تَسَلَّطْتَ بِقُوَّتِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+You expressed Your Might through Your supremacy, You reigned through Your Power</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ تَعَالَيْتَ بِقُدْرَتِكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and exalted with Your ability.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ فَأَنْتَ بِالْمَنْظَرِ الْأَعْلَى فَوْقَ السَّمَاوَاتِ الْعُلَى </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Thereupon, You are in the highest viewpoint above the high heavens!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+كَيْفَ لَا يَقْصُرُ دُونَكَ عِلْمُ الْعُلَمَاءِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+How could not the scholars' knowledge be incapable before You,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ لَكَ الْعِزَّةُ أَحْصَيْتَ خَلْقَكَ وَ مَقَادِيرَكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and Glory be to You; You counted Your creation and ordainments;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ لِمَا جَلَّ مِنْ جَلَالِ مَا جَلَّ مِنْ ذِكْرِكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+for the sublime exalt of Your splendid mention</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ لِمَا ارْتَفَعَ مِنْ رَفِيعِ مَا ارْتَفَعَ مِنْ كُرْسِيِّكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and for the highest pitch from what upraised of Your throne.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ عَلَوْتَ عَلَى عُلُوِّ مَا اسْتَعْلَى مِنْ مَكَانِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+You advanced Your highness above the elevation of what overcome upon Your place!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+كُنْتَ قَبْلَ جَمِيعِ خَلْقِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+You existed before Your all creation.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لَا يَقْدِرُ الْقَادِرُونَ قَدْرَكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+No assessor can assess Your value,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ لَا يَصِفُ الْوَاصِفُونَ أَمْرَكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and the describers cannot describe Your being;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ رَفِيعُ الْبُنْيَانِ مُضِيْ‏ءُ الْبُرْهَانِ عَظِيمُ الْجَلَالِ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+glorious base, illuminated proof, great solemnity,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+قَدِيمُ الْمَجْدِ مُحِيطُ الْعِلْمِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+eternal Glory, encompassing of knowledge,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ لَطِيفُ الْخَبَرِ حَكِيمُ الْأَمْرِ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+very pleasing tradition, and wise command!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+أَحْكَمَ الْأَمْرَ صُنْعُكَ وَ قَهَرَ كُلَّ شَيْ‏ءٍ سُلْطَانُكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Your making excelled the commands, and Your power conquered everything</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ تَوَلَّيْتَ الْعَظَمَةَ بِعِزَّةِ مُلْكِكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and took over the mightiness with Your mighty authority</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ الْكِبْرِيَاءَ بِعَظِيمِ جَلَالِكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and the sublimity of your great magnificence.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+[ ثُمَّ دَبَّرْتَ الْأَشْيَاءَ كُلَّهَا بِحُكْمِكَ [بِحِكْمَتِكَ‏ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Moreover, You arranged everything with Your wisdom</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ أَحْصَيْتَ أَمْرَ الدُّنْيَا وَ الْآخِرَةِ كُلَّهَا بِعِلْمِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and Enumerated this world and the hereafter case with Your knowledge.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ كَانَ الْمَوْتُ وَ الْحَيَاةُ بِيَدِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And the death and life are in Your hand,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ ضَرَعَ كُلَّ شَيْءٍ إِلَيْكَ وَ ذَلَّ كُلُّ شَيْ‏ءٍ لِمُلْكِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and everything implored to You, and everything submitted to Your authority,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ انْقَادَ كُلُّ شَيْ‏ءٍ لِطَاعَتِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and everything yielded to Your obedience.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَتَقَدَّسْتَ رَبَّنَا وَ تَقَدَّسَ اسْمُكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Therefore glorified be our Lord, and glorified is Your name;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ تَبَارَكْتَ رَبَّنَا وَ تَعَالَى ذِكْرُكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+blessed is our Lord, high exalted is Your mention</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ بِقُدْرَتِكَ عَلَى خَلْقِكَ وَ لُطْفِكَ فِي أَمْرِكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and by Your omnipotence upon Your creation and Your gentleness with Your command.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ لَا يَعْزُبُ عَنْكَ مِثْقَالُ ذَرَّةٍ فِي السَّمَا وَاتِ وَ الْأَرْض</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The weight of a dust mote; doesn't escape from you in heavens and earth,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+‏ وَ لا أَصْغَرُ مِنْ ذلِكَ وَ لا أَكْبَرُ إِلَّا فِي كِتابٍ مُبِينٍ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+not even less than that nor more but (it is noted) in a clear record!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+‏ فَسُبْحَانَكَ وَ بِحَمْدِكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+So, Glory and praise be to You;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ تَبَارَكْتَ رَبَّنَا وَ جَلَّ ثَنَاؤُكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+blessed is our Lord, and splendid be the praising of You!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ عَبْدِكَ وَ رَسُولِكَ  وَ نَبِيِّكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah, (please) send blessings upon Muhammad, Your servant, Messenger, and Prophet,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ أَفْضَلَ مَا صَلَّيْتَ عَلَى أَحَدٍ مِنْ بُيُوتَاتِ الْمُسْلِمِينَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+with the most excellent blessings you have ever sent upon any Muslim houses.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+صَلَاةً تُبَيِّضُ بِهَا وَجْهَهُ وَ تُقِرُّ بِهَا عَيْنَهُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+The blessing in that which You illuminate with his face makes him delighted,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ تُزَ  يِّنُ بِهَا مَقَامَهُ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+adorning with it his position.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ تَجْعَلُهُ خَطِيباً لِمَحَامِدِكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And make him an orator to Your laudations,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ مَا قَالَ صَدَّقْتَهُ وَ مَا سَأَلَ أَعْطَيْتَهُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+what he says; You believed, what he asks for, You grant</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ لِمَنْ شَفَعَ شَفَّعْتَهُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and to who he mediates for; You mediated.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ اجْعَلْ لَهُ مِنْ عَطَائِكَ عَطَاءً تَامّاً وَ قَسَماً</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And assign to him of Your bestowal; full bestowal completed portion, </t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَافِياً وَ نَصِيباً جَزِيلًا وَ اسْماً عَالِياً عَلَى‏ النَّبِيِّينَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+large share and, a high name upon the prophets,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ الصِّدِّيقِينَ وَ الشُّهَداءِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+righteous', martyrs,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ الصَّالِحِينَ وَ حَسُنَ أُولئِكَ رَفِيقاً</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the most elevated rank ones and, a goodly company are they!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ اللَّهُمَّ إِنِّي أَسْأَلُكَ بِاسْمِكَ الَّذِي</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah, I beseech You by Your Name;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ إِذَا ذُكِرَ اهْتَزَّ لَهُ عَرْشُكَ وَ تَهَلَّلَ لَهُ نُورُكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+if it is mentioned, Your throne shook, Your light gleamed,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ اسْتَبْشَرَتْ لَهُ مَلَائِكَتُكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and Your Angels rejoiced to it!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+‏ وَ الَّذِي إِذَا ذُكِرَ تَزَعْزَعَتْ لَهُ السَّمَاوَاتُ وَ الْأَرْضُ وَ الْجِبَالُ وَ الشَّجَرُ وَ الدَّوَابُّ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And in which if it is mentioned the; heavens, earth, mountains, trees, animals will be shaken for Him!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ الَّذِي إِذَا ذُكِرَ تَفَتَّحَتْ لَهُ أَبْوَابُ السَّمَاءِ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And in which if it is mentioned; the gates of heavens will be unfolded to Him,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ أَشْرَقَتْ لَهُ الْأَرْضُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the earth shone for Him</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ سَبَّحَتْ [ستحت‏] لَهُ الْجِبَالُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and the mountains glorified Him!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ الَّذِي إِذَا ذُكِرَ تَصَدَّعَتْ لَهُ الْأَرْضُ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And in which if it is mentioned; the earth be cracked for Him,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ قَدَّسَتْ لَهُ الْمَلَائِكَةُ وَ الْإِنْسُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+hallowed Him the Angels and humankind,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ تَفَجَّرَتْ لَهُ الْأَنْهَارُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the rivers for Him burst out!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ الَّذِي إِذَا ذُكِرَ ارْتَعَدَتْ مِنْهُ النُّفُوسُ وَ وَجِلَتْ مِنْهُ الْقُلُوبُ وَ خَشَعَتْ لَهُ الْأَصْوَاتُ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And in which if it is mentioned; the souls are violent fear seized of Him and sounds are submitted of Him.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+أَنْ تَغْفِرَ لِي وَ لِوَالِدَيَّ وَ ارْحَمْهُما كَما رَبَّيانِي صَغِيراً</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Therefore, forgive my parents and me, bestow Your grace upon them as they cherished and reared me when I was a child,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ ارْزُقْنِي ثَوَابَ طَاعَتِهِمَا وَ مَرْضَاتِهِمَا</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+grant me their fidelity reward and satisfaction,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ عَرِّفْ بَيْنِي وَ بَيْنَهُمَا فِي جَنَّتِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and make awareness between them in Your heaven and me!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+أَسْأَلُكَ لِي وَ لَهُمَا الْأَجْرَ فِي الْآخِرَةِ يَوْمَ الْقِيَامَةِ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+For them and me, I beseech You for the reward in the hereafter; the Day of Resurrection.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ الْعَفْوَ يَوْمَ الْقَضَاءِ وَ بَرْدَ الْعَيْشِ عِنْدَ الْمَوْتِ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And the pardoning on the Doomsday, decree for ease after death,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ قُرَّةَ عَيْنٍ لَا تَنْقَطِعُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the light of eyes that do not cease,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ لَذَّةَ النَّظَرِ  إِلَى وَجْهِكَ وَ شَوْقاً إِلَى لِقَائِكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and the delight of witnessing Your presence and longing for Your meeting!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ اللَّهُمَّ إِنِّي ضَعِيفٌ فَقَوِّ فِي رِضَاكَ ضَعْفِي </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O, Allah, I am weak; so strengthen my weakness in the course of Your pleasure,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ خُذْ إِلَى الْخَيْرِ بِنَاصِيَتِي </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and lead my forelock to goodness,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ اجْعَلِ الْإِسْلَامَ مُنْتَهَى رِضَايَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and cause Islam to be the utmost of my pleasure.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ اجْعَلِ الْبِرَّ أَكْبَرَ أَخْلَاقِي وَ التَّقْوَى زَادِي </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And appoint faithfulness as my most significant moral and Your reverential fear as my provision.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ ارْزُقْنِي الظَّفَرَ بِالْخَيْرِ لِنَفْسِي </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Grant me to achieve goodness for myself</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ أَصْلِحْ لِي دِينِيَ الَّذِي هُوَ عِصْمَةُ أَمْرِي</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and set right my religion that is the preserving tie of my affair.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ بَارِكْ فِي دُنْيَايَ الَّتِي فِيهَا بَلَاغِي </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And bless me in this world that has my reach</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ أَصْلِحْ لِي آخِرَتِيَ الَّتِي إِلَيْهَا مُنْقَلَبِي وَ مَعَادِي</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and reforms my hereafter, where my recourses head for and my return;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ اجْعَلْ دُنْيَايَ زِيَادَةً فِي كُلِّ خَيْرٍ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+make my life (in this world) more in every good</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ اجْعَلْ آخِرَ  تِي عَافِيَةً مِنْ كُلِّ شَرٍّ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and my hereafter a relief of every evil!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ هَيِّئْ لِيَ الْإِنَابَةَ إِلَى دَارِ الْخُلُودِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And, prepare me for having love in the world Hereafter,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ التَّجَافِيَ عَنْ دَارِ الْغُرُورِ وَ الِاسْتِعْدَادَ لِلْمَوْتِ قَبْلَ أَنْ يَنْزِلَ بِي </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+not being proud and the preparedness to death before it lays down on me!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اللَّهُمَّ لَا تَأْخُذْنِي بَغْتَةً وَ لَا تَقْتُلْنِي فَجْأَةً </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O, Allah, do not overtake me all of a sudden and do not kill me, surprisingly,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ لَا تُعَجِّلْنِي عَنْ حَقٍّ وَ لَا تَسْلُبْنِيهِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and do not make me give up on the right or deprive me of it!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ عَافِنِي مِنْ مُمَارَسَةِ الذُّنُوبِ بِتَوْبَةٍ نَصُوحٍ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And recover me from; performing the sins' act with sincere repentance,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ مِنَ الْأَسْقَامِ الدَّوِيَّةِ بِالْعَفْوِ وَ الْعَافِيَةِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+chronic illnesses with pardon and well-being</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ تَوَفَّ نَفْسِي آمِنَةً مُطْمَئِنَّةً</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and make myself die reassured safely.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ رَاضِيَةً بِمَا لَهَا مَرْضِيَّةً لَيْسَ عَلَيْهَا خَوْفٌ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Satisfied with what it had pleasingly, neither have fear nor;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ لَا حَزَنٌ وَ لَا جَزَعٌ وَ لَا فَزَعٌ وَ لَا وَجَلٌ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+sadness, fright, anxiety, worry,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ لَا مَقْتٌ مِنْكَ مَعَ الْمُؤْمِنِينَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and hatred from You upon the believers</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ الَّذِينَ سَبَقَتْ لَهُمْ مِنْكَ الْحُسْنَى</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+who have got precedence from You in Your rewards;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ هُمْ عَنِ النَّارِ مُبْعَدُونَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+they shall be kept far from hell.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَ آلِ مُحَمَّدٍ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah, (please) send blessings upon Muhammad and His Household;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ مَنْ أَرَادَنِي بِحُسْنٍ فَأَعِنْهُ عَلَيْهِ وَ يَسِّرْهُ لِي </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And as for anyone who intends good to me, assist them with and pave it for me;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَ إِنِّي لِما أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+because surely I require whatever good You may send down to me.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ مَنْ أَرَادَنِي بِسُوءٍ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And whoever desires for me;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ أَوْ حَسَدٍ أَوْ بَغْيٍ أَوْ عَدَاوَةٍ أَوْ ظُلْمٍ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+evil, envy, offense, enmity or tyranny;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ فَإِنِّي أَدْرَأُ بِكَ فِي نَحْرِهِ وَ أَسْتَعِينُ بِكَ عَلَيْهِ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+indeed, then take me out from his machinations, and I seek Your help regarding him.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَاكْفِنِيهِ بِمَ شِئْتَ وَ اشْغَلْهُ عَنِّي بِمَ شِئْتَ فَإِنَّهُ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+So suffice me with what You will and preoccupy him against me with what You will;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لَا حَوْلَ وَ لَا قُوَّةَ إِلَّا بِكَ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+because there is no change nor any strength except by You!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اللَّهُمَّ   إِنِّي أَعُوذُ بِكَ مِنَ الشَّيْطَانِ الرَّجِيمِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O, Allah, I seek refuge with You from the accursed shaytan,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ مِنْ مَغَاوِيهِ وَ اعْتِرَاضِهِ وَ فَزَعِهِ وَ وَسْوَسَتِهِ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+from his; temptations, disagreements, fear, and whispers.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اللَّهُمَّ فَلَا تَجْعَلْ لَهُ عَلَيَّ سُلْطَاناً </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O, Allah, do not make for him authority upon me,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ لَا تَجْعَلْ لَهُ عَلَيَّ سَبِيلًا </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and do not let him find a way to me</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ لَا تَجْعَلْ لَهُ فِي مَالِي وَ وُلْدِي شِرْكاً</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and make for him neither a share nor portion in my properties and sons.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ لَا نَصِيباً وَ بَاعِدْ بَيْنَنَا وَ بَيْنَهُ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And Keep us far away from him</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَ الْمَغْرِبِ </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+as You have kept the East far away from the West</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+حَتَّى لَا يُفْسِدَ شَيْئاً مِنْ طَاعَتِكَ عَلَيْنَا</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+so that he does not ruin any of our obeying to You,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ أَتْمِمْ نِعْمَتَكَ عِنْدَنَا بِمَرْضَاتِكَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and complete Your grace, to us with Your pleasure upon us;</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ يَا أَرْحَمَ الرَّاحِمِينَ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O, Most Merciful of the merciful!</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ صَلَّى اللهُ عَلَى سَيِّدِنَا رَسُولِهِ مُحَمَّدٍ النَّبِيِّ</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And blessings of Allah be upon our Master, His Messenger; the Prophet Muhammed</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ آلِهِ الطَّاهِرِينَ وَ سَلَّمَ تَسْلِيماً</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and his pure Household; and exalt you thoroughly.</t1></div><br>
+
+
+المصدر<br>
+المصباح للكفعمي<br>
+By @haqybatelmomen 	<br>
+					<!-- Do Not alter -->
+								<a href="#top" style="font-size: 16px;"><button class="btn btn-warning  btn-xs" style="font-size: 14px;"> <i class="fa fa-angle-double-up fa-lg" style="font-size: 18.6666px;"></i></button></a>
+								<br><br></div>
+								
+								<!-- PANE "six" CONTENT END -->  
+
+<!-- PANES "seven" START -->    
+								<div class="tab-pane fade" id="seven" role="tabpanel" aria-labelledby="seven-tab" style="font-size: 16px;">
+									<!-- Pane "seven" content Start -->
+	<audio controls="">
+<source src="https://mp3.duas.org/Special-wed-ziyarat-Imam-razaas.mp3" type="audio/mpeg" style="font-size: 16px;">
+<a href="https://mp3.duas.org/Special-wed-ziyarat-Imam-razaas.mp3" style="font-size: 16px;">Audio Name</a> </audio> <br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+َلسَّلَامُ عَلَى الرِّضَا الْمُرْتَضٰى سَـمِيِّ سَيِّدِ الْوَصِيِّيْنَ وَ اِمَامِ الْمُتَّقِيْنَ خَلِيْفَةِ الرَّحْمٰنِ وَ اِمَامِ اَهْلِ الْقُرْآنِ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">assalaamo a’lar rezal murtazaa samiyye sayyedil wasiyyeen wa emaamil muttaqeen khaleefatir rahmaane wa emaame ahlil qur-aane</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Peace be upon al-Reza, the well-pleased, exalted chief of the Prophet’s successor, and leader of the pious ones, representative of the Beneficent, and leader of the people of the Holy Quran,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ صَاحِبِ التَّاْوِيْلِ وَ مَعْدِنِ الْفُرْقَانِ وَ حَامِلِ التَّوْرَاةِ وَ الْاِنْـجِيْلِ وَ اِفْنَآءِ الْـخَبِيْثَاتِ وَ الْاَبَاطِيْلِ وَ الْقَائِلِ الْفَاعِلِ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wa saahebit taaweele wa ma’denir furqaan wa haamelit tawraate wal injeele wa ifnaaa-il khabeesaate wal abaateele wal qaa-elil faa-e’le</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the man of true interpretation, core of distinction (between the right and the wrong), the bearer of the Torah and the Gospel, destructor of the mischiefs and the vanities, instructor and doer (of action),</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ الْـحَاكِمِ الْعَادِلِ وَ الصَّادِقِ الْبَرِّ وَ الْـحَائِزِ الْفَخْرِ جَدُّهٗ سَيِّدُ النَّبِيِّيْنَ وَ اَبُوْهُ سَيِّدُ الْوَصِيِّيْنَ وَ اِلَيْهِ مَآبُ الْاَوَّلِيْنَ وَ الْآخِرِيْنَ
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">wal haakemil a’adele was saadeqil barre wal haa-ezil fakhre jaddohu sayyedun nabiyyeena wa abooho sayyedul wasiyyeena wa elayhe ma-aaabul awwaleena wal aakhereena</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the evenhanded judge, the truthful good doer, the possessor of the honour, his grandfather is the chief of the messengers, and his father is the chief of the Prophet’s successor, and to him is the place of return for the first and the last.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَلسَّلَامُ عَلَيْكَ يَا اَبَا الْـحَسَنِ عَلِيَّ بْنَ مُوسَى الرِّضَا وَ رَحْمَةُ اللهِ وَ بَرَكَاتُهٗ اَللّٰهُمَّ صَلِّ عَلٰى مُـحَمَّدٍ وَ عَلٰى اٰلِ مُـحَمَّدٍ وَ كَمَا اَكْرَمْتَهٗ بِـمُحَمَّدٍ رَسُوْلِكَ وَ جَعَلْتَهٗ فِيْ الْـحَقِّ دَلِيْلَكَ فَدَعَا اِلٰى سَبِيْلِكَ بِالْـحِكْمَةِ وَ الْمَوْعِظَةِ الْـحَسَنَةِ	
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">assalaamo a’layka yaa abal hasane a’liyy ibne moosar rezaa wa rahmatul laahe wa barakaatohu allaahumma salle a’laa mohammadin wa a’laa aale mohammadin wa kamaa akramtahu be-mohammadin rasooleka wa ja-a’ltahu fil haqqe daleelaka fa-da-a’a elaa sabeeleka bil-hikmate wal maw-e’zatil hasanate </t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Peace be on you, O Abal Hasan Ali, son of Moosa al-Reza and mercy of Allah and his blessings. O Allah! Send blessings upon Muhammad and on the progeny of Muhammad, and like You have honoured him with Muhammad, Your Prophet and appointed him as Your truthful guide, then he called towards Your path with wisdom and fair exhortation, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَاَكْمِلْ لَهُ الْعَهْدَ وَ تَـمِّمْ لَهُ الْوَعْدَ وَ اَيِّدْهُ وَ ذُرِّيَّتَهٗ وَ اَوْلِيَآئَهٗ بِالنَّصْرِ وَ الْـجُنْدِ لِيُخَلِّصَ الدِّيْنَ بِالْـجِدِّ فَيَعْمَلَ فِيْ ذٰلِكَ بِالْـجَهْدِ وَ يُصَيِّرَ لَكَ الدِّيْنَ خَالِصًا وَ الْـحَمْدَ تَامًّا
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">fa-akmil lahul a’hda wa tammim lahul wa’da wa ayyidho wa zurriyyatahu wa awleyaaa-ohu bin-nasre wal junde le-yokhallesad deena bil-jidde fa-ya’mala fee zaaleka bil-jahde wa yosayyera lakad deena khaalesan wal hamda taam-man</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+then complete for him the promise, then complete for him the covenant and finish for him the promise, and support him and his progeny and his friends with victory and army to purify the religion with devotion, then act in it with exertion so he renders for Your pure religion and complete praise. </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَللّٰهُمَّ صَلِّ عَلَيْهِ حَيًّا وَ مَيِّتًا وَ عَـجِّلْ فَرَجَنَا بِهٖ وَ بِالْوَصِيِّ مِنْ بَعْدِهٖ وَ انْصُرْهُ عَلٰى اَهْلِ طَاعَةِ الشَّيْطَانِ وَ اَعْزِزْ بِهِ الْاِيْـمَانَ وَ اَذْلِلْ بِهِ الشَّيْطَانَ.‏
+</a1></div><div class="Trl" style="font-size: 16px;"><t2 style="font-size: 15px;">allaahumma salle a’layhe hayyan wa mayyetan wa a’jjil farajanaa behi wa bil-wasiyye min ba’dehi wan surho a’laa ahle taa-a’tish shaytaane wa a-a’ziz behil eemaana wa azlil behish shaytaana.</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah! Send blessings upon him when he is alive and when he dies, and expediate our relief by him and the vicegerent after him, and help him against the people of Satan, and through him honour the belief and degrade the Satan.</t1></div><br>
+<!--
+<hr class="black2">
+Wednesday is ascribed with the names of Imam Moosa Ibn Ja’far (a.s.), Imam Reza (a.s.), Imam Jawad (a.s.) and Imam Hadi (a.s.) recite their ziyaarat as follows:
+<div class="Ara"><a1>
+اَلسَّلَامُ عَلَيْکُمْ يَا اَؤْلِيَآءَ اللهِ اَلسَّلَامُ عَلَيْکُمْ يَا حُـجَجَ اللهِ اَلسَّلَامُ عَلَيْکُمْ يَا نُوْرَ اللهِ فِیْ ظُلُمَاتِ الْاَرْضِ اَلسَّلَامُ عَلَيْکُمْ صَلَوَاتُ اللهِ عَلَيْکُمْ وَ عَلٰی اٰلِ بَيْتِکُمُ الطَّيِّبِيْنَ الطَّاهِرِيْنَ بِاَبِیْ اَنْتُمْ وَ اُمِّیْ لَقَدْ عَبَدْتُمُ اللهَ مُخْلِصِيْنَ وَ جَاهَدْتُمْ فِیْ اللهِ حَقَّ جِهَادِهٖ حَتّٰی اَتَاکُمُ الْيَقِيْنُ فَلَعَنَ اللهُ اَعْدَآئَکُمْ مِنَ الْـجِنِّ وَ الْاِنْسِ اَجْمَعِيْنَ وَ اَنَا اَبْرَءُ اِلَی اللهِ وَ اِلَيْکُمْ مِنْهُمْ يَا مَوْلَایَ يَا اَبَا اِبْرَاهِيْمَ مُوْسَی بْنَ جَعْفَرٍ يَا مَوْلَایَ اَبَا الْـحَسَنِ عَلِیَّ بْنَ مُوْسیٰ يَا مَوْلَایَ يَا اَبَا جَعْفَرٍ مُـحَمَّدَ بْنَ عَلِیٍّ يَا مَوْلَایَ يَا اَبَا الْـحَسَنِ عَلِیَّ بْنَ مُـحَمَّدٍ اَنَا مَوْلًی لَکُمْ مُؤْمِنٌ بِسِرِّکُمْ وَ جَهْرِکُمْ مُتَضَيِّفٌ بِکُمْ فِیْ يَوْمِکُمْ هٰذَا وَ هُوَ يَوْمُ الْاَرْبَعَآءِ وَ مُسْتَجِيْرٌ بِکُمْ فَاضِيْفُوْنِیْ وَ اَجِيْرُوْنِیْ بِاٰلِ بَيْتِکُمُ الطَّيِّبِيْنَ الطَّاهِرِيْنَ.
+</a1></div><div class="Trl"><t2>
+Assalaamo A’laykum Yaa Awleyaaa-Al Laahe Assalaamo A’laykum Yaa Hojajal Laahe Assalaamo A’laykum Yaa Nooral Laahe Fee Zolomaatil Arze Assalaamo A’laykum Salawaatul Laahe A’laykum Wa A’laa Aale Baytekomut Tayyebeenat Taahereena Be-Abee Antum Wa Ummee Laqad A’bad-Tomul Laaha Mukhleseena Wa Jaahad-Tum Fil Laahe Haqqa Jehaadehi Hattaa Ataakomul Yaqeeno Fa-La-A’nal Laaho A-A’daaa-Akum Menal Jinne Wal Inse Ajma-E’en Wa Anaa Abra-O Elal Laahe Wa Elaykum Minhum Yaa Mawlaaya Yaa Abaa Ibraaheema Moosabna Jaa’farin Yaa Mawlaaya Yaa Abal Hasane A’liy Yabna Moosaa Yaa Mawlaaya Yaa Abaa Ja’farin Mohammad Abna A’li Yaa Mawlaaya Yaa Abal Hasane A’liy Yabna Mohammadin Anaa Mawlan Lakum Momenun Be-Sirrekum Wa Jahrekum Motazayyefun Bekum Fee Yawmekum Haazaa Wa Howa Yawmul Arba-A’aa-E Wa Mustajeerun Bekum Fa-Azeefoonee Wa Ajeeroonee Be Aale Baytekomut Tayyebeenat Taahereena.
+</div></t2><div class="Tra"><t1>
+Peace be on you, O intimate friends of Allah! Peace be on you, O decisive arguments of Allah! Peace be on you, O light of Allah, in the midst of ignorance and disorder, widespread in the world! Peace be on you, blessings of Allah be on you, and on your pure and pious children. With my father (I am) at your disposal, and also my mother. Surely you sincerely carried out the mission of Allah, and strived in the cause of Allah, leaving no stone unturned, against heavy odds, in letter and spirit, till the inevitable came unto you. Therefore Allah condemns your enemies, whether they be men or jinn, one and all. I turn obedient, unto Allah, and you, keeping away from them. O Master! O Abu Ibrahim! Moosa son of Ja’far! O Master! O Abul Hasan! Ali son of Moosa! O Master! O Abu Ja’far! Mohammad son of Ali! O Master! O Abul Hasan! Ali son of Mohammad! I am your bondman, I truly believe in your innermost best aspects, in your evident public roles, take refuge with you, in the hours of today, your day, Wednesday, and seek your nearness, therefore receive me with open arms, let me be near you, (and near) your pure and pious children.0
+</div></t1><br><br>-->
+		
+									<!-- Do Not alter --><a href="#top" style="font-size: 16px;"><button class="btn btn-warning  btn-xs" style="font-size: 14px;"> <i class="fa fa-angle-double-up fa-lg" style="font-size: 18.6666px;"></i></button></a>
+									<br>
+								<br><br></div>
+								
+								<!-- PANE "seven" CONTENT END 									
+								
+								
+								<!-- PANES "eight" START -->    
+								<div class="tab-pane fade" id="eight" role="tabpanel" aria-labelledby="eight-tab" style="font-size: 16px;">
+									<!-- Pane "eight" content Start -->
+									
+<a href="https://www.duas.org/Wednesday-Duas.pdf" style="font-size: 16px;"> PDF  LBL ALL</a><br>
+<a href="https://www.duas.org/ereaderpdfs/wednesdayduas.pdf" style="font-size: 16px;"> Pdf  </a><br>
+<a href="https://www.duas.org/pdfs/Wednesday%20Night.pdf" style="font-size: 16px;"> Wednesday night arabic </a><br>
+
+
+<a href="https://www.duas.org/ppt/WEDNESDAY%20DUA.ppt" style="font-size: 16px;"> Ppt explantion </a><br>
+<a href="https://www.duas.org/Wednesday.jpg" style="font-size: 16px;"> 1 Pg Jpg </a><br>
+<a href="https://www.duas.org/pdfs/Ziarat_Wednesday.pdf" style="font-size: 16px;">7,8,9,10 Imam ziarat pdf</a><br>
+<a href="https://www.duas.org/syfatimaweddua.jpg" style="font-size: 16px;"> 1 pg Sy Fatima dua jpg</a><br>
+<a href="https://www.duas.org/pdfs/wedsahifaalavia.pdf" style="font-size: 16px;">Imam Ali dua pdf </a>
+
+
+
+
+
+									
+									
+																
+									
+									<!-- Do Not alter -->
+								<br><br></div>
+								
+								<!-- PANE "eight" CONTENT END -->   
+
+								
+									
+								
+								
+								
+								
+								
+								<!-- Do Not alter -->
+								</div></article></div>
+
+
+				
+
+										<br><br><br><br>
+								</article>
+
+                <footer>
+  © 2025 Noor Al Huda — All in one Shia website
+</footer>
