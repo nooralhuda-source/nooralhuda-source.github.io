@@ -1,0 +1,656 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Noor Al Huda - Dua Sabah</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const mainNav = document.getElementById("mainNav");
+  const hamburger = document.querySelector(".hamburger");
+  const grid = document.getElementById("bookGrid");
+
+
+
+
+
+hamburger.addEventListener("click", e => {
+  e.stopPropagation();
+  mainNav.classList.toggle("open");
+});
+
+document.addEventListener("click", e => {
+  if (!mainNav.contains(e.target) && !hamburger.contains(e.target))
+    mainNav.classList.remove("open");
+});
+
+searchInput.addEventListener("input", e => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll(".surah-card").forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(q) ? "" : "none";
+  });
+});
+});a
+function applyThemeClass(isDark) {
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.remove("dark-mode");
+    }
+  }
+  var savedTheme = localStorage.getItem("theme");
+  applyThemeClass(savedTheme === "dark");
+
+  if (darkToggle) {
+    darkToggle.checked = savedTheme === "dark";
+    darkToggle.addEventListener("change", function (ev) {
+      var isDarkNow = !!ev.target.checked;
+      applyThemeClass(isDarkNow);
+      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+    });
+  }
+  </script>
+
+  <style>
+    /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+    .ziyarat-section {
+      margin: 2rem auto;
+      max-width: 800px;
+      padding: 1.5rem;
+      background: var(--background, #fff);
+      border-radius: var(--radius, 10px);
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .ziyarat-section h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    .arabic {
+      direction: rtl;
+      font-family: 'Scheherazade', serif;
+      font-size: 1.2rem;
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+    .transliteration, .translation {
+      background: #fdfdfd;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+    .back-duas-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  background-color: var(--green);
+  color: white;
+  text-decoration: none; /* removes underline if it's a link */
+
+  border: none;
+  border-radius: 14px;
+  padding: 0.6rem 1.1rem;
+
+  font-family: "SF Pro Rounded", "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Subtle lift and lighter shade on hover */
+.back-duas-btn:hover {
+  background-color: #2db574; /* a lighter version of your green */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Pressed (active) effect: darker and slightly lowered */
+.back-duas-btn:active {
+  background-color: #1e8b58; /* darker tone of your green */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset;
+  transform: translateY(1px);
+}
+
+/* Optional: if you use an arrow or icon */
+.back-duas-btn .icon {
+  font-size: 1.1rem;
+  margin-right: 0.25rem;
+  opacity: 0.9;
+}
+  </style>
+</head>
+
+<body onload="updateThemeIcon()">
+  <!-- Header -->
+ <header>
+  <div class="brand"><h1><a href="index.html">Noor Al Huda</a></h1></div>
+  <button class="hamburger" aria-label="Open menu">☰</button>
+</header>
+
+<nav id="mainNav">
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="salah.html">Salah</a>
+  <a href="shiatube/index.html">ShiaTube</a>
+  <a href="index.html">Home</a>
+  <a href="settings.html">Settings</a>
+</nav>
+
+
+
+
+  <!-- Main -->
+  <main class="ziyarat-section">
+    <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+    <h2>Dua Sabah</h2><br>
+    
+</div>
+
+
+
+<audio controls="">
+                                                        <source src="https://mp3.duas.org/sabah%20ali%20bouhamad.mp3" type="audio/mpeg">
+                                                        <a href="https://mp3.duas.org/sabah%20ali%20bouhamad.mp3">Dua </a>
+                                                    </audio>
+
+
+
+
+
+
+
+<article id="fontSize" class="mt-3" style="font-size: 16px;">                     
+						
+				<!-- Pane "one" content begins -->		
+										
+
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">						
+بِسْمِ ٱللَّهِ ٱلرَّحْمٰنِ ٱلرَّحِيمِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">bismi allahi alrrahmani alrrahimi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+In the Name of Allah, the All-beneficent, the All-merciful.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اللَّهُمَّ يَا مَنْ دَلَعَ لِسَانَ ٱلصَّبَاحِ بِنُطْقِ تَبَلُّجِهِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">allahumma ya man dala`a lisana alssabahi binutqi taballujihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah, O He Who extended the morning's tongue in the speech of its dawning,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَسَرَّحَ قِطَعَ ٱللَّيْلِ ٱلْمُظْلِمِ بِغَيَاهِبِ تَلَجْلُجِهِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa sarraha qita`a allayli almuzlimi bighayahibi talajlujihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+dispatched the fragments of the dark night into the gloom of its stammering,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَتْقَنَ صُنْعَ ٱلْفَلَكِ الدَّوَّارِ فِي مَقَادِيرِ تَبَرُّجِهِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa atqana sun`a alfalaki alddawwari fi maqadiri tabarrujihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+made firm the structure of the turning spheres in the measure of its display,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَشَعْشَعَ ضِيَاءَ ٱلشَّمْسِ بِنُورِ تَأَجُّجِهِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa sha`sha`a diya'a alshshamsi binuri ta'ajjujihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and beamed forth the brightness of the sun through the light of its blazing!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يَا مَنْ دَلَّ عَلَىٰ ذَاتِهِ بِذَاتِهِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ya man dalla `ala dhatihi bidhatihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O He Who demonstrates His Essence by His Essence,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَتَنَزَّهَ عَنْ مُجَانَسَةِ مَخْلُوقَاتِهِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa tanazzaha `an mujanasati makhluqatihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+transcends from congeniality with His creatures,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَجَلَّ عَنْ مُلائَمَةِ كَيْفِيَاتِهِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa jalla `an mula'amati kayfiyyatihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and is exalted beyond conformity with His qualities!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يَا مَنْ قَرُبَ مِنْ خَطَرَاتِ ٱلظُّنُونِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ya man qaruba min khatarati alzzununi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O He Who is near to the passing thoughts of opinions,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَبَعُدَ عَنْ لَحَظَاتِ ٱلْعُيُونِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ba`uda `an lahazati al`uyuni</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+far from the regards of eyes,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَعَلِمَ بِمَا كَانَ قَبْلَ أَن يَكُونَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `alima bima kana qabla an yakuna</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and knows what will be before it comes to be!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يَا مَنْ أَرْقَدَنِي فِي مِهَادِ أَمْنِهِ وَأَمَانِهِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ya man arqadani fi mihadi amnihi wa amanihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O He Who has put me at ease in the cradle of His security and sanctuary,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَيْقَظَنِي إِلَىٰ مَا مَنَحَنِي بِهِ مِنْ مِنَنِهِ وَإِحْسَانِهِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ayqazani ila ma manahani bihi min minanihi wa ihsanihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+awakened me to the favors and kindness that He has bestowed upon me,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَكَفَّ أَكُفَّ السُّوءِ عَنِّي بِيَدِهِ وَسُلْطَانِهِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa kaffa akuffa alssu'i `anni biyadihi wa sultanihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and held back from me the claws of evil with His hand and His authority!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+صَلِّ اللَّهُمَّ عَلَىٰ ٱلدَّلِيلِ إِلَيْكَ فِي ٱللَّيْلِ ٱلأَلْيَلِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">salli allahumma `ala alddalili ilayka fi allayli al-alyali</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Bless, O Allah, the guide to You in the darkest night,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَٱلْمَاسِكِ مِنْ أَسْبَابِكَ بِحَبْلِ ٱلشَّرَفِ ٱلأَطْوَلِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">walmasiki min asbabika bihabli alshsharafi al-atwali</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+who, of Your ropes, clings to the cord of the longest nobility,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَٱلنَّاصِعِ ٱلْحَسَبِ فِي ذِرْوَةِ ٱلْكَاهِلِ ٱلأَعْبَلِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">walnnasi`i alhasabi fi dhirwati alkahili al-a`bali</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+whose pure lineage evident at the summit of stout shoulders,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَٱلثَّابِتِ ٱلْقَدَمِ عَلَىٰ زَحَاِليْفِهَا فِي ٱلزَّمَنِ ٱلأَوَّلِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">walththabiti alqadami `ala zahalifiha fi alzzamani al-awwali</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and whose feet were entrenched in spite of slippery places in ancient time.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَعَلَىٰ آلِهِ ٱلأَخْيَارِ ٱلْمُصْطَفَيْنَ ٱلأَبْرَارِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `ala alihi al-akhyari almustafayna al-abrari</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And [bless] his household, the good, chosen, and pious.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وٱفْتَحِ اللَّهُمَّ لَنَا مَصَارِيعَ ٱلصَّبَاحِ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">waftah allahumma lana masari`a alssabahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Open for us, O Allah, the leaves of the morning's door </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِمَفَاتِيحِ ٱلرَّحْمَةِ وَٱلْفَلاَحِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">bimafatihi alrrahmati walfalahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+with the keys of mercy and prosperity!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَلْبِسْنِي ٱللَّهُمَّ مِنْ أَفْضَلِ خِلَعِ ٱلْهِدَايَةِ وَٱلصَّلاَحِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa albisni allahumma min afdali khila`i alhidayati walssalahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Clothe me, O Allah, with the most excellent robes of guidance and righteousness!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَٱغْرِسِ اللَّهُمَّ بِعَظَمَتِكَ فِي شِرْبِ جَنَانِي يَنَابِيعَ ٱلْخُشُوعِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ighris allahumma bi`azamatika fi shirbi janani yanabi`a alkhushu`i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Plant, O Allah, through Your tremendousness, the springs of humility in the watering place of my heart!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَجْرِ ٱللَّهُمَّ لِهَيْبَتِكَ مِنْ آمَاقِي زَفَرَاتِ ٱلدُّمُوعِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ajri allahumma lihaybatika min amaqi zafarati alddumu`i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Cause to flow, O Allah, through fear of You, tears of moaning from the corners of my eyes!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَدِّبِ ٱللَّهُمَّ نَزَقَ ٱلْخُرْقِ مِنِّي بِأَزِمَّةِ ٱلْقُنُوعِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa addib allahumma nazaqa alkhurqi minni bi-azimmati alqunu`i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Chastise, O Allah, the recklessness of my clumsiness with the reins of contentment!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِلٰهِي إِن لَمْ تَبْتَدِئْنِي ٱلرَّحْمَةُ مِنْكَ بِحُسْنِ ٱلتَّوْفِيقِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ilahi in lam tabtadi'ni alrrahmatu minka bihusni alttawfiqi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, if mercy from You does not begin with fair success for me,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَمَنِ ٱلسَّاِلكُ بِي إِلَيْكَ فِي وَاضِحِ ٱلطَّرِيقِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">faman alssaliku bi ilayka fi wadihi alttariqi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+then who can take me to You upon the evident path?</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَإِنْ أَسْلَمَتْنِي أَنَاتُكَ لِقَائِدِ ٱلأَمَلِ وَٱلْمُنَىٰ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa in aslamatni anatuka liqa'idi al-amali walmuna </t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+If Your deliberateness should turn me over to the guide of hope and wishes, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَمَنِ ٱلْمُقِيلُ عَثَرَاتِي مِنْ كَبَوَاتِ ٱلْهَوَىٰ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">faman almuqilu `atharati min kabawati alhawa</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+then who will annul my slips from the stumbles of caprice?</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَإِنْ خَذَلَنِي نَصْرُكَ عِنْدَ مُحَارَبَةِ ٱلنَّفْسِ وَٱلشَّيْطَانِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa in khadhalani nasruka `inda muharabati alnnafsi walshshaytani</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+If Your help should forsake me in the battle against the soul and Satan,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَقَدْ وَكَلَنِي خِذْلاَنُكَ إِلَىٰ حَيْثُ ٱلنَّصَبِ وَٱلْحِرْمَانِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">faqad wakalani khidhlanuka ila haythu alnnasabi walhirmani</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+then Your forsaking will have submitted me to where there is hardship and deprivation.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِلٰهِي أَتَرَانِي مَا أَتَيْتُكَ إِلاَّ مِنْ حَيْثُ ٱلآمَاِل
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ilahi atarani ma ataytuka illa min haythu al-amali</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, do You see that I have only come to You from the direction of hopes,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+أَمْ عَلِقْتُ بِأَطْرَافِ حِبَاِلكَ إِلاَّ حِينَ بَاعَدَتْنِي ذُنُوبِي عَنْ دَارِ ٱلْوِصَاِل
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">am `aliqtu bi-atrafi hibalika illa hina ba`adatni dhunubi `an dari alwisali</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+or clung to the ends of Your cords when my sins have driven me from the house of union?</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَبِئْسَ ٱلْمَطِيَّةُ الَّتِي ٱمْتَطَتْ نَفْسِي مِنْ هَوَاهَا
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">fabi'sa almatiyyatu allati imtatat nafsi min hawaha</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+So what an evil mount upon which my soul has mounted-its caprice!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَوَاهاً لَهَا لِمَا سَوَّلَتْ لَهَا ظُنُونُهَا وَمُنَاهَا
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">fawahan laha lima sawwalat laha zununuha wa munaha</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Woe upon it for being seduced by its own opinions and wishes!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَتَبّاً لَهَا لِجُرْأَتِهَا عَلَىٰ سَيِّدِهَا وَمَوْلاهَا
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa tabban laha lijur'atiha `ala sayyidiha wa mawlaha</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Destruction be upon it for its audacity toward its Master and Protector!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِلٰهِي قَرَعْتُ بَابَ رَحْمَتِكَ بِيَدِ رَجَائِي
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ilahi qara`tu baba rahmatika biyadi raja'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, I have knocked upon the door of Your mercy with the hand of my hope,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَهَرَبْتُ إِلَيْكَ لاَجِئاً مِنْ فَرْطِ أَهْوَائِي
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa harabtu ilayka laji'an min farti ahwa'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+fled to You seeking refuge from my excessive caprice,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَعَلَّقْتُ بِأَطْرَافِ حِبَاِلكَ أَنَامِلَ وَلائِي
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `allaqtu bi-atrafi hibalika anamila wala'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and fixed the fingers of my love to the ends of Your cords.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَٱصْفَحِ اللَّهُمَّ عَمَّا كُنتُ أَجْرَمْتُهُ مِنْ زَلَلِي وَخَطَائِي
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">fasfah allahumma `amma kuntu ajramtuhu min zalali wa khata'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+So pardon, O Allah, the slips and errors I have committed,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَقِلْنِي مِنْ صَرْعَةِ رِدَائِي
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa aqilni min sar`ati rida'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and release me from the foot-tangling of my robe,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَإِنَّكَ سَيِّدِي وَمَوْلايَ وَمُعْتَمَدِي وَرَجَائِي
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">fa'innaka sayyidi wa mawlaya wa mu`tamadi wa raja'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+for You are my Master, my Protector, my Support and my Hope,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَنتَ غَايَةُ مَطْلُوبِي وَمُنَايَ فِي مُنْقَلَبِي وَمَثْوايَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa anta ghayatu matlubi wa munaya fi munqalabi wa mathwaya</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and You are the object of my search and my desire in my ultimate end and stable abode.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِلٰهِي كَيْفَ تَطْرُدُ مِسْكِيناً ٱلْتَجَأَ إِلَيْكَ مِنَ ٱلذُّنُوبِ هَارِباً
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ilahi kayfa tatrudu miskinan iltaja'a ilayka mina aldhdhunubi hariban</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, how could You drive away a poor beggar who seeks refuge in You from sins, fleeing?</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+أَم كَيْفَ تُخَيِّبُ مُستَرْشِداً قَصَدَ إِلَىٰ جَنَابِكَ سَاعِياً
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">am kayfa tukhayyibu mustarshidan qasada ila janabika sa`iyan</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+How could You disappoint one seeking guidance who repairs to Your threshold, running?</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+أَمْ كَيْفَ تَرُدُّ ظَمْآناً وَرَدَ إِلَىٰ حِيَاضِكَ شَارِباً
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">am kayfa taruddu zam'anan warada ila hiyadika shariban</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+How could You reject a thirsty man who comes to Your pools to drink?</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+كَلاَّ وَحِيَاضُكَ مُتْرَعَةٌ فِي ضَنْكِ ٱلْمُحُولِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">kalla wa hiyaduka mutra`atun fi danki almuhuli</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Never! For Your pools are full in the hardship of drought,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَبَابُكَ مَفْتُوحٌ لِلطَّلَبِ وَٱلْوُغُولِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa babuka maftuhun lilttalabi walwughuli</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Your door is open for seeking and penetration,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَنتَ غَايَةُ ٱلْمَسْؤُولِ وَنِهَايَةُ ٱلْمَأْمُولِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa anta ghayatu almas'uli wa nihayatu alma'muli</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and You are the goal of requests and the object of hopes.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِلٰهِي هٰذِهِ أَزِمَّةُ نَفْسِي عَقَلْتُهَا بِعِقَاِل مَشِيئَتِكَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ilahi hadhihi azimmatu nafsi `aqaltuha bi`iqali mashi'atika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, these are the reins of my soul I have bounded with the ties of Your will.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَهٰذِهِ أَعْبَاءُ ذُنُوبِي دَرَاْتُهَا بِعَفْوِكَ وَرَحْمَتِكَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa hadhihi a`ba'u dhunubi dara'tuha bi`afwika wa rahmatika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+These are the burdens of my sins I have averted with Your pardon and mercy.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَهٰذِهِ أَهْوَائِيَ ٱلْمُضِلَّةُ وَكَلْتُهَا إِلَىٰ جَنَابِ لُطفِكَ وَرَاْفَتِكَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa hadhihi ahwa'i almudillatu wakaltuha ila janabi lutfika wa ra'fatika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+These are my misleading caprices I have referred to the threshold of Your gentleness and kindliness.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَٱجْعَلِ ٱللَّهُمَّ صَبَاحِي هٰذَا نَازِلاً عَلَيَّ بِضِيَاءِ ٱلْهُدَىٰ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">faj`al allahumma sabahi hadha nazilan `alayya bidiya'i alhuda</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+So, make this morning of mine, O Allah, descend upon me with the radiance of guidance</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَبِٱلسَّلاَمَةِ فِي ٱلدِّينِ وَٱلدُّنْيَا
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa bilssalamati fi alddini walddunya</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and safety in religion and this world!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَمَسَائِيَ جُنَّةً مِنْ كَيْدِ ٱلْعِدَىٰ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa masa'i junnatan min kaydi al`ida</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+And [make] my evening a shield against the deception of enemies</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَوِقَايَةً مِنْ مُرْدِيَاتِ ٱلْهَوَىٰ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa wiqayatan min murdiyati alhawa</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and a protection against the destructive blows of caprice!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِنَّكَ قَادِرٌ عَلَىٰ مَا تَشَاءُ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">innaka qadirun `ala ma tasha'u</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Verily, You have power to do what You will!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+تُؤْتِي ٱلْمُلْكَ مَنْ تَشَاءُ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">tu'ti almulka man tasha'u</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+You give the kingdom to whom You will,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَتَنْزِعُ ٱلْمُلْكَ مِمَّن تَشَاءُ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa tanzi`u almulka mimman tasha'u</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+seize the kingdom from whom You will,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَتُعِزُّ مَنْ تَشَاءُ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa tu`izzu man tasha'u</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+exalt whom You will,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَتُذِلُّ مَنْ تَشَاءُ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa tudhillu man tasha'u</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and abase whom You will.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِيَدِكَ ٱلْخَيرُ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">biyadika alkhayru</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+In Your hand is the good</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">innaka `ala kulli shay'in qadirun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and You are powerful over all things.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+تُولِجُ ٱللَّيْلَ فِي ٱلنَّهَارِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">tuliju allayla fi alnnahari</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+You make the night to enter into the day,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَتُولِجُ ٱلنَّهَارَ فِي ٱللَّيْلِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa tuliju alnnahara fi allayli</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+make the day to enter into the night,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَتُخْرِجُ ٱلْحَيَّ مِنَ ٱلمَيِّتِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa tukhriju alhayya mina almayyiti</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+bring forth the living from the dead,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَتُخْرِجُ ٱلْمَيِّتَ مِنَ ٱلحَيِّ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa tukhriju almayyita mina alhayyi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+bring forth the dead from the living,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَتَرْزُقُ مَنْ تَشَاءُ بِغَيْرِ حِسَابٍ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa tarzuqu man tasha'u bighayri hisabin</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and provide whomsoever You will without measure!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لاَ إِلٰهَ إِلاَّ أَنتَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">la ilaha illa anta</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+There is no god but You!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+سُبْحَانَكَ ٱللَّهُمَّ وَبِحَمْدِكَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">subhanaka allahumma wa bihamdika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Glory be to You, O Allah, and Yours is the praise!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مَنْ ذَا يَعْرِفُ قَدْرَكَ فَلاَ يَخَافُكَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">man dha ya`rifu qadraka fala yakhafuka</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Who knows Your measure and yet does not fear You?</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَمَن ذَا يَعْلَمُ مَا أَنتَ فَلاَ يَهَابُكَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa man dha ya`lamu ma anta fala yahabuka</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Who knows what You are and yet does not stand in awe of You?</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+أَلَّفْتَ بِقُدْرَتِكَ ٱلْفِرَقَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">allafta biqudratika alfiraqa</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Through Your power, You have joined disparate things,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَفَلَقْتَ بِلُطْفِكَ ٱلْفَلَقَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa falaqta bilutfika alfalaqa</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+through Your gentleness, You have cleaved apart the daybreak,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَنَرْتَ بِكَرَمِكَ ديَاجِيَ ٱلْغَسَقِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa anarta bikaramika dayajiya alghasaqi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+through Your generosity, You have illumined the dark shrouds of night,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَنْهَرْتَ ٱلْمِيَاهَ مِنَ ٱلصُّمِّ ٱلصَّيَاخِيدِ عَذْباً وَأُجَاجاً
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa anharta almiyaha mina alssummi alssayakhidi `adhban wa ujajan</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+made waters, sweet and salt, flow forth from hard shining stones,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَأَنزَلْتَ مِنَ ٱلمُعْصِرَاتِ مَاءً ثَجَّاجاً
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa anzalta mina almu`sirati ma'an thajjajan</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+sent dawn out of rain-clouds water cascading,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَجَعَلْتَ ٱلشَّمْسَ وَٱلْقَمَرَ لِلْبَرِيَّةِ سِرَاجاً وَهَّاجاً
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ja`alta alshshamsa walqamara lilbariyyati sirajan wahhajan</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and appointed the sun and the moon a blazing lamp for the creatures</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مِنْ غَيْرِ أَن تُمَارِسَ فِيمَا ٱبْتَدَأْتَ بِهِ لُغُوباً وَلاَ عِلاَجاً
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">min ghayri an tumarisa fima ibtada'ta bihi lughuban wa la `ilajan</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+without experiencing in that which You originated either weariness or effort.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَيَا مَنْ تَوَحَّدَ بِٱلْعِزِّ وَٱلْبَقَاءِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">faya man tawahhada bil`izzi walbaqa'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+So, O He Who is alone in might and subsistence</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَقَهَرَ عِبَادَهُ بِٱلْمَوْتِ وَٱلْفَنَاءِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa qahara `ibadahu bilmawti walfana'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and dominates His slaves with death and annihilation,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+صَلِّ عَلَىٰ مُحَمَّدٍ وَآلِهِ ٱلأَتْقِيَاءِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">salli `ala muhammadin wa alihi al-atqiya'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+(please) bless Muhammad and his household, the god-fearing,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَٱسْمَعْ نِدَائِي وَٱسْتَجِبْ دُعَائِي
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wasma` nida'i wastajib du`a'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+answer my supplication, hear my call,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَحَقِّقْ بِفَضْلِكَ أَمَلِي وَرَجَائِي
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa haqqiq bifadlika amali wa raja'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and actualize through Your favor my hope and desire.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يَا خَيْرَ مَنْ دُعِيَ لِكَشْفِ ٱلضُّرِّ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ya khayra man du`iya likashfi alddurri</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Best of those who are called to remove affliction</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَٱلْمَأْمُولِ فِي كُلِّ عُسْرٍ وَيُسْرٍ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">walma'muli fi kulli `usrin wa yusrin</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and object of hope in difficulty and ease!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِكَ أَنزَلْتُ حَاجَتِي فَلاَ تَرُدَّنِي مِنْ سَنِيِّ مَوَاهِبِكَ خَائِباً
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">bika anzaltu hajati fala taruddani min saniyyi mawahibika kha'iban</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+I have stated my need to You; so, do not reject me despairing of Your exalted gifts.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يَا كَرِيمُ يَا كَرِيمُ يَا كَرِيمُ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ya karimu ya karimu ya karimu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O All-generous! O All-generous! O All-generous!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِرَحْمَتِكَ يَا أَرْحَمَ ٱلرَّاحِمِينَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">birahmatika ya arhama alrrahimina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+By Your mercy, O Most Merciful of the merciful!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَصَلَّىٰ ٱللَّهُ عَلَىٰ خَيْرِ خَلْقِهِ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa salla allahu `ala khayri khalqihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+May Allah bless the best of His creatures, </t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مُحَمَّدٍ وَآلِهِ أَجْمَعِينَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">muhammadin wa alihi ajma`ina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Muhammad, and his entire Household!</t1></div><br>
+
+<hr style="font-size: 16px;">
+<h5 style="font-size: 20px;"><b style="font-size: 20px;">Prostrate and say (in Sajdah)&nbsp;</b></h5><br>
+
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِلٰهِي قَلْبِي مَحْجُوبٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ilahi qalbi mahjubun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, my heart is veiled,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَنَفْسِي مَعْيُوبٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa nafsi ma`yubun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+my soul is deficient,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَعَقْلِي مَغْلُوبٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `aqli maghlubun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+my intelligence is defeated,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَهَوَائِي غَاِلبٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa hawa'i ghalibun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+my caprice is triumphant,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَطَاعَتِي قَلِيلٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ta`ati qalilun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+my obedience is little,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَمَعْصِيَتِي كَثِيرٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ma`siyati kathirun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+my disobedience is much,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَلِسَانِي مُقِرٌّ بِٱلذُّنُوبِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa lisani muqirrun bildhdhnubi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and my tongue confesses of sinning;</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَكَيْفَ حِيلَتِي
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">fakayfa hilati </t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+so, what am I to do?</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يَا سَتَّارَ ٱلْعُيُوبِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;"></t2></div>ya sattara al`uyubi<div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O He Who covers defects!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَيَا عَلاَّمَ ٱلْغُيُوبِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;"></t2></div>wa ya `allama alghuyubi<div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O He Who knows the unseen!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَيَا كَاشِفَ ٱلْكُرُوبِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;"></t2></div>wa ya kashifa alkurubi<div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O He Who removes troubles!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إِغْفِر ذُنُوبِي كُلَّهَا
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;"></t2></div>ighfir dhunubi kulliha<div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Forgive my sins, all of them,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِحُرْمَةِ مُحَمَّدٍ وَآلِ مُحَمَّدٍ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;"></t2></div>bihurmati muhammadin wa ali muhammadin<div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+in the name of the sacredness of Muhammad and the household of Muhammad!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يَا غَفَّارُ يَا غَفَّارُ يَا غَفَّارُ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ya ghaffaru ya ghaffaru ya ghaffaru</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O All-forgiver! O All-forgiver! O All-forgiver!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِرَحْمَتِكَ يَا ارْحَمَ ٱلرَّاحِمِينَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;"></t2></div>birahmatika ya arhama alrrahimina<div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+By Your mercy, O Most Merciful of the merciful!</t1></div>
+
+
+
+
+
+				    
+															
+				
+
+										
+								</article>
+
+
+                <footer>
+  © 2025 Noor Al Huda — All in one Shia website
+</footer>
+
+
+
+
+
+
+
+
+
