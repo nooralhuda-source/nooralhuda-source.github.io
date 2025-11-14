@@ -1,0 +1,609 @@
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Noor Al Huda - Dua Adeela</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const mainNav = document.getElementById("mainNav");
+  const hamburger = document.querySelector(".hamburger");
+  const grid = document.getElementById("bookGrid");
+
+
+
+
+
+hamburger.addEventListener("click", e => {
+  e.stopPropagation();
+  mainNav.classList.toggle("open");
+});
+
+document.addEventListener("click", e => {
+  if (!mainNav.contains(e.target) && !hamburger.contains(e.target))
+    mainNav.classList.remove("open");
+});
+
+searchInput.addEventListener("input", e => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll(".surah-card").forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(q) ? "" : "none";
+  });
+});
+});a
+function applyThemeClass(isDark) {
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.remove("dark-mode");
+    }
+  }
+  var savedTheme = localStorage.getItem("theme");
+  applyThemeClass(savedTheme === "dark");
+
+  if (darkToggle) {
+    darkToggle.checked = savedTheme === "dark";
+    darkToggle.addEventListener("change", function (ev) {
+      var isDarkNow = !!ev.target.checked;
+      applyThemeClass(isDarkNow);
+      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+    });
+  }
+  </script>
+
+  <style>
+    /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+header h2 { font-size: 1.4rem; font-weight: 700; }
+header h2 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h2 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+    .ziyarat-section {
+  margin: 0 auto;
+  margin-top: 0;
+  max-width: 800px;
+  padding: 1.5rem;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  text-align: center; /* ✅ everything inside is centered */
+}
+    .arabic {
+      direction: rtl;
+      font-family: 'Scheherazade', serif;
+      font-size: 1.2rem;
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .transliteration, .translation {
+      background: #fdfdfd;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+   .back-duas-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+
+  background-color: var(--green);
+  color: white;
+  text-decoration: none;
+
+  border: none;
+  border-radius: 14px;
+  padding: 0.6rem 1.1rem;
+
+  font-family: "SF Pro Rounded", "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  margin: 0; /* remove the large top space */
+}
+
+/* Hover and active effects */
+.back-duas-btn:hover {
+  background-color: #2db574;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+.back-duas-btn:active {
+  background-color: #1e8b58;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset;
+  transform: translateY(1px);
+}
+header h2 { text-align: center; }
+header h3 { text-align: center; }
+.button-container {
+  text-align: left;
+  margin-bottom: 1rem; /* optional spacing */
+}
+  </style>
+</head>
+
+<body onload="updateThemeIcon()">
+  <!-- Header -->
+ <header>
+  <div class="brand"><h1><a href="index.html">Noor Al Huda</a></h1></div>
+  <button class="hamburger" aria-label="Open menu">☰</button>
+</header>
+
+<nav id="mainNav">
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="salah.html">Salah</a>
+  <a href="shiatube/index.html">ShiaTube</a>
+  <a href="index.html">Home</a>
+  <a href="settings.html">Settings</a>
+</nav>
+
+
+  <!-- Main -->
+  <main class="ziyarat-section">
+    <div class="button-container">
+    <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+  </div>
+    <h2>Ziyarat Waritha</h2><br>
+    <h3>Ziyarat Waritha is a supplication recited to honor the inheritor of Adam, the chosen one of Allah. It is a prayer that seeks peace and blessings upon the inheritor of the prophets and righteous individuals. This ziyarat is a way to show respect and remembrance for those who have been granted a special status by Allah. Reciting Ziyarat Waritha carries great spiritual benefits and helps strengthen one's connection to the legacy of the prophets and the Ahl al-Bayt.</h3>
+    <br>
+    <h4>Listen to the Recitation:</h4>
+    <br>
+</div>
+
+
+
+<audio controls="">
+										<source src="https://mp3.duas.org/ziyarat/ziarat-warisa.mp3" type="audio/mpeg" style="font-size: 16px;">
+									<a href="https://mp3.duas.org/ziyarat/ziarat-warisa.mp3" style="font-size: 16px;">warith</a> </audio>
+
+
+<section id="content-1-2" class="content-block content-1-2 pad0 pad-bottom0" style="font-size: 16px;">
+									
+									
+									
+									      
+									
+									<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">		
+										اَلسَّلاَمُ عَلَيْكَ يَا وَارِثَ آدَمَ صَفْوَةِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ya waritha adama safwati allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O inheritor of Adam the choice of Allah.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا وَارِثَ نُوحٍ نَبِيِّ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ya waritha nuhin nabiyyi allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O inheritor of Noah the prophet of Allah.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا وَارِثَ إِبْرَاهِيمَ خَلِيلِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ya waritha ibrahima khalili allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O inheritor of Abraham the intimate friend of Allah.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا وَارِثَ مُوسَىٰ كَلِيمِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ya waritha musa kalimi allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O inheritor of Moses the spoken by Allah.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا وَارِثَ عِيسَىٰ رُوحِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ya waritha `isa ruhi allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O inheritor of Jesus the spirit of Allah.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا وَارِثَ مُحَمَّدٍ حَبِيبِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ya waritha muhammadin habibi allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O inheritor of Muhammad the most beloved by Allah.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا وَارِثَ أَمِيرِ ٱلْمُؤْمِنِينَ عَلَيْهِ ٱلسَّلاَمُ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ya waritha amiri almu'minina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O inheritor of the Commander of the Faithful, peace be upon him.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا بْنَ مُحَمَّدٍ ٱلْمُصْطَفَىٰ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka yabna muhammadin almustafa</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O son of Muhammad the well-chosen Prophet.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا بْنَ عَلِيٍّ ٱلْمُرْتَضَىٰ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka yabna `aliyyin almurtada</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O son of `Ali the well-pleased.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا بْنَ فَاطِمَةَ ٱلزَّهْرَاءِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka yabna fatimata alzzahra'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O son of Fatimah the luminous lady.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا بْنَ خَدِيـجَةَ ٱلْكُبْرَىٰ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka yabna khadijata alkubra</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O son of Khadijah the grand lady.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا ثَارَ ٱللَّهِ وَٱبْنَ ثَارِهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ya thara allahi wabna tharihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O vengeance of Allah, son of His vengeance,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَٱلْوِتْرَ ٱلْمَوْتُورَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">walwitra almawtura</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and the unavenged so far.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										أَشْهَدُ أَنَّكَ قَدْ أَقَمْتَ ٱلصَّلاَةَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ashhadu annaka qad aqamta alssalata</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										I bear witness that you performed the prayers,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَآتَيْتَ ٱلزَّكَاةَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa atayta alzzakata</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										defrayed the poor-rate,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَمَرْتَ بِٱلْمَعْرُوفِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa amarta bilma`rufi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										enjoined the right,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَنَهَيْتَ عَنِ ٱلْمُنْكَرِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa nahayta `an almunkari</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										forbade the wrong,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَطَعْتَ ٱللَّهَ وَرَسُولَهُ حَتَّىٰ أَتَاكَ ٱلْيَقِينُ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ata`ta allaha wa rasulahu hatta ataka alyaqinu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and obeyed Allah and His Messenger until death came upon you.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										فَلَعَنَ ٱللَّهُ أُمَّةً قَتَلَتْكَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">fala`ana allahu ummatan qatalatka</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										So, may Allah curse the people who slew you.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَلَعَنَ ٱللَّهُ أُمَّةً ظَلَمَتْكَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa la`ana allahu ummatan zalamatka</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										May Allah curse the people who persecuted you.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَلَعَنَ ٱللَّهُ أُمَّةً سَمِعَتْ بِذٰلِكَ فَرَضِيَتْ بِهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa la`ana allahu ummatan sami`at bidhalika faradiyat bihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										May Allah curse the people who were pleased when they had heard of that.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										يَا مَوْلاَيَ يَا أَبَا عَبْدِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ya mawlaya ya aba `abdillahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										O my Master, O Abu-`Abdullah!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										أَشْهَدُ أَنَّكَ كُنْتَ نُوراً فِي ٱلأَصْلاَبِ ٱلشَّامِخَةِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ashhadu annaka kunta nuran fi al-aslabi alshshamikhati</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										I bear witness that you were light in the sublime loins</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَٱلأَرْحَامِ ٱلْمُطَهَّرَةِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wal-arhami almutahharati</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and purified wombs;</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										لَمْ تُنَجِّسْكَ ٱلْجَاهِلِيَّةُ بِأَنْجَاسِهَا
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">lam tunajjiska aljahiliyyatu bi'anjasiha</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										the impurities of the Ignorance Era could not object you to filth</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَلَمْ تُلْبِسْكَ مِنْ مُدْلَهِمَّاتِ ثِيَابِهَا
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa lam tulbiska min mudlahimmati thiyabiha</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										nor could it dress you its murky clothes.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَشْهَدُ أَنَّكَ مِنْ دَعَائِمِ ٱلدِّينِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ashhadu annaka min da`a'imi alddini</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										I also bear witness that you are one of the mainstays of the religion</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَرْكَانِ ٱلْمُؤْمِنِينَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa arkani almu'minina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and the supports of the faithful believers.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَشْهَدُ أَنَّكَ ٱلإِمَامُ ٱلْبَرُّ ٱلتَّقِيُّ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ashhadu annaka al-imamu albarru alttaqiyyu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										I also bear witness that you are the God-fearing, pious,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										ٱلرَّضِيُّ ٱلزَّكِيُّ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alrradiyyu alzzakiyyu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										pleased, immaculate,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										ٱلْهَادِي ٱلْمَهْدِيُّ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alhadi almahdiyyu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										guide, and well-guided Imam.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَشْهَدُ أَنَّ ٱلأَئِمَّةَ مِنْ وُلْدِكَ كَلِمَةُ ٱلتَّقْوَىٰ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ashhadu anna al-a'immata min wuldika kalimatu alttaqwa</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										And (I bear witness) that the Imams from your progeny are the spokesmen of piety,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَعْلاَمُ ٱلْهُدَىٰ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa a`lamu alhuda</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										the signs of guidance,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَٱلْعُروَةُ ٱلْوُثْقَىٰ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wal`urwatu alwuthqa</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										the firmest handle (of Islam),</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَٱلْحُجَّةُ عَلَىٰ أَهْلِ ٱلدُّنْيَا
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">walhujjatu `ala ahli alddunya</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and the decisive Argument against the inhabitants of the world.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأُشْهِدُ ٱللَّهَ وَمَلاَئِكَتَهُ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ushhidu allaha wa mala'ikatahu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										And I call Allah, His angels,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَنْبِيَاءَهُ وَرُسُلَهُ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa anbiya'ahu wa rusulahu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										His Prophets, and His Messenger</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										أَنِّي بِكُمْ مُؤْمِنٌ وَبِإِيَابِكُمْ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">anni bikum mu'minun wa bi'yabikum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										to witness for me that I believe in you all and in your Return,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										مُوقِنٌ بِشَرَائِعِ دِينِي وَخَوَاتِيمِ عَمَلي
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">muqinun bishara'i`i dini wa khawatimi `amali</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										I have full confidence in the laws of my religion and in the seals of my deeds,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَقَلْبِي لِقَلْبِكُمْ سِلْمٌ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa qalbi liqalbikum silmun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										my heart is at peace with you all,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَمْرِي لأَمْرِكُمْ مُتَّبِعٌ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa amri li'amrikum muttbi`un</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and all my affairs are based on your commands.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										صَلَوَاتُ اللَّهِ عَلَيْكُمْ وَعَلَىٰ أَرْوَاحِكُمْ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">salawatu allahi `alaykum wa `ala arwahikum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										May Allah’s benedictions be on your souls,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَعَلَىٰ أَجْسَادِكُمْ وَعَلَىٰ أَجْسَامِكُمْ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `ala ajsadikum wa `ala ajsamikum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										your bodies, your forms,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَعَلَىٰ شَاهِدِكُمْ وَعَلَىٰ غَائِبِكُمْ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `ala shahidikum wa `ala gha'ibkum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										the present and the absent from you,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَعَلَىٰ ظَاهِرِكُمْ وَعَلَىٰ بَاطِنِكُمْ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `ala zahirikum wa `ala batinikum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+									and the apparent and the invisible from you.</t1></div><br>
+									<b style="font-size: 16px;"><h6 style="font-size: 16px;">Then, you may throw yourself on the tomb, kiss it, and say these words:</h6></b>
+									<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										بِأَبِي أَنْتَ وَأُمِّي يَا بْنَ رَسُولِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">bi'abi anta wa ummi yabna rasuli allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										My father and mother be sacrificed for you, O son of the Messenger of Allah!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										بِأَبِي أَنْتَ وَأُمِّي يَا أَبَا عَبْدِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">bi'abi anta wa ummi ya aba `abdillahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										My father and mother be sacrificed for you, O Abu `Abdullah!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										لَقَدْ عَظُمَتِ ٱلرَّزِيَّةُ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">laqad `azumat alrraziyyatu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Extremely terrible was the calamity</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَجَلَّتِ ٱلْمُصيبَةُ بِكَ عَلَيْنَا
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa jallat almusibatu bika `alayna</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and astounding is the misfortune that you suffered upon us</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَعَلَىٰ جَمِيعِ أَهْلِ ٱلسَّمَاوَاتِ وَٱلأَرْضِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `ala jami`i ahli alssamawati wal-ardi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and upon all the inhabitants of the heavens and the earth.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										فَلَعَنَ ٱللَّهُ أُمَّةً أَسْرَجَتْ وَأَلْجَمَتْ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">fala`ana allahu ummatan asrajat wa aljamat</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Therefore, Allah may curse the people who saddled up, gave rein to their horses,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَتَهَيَّأَتْ لِقِتَالِكَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa tahayya'at liqitalika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and prepared themselves to kill you.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										يَا مَوْلاَيَ يَا أَبَا عَبْدِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ya mawlaya ya aba `abdillahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										O my Master, O Abu `Abdullah!</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										قَصَدْتُ حَرَمَكَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">qasadtu haramaka</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										I moved towards your sanctuary</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَتَيْتُ إِلَىٰ مَشْهَدِكَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ataytu ila mashhadika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and came to your shrine</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										أَسْأَلُ ٱللَّهَ بِٱلشَّأْنِ ٱلَّذِي لَكَ عِنْدَهُ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">as'alu allaha bilshsha'ni alladhi laka `indahu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										beseeching Allah in the name of the standing that you enjoy with Him</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَبِٱلْمَحَلِّ ٱلَّذِي لَكَ لَدَيْهِ 
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa bilmahalli alladhi laka ladayhi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and the position that you occupy with Him</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										أَنْ يُصَلِّيَ عَلَىٰ مُحَمَّدٍ وَآلِ مُحَمَّدٍ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">an yusalliya `ala muhammadin wa ali muhammadin</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										to send blessings on Muhammad and on the Household of Muhammad</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَنْ يَجْعَلَنِي مَعَكُمْ فِي ٱلدُّنْيَا وَٱلآخِرَةِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa an yaj`alani ma`akum fi alddunya wal-akhirati</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+									and to keep me with you in this world and in the Hereafter.</t1></div><br>
+									<hr style="font-size: 16px;">
+									<green style="font-size: 16px;"><b style="font-size: 16px;">Ziyarah of `Ali ibn al-Husayn (peace be upon him)</b></green><b style="font-size: 16px;"> </b><br>
+									<iframe src="https://www.youtube.com/embed/elfnER9QTTo" frameborder="0" allowfullscreen="" style="font-size: 16px;"></iframe><br>
+									<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا بْنَ رَسُولِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka yabna rasuli allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O son of the Messenger of Allah.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا بْنَ نَبِيِّ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka yabna nabiyyi allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O son of the Prophet of Allah.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا بْنَ أَمِيرِ ٱلْمُؤْمِنِينَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka yabna amiri almu'minina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O son of the commander of the faithful.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا بْنَ ٱلْحُسَيْنِ ٱلشَّهِيدِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka yabna alhusayni alshshahidi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O son of al-Husayn the martyr.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ أَيُّهَا ٱلشَّهِيدُ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ayyuha alshshahidu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O martyr.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ أَيُّهَا ٱلْمَظْلُومُ وَٱبْنُ ٱلْمَظْلُومِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ayyuha almazlumu wabnu almazlumi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O wronged and harassed and the son of the wrong and harassed.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										لَعَنَ ٱللَّهُ أُمَّةً قَتَلَتْكَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">la`ana allahu ummatan qatalatka</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Curse of Allah be on those who killed you.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَلَعَنَ ٱللَّهُ أُمَّةً ظَلَمَتْكَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa la`ana allahu ummatan zalamatka</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Curse of Allah be on those who persecuted you.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَلَعَنَ ٱللَّهُ أُمَّةً سَمِعَتْ بِذٰلِكَ فَرَضَيِتْ بِهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa la`ana allahu ummatan sami`at bidhalika faradiyat bihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+									Curse of Allah be on those who heard this even but rested satisfied.</t1></div><br>
+									
+									<b style="font-size: 16px;"><h6 style="font-size: 16px;">You should then throw yourself on the tomb, kiss it, and say the following words:</h6></b><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكَ يَا وَلِيَّ ٱللَّهِ وَٱبْنَ وَلِيِّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ya waliyya allahi wabna waliyyihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon you, O intimate servant of Allah and the son of His intimate servant.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										لَقَدْ عَظُمَتِ ٱلْمُصيبَةُ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">laqad `azumat almusibatu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Extremely terrible was the calamity</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَجَلَّتِ ٱلرَّزِيَّةُ بِكَ عَلَيْنَا
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa jallat alrraziyyatu bika `alayna</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and astounding is the misfortune that you suffered, upon us</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَعَلَىٰ جَمِيعِ ٱلْمُسْلِمينَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `ala jami`i almuslimina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										and upon all Muslims.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										فَلَعَنَ ٱللَّهُ أُمَّةً قَتَلَتْكَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">fala`ana allahu ummatan qatalatka</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										So, curse of Allah be on those who killed you</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَأَبْرَأُ إِلَىٰ ٱللَّهِ وَإِلَيْكَ مِنْهُمْ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa abra'u ila allahi wa ilayka minhum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+									and I disavow them in the presence of Allah and You.</t1></div><br>
+									<hr style="font-size: 16px;">
+									<green style="font-size: 16px;"><b style="font-size: 16px;">Ziyarah of all Martyrs (Shuhada')</b></green><br>
+									<iframe src="https://www.youtube.com/embed/fxaIDMsUozg" frameborder="0" allowfullscreen="" style="font-size: 16px;"></iframe><br>
+									<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكُمْ يَا أَوْلِيَاءَ ٱللَّهِ وَأَحِبَّائَهُ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alaykum ya awliya'a allahi wa ahibba'ahu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon all of you, O friends and dears of Allah.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكُمْ يَا أَصْفِيَاءَ ٱللَّهِ وَأَوِدَّاءَهُ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alaykum ya asfiya'a allahi wa awidda'ahu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon all of you, O choice of Allah and sincerely attached to Him.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكُمْ يَا أَنْصَارَ دِينِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alaykum ya ansara dini allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon all of you, O supporters of Allah’s religion.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكُمْ يَا أَنْصَارَ رَسُولِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alaykum ya ansara rasuli allahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon all of you, O supporters of the Messenger of Allah.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكُمْ يَا أَنْصَارَ أَمِيرِ ٱلْمُؤْمِنِينَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alaykum ya ansara amiri almu'minina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon all of you, O supporters of the Commander of the Faithful.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكُمْ يَا أَنْصَارَ فَاطِمَةَ سَيِّدَةِ نِسَاءِ ٱلْعَالَمِينَ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alaykum ya ansara fatimata sayyidati nisa'i al`alamina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon all of you, O supporters of Fatimah the doyenne of the women of this world.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكُمْ يَا أَنْصَارَ أَبِي مُحَمَّدٍ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alaykum ya ansara abi muhammadin</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon all of you, O supporters of Abu Muhammad,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										ٱلْحَسَنِ بْنِ عَلِيٍّ ٱلْوَلِيِّ ٱلنَّاصِحِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alhasani ibni `aliyyin alwaliyyi alnnasihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										al-Hasan the son of `Ali, the saintly and sincere.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										اَلسَّلاَمُ عَلَيْكُمْ يَا أَنْصَارَ أَبِي عَبْدِ ٱللَّهِ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alaykum ya ansara abi `abdillahi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Peace be upon all of you, O supporters of Abu-`Abdullah.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										بِأَبِي أَنْتُمْ وَأُمِّي
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">bi'abi antum wa ummi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										My father and mother be sacrificed for you.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										طِبْتُمْ وَطَابَتِ ٱلأَرْضُ ٱلَّتِي فِيهَا دُفِنْتُمْ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">tibtum wa tabat al-ardu allati fiha dufintum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										Verily, pure be you and pure be the soil in which you were buried.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										وَفُزْتُمْ فَوْزاً عَظيماً
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa fuztum fawzan `aziman</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+										You attained great success.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+										فَيَا لَيْتَنِي كُنْتُ مَعَكُمْ فَأَفُوزَ مَعَكُمْ
+										</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">fayalaytani kuntu ma`akum fa'afuza ma`akum</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+									Would that I were with you so that I could also share the accomplishment with you.</t1></div><br>
+									
+									<b style="font-size: 16px;"><green style="font-size: 16px;">Ziyarah Abal Fadhl 'Abbas (peace be upon him)</green></b>
+								<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَلسَّلاَمُ عَلَيْكَ يَا بْنَ امِيرِ ٱلْمُؤْمِنِينَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka yabna amiri almu'minina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Peace be upon you, O son of the Commander of the Faithful.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَلسَّلاَمُ عَلَيْكَ ايُّهَا ٱلْعَبْدُ ٱلصَّالِحُ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ayyuha al`abdu alssalihu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Peace be upon you, O righteous servant (of Allah)</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ٱلْمُطِيعُ لِلَّهِ وَلِرَسُولِهِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">almuti`u lillahi wa lirasulihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and obedient to Allah and to His Messenger.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اشْهَدُ انَّكَ قَدْ جَاهَدْتَ وَنَصَحْتَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ashhadu annaka qad jahadta wa nasahta</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+I bear witness that you strove (in the way of Allah), acted sincerely,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَصَبَرْتَ حَتَّىٰ اتَاكَ ٱلْيَقِينُ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa sabarta hatta ataka alyaqinu</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and tolerated (harm) until death came upon you.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لَعَنَ ٱللَّهُ ٱلظَّالِمِينَ لَكُمْ مِنَ ٱلاوَّلِينَ وَٱلآخِرِينَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">la`ana allahu alzzalimina lakum min al-awwalina wal-akhirina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+May Allah curse those who wronged you from the past and the present generations</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَالْحَقَهُمْ بِدَرْكِ ٱلْجَحِيمِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa alhaqahum bidarki aljahimi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and may He send them to the lowest layer of the blazing Hell.</t1></div><br>
+						
+						
+					
+	<a href="#top" style="font-size: 16px;"><button class="btn btn-warning  btn-xs" style="font-size: 14px;"> <i class="fa fa-angle-double-up fa-lg" style="font-size: 18.6666px;"></i></button></a>
+					
+		<br><br>				
+</section>
