@@ -50,3 +50,23 @@ if (searchInput) {
     });
   });
 }
+const headerHTML = `
+<header>
+  <div class="brand">
+    <h1><a href="index.html">Noor Al Huda</a></h1>
+  </div>
+
+  <button class="hamburger" aria-label="Open menu">☰</button>
+</header>
+
+<nav id="mainNav">
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="salah.html">Salah</a>
+  <a href="shiatube/index.html">ShiaTube</a>
+  <a href="index.html">Home</a>
+  <a href="settings.html">Settings</a>
+</nav>
+`;
