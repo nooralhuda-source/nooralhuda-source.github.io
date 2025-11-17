@@ -70,3 +70,9 @@ const headerHTML = `
   <a href="settings.html">Settings</a>
 </nav>
 `;
+const banner = document.createElement('div');
+banner.className = 'beta-banner'; // styled in style.css
+banner.textContent = '⚠️ This site is in BETA — features may change.';
+
+
+document.body.prepend(banner);

@@ -197,14 +197,11 @@ body.dark-mode .widget-card {
 
 /* Menu Links */
 #mainNav a {
-  background: #fff;
-  color: var(--green);
-  padding: 0.6rem 1rem;
-  border-radius: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.25s ease;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 /* 3D Hover Effect (Apple-like) */
@@ -320,4 +317,19 @@ body.dark-mode .widget-card {
 .search:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+.beta-banner {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+background: #FFD500;
+color: #000;
+font-weight: 700;
+font-size: 1rem;
+text-align: center;
+padding: 14px 0;
+z-index: 9999;
+box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+letter-spacing: 0.3px;
 }
