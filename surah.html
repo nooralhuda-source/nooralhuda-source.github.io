@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en" dir="ltr">
+  
 <head>
+  <link rel="icon" type="image/png" href="logo.png.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Noor Al Huda — Surah Viewer</title>
@@ -80,7 +83,7 @@ header {
 .left-drawer .surah-item:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 14px 36px rgba(0,0,0,0.14); }
 
 /* push wrapper */
-.push-wrapper { transition: margin-left .28s ease, margin-right .28s ease; }
+
 
 /* opener buttons */
 #surahPickerOpener, #settingsOpener {
@@ -103,11 +106,11 @@ header {
 .page { padding: 5.2rem 1.25rem 6rem 1.25rem; max-width:1200px; margin: 0 auto; }
 .surah-header { display:flex; flex-direction:column; align-items:center; gap:6px; margin-bottom:12px; text-align:center; }
 .header-row { display:flex; align-items:center; gap:12px; width:100%; }
-.back-home { margin-right:auto; color:#fff; text-decoration:none; background:var(--green); padding:.35rem .6rem; border-radius:10px; }
+.back-home { margin-right:auto; color:#fff; text-decoration:none; background:var(--green); padding:.35rem .6rem; border-radius:10px;  }
 
-.surah-title-en { font-size:1.05rem; color:var(--muted); }
-.surah-title-ar { font-size:2.1rem; font-weight:800; color:var(--green); line-height:1.05; font-family: 'IndoPakQuran', 'UthmaniQuran', serif; }
-.surah-meta-center { color:var(--muted); font-size:.95rem; }
+.surah-title-en { font-size:1.05rem; color:var(--muted);  align-items: center; }
+.surah-title-ar { font-size:2.1rem; font-weight:800; color:var(--green); line-height:1.05; font-family: 'IndoPakQuran', 'UthmaniQuran', serif;  align-items: center;}
+.surah-meta-center { color:var(--muted); font-size:.95rem;  align-items: center;}
 
 /* ayah list */
 #ayahContainer { margin-top:12px; }
@@ -141,6 +144,62 @@ header {
 body.dark-mode { --bg:#071226; --text:#f9fafb; --muted:#9fb0c7; --card:#071a2a; --border:#123047; background:var(--bg); color:var(--text); }
 
 .small-muted { color: var(--muted); font-size: .9rem; }
+/* Prevent sideways scrolling */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  touch-action: manipulation;
+}
+
+/* Text sizes scale down on mobile */
+@media (max-width: 600px) {
+  body {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* Surah Title */
+  #surahTitle {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  /* Bismillah */
+  .bismillah {
+    width: 80%;
+    margin: 10px auto;
+    display: block;
+  }
+
+  /* Arabic ayat */
+  .aya-ar {
+    font-size: 1.45rem;
+    line-height: 2.2rem;
+  }
+
+  /* Translation */
+  .aya-en {
+    font-size: 1rem;
+  }
+
+  /* Hide side padding on very small screens */
+  .container {
+    padding: 0.5rem;
+  }
+
+  /* Buttons */
+  .q-btn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.8rem;
+  }
+
+  /* Slide menus adjust width */
+  #mainNav, #surahPicker {
+    width: 75%;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -217,7 +276,7 @@ body.dark-mode { --bg:#071226; --text:#f9fafb; --muted:#9fb0c7; --card:#071a2a; 
     <main class="page">
       <div class="surah-header">
         <div class="header-row">
-          <a class="back-home" href="quran.html">← Back to Quran Home</a>
+          <a class="back-home" href="quran.html">← Back</a>
           <div style="margin-left:auto; margin-right:auto; text-align:center;">
             <div class="surah-title-en" id="surahTitleEnglish">Sūrah — English name</div>
             <div class="surah-title-ar" id="surahTitleArabic">سورة ...</div>
@@ -772,6 +831,10 @@ function populateTranslationsUI(){
     row.appendChild(cb); row.appendChild(document.createTextNode(' ' + name)); settingsTransList.appendChild(row);
   });
 }
+document.addEventListener("touchstart", function(){}, true);
+window.addEventListener("resize", () => {
+  document.body.style.height = window.innerHeight + "px";
+});
 </script>
 </body>
 </html>
