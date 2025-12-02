@@ -444,7 +444,7 @@ async function loadHadiths(){
     hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Failed to load hadiths.</div>';
   }
 }
-
+        
 /* render list: english/context left, arabic right (RTL) */
 function renderList(){
   hadithContainer.innerHTML = '';
@@ -491,7 +491,30 @@ const gradWrap = el('div', { class: 'gradings' });
 
     gradWrap.appendChild(chip);
 });
+if (window.innerWidth <= 600) {
+    leftCol.innerHTML = '';
+    rightCol.innerHTML = '';
 
+    // 1. Arabic
+    rightCol.appendChild(arP);
+
+    // 2. Sanad
+    rightCol.appendChild(contextP);
+
+    // 3. English
+    rightCol.appendChild(enP);
+
+    // 4. Gradings
+    rightCol.appendChild(gradWrap);
+
+} else {
+    // Desktop/tablet original layout
+    leftCol.appendChild(contextP);
+    leftCol.appendChild(enP);
+
+    rightCol.appendChild(arP);
+    rightCol.appendChild(gradWrap);
+}
 
     // actions: open, and three-dots
     const actions = el('div',{class:'card-actions'});
