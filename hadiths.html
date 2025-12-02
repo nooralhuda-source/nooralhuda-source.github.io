@@ -111,7 +111,23 @@
   .hadith-en { font-size:0.98rem; color:var(--text); margin-bottom:8px; text-align:left; }
   .hadith-context { font-size:0.88rem; color:var(--muted); margin-bottom:8px; }
   .hadith-ar { font-family: 'parastoo'; direction:rtl; font-size:27px; line-height:1.45; text-align:right; }
+@media (max-width: 600px) {
+  .hadith-context {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
+  .hadith-ar {
+    order: 1;
+    text-align: right;
+  }
+
+  .hadith-en {
+    order: 2;
+    text-align: left;
+  }
+}
   /* popup / three-dots */
   .three-dots { background: rgba(255,255,255,0.9); border:1px solid var(--border); padding:8px 10px; border-radius:10px; cursor:pointer; box-shadow:0 8px 26px rgba(0,0,0,0.08); min-width:44px; min-height:var(--tap); display:flex; align-items:center; justify-content:center; }
   .hadith-popup { position:absolute; right:12px; top:56px; background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.55)); padding:.6rem; border-radius:12px; box-shadow: 0 22px 60px rgba(4,10,6,0.12); display:none; z-index:1600; min-width:200px; backdrop-filter: blur(6px) saturate(120%); }
