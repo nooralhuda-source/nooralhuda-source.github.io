@@ -218,6 +218,40 @@
 #openSaved:active, #openFilter:active {
   transform: translateY(2px);
 }
+/* --- Universal Mobile Fixes --- */
+
+@media (max-width:1024px){
+  .modal-grid { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width:720px){
+  .hadith-ar { font-size:20px; line-height:1.5; }
+  .hadith-en { font-size:0.95rem; }
+}
+
+@media (max-width:600px){
+  .hadith-card { flex-direction: column; }
+  .hadith-meta {
+    width:100%;
+    text-align:left;
+    padding-bottom:6px;
+  }
+}
+
+.modal-ar {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.hadith-popup {
+  min-width: 60vw;
+  max-width: 260px;
+}
+
+#mainNav {
+  width: 70vw;
+  max-width: 260px;
+}
 
   </style>
 </head>
