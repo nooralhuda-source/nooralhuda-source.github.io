@@ -150,7 +150,7 @@
   .modal { width:min(980px,96%); max-height:92vh; overflow:auto; background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9)); border-radius:12px; padding:18px; box-shadow:0 28px 80px rgba(0,0,0,0.28); color:var(--text); }
   .modal-grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; align-items:start; }
   .modal-ar { font-family: 'parastoo'; direction:rtl; font-size:26px; line-height:1.6; text-align:right; }
-  .modal-en { font-size:1rem; color:var(--muted); text-align:left; }
+  .modal-en { font-size:1rem; color:#000; text-align:left; }
   .modal-meta { margin-top:10px; color:var(--muted); font-size:.92rem; }
 
   /* bottom controls: back to beginning */
@@ -560,36 +560,45 @@ const gradWrap = el('div', { class: 'gradings' });
     hadithContainer.appendChild(card);
   });
 }
+/* open a hadith modal by index — sanad then matn */
+function openHadithModal(idx) {
+  if (idx < 0 || idx >= HADITHS.length) return;
 
-/* open a hadith modal by index — loads notes immediately */
-function openHadithModal(idx){
-  if(idx < 0 || idx >= HADITHS.length) return;
   visibleIndex = idx;
   const h = HADITHS[idx];
 
-  // Fill modal fields
-  modalArabic.innerHTML = (h.arabicText || h.thaqalaynMatn || '').trim();
-  modalEnglish.innerHTML = (h.englishText || h.thaqalaynMatn || '').trim();
-  modalSanad.innerHTML = (h.thaqalaynSanad || '').trim();
-  modalMeta.innerHTML = `Book: ${h.book || ''} • Chapter: ${h.chapter || ''} • ID: ${h.id || ''}`;
+  // -------- SANAD --------
+  // Only one sanad source
+  const sanadText = (h.sanad || h.thaqalaynSanad || '').trim();
+  modalSanad.innerHTML = sanadText;
 
-  // gradings
-  // full grading display (grade — scholar — book/reference)
+  // -------- MATN (Arabic + English) --------
+  const matnAr = (h.arabicText || '').trim();
+  const matnEn = (h.thaqalaynMatn|| '').trim();
 
-modalGradings.innerHTML = '';
-(h.gradingsFull || []).forEach(g => {
-  const grade = (g.grade_ar || '—').trim();
-  const scholar = g.author?.name_en ? ` — ${g.author.name_en}` : '';
-  const ref = g.reference_en ? ` — ${g.reference_en}` : '';
+  modalArabic.innerHTML = matnAr;
+  modalEnglish.innerHTML = matnEn;
 
-  const chip = el(
-    'div',
-    { class: 'grade-chip ' + gradeClass(grade) },
-    grade + scholar + ref
-  );
+  // -------- META --------
 
-  modalGradings.appendChild(chip);
-});
+
+  // -------- GRADINGS --------
+  modalGradings.innerHTML = '';
+
+  (h.gradingsFull || []).forEach(g => {
+    const grade = (g.grade_ar || '—').trim();
+    const scholar = g.author?.name_en ? ` — ${g.author.name_en}` : '';
+    const ref = g.reference_en ? ` — ${g.reference_en}` : '';
+
+    const chip = el(
+      'div',
+      { class: 'grade-chip ' + gradeClass(grade) },
+      grade + scholar + ref
+    );
+
+    modalGradings.appendChild(chip);
+  });
+
 
 
   // load note if present
