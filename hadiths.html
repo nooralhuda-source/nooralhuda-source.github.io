@@ -168,8 +168,25 @@
   }
   @media (max-width:720px){
     body{ padding-top:3.2rem; }
-    .hadith-ar { font-size:18px; }
-    .hadith-en { font-size:0.98rem; }
+    /* Arabic text auto-scales on all screens */
+.hadith-ar {
+  font-size: clamp(20px, 4vw, 30px);
+  line-height: 1.6;
+  text-align: right;
+}
+
+/* English text auto-scales on all screens */
+.hadith-en {
+  font-size: clamp(14px, 3.3vw, 20px);
+  line-height: 1.55;
+}
+
+/* Context/sanad text auto-scales too */
+.hadith-context {
+  font-size: clamp(12px, 3vw, 16px);
+  line-height: 1.45;
+}
+
     .three-dots{ padding:8px; min-height:44px; }
     .bottom-actions { bottom: 10px; }
   }
@@ -267,6 +284,83 @@
 #mainNav {
   width: 70vw;
   max-width: 260px;
+}
+/* Mobile layout: stack Arabic → English → Sanad → Gradings */
+@media (max-width: 600px) {
+  .hadith-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .hadith-ar {
+    order: 1;
+  }
+
+  .hadith-context {
+    order: 2;
+  }
+
+  .hadith-en {
+    order: 3;
+  }
+
+  .gradings {
+    order: 4;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal {
+    padding: 16px;
+  }
+
+  .modal-ar {
+    font-size: 22px;
+    line-height: 1.55;
+  }
+
+  .modal-en {
+    font-size: 1rem;
+  }
+
+  .modal-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+}
+.hadith-popup {
+  right: 8px !important;
+  top: 48px !important;
+  max-width: 90vw !important;
+  width: max-content;
+}
+#mainNav {
+  width: 75vw;
+  max-width: 300px;
+}
+/* Arabic auto-resize for mobile */
+#modalArabic {
+  font-size: clamp(20px, 4vw, 34px);
+  line-height: 1.8;
+  word-wrap: break-word;
+}
+
+/* English adjusts but slightly smaller */
+#modalEnglish {
+  font-size: clamp(16px, 3.2vw, 24px);
+  line-height: 1.7;
+}
+
+/* Very small phones */
+@media (max-width: 430px) {
+  #modalArabic {
+    font-size: clamp(18px, 6vw, 30px);
+  }
+}
+#modalContent {
+  display: flex;
+  flex-direction: column;
 }
 
   </style>
@@ -491,7 +585,6 @@ const gradWrap = el('div', { class: 'gradings' });
 
     gradWrap.appendChild(chip);
 });
-
 
     // actions: open, and three-dots
     const actions = el('div',{class:'card-actions'});
@@ -786,4 +879,3 @@ if(bismillahImg) bismillahImg.addEventListener('error', ()=>{ bismillahImg.style
 </script>
 </body>
 </html>
-
