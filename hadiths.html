@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Noor Al Huda — Al-Kāfi (Vol 1) — Kitāb al-ʿAql wa al-Jahl</title>
+  <title>Al-Kafi vol. 1 chapter 2</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -347,6 +347,102 @@
   .surah-title-ar { font-size: 1.2rem; }
   .surah-title-en { font-size: 1rem; }
 }
+.grading-full { display: block; }
+.gradings-chips { display: none; }
+
+@media (max-width:720px) {
+  .grading-full { display: none; }    /* hide full details on phone */
+  .gradings-chips { display: flex; }  /* show compact chips on phone */
+  .gradings-chips .grade-chip { margin-right:6px; }
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+
+body.dark-mode .modal {
+  background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(30,41,59,0.9));
+  color: #f9fafb;
+}
+
+body.dark-mode .modal-ar,
+body.dark-mode .modal-en {
+  color: #f9fafb;
+}
+
+body.dark-mode .modal-meta {
+  color: #94a3b8;
+}
+
+body.dark-mode .modal-backdrop {
+  background: rgba(0,0,0,0.8);
+}
+
+body.dark-mode .btn-3d {
+  background: rgba(30,41,59,0.9);
+  color: #276540;
+  border: 1px solid #475569;
+}
+
+body.dark-mode .btn-3d:hover {
+  background: rgba(51,65,85,0.9);
+  border-color: #64748b;
+}
+
+body.dark-mode #modalGradings .grade-chip {
+  opacity: 0.9;
+}
+
+body.dark-mode .note-input {
+  background: #1e293b;
+  border: 1px solid #475569;
+  color: #f9fafb;
+}
+
+body.dark-mode .note-input::placeholder {
+  color: #94a3b8;
+}
+.book-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 4px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width:720px) {
+  .book-meta {
+    font-size: 0.75rem;
+    margin-top: 2px;
+  }
+}
+
+@media (max-width:600px) {
+  .book-meta {
+    font-size: 0.7rem;
+    margin-top: 2px;
+  }
+}
+
+@media (max-width:720px){
+  body { padding-top: 2.8rem; }
+  .surah-header { gap: 0; margin-bottom: 8px; padding: 0 10px; }
+  .header-row { gap: 6px; }
+  .back-home { padding: .3rem .5rem; font-size: .8rem; }
+  #openSaved { padding: .3rem .5rem; font-size: .75rem; width: auto; max-width: 70px; }
+  .surah-title-en { font-size: 1.2rem; margin: 0; }
+  .surah-title-ar { font-size: 1.4rem; margin: 0; }
+  .book-meta { font-size: 1.1rem; margin-top: 1px; }
+}
+
+@media (max-width:600px){
+  body { padding-top: 2.5rem; }
+  .surah-header { gap: 2px; margin-bottom: 6px; padding: 0 8px; }
+  .header-row { gap: 4px; }
+  #openSaved { max-width: 70px; padding: 0.5rem .5rem; font-size: 1.2rem; }
+  #bismillahWrap { margin: 6px 0; }
+  #hadithContainer { margin-top: 4px; padding: 0 4px 120px 4px; }
+}
   </style>
 </head>
 <body>
@@ -369,13 +465,16 @@
 
   <main class="page" id="page">
     <div class="surah-header" role="banner">
-      <div class="header-row">
-        <a class="back-home" href="alkafi-volume1.html">← Volume 1</a>
-        <button id="openSaved" class="btn-3d">Saved</button>
-        <div style="text-align:center; flex:1;">
-          <div class="surah-title-en">كتاب العقل والجهل</div>
-          <div class="surah-title-ar">Book of Intelligence & Ignorance</div>
-        </div>
+  <div class="header-row">
+    <a class="back-home" href="alkafi-volume1.html">← Volume 1</a>
+    <button id="openSaved" class="btn-3d">Saved</button>
+    <div style="text-align:center; flex:1;">
+      <div class="surah-title-en">كتاب العقل والجهل</div>
+      <div class="surah-title-ar">Book of Intelligence & Ignorance</div>
+      <div class="book-meta">Al-Kāfi — Volume 1 by Sheikh al al-Kulaynī </div>
+    </div>
+  </div>
+</div>
         
        
       </div>
@@ -704,7 +803,14 @@ function populateSavedList() {
     const row = el("div", { class: "saved-row" });
     const left = el("div");
 
-    const meta = el("div", { style: "font-size:.85rem;color:var(--muted)" }, `#${hadith.id} — ${hadith.book}`);
+    // Show full details: book, volume, chapter, hadith number
+    const metaText = `
+      <strong>${hadith.book}</strong><br>
+      Vol. ${hadith.volume} — Ch. ${hadith.chapter} — #${hadith.id}
+    `;
+    const meta = el("div", { style: "font-size:.85rem;color:var(--muted)" });
+    meta.innerHTML = metaText;
+    
     const note = el("div", { style: "margin-top:4px;font-size:.9rem" }, notes[hadith.id] || '(no note)');
 
     left.append(meta, note);
@@ -741,7 +847,6 @@ function populateSavedList() {
     savedList.appendChild(row);
   });
 }
-
 function scrollToCard(){ const id = HADITHS[visibleIndex].id; const elCard = document.getElementById('hadith-card-'+id); if(elCard) elCard.scrollIntoView({behavior:'smooth', block:'center'}); }
 backBeginning.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 
@@ -751,6 +856,18 @@ document.addEventListener('click',(e)=>{ if(!document.getElementById('mainNav').
 loadHadiths();
 
 if(bismillahImg) bismillahImg.addEventListener('error', ()=>{ bismillahImg.style.display='none'; });
+function applyThemeClass(isDark) {
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.remove("dark-mode");
+    }
+  }
+  var savedTheme = localStorage.getItem("theme");
+  applyThemeClass(savedTheme === "dark");
+
 </script>
 </body>
 </html>
