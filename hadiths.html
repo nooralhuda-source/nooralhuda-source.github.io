@@ -526,7 +526,7 @@ body.dark-mode .note-input::placeholder {
   <div class="modal-backdrop" id="savedBackdrop" style="display:none">
     <div class="modal" id="savedPopup">
       <h3 style="margin-bottom:8px">Saved Hadiths</h3>
-      <div id="savedList" style="max-height:50vh; overflow:auto"></div>
+      <div>currently in beta testing, will insha allah be available in January 2026</div> 
       <div style="text-align:right;margin-top:12px"><button id="closeSaved" class="btn-3d">Close</button></div>
     </div>
   </div>
@@ -542,6 +542,24 @@ const STORAGE_NOTES = 'noor_hadith_notes_v1';
 
 let HADITHS = [];
 let visibleIndex = 0;
+// AUTO-OPEN HADITH WHEN REDIRECTED TO THIS PAGE
+window.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const open = params.get("open");
+
+    if (open === "true" && id) {
+        // Wait for hadiths and cards to render
+        setTimeout(() => {
+            const idx = HADITHS.findIndex(h => String(h.id) === String(id));
+            if (idx >= 0) {
+                openHadithModal(idx);
+                const card = document.getElementById("hadith-card-" + id);
+                if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        }, 300);
+    }
+});
 
 const hadithContainer = document.getElementById('hadithContainer');
 const modalBackdrop = document.getElementById('modalBackdrop');
@@ -785,7 +803,7 @@ savedBackdrop.addEventListener("click", (e) => {
   if (e.target === savedBackdrop) savedBackdrop.style.display = "none";
 });
 
-function populateSavedList() {
+async function populateSavedList() {
   const savedItems = load(STORAGE_SAVED, []);
   savedList.innerHTML = "";
 
@@ -795,49 +813,92 @@ function populateSavedList() {
   }
 
   const notes = load(STORAGE_NOTES, {});
+  let corpus = window.ALL_SAVED_HADITHS || null;
+  if (!corpus) {
+    try {
+      const res = await fetch(API_URL);
+      corpus = res.ok ? await res.json() : HADITHS.slice();
+    } catch (e) {
+      corpus = HADITHS.slice();
+    }
+    window.ALL_SAVED_HADITHS = corpus;
+  }
 
   savedItems.forEach((item) => {
-    const hadith = HADITHS.find(h => String(h.id) === String(item.id));
-    if (!hadith) return;
+    const hadith = corpus.find(h => String(h.id) === String(item.id));
 
     const row = el("div", { class: "saved-row" });
     const left = el("div");
 
-    // Show full details: book, volume, chapter, hadith number
-    const metaText = `
-      <strong>${hadith.book}</strong><br>
-      Vol. ${hadith.volume} — Ch. ${hadith.chapter} — #${hadith.id}
-    `;
+    let metaHtml = '';
+    if (hadith) {
+      const book = hadith.book || hadith.bookId || '(Unknown book)';
+      const vol = hadith.volume || '(?)';
+      const ch = hadith.chapter || hadith.category || hadith.categoryId || '(?)';
+      metaHtml = `<strong>${escapeHtml(book)}</strong><br>Vol. ${escapeHtml(vol)} — Ch. ${escapeHtml(ch)} — #${escapeHtml(hadith.id)}`;
+    } else {
+      metaHtml = `<strong>Hadith #${escapeHtml(item.id)}</strong><br><small style="color:var(--muted)">${escapeHtml(item.snippet || '')}</small>`;
+    }
     const meta = el("div", { style: "font-size:.85rem;color:var(--muted)" });
-    meta.innerHTML = metaText;
-    
-    const note = el("div", { style: "margin-top:4px;font-size:.9rem" }, notes[hadith.id] || '(no note)');
+    meta.innerHTML = metaHtml;
+
+    const noteText = notes[item.id] || item.note || '(no note)';
+    const note = el("div", { style: "margin-top:4px;font-size:.9rem" }, noteText);
 
     left.append(meta, note);
 
     const right = el("div", { style: "display:flex;gap:6px" });
 
-    const openBtn = el("button", { class: "btn-3d" }, "Open");
-    openBtn.addEventListener("click", () => {
-      const index = HADITHS.findIndex(h => String(h.id) === String(item.id));
-      if (index >= 0) {
-        openHadithModal(index);
-        savedBackdrop.style.display = "none";
-      }
-    });
+// Replace the entire openBtn event listener in populateSavedList():
+
+const openBtn = el("button", { class: "btn-3d" }, "Open");
+openBtn.addEventListener("click", async () => {
+  if (!hadith) {
+    alert("Hadith data not found");
+    return;
+  }
+
+  const indexInPage = HADITHS.findIndex(h => String(h.id) === String(hadith.id));
+  if (indexInPage >= 0) {
+    // Hadith is on current page - open modal directly
+    openHadithModal(indexInPage);
+    savedBackdrop.style.display = "none";
+    return;
+  }
+
+  // Hadith not on this page - navigate to correct page
+  const vol = Number(hadith.volume) || 1;
+  const ch = Number(hadith.chapter) ;
+  const hadithId = hadith.id;
+
+  let targetPage = 'hadiths.html';
+  
+  if (vol === 1) {
+    if (ch === 0) targetPage = 'alkafi-v1-ch1.html';
+    else if (ch === 1) targetPage = 'hadiths.html';
+    else if (ch === 2) targetPage = 'alkafi-v1-ch3.html';
+    else if (ch === 3) targetPage = 'alkafi-v1-ch4.html';
+    else if (ch === 4) targetPage = 'alkafi-v1-ch5.html';
+  }
+
+  //
+
+});
+
+// ...existing code...
 
     const editBtn = el("button", { class: "btn-3d" }, "Edit");
     editBtn.addEventListener("click", () => {
-      const newNote = prompt(`Edit note for #${hadith.id}:`, notes[hadith.id] || "") || "";
-      if (newNote.trim()) notes[hadith.id] = newNote.trim();
-      else delete notes[hadith.id];
+      const current = notes[item.id] || item.note || "";
+      if (newNote.trim()) notes[item.id] = newNote.trim();
+      else delete notes[item.id];
       save(STORAGE_NOTES, notes);
       populateSavedList();
     });
 
     const delBtn = el("button", { class: "btn-3d" }, "Delete");
     delBtn.addEventListener("click", () => {
-      const updated = savedItems.filter(x => String(x.id) !== String(hadith.id));
+      const updated = savedItems.filter(x => String(x.id) !== String(item.id));
       save(STORAGE_SAVED, updated);
       populateSavedList();
     });
@@ -846,7 +907,40 @@ function populateSavedList() {
     row.append(left, right);
     savedList.appendChild(row);
   });
+
+  function escapeHtml(s){
+    return String(s === undefined || s === null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
 }
+
+// Auto-open modal when returning from saved hadith
+function checkAndOpenSavedHadith() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const hadithId = urlParams.get('id');
+  const shouldOpen = urlParams.get('open') === 'true';
+
+  if (hadithId && shouldOpen && HADITHS.length > 0) {
+    const idx = HADITHS.findIndex(h => String(h.id) === String(hadithId));
+    if (idx >= 0) {
+      setTimeout(() => {
+        openHadithModal(idx);
+        const card = document.getElementById('hadith-card-' + HADITHS[idx].id);
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Clean up URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }, 300);
+    }
+  }
+}
+
+// Call after hadiths load
+const originalLoadHadiths = loadHadiths;
+loadHadiths = async function() {
+  await originalLoadHadiths.call(this);
+  checkAndOpenSavedHadith();
+};
+
 function scrollToCard(){ const id = HADITHS[visibleIndex].id; const elCard = document.getElementById('hadith-card-'+id); if(elCard) elCard.scrollIntoView({behavior:'smooth', block:'center'}); }
 backBeginning.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 
@@ -854,6 +948,60 @@ document.querySelectorAll('.hamburger').forEach(h=>h.addEventListener('click',(e
 document.addEventListener('click',(e)=>{ if(!document.getElementById('mainNav').contains(e.target) && !e.target.closest('.hamburger')) document.getElementById('mainNav').classList.remove('open'); });
 
 loadHadiths();
+function getTargetPageFromHadith(hadith) {
+  // Default fallback
+  let targetPage = 'hadiths.html';
+  
+  if (!hadith) return targetPage;
+  
+  // Try to use a books config if available
+  if (window.BOOKS_CONFIG && Array.isArray(window.BOOKS_CONFIG)) {
+    const book = window.BOOKS_CONFIG.find(b => 
+      b.bookId === hadith.bookId || 
+      b.book === hadith.book ||
+      String(b.id) === String(hadith.bookId)
+    );
+    
+    if (book && book.chapters) {
+      const chapter = book.chapters.find(ch => 
+        Number(ch.id) === Number(hadith.chapter) ||
+        Number(ch.categoryId) === Number(hadith.categoryId)
+      );
+      
+      if (chapter && chapter.filename) {
+        targetPage = chapter.filename;
+      }
+    }
+  }
+  
+  return targetPage;
+}
+
+const openBtn = el("button", { class: "btn-3d" }, "Open");
+openBtn.addEventListener("click", async () => {
+  if (!hadith) {
+    alert("Hadith data not found");
+    return;
+  }
+
+  const indexInPage = HADITHS.findIndex(h => String(h.id) === String(hadith.id));
+  if (indexInPage >= 0) {
+    openHadithModal(indexInPage);
+    savedBackdrop.style.display = "none";
+    return;
+  }
+
+  // Use dynamic page lookup
+  const targetPage = getTargetPageFromHadith(hadith);
+  const hadithId = hadith.id;
+
+  const pathArray = window.location.pathname.split('/');
+  pathArray[pathArray.length - 1] = targetPage;
+  const newPath = pathArray.join('/');
+  const newUrl = window.location.origin + newPath + '?id=' + hadithId + '&open=true';
+  
+  window.location.href = newUrl;
+});
 
 if(bismillahImg) bismillahImg.addEventListener('error', ()=>{ bismillahImg.style.display='none'; });
 function applyThemeClass(isDark) {

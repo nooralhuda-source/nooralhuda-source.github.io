@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Al-Kafi vol. 1 chapter 4</title>
+  <title>Al-Kafi vol. 1 chapter 1</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -469,8 +469,8 @@ body.dark-mode .note-input::placeholder {
     <a class="back-home" href="alkafi-volume1.html">← Volume 1</a>
     <button id="openSaved" class="btn-3d">Saved</button>
     <div style="text-align:center; flex:1;">
-      <div class="surah-title-en">كتاب فضيلة المعرفة</div>
-      <div class="surah-title-ar">The Book on Oneness of Allah</div>
+      <div class="surah-title-en">مقدمة</div>
+      <div class="surah-title-ar">Introduction</div>
       <div class="book-meta">Al-Kāfi — Volume 1 by Sheikh al al-Kulaynī </div>
     </div>
   </div>
@@ -534,7 +534,7 @@ body.dark-mode .note-input::placeholder {
 <script>
 const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/1.json';
 const FILTER_VOLUME = 1;
-const FILTER_CATEGORY_ID = 3;
+const FILTER_CATEGORY_ID = 0;
 
 const STORAGE_SAVED = 'noor_saved_hadiths_v1';
 const STORAGE_PINNED = 'noor_pinned_hadith_v1';
@@ -632,13 +632,13 @@ function renderList(){
     const rightCol = el('div',{class:'hadith-col'});
 
     const sanad = (h.thaqalaynSanad || '').trim();
-    const english = (h.thaqalaynMatn || '').trim();
+    const english = (h.thaqalaynMatn || h.englishText || '').trim();
     const contextP = el('div',{class:'hadith-context'}, sanad ? (`Sanad: ${sanad}`) : '');
     const enP = el('div',{class:'hadith-en'}, english);
     leftCol.appendChild(contextP);
     leftCol.appendChild(enP);
 
-    const arabic = (h.arabicText || h.thaqalaynMatn || '').trim();
+    const arabic = (h.arabicText || h.englishText || '').trim();
     const arP = el('div',{class:'hadith-ar'}, arabic);
     rightCol.appendChild(arP);
 
@@ -691,8 +691,8 @@ function renderList(){
       const note = prompt('Add note:', currentNote) || '';
       const saved = load(STORAGE_SAVED, []);
       const idx = saved.findIndex(x=>String(x.id)===String(h.id));
-      if(idx === -1) saved.unshift({ id:h.id, snippet: (h.thaqalaynMatn||'').slice(0,160), note });
-      else { saved[idx].note = note; saved[idx].snippet = (h.thaqalaynMatn||'').slice(0,160); }
+      if(idx === -1) saved.unshift({ id:h.id, snippet: (h.englishText||'').slice(0,160), note });
+      else { saved[idx].note = note; saved[idx].snippet = (h.englishText||'').slice(0,160); }
       save(STORAGE_SAVED, saved);
       if(note.trim()) { notes[h.id] = note.trim(); save(STORAGE_NOTES, notes); }
       alert('Saved hadith #' + h.id);
@@ -726,7 +726,7 @@ function openHadithModal(idx) {
 
   const sanadText = (h.sanad || h.thaqalaynSanad || '').trim();
   const matnAr = (h.arabicText || '').trim();
-  const matnEn = (h.thaqalaynMatn|| '').trim();
+  const matnEn = (h.englishText || '').trim();
 
   // Get modal grid and reorder for desktop/mobile
   const modalGrid = document.querySelector('.modal-grid');
