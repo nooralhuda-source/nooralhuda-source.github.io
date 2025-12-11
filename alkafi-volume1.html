@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda — Al Kafi Volume 1</title>
+  <title>Noor Al Huda — Hadith Books</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
 /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
@@ -149,9 +149,9 @@ body.dark-mode {
 </nav>
 
 <main class="container">
-  <h2 style="text-align:center; margin-top:2rem;">Select a Chapter</h2>
+  <h2 style="text-align:center; margin-top:2rem;">Select a Hadith Collection</h2>
   <div class="surah-search">
-    <input type="text" id="searchBook" placeholder="Search Chapter...">
+    <input type="text" id="searchBook" placeholder="Search Hadith Book...">
   </div>
   <div class="surah-grid" id="bookGrid"></div>
 </main>
@@ -167,12 +167,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("bookGrid");
   const searchInput = document.getElementById("searchBook");
 const books = [
-  { name_en: "Chapter 1", href: "alkafi-v1ch0.html" },
-  { name_en: "Chapter 2",  href: "hadiths.html" },
-  { name_en: "Chapter 3", href: "alkafi-v1-ch3.html" },
-  { name_en: "Chapter 4", href: "alkafi-v1-ch4.html" },
-  { name_en: "Chapter 5", href: "alkafi-v1-ch5.html" },
-
+  { name_en: "Chapter 1 - Introduction", name_ar: "مقدمة", href: "alkafi-v1-ch1.html" },
+  { name_en: "Chapter 2 - The Book of Intelligence and Ignorance", name_ar: "كتاب الذكاء والجهل", href: "hadiths.html" },
+  { name_en: "Chapter 3 - The Book on Virtue of Knowledge", name_ar: "كتاب فضيلة المعرفة", href: "alkafi-v1-ch3.html" },
+  { name_en: "Chapter 4 - The Book on Oneness of Allah", name_ar: "كتاب وحدانية الله", href: "alkafi-v1-ch4.html" },
+  { name_en: "Chapter 5 - The Book about people with Divine Authority", name_ar: "كتاب عن الأشخاص ذوي السلطة الإلهية", href: "alkafi-v1-ch5.html" },
 
 ];
 
@@ -180,8 +179,8 @@ books.forEach(book => {
   const card = document.createElement("div");
   card.className = "surah-card";
   card.innerHTML = `
-    <h3>${book.name_en}</h3>`;
-    
+    <h3>${book.name_en}</h3>
+    <p>${book.name_ar}</p>`;
   card.addEventListener("click", () => {
     window.location.href = book.href;
   });
