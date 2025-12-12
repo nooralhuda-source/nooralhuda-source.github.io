@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en" dir="ltr">
 <head>
@@ -33,7 +34,7 @@
   <main class="page" id="page">
     <div class="surah-header" role="banner">
   <div class="header-row">
-    <a class="back-home" href="alkafi-volume2.html">Volume 2</a>
+    <a class="back-home" href="alkafi-volume3.html">Volume 3</a>
     <button id="openSaved" class="btn-3d">Saved</button>
     <div style="text-align:center; flex:1;">
       <div class="surah-title-en">كتاب الإيمان والكفر</div>
@@ -51,7 +52,9 @@
       <img src="bismillah.png" alt="Bismillah" onerror="this.style.display='none'">
     </div>
 <!-- PART NAVIGATION (paste this just above #hadithContainer) -->
-<div id="partButtons" style="margin:20px 0; display:flex; gap:8px; flex-wrap:wrap; text-align: center;align-items: center;"><br></div>
+<div id="partButtons" style="text-align:center; margin:20px 0;"></div>
+
+
     <div id="hadithContainer" aria-live="polite"></div>
   </main>
 
@@ -124,7 +127,7 @@ function showPart(partNum) {
 const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/2.json';
 const FILTER_VOLUME = 2;
 const FILTER_CATEGORY_ID = 1;
-const TOTAL_PARTS = 13;   // ← change this any time you want
+const TOTAL_PARTS = 25;   // ← change this any time you want
 
 
 
@@ -340,7 +343,7 @@ const part = Math.floor(i / groupSize) + 1;
       save(STORAGE_PINNED, { id: h.id, volume: FILTER_VOLUME });
       alert(`Pinned hadith #${h.id}`);
       popup.style.display = 'none';
-      renderList();
+      showPart(1); 
     });
 
     // SAVE (to saved list) + optional note
@@ -405,7 +408,11 @@ function generatePartButtons() {
     btn.onclick = () => showPart(p);
     container.appendChild(btn);
   }
+    // ... end of renderList
+  afterRenderSetup();
 }
+
+
 
 /* -------------------------
    Modal handling
@@ -677,6 +684,74 @@ function checkAndOpenSavedHadith(){
     openHadithModal(index);
   }, 30);
 }
+/* -------------------------
+   Auto-generate Part Buttons
+   ------------------------- */
+
+/* ---------- part state ---------- */
+let currentPart = 1;
+
+/* ---------- show/hide parts ---------- */
+function showPart(partNum) {
+  currentPart = Number(partNum) || 1;
+  // hide all then show only matching part
+  document.querySelectorAll(".hadith-card").forEach(card => {
+    const p = Number(card.dataset.part) || 1;
+    card.style.display = (p === currentPart) ? "block" : "none";
+  });
+  // update active button style (optional)
+  const btns = document.querySelectorAll('#partButtons button');
+  btns.forEach((b, i) => b.classList.toggle('active-part', (i+1) === currentPart));
+}
+
+/* ---------- generate buttons automatically ---------- */
+function generatePartButtons() {
+  const container = document.getElementById("partButtons");
+  if (!container) return;
+  container.innerHTML = "";
+
+  for (let p = 1; p <= TOTAL_PARTS; p++) {
+    const btn = document.createElement("button");
+    btn.className = "btn-3d";
+    btn.type = "button";
+    btn.textContent = "Part " + p;
+    btn.addEventListener('click', () => showPart(p));
+
+    container.appendChild(btn);
+
+    // small inline horizontal space between buttons
+    container.appendChild(document.createTextNode(" "));
+
+    // after every 5 buttons create a visual row gap (2 <br> lines)
+
+      
+    }
+  }
+
+
+/* ---------- helper to assign parts and enforce initial hiding ---------- */
+function assignPartsAndHideInitially() {
+  if (!HADITHS || !HADITHS.length) return;
+  // calculate group size and assign data-part — replicates what renderList uses
+  const groupSize = Math.ceil(HADITHS.length / TOTAL_PARTS);
+  document.querySelectorAll(".hadith-card").forEach((card, idx) => {
+    // idx here is not reliable for element position; find by id mapping
+    const id = card.id && card.id.replace('hadith-card-','');
+    const index = HADITHS.findIndex(h => String(h.id) === String(id));
+    const part = (index >= 0) ? (Math.floor(index / groupSize) + 1) : 1;
+    card.dataset.part = part;
+    // hide all initially
+    card.style.display = 'none';
+  });
+}
+
+/* Make sure initial part buttons are generated and the view is set after rendering */
+function afterRenderSetup() {
+  generatePartButtons();
+  assignPartsAndHideInitially();
+  showPart(currentPart || 1);
+}
+
 
 
 
@@ -688,8 +763,8 @@ loadHadiths = async function() {
   showPart(1);             // start at part 1
 };
 
-
 loadHadiths();
+
 
 
 </script>

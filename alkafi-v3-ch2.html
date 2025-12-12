@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Al-Kafi vol. 2 chapter 4</title>
+  <title>Al-Kafi vol. 3 chapter 2</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,9 +37,9 @@
     <a class="back-home" href="alkafi-volume3.html">Volume 3</a>
     <button id="openSaved" class="btn-3d">Saved</button>
     <div style="text-align:center; flex:1;">
-      <div class="surah-title-en">كتاب الآداب الاجتماعية</div>
-      <div class="surah-title-ar">The Book of Social Manners</div>
-      <div class="book-meta">Al-Kāfi — Volume 2 by Sheikh al al-Kulaynī </div>
+      <div class="surah-title-en">كتاب هايد</div>
+      <div class="surah-title-ar">The Book of Hayd (Mesnses)</div>
+      <div class="book-meta">Al-Kāfi — Volume 3 by Sheikh al al-Kulaynī </div>
     </div>
   </div>
 </div>
@@ -124,16 +124,16 @@ function showPart(partNum) {
 /* -------------------------
    Configuration & Storage
    ------------------------- */
-const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/2.json';
-const FILTER_VOLUME = 2;
-const FILTER_CATEGORY_ID = 4;
-const TOTAL_PARTS = 6;   // ← change this any time you want
+const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/3.json';
+const FILTER_VOLUME = 3;
+const FILTER_CATEGORY_ID = 2;
+const TOTAL_PARTS = 8;   // ← change this any time you want
 
 
 
-const STORAGE_SAVED = 'noor_saved_hadiths_v2';
-const STORAGE_PINNED = 'noor_pinned_hadith_v2';
-const STORAGE_NOTES = 'noor_hadith_notes_v2';
+const STORAGE_SAVED = 'noor_saved_hadiths_v3';
+const STORAGE_PINNED = 'noor_pinned_hadith_v3';
+const STORAGE_NOTES = 'noor_hadith_notes_v3';
 
 
 /* -------------------------
@@ -199,7 +199,7 @@ async function loadHadiths(){
     const filtered = arr.filter(h =>
       Number(h.volume) === FILTER_VOLUME &&
       (Number(h.categoryId) === FILTER_CATEGORY_ID || String(h.categoryId) === String(FILTER_CATEGORY_ID)) &&
-      String(h.bookId || '').includes('Al-Kafi-Volume-2')
+      String(h.bookId || '').includes('Al-Kafi-Volume-3')
     );
 
     filtered.sort((a,b) => (Number(a.id)||0) - (Number(b.id)||0));
@@ -408,11 +408,7 @@ function generatePartButtons() {
     btn.onclick = () => showPart(p);
     container.appendChild(btn);
   }
-    // ... end of renderList
-  afterRenderSetup();
 }
-
-
 
 /* -------------------------
    Modal handling
@@ -688,70 +684,20 @@ function checkAndOpenSavedHadith(){
    Auto-generate Part Buttons
    ------------------------- */
 
-/* ---------- part state ---------- */
-let currentPart = 1;
-
-/* ---------- show/hide parts ---------- */
-function showPart(partNum) {
-  currentPart = Number(partNum) || 1;
-  // hide all then show only matching part
-  document.querySelectorAll(".hadith-card").forEach(card => {
-    const p = Number(card.dataset.part) || 1;
-    card.style.display = (p === currentPart) ? "block" : "none";
-  });
-  // update active button style (optional)
-  const btns = document.querySelectorAll('#partButtons button');
-  btns.forEach((b, i) => b.classList.toggle('active-part', (i+1) === currentPart));
-}
-
-/* ---------- generate buttons automatically ---------- */
 function generatePartButtons() {
   const container = document.getElementById("partButtons");
-  if (!container) return;
   container.innerHTML = "";
 
   for (let p = 1; p <= TOTAL_PARTS; p++) {
     const btn = document.createElement("button");
     btn.className = "btn-3d";
-    btn.type = "button";
     btn.textContent = "Part " + p;
-    btn.addEventListener('click', () => showPart(p));
+    btn.onclick = () => showPart(p);
 
     container.appendChild(btn);
-
-    // small inline horizontal space between buttons
-    container.appendChild(document.createTextNode(" "));
-
-    // after every 5 buttons create a visual row gap (2 <br> lines)
-
-      
-    }
+    container.appendChild(document.createTextNode(" ")); // spacing
   }
-
-
-/* ---------- helper to assign parts and enforce initial hiding ---------- */
-function assignPartsAndHideInitially() {
-  if (!HADITHS || !HADITHS.length) return;
-  // calculate group size and assign data-part — replicates what renderList uses
-  const groupSize = Math.ceil(HADITHS.length / TOTAL_PARTS);
-  document.querySelectorAll(".hadith-card").forEach((card, idx) => {
-    // idx here is not reliable for element position; find by id mapping
-    const id = card.id && card.id.replace('hadith-card-','');
-    const index = HADITHS.findIndex(h => String(h.id) === String(id));
-    const part = (index >= 0) ? (Math.floor(index / groupSize) + 1) : 1;
-    card.dataset.part = part;
-    // hide all initially
-    card.style.display = 'none';
-  });
 }
-
-/* Make sure initial part buttons are generated and the view is set after rendering */
-function afterRenderSetup() {
-  generatePartButtons();
-  assignPartsAndHideInitially();
-  showPart(currentPart || 1);
-}
-
 
 
 
