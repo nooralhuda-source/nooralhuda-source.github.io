@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda — Hadith Books</title>
+  <title>Noor Al Huda — Volume 8</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
 /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
@@ -162,6 +162,8 @@ body.dark-mode {
   margin: 0;
   font-size: 1.4rem;
 }
+
+
   </style>
 </head>
 <body>
@@ -186,6 +188,7 @@ body.dark-mode {
   <a class="back-home" href="alkafi.html">← Back</a>
   <h2>Select a Chapter</h2>
 </div>
+
   <div class="surah-search">
     <input type="text" id="searchBook" placeholder="Search Hadith Book...">
   </div>
@@ -203,12 +206,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("bookGrid");
   const searchInput = document.getElementById("searchBook");
 const books = [
-  { name_en: "Chapter 1 - Introduction", name_ar: "مقدمة", href: "alkafi-v1-ch1.html" },
-  { name_en: "Chapter 2 - The Book of Intelligence and Ignorance", name_ar: "كتاب الذكاء والجهل", href: "hadiths.html" },
-  { name_en: "Chapter 3 - The Book on Virtue of Knowledge", name_ar: "كتاب فضيلة المعرفة", href: "alkafi-v1-ch3.html" },
-  { name_en: "Chapter 4 - The Book on Oneness of Allah", name_ar: "كتاب وحدانية الله", href: "alkafi-v1-ch4.html" },
-  { name_en: "Chapter 5 - The Book about people with Divine Authority", name_ar: "كتاب عن الأشخاص ذوي السلطة الإلهية", href: "alkafi-v1-ch5.html" },
-
+  { name_en: "Chapter 1 - The Book of 'Aqiqah (Offering Animal Sacrfice for a Newborn Child)", name_ar: "كتاب العقيقة", href: "alkafi-v6-ch1.html" },
+  { name_en: "Chapter 2 - The Book of Talaq (Divorces)", name_ar: "كتاب الطلاق", href: "alkafi-v6-ch2.html" },
+  { name_en: "Chapter 3 - The Book of Hunting", name_ar: "كتاب الصيد", href: "alkafi-v6-ch3<|fim_middle|>oleon<|fim_middle|><|fim_middle|>Eloluta.html" },
+  { name_en: "Chapter 4 - The Book of Slaughtering Animals for Food", name_ar: "كتاب الذبح", href: "alkafi-v6-ch4.html" },
+  { name_en: "Chapter 5 - The Book of Food", name_ar: "كتاب الطعام", href: "alkafi-v6-ch5.html" },
+  { name_en: "Chapter 6 - The Book of Drinks", name_ar: "كتاب الشراب", href: "alkafi-v6-ch6.html" },
+  { name_en: "Chapter 7 - The Book of Dresses, Beautification and Kindness", name_ar: "كتاب الملابس والزينة والكرم", href: "alkafi-v6-ch7.html" },
+  { name_en: "Chapter 8 - The Book of Domestic Animals", name_ar: "كتاب الحيوانات الأليفة", href: "alkafi-v6-ch8.html" },
 ];
 
 books.forEach(book => {

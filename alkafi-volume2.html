@@ -129,6 +129,39 @@ body.dark-mode {
   --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
   --card:#1e293b; --border:#334155;
 }
+.top-row {
+  display: flex;
+  justify-content: center; /* keeps the title centered */
+  align-items: center;
+  position: relative;
+  margin-top: 2rem;
+}
+
+/* Back button positioned BETWEEN left and center */
+.top-row .back-home {
+  position: absolute;
+  left: 23%;  /* ★ THIS CONTROLS THE POSITION */
+  transform: translateX(-50%);
+}
+
+/* Button styles */
+.back-home {
+  color: #fff;
+  background: var(--green);
+  padding: .35rem .7rem;
+  border-radius: 10px;
+  font-size: .9rem;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.back-home:hover {
+  background: #2d7f4b;
+}
+
+.top-row h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
   </style>
 </head>
 <body>
@@ -149,7 +182,10 @@ body.dark-mode {
 </nav>
 
 <main class="container">
-  <h2 style="text-align:center; margin-top:2rem;">Select a Chapter</h2>
+  <div class="top-row">
+  <a class="back-home" href="alkafi.html">← Back</a>
+  <h2>Select a Chapter</h2>
+</div>
   <div class="surah-search">
     <input type="text" id="searchBook" placeholder="Search Hadith Book...">
   </div>
