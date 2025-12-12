@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda — Al Kafi</title>
+  <title>Noor Al Huda — Volume 8</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
 /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
@@ -129,6 +129,39 @@ body.dark-mode {
   --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
   --card:#1e293b; --border:#334155;
 }
+.top-row {
+  display: flex;
+  justify-content: center; /* keeps the title centered */
+  align-items: center;
+  position: relative;
+  margin-top: 2rem;
+}
+
+/* Back button positioned BETWEEN left and center */
+.top-row .back-home {
+  position: absolute;
+  left: 23%;  /* ★ THIS CONTROLS THE POSITION */
+  transform: translateX(-50%);
+}
+
+/* Button styles */
+.back-home {
+  color: #fff;
+  background: var(--green);
+  padding: .35rem .7rem;
+  border-radius: 10px;
+  font-size: .9rem;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.back-home:hover {
+  background: #2d7f4b;
+}
+
+.top-row h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
   </style>
 </head>
 <body>
@@ -149,9 +182,12 @@ body.dark-mode {
 </nav>
 
 <main class="container">
-  <h2 style="text-align:center; margin-top:2rem;">Select a Volume</h2>
+  <div class="top-row">
+  <a class="back-home" href="alkafi.html">← Back</a>
+  <h2>Select a Chapter</h2>
+</div>
   <div class="surah-search">
-    <input type="text" id="searchBook" placeholder="Search Volume...">
+    <input type="text" id="searchBook" placeholder="Search Hadith Book...">
   </div>
   <div class="surah-grid" id="bookGrid"></div>
 </main>
@@ -167,23 +203,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("bookGrid");
   const searchInput = document.getElementById("searchBook");
 const books = [
-  { name_en: "Volume 1", href: "alkafi-volume1.html" },
-  { name_en: "Volume 2",  href: "alkafi-volume2.html" },
-  { name_en: "Volume 3", href: "alkafi-volume3.html" },
-  { name_en: "Volume 4", href: "alkafi-volume4.html" },
-  { name_en: "Volume 5", href: "alkafi-volume5.html" },
-  { name_en: "Volume 6", href: "alkafi-volume6.html" },
-  { name_en: "Volume 7", href: "alkafi-volume7.html" },
-  { name_en: "Volume 8", href: "alkafi-volume8.html" },
+  { name_en: "Volume 1 - al-Uṣūl (Roots)", name_ar: "الجذور", href: "alkafi-volume1.html" },
+  { name_en: "Volume 2 - al-Uṣūl (Roots)", name_ar: "الجذور", href: "alkafi-volume2.html" },
+  { name_en: "Volume 3 - al-Furūʿ (Branches)", name_ar: "الفروع", href: "alkafi-volume3.html" },
+  { name_en: "Volume 4 - al-Furūʿ (Branches)", name_ar: "الفروع", href: "alkafi-volume4.html" },
+  { name_en: "Volume 5 - al-Furūʿ (Branches)", name_ar: "الفروع", href: "alkafi-volume5.html" },
+  { name_en: "Volume 6 - al-Furūʿ (Branches)", name_ar: "الفروع", href: "alkafi-volume6.html" },
+  { name_en: "Volume 7 - al-Furūʿ (Branches)", name_ar: "الفروع", href: "alkafi-volume7.html" },
+  { name_en: "Volume 8 - al-Rawḍa (the Garden)", name_ar: "الروضة", href: "alkafi-volume8.html" },
 
 ];
 
-books.forEach(book => {
+
+
+  books.forEach(book => {
   const card = document.createElement("div");
   card.className = "surah-card";
   card.innerHTML = `
-    <h3>${book.name_en}</h3>`;
-    
+    <h3>${book.name_en}</h3>
+    <p>${book.name_ar}</p>`;
   card.addEventListener("click", () => {
     window.location.href = book.href;
   });
