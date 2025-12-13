@@ -131,17 +131,19 @@ body.dark-mode {
 }
 .top-row {
   display: flex;
-  justify-content: center; /* keeps the title centered */
   align-items: center;
+  justify-content: center;   /* keeps title centered */
   position: relative;
   margin-top: 2rem;
+  gap: 1rem;
 }
 
-/* Back button positioned BETWEEN left and center */
+/* Back button – desktop positioning */
 .top-row .back-home {
   position: absolute;
-  left: 23%;  /* ★ THIS CONTROLS THE POSITION */
-  transform: translateX(-50%);
+  left: 25rem;               /* safe fixed padding instead of % */
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* Button styles */
@@ -161,7 +163,23 @@ body.dark-mode {
 .top-row h2 {
   margin: 0;
   font-size: 1.4rem;
+  text-align: center;
 }
+@media (max-width: 600px) {
+  .top-row {
+    flex-direction: column;
+    gap: .75rem;
+  }
+
+  .top-row .back-home {
+    position: static;       /* remove absolute positioning */
+    transform: none;
+    align-self: flex-start; /* stays left */
+    margin-left: clamp(0.75rem, 4vw, 1.25rem);
+
+  }
+}
+
   </style>
 </head>
 <body>

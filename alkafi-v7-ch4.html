@@ -1,0 +1,354 @@
+
+
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Al-Kafi vol. 7 chapter 4</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Kufi+Arabic:wght@100..900&family=Noto+Sans+Arabic:wght@100..900&family=Parastoo:wght@400..700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="hadiths.css">
+</head>
+<body>
+
+  <header>
+    <div class="brand"><h1><a href="index.html">Noor Al Huda</a></h1></div>
+    <button class="hamburger" aria-label="Open menu">☰</button>
+  </header>
+
+  <nav id="mainNav" aria-hidden="true">
+    <a href="quran.html">Quran</a>
+    <a href="duas.html">Duas</a>
+    <a href="hadiths-home.html">Hadiths</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="salah.html">Salah</a>
+    <a href="shiatube/index.html">ShiaTube</a>
+    <a href="index.html">Home</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+
+  <main class="page" id="page">
+    <div class="surah-header" role="banner">
+  <div class="header-row">
+    <a class="back-home" href="alkafi-volume7.html">Volume 7</a>
+    <button id="openSaved" class="btn-3d">Saved</button>
+    <div style="text-align:center; flex:1;">
+      <div class="surah-title-en">كتاب التعويضات</div>
+      <div class="surah-title-ar">The Book of Compensation</div>
+      <div class="book-meta">Al-Kāfi — Volume 7 by Sheikh al al-Kulaynī </div>
+    </div>
+  </div>
+</div>
+        
+       
+      </div>
+    </div>
+
+    <div id="bismillahWrap">
+      <img src="bismillah.png" alt="Bismillah" onerror="this.style.display='none'">
+    </div>
+<!-- PART NAVIGATION (paste this just above #hadithContainer) -->
+<div id="partButtons" style="text-align:center; margin:20px 0;"></div>
+
+
+    <div id="hadithContainer" aria-live="polite"></div>
+  </main>
+
+  <div class="bottom-actions">
+    <button id="backBeginning" class="btn-3d">Back to Top</button>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+        <div style="display:flex;gap:8px">
+          <button id="modalPrev" class="btn-3d">← Prev</button>
+          <button id="modalNext" class="btn-3d">Next →</button>
+        </div>
+        <button id="modalClose" class="btn-3d">Close</button>
+      </div>
+
+      <div class="modal-grid">
+        <div>
+          <div class="modal-meta" id="modalSanad"></div>
+          <div class="modal-en" id="modalEnglish"></div>
+        </div>
+        <div>
+          <div class="modal-ar" id="modalArabic"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <strong style="font-size:.95rem">Gradings</strong>
+        <div class="gradings" id="modalGradings" style="margin-top:6px"></div>
+      </div>
+
+      <div style="margin-top:12px">
+        <strong style="font-size:.95rem">Notes</strong>
+        <textarea id="modalNote" class="note-input" placeholder="Add a private note"></textarea>
+      </div>
+    </div>
+  </div>
+
+<div class="modal-backdrop" id="savedBackdrop" style="display:none">
+  <div class="modal" id="savedPopup">
+    <h3 style="margin-bottom:8px">Saved Hadiths</h3>
+
+    <div style="padding:10px 0; line-height:1.6; font-size:.95rem;">
+
+    </div>
+
+    <div style="text-align:right;margin-top:12px">
+      <button id="closeSaved" class="btn-3d">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================
+   CONFIG
+========================= */
+const API_URL =
+  "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V1/ThaqalaynData/Al-Kafi-Volume-7-Kulayni.json";
+
+const FILTER_BOOK_ID = "Al-Kafi-Volume-7-Kulayni";
+const FILTER_CATEGORY_ID = 4;
+const FILTER_VOLUME = 7;
+const TOTAL_PARTS = 6;
+
+const STORAGE_SAVED  = "noor_saved_hadiths_v7";
+const STORAGE_PINNED = "noor_pinned_hadith_v7";
+const STORAGE_NOTES  = "noor_hadith_notes_v7";
+
+/* =========================
+   STATE & DOM
+========================= */
+let HADITHS = [];
+let visibleIndex = 0;
+
+const hadithContainer = document.getElementById("hadithContainer");
+const modalBackdrop  = document.getElementById("modalBackdrop");
+const modalGrid      = document.querySelector(".modal-grid");
+const modalNote      = document.getElementById("modalNote");
+const modalPrev      = document.getElementById("modalPrev");
+const modalNext      = document.getElementById("modalNext");
+const modalClose     = document.getElementById("modalClose");
+
+const savedBackdrop  = document.getElementById("savedBackdrop");
+const openSavedBtn   = document.getElementById("openSaved");
+const closeSavedBtn  = document.getElementById("closeSaved");
+
+/* =========================
+   STORAGE HELPERS
+========================= */
+const save = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+const load = (k,f) => {
+  try { return JSON.parse(localStorage.getItem(k)) ?? f; }
+  catch { return f; }
+};
+
+/* =========================
+   UTIL
+========================= */
+function el(tag, cls, text){
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text) e.textContent = text;
+  return e;
+}
+
+/* =========================
+   PARTS
+========================= */
+function showPart(n){
+  document.querySelectorAll(".hadith-card").forEach(card=>{
+    card.style.display =
+      Number(card.dataset.part) === n ? "block" : "none";
+  });
+}
+
+function generatePartButtons(){
+  const container = document.getElementById("partButtons");
+  container.innerHTML = "";
+  for(let i=1;i<=TOTAL_PARTS;i++){
+    const b = document.createElement("button");
+    b.className = "btn-3d";
+    b.textContent = "Part " + i;
+    b.onclick = ()=>showPart(i);
+    container.appendChild(b);
+  }
+}
+
+/* =========================
+   LOAD HADITHS
+========================= */
+async function loadHadiths(){
+  hadithContainer.textContent = "Loading…";
+
+  const res = await fetch(API_URL);
+  const data = await res.json();
+
+  HADITHS = data
+    .filter(h =>
+      String(h.bookId) === FILTER_BOOK_ID &&
+      Number(h.categoryId) === FILTER_CATEGORY_ID
+    )
+    .sort((a,b)=>Number(a.id)-Number(b.id));
+
+  renderList();
+  generatePartButtons();
+  showPart(1);
+  openPinnedIfAny();
+}
+
+/* =========================
+   RENDER
+========================= */
+function renderList(){
+  hadithContainer.innerHTML = "";
+  if(!HADITHS.length) return;
+
+  const pinned = load(STORAGE_PINNED,null);
+  const groupSize = Math.ceil(HADITHS.length / TOTAL_PARTS);
+
+  HADITHS.forEach((h,i)=>{
+    const part = Math.floor(i / groupSize) + 1;
+
+    const card = el("div","hadith-card");
+    card.id = "hadith-card-" + h.id;
+    card.dataset.part = part;
+
+    const meta = el("div","hadith-meta","#"+h.id);
+
+    const body = el("div","hadith-body");
+    const left = el("div","hadith-col");
+    const right = el("div","hadith-col");
+
+    if(h.englishText)
+      left.appendChild(el("div","hadith-en",h.englishText));
+
+    if(h.arabicText)
+      right.appendChild(el("div","hadith-ar",h.arabicText));
+
+    /* ACTIONS */
+    const actions = el("div","card-actions");
+    const openBtn = el("button","btn-3d","Open");
+    openBtn.onclick = ()=>openModal(i);
+    actions.appendChild(openBtn);
+
+    left.appendChild(actions);
+
+    /* THREE DOT MENU */
+    const menuWrap = el("div","hadith-menu-wrap");
+    menuWrap.style.cssText="position:absolute;top:6px;right:6px";
+
+    const dots = el("button","three-dots","⋯");
+    const popup = el("div","hadith-popup");
+
+    const pinBtn = el("button","", pinned?.id==h.id ? "Unpin":"Pin");
+    const saveBtn = el("button","","Save");
+    const copyBtn = el("button","","Copy");
+
+    popup.append(pinBtn,saveBtn,copyBtn);
+    menuWrap.append(dots,popup);
+
+    dots.onclick = e=>{
+      e.stopPropagation();
+      document.querySelectorAll(".hadith-popup")
+        .forEach(p=>p.style.display="none");
+      popup.style.display =
+        popup.style.display==="block"?"none":"block";
+    };
+
+    document.addEventListener("click",()=>popup.style.display="none");
+
+    pinBtn.onclick=()=>{
+      const cur = load(STORAGE_PINNED,null);
+      if(cur && cur.id==h.id)
+        localStorage.removeItem(STORAGE_PINNED);
+      else
+        save(STORAGE_PINNED,{id:h.id,volume:FILTER_VOLUME});
+      renderList();
+    };
+
+    saveBtn.onclick=()=>{
+      const s = load(STORAGE_SAVED,[]);
+      if(!s.find(x=>x.id==h.id)){
+        s.unshift({id:h.id});
+        save(STORAGE_SAVED,s);
+      }
+      popup.style.display="none";
+    };
+
+    copyBtn.onclick=async()=>{
+      await navigator.clipboard.writeText(
+        `Hadith #${h.id}\n\n${h.arabicText||""}\n\n${h.englishText||""}`
+      );
+      popup.style.display="none";
+    };
+
+    body.append(left,right);
+    card.append(meta,body,menuWrap);
+    hadithContainer.appendChild(card);
+  });
+}
+
+/* =========================
+   MODAL
+========================= */
+function openModal(i){
+  visibleIndex = i;
+  const h = HADITHS[i];
+
+  modalGrid.innerHTML="";
+  modalGrid.append(
+    el("div","modal-en",h.englishText||""),
+    el("div","modal-ar",h.arabicText||"")
+  );
+
+  modalNote.value = load(STORAGE_NOTES,{})[h.id]||"";
+  modalBackdrop.style.display="flex";
+}
+
+modalPrev.onclick=()=>visibleIndex>0 && openModal(--visibleIndex);
+modalNext.onclick=()=>visibleIndex<HADITHS.length-1 && openModal(++visibleIndex);
+modalClose.onclick=()=>modalBackdrop.style.display="none";
+
+/* =========================
+   PIN AUTO OPEN
+========================= */
+function openPinnedIfAny(){
+  const p = load(STORAGE_PINNED,null);
+  if(!p) return;
+
+  const idx = HADITHS.findIndex(h=>h.id==p.id);
+  if(idx<0) return;
+
+  const card = document.getElementById("hadith-card-"+p.id);
+  showPart(Number(card.dataset.part));
+  setTimeout(()=>openModal(idx),100);
+}
+
+/* =========================
+   SAVED (BETA NOTE ONLY)
+========================= */
+openSavedBtn.onclick=()=>{
+  savedBackdrop.querySelector(".modal").innerHTML =
+    "<em>Saved Hadiths are in beta testing. Coming January 2026 insha’Allah.</em>";
+  savedBackdrop.style.display="flex";
+};
+closeSavedBtn.onclick=()=>savedBackdrop.style.display="none";
+
+/* =========================
+   INIT
+========================= */
+loadHadiths();
+</script>
+
+</body>
+</html>

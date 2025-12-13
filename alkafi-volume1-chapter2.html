@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Noor Al Huda — Al-Kafi Volume 1 Chapter 2</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    /* kept styles minimal and matching your template */
+    :root{--accent:#2563eb;--muted:#6b7280;--border:#e6e9ee;--card-bg:#ffffff;--isnad:#374151}
+    body{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;margin:0;background:#fff;color:#0f1724}
+    header{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--border)}
+    main.container{max-width:920px;margin:28px auto;padding:22px}
+    .back-btn{display:inline-block;margin-bottom:12px;color:#285f74;text-decoration:none;font-weight:600}
+    h2.title{text-align:center;font-size:1.25rem;margin:6px 0 12px;color:#374151}
+    .meta{text-align:center;color:var(--muted);font-size:0.95rem;margin-bottom:14px}
+    .controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+    .controls input{width:360px;max-width:86%;padding:8px;border:1px solid var(--border);border-radius:8px}
+    .controls button{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
+    .list{margin:0;padding:0;list-style:none}
+    .subchapter-card{background:#f8f9fb;border:1px dashed var(--border);border-radius:12px;padding:10px 14px;margin:18px 0;display:flex;justify-content:space-between}
+    .hadith-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:16px;margin:12px 0}
+    .hadith-header{display:flex;justify-content:space-between;align-items:baseline}
+    .hadith-number{font-weight:700;color:var(--accent)}
+    .isnad{color:var(--isnad);margin:6px 0}
+    .text-ar{font-family:"Amiri",serif;direction:rtl;padding:8px;background:#fbfbfb;border-radius:8px}
+    .text-en{margin-top:10px}
+    .grading-pill{display:inline-block;background:#f2f5ff;color:#3949ab;border:1px solid #e3e7ff;border-radius:999px;padding:3px 10px;margin-right:6px;margin-top:6px;font-weight:600}
+    .status{text-align:center;color:var(--muted);padding:14px 0}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="logo.png.png" alt="Noor Al Huda Logo" style="width:36px;height:36px;object-fit:contain">
+      <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
+    </div>
+    <div>
+      <button id="themeToggle" onclick="toggleDarkMode()">🌙</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <a class="back-btn" href="alkafi-volume1.html">← Back to Volume 1</a>
+    <h2 class="title">Volume 1 — Chapter 2: The Book of Virtue and Vice</h2>
+    <div class="meta">Author: Shaykh Muḥammad b. Yaʿqūb al-Kulaynī • Translation: Muhammad Sarwar</div>
+
+    <div class="controls">
+      <input id="searchInput" type="text" placeholder="Filter hadith number, subchapter, grading, or text..." oninput="filterHadiths()">
+      <button onclick="resetFilter()">Reset</button>
+    </div>
+
+    <ul id="hadithList" class="list">
+      <li class="status">Loading hadiths…</li>
+    </ul>
+  </main>
+
+  <footer>© 2025 Noor Al Huda — Personal Islamic Companion (Shia Ithna Ashari)</footer>
+
+  <script>
+    // minimal theme toggle (keeps your behavior)
+    if (localStorage.getItem("theme") === "dark") document.documentElement.classList.add("dark-mode");
+    function toggleDarkMode(){ document.documentElement.classList.toggle("dark-mode"); localStorage.setItem("theme", document.documentElement.classList.contains("dark-mode") ? "dark":"light"); updateThemeIcon(); }
+    function updateThemeIcon(){ const b = document.getElementById('themeToggle'); if(b) b.textContent = document.documentElement.classList.contains('dark-mode') ? '☀️':'🌙'; }
+    updateThemeIcon();
+
+    // small utilities (kept tiny and similar to your previous code)
+    function pick(...xs){ for(const x of xs) if (x !== undefined && x !== null) return x; return undefined; }
+    function safe(v){ return v===undefined||v===null ? '' : String(v); }
+
+    function inferNumber(item, fallback){
+      if (item === undefined || item === null) return fallback;
+      if (typeof item === 'number') return item;
+      const candidates = [item.hadithNumber, item.hadith_number, item.id, item.number, item.n];
+      for(const c of candidates) if (c !== undefined) return Number(c);
+      const en = pick(item.englishText, item.text?.en, '');
+      const m = en.match(/^\s*(\d+)\s*[.\-–:]/) || en.match(/^\s*(\d+)\s/);
+      if (m) return Number(m[1]);
+      const ar = pick(item.arabicText, item.text?.ar, '');
+      const ma = ar && ar.match(/^\s*[\u0660-\u06690-9]*?(\d+)\s*[.\u066B\-–:]/);
+      if (ma) return Number(ma[1]);
+      return fallback;
+    }
+
+    // create hadith card (keeps markup close to your earlier working version)
+    function createHadithCard(h, idx){
+      const num = inferNumber(h, idx+1);
+      if (num === undefined || num === null) return null;
+      if (Number(num) >= 214) return null; // exclude >=214
+
+      const isnad = safe(pick(h.thaqalaynSanad, h.isnad, h.chain, ''));
+      const textAr = safe(pick(h.arabicText, h.text?.ar, ''));
+      const textEn = safe(pick(h.englishText, h.text?.en, ''));
+      const gradings = Array.isArray(h.gradingsFull) ? h.gradingsFull : (Array.isArray(h.gradings) ? h.gradings : (h.grading ? [h.grading] : []));
+
+      const li = document.createElement('li');
+      li.className = 'hadith-card';
+      li.dataset.search = ((isnad||'') + ' ' + textAr + ' ' + textEn + ' ' + (h.chapterInCategoryId ?? '')).toLowerCase();
+
+      li.innerHTML = `
+        <div class="hadith-header">
+          <div class="hadith-number">Hadith ${safe(num)}</div>
+          <div class="source-link">${h.sourceUrl ? `<a href="${safe(h.sourceUrl)}" target="_blank">Source</a>` : ''}</div>
+        </div>
+        ${isnad ? `<div class="isnad">${isnad}</div>` : ''}
+        ${textAr ? `<div class="text-ar" dir="rtl">${textAr}</div>` : ''}
+        ${textEn ? `<div class="text-en">${textEn}</div>` : ''}
+        ${gradings.length ? `<div class="gradings">${gradings.map(g => `<span class="grading-pill">${safe(g.grade_en || g.grade || g)}</span>`).join(' ')}</div>` : ''}
+      `;
+      return li;
+    }
+
+    // build index of full hadiths (number -> object) limited to <214
+    function buildFullIndex(root){
+      const map = new Map();
+      const stack = [root];
+      while(stack.length){
+        const node = stack.pop();
+        if (!node || typeof node !== 'object') continue;
+        if (Array.isArray(node)){ for (const n of node) stack.push(n); continue; }
+        const num = inferNumber(node, undefined);
+        const hasText = Boolean(pick(node.englishText, node.arabicText, node.text?.en, node.text?.ar));
+        if (num !== undefined && num !== null && hasText && Number(num) < 214) map.set(Number(num), node);
+        for (const k of Object.keys(node)) { const c = node[k]; if (c && typeof c === 'object') stack.push(c); }
+      }
+      return map;
+    }
+
+    // find hadith numbers list for categoryId = 2 (returns numbers <214)
+    function findNumbersForCategory(root, categoryId = 2){
+      const want = Number(categoryId);
+      // top-level array of category objects
+      if (Array.isArray(root)){
+        for (const it of root){
+          if (!it || typeof it !== 'object') continue;
+          const cat = Number(pick(it.categoryId, it.category_id, it.cat, it.category) ?? NaN);
+          if (!Number.isNaN(cat) && cat === want){
+            const arr = pick(it.hadithNumbers, it.hadiths, it.items, it.numbers, it.ids);
+            if (Array.isArray(arr) && arr.length) return arr.map(x => Number(x)).filter(n => n < 214);
+          }
+        }
+      }
+      // deep search
+      const stack = [root];
+      while(stack.length){
+        const node = stack.pop();
+        if (!node || typeof node !== 'object') continue;
+        const cat = Number(pick(node.categoryId, node.category_id, node.cat, node.category) ?? NaN);
+        if (!Number.isNaN(cat) && cat === want){
+          const arr = pick(node.hadithNumbers, node.hadiths, node.items, node.numbers, node.ids);
+          if (Array.isArray(arr) && arr.length) return arr.map(x => Number(x)).filter(n => n < 214);
+          for (const k of Object.keys(node)){
+            const v = node[k];
+            if (Array.isArray(v) && v.length && v.every(x => typeof x === 'number' || (typeof x === 'string' && /^\d+$/.test(x)))) {
+              return v.map(x => Number(x)).filter(n => n < 214);
+            }
+          }
+        }
+        for (const k of Object.keys(node)) { const c = node[k]; if (c && typeof c === 'object') stack.push(c); }
+      }
+      return null;
+    }
+
+    // Render numbers grouped by subchapter when possible and ensure hadith 37 included
+    function renderFromNumbers(numbers, fullIndex){
+      const ul = document.getElementById('hadithList');
+      ul.innerHTML = '';
+      if (!numbers || numbers.length === 0) { ul.innerHTML = '<li class="status">No hadiths found for Chapter 2.</li>'; return; }
+
+      // group numbers by subchapter using fullIndex if available
+      const groups = new Map();
+      numbers.forEach(n => {
+        if (Number(n) >= 214) return;
+        const full = fullIndex.get(Number(n));
+        const sub = full ? (full.chapterInCategoryId ?? full.chapter_in_category_id ?? full.subchapter ?? null) : null;
+        const key = sub !== null && sub !== undefined ? String(sub) : '_no_sub';
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(Number(n));
+      });
+
+      // ensure hadith 37 included if present in full index
+      if (fullIndex.has(37) && !numbers.includes(37) && 37 < 214){
+        const f = fullIndex.get(37);
+        const sub = f.chapterInCategoryId ?? f.chapter_in_category_id ?? f.subchapter ?? null;
+        const key = sub !== null && sub !== undefined ? String(sub) : '_no_sub';
+        if (!groups.has(key)) groups.set(key, []);
+        if (!groups.get(key).includes(37)) groups.get(key).unshift(37);
+      }
+
+      // sort keys numerically; '_no_sub' last
+      const sortedKeys = Array.from(groups.keys()).sort((a,b) => {
+        if (a === '_no_sub') return 1;
+        if (b === '_no_sub') return -1;
+        return Number(a) - Number(b);
+      });
+
+      let anyShown = false;
+      for (const key of sortedKeys){
+        const arr = groups.get(key).sort((a,b)=>a-b);
+        if (key !== '_no_sub'){
+          // try to get a title from the first full object, else blank
+          const firstFull = fullIndex.get(arr.find(()=>true));
+          const title = pick(firstFull?.chapterTitle, firstFull?.chapter, '');
+          const header = document.createElement('li');
+          header.className = 'subchapter-card';
+          header.innerHTML = `<div>Subchapter ${safe(Number(key)+1)}</div><div>${safe(title)}</div>`;
+          ul.appendChild(header);
+        }
+        for (const n of arr){
+          const full = fullIndex.get(Number(n));
+          if (full){
+            const card = createHadithCard(full, n);
+            if (card){ ul.appendChild(card); anyShown = true; }
+          } else {
+            const li = document.createElement('li');
+            li.className = 'hadith-card';
+            li.dataset.search = (`hadith ${n}`).toLowerCase();
+            li.innerHTML = `
+              <div class="hadith-header">
+                <div class="hadith-number">Hadith ${safe(n)}</div>
+                <div class="source-link"><a href="https://thaqalayn.net/hadith/${safe(n)}" target="_blank">View on Thaqalayn</a></div>
+              </div>
+              <div class="status">Content not available in this JSON file</div>
+            `;
+            ul.appendChild(li);
+            anyShown = true;
+          }
+        }
+      }
+      if (!anyShown) ul.innerHTML = '<li class="status">No hadiths under 214 available for Chapter 2.</li>';
+    }
+
+    // Try to find direct hadith objects (categoryId on objects or per-item categoryId)
+    function findDirectHadithObjects(root, categoryId=2){
+      const found = [];
+      const stack = [root];
+      while(stack.length){
+        const n = stack.pop();
+        if (!n || typeof n !== 'object') continue;
+        if (Array.isArray(n)){ for(const it of n) stack.push(it); continue; }
+        if (Number(pick(n.categoryId, n.category_id, n.cat, n.category) ?? NaN) === Number(categoryId) && Array.isArray(n.hadiths)){
+          for (const h of n.hadiths) found.push(h);
+        }
+        if (Array.isArray(n.items) || Array.isArray(n.data)){
+          const arr = n.items || n.data;
+          arr.forEach(it => {
+            if (it && typeof it === 'object' && Number(pick(it.categoryId, it.category_id, it.cat) ?? NaN) === Number(categoryId)) found.push(it);
+          });
+        }
+        for (const k of Object.keys(n)) { const c = n[k]; if (c && typeof c === 'object') stack.push(c); }
+      }
+      // filter out >=214
+      return found.filter(h => { const num = inferNumber(h, Infinity); return Number(num) < 214; });
+    }
+
+    // Search/filter helpers
+    function filterHadiths(){
+      const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const cards = document.querySelectorAll('.hadith-card');
+      if (!q) { cards.forEach(c => c.style.display = ''); return; }
+      cards.forEach(c => { const t = (c.dataset.search || '').toLowerCase(); c.style.display = t.includes(q) ? '' : 'none'; });
+    }
+    function resetFilter(){ document.getElementById('searchInput').value = ''; filterHadiths(); }
+
+    // load and render (keeps same entrypoint and main fetch URL you used)
+    (async function init(){
+      const list = document.getElementById('hadithList');
+      list.innerHTML = '<li class="status">Loading hadiths…</li>';
+      const url = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/main/V2/ThaqalaynData/1.json';
+      try {
+        const res = await fetch(url, {cache: 'no-store'});
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        console.log('Fetched JSON (root sample):', Array.isArray(data) ? data.slice(0,3) : Object.keys(data).slice(0,20), data);
+
+        const fullIndex = buildFullIndex(data);
+
+        // 1) try direct hadith objects for categoryId 2
+        const direct = findDirectHadithObjects(data, 2);
+
+        if (direct.length){
+          // group direct objects by subchapter
+          const ul = document.getElementById('hadithList'); ul.innerHTML = '';
+          const groups = new Map();
+          direct.forEach(h => {
+            const sub = pick(h.chapterInCategoryId, h.chapter_in_category_id, h.subchapter, null);
+            const key = sub !== null && sub !== undefined ? String(sub) : '_no_sub';
+            if (!groups.has(key)) groups.set(key, []);
+            groups.get(key).push(h);
+          });
+
+          // ensure hadith 37 included if present in fullIndex but missing
+          if (fullIndex.has(37) && !direct.some(d => Number(inferNumber(d, -1)) === 37)){
+            const f = fullIndex.get(37);
+            const sub = pick(f.chapterInCategoryId, f.chapter_in_category_id, f.subchapter, null);
+            const key = sub !== null && sub !== undefined ? String(sub) : '_no_sub';
+            if (!groups.has(key)) groups.set(key, []);
+            groups.get(key).unshift(f);
+          }
+
+          const keys = Array.from(groups.keys()).sort((a,b)=> {
+            if (a === '_no_sub') return 1;
+            if (b === '_no_sub') return -1;
+            return Number(a) - Number(b);
+          });
+
+          let any = false;
+          keys.forEach(key => {
+            if (key !== '_no_sub'){
+              const title = pick(groups.get(key)[0]?.chapterTitle, groups.get(key)[0]?.chapter, '');
+              const header = document.createElement('li');
+              header.className = 'subchapter-card';
+              header.innerHTML = `<div>Subchapter ${safe(Number(key)+1)}</div><div>${safe(title)}</div>`;
+              ul.appendChild(header);
+            }
+            groups.get(key).sort((A,B)=> inferNumber(A,0)-inferNumber(B,0)).forEach(h => {
+              const card = createHadithCard(h, inferNumber(h,0));
+              if (card){ ul.appendChild(card); any = true; }
+            });
+          });
+          if (!any) ul.innerHTML = '<li class="status">No hadiths under 214 found for Chapter 2.</li>';
+        } else {
+          // 2) numbers-only case
+          const numbers = findNumbersForCategory(data, 2);
+          if (!numbers || numbers.length === 0){
+            list.innerHTML = '<li class="status">No hadiths found for Chapter 2 in this JSON. Open DevTools console for details.</li>';
+            console.warn('Inspect JSON root in console for structure:', data);
+          } else {
+            renderFromNumbers(numbers, fullIndex);
+          }
+        }
+      } catch (err){
+        console.error('Fetch/parse error:', err);
+        list.innerHTML = '<li class="status">Error loading hadiths. Open DevTools console for details.</li>';
+      }
+
+      document.getElementById('searchInput')?.addEventListener('input', filterHadiths);
+    })();
+  </script>
+</body>
+</html>

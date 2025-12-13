@@ -131,17 +131,19 @@ body.dark-mode {
 }
 .top-row {
   display: flex;
-  justify-content: center; /* keeps the title centered */
   align-items: center;
+  justify-content: center;   /* keeps title centered */
   position: relative;
   margin-top: 2rem;
+  gap: 1rem;
 }
 
-/* Back button positioned BETWEEN left and center */
+/* Back button – desktop positioning */
 .top-row .back-home {
   position: absolute;
-  left: 23%;  /* ★ THIS CONTROLS THE POSITION */
-  transform: translateX(-50%);
+  left: 25rem;               /* safe fixed padding instead of % */
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* Button styles */
@@ -161,6 +163,21 @@ body.dark-mode {
 .top-row h2 {
   margin: 0;
   font-size: 1.4rem;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .top-row {
+    flex-direction: column;
+    gap: .75rem;
+  }
+
+  .top-row .back-home {
+    position: static;       /* remove absolute positioning */
+    transform: none;
+    align-self: flex-start; /* stays left */
+    margin-left: clamp(0.75rem, 4vw, 1.25rem);
+
+  }
 }
 
 
@@ -206,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("bookGrid");
   const searchInput = document.getElementById("searchBook");
 const books = [
-  { name_en: "Chapter 1 - The Book of 'Aqiqah (Offering Animal Sacrfice for a Newborn Child)", name_ar: "كتاب العقيقة", href: "alkafi-v6-ch1.html" },
+  { name_en: "Chapter 1 - The Book of 'Aqiqah (Offering Animal Sacrifice for a Newborn Child)", name_ar: "كتاب العقيقة", href: "alkafi-v6-ch1.html" },
   { name_en: "Chapter 2 - The Book of Talaq (Divorces)", name_ar: "كتاب الطلاق", href: "alkafi-v6-ch2.html" },
   { name_en: "Chapter 3 - The Book of Hunting", name_ar: "كتاب الصيد", href: "alkafi-v6-ch3<|fim_middle|>oleon<|fim_middle|><|fim_middle|>Eloluta.html" },
   { name_en: "Chapter 4 - The Book of Slaughtering Animals for Food", name_ar: "كتاب الذبح", href: "alkafi-v6-ch4.html" },
