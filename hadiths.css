@@ -431,3 +431,42 @@ body.dark-mode .note-input::placeholder {
   #bismillahWrap { margin: 6px 0; }
   #hadithContainer { margin-top: 4px; padding: 0 4px 120px 4px; }
 }
+#partNav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+#partNav .btn-3d {
+  margin: 0; /* keep margin zero so gap fully controls spacing */
+}
+#partButtons {
+  display: flex;
+  flex-wrap: wrap;      /* allows automatic wrapping */
+  gap: 10px;            /* controls spacing between buttons */
+  justify-content: center; /* optional: center them */
+  margin-bottom: 20px;
+}
+
+#partButtons button {
+  margin: 0;            /* ensures gap controls spacing */
+}
+.hadith-ar.sanad {
+  opacity: 0.65;
+  font-size: 1.4em;
+}
+
+.hadith-ar.matn {
+  margin-top: .4rem;
+}
+.modal-ar.sanad {
+  opacity: 0.65;
+  font-size: 1.4em;
+}
+
+.modal-ar.matn {
+  margin-top: .5rem;
+}
+
+
