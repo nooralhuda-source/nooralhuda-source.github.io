@@ -17,13 +17,8 @@
     border-radius:20px; font-weight:600; text-decoration:none;
     border:none; cursor:pointer; transition:background 0.2s,color 0.2s;
   }
-  #mainNav a:hover, #mainNav button:hover { background:#065c2f; color:#fff; }
-  .hamburger { display:none; font-size:1.5rem; background:none; border:none; color:#fff; cursor:pointer; }
-  @media(max-width:768px){
-    #mainNav{display:none;flex-direction:column;background:#0b7d40;position:absolute;top:60px;right:0;padding:1rem;}
-    #mainNav.open{display:flex;}
-    .hamburger{display:block;}
-  }
+
+  .hamburger {font-size:1.5rem; background:none; border:none; color:#fff; cursor:pointer; }
 
   .calendar { max-width:1000px; margin:20px auto; background:#fff; border:1px solid #d8dee4; border-radius:8px; padding:20px; }
   .cal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
@@ -31,7 +26,7 @@
   .controls button:hover { background:#256428; }
   .grid { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
   .cell { min-height:90px; border:1px solid #d8dee4; border-radius:6px; padding:6px; background:#fff; cursor:pointer; display:flex; flex-direction:column; gap:4px; }
-  .cell.today { background:#fffde7; border-color:#fbc02d; }
+  .cell.today { background: #FFB6C1; }
   .greg { font-weight:bold; }
   .hijri { font-size:0.8rem; color:#2e7d32; }
   .event-tag { font-size:0.75rem; color:#c62828; }
@@ -53,27 +48,357 @@
   body.dark-mode .modal-card { background:#1e2430; color:#e7ebf0; border-color:#2a3140; }
   .modal-card h3 { margin-top:0; }
   .modal-card button { margin-top:12px; background:#2e7d32; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; }
+  /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+/* === EVENT TYPE STYLES === */
+
+/* Wiladat — green & white */
+li[data-type="wiladat"] {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border-left: 5px solid #2e7d32;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+/* Shahadat — red & dark */
+li[data-type="shahadat"] {
+  background: #2b0000;
+  color: #ffebee;
+  border-left: 5px solid #c62828;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+/* Eid — white & gold/brown */
+li[data-type="eid"] {
+  background: #fff8e1;
+  color: #6d4c41;
+  border-left: 5px solid #c9a227;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+/* Historic — neutral blue/grey */
+li[data-type="historic"] {
+  background: #e3f2fd;
+  color: #0d47a1;
+  border-left: 5px solid #1565c0;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+/* Jumu‘ah — calm blue */
+li[data-type="jumuah"] {
+  background: #e1f5fe;
+  color: #01579b;
+  border-left: 5px solid #0288d1;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+/* === CALENDAR CELL COLORING === */
+
+/* Wiladat */
+.cell.wiladat {
+  background: #e8f5e9;
+  border-color: #2e7d32;
+}
+
+/* Shahadat */
+.cell.shahadat {
+  background: #2b0000;
+  color: #ffebee;
+  border-color: #c62828;
+}
+
+/* Eid */
+.cell.eid {
+  background: #fff8e1;
+  border-color: #c9a227;
+}
+
+/* Historic */
+.cell.historic {
+  background: #e3f2fd;
+  border-color: #1565c0;
+}
+
+/* Jumuʿah */
+.cell.jumuah {
+  background: #fffde7;
+  border-color: #fbc02d;
+}
+
+/* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
 </style>
 </head>
 <body>
-
 <header>
-  <div class="brand">
-    <img src="logo.png.png" alt="Noor Al Huda Logo">
-    <h1>Noor Al Huda <span class="arabic">نور الهدى</span></h1>
-  </div>
-  <button class="hamburger" onclick="toggleMenu()">☰</button>
-  <nav id="mainNav">
-    <a href="quran.html">📖 Qur’an</a>
-    <a href="duas.html">🤲 Duas</a>
-    <a href="hadiths-home.html">📜 Hadiths</a>
-    <a href="calendar.html" class="active">📅 Calendar</a>
-    <a href="salah.html">🕌 Salah</a>
-    <a href="index.html" class="utility">🏠</a>
-    <a href="settings.html" class="utility">⚙</a>
-    <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
-  </nav>
+  <div class="brand"><h1><a href="index.html">Noor Al Huda</a></h1></div>
+<button class="hamburger" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+
 </header>
+
+<nav id="mainNav">
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="salah.html">Salah</a>
+  <a href="shiatube/index.html">ShiaTube</a>
+  <a href="index.html">Home</a>
+  <a href="settings.html">Settings</a>
+</nav>
+
+
+
+
+
 
 <div class="calendar">
   <div class="cal-header">
@@ -94,8 +419,13 @@
     <button onclick="closeModal()">Close</button>
   </div>
 </div>
-
+<footer>
+  © 2025 Noor Al Huda — All in one Shia website
+</footer>
 <script>
+
+
+
 /* Nav + theme */
 function toggleMenu(){document.getElementById("mainNav").classList.toggle("open");}
 function toggleDarkMode(){
@@ -103,6 +433,13 @@ function toggleDarkMode(){
   localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
 }
 if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark-mode");}
+document.addEventListener("click", e => {
+  const nav = document.getElementById("mainNav");
+  const burger = document.querySelector(".hamburger");
+  if (!nav.contains(e.target) && !burger.contains(e.target)) {
+    nav.classList.remove("open");
+  }
+});
 
 /* Hijri conversion */
 function gregorianToJDN(y,m,d){const a=Math.floor((14-m)/12);const y2=y+4800-a;const m2=m+12*a-3;return d+Math.floor((153*m2+2)/5)+365*y2+Math.floor(y2/4)-Math.floor(y2/100)+Math.floor(y2/400)-32045;}
@@ -123,80 +460,200 @@ function jdnToIslamic(jdn){
 const G_MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
 const H_MONTHS=["Muharram","Safar","Rabiʿ al-Awwal","Rabiʿ al-Thani","Jumada al-Ula","Jumada al-Thani","Rajab","Shaʿban","Ramadan","Shawwal","Dhu al-Qaʿdah","Dhu al-Hijjah"];
 const EVENTS_HIJRI = {
+
   // Muharram
-  "1-1":["Islamic New Year – start of mourning"],
-  "1-2":["Imam Husayn (as) arrives in Karbala"],
-  "1-7":["Water supply cut off from Imam Husayn’s camp"],
-  "1-9":["Tasuʿa (eve of Ashura)"],
-  "1-10":["Ashura – Martyrdom of Imam Husayn (as) and companions"],
-  "1-11":["Captives taken after Karbala"],
-  "1-12":["Burial of Karbala martyrs"],
-  "1-25":["Martyrdom of Imam Zayn al‑Abidin (as)"],
+  "1-1":[
+    { label:"Islamic New Year", type:"historic" }
+  ],
+  "1-2":[
+    { label:"Imam Husayn (a) arrives in Karbala", type:"historic" }
+  ],
+  "1-7":[
+    { label:"Water cut off from Imam Husayn’s camp", type:"historic" }
+  ],
+  "1-9":[
+    { label:"Tasuʿa", type:"historic" }
+  ],
+  "1-10":[
+    { label:"Ashura – martyrdom of Imam Husayn (a) and companions", type:"shahadat" }
+  ],
+  "1-11":[
+    { label:"Ahl al-Bayt taken captive", type:"historic" }
+  ],
+  "1-12":[
+    { label:"Burial of the martyrs of Karbala", type:"historic" }
+  ],
+  "1-25":[
+    { label:"Martyrdom of Imam Zayn al-Abidin (a)", type:"shahadat" }
+  ],
 
   // Safar
-  "2-7":["Martyrdom of Imam Hasan (as)","Birth of Imam Musa al‑Kazim (as)"],
-  "2-13":["Death of Bibi Sakina (sa)"],
-  "2-17":["Martyrdom of Imam Ridha (as)"],
-  "2-20":["Arbaeen (40th of Imam Husayn, as)"],
-  "2-28":["Demise of Prophet Muhammad (saw)"],
+  "2-7":[
+    { label:"Martyrdom of Imam Hasan al-Mujtaba (a)", type:"shahadat" },
+    { label:"Birth of Imam Musa al-Kazim (a)", type:"wiladat" }
+  ],
+  "2-13":[
+    { label:"Martyrdom of Bibi Sakina (s)", type:"shahadat" }
+  ],
+  "2-20":[
+    { label:"Arbaeen of Imam Husayn (a)", type:"historic" }
+  ],
+  "2-28":[
+    { label:"Demise of Prophet Muhammad (s)", type:"shahadat" }
+  ],
 
-  // Rabi al‑Awwal
-  "3-8":["Martyrdom of Imam Hasan al‑Askari (as)"],
-  "3-9":["Eid‑e‑Zahra (sa)"],
-  "3-17":["Birth of Prophet Muhammad (saw)","Birth of Imam Jaʿfar al‑Sadiq (as)"],
+  // Rabi al-Awwal
+  "3-8":[
+    { label:"Martyrdom of Imam Hasan al-Askari (a)", type:"shahadat" }
+  ],
+  "3-9":[
+    { label:"Eid-e-Zahra (s)", type:"eid" }
+  ],
+  "3-17":[
+    { label:"Birth of Prophet Muhammad (s)", type:"wiladat" },
+    { label:"Birth of Imam Jaʿfar al-Sadiq (a)", type:"wiladat" }
+  ],
 
-  // Rabi al‑Thani
-  "4-8":["Martyrdom of Lady Fatima Zahra (sa) (tradition)"],
-  "4-10":["Martyrdom of Lady Masuma of Qom (sa)"],
+  // Rabi al-Thani
+  "4-10":[
+    { label:"Martyrdom of Lady Masuma of Qom (s)", type:"shahadat" }
+  ],
 
-  // Jumada al‑Ula
-  "5-5":["Birth of Lady Zaynab (sa)"],
-  "5-13":["Martyrdom of Lady Fatima Zahra (sa) (second narration)"],
-  "5-15":["Birth of Imam Zayn al‑Abidin (as)"],
+  // Jumada al-Ula
+  "5-5":[
+    { label:"Birth of Lady Zaynab (s)", type:"wiladat" }
+  ],
+  "5-13":[
+    { label:"Martyrdom of Lady Fatima Zahra (s)", type:"shahadat" }
+  ],
+  "5-15":[
+    { label:"Birth of Imam Zayn al-Abidin (a)", type:"wiladat" }
+  ],
 
-  // Jumada al‑Thani
-  "6-3":["Martyrdom of Lady Fatima Zahra (sa) (third narration)"],
-  "6-20":["Birth of Lady Fatima Zahra (sa)"],
+  // Jumada al-Thani
+  "6-3":[
+    { label:"Martyrdom of Lady Fatima Zahra (s)", type:"shahadat" }
+  ],
+  "6-20":[
+    { label:"Birth of Lady Fatima Zahra (s)", type:"wiladat" }
+  ],
 
   // Rajab
-  "7-1":["Birth of Imam Muhammad al‑Baqir (as)"],
-  "7-3":["Martyrdom of Imam Ali al‑Naqi (as)"],
-  "7-10":["Birth of Imam Muhammad al‑Taqi (as)"],
-  "7-13":["Birth of Imam Ali (as)"],
-  "7-25":["Martyrdom of Imam Musa al‑Kazim (as)"],
-  "7-26":["Death of Abu Talib (as)"],
-  "7-27":["Mabʿath / Miʿraj (Prophet’s mission)"],
+  "7-1":[
+    { label:"Birth of Imam Muhammad al-Baqir (a)", type:"wiladat" }
+  ],
+  "7-3":[
+    { label:"Martyrdom of Imam Ali al-Hadi (a)", type:"shahadat" }
+  ],
+  "7-10":[
+    { label:"Birth of Imam Muhammad al-Taqi (a)", type:"wiladat" }
+  ],
+  "7-13":[
+    { label:"Birth of Imam Ali ibn Abi Talib (a)", type:"wiladat" }
+  ],
+  "7-25":[
+    { label:"Martyrdom of Imam Musa al-Kazim (a)", type:"shahadat" }
+  ],
+  "7-26":[
+    { label:"Death of Abu Talib (a)", type:"shahadat" }
+  ],
+  "7-27":[
+    { label:"Mabʿath – Beginning of Prophethood", type:"eid" }
+  ],
 
   // Shaʿban
-  "8-3":["Birth of Imam Husayn (as)"],
-  "8-4":["Birth of Hazrat Abbas (as)"],
-  "8-5":["Birth of Imam Zayn al‑Abidin (as)"],
-  "8-15":["Birth of Imam al‑Mahdi (aj)"],
+  "8-3":[
+    { label:"Birth of Imam Husayn (a)", type:"wiladat" }
+  ],
+  "8-4":[
+    { label:"Birth of Hazrat Abbas (a)", type:"wiladat" }
+  ],
+  "8-5":[
+    { label:"Birth of Imam Zayn al-Abidin (a)", type:"wiladat" }
+  ],
+  "8-11":[
+    { label:"Birth of Ali Akbar (a)", type:"wiladat" }
+  ],
+  "8-15":[
+    { label:"Birth of Imam al-Mahdi (aj)", type:"wiladat" }
+  ],
 
   // Ramadan
-  "9-10":["Death of Lady Khadija (sa)"],
-  "9-15":["Birth of Imam Hasan al‑Mujtaba (as)"],
-  "9-17":["Battle of Badr"],
-  "9-19":["Imam Ali (as) struck in Kufa","Laylat al‑Qadr (possible)"],
-  "9-21":["Martyrdom of Imam Ali (as)","Laylat al‑Qadr (possible)"],
-  "9-23":["Laylat al‑Qadr (possible)"],
+  "9-10":[
+    { label:"Demise of Lady Khadija (s)", type:"shahadat" }
+  ],
+  "9-15":[
+    { label:"Birth of Imam Hasan al-Mujtaba (a)", type:"wiladat" }
+  ],
+  "9-17":[
+    { label:"Battle of Badr", type:"historic" }
+  ],
+  "9-19":[
+    { label:"Imam Ali (a) struck in Kufa", type:"shahadat" }
+  ],
+  "9-21":[
+    { label:"Martyrdom of Imam Ali (a)", type:"shahadat" }
+  ],
+  "9-23":[
+    { label:"Laylat al-Qadr", type:"historic" }
+  ],
 
   // Shawwal
-  "10-8":["Destruction of Jannat al‑Baqi"],
-  "10-25":["Martyrdom of Imam Jaʿfar al‑Sadiq (as)"],
+  "10-1":[
+    { label:"Eid al-Fitr", type:"eid" }
+  ],
+  "10-8":[
+    { label:"Destruction of Jannat al-Baqi", type:"historic" }
+  ],
+  "10-25":[
+    { label:"Martyrdom of Imam Jaʿfar al-Sadiq (a)", type:"shahadat" }
+  ],
 
-  // Dhu al‑Qaʿdah
-  "11-11":["Birth of Imam Ali al‑Ridha (as)"],
-  "11-23":["Martyrdom of Imam Ridha (as)"],
-  "11-29":["Martyrdom of Imam Muhammad al‑Taqi (as)"],
+  // Dhu al-Qaʿdah
+  "11-11":[
+    { label:"Birth of Imam Ali al-Ridha (a)", type:"wiladat" }
+  ],
+  "11-23":[
+    { label:"Martyrdom of Imam Ali al-Ridha (a)", type:"shahadat" }
+  ],
+  "11-29":[
+    { label:"Martyrdom of Imam Muhammad al-Taqi (a)", type:"shahadat" }
+  ],
 
-  // Dhu al‑Hijjah
-  "12-7":["Martyrdom of Imam Muhammad al‑Baqir (as)"],
-  "12-9":["Martyrdom of Muslim ibn Aqil (as)"],
-  "12-10":["Eid al‑Adha"],
-  "12-18":["Eid al‑Ghadir"],
-  "12-24":["Eid al‑Mubahila"]
+  // Dhu al-Hijjah
+  "12-9":[
+    { label:"Martyrdom of Muslim ibn Aqil (a)", type:"shahadat" }
+  ],
+  "12-10":[
+    { label:"Eid al-Adha", type:"eid" }
+  ],
+  "12-18":[
+    { label:"Eid al-Ghadir", type:"eid" }
+  ],
+  "12-24":[
+    { label:"Eid al-Mubahila", type:"eid" }
+  ],
+
+  // Major Scholars (widely recognised)
+  "10-15":[
+    { label:"Death of Shaykh al-Mufid (r)", type:"historic" }
+  ],
+  "12-19":[
+    { label:"Death of Shaykh al-Saduq (r)", type:"historic" }
+  ],
+  "12-25":[
+    { label:"Death of Allama al-Hilli (r)", type:"historic" }
+  ],
+  "6-13":[
+    { label:"Death of Imam Khomeini (r)", type:"historic" }
+  ],
+  "1-2":[
+    { label:"Death of Ayatollah Bahjat (r)", type:"historic" }
+  ]
 };
+
+
+
 
 /* State */
 let view=(function(){
@@ -231,6 +688,8 @@ function makeCell(y,mZeroBased,d,dim){
   cell.appendChild(gEl);
 
   const jdn=gregorianToJDN(y2,m2+1,d);
+  const isFriday = new Date(y2, m2, d).getDay() === 5;
+
   const hK=jdnToIslamic(jdn+view.offsetK);
   const hS=jdnToIslamic(jdn+view.offsetS);
 
@@ -241,23 +700,55 @@ function makeCell(y,mZeroBased,d,dim){
 
   const keyK=`${hK.month}-${hK.day}`;
   const keyS=`${hS.month}-${hS.day}`;
-  const eventsPreview=[];
-  if(EVENTS_HIJRI[keyK]) eventsPreview.push(...EVENTS_HIJRI[keyK].map(e=>`[K] ${e}`));
-  if(EVENTS_HIJRI[keyS]) eventsPreview.push(...EVENTS_HIJRI[keyS].map(e=>`[S] ${e}`));
+const eventsPreview = [];
+const seen = new Set();
 
-  if(eventsPreview.length){
-    const tag=document.createElement("div");
-    tag.className="event-tag";
-    tag.textContent=eventsPreview[0]+(eventsPreview.length>1?` (+${eventsPreview.length-1})`:"");
-    cell.appendChild(tag);
-  }
-
-  cell.addEventListener("click",()=>{
-    const title=`${G_MONTHS[m2]} ${d}, ${y2}`;
-    openModal(title,eventsPreview);
+function addEvents(key) {
+  if (!EVENTS_HIJRI[key]) return;
+  EVENTS_HIJRI[key].forEach(e => {
+    const id = e.label + e.type;
+    if (!seen.has(id)) {
+      seen.add(id);
+      eventsPreview.push({
+        label: e.label,
+        type: e.type
+      });
+    }
   });
+}
 
-  return cell;
+addEvents(keyK);
+addEvents(keyS);
+
+// Auto-add Jumuʿah
+if (isFriday) {
+  eventsPreview.push({
+    label: "Jumuʿah",
+    type: "jumuah"
+  });
+}
+if (eventsPreview.length > 0) {
+  const tag = document.createElement("div");
+  tag.className = "event-tag";
+  tag.textContent =
+    eventsPreview[0].label +
+    (eventsPreview.length > 1 ? ` (+${eventsPreview.length - 1})` : "");
+  cell.appendChild(tag);
+
+  // colour cell by first event
+  cell.classList.add(eventsPreview[0].type);
+
+  // modal click
+  cell.addEventListener("click", () => {
+    openModal(
+      `${d} ${G_MONTHS[m2]} ${y2}`,
+      eventsPreview
+    );
+  });
+}
+
+return cell;
+
 }
 
 /* Render month grid */
@@ -299,10 +790,12 @@ function openModal(dateLabel,events){
   }else{
     const ul=document.createElement("ul");
     events.forEach(e=>{
-      const li=document.createElement("li");
-      li.textContent=e;
-      ul.appendChild(li);
-    });
+  const li = document.createElement("li");
+  li.textContent = e.label;
+  li.dataset.type = e.type; // hidden metadata
+  ul.appendChild(li);
+});
+
     box.appendChild(ul);
   }
   document.getElementById("eventModal").style.display="flex";
