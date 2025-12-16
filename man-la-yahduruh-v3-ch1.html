@@ -1,0 +1,816 @@
+
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Man La Yahduruh Al-Faqih V.3 Ch.1</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Kufi+Arabic:wght@100..900&family=Noto+Sans+Arabic:wght@100..900&family=Parastoo:wght@400..700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="hadiths.css">
+</head>
+<body>
+
+  <header>
+    <div class="brand"><h1><a href="index.html">Noor Al Huda</a></h1></div>
+    <button class="hamburger" aria-label="Open menu">☰</button>
+  </header>
+
+  <nav id="mainNav" aria-hidden="true">
+    <a href="quran.html">Quran</a>
+    <a href="duas.html">Duas</a>
+    <a href="hadiths-home.html">Hadiths</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="salah.html">Salah</a>
+    <a href="shiatube/index.html">ShiaTube</a>
+    <a href="index.html">Home</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+
+  <main class="page" id="page">
+    <div class="surah-header" role="banner">
+  <div class="header-row">
+    <a class="back-home" href="man-la-yahduruh-v3.html">← Go Back</a>
+    <button id="openSaved" class="btn-3d">Saved</button>
+    <div style="text-align:center; flex:1;">
+      <div class="surah-title-en">من لا يحضره الفقيه المجلد الثالث كتاب القضايا والأحكام القانونية </div>
+      <div class="surah-title-ar">He who is without a jurist - Volume 3 - Book of Legal Cases and Rulings</div>
+      <div class="book-meta">Man La Yahduruh Al-Faqih by Sheikh Muhammad ibn Ali Al-Saduq</div>
+    </div>
+  </div>
+</div>
+        
+       
+      </div>
+    </div>
+
+    <div id="bismillahWrap">
+      <img src="bismillah.png" alt="Bismillah" onerror="this.style.display='none'">
+    </div>
+<!-- PART NAVIGATION (paste this just above #hadithContainer) -->
+<div id="partButtons" style="text-align:center; margin:20px 0;"></div>
+
+
+    <div id="hadithContainer" aria-live="polite"></div>
+  </main>
+
+  <div class="bottom-actions">
+    <button id="backBeginning" class="btn-3d">Back to Top</button>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+        <div style="display:flex;gap:8px">
+          <button id="modalPrev" class="btn-3d">← Prev</button>
+          <button id="modalNext" class="btn-3d">Next →</button>
+        </div>
+        <button id="modalClose" class="btn-3d">Close</button>
+      </div>
+
+      <div class="modal-grid">
+        <div>
+          <div class="modal-meta" id="modalSanad"></div>
+          <div class="modal-en" id="modalEnglish"></div>
+        </div>
+        <div>
+          <div class="modal-ar" id="modalArabic"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <strong style="font-size:.95rem">Gradings</strong>
+        <div class="gradings" id="modalGradings" style="margin-top:6px"></div>
+      </div>
+
+      <div style="margin-top:12px">
+        <strong style="font-size:.95rem">Notes</strong>
+        <textarea id="modalNote" class="note-input" placeholder="Add a private note"></textarea>
+      </div>
+    </div>
+  </div>
+
+<div class="modal-backdrop" id="savedBackdrop" style="display:none">
+  <div class="modal" id="savedPopup">
+    <h3 style="margin-bottom:8px">Saved Hadiths</h3>
+
+    <div style="padding:10px 0; line-height:1.6; font-size:.95rem;">
+      This feature is currently in beta testing.<br>
+      I am still working on it, and it will be available in January 2026, insha’Allah.
+    </div>
+
+    <div style="text-align:right;margin-top:12px">
+      <button id="closeSaved" class="btn-3d">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* -------------------------
+   PART SPLITTING
+   ------------------------- */
+
+function showPart(partNum) {
+  document.querySelectorAll(".hadith-card").forEach(card => {
+    const p = Number(card.dataset.part);
+    card.style.display = (p === partNum) ? "block" : "none";
+  });
+}
+
+/* -------------------------
+   Configuration & Storage
+   ------------------------- */
+const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/36.json';
+const FILTER_VOLUME = 3;
+const FILTER_CATEGORY_ID = 1;
+const TOTAL_PARTS = 30;   // ← change this any time you want
+
+
+
+
+const STORAGE_SAVED = 'noor_saved_hadiths_v15';
+const STORAGE_PINNED = 'noor_pinned_hadith_v15';
+const STORAGE_NOTES = 'noor_hadith_notes_v15';
+
+
+/* -------------------------
+   DOM refs & state
+   ------------------------- */
+const hadithContainer = document.getElementById('hadithContainer');
+const modalBackdrop = document.getElementById('modalBackdrop');
+const modalGradings = document.getElementById('modalGradings');
+const modalNote = document.getElementById('modalNote');
+const modalPrev = document.getElementById('modalPrev');
+const modalNext = document.getElementById('modalNext');
+const modalClose = document.getElementById('modalClose');
+const openSavedBtn = document.getElementById('openSaved');
+const savedBackdrop = document.getElementById('savedBackdrop');
+const savedPopup = document.getElementById('savedPopup');
+const closeSaved = document.getElementById('closeSaved');
+const backBeginning = document.getElementById('backBeginning');
+
+let HADITHS = [];
+let visibleIndex = 0;
+let ALL_SAVED_CORPUS = null;
+
+/* Ensure saved list container exists inside savedPopup 
+let savedList = document.getElementById('savedList');
+if (!savedList) {
+  savedList = document.createElement('div');
+  savedList.id = 'savedList';
+  savedList.style.marginTop = '12px';
+  savedPopup.insertBefore(savedList, savedPopup.querySelector('div[style*="text-align:right"]') || null);
+}
+*/
+/* -------------------------
+   Utilities
+   ------------------------- */
+function save(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
+function load(key, fallback){ try{ const v = JSON.parse(localStorage.getItem(key)); return v === null ? fallback : (v || fallback); }catch(e){ return fallback; } }
+function el(tag, attrs = {}, text = ''){ const e = document.createElement(tag); for(const k in attrs) { if(k === 'style') e.style.cssText = attrs[k]; else e.setAttribute(k, attrs[k]); } if(text) e.innerText = text; return e; }
+function escapeHtml(s){ return String(s === undefined || s === null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function gradeClass(text){
+  if (!text) return 'grade-none';
+  const t = String(text).trim();
+
+  // ✅ GOOD / GREEN
+  if (/صحيح|حسن|معتبر|Sahih|Hasan|sound|authentic/i.test(t)) {
+    return 'grade-good';
+  }
+
+  // ❌ WEAK / RED
+  if (/ضعيف|weak|Daif/i.test(t)) {
+    return 'grade-bad';
+  }
+
+  // ⚠️ UNKNOWN / MID
+  return 'grade-mid';
+}
+
+
+function extractGradeOnly(fullText){
+  if(!fullText) return '';
+  const match = fullText.match(/^[^—]*?(?=\s*(?:—|$))/);
+  return match ? match[0].trim() : fullText.trim();
+}
+function splitArabicSanadMatn(arabicText) {
+  if (!arabicText) return { sanad: '', matn: '' };
+
+  arabicText = arabicText.trim();
+
+  // Remove "Hadith.x -" prefix if exists
+  arabicText = arabicText.replace(/^Hadith\.\d+\s*-\s*/i, '');
+
+  // Find first «
+  const idxQuote = arabicText.indexOf('«');
+  if (idxQuote !== -1) {
+    return {
+      sanad: arabicText.slice(0, idxQuote).trim(),
+      matn: arabicText.slice(idxQuote).trim()
+    };
+  }
+
+  // Fallback: use last colon
+  const idxColon = arabicText.lastIndexOf(':');
+  if (idxColon !== -1) {
+    return {
+      sanad: arabicText.slice(0, idxColon + 1).trim(),
+      matn: arabicText.slice(idxColon + 1).trim()
+    };
+  }
+
+  // No split possible
+  return { sanad: '', matn: arabicText };
+}
+
+
+
+
+/* -------------------------
+   Data loader
+   ------------------------- */
+async function loadHadiths(){
+  hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
+  try {
+    const res = await fetch(API_URL);
+    if(!res.ok) throw new Error('API fetch failed');
+    const arr = await res.json();
+
+    // Filter by volume/category and book id string that includes Al-Kafi-Volume-2 (keeps old logic)
+const filtered = arr.filter(h =>
+  Number(h.categoryId) === FILTER_CATEGORY_ID
+);
+
+
+    filtered.sort((a,b) => (Number(a.id)||0) - (Number(b.id)||0));
+    HADITHS = filtered;
+
+
+    renderList();
+
+    // Auto-open pinned if present and present on this page
+    const pinned = load(STORAGE_PINNED, null);
+    if (pinned && String(pinned.volume) === String(FILTER_VOLUME)) {
+      const idx = HADITHS.findIndex(h => String(h.id) === String(pinned.id));
+      if (idx >= 0) {
+        setTimeout(() => { openHadithModal(idx); const card = document.getElementById('hadith-card-' + HADITHS[idx].id); if(card) card.scrollIntoView({behavior:'smooth', block:'center'}); }, 260);
+      }
+    }
+
+  } catch (err) {
+    console.error(err);
+    hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Failed to load hadiths.</div>';
+  }
+}
+function cleanSanad(sanad) {
+    if (!sanad) return '';
+    // Remove "Hadith.1 - " or any "Hadith.<number> -" at the start
+    return sanad.replace(/^Hadith\.\d+\s*-\s*/i, '').trim();
+}
+
+/* -------------------------
+   Render list / cards
+   ------------------------- */
+function renderList(){
+  hadithContainer.innerHTML = '';
+  if(!HADITHS.length){ hadithContainer.innerHTML = '<em style="color:var(--muted);padding:12px">No hadiths found.</em>'; return; }
+
+  const currentPinned = load(STORAGE_PINNED, null);
+
+  HADITHS.forEach((h, i) => {
+
+// ⭐ AUTO ASSIGN PART NUMBER (10 groups)
+const groupSize = Math.ceil(HADITHS.length / TOTAL_PARTS);
+const part = Math.floor(i / groupSize) + 1;
+
+
+
+    const card = el('div', {
+        class: 'hadith-card',
+        id: 'hadith-card-' + h.id,
+        'data-part': part   // ⭐ store part number on each hadith
+    });
+
+    const meta = el('div', { class: 'hadith-meta' }, `#${h.id}`);
+
+    const body = el('div', { class: 'hadith-body' });
+    const leftCol = el('div', { class: 'hadith-col' });
+    const rightCol = el('div', { class: 'hadith-col' });
+
+    // Decide which content to show: prefer Thaqalayn sanad+matn when both exist,
+    // otherwise fallback to englishText or thaqalaynMatn
+    const hasSanad = h.thaqalaynSanad && String(h.thaqalaynSanad).trim() !== '';
+    const hasMatn = h.thaqalaynMatn && String(h.thaqalaynMatn).trim() !== '';
+
+let sanad = '';
+let english = '';
+let arabicSanad = '';
+let arabicMatn = '';
+
+// 1️⃣ English
+if (hasSanad && hasMatn) {
+  // Use thaqalaynSanad + thaqalaynMatn as-is
+  sanad = String(h.thaqalaynSanad).trim();
+  english = String(h.thaqalaynMatn).trim();
+} else {
+  // Fallback: englishText might contain "sanad: matn"
+  const fullEnglish = String(h.englishText || h.thaqalaynMatn || '').trim();
+  const idxColon = fullEnglish.lastIndexOf(':');
+  if (idxColon !== -1) {
+    sanad = fullEnglish.slice(0, idxColon + 1).trim();
+    english = fullEnglish.slice(idxColon + 1).trim();
+  } else {
+    english = fullEnglish; // no split possible
+  }
+}
+
+// 2️⃣ Arabic
+const fullArabic = String(h.arabicText || '').trim();
+({ sanad: arabicSanad, matn: arabicMatn } = splitArabicSanadMatn(fullArabic));
+if (!arabicSanad && !arabicMatn && fullArabic) arabicMatn = fullArabic; // fallback
+
+
+
+    const contextP = el('div', { class: 'hadith-context' }, sanad ? `${sanad}` : '');
+    const enP = el('div', { class: 'hadith-en' }, english || '');
+
+
+    leftCol.appendChild(contextP);
+    if (english) leftCol.appendChild(enP);
+
+if (arabicSanad) {
+  rightCol.appendChild(
+    el('div', { class: 'hadith-ar sanad' }, arabicSanad)
+  );
+}
+
+if (arabicMatn) {
+  rightCol.appendChild(
+    el('div', { class: 'hadith-ar matn' }, arabicMatn)
+  );
+}
+
+
+    // gradings
+    const gradWrap = el('div', { class: 'gradings' });
+    (h.gradingsFull || []).slice(0,2).forEach(g => {
+      const grade = extractGradeOnly(g.grade_ar || g.grade || '—');
+      const chip = el('div', { class: 'grade-chip ' + gradeClass(grade) }, grade);
+      gradWrap.appendChild(chip);
+    });
+
+    const actions = el('div', { class: 'card-actions' });
+    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
+    openBtn.addEventListener('click', () => openHadithModal(i));
+    actions.appendChild(openBtn);
+
+    leftCol.appendChild(gradWrap);
+    leftCol.appendChild(actions);
+
+    // popup menu (pin/save/copy/open)
+    const rightWrap = el('div', { class: 'hadith-menu-wrap', style: 'position:absolute;top:6px;right:6px' });
+    const dot = el('button', { class: 'three-dots', 'aria-label': 'Menu' }, '⋯');
+    const popup = el('div', { class: 'hadith-popup', id: `popup-${h.id}` });
+
+    const pinBtn = el('button', {}, currentPinned && String(currentPinned.id) === String(h.id) ? 'Unpin' : 'Pin');
+    const saveBtn = el('button', {}, 'Save');
+    const copyBtn = el('button', {}, 'Copy');
+    const openFullBtn = el('button', {}, 'Open');
+
+    popup.append(pinBtn, saveBtn, copyBtn, openFullBtn);
+    rightWrap.append(dot, popup);
+
+    // toggle popup
+    dot.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      document.querySelectorAll('.hadith-popup').forEach(p => { if(p !== popup) p.style.display = 'none'; });
+      popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', (e) => {
+      if(!popup.contains(e.target) && e.target !== dot) popup.style.display = 'none';
+    });
+
+    // PIN / UNPIN: checks + confirmation
+    pinBtn.addEventListener('click', () => {
+      const currentPinnedNow = load(STORAGE_PINNED, null);
+
+      // if already pinned -> unpin
+      if (currentPinnedNow && String(currentPinnedNow.id) === String(h.id)) {
+        localStorage.removeItem(STORAGE_PINNED);
+        alert(`Unpinned hadith #${h.id}`);
+        popup.style.display = 'none';
+        renderList();
+        return;
+      }
+
+      // if another pinned exists -> confirm overwrite
+      if (currentPinnedNow && String(currentPinnedNow.id) !== String(h.id)) {
+        if (!confirm(`Hadith #${currentPinnedNow.id} is already pinned.\n\nReplace it with #${h.id}?`)) {
+          return;
+        }
+      }
+
+      // save pin (include volume so we know where it's pinned)
+      save(STORAGE_PINNED, { id: h.id, volume: FILTER_VOLUME });
+      alert(`Pinned hadith #${h.id}`);
+      popup.style.display = 'none';
+      showPart(1); 
+    });
+
+    // SAVE (to saved list) + optional note
+    saveBtn.addEventListener('click', () => {
+      const notes = load(STORAGE_NOTES, {});
+      const currentNote = notes[h.id] || '';
+      const note = prompt('Add note (optional):', currentNote) || '';
+
+      const saved = load(STORAGE_SAVED, []);
+      const idx = saved.findIndex(x => String(x.id) === String(h.id));
+      if (idx === -1) {
+        saved.unshift({ id: h.id, snippet: (h.thaqalaynMatn || h.englishText || '').slice(0,160), note: note || '' });
+      } else {
+        saved[idx].note = note || '';
+        saved[idx].snippet = (h.thaqalaynMatn || h.englishText || '').slice(0,160);
+      }
+
+      if (note && note.trim()) {
+        notes[h.id] = note.trim();
+        save(STORAGE_NOTES, notes);
+      } else {
+        // remove note if blank
+        delete notes[h.id];
+        save(STORAGE_NOTES, notes);
+      }
+
+      save(STORAGE_SAVED, saved);
+      alert('Saved hadith #' + h.id);
+      popup.style.display = 'none';
+      populateSavedList();
+    });
+
+    // COPY
+    copyBtn.addEventListener('click', async () => {
+      const txt = `Hadith #${h.id}\n\n${arabic || ''}\n\n${english || ''}`;
+      try { await navigator.clipboard.writeText(txt); alert('Copied'); }
+      catch(e){ alert('Copy failed'); }
+      popup.style.display = 'none';
+    });
+
+    // Open modal
+    openFullBtn.addEventListener('click', () => { openHadithModal(i); popup.style.display = 'none'; });
+
+    // assemble
+    body.appendChild(leftCol);
+    body.appendChild(rightCol);
+
+    card.appendChild(meta);
+    card.appendChild(body);
+    card.appendChild(rightWrap);
+    hadithContainer.appendChild(card);
+  });
+}
+function generatePartButtons() {
+  const container = document.getElementById("partButtons");
+  container.innerHTML = "";
+
+  for (let p = 1; p <= TOTAL_PARTS; p++) {
+    const btn = document.createElement("button");
+    btn.className = "btn-3d";
+    btn.textContent = "Part " + p;
+    btn.onclick = () => showPart(p);
+    container.appendChild(btn);
+  }
+}
+
+
+function openHadithModal(idx){
+  if (idx < 0 || idx >= HADITHS.length) return;
+  visibleIndex = idx;
+  const h = HADITHS[idx];
+
+  const hasSanad = h.thaqalaynSanad && String(h.thaqalaynSanad).trim() !== '';
+  const hasMatn  = h.thaqalaynMatn  && String(h.thaqalaynMatn).trim() !== '';
+
+  let sanad = '';
+  let english = '';
+  let arabicSanad = '';
+  let arabicMatn = '';
+
+  if (hasSanad && hasMatn) {
+    sanad   = String(h.thaqalaynSanad).trim();
+    english = String(h.thaqalaynMatn).trim();
+
+    const fullArabic = String(h.arabicText || '').trim();
+    const lastColon = fullArabic.lastIndexOf(':');
+
+    if (lastColon !== -1) {
+      arabicSanad = fullArabic.slice(0, lastColon + 1).trim();
+      arabicMatn  = fullArabic.slice(lastColon + 1).trim();
+    } else {
+      arabicMatn = fullArabic;
+    }
+
+  } else {
+    english = String(h.englishText || h.thaqalaynMatn || '').trim();
+    arabicMatn = String(h.arabicText || '').trim();
+  }
+    /* main grid */
+  const modalGrid = document.querySelector('.modal-grid');
+  modalGrid.innerHTML = '';
+
+  const leftDiv = el('div');
+
+  if (sanad) {
+    leftDiv.appendChild(
+      el('div', { class: 'modal-meta' }, sanad)
+    );
+  }
+
+  if (english) {
+    leftDiv.appendChild(
+      el('div', { class: 'modal-en' }, english)
+    );
+  }
+
+  const rightDiv = el('div');
+
+  if (arabicSanad) {
+    rightDiv.appendChild(
+      el('div', { class: 'modal-ar sanad' }, arabicSanad)
+    );
+  }
+
+  if (arabicMatn) {
+    rightDiv.appendChild(
+      el('div', { class: 'modal-ar matn' }, arabicMatn)
+    );
+  }
+
+  modalGrid.appendChild(leftDiv);
+  modalGrid.appendChild(rightDiv);
+
+  /* gradings */
+  modalGradings.innerHTML = '';
+  (h.gradingsFull || []).forEach(g => {
+    const grade = extractGradeOnly(g.grade_ar || g.grade || '—');
+    modalGradings.appendChild(
+      el('div', { class: 'grade-chip ' + gradeClass(grade) }, grade)
+    );
+  });
+
+  /* notes */
+  const notes = load(STORAGE_NOTES, {});
+  modalNote.value = notes[h.id] || '';
+
+  modalBackdrop.style.display = 'flex';
+}
+
+
+/* modal nav */
+modalPrev.addEventListener('click', () => { if(visibleIndex > 0) { visibleIndex--; openHadithModal(visibleIndex); scrollToCard(); }});
+modalNext.addEventListener('click', () => { if(visibleIndex < HADITHS.length - 1) { visibleIndex++; openHadithModal(visibleIndex); scrollToCard(); }});
+modalClose.addEventListener('click', () => modalBackdrop.style.display = 'none');
+modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) modalBackdrop.style.display = 'none'; });
+
+/* notes autosave */
+let noteTimer = null;
+modalNote.addEventListener('input', () => {
+  clearTimeout(noteTimer);
+  noteTimer = setTimeout(() => {
+    const h = HADITHS[visibleIndex];
+    if (!h) return;
+    const notes = load(STORAGE_NOTES, {});
+    if (modalNote.value && modalNote.value.trim()) notes[h.id] = modalNote.value.trim();
+    else delete notes[h.id];
+    save(STORAGE_NOTES, notes);
+
+    // reflect note in saved list if present
+    const saved = load(STORAGE_SAVED, []);
+    const sidx = saved.findIndex(x => String(x.id) === String(h.id));
+    if (sidx >= 0) {
+      saved[sidx].note = modalNote.value.trim();
+      save(STORAGE_SAVED, saved);
+      populateSavedList();
+    }
+  }, 400);
+});
+
+/* -------------------------
+   Saved list modal
+   ------------------------- */
+openSavedBtn.addEventListener('click', () => { populateSavedList(); savedBackdrop.style.display = 'flex'; });
+closeSaved.addEventListener('click', () => savedBackdrop.style.display = 'none');
+savedBackdrop.addEventListener('click', (e) => { if (e.target === savedBackdrop) savedBackdrop.style.display = 'none'; });
+
+async function populateSavedList(){
+  const savedItems = load(STORAGE_SAVED, []);
+  savedList.innerHTML = '';
+
+  if (!savedItems.length) {
+    savedList.innerHTML = '<em style="color:var(--muted)">No saved hadiths</em>';
+    return;
+  }
+
+  // try to reuse cached corpus
+  if (!ALL_SAVED_CORPUS) {
+    try {
+      const res = await fetch(API_URL);
+      ALL_SAVED_CORPUS = res.ok ? await res.json() : HADITHS.slice();
+    } catch (e) {
+      ALL_SAVED_CORPUS = HADITHS.slice();
+    }
+  }
+
+  const notes = load(STORAGE_NOTES, {});
+  savedItems.forEach((item) => {
+    const hadith = ALL_SAVED_CORPUS.find(h => String(h.id) === String(item.id));
+    const row = el('div', { class: 'saved-row', style: 'display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed var(--border);flex-wrap:wrap' });
+
+    const left = el('div');
+    let metaHtml = '';
+    if (hadith) {
+      const book = escapeHtml(hadith.book || hadith.bookId || '(Unknown book)');
+      const vol = escapeHtml(hadith.volume || '(?)');
+      const ch = escapeHtml(hadith.chapter || hadith.category || hadith.categoryId || '(?)');
+      metaHtml = `<strong>${book}</strong><br>Vol. ${vol} — Ch. ${ch} — #${escapeHtml(hadith.id)}`;
+    } else {
+      metaHtml = `<strong>Hadith #${escapeHtml(item.id)}</strong><br><small style="color:var(--muted)">${escapeHtml(item.snippet || '')}</small>`;
+    }
+    const meta = el('div', { style: 'font-size:.85rem;color:var(--muted)' });
+    meta.innerHTML = metaHtml;
+
+    const noteText = notes[item.id] || item.note || '(no note)';
+    const noteEl = el('div', { style: 'margin-top:4px;font-size:.9rem' }, noteText);
+
+    left.append(meta, noteEl);
+
+    const right = el('div', { style: 'display:flex;gap:6px' });
+
+    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
+    openBtn.addEventListener('click', async () => {
+      if (!hadith) { alert('Hadith data not found'); return; }
+
+      const indexInPage = HADITHS.findIndex(h => String(h.id) === String(hadith.id));
+      if (indexInPage >= 0) {
+        openHadithModal(indexInPage);
+        savedBackdrop.style.display = 'none';
+        return;
+      }
+
+      // navigate to proper page with id=open
+      const targetPage = getTargetPageFromHadith(hadith);
+      const hadithId = hadith.id;
+      const pathArray = window.location.pathname.split('/');
+      pathArray[pathArray.length - 1] = targetPage;
+      const newPath = pathArray.join('/');
+      const newUrl = window.location.origin + newPath + '?id=' + encodeURIComponent(hadithId) + '&open=true';
+      window.location.href = newUrl;
+    });
+
+    const editBtn = el('button', { class: 'btn-3d' }, 'Edit');
+    editBtn.addEventListener('click', () => {
+      const current = notes[item.id] || item.note || '';
+      const newNote = prompt('Edit note:', current) || '';
+      if (newNote.trim()) notes[item.id] = newNote.trim();
+      else delete notes[item.id];
+      save(STORAGE_NOTES, notes);
+
+      // Update saved list entry
+      const saved = load(STORAGE_SAVED, []);
+      const idx = saved.findIndex(x => String(x.id) === String(item.id));
+      if (idx >= 0) { saved[idx].note = newNote.trim(); save(STORAGE_SAVED, saved); }
+      populateSavedList();
+    });
+
+    const delBtn = el('button', { class: 'btn-3d' }, 'Delete');
+    delBtn.addEventListener('click', () => {
+      const updated = savedItems.filter(x => String(x.id) !== String(item.id));
+      save(STORAGE_SAVED, updated);
+      populateSavedList();
+    });
+
+    right.append(openBtn, editBtn, delBtn);
+    row.append(left, right);
+    savedList.appendChild(row);
+  });
+}
+
+/* -------------------------
+   Helper: target page mapping
+   ------------------------- */
+function getTargetPageFromHadith(hadith) {
+  // sensible fallback
+  let targetPage = 'hadiths.html';
+  if (!hadith) return targetPage;
+
+  // if BOOKS_CONFIG present, use it
+  if (window.BOOKS_CONFIG && Array.isArray(window.BOOKS_CONFIG)) {
+    const book = window.BOOKS_CONFIG.find(b =>
+      b.bookId === hadith.bookId || b.book === hadith.book || String(b.id) === String(hadith.bookId)
+    );
+    if (book && book.chapters) {
+      const chapter = book.chapters.find(ch =>
+        Number(ch.id) === Number(hadith.chapter) ||
+        Number(ch.categoryId) === Number(hadith.categoryId)
+      );
+      if (chapter && chapter.filename) return chapter.filename;
+    }
+  }
+
+  // Simple heuristics: use book/volume to infer local filenames (customize per your site)
+  const vol = Number(hadith.volume);
+  if (vol === 1) return 'alkafi-volume1.html';
+  if (vol === 2) return 'alkafi-volume2.html';
+  return targetPage;
+}
+
+/* -------------------------
+   Misc helpers & UI
+   ------------------------- */
+function scrollToCard(){
+  const id = HADITHS[visibleIndex] && HADITHS[visibleIndex].id;
+  if (!id) return;
+  const elCard = document.getElementById('hadith-card-' + id);
+  if (elCard) elCard.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+backBeginning.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* hamburger/menu */
+document.querySelectorAll('.hamburger').forEach(h => h.addEventListener('click', (e) => { e.stopPropagation(); document.getElementById('mainNav').classList.toggle('open'); }));
+document.addEventListener('click', (e) => { if(!document.getElementById('mainNav').contains(e.target) && !e.target.closest('.hamburger')) document.getElementById('mainNav').classList.remove('open'); });
+
+/* theme apply */
+function applyThemeClass(isDark) {
+  if (isDark) {
+    document.body.classList.add('dark', 'dark-mode');
+  } else {
+    document.body.classList.remove('dark', 'dark-mode');
+  }
+}
+applyThemeClass(localStorage.getItem('theme') === 'dark');
+
+/* -------------------------
+   Check URL open param (when navigated from saved list)
+   ------------------------- */
+
+function checkAndOpenSavedHadith(){
+  const pinned = load(STORAGE_PINNED, null);
+  if(!pinned) return;
+
+  const index = HADITHS.findIndex(h => String(h.id) === String(pinned.id));
+  if(index === -1) return;
+
+  // ⭐ Find the pinned hadith card to get its part number
+  const card = document.querySelector(`#hadith-card-${pinned.id}`);
+  if(card){
+    const partNumber = Number(card.dataset.part);
+
+    // ⭐ Switch to correct part before opening modal
+    showPart(partNumber);
+  }
+
+  // ⭐ Open modal AFTER switching to correct part
+  setTimeout(() => {
+    openHadithModal(index);
+  }, 30);
+}
+/* -------------------------
+   Auto-generate Part Buttons
+   ------------------------- */
+
+function generatePartButtons() {
+  const container = document.getElementById("partButtons");
+  container.innerHTML = "";
+
+  for (let p = 1; p <= TOTAL_PARTS; p++) {
+    const btn = document.createElement("button");
+    btn.className = "btn-3d";
+    btn.textContent = "Part " + p;
+    btn.onclick = () => showPart(p);
+
+    container.appendChild(btn);
+    container.appendChild(document.createTextNode(" ")); // spacing
+  }
+}
+
+
+
+const originalLoadHadiths = loadHadiths;
+loadHadiths = async function() {
+  await originalLoadHadiths.call(this);
+
+  generatePartButtons();   // ← creates 15 buttons automatically
+  showPart(1);             // start at part 1
+};
+
+loadHadiths();
+
+
+
+</script>
+</body>
+</html>
