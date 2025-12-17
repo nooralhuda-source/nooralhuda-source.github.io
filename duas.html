@@ -31,20 +31,52 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* ─── HEADER + NAV ─── */
+
+/* ───────────────────────────────
+   HEADER
+──────────────────────────────── */
 header {
-  position: fixed; top: 0; left: 0; width: 100%;
-  display: flex; justify-content: space-between; align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   backdrop-filter: blur(14px) saturate(160%);
-  background: #276540;
+  background: rgba(19, 111, 60, 0.9);
   color: #fff;
   padding: 0.75rem 1.25rem;
   box-shadow: var(--shadow-sm);
   z-index: 1000;
 }
-header h1 { font-size: 1.4rem; font-weight: 700; }
-header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
-header h1 a:hover { opacity: 0.85; }
+
+header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+header .btn {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--green);
+  border: none;
+  border-radius: 12px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: var(--transition);
+}
+
+header .btn:hover {
+  transform: translateY(-2px);
+  background: #fff;
+}
+
 
 .hamburger {
   font-size: 1.5rem; background: transparent; color: #fff;
@@ -167,7 +199,6 @@ body.dark-mode .surah-card { box-shadow: none; }
 
 <footer>
   © 2025 Noor Al Huda — All in one Shia website
-  credit: Duas.org for the Duas and Ziyarats
 </footer>
 
 <script>
@@ -189,8 +220,8 @@ document.addEventListener("DOMContentLoaded", () => {
     { name_en: "Dua al-Adeela", name_ar: "دُعاء العديلة", href: "dua-adeela.html" },
     { name_en: "Dua for Imam al-Hujjah", name_ar: "دُعاء الإمام الحجة", href: "dua-hujjah.html" },
     { name_en: "Ziyarat Waritha", name_ar: "زيارة وارث", href: "ziyarat-waritha.html" },
-    { name_en: "Wednesday Duas", name_ar: "أدعية الأربعاء", href: "wednesdaydua.html" }
-    { name_en: "Ziyarat Ale yasin", name_ar: "زيارة آل ياسين", href: "Ziyarat-ale-yasin.html" }
+    { name_en: "Dua al-Faraj", name_ar: "دُعاء الفرج", href: "dua-faraj.html" },
+    { name_en: "Ziyarat Ale Yasin", name_ar: "زيارة آل ياسين", href: "ziyarat-ale-yasin.html" }
   ];
 
   // render
@@ -256,8 +287,3 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
-
-
-
-
-
