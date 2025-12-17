@@ -1,48 +1,200 @@
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda — Ziyarat Ashura</title>
+  <title>Ziyarat Ashura</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 
   <script>
-    // Theme handling
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.classList.add("dark-mode");
+    document.addEventListener("DOMContentLoaded", () => {
+  const mainNav = document.getElementById("mainNav");
+  const hamburger = document.querySelector(".hamburger");
+  const grid = document.getElementById("bookGrid");
+const aiSummaryButton = document.getElementById("aiSummaryButton");
+const modalBackdrop = document.getElementById("modalBackdrop");
+const closeSummary = document.getElementById("closeSummary");
+const aiSummaryText = document.getElementById("aiSummaryText");
+
+const aiSummary =
+  "Ziyarat Ashura is a powerful ziyarat transmitted from Imam Muhammad al-Baqir through Imam Ja‘far al-Sadiq, giving it a firm and authoritative foundation in Shi‘i hadith tradition. It is directly connected to the tragedy of Karbala and serves as a formal declaration of loyalty to Imam Husayn and disassociation from those who opposed and martyred him. Unlike many supplications that focus primarily on personal needs, Ziyarat Ashura is centered on theological allegiance, justice, and the eternal struggle between truth and falsehood. Its recitation reinforces the principles for which Imam Husayn rose, namely resistance to oppression and preservation of the true Islam of the Prophet and the Ahl al-Bayt. Ziyarat Ashura is especially recommended on the day of Ashura itself, but it is also widely recited daily or on Fridays, as it is regarded as a means of spiritual proximity to Imam Husayn and a source of steadfastness upon the path of the Ahl al-Bayt.";
+aiSummaryButton.addEventListener("click", () => {
+  aiSummaryText.textContent = aiSummary;
+  modalBackdrop.style.display = "flex";
+});
+
+closeSummary.addEventListener("click", () => {
+  modalBackdrop.style.display = "none";
+});
+
+modalBackdrop.addEventListener("click", e => {
+  if (e.target === modalBackdrop) {
+    modalBackdrop.style.display = "none";
+  }
+});
+});
+function applyThemeClass(isDark) {
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.remove("dark-mode");
     }
-    function toggleDarkMode() {
-      document.documentElement.classList.toggle("dark-mode");
-      localStorage.setItem("theme",
-        document.documentElement.classList.contains("dark-mode") ? "dark" : "light"
-      );
-      updateThemeIcon();
-    }
-    function updateThemeIcon() {
-      const btn = document.getElementById("themeToggle");
-      if (btn) {
-        btn.textContent = document.documentElement.classList.contains("dark-mode") ? "☀️" : "🌙";
-      }
-    }
-    function toggleMenu() {
-      document.getElementById("mainNav").classList.toggle("open");
-    }
+  }
+  var savedTheme = localStorage.getItem("theme");
+  applyThemeClass(savedTheme === "dark");
+
+  if (darkToggle) {
+    darkToggle.checked = savedTheme === "dark";
+    darkToggle.addEventListener("change", function (ev) {
+      var isDarkNow = !!ev.target.checked;
+      applyThemeClass(isDarkNow);
+      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+    });
+  }
   </script>
 
   <style>
+    /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+header h2 { font-size: 1.8rem; font-weight: 700; }
+header h2 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h2 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
     .ziyarat-section {
-      margin: 2rem auto;
-      max-width: 800px;
-      padding: 1.5rem;
-      background: var(--background, #fff);
-      border-radius: var(--radius, 10px);
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-    .ziyarat-section h2 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-size: 1.8rem;
-    }
+  margin: 0 auto;
+  margin-top: 0;
+  max-width: 800px;
+  padding: 1.5rem;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  text-align: center; /* ✅ everything inside is centered */
+}
     .arabic {
       direction: rtl;
       font-family: 'Scheherazade', serif;
@@ -51,6 +203,7 @@
       padding: 1rem;
       border-radius: 6px;
       margin-bottom: 1.5rem;
+      text-align: center;
     }
     .transliteration, .translation {
       background: #fdfdfd;
@@ -58,37 +211,153 @@
       border-radius: 6px;
       margin-bottom: 1.5rem;
     }
+   .back-duas-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+
+  background-color: var(--green);
+  color: white;
+  text-decoration: none;
+
+  border: none;
+  border-radius: 14px;
+  padding: 0.6rem 1.1rem;
+
+  font-family: "SF Pro Rounded", "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  margin: 0; /* remove the large top space */
+}
+
+/* Hover and active effects */
+.back-duas-btn:hover {
+  background-color: #2db574;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+.back-duas-btn:active {
+  background-color: #1e8b58;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset;
+  transform: translateY(1px);
+}
+header h2 { text-align: center; }
+header h3 { text-align: center; }
+.button-container {
+  text-align: left;
+  margin-bottom: 1rem; /* optional spacing */
+}
+  /* Buttons */
+  .q-btn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.8rem;
+  }
+  .btn-3d { padding:.7rem 1.1rem; border-radius:14px; border:0; cursor:pointer; font-weight:700; background: linear-gradient(180deg,#fff,#eee); color:var(--green); box-shadow: 0 8px 24px rgba(0,0,0,0.12); transform: translateZ(0); transition: transform .18s ease, box-shadow .18s ease; }
+.btn-3d:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 46px rgba(0,0,0,0.18); }
+.btn-3d.primary { background: linear-gradient(180deg,var(--green),#184c32); color:#fff; }
+.btn-3d {text-align: right;}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-box {
+  background: var(--card);
+  color: var(--text);
+  max-width: 520px;
+  width: 90%;
+  padding: 1.6rem;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  position: relative;
+  animation: pop 0.25s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.button-container {
+  display: flex;
+  justify-content: space-between; /* left & right */
+  align-items: center;
+  margin-bottom: 1rem;
+}
+@media (max-width: 480px) {
+  .button-container {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
   </style>
 </head>
 
 <body onload="updateThemeIcon()">
   <!-- Header -->
-  <header>
-    <div class="brand">
-      <img src="logo.png.png" alt="Noor Al Huda Logo">
-      <h1>Noor Al Huda </h1>
-    </div>
+ <header>
+  <div class="brand"><h1><a href="index.html">Noor Al Huda</a></h1></div>
+  <button class="hamburger" aria-label="Open menu">☰</button>
+</header>
 
-    <button class="hamburger" onclick="toggleMenu()">☰</button>
+<nav id="mainNav">
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="salah.html">Salah</a>
+  <a href="shiatube/index.html">ShiaTube</a>
+  <a href="index.html">Home</a>
+  <a href="settings.html">Settings</a>
+</nav>
 
-    <nav id="mainNav">
-      <a href="quran.html">📖 Qur’an</a>
-      <a href="duas.html">🤲 Duas</a>
-      <a href="hadiths-home.html">📜 Hadiths</a>
-      <a href="calendar.html">📅 Calendar</a>
-      <a href="salah.html">🕌 Salah</a>
-      <a href="index.html" class="utility">🏠</a>
-      <a href="settings.html" class="utility">⚙</a>
-      <button class="btn utility" id="themeToggle" onclick="toggleDarkMode()">🌙</button>
-    </nav>
-  </header>
 
   <!-- Main -->
   <main class="ziyarat-section">
-    <a href="duas.html" class="back-duas-btn"> Back to Duas Home</a>
-    <h2>Ziyarat Ashura</h2><br>
-    
+  <div class="button-container">
+  <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+  <button id="aiSummaryButton" class="btn-3d">AI Summary</button>
 </div>
+<div id="modalBackdrop" class="modal-backdrop">
+  <div class="modal-box">
+    <button id="closeSummary" class="close-btn">✕</button>
+    <h3>AI Summary</h3>
+    <p id="aiSummaryText"></p>
+  </div>
+</div>
+
+
+    <h2>Ziyarat Ashura</h2>
+    <br>
+    <h4>Listen to the Recitation:</h4>
+    <br>
+</div>
+
+
 
 
 <br>

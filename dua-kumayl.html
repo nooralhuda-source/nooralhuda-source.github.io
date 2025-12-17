@@ -3,7 +3,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda - Dua Kumayl</title>
+  <title>Dua Kumayl</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 
@@ -12,29 +12,28 @@
   const mainNav = document.getElementById("mainNav");
   const hamburger = document.querySelector(".hamburger");
   const grid = document.getElementById("bookGrid");
+const aiSummaryButton = document.getElementById("aiSummaryButton");
+const modalBackdrop = document.getElementById("modalBackdrop");
+const closeSummary = document.getElementById("closeSummary");
+const aiSummaryText = document.getElementById("aiSummaryText");
 
-
-
-
-
-hamburger.addEventListener("click", e => {
-  e.stopPropagation();
-  mainNav.classList.toggle("open");
+const aiSummary =
+  "Dua Kumayl is a deeply personal supplication taught by Imam Ali ibn Abi Talib to his companion Kumayl ibn Ziyad, reflecting the Imam’s profound understanding of divine mercy and human frailty. The dua is marked by its intense language of repentance, humility, and hope, guiding the believer to acknowledge sin while never despairing of Allah’s forgiveness. Unlike structured or formulaic supplications, Dua Kumayl reads as an intimate conversation with Allah, expressing both fear of divine justice and complete trust in divine compassion. It is specifically recommended to be recited on Thursday nights, a practice maintained across Shi‘i communities, and is regarded as a powerful means of seeking forgiveness, spiritual purification, and nearness to Allah.";
+aiSummaryButton.addEventListener("click", () => {
+  aiSummaryText.textContent = aiSummary;
+  modalBackdrop.style.display = "flex";
 });
 
-document.addEventListener("click", e => {
-  if (!mainNav.contains(e.target) && !hamburger.contains(e.target))
-    mainNav.classList.remove("open");
+closeSummary.addEventListener("click", () => {
+  modalBackdrop.style.display = "none";
 });
 
-searchInput.addEventListener("input", e => {
-  const q = e.target.value.toLowerCase();
-  document.querySelectorAll(".surah-card").forEach(card => {
-    const text = card.textContent.toLowerCase();
-    card.style.display = text.includes(q) ? "" : "none";
-  });
+modalBackdrop.addEventListener("click", e => {
+  if (e.target === modalBackdrop) {
+    modalBackdrop.style.display = "none";
+  }
 });
-});a
+});
 function applyThemeClass(isDark) {
     if (isDark) {
       document.body.classList.add("dark");
@@ -99,7 +98,7 @@ header {
 header h1 { font-size: 1.4rem; font-weight: 700; }
 header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
 header h1 a:hover { opacity: 0.85; }
-header h2 { font-size: 1.4rem; font-weight: 700; }
+header h2 { font-size: 1.8rem; font-weight: 700; }
 header h2 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
 header h2 a:hover { opacity: 0.85; }
 
@@ -173,7 +172,7 @@ header h2 a:hover { opacity: 0.85; }
   transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
   box-shadow: var(--shadow-lg);
 }
-.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
 .surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
 
 footer {
@@ -254,6 +253,66 @@ header h3 { text-align: center; }
   text-align: left;
   margin-bottom: 1rem; /* optional spacing */
 }
+  /* Buttons */
+  .q-btn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.8rem;
+  }
+  .btn-3d { padding:.7rem 1.1rem; border-radius:14px; border:0; cursor:pointer; font-weight:700; background: linear-gradient(180deg,#fff,#eee); color:var(--green); box-shadow: 0 8px 24px rgba(0,0,0,0.12); transform: translateZ(0); transition: transform .18s ease, box-shadow .18s ease; }
+.btn-3d:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 46px rgba(0,0,0,0.18); }
+.btn-3d.primary { background: linear-gradient(180deg,var(--green),#184c32); color:#fff; }
+.btn-3d {text-align: right;}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-box {
+  background: var(--card);
+  color: var(--text);
+  max-width: 520px;
+  width: 90%;
+  padding: 1.6rem;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  position: relative;
+  animation: pop 0.25s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.button-container {
+  display: flex;
+  justify-content: space-between; /* left & right */
+  align-items: center;
+  margin-bottom: 1rem;
+}
+@media (max-width: 480px) {
+  .button-container {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
   </style>
 </head>
 
@@ -278,15 +337,32 @@ header h3 { text-align: center; }
 
   <!-- Main -->
   <main class="ziyarat-section">
-    <div class="button-container">
-    <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+  <div class="button-container">
+  <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+  <button id="aiSummaryButton" class="btn-3d">AI Summary</button>
+</div>
+<div id="modalBackdrop" class="modal-backdrop">
+  <div class="modal-box">
+    <button id="closeSummary" class="close-btn">✕</button>
+    <h3>AI Summary</h3>
+    <p id="aiSummaryText"></p>
   </div>
-    <h2>Dua Kumayl</h2><br>
-    <h3>Dua Kumayl is one of the most profound supplications taught by Imam Ali (as) to his companion Kumayl ibn Ziyad. It is traditionally recited on Thursday nights and on the 15th of Sha'ban. This powerful dua opens with praise of Allah’s mercy, generosity, and greatness, then transitions into a deeply moving confession of human weakness, sins, and the need for divine forgiveness. It expresses the believer’s longing for closeness to Allah, rescue from spiritual darkness, and protection from punishment in this world and the next. Reciting Dua Kumayl softens the heart, purifies the soul, and draws a person nearer to the compassion of Allah and the light of Imam Ali (as). When recited with awareness and sincerity, it brings immense forgiveness, relief from worries, and spiritual elevation.</h3>
+</div>
+
+
+    <h2>Dua Kumayl</h2>
     <br>
     <h4>Listen to the Recitation:</h4>
     <br>
 </div>
+<br>
+
+<section id="content-1-2" class="content-block content-1-2 pad0 pad-bottom0">
+				<section id="content-1-2" class="content-block content-1-2 pad0 pad-bottom0" style="font-size: 16px;">
+
+
+				    
+	
 				
 										
                 <audio controls="">
@@ -1058,4 +1134,3 @@ header h3 { text-align: center; }
 
 										<br><br><br><br>
 								</article></section>
-

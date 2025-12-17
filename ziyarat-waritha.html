@@ -4,7 +4,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda - Dua Adeela</title>
+  <title>Ziyarat Waritha</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 
@@ -13,29 +13,28 @@
   const mainNav = document.getElementById("mainNav");
   const hamburger = document.querySelector(".hamburger");
   const grid = document.getElementById("bookGrid");
+const aiSummaryButton = document.getElementById("aiSummaryButton");
+const modalBackdrop = document.getElementById("modalBackdrop");
+const closeSummary = document.getElementById("closeSummary");
+const aiSummaryText = document.getElementById("aiSummaryText");
 
-
-
-
-
-hamburger.addEventListener("click", e => {
-  e.stopPropagation();
-  mainNav.classList.toggle("open");
+const aiSummary =
+  "Ziyarat Waritha is a ziyarat transmitted from Imam Ja‘far al-Sadiq and is addressed to Imam Husayn, presenting him as the inheritor of the prophets and the divinely guided leaders before him. Its wording traces Imam Husayn’s spiritual lineage back to Adam, Nuh, Ibrahim, Musa, and Isa, emphasizing that his stand at Karbala was a continuation of the same divine mission upheld by the prophets. Unlike ziyarats that focus primarily on mourning, Ziyarat Waritha highlights theological continuity, portraying Imam Husayn as the living embodiment of prophetic truth and guidance. It is especially recommended to be recited on the day of Ashura, as well as on Fridays and during ziyarat of Imam Husayn, serving as a reaffirmation of loyalty to his cause and recognition of his role as the inheritor of the prophetic legacy within the Ahl al-Bayt.";
+aiSummaryButton.addEventListener("click", () => {
+  aiSummaryText.textContent = aiSummary;
+  modalBackdrop.style.display = "flex";
 });
 
-document.addEventListener("click", e => {
-  if (!mainNav.contains(e.target) && !hamburger.contains(e.target))
-    mainNav.classList.remove("open");
+closeSummary.addEventListener("click", () => {
+  modalBackdrop.style.display = "none";
 });
 
-searchInput.addEventListener("input", e => {
-  const q = e.target.value.toLowerCase();
-  document.querySelectorAll(".surah-card").forEach(card => {
-    const text = card.textContent.toLowerCase();
-    card.style.display = text.includes(q) ? "" : "none";
-  });
+modalBackdrop.addEventListener("click", e => {
+  if (e.target === modalBackdrop) {
+    modalBackdrop.style.display = "none";
+  }
 });
-});a
+});
 function applyThemeClass(isDark) {
     if (isDark) {
       document.body.classList.add("dark");
@@ -100,7 +99,7 @@ header {
 header h1 { font-size: 1.4rem; font-weight: 700; }
 header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
 header h1 a:hover { opacity: 0.85; }
-header h2 { font-size: 1.4rem; font-weight: 700; }
+header h2 { font-size: 1.8rem; font-weight: 700; }
 header h2 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
 header h2 a:hover { opacity: 0.85; }
 
@@ -174,7 +173,7 @@ header h2 a:hover { opacity: 0.85; }
   transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
   box-shadow: var(--shadow-lg);
 }
-.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
 .surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
 
 footer {
@@ -255,6 +254,66 @@ header h3 { text-align: center; }
   text-align: left;
   margin-bottom: 1rem; /* optional spacing */
 }
+  /* Buttons */
+  .q-btn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.8rem;
+  }
+  .btn-3d { padding:.7rem 1.1rem; border-radius:14px; border:0; cursor:pointer; font-weight:700; background: linear-gradient(180deg,#fff,#eee); color:var(--green); box-shadow: 0 8px 24px rgba(0,0,0,0.12); transform: translateZ(0); transition: transform .18s ease, box-shadow .18s ease; }
+.btn-3d:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 46px rgba(0,0,0,0.18); }
+.btn-3d.primary { background: linear-gradient(180deg,var(--green),#184c32); color:#fff; }
+.btn-3d {text-align: right;}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-box {
+  background: var(--card);
+  color: var(--text);
+  max-width: 520px;
+  width: 90%;
+  padding: 1.6rem;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  position: relative;
+  animation: pop 0.25s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.button-container {
+  display: flex;
+  justify-content: space-between; /* left & right */
+  align-items: center;
+  margin-bottom: 1rem;
+}
+@media (max-width: 480px) {
+  .button-container {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
   </style>
 </head>
 
@@ -279,11 +338,20 @@ header h3 { text-align: center; }
 
   <!-- Main -->
   <main class="ziyarat-section">
-    <div class="button-container">
-    <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+  <div class="button-container">
+  <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+  <button id="aiSummaryButton" class="btn-3d">AI Summary</button>
+</div>
+<div id="modalBackdrop" class="modal-backdrop">
+  <div class="modal-box">
+    <button id="closeSummary" class="close-btn">✕</button>
+    <h3>AI Summary</h3>
+    <p id="aiSummaryText"></p>
   </div>
-    <h2>Ziyarat Waritha</h2><br>
-    <h3>Ziyarat Waritha is a supplication recited to honor the inheritor of Adam, the chosen one of Allah. It is a prayer that seeks peace and blessings upon the inheritor of the prophets and righteous individuals. This ziyarat is a way to show respect and remembrance for those who have been granted a special status by Allah. Reciting Ziyarat Waritha carries great spiritual benefits and helps strengthen one's connection to the legacy of the prophets and the Ahl al-Bayt.</h3>
+</div>
+
+
+    <h2>Ziyarat Waritha</h2>
     <br>
     <h4>Listen to the Recitation:</h4>
     <br>

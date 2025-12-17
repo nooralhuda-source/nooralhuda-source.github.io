@@ -1,10 +1,9 @@
 
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda - Dua Iftitah</title>
+  <title>Dua Iftitah</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 
@@ -13,29 +12,28 @@
   const mainNav = document.getElementById("mainNav");
   const hamburger = document.querySelector(".hamburger");
   const grid = document.getElementById("bookGrid");
+const aiSummaryButton = document.getElementById("aiSummaryButton");
+const modalBackdrop = document.getElementById("modalBackdrop");
+const closeSummary = document.getElementById("closeSummary");
+const aiSummaryText = document.getElementById("aiSummaryText");
 
-
-
-
-
-hamburger.addEventListener("click", e => {
-  e.stopPropagation();
-  mainNav.classList.toggle("open");
+const aiSummary =
+  "Dua Iftitah is a supplication transmitted from Imam al-Mahdi himself and preserved through the teachings of the Imams of the Ahl al-Bayt, giving it a special connection to the era of occultation. The dua is characterized by its eloquent balance between praise of Allah, acknowledgment of human weakness, and hope in divine mercy, before turning toward the longing for the just rule of Imam al-Mahdi. Unlike brief supplications, Dua Iftitah gradually prepares the heart through humility and reflection, aligning the believer spiritually with the values of divine governance and justice. It is specifically recommended to be recited every night during the month of Ramadan, particularly after the night prayer, as a means of spiritual refinement and renewed anticipation for the reappearance of the Imam and the fulfillment of Allah’s promise on earth.";
+aiSummaryButton.addEventListener("click", () => {
+  aiSummaryText.textContent = aiSummary;
+  modalBackdrop.style.display = "flex";
 });
 
-document.addEventListener("click", e => {
-  if (!mainNav.contains(e.target) && !hamburger.contains(e.target))
-    mainNav.classList.remove("open");
+closeSummary.addEventListener("click", () => {
+  modalBackdrop.style.display = "none";
 });
 
-searchInput.addEventListener("input", e => {
-  const q = e.target.value.toLowerCase();
-  document.querySelectorAll(".surah-card").forEach(card => {
-    const text = card.textContent.toLowerCase();
-    card.style.display = text.includes(q) ? "" : "none";
-  });
+modalBackdrop.addEventListener("click", e => {
+  if (e.target === modalBackdrop) {
+    modalBackdrop.style.display = "none";
+  }
 });
-});a
+});
 function applyThemeClass(isDark) {
     if (isDark) {
       document.body.classList.add("dark");
@@ -100,7 +98,7 @@ header {
 header h1 { font-size: 1.4rem; font-weight: 700; }
 header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
 header h1 a:hover { opacity: 0.85; }
-header h2 { font-size: 1.4rem; font-weight: 700; }
+header h2 { font-size: 1.8rem; font-weight: 700; }
 header h2 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
 header h2 a:hover { opacity: 0.85; }
 
@@ -174,7 +172,7 @@ header h2 a:hover { opacity: 0.85; }
   transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
   box-shadow: var(--shadow-lg);
 }
-.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
 .surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
 
 footer {
@@ -255,6 +253,66 @@ header h3 { text-align: center; }
   text-align: left;
   margin-bottom: 1rem; /* optional spacing */
 }
+  /* Buttons */
+  .q-btn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.8rem;
+  }
+  .btn-3d { padding:.7rem 1.1rem; border-radius:14px; border:0; cursor:pointer; font-weight:700; background: linear-gradient(180deg,#fff,#eee); color:var(--green); box-shadow: 0 8px 24px rgba(0,0,0,0.12); transform: translateZ(0); transition: transform .18s ease, box-shadow .18s ease; }
+.btn-3d:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 46px rgba(0,0,0,0.18); }
+.btn-3d.primary { background: linear-gradient(180deg,var(--green),#184c32); color:#fff; }
+.btn-3d {text-align: right;}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-box {
+  background: var(--card);
+  color: var(--text);
+  max-width: 520px;
+  width: 90%;
+  padding: 1.6rem;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  position: relative;
+  animation: pop 0.25s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.button-container {
+  display: flex;
+  justify-content: space-between; /* left & right */
+  align-items: center;
+  margin-bottom: 1rem;
+}
+@media (max-width: 480px) {
+  .button-container {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
   </style>
 </head>
 
@@ -279,11 +337,20 @@ header h3 { text-align: center; }
 
   <!-- Main -->
   <main class="ziyarat-section">
-    <div class="button-container">
-    <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+  <div class="button-container">
+  <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+  <button id="aiSummaryButton" class="btn-3d">AI Summary</button>
+</div>
+<div id="modalBackdrop" class="modal-backdrop">
+  <div class="modal-box">
+    <button id="closeSummary" class="close-btn">✕</button>
+    <h3>AI Summary</h3>
+    <p id="aiSummaryText"></p>
   </div>
-    <h2>Dua Iftitah</h2><br>
-    <h3>Dua Iftitah is a beautiful supplication taught by Imam al-Mahdi (ajf) to be recited during the nights of the blessed month of Ramadan. It begins by praising Allah’s greatness and mercy, then sends blessings upon the Prophet (s) and his Ahl al-Bayt (as), and ends with heartfelt prayers for the reappearance of the Imam and the establishment of divine justice. Reciting Dua Iftitah strengthens one’s connection with Allah and the Awaited Saviour, filling the heart with hope, humility, and faith. It carries great thawab, forgiveness of sins, elevation of spiritual rank, and closeness to the Ahl al-Bayt, when read sincerely each night of Ramadan.</h3>
+</div>
+
+
+    <h2>Dua Iftitah</h2>
     <br>
     <h4>Listen to the Recitation:</h4>
     <br>
