@@ -108,7 +108,122 @@
     </div>
   </div>
 </div>
+<div id="manarat-wrapper">
+    <div id="manarat-launcher" onclick="toggleManarat()" title="Ask Manarat AI (Beta)">
+        <span id="launcher-text">Manarat AI <b>Beta</b></span>
+    </div>
 
+    <div id="manarat-popup">
+        <div id="manarat-header">
+            
+            <button onclick="toggleManarat()" id="close-btn">&times;</button>
+        </div>
+        <iframe src="manarat-ai.html" id="manarat-iframe"></iframe>
+    </div>
+</div>
+
+<style>
+    /* Launcher Styling: Changed to a Pill Shape for text */
+    #manarat-launcher {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        padding: 12px 24px; /* Flexible width for text */
+        background: linear-gradient(135deg, #1b5e20, #2e7d32);
+        border-radius: 50px; /* Pill shape */
+        border: 2px solid #d4af37;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+        animation: pulse 3s infinite;
+    }
+
+    #manarat-launcher:hover { transform: scale(1.05); background: #2e7d32; }
+    
+    #launcher-text { 
+        color: white; 
+        font-family: 'Segoe UI', sans-serif; 
+        font-size: 16px; 
+        font-weight: 500;
+        white-space: nowrap;
+    }
+    
+    #launcher-text b { 
+        font-size: 10px; 
+        background: #d4af37; 
+        color: #1b5e20; 
+        padding: 2px 6px; 
+        border-radius: 4px; 
+        margin-left: 8px; 
+        text-transform: uppercase;
+    }
+
+    /* Popup Window Styling */
+    #manarat-popup {
+        display: none;
+        position: fixed;
+        bottom: 90px;
+        right: 25px;
+        width: 380px;
+        height: 600px;
+        max-height: 80vh;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        z-index: 10000;
+        flex-direction: column;
+        animation: slideUp 0.4s ease-out;
+    }
+
+    #manarat-header {
+        background: #1b5e20;
+        color: white;
+        padding: 10px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'Segoe UI', sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        border-bottom: 3px solid #d4af37;
+    }
+
+    #close-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+
+    #manarat-iframe { width: 100%; flex: 1; border: none; }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0.4); }
+        70% { box-shadow: 0 0 0 12px rgba(27, 94, 32, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
+    }
+</style>
+
+<script>
+    function toggleManarat() {
+        const popup = document.getElementById('manarat-popup');
+        const text = document.getElementById('launcher-text');
+        
+        if (popup.style.display === 'none' || popup.style.display === '') {
+            popup.style.display = 'flex';
+            text.innerHTML = 'Close ✕';
+        } else {
+            popup.style.display = 'none';
+            text.innerHTML = 'Manarat AI <b>Beta</b>';
+        }
+    }
+</script>
 <script>
 /* -------------------------
    PART SPLITTING
@@ -787,4 +902,5 @@ loadHadiths();
 
 </script>
 </body>
+
 </html>
