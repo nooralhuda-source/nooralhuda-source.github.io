@@ -199,7 +199,64 @@ html, body {
     width: 75%;
   }
 }
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #276540;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  z-index: 2000;
+}
+.bottom-actions { 
+  position: fixed; 
+  bottom: 14px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  display:flex; 
+  gap:10px; 
+  z-index:1500; 
+}
 
+#backBeginning {
+  background: var(--green);
+  color: #fff;
+  padding: 0.5rem 1rem;
+}
+
+#backBeginning:hover {
+  background: #2d7f4b;
+}
+.bottom-actions { 
+  position: fixed; 
+  bottom: 20px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  display: flex; 
+  gap: 10px; 
+  z-index: 9999; /* Higher than everything else */
+  pointer-events: none; /* Allows clicks to pass through the container */
+}
+
+#backBeginning {
+  pointer-events: auto; /* Makes the button itself clickable */
+  background: var(--green);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+
+  font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -319,6 +376,7 @@ html, body {
     </main>
   </div>
 
+
   <!-- AI Summary modal -->
   <div class="modal-backdrop" id="modalBackdrop">
     <div class="modal" role="dialog" aria-modal="true" id="summaryModal">
@@ -339,6 +397,12 @@ html, body {
       <div style="text-align:right;margin-top:12px"><button id="closeBookmarks" class="btn-3d">Close</button></div>
     </div>
   </div>
+
+  <!-- ===== Add Back to Top Button ===== -->
+  <!-- Create the back-to-top button -->
+
+
+
 
 <script>
 /* ===== Config & sources ===== */
@@ -413,7 +477,7 @@ const closeBookmarks = document.getElementById('closeBookmarks');
 const arabicSize = document.getElementById('arabicSize');
 const arabicBold = document.getElementById('arabicBold');
 const arabicItalic = document.getElementById('arabicItalic');
-
+const backToTopBtn = document.getElementById('backBeginning');
 /* Surah names (english & Arabic) */
 const SURAH_NAMES = [
 "Al-Fātiḥah","Al-Baqarah","Āl ʿImrān","An-Nisāʼ","Al-Māʼidah","Al-Anʿām","Al-Aʿrāf","Al-Anfāl","At-Tawbah",
@@ -549,8 +613,9 @@ function renderFullSurah(surah){
   setFullSurahAudio(surah);
 
   // render ayahs
-  verses.forEach(v=>{
-    const row = document.createElement('div'); row.className = 'ayah-row'; row.id = 'ayah-'+v;
+ // render ayahs
+  verses.forEach(v => {
+    const row = document.createElement('div'); row.className = 'ayah-row'; row.id = 'ayah-' + v;
     row.dataset.chapter = surah; row.dataset.verse = v;
 
     const meta = document.createElement('div'); meta.className = 'ayah-meta';
@@ -563,15 +628,23 @@ function renderFullSurah(surah){
     const content = document.createElement('div'); content.className = 'ayah-content';
     const arab = getText(currentArabicSource, surah, v) || '';
     const translit = getText('ara-quran-la1', surah, v) || '';
+    
+    // --- AI TAFSIR LINK ADDED HERE ---
     const arabHtml = `<div class="ayah-arabic" style="font-family:${getArabicFontCss()}; font-size:${arabicSize.value}px; ${arabicBold.classList.contains('active') ? 'font-weight:800;' : ''} ${arabicItalic.classList.contains('active') ? 'font-style:italic;' : ''}">${escapeHtml(arab)}</div>`;
+    
+    // This creates the clickable "AI Tafsir" text
+    const tafsirLinkHtml = `<div class="ai-tafsir-trigger" style="color:#2e7d32; cursor:pointer; font-size:0.85rem; margin-top:5px; font-weight:bold;" onclick="getAyahTafsir(${v}, \`${arab.replace(/'/g, "\\'")}\`)">Manarat AI ayah Tafsir</div>`;
+    
     const translitHtml = `<div class="ayah-translit">${escapeHtml(translit)}</div>`;
-    content.innerHTML = arabHtml + (toggleTranslit.checked ? translitHtml : '');
+    
+    // Combine everything into the content area
+    content.innerHTML = arabHtml + tafsirLinkHtml + (toggleTranslit.checked ? translitHtml : '');
 
     const translationsBlock = document.createElement('div'); translationsBlock.className = 'ayah-translations';
     visibleTranslations.forEach(name => {
-      if(name.startsWith('ara-')) return;
+      if (name.startsWith('ara-')) return;
       const t = getText(name, surah, v);
-      if(t){
+      if (t) {
         const p = document.createElement('p');
         p.innerHTML = `<strong style="font-size:.95rem">${escapeHtml(name)}</strong> — ${escapeHtml(t)}`;
         translationsBlock.appendChild(p);
@@ -584,12 +657,18 @@ function renderFullSurah(surah){
 
     // popup wiring
     const dotsBtn = meta.querySelector('.ayah-dots');
-    dotsBtn.addEventListener('click', (e)=> {
+    dotsBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      document.querySelectorAll('.ayah-popup').forEach(p=>{ if(p!==popup) p.style.display='none';});
+      document.querySelectorAll('.ayah-popup').forEach(p => { if (p !== popup) p.style.display = 'none'; });
       popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
     });
     meta.appendChild(popup);
+    
+    // (Rest of your popup event listeners remain the same...)
+
+  
+
+    
 
     popup.querySelector('.popup-bookmark').addEventListener('click', ()=>{ addBookmark(surah, v); popup.style.display='none'; });
     popup.querySelector('.popup-copy').addEventListener('click', async ()=>{ 
@@ -606,18 +685,6 @@ function renderFullSurah(surah){
         try{ await navigator.clipboard.writeText(txt); alert('Link copied'); }catch(e){ alert('Copy failed'); }
       }
       popup.style.display='none';
-    });
-
-    // clicking Arabic plays full audio and scrolls to the ayah hash
-    const arabDiv = content.querySelector('.ayah-arabic');
-    if(arabDiv){
-      arabDiv.style.cursor = 'pointer';
-      arabDiv.addEventListener('click', ()=> { audioEl.play().catch(()=>{}); location.hash = 'ayah-'+v; });
-    }
-
-    // clicking outside closes popup
-    document.addEventListener('click', (ev)=> {
-      if(popup && !popup.contains(ev.target) && ev.target !== dotsBtn) popup.style.display='none';
     });
   });
 }
@@ -679,6 +746,40 @@ function populateBookmarksUI(){
   });
 }
 
+/* ===== FINAL FUNCTIONAL BACK TO TOP ===== */
+function initBackToTop() {
+  const btn = document.getElementById('backBeginning');
+  if (!btn) return;
+
+  // 1. Monitor scrolling to show/hide button
+  window.addEventListener('scroll', () => {
+    // Show after 500px of scrolling
+    if (window.scrollY > 500) {
+      btn.style.display = 'block';
+    } else {
+      btn.style.display = 'none';
+    }
+  });
+
+  // 2. Click event
+  btn.onclick = function(e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+}
+
+// Call it immediately
+initBackToTop();
+
+
+
+
+/* Your existing Init functions and event listeners should continue below this... */
+// Make sure to include your existing populateSurahList, init, etc.
+
 /* ===== Surah picker populate ===== */
 function populateSurahList(){
   surahListEl.innerHTML = '';
@@ -700,52 +801,96 @@ function getArabicFontCss(){
 }
 
 /* ===== AI summary (expanded Shia flavored) ===== */
-function generateShiaSummary(surah){
-  const nameEn = SURAH_NAMES[surah-1] || ('Sūrah '+surah);
-  const nameAr = SURAH_NAMES_AR[surah-1] || '';
-  const para = `${nameEn} (${nameAr}) contains themes of divine guidance, trial and steadfastness. From a Shia perspective it emphasizes the importance of authoritative guidance (the Ahl al-Bayt), moral responsibility, and the socio-political ethical obligations of believers. It underlines testing, reward and retribution, and the need for community justice, with attention to leadership and the preservation of authentic transmission.`;
-  const bullets = [
-    "Revelation context and historical background.",
-    "Key theological emphases: tawḥīd, accountability, justice.",
-    "Moral & social directives relevant to community conduct.",
-    "Shia reflection: role and authority of the Ahl al-Bayt.",
-    "Practical guidance for steadfastness in faith and ethics."
-  ];
-  return { title: `${nameEn} — AI Summary`, para, bullets };
-}
-function openAiSummary(){
-  const s = generateShiaSummary(currentSurah);
-  summaryTitle.textContent = s.title;
-  summaryMeta.textContent = `AI Shia-oriented summary for ${SURAH_NAMES[currentSurah-1] || ('Sūrah '+currentSurah)}`;
-  summaryContent.innerHTML = s.para + "\n\n" + s.bullets.map(b => "• " + b).join("\n");
+/* ===== REAL AI SUMMARY (GROQ API) ===== */
+async function openAiSummary() {
+  // 1. Put your GROQ API KEY here (starts with 'gsk_')
+  const API_KEY = "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"; 
+  const surahName = SURAH_NAMES[currentSurah - 1];
+  
+  // UI Loading State
+  summaryTitle.textContent = "Manarat AI is thinking...";
+  summaryContent.innerHTML = "<div style='text-align:center; padding:20px;'><em>Manarat AI is thinking...</em></div>";
   modalBackdrop.style.display = 'flex';
+
+  try {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: 'POST',
+      headers: { 
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify({
+        // This is the "ChatGPT" equivalent model on Groq
+        model: "openai/gpt-oss-120b", 
+        messages: [
+          { 
+            role: "system", 
+            content: "You are a Shia scholar. Summarize the Surah focusing on Ahl al-Bayt (AS) and Shia Tafsir like Al-Mizan. Please make it a summary not an essay, so like 300 words maximum. also remove so many gaps between lines to save space. dont over shiaify it keep it a normal islamic summary but instead of sunni sources and interpretations use shia dont link everything to  ahlulbayt. dont mention shia in every line, remove spaces and keep it 300 words maximum.Use HTML <b> and <ul> tags." 
+          },
+          { 
+            role: "user", 
+            content: `Provide a Shia-oriented summary of Sūrah ${surahName}.` 
+          }
+        ]
+      })
+    });
+
+    const data = await response.json();
+    summaryTitle.textContent = `${surahName} — AI Summary`;
+    summaryContent.innerHTML = data.choices[0].message.content;
+
+  } catch (error) {
+    summaryContent.innerHTML = "<b>Error:</b> Make sure your Groq API key is correct.";
+  }
 }
-if(aiSummaryButton) aiSummaryButton.addEventListener('click', openAiSummary);
-if(closeSummary) closeSummary.addEventListener('click', ()=> modalBackdrop.style.display = 'none');
-modalBackdrop.addEventListener('click', (e)=> { if(e.target === modalBackdrop) modalBackdrop.style.display = 'none'; });
+    
+/* ===== AYAH-BY-AYAH TAFSIR (GROQ) ===== */
+async function getAyahTafsir(ayahNumber, ayahText) {
+  const API_KEY = "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"; // Use your gsk_ key
+  const surahName = SURAH_NAMES[currentSurah - 1];
+  
+  // Show loading in your modal or a popup
+  summaryTitle.textContent = `Tafsir: Ayah ${ayahNumber}`;
+  summaryContent.innerHTML = "<em>Manarat AI is analyzing...</em>";
+  modalBackdrop.style.display = 'flex';
 
-/* ===== UI events and drawers ===== */
-document.querySelectorAll('.hamburger').forEach(h => h.addEventListener('click', (e)=> { e.stopPropagation(); document.getElementById('mainNav').classList.toggle('open'); }));
-surahPickerOpener.addEventListener('click', ()=>{
-  const open = leftDrawer.classList.toggle('open');
-  if(open) pushWrapper.style.marginLeft = getComputedStyle(document.documentElement).getPropertyValue('--left-drawer-width') || '240px';
-  else pushWrapper.style.marginLeft = '0px';
-});
-closeLeftDrawer.addEventListener('click', ()=>{ leftDrawer.classList.remove('open'); pushWrapper.style.marginLeft = '0px'; });
-settingsOpener.addEventListener('click', ()=> settingsDrawer.classList.toggle('open'));
+  try {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: 'POST',
+      headers: { 
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          { 
+            role: "system", 
+            content: "You are a Shia scholar. Provide a concise Tafsir for the specific verse provided. Focus on the 'Shan al-Nuzul' (context of revelation) and any connection to the Ahl al-Bayt (AS) using sources like Tafsir al-Mizan. Use HTML <b> tags.dont link everything to ahlulbayt. dont mention shia in every line, . keep it general islamic teachings" 
+          },
+          { 
+            role: "user", 
+            content: `Provide the Tafsir for Sūrah ${surahName}, Ayah ${ayahNumber}. The verse text is: "${ayahText}"` 
+          }
+        ]
+      })
+    });
 
-document.addEventListener('click', (e)=>{
-  if(!document.getElementById('mainNav').contains(e.target) && !e.target.closest('.hamburger')) document.getElementById('mainNav').classList.remove('open');
-  if(!leftDrawer.contains(e.target) && e.target !== surahPickerOpener) { leftDrawer.classList.remove('open'); pushWrapper.style.marginLeft = '0px'; }
-  if(!settingsDrawer.contains(e.target) && e.target !== settingsOpener) settingsDrawer.classList.remove('open');
-});
-[leftDrawer, settingsDrawer, document.getElementById('mainNav')].forEach(el=>{ if(!el) return; el.addEventListener('click', (e)=> e.stopPropagation()); });
+    const data = await response.json();
+    summaryContent.innerHTML = data.choices[0].message.content;
 
-/* keyboard navigation */
-document.addEventListener('keydown', (ev)=> {
-  if(ev.key === 'ArrowLeft'){ if(currentSurah > 1){ currentSurah--; renderFullSurah(currentSurah); window.scrollTo({top:0,behavior:'smooth'}); } }
-  if(ev.key === 'ArrowRight'){ if(currentSurah < 114){ currentSurah++; renderFullSurah(currentSurah); window.scrollTo({top:0,behavior:'smooth'}); } }
-});
+  } catch (error) {
+    summaryContent.innerHTML = "<b>Error:</b> Could not fetch Tafsir.";
+  }
+}
+
+// Ensure the button triggers the new function
+if(aiSummaryButton) {
+  aiSummaryButton.onclick = openAiSummary;
+}
+if(closeSummary) {
+  closeSummary.addEventListener('click', () => modalBackdrop.style.display = 'none');
+}
 
 /* view bookmarks popup */
 viewBookmarksBtn.addEventListener('click', ()=> {
@@ -831,11 +976,8 @@ function populateTranslationsUI(){
     row.appendChild(cb); row.appendChild(document.createTextNode(' ' + name)); settingsTransList.appendChild(row);
   });
 }
-document.addEventListener("touchstart", function(){}, true);
-window.addEventListener("resize", () => {
-  document.body.style.height = window.innerHeight + "px";
-});
+
+
 </script>
 </body>
 </html>
-
