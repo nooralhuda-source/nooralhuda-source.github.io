@@ -17,7 +17,28 @@ const aiSummaryButton = document.getElementById("aiSummaryButton");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const closeSummary = document.getElementById("closeSummary");
 const aiSummaryText = document.getElementById("aiSummaryText");
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent immediate close
+  mainNav.classList.toggle("open");
+});
 
+// Close when clicking anywhere outside the nav
+document.addEventListener("click", (e) => {
+  if (
+    mainNav.classList.contains("open") &&
+    !mainNav.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    mainNav.classList.remove("open");
+  }
+});
+
+// Optional: close when pressing Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mainNav.classList.remove("open");
+  }
+});
 const aiSummary =
   "Ziyarat Ashura is a powerful ziyarat transmitted from Imam Muhammad al-Baqir through Imam Ja‘far al-Sadiq, giving it a firm and authoritative foundation in Shi‘i hadith tradition. It is directly connected to the tragedy of Karbala and serves as a formal declaration of loyalty to Imam Husayn and disassociation from those who opposed and martyred him. Unlike many supplications that focus primarily on personal needs, Ziyarat Ashura is centered on theological allegiance, justice, and the eternal struggle between truth and falsehood. Its recitation reinforces the principles for which Imam Husayn rose, namely resistance to oppression and preservation of the true Islam of the Prophet and the Ahl al-Bayt. Ziyarat Ashura is especially recommended on the day of Ashura itself, but it is also widely recited daily or on Fridays, as it is regarded as a means of spiritual proximity to Imam Husayn and a source of steadfastness upon the path of the Ahl al-Bayt.";
 aiSummaryButton.addEventListener("click", () => {

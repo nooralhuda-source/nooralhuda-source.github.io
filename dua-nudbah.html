@@ -16,7 +16,28 @@ const aiSummaryButton = document.getElementById("aiSummaryButton");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const closeSummary = document.getElementById("closeSummary");
 const aiSummaryText = document.getElementById("aiSummaryText");
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent immediate close
+  mainNav.classList.toggle("open");
+});
 
+// Close when clicking anywhere outside the nav
+document.addEventListener("click", (e) => {
+  if (
+    mainNav.classList.contains("open") &&
+    !mainNav.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    mainNav.classList.remove("open");
+  }
+});
+
+// Optional: close when pressing Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mainNav.classList.remove("open");
+  }
+});
 const aiSummary =
   "Dua Nudbah is a supplication transmitted from Imam Ja‘far al-Sadiq and is centered on expressing grief, longing, and unwavering devotion to the divinely appointed Imams, culminating in an intense yearning for Imam al-Mahdi during his occultation. The dua traces the history of divine guidance from the prophets to the Ahl al-Bayt, reflecting on the trials faced by Allah’s representatives and the pain of separation from the living Imam. Unlike supplications focused on personal requests, Dua Nudbah is a communal lament and a declaration of loyalty, giving voice to the sorrow of waiting and the hope for the restoration of justice. It is especially recommended to be recited on Friday mornings and on major occasions such as Eid al-Fitr, Eid al-Adha, Eid al-Ghadir, and Eid al-Mubahala, serving as a spiritual renewal of commitment to the cause and leadership of Imam al-Mahdi.";
 aiSummaryButton.addEventListener("click", () => {

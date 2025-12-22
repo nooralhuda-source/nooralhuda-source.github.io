@@ -16,7 +16,28 @@ const aiSummaryButton = document.getElementById("aiSummaryButton");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const closeSummary = document.getElementById("closeSummary");
 const aiSummaryText = document.getElementById("aiSummaryText");
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent immediate close
+  mainNav.classList.toggle("open");
+});
 
+// Close when clicking anywhere outside the nav
+document.addEventListener("click", (e) => {
+  if (
+    mainNav.classList.contains("open") &&
+    !mainNav.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    mainNav.classList.remove("open");
+  }
+});
+
+// Optional: close when pressing Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mainNav.classList.remove("open");
+  }
+});
 const aiSummary =
   "Hadith al-Kisa is a foundational narration transmitted through multiple reliable Shi‘i chains, most famously from Lady Fatima, and it defines the special status of the Ahl al-Bayt: the Prophet Muhammad, Imam Ali, Lady Fatima, Imam Hasan, and Imam Husayn. The hadith recounts the moment when the Prophet gathered them under his cloak, affirming their unique purity and divine selection, which is directly linked to the revelation of the verse of purification in the Qur’an. Unlike general narrations about virtue, Hadith al-Kisa establishes a clear theological boundary, identifying who the Ahl al-Bayt are in an exclusive and authoritative sense. It is especially recited in gatherings seeking divine mercy, unity, and spiritual protection, and is traditionally read on Thursdays or during times of hardship, as it is believed to attract Allah’s mercy and blessings through devotion to the purified household.";
   aiSummaryText.textContent = aiSummary;

@@ -16,7 +16,28 @@ const aiSummaryButton = document.getElementById("aiSummaryButton");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const closeSummary = document.getElementById("closeSummary");
 const aiSummaryText = document.getElementById("aiSummaryText");
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent immediate close
+  mainNav.classList.toggle("open");
+});
 
+// Close when clicking anywhere outside the nav
+document.addEventListener("click", (e) => {
+  if (
+    mainNav.classList.contains("open") &&
+    !mainNav.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    mainNav.classList.remove("open");
+  }
+});
+
+// Optional: close when pressing Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mainNav.classList.remove("open");
+  }
+});
 const aiSummary =
   "Dua Tawassul is a well-known supplication transmitted through Imam Ja‘far al-Sadiq and preserved by early Shi‘i scholars as a means of seeking closeness to Allah through the divinely appointed representatives of the Ahl al-Bayt. The supplication invokes the Prophet Muhammad and the Twelve Imams one by one, affirming their spiritual authority and their role as intercessors by Allah’s permission. Unlike general personal du‘as, Dua Tawassul is structured as a formal appeal grounded in Shi‘i theology, emphasizing reliance upon Allah while approaching Him through those He has chosen. It is traditionally recommended to be recited on Tuesday nights and during times of difficulty or urgent need, as it is regarded as a powerful means of seeking relief, acceptance of prayers, and renewed connection to the Ahl al-Bayt.";
 aiSummaryButton.addEventListener("click", () => {

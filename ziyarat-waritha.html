@@ -17,7 +17,28 @@ const aiSummaryButton = document.getElementById("aiSummaryButton");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const closeSummary = document.getElementById("closeSummary");
 const aiSummaryText = document.getElementById("aiSummaryText");
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent immediate close
+  mainNav.classList.toggle("open");
+});
 
+// Close when clicking anywhere outside the nav
+document.addEventListener("click", (e) => {
+  if (
+    mainNav.classList.contains("open") &&
+    !mainNav.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    mainNav.classList.remove("open");
+  }
+});
+
+// Optional: close when pressing Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mainNav.classList.remove("open");
+  }
+});
 const aiSummary =
   "Ziyarat Waritha is a ziyarat transmitted from Imam Ja‘far al-Sadiq and is addressed to Imam Husayn, presenting him as the inheritor of the prophets and the divinely guided leaders before him. Its wording traces Imam Husayn’s spiritual lineage back to Adam, Nuh, Ibrahim, Musa, and Isa, emphasizing that his stand at Karbala was a continuation of the same divine mission upheld by the prophets. Unlike ziyarats that focus primarily on mourning, Ziyarat Waritha highlights theological continuity, portraying Imam Husayn as the living embodiment of prophetic truth and guidance. It is especially recommended to be recited on the day of Ashura, as well as on Fridays and during ziyarat of Imam Husayn, serving as a reaffirmation of loyalty to his cause and recognition of his role as the inheritor of the prophetic legacy within the Ahl al-Bayt.";
 aiSummaryButton.addEventListener("click", () => {

@@ -16,7 +16,28 @@ const aiSummaryButton = document.getElementById("aiSummaryButton");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const closeSummary = document.getElementById("closeSummary");
 const aiSummaryText = document.getElementById("aiSummaryText");
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent immediate close
+  mainNav.classList.toggle("open");
+});
 
+// Close when clicking anywhere outside the nav
+document.addEventListener("click", (e) => {
+  if (
+    mainNav.classList.contains("open") &&
+    !mainNav.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    mainNav.classList.remove("open");
+  }
+});
+
+// Optional: close when pressing Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mainNav.classList.remove("open");
+  }
+});
 const aiSummary =
   "Dua Iftitah is a supplication transmitted from Imam al-Mahdi himself and preserved through the teachings of the Imams of the Ahl al-Bayt, giving it a special connection to the era of occultation. The dua is characterized by its eloquent balance between praise of Allah, acknowledgment of human weakness, and hope in divine mercy, before turning toward the longing for the just rule of Imam al-Mahdi. Unlike brief supplications, Dua Iftitah gradually prepares the heart through humility and reflection, aligning the believer spiritually with the values of divine governance and justice. It is specifically recommended to be recited every night during the month of Ramadan, particularly after the night prayer, as a means of spiritual refinement and renewed anticipation for the reappearance of the Imam and the fulfillment of Allah’s promise on earth.";
 aiSummaryButton.addEventListener("click", () => {

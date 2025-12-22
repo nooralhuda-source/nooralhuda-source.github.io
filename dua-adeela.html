@@ -16,7 +16,28 @@ const aiSummaryButton = document.getElementById("aiSummaryButton");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const closeSummary = document.getElementById("closeSummary");
 const aiSummaryText = document.getElementById("aiSummaryText");
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent immediate close
+  mainNav.classList.toggle("open");
+});
 
+// Close when clicking anywhere outside the nav
+document.addEventListener("click", (e) => {
+  if (
+    mainNav.classList.contains("open") &&
+    !mainNav.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    mainNav.classList.remove("open");
+  }
+});
+
+// Optional: close when pressing Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mainNav.classList.remove("open");
+  }
+});
 const aiSummary =
   "Dua Adeela is a supplication traditionally attributed to Imam Ja‘far al-Sadiq and is centered on seeking steadfast faith at the most critical moment of a believer’s life, the time of death. The dua focuses on protection from doubt, deception, and spiritual misguidance when the soul is most vulnerable, affirming loyalty to Allah, the Prophet Muhammad, and the Ahl al-Bayt. Unlike supplications that ask for worldly needs, Dua Adeela is deeply eschatological, emphasizing correct belief, sincere conviction, and a sound end. It is especially recommended to be recited regularly, particularly on Fridays or during times of spiritual anxiety, and is commonly read for oneself or on behalf of others to seek firmness in faith and a righteous conclusion to life.";
 aiSummaryButton.addEventListener("click", () => {

@@ -16,7 +16,28 @@ const aiSummaryButton = document.getElementById("aiSummaryButton");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const closeSummary = document.getElementById("closeSummary");
 const aiSummaryText = document.getElementById("aiSummaryText");
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent immediate close
+  mainNav.classList.toggle("open");
+});
 
+// Close when clicking anywhere outside the nav
+document.addEventListener("click", (e) => {
+  if (
+    mainNav.classList.contains("open") &&
+    !mainNav.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    mainNav.classList.remove("open");
+  }
+});
+
+// Optional: close when pressing Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mainNav.classList.remove("open");
+  }
+});
 const aiSummary =
   "Dua al-Hujjah, in this concise and widely recited form beginning with “Allahumma kun li-waliyyika al-Hujjah ibn al-Hasan”, is a supplication rooted in early Shi‘i devotional practice and centered entirely on Imam al-Mahdi during his occultation. The dua is a direct plea to Allah to act as the Imam’s guardian, protector, supporter, and guide in every moment, reflecting the Shi‘i belief that although the Imam is unseen, he remains alive, divinely appointed, and under Allah’s constant care. Unlike longer supplications that invoke many figures, this dua is singular in focus, emphasizing continuous divine guardianship until the Imam is granted full authority upon the earth. It is especially recommended to be recited after daily prayers, with strong emphasis on Friday mornings, as an expression of loyalty, vigilance, and hope for the Imam’s reappearance and the establishment of divine justice.";
 aiSummaryButton.addEventListener("click", () => {

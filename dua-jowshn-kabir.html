@@ -16,7 +16,28 @@ const aiSummaryButton = document.getElementById("aiSummaryButton");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const closeSummary = document.getElementById("closeSummary");
 const aiSummaryText = document.getElementById("aiSummaryText");
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent immediate close
+  mainNav.classList.toggle("open");
+});
 
+// Close when clicking anywhere outside the nav
+document.addEventListener("click", (e) => {
+  if (
+    mainNav.classList.contains("open") &&
+    !mainNav.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    mainNav.classList.remove("open");
+  }
+});
+
+// Optional: close when pressing Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mainNav.classList.remove("open");
+  }
+});
 const aiSummary =
   "Dua Jawshan Kabir is a profound supplication taught by the Angel Jibra’il to the Prophet Muhammad during a moment of physical hardship in battle, as a means of spiritual protection and reliance upon Allah rather than armor. The dua is composed of one hundred sections, each invoking ten divine names or attributes of Allah, making it a comprehensive meditation on divine mercy, power, and transcendence. Unlike supplications focused on a single request, Jawshan Kabir immerses the reciter in the remembrance of Allah through His Names, reinforcing absolute dependence upon Him alone. It holds particular significance in Shi‘i devotional life and is especially recommended to be recited on the nights of Qadr in the month of Ramadan, as well as at times of seeking protection, forgiveness, and spiritual closeness through deep reflection on Allah’s attributes.";
   modalBackdrop.style.display = "flex";
