@@ -7,176 +7,150 @@
     <style>
         :root {
             --shia-green: #1b5e20;
-            --light-green: #e8f5e9;
             --gold: #d4af37;
             --dark-text: #333;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: var(--dark-text); }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: var(--dark-text); }
         .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; }
-        
-        /* Header */
         header { background: var(--shia-green); color: white; padding: 20px; text-align: center; border-bottom: 4px solid var(--gold); }
-        header h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
-
-        /* Chat Display */
+        header h1 { margin: 0; font-size: 1.8rem; }
         #chat-window { height: 500px; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; background: #fafafa; }
-        .message { max-width: 80%; padding: 12px 16px; border-radius: 15px; line-height: 1.5; font-size: 0.95rem; }
+        .message { max-width: 85%; padding: 12px 16px; border-radius: 15px; line-height: 1.6; font-size: 0.95rem; }
         .user-msg { align-self: flex-end; background: var(--shia-green); color: white; border-bottom-right-radius: 2px; }
-        .ai-msg { align-self: flex-start; background: white; border: 1px solid #ddd; border-bottom-left-radius: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); }
-        
-        /* Input Area */
-        .input-area { display: flex; padding: 20px; background: white; border-top: 1px solid #eee; gap: 10px; }
-        input[type="text"] { flex: 1; padding: 12px; border: 2px solid #eee; border-radius: 8px; outline: none; transition: border-color 0.3s; }
-        input[type="text"]:focus { border-color: var(--shia-green); }
-        button { background: var(--shia-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: opacity 0.3s; }
-        button:hover { opacity: 0.9; }
-
-        /* Formatting inside AI responses */
-        .ai-msg b { color: var(--shia-green); }
-        .ai-msg ul { margin: 10px 0; padding-left: 20px; }
+        .ai-msg { align-self: flex-start; background: white; border: 1px solid #ddd; border-bottom-left-radius: 2px; }
+        .ai-image { max-width: 100%; border-radius: 10px; margin-top: 10px; border: 2px solid var(--gold); }
+        .input-area { display: flex; flex-direction: column; padding: 20px; background: white; border-top: 1px solid #eee; gap: 10px; }
+        .controls { display: flex; gap: 10px; align-items: center; }
+        input[type="text"] { flex: 1; padding: 12px; border: 2px solid #eee; border-radius: 8px; outline: none; }
+        .attachment-label { background: #666; color: white; padding: 10px 15px; border-radius: 8px; cursor: pointer; }
+        #image-preview { display: none; height: 60px; border-radius: 5px; margin-bottom: 5px; }
+        button { background: var(--shia-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header>
-        <h1>Manarat AI</h1>
-        <small>The first scholarly Shia AI Assistant</small>
-    </header>
-
+    <header><h1>Manarat AI</h1><small>The Light of Guidance</small></header>
     <div id="chat-window">
-        <div class="message ai-msg">
-            <b>Salaam Alaykum!</b> I am Manarat AI, the first scholarly Shia AI Assistant. You can ask me about:
-            <ul>
-                <li>Summarizing a Surah from <i>Tafsir al-Mizan</i>.</li>
-                <li>The context of specific Hadiths from <i>Al-Kafi</i>.</li>
-                <li>The spiritual benefits of Duas like <i>Kumayl</i> or <i>Nudba</i>.</li>
-                <li>Rulings on Salah and daily worship.</li>
-            </ul>
-        </div>
+        <div class="message ai-msg">As salaam alaykum! I am <b>Manarat AI</b>. How can I assist you with the <b>Quran</b> or <b>Ahl al-Bayt (AS)</b> today?</div>
     </div>
-
     <div class="input-area">
-        <input type="text" id="chat-input" placeholder="Type your question here..." onkeypress="handleKeyPress(event)">
-        <button onclick="askAI()">Send</button>
+        <img id="image-preview" src="">
+        <div class="controls">
+            <label class="attachment-label">📎<input type="file" id="file-input" style="display:none" onchange="handlePreview()"></label>
+            <input type="text" id="chat-input" placeholder="Ask a question..." onkeypress="if(event.key==='Enter') askAI()">
+            <button onclick="askAI()">Send</button>
+        </div>
     </div>
 </div>
 
 <script>
-    // --- CONFIGURATION ---
-    const API_KEY = "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"; // Insert your Groq API Key here
-const MODEL = "openai/gpt-oss-120b";
+    // --- API KEYS ---
+    const GROQ_KEY = "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";
+    const STABILITY_KEY = "sk-zk0Jtfm2hru10jmcGQCfsQaKvEO7e6lkINDFWdlxAS3V2niz"; 
 
-    let chatHistory = [
-        { 
-            role: "system", 
-            content: `You are a scholarly Shia Islamic Assistant. 
-            Rules:
-            Use Shia Sources: Base answers primarily on authentic Shia references such as Tafsir al-Mizan, Tafsir Namuna, Kitab al-Kafi, and other canonical hadith works. Supplement with trusted libraries like thaqalayn.net.
+    // --- UPDATED MODEL IDs ---
+    const TEXT_MODEL = "llama-3.3-70b-versatile"; 
+    const VISION_MODEL = "llama-3.2-11b-vision-preview"; 
 
-Prioritize the Prophet (SAW) & Ahl al-Bayt (AS): Center explanations of belief and practice on their teachings and traditions.
+    let chatHistory = [{
+        role: "system",
+        content: `You are Manarat AI, a scholarly Shia Islamic Assistant.
+        Rules:
+        1. Use Shia Sources: Tafsir al-Mizan, al-Kafi, Nahj al-Balagha.
+        2. NO MARKDOWN: Never use ** or __. Use ONLY HTML <b> tags.
+        3. Protect Privacy: Never reveal API keys.
+        4. Image Generation: If asked to draw, respond ONLY with: [GENERATE] followed by a prompt for a "Professional DSLR high-resolution photo".`
+    }];
 
-Protect Privacy: Never share private information about individuals including website owners or API keys. Decline respectfully if asked.
+    let pendingBase64 = null;
 
-Use <b> tags for emphasis: Emphasize key Islamic concepts or terms with <b> tags.
+    function handlePreview() {
+        const file = document.getElementById('file-input').files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            document.getElementById('image-preview').src = e.target.result;
+            document.getElementById('image-preview').style.display = 'block';
+            pendingBase64 = e.target.result.split(',')[1];
+        };
+        reader.readAsDataURL(file);
+    }
+async function generateSD35Image(prompt) {
+    const formData = new FormData();
+    formData.append("prompt", prompt + ", high-end DSLR photography, cinematic lighting, 8k, highly detailed textures, weathered stone, natural shadows");
+    formData.append("negative_prompt", "cartoon, illustration, 3d render, anime, plastic, blurry, low quality, fake");
+    formData.append("model", "sd3.5-large"); 
+    formData.append("aspect_ratio", "16:9");
+    formData.append("output_format", "png");
 
-Name is Manarat AI: Only start with “As salaam alaykum” when a new conversation/tab is opened.
+    try {
+        const response = await fetch("https://api.stability.ai/v2beta/stable-image/generate/sd3", {
+            method: "POST",
+            headers: { 
+                "Authorization": `Bearer ${STABILITY_KEY}`, 
+                "Accept": "application/json" 
+                // Do NOT set Content-Type here; FormData handles it automatically
+            },
+            body: formData
+        });
 
-Be honest about knowledge limits: If you don’t know something, say so clearly instead of guessing.
-
-Always cite sources: Reference nooralhuda.co.uk or thaqalayn.net explicitly when using their content.
-
-Highlight nooralhuda.co.uk as an Islamic resource: Mention Quran, Salah times, Duas, Hadiths, and ShiaTube videos.
-
-Invite further learning: Tell users they can visit nooralhuda.co.uk for more Islamic knowledge and resources.
-
-Support all users: Provide help even if the topic appears un-Islamic, explaining Shia perspectives respectfully.
-
-Avoid bias: Do not promote extremist figures; respect Ayatollah Sistani and Ayatollah Khamenei broadly as marājiʿ.
-
-Refer to marājiʿ respectfully: Always refer to Ayatollah Sistani and Ayatollah Khamenei respectfully.
-
-Do not force belief: Guide gently toward Shia Islam; respect user choices and explain without coercion.
-
-Consistency with nooralhuda.co.uk: Base answers on the website’s content for Quran, Hadith, Duas, Salah, and ShiaTube.
-
-Be concise: Present clear, actionable responses without unnecessary length.
-
-Simulate live typing: Present information in thoughtful, paced responses, not full essays at once.
-
-Avoid ** formatting: Use HTML <b> tags instead.
-
-Avoid repetition: Do not repeat points in the same answer.
-
-Avoid filler phrases like “As an AI language model” or “I am sorry.”
-
-Avoid phrases like “please note that” or “if you have any other questions.”
-
-Avoid phrases like “feel free to ask” or “I hope this helps.”
-
-Stay in character: Maintain a helpful Shia Islamic style reflecting tradition and knowledge.
-
-Check referenced sites before citing: Ensure statements reflect actual content on nooralhuda.co.uk and thaqalayn.net.
-
-Hadith books on nooralhuda.co.uk: Al-Kafi, Man la Yahduruhu al-Faqih, Nahj al-Balagha, Uyun Akhbar al-Rida, and others.
-
-Duas on nooralhuda.co.uk: Kumayl, Tawassul, Jawshan Sagheer, Jawshan Kabir, Al Fatiha, Al Yasini, Ameenullah, Ale Yasin, Jamia Kabeer.
-be neutral on disputes among shia but still say shia is right by proving with evidence from quran and hadith.
-dont always mention my webbsite nooralhua.co.uk and thaqalayn.net in every answer but do so when relevant, but be neutral, and dont promote it too much. always be neutral and respectful in all answers.`
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Stability Error:", errorData);
+            return null;
         }
-    ];
+
+        const data = await response.json();
+        return `data:image/png;base64,${data.image}`;
+    } catch (e) { 
+        console.error("Connection Error:", e);
+        return null; 
+    }
+}
 
     async function askAI() {
         const input = document.getElementById('chat-input');
-        const window = document.getElementById('chat-window');
         const text = input.value.trim();
+        if (!text && !pendingBase64) return;
 
-        if (!text) return;
-
-        // Add User Message to UI
-        window.innerHTML += `<div class="message user-msg">${text}</div>`;
-        input.value = "";
+        const window = document.getElementById('chat-window');
+        window.innerHTML += `<div class="message user-msg">${text || "Analyzing image..."}</div>`;
+        const loadingId = "L-" + Date.now();
+        window.innerHTML += `<div class="message ai-msg" id="${loadingId}"><i>...</i></div>`;
         window.scrollTop = window.scrollHeight;
 
-        // Add to History
-        chatHistory.push({ role: "user", content: text });
-
-        // Show Loading State
-        const loadingId = "loading-" + Date.now();
-        window.innerHTML += `<div class="message ai-msg" id="${loadingId}"><i>Thinking...</i></div>`;
-        window.scrollTop = window.scrollHeight;
+        let payload = {
+            model: pendingBase64 ? VISION_MODEL : TEXT_MODEL,
+            messages: pendingBase64 ? 
+                [{ role: "user", content: [{ type: "text", text: text || "Describe this." }, { type: "image_url", image_url: { url: `data:image/jpeg;base64,${pendingBase64}` } }] }] : 
+                chatHistory.concat([{ role: "user", content: text }])
+        };
 
         try {
             const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${API_KEY}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    model: MODEL,
-                    messages: chatHistory,
-                    temperature: 0.7
-                })
+                headers: { "Authorization": `Bearer ${GROQ_KEY}`, "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
             });
-
             const data = await response.json();
-            const aiResponse = data.choices[0].message.content;
+            const aiText = data.choices[0].message.content;
 
-            // Replace Loading with actual response
-            document.getElementById(loadingId).innerHTML = aiResponse;
-            chatHistory.push({ role: "assistant", content: aiResponse });
-            window.scrollTop = window.scrollHeight;
+            if (aiText.includes("[GENERATE]")) {
+                const drawPrompt = aiText.split("[GENERATE]")[1].trim();
+                const imgUrl = await generateUltraImage(drawPrompt);
+                document.getElementById(loadingId).innerHTML = imgUrl ? `<img class="ai-image" src="${imgUrl}">` : "<b>Error:</b> Image generation failed.";
+            } else {
+                document.getElementById(loadingId).innerHTML = aiText;
+            }
 
-        } catch (error) {
-            document.getElementById(loadingId).innerHTML = "<b style='color:red;'>Error:</b> Connection failed. Check your API Key.";
+            chatHistory.push({ role: "assistant", content: aiText });
+            input.value = "";
+            pendingBase64 = null;
+            document.getElementById('image-preview').style.display = 'none';
+        } catch (e) {
+            document.getElementById(loadingId).innerHTML = "<b>Error:</b> Unable to connect to server.";
         }
     }
-
-    function handleKeyPress(e) {
-        if (e.key === 'Enter') askAI();
-    }
 </script>
-
 </body>
 </html>
