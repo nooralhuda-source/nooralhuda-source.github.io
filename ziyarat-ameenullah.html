@@ -1,0 +1,802 @@
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ziyarat Ameenullah</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const mainNav = document.getElementById("mainNav");
+  const hamburger = document.querySelector(".hamburger");
+  const grid = document.getElementById("bookGrid");
+const aiSummaryButton = document.getElementById("aiSummaryButton");
+const modalBackdrop = document.getElementById("modalBackdrop");
+const closeSummary = document.getElementById("closeSummary");
+const aiSummaryText = document.getElementById("aiSummaryText");
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent immediate close
+  mainNav.classList.toggle("open");
+});
+
+// Close when clicking anywhere outside the nav
+document.addEventListener("click", (e) => {
+  if (
+    mainNav.classList.contains("open") &&
+    !mainNav.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    mainNav.classList.remove("open");
+  }
+});
+
+// Optional: close when pressing Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mainNav.classList.remove("open");
+  }
+});
+
+
+const aiSummary =
+  "Ziyarat Amīnullāh is one of the most eminent and widely transmitted ziyārāt in the Shiʿi tradition, narrated from Imam Jaʿfar al-Ṣādiq (ʿa) and taught for the visitation of Imam ʿAlī ibn Abī Ṭālib (ʿa). Unlike ziyārāt limited to a specific Imam or occasion, Ziyarat Amīnullāh holds a unique status due to its universal acceptance among the Imams, with narrations indicating that it may be recited when visiting any of the Imams, though it is especially associated with the shrine of Imam ʿAlī in Najaf. The ziyārah emphasizes profound theological themes, including divine authority, wilāyah, loyalty to the Ahl al-Bayt, and dissociation from their enemies, making it both a devotional greeting and a concise statement of Shiʿi creed. It is particularly recommended to be recited during a physical visitation to the shrine of Imam ʿAlī (ʿa), where its words serve as a renewal of allegiance, spiritual alignment, and submission to Allah through His chosen vicegerent. Scholars have consistently regarded Ziyarat Amīnullāh as one of the most comprehensive and eloquent ziyārāt in expressing the essence of Imamate and servitude to God.";
+aiSummaryButton.addEventListener("click", () => {
+  aiSummaryText.textContent = aiSummary;
+  modalBackdrop.style.display = "flex";
+});
+
+closeSummary.addEventListener("click", () => {
+  modalBackdrop.style.display = "none";
+});
+
+modalBackdrop.addEventListener("click", e => {
+  if (e.target === modalBackdrop) {
+    modalBackdrop.style.display = "none";
+  }
+});
+});
+function applyThemeClass(isDark) {
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.remove("dark-mode");
+    }
+  }
+  var savedTheme = localStorage.getItem("theme");
+  applyThemeClass(savedTheme === "dark");
+
+  if (darkToggle) {
+    darkToggle.checked = savedTheme === "dark";
+    darkToggle.addEventListener("change", function (ev) {
+      var isDarkNow = !!ev.target.checked;
+      applyThemeClass(isDarkNow);
+      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+    });
+  }
+  </script>
+
+  <style>
+    /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+header h2 { font-size: 1.8rem; font-weight: 700; }
+header h2 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h2 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+    .ziyarat-section {
+  margin: 0 auto;
+  margin-top: 0;
+  max-width: 800px;
+  padding: 1.5rem;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  text-align: center; /* ✅ everything inside is centered */
+}
+    .arabic {
+      direction: rtl;
+      font-family: 'Scheherazade', serif;
+      font-size: 1.2rem;
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .transliteration, .translation {
+      background: #fdfdfd;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+   .back-duas-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+
+  background-color: var(--green);
+  color: white;
+  text-decoration: none;
+
+  border: none;
+  border-radius: 14px;
+  padding: 0.6rem 1.1rem;
+
+  font-family: "SF Pro Rounded", "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  margin: 0; /* remove the large top space */
+}
+
+/* Hover and active effects */
+.back-duas-btn:hover {
+  background-color: #2db574;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+.back-duas-btn:active {
+  background-color: #1e8b58;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset;
+  transform: translateY(1px);
+}
+header h2 { text-align: center; }
+header h3 { text-align: center; }
+.button-container {
+  text-align: left;
+  margin-bottom: 1rem; /* optional spacing */
+}
+  /* Buttons */
+  .q-btn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.8rem;
+  }
+  .btn-3d { padding:.7rem 1.1rem; border-radius:14px; border:0; cursor:pointer; font-weight:700; background: linear-gradient(180deg,#fff,#eee); color:var(--green); box-shadow: 0 8px 24px rgba(0,0,0,0.12); transform: translateZ(0); transition: transform .18s ease, box-shadow .18s ease; }
+.btn-3d:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 46px rgba(0,0,0,0.18); }
+.btn-3d.primary { background: linear-gradient(180deg,var(--green),#184c32); color:#fff; }
+.btn-3d {text-align: right;}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-box {
+  background: var(--card);
+  color: var(--text);
+  max-width: 520px;
+  width: 90%;
+  padding: 1.6rem;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  position: relative;
+  animation: pop 0.25s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.button-container {
+  display: flex;
+  justify-content: space-between; /* left & right */
+  align-items: center;
+  margin-bottom: 1rem;
+}
+@media (max-width: 480px) {
+  .button-container {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
+  .bismillah {
+    width: 80%;
+    margin: 10px auto;
+    display: block;
+  }
+  /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+  </style>
+</head>
+
+<body onload="updateThemeIcon()">
+  <!-- Header -->
+ <header>
+  <div class="brand"><h1><a href="index.html">Noor Al Huda</a></h1></div>
+  <button class="hamburger" aria-label="Open menu">☰</button>
+</header>
+
+<nav id="mainNav">
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="salah.html">Salah</a>
+  <a href="shiatube/index.html">ShiaTube</a>
+  <a href="index.html">Home</a>
+  <a href="settings.html">Settings</a>
+</nav>
+
+
+  <!-- Main -->
+  <main class="ziyarat-section">
+  <div class="button-container">
+  <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+  <button id="aiSummaryButton" class="btn-3d">AI Summary</button>
+</div>
+<div id="modalBackdrop" class="modal-backdrop">
+  <div class="modal-box">
+    <button id="closeSummary" class="close-btn">✕</button>
+    <h3>AI Summary</h3>
+    <p id="aiSummaryText"></p>
+  </div>
+</div>
+
+<!-- Inline style -->
+
+
+
+    <h2>Ziyarat Ameenullah</h2>
+    <br>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="content-1-2" class="content-block content-1-2 pad0 pad-bottom0" style="font-size: 16px;">
+				
+				<!-- PANE "ONE" CONTENT -->    
+				<!-- Video Link -->
+				
+				      				
+             
+				
+				<!-- Pane "one" content begins --><br><br>
+
+
+
+
+		
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">				 
+اَلسَّلَامُ عَلَیْكَ یَا اَمِیْنَ اللّٰهِ فِیْ اَرْضِهٖ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ya amina allahi fi ardihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Peace be upon you, O trustee of Allah on His lands</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ حُجَّتَهٗ عَلٰی عِبَادِهٖ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa hujjatahu `ala `ibadihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and argument of Allah against His servants.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَلسَّلَامُ عَلَیْكَ یَا اَمِیْرَ الْمُؤْمِنِیْنَ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">alssalamu `alayka ya amira almu'minina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Peace be upon you, O Commander of the Faithful.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَشْهَدُ اَنَّكَ جَاهَدْتَ فِی اللّٰهِ حَقَّ جِهَادِهٖ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ashhadu annaka jahadta fi allahi haqqa jihadihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+I bear witness that you strove for the sake of Allah as it ought to be striven,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ عَمِلْتَ بِكِتَابِهٖ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `amilta bikitabihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+acted upon His Book,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ اتَّبَعْتَ سُنَنَ نَبِیِّهٖ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wattba`ta sunana nabiyyihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and followed the instructions of His Prophet,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+صَلَّی اللّٰهُ عَلَیْهِ وَ اٰلِهٖ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">salla allahu `alayhi wa alihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+peace of Allah be upon him and his Household,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+حَتّٰی دَعَاكَ اللّٰهُ اِلیٰ جِوَارِهٖ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">hatta da`aka allahu ila jiwarihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+until Allah called you to be in His vicinity.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+فَقَبَضَكَ اِلَیْهِ بِاِخْتِیَارِهٖ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">faqabadaka ilayhi bikhtiyarihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+So, He grasped you to Him by His will</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ اَلْزَمَ اَعْدَاۤئَكَ الْحُجَّۃَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa alzama a`da'aka alhujjata</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and put your enemies under the claim</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ مَعَ مَالَكَ مِنَ الْحُجَجِ الْبَالِغَۃِ عَلٰی جَمِیْعِ خَلْقِهٖ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ma`a ma laka min alhujaji albalighati `ala jami`i khalqihi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+although you have inclusive claims against all of His creatures.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَللّٰهُمَّ فَاجْعَلْ نَفْسِیْ مُطْمَئِنَّۃً بِقَدَرِكَ  
+
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">allahumma faj`al nafsi mutma'innatan biqadarika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah, (please do) cause my soul to be fully tranquil with Your decrees,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+رَاضِیَۃً بِقَضَاۤئِكَ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">radiyatan biqada'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+satisfied with Your acts,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مُوْلَعَۃً بِذِكْرِكَ وَ دُعَاۤئِكَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">mula`atan bidhikrika wa du`a'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+fond of mentioning and praying to You,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مُحِبَّۃً لِصَفْوَۃِ اَوْلِیَاۤئِكَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">muhibbatan lisafwati awliya'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+bearing love for the choicest of Your intimate servants,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مَحْبُوْبَۃً فِیْ اَرْضِكَ وَ سَمَاۤئِكَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">mahbubatan fi ardika wa sama'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+beloved in Your lands and heavens,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+صَابِرَۃًعَلٰی نُزُوُلِ بَلَاۤئِكَ
+  
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">sabiratan `ala nuzuli bala'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+steadfast against the affliction of Your tribulations,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ شَاكِرَۃً لِفَوَاضِلِ نَعْمَاۤئِكَ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">shakiratan lifawadili na`ma'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+thankful for Your graceful bounties,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ ذَاكِرَۃً لِسَوَابِغِ اٰلَاۤئِكَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">dhakiratan lisawabighi ala'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+always bearing in mind Your incessant gifts,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ مُشْتَاقَۃً اِلیٰ فَرْحَتِ لِقَاۤئِكَ
+
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">mushtaqatan ila farhati liqa'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+longing for the gladness of meeting You,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ مُتَزَوِّدَۃً التَّقْوٰی لِیَوْمِ جَزَاۤئِكَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">mutazawwidatan alttaqwa liyawmi jaza'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+supplied with piety for the day of Your rewarding,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ مُسْتَنَّۃً بِسُنَنِ اَوْلِیَاۤئِكَ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">mustannatan bisunani awliya'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+pursuing the morals of Your intimate servants,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+مُفَارِقَۃً لِاَخْلَاقِ اَعْدَاۤئِكَ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">mufariqatan li'akhlaqi a`da'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+quitting the conducts of Your enemies,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+مَشْغُوْلَۃً عَنِ الدُّنْیَا بِحَمْدِكَ وَ ثَنَاۤئِكَ۔
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">mashghulatan `an alddunya bihamdika wa thana'ika</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and distracted from this world by praising and thanking You.</t1></div><br>
+
+<hr style="font-size: 16px;">
+
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَللّٰهُمَّ اِنَّ قُلُوْبَ الْمُخْبِتِیْنَ اِلَیْكَ وَالِهَۃٌ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">allahumma inna quluba almukhbitina ilayka walihatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah, the hearts of those humbling themselves to You are fascinated,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ سُبُلَ الرَّاغِبِیْنَ اِلَیْكَ شَارِعَۃٌ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa subula alrraghibina ilayka shari`atun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the paths of those desiring for You are open,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+وَ اَعْلَامَ الْقَاصِدِیْنَ اِلَیْكَ وَاضِحَۃٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa a`lama alqasidina ilayka wadihatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the sings of those directing to You are evident,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+وَ اَفْئِدَۃَ الْعَارِفِیْنَ مِنْكَ فَازِعَۃٌ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa af'idata al`arifina minka fazi`atun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the hearts of those having recognition of You are resorting to You,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+وَ اَصْوَاتَ الدَّاعِیْنَ اِلَیْكَ صَاعِدَۃٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa aswata aldda`ina ilayka sa`idatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the voices of those beseeching You are mounting up to You,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+وَ اَبْوَابَ الْاِجَابَۃِ لَهُمْ مُفَتَّحَۃٌ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa abwaba al-ijabati lahum mufattahatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the doors of responding to them are wide open,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ دَعْوَۃَ مَنْ نَاجَاكَ مُسْتَجَابَۃٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa da`wata man najaka mustajabatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the prayer of him who speaks to You confidentially is responded,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+وَ تَوْبَۃَ مَنْ اَنَابَ اِلَیْكَ مَقْبُوْلَۃٌ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa tawbata man anaba ilayka maqbulatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the repentance of him who turns to You modestly is admitted,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+وَ عَبْرَۃَ مَنْ بَكٰی مِنْ خَوْفِكَ مَرْحُوْمَۃٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `abrata man baka min khawfika marhumatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the tear of him who weeps on account of fear from You is compassionated,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+و وَ الْاِغَاثَۃَ لِمَنِ اسْتَغَاثَ بِكَ مَوْجُوْدَۃٌ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wal-ighathata liman istaghatha bika mawjudatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the aid of him who seeks Your aid is available,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ الْاِعَانَۃَ لِمَنِ اسْتَعَانَ بِكَ مَبْذُوْلَۃٌ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wal-i`anata liman ista`ana bika mabdhulatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the help of him who seeks Your help is obtainable,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ عِدَاتِكَ لِعِبَادِكَ مُنْجَزَۃٌ  
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `idatika li`ibadika munjazatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Your promises to Your servants are fulfilled,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ زَلَلَ مَنِ اسْتَقَالَكَ مُقَالَۃٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa zalala man istaqalaka muqalatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the slips of him who implore You to excuse him are forgivable,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ اَعْمَالَ الْعَامِلِیْنَ لَدَیْكَ مَحْفُوْظَۃٌ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa a`mala al`amilina ladayka mahfuzatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the deeds of those who act for You are preserved,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ اَرْزَاقَكَ اِلَی الْخَلَاۤئِقِ مِنْ لَّدُنْكَ نَازِلَۃٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa arzaqaka ila alkhala'iqi min ladunka nazilatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Your sustenance to the creatures are descending from You,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+ وَ عَوَاۤئِدَ الْمَزِیْدِ اِلَیْھِمْ وَاصِلَۃٌ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `awa'ida almazidi ilayhim wasilatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Your gifts for further conferrals are reaching them,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ ذُنُوْبَ الْمُسْتَغْفِرِیْنَ مَغْفُوْرَۃٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa dhunuba almustaghfirina maghfuratun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the sins of those imploring Your forgiveness are forgiven,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+ وَ حَوَاۤئِجِ خَلْقِكَ عِنْدَكَ مَقْضِیَّۃٌ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa hawa'ija khalqika `indaka maqdiyyatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the requests of Your creatures are granted by You,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ جَوَاۤئِزَ السَّاۤئِلِیْنَ عِنْدَكَ مُوَفَّرَۃٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa jawa'iza alssa'ilina `indaka muwaffaratun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the prizes of those begging You are offered,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+ وَ عَوَاۤئِدَ الْمَزِیْدِ مُتَوَاْتِرَۃٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa `awa'ida almazidi mutawatiratun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Your gifts for further conferrals are uninterrupted,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ مَوَاۤئِدَ الْمُسْتَطْعِمِیْنَ مُعَدَّۃٌ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa mawa'ida almustat`imina mu`addatun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the dining tables for those seeking Your feeding are prepared,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+ وَ مَنَاهِلَ الظِّمَاۤئِ مُتْرَعَۃٌ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa manahila alzzama'i mutra`atun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and the springs of quenching their thirst are brimful.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَللّٰهُمَّ فَاسْتَجِبْ دُعَاۤئِیْ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">allahumma fastajib du`a'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Allah, (so) respond to my prayer,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+وَ اقْبَلْ ثَنَاۤئِیْ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">waqbal thana'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+accept my thanksgiving for You,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+وَ اجْمَعْ بَیْنِیْ وَ بَیْنَ اَوْلِیَاۤئِیْ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wajma` bayni wa bayna awliya'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and join me to my masters,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+بِحَقِّ مُحَمَّدٍ وَّ عَلِیٍّ  
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">bihaqqi muhammadin wa `aliyyin</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+[I beseech You] in the name of Muhammad, `Ali,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ فَاطِمَۃَوَٱلْحَسَنِ وَٱلْحُسَيْنِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa fatimata walhasani walhusayni</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Fatimah, al-Hasan, and al-Husayn.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+
+  اِنَّكَ وَلِیُّ نَعْمَاۤئِیْ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">innaka waliyyu na`ma'i</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+You are verily the only source of my boons,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ مُنْتَهٰی مُنَایَ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa muntaha munaya</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+the ultimate goal of my wishes,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ غَایَۃُ رَجَاۤئِیْ فِیْ مُنْقَلَبِیْ وَ مَثْوَایَ۔
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ghayatu raja'i fi munqalabi wa mathwaya</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and the target of my hope in my recourses and settlement.</t1></div><br><br>
+
+<h6 style="font-size: 16px;"><b style="font-size: 16px;">In the book of Kamil al-Ziyarat, the following statements are added to this form of Ziyarah:</b></h6><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اَنْتَ اِلٰهِیْ وَ سَیَّدِیْ وَ مَوْلَایَ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">anta ilahi wa sayyidi wa mawlaya</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+You are verily my God, Master, and Lord.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+اغْفِرْ لِاَوْلِیَاۤئِنَا 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">ighfir li-awliya'ina</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+(Please) forgive our friend,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ كُفَّ عَنَّا اَعْدَاۤئَنَا
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa kuffa `anna a`da'ana</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+prevent our enemies against us,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ اشْغَلْهُمْ عَنْ اَذَانَا
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa ashghilhum `an adhana</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+distract them from harming us,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+وَ اَظْهِرْ كَلِمَۃَ الْحَقِّ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa azhir kalimata alhaqqi</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+give prevalence to the Word of Truth</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ اجْعَلْهَا الْعُلْیَا
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">waj`alha al`ulya</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and make it the supreme,</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+  وَ اَدْحِضْ كَلِمَۃَ الْبَاطِلِ
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">wa adhid kalimata albatili</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and frustrate the word of falsehood</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ وَ اجْعَلْهَا السُّفْلیٰ 
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">waj`alha alssufla</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+and make it the lowliest.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ اِنَّكَ عَلٰی كُلِّ شَیْئٍ قَدِیْرٌ۔
+</a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">innaka `ala kulli shay'in qadirun</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Verily, You have power over all things.</t1></div><br>
+
+ 
+
+
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ اَلسَّلَامُ عَلَيْكَ اَيُّهَا الْاِمَامُ وَ رَحْمَةُ اللهِ وَ بَرَكَاتُهٗ اَسْتَوْدِعُكَ اللهَ وَ عَلَيْكَ السَّلَامُ وَ رَحْمَةُ اللهِ وَ بَرَكَاتُہٗ.
+ </a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;"> assalaamo a’layka ayyohal emaamo wa rahmatul laahe wa barakaatohu as-tawde-o’kal laaha wa a’laykas salaamo wa rahmatul laahe wa barakaatoh.</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+ Peace be on you, O the Imam and mercy of Allah and His blessings, I entrust you with Allah and upon you is peace and mercy of Allah and His blessings.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ اٰمَنَّا بِالرَّسُوْلِ وَ بِمَا جِئْتُمْ بِهٖ وَ دَعَوْتُمْ اِلَيْهِ.
+  </a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">aamannaa bir-rasoole wa bemaa jeatum behi da-a’wtum elayhe. </t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+ We believe in the Messenger,  and in whatever you have come with and called to.</t1></div><br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ اَللّٰهُمَّ لَا تَجْعَلْهُ اٰخِرَ الْعَهْدِ مِنْ زِيَارَتِيْ وَلِيَّكَ.
+ </a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">allaahumma laa taj-a’lho aakheral a’hde min zeyaaratee waliyyaka. </t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+ O Allah! Do not make this my last visitation of Your master.</t1></div><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ اَللّٰهُمَّ لَا تَحْرِمْنِيْ ثَوَابَ مَزَارِهِ الَّذِيْ اَوْجَبْتَ لَهٗ وَ يَسِّرْ لَنَا الْعَوْدَ اِلَیْہِ اِنْ شَآءَ اللهُ تَعَالٰى‏.
+  </a1></div><div class="Trl" style="font-size: 16px; display: none;"><t2 style="font-size: 15px;">allaahumma laa tahrimnee sawaaba mazaarehil lazee awjabta lahu wa yassir lanal a’wda elayhe in shaaa allaaho ta-a’alaa.</t2></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+  O Allah! Do not deprive me of the reward of his shrine which You have decided for him and make our returning to visit it easy for us, if Allah – the High – wish.</t1></div><br>
+ 
+ <br><br>
+				<!-- PANES "ONE" CONTENT END -->
+
+<hr style="font-size: 16px;">
+2] Mafateeh ul Jinaan: p. 698; Misbah ul Mutahajjid: p. 738; and in Misbah uz Zaaer: p. 474, and the Mazaar of Agha Jamaal Khwansaari: p. 98 with slight difference.<br>
+
+				
+															
+				<!-- Do Not alter -->
+
+										<br><br><br>
+								</section>
