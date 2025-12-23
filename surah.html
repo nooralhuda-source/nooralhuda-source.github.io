@@ -257,6 +257,201 @@ html, body {
 
   font-weight: bold;
 }
+/* ===== 1. 3-dots popup ===== */
+.ayah-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 6px;
+    display: none;
+    z-index: 50;
+    min-width: 120px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.ayah-popup button {
+    display: block;
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 6px 8px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.ayah-popup button:hover {
+    background: #f0f0f0;
+}
+
+/* JS to close when clicking outside */
+
+
+/* ===== 2. Main nav less wide on mobile ===== */
+@media(max-width: 768px) {
+    #mainNav {
+        width: 220px; /* narrower than default */
+        font-size: 0.95rem;
+    }
+}
+
+/* ===== 3. Surah picker drawer ===== */
+.left-drawer {
+    position: fixed;
+    top: 0;
+    left: -280px; /* hidden by default */
+    width: 260px;
+    height: 100%;
+    background: #fff;
+    box-shadow: 4px 0 12px rgba(0,0,0,0.2);
+    transition: left 0.3s ease;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+}
+
+.left-drawer.open {
+    left: 0;
+}
+
+.left-drawer .left-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.left-drawer .surah-item {
+    display: block;
+    padding: 8px 6px;
+    border-radius: 6px;
+    color: #222;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.left-drawer .surah-item:hover {
+    background: rgba(46, 125, 50, 0.1);
+}
+/* Ayah popup for 3 dots */
+.ayah-popup {
+    position: absolute;
+    top: 100%;       /* below the dots button */
+    right: 0;        /* align to right of button */
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 5px 0;
+    display: none;   /* toggle with JS */
+    z-index: 100;    /* above other content */
+    min-width: 140px;
+}
+
+/* Popup buttons */
+.ayah-popup button {
+    width: 100%;
+    background: none;
+    border: 0;
+    padding: 8px 12px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #222;
+    transition: background 0.2s;
+}
+
+.ayah-popup button:hover {
+    background: #f0f0f0;
+    border-radius: 6px;
+}
+
+/* Close popup when clicking outside */
+body {
+    position: relative;
+}
+
+/* Optional: small arrow pointing to dots button */
+.ayah-popup::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 10px; /* adjust arrow position */
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+}
+/* ⋯ popup menu */
+.ayah-popup {
+    position: absolute;
+    top: 100%;       /* below the dots button */
+    right: 0;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 5px 0;
+    display: none;   /* toggle with JS */
+    z-index: 1000;   /* above everything */
+    min-width: 140px;
+}
+
+/* Popup buttons */
+.ayah-popup button {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #222;
+    transition: background 0.2s;
+}
+
+.ayah-popup button:hover {
+    background: #f0f0f0;
+    border-radius: 6px;
+}
+
+/* Small arrow pointing to dots button */
+.ayah-popup::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 10px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+}
+/* 3-dots button for ayah actions */
+/* Modern 3-dots button (fixed position in layout) */
+.ayah-dots {
+    background: #f3f4f6;          /* light neutral background */
+    border: none;                 /* no border */
+    border-radius: 50%;           /* circular */
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;            /* size of the dots */
+    color: #276540;               /* accent green */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* subtle shadow */
+    transition: background 0.2s ease; /* only background changes */
+    position: relative;           /* keeps its layout position */
+}
+
+/* Hover effect without moving the button */
+.ayah-dots:hover {
+    background: #e0f2e9;          /* subtle hover green */
+    transform: none;              /* no shift/scale */
+}
+
 
 </style>
 </head>
@@ -853,18 +1048,18 @@ function populateSurahList(){
     const idx = i+1;
     const a = document.createElement('a'); 
     a.className = 'surah-item'; 
-    // Set the actual link path
     a.href = `surah.html?id=${idx}`; 
     a.textContent = `${idx}. ${nm}`;
     
-    a.addEventListener('click', (e)=>{ 
-      // Removed e.preventDefault() to allow the browser to navigate
+    a.addEventListener('click', ()=>{
       leftDrawer.classList.remove('open'); 
       pushWrapper.style.marginLeft = '0px'; 
     });
+
     surahListEl.appendChild(a);
   });
 }
+
 
 /* Arabic font helper */
 function getArabicFontCss(){
@@ -1130,24 +1325,12 @@ document.addEventListener('click', (e) => {
         settingsDrawer.classList.remove('open');
     }
 });
-document.addEventListener('click', (e) => {
-    const link = e.target.closest('a');
-    if (!link) return;
-
-    // Check if the link belongs to the main navigation
-    const isMainNav = link.classList.contains('nav-item') || link.closest('.main-nav');
-
-    if (isMainNav) {
-        // ALLOW the browser to follow these links normally
-        return; 
-    }
-
-    // If it's a Surah Picker link, handle it with your custom logic
-    if (link.classList.contains('surah-item')) {
-        e.preventDefault();
-        const surahId = link.dataset.surah;
-        window.location.href = `surah.html?id=${surahId}`;
-    }
+document.addEventListener('click', e => {
+    document.querySelectorAll('.ayah-popup').forEach(p => {
+        if(!p.contains(e.target) && !p.previousElementSibling?.contains(e.target)) {
+            p.style.display = 'none';
+        }
+    });
 });
 </script>
 </body>
