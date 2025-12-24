@@ -1,0 +1,645 @@
+<html lang="en" dir="ltr"><head>
+  <meta charset="UTF-8">
+  <title>Dua Amaan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const mainNav = document.getElementById("mainNav");
+  const hamburger = document.querySelector(".hamburger");
+  const grid = document.getElementById("bookGrid");
+const aiSummaryButton = document.getElementById("aiSummaryButton");
+const modalBackdrop = document.getElementById("modalBackdrop");
+const closeSummary = document.getElementById("closeSummary");
+const aiSummaryText = document.getElementById("aiSummaryText");
+hamburger.addEventListener("click", (e) => {
+  e.stopPropagation(); // prevent immediate close
+  mainNav.classList.toggle("open");
+});
+
+// Close when clicking anywhere outside the nav
+document.addEventListener("click", (e) => {
+  if (
+    mainNav.classList.contains("open") &&
+    !mainNav.contains(e.target) &&
+    !hamburger.contains(e.target)
+  ) {
+    mainNav.classList.remove("open");
+  }
+});
+
+// Optional: close when pressing Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    mainNav.classList.remove("open");
+  }
+});
+
+
+const aiSummary =
+  "Dua Amaan is a devotional supplication traditionally attributed to seeking protection, comfort, and ease in times of distress, hardship, or fear. It is commonly recited to invoke divine safeguarding and to reaffirm trust in God’s mercy and wisdom. The dua emphasizes turning to God with humility, recognizing one’s vulnerability, and seeking shelter from trials, calamities, and negative forces. Its language centers on reassurance, steadfast faith, and the comfort of divine presence, inviting the believer to place confidence in God’s protection and guidance. Dua Amaan is often recited during moments of anxiety, danger, or when one desires inner peace and safety, and it is valued for its concise, heartfelt appeal for security and solace in the face of adversity.";
+aiSummaryButton.addEventListener("click", () => {
+  aiSummaryText.textContent = aiSummary;
+  modalBackdrop.style.display = "flex";
+});
+
+closeSummary.addEventListener("click", () => {
+  modalBackdrop.style.display = "none";
+});
+
+modalBackdrop.addEventListener("click", e => {
+  if (e.target === modalBackdrop) {
+    modalBackdrop.style.display = "none";
+  }
+});
+});
+function applyThemeClass(isDark) {
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.remove("dark-mode");
+    }
+  }
+  var savedTheme = localStorage.getItem("theme");
+  applyThemeClass(savedTheme === "dark");
+
+  if (darkToggle) {
+    darkToggle.checked = savedTheme === "dark";
+    darkToggle.addEventListener("change", function (ev) {
+      var isDarkNow = !!ev.target.checked;
+      applyThemeClass(isDarkNow);
+      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+    });
+  }
+  </script>
+
+  <style>
+    /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+header h2 { font-size: 1.8rem; font-weight: 700; }
+header h2 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h2 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+    .ziyarat-section {
+  margin: 0 auto;
+  margin-top: 0;
+  max-width: 800px;
+  padding: 1.5rem;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  text-align: center; /* ✅ everything inside is centered */
+}
+    .arabic {
+      direction: rtl;
+      font-family: 'Scheherazade', serif;
+      font-size: 1.2rem;
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .transliteration, .translation {
+      background: #fdfdfd;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+   .back-duas-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+
+  background-color: var(--green);
+  color: white;
+  text-decoration: none;
+
+  border: none;
+  border-radius: 14px;
+  padding: 0.6rem 1.1rem;
+
+  font-family: "SF Pro Rounded", "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  margin: 0; /* remove the large top space */
+}
+
+/* Hover and active effects */
+.back-duas-btn:hover {
+  background-color: #2db574;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+.back-duas-btn:active {
+  background-color: #1e8b58;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) inset;
+  transform: translateY(1px);
+}
+header h2 { text-align: center; }
+header h3 { text-align: center; }
+.button-container {
+  text-align: left;
+  margin-bottom: 1rem; /* optional spacing */
+}
+  /* Buttons */
+  .q-btn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.8rem;
+  }
+  .btn-3d { padding:.7rem 1.1rem; border-radius:14px; border:0; cursor:pointer; font-weight:700; background: linear-gradient(180deg,#fff,#eee); color:var(--green); box-shadow: 0 8px 24px rgba(0,0,0,0.12); transform: translateZ(0); transition: transform .18s ease, box-shadow .18s ease; }
+.btn-3d:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 46px rgba(0,0,0,0.18); }
+.btn-3d.primary { background: linear-gradient(180deg,var(--green),#184c32); color:#fff; }
+.btn-3d {text-align: right;}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-box {
+  background: var(--card);
+  color: var(--text);
+  max-width: 520px;
+  width: 90%;
+  padding: 1.6rem;
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  position: relative;
+  animation: pop 0.25s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.button-container {
+  display: flex;
+  justify-content: space-between; /* left & right */
+  align-items: center;
+  margin-bottom: 1rem;
+}
+@media (max-width: 480px) {
+  .button-container {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}
+.h4 { font-size: 0.5rem; font-weight: 700; color: var(--green); }
+  .bismillah {
+    width: 80%;
+    margin: 10px auto;
+    display: block;
+  }
+  /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+  </style>
+<script src="chrome-extension://mpbgcojnamdnljaacdhpgenikkblddjj/assets/scrapeScript.ts-bb3ed465.js" type="module"></script></head>
+
+<body onload="updateThemeIcon()">
+  <!-- Header -->
+ <header>
+  <div class="brand"><h1><a href="index.html">Noor Al Huda</a></h1></div>
+  <button class="hamburger" aria-label="Open menu">☰</button>
+</header>
+
+<nav id="mainNav">
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="salah.html">Salah</a>
+  <a href="shiatube/index.html">ShiaTube</a>
+  <a href="index.html">Home</a>
+  <a href="settings.html">Settings</a>
+</nav>
+
+
+  <!-- Main -->
+  <main class="ziyarat-section">
+  <div class="button-container">
+  <a href="duas.html" class="back-duas-btn">Back to Duas Home</a>
+  <button id="aiSummaryButton" class="btn-3d">AI Summary</button>
+</div>
+<div id="modalBackdrop" class="modal-backdrop">
+  <div class="modal-box">
+    <button id="closeSummary" class="close-btn">✕</button>
+    <h3>AI Summary</h3>
+    <p id="aiSummaryText"></p>
+  </div>
+</div>
+
+<!-- Inline style -->
+
+
+
+    <h2>Dua Amaan</h2>
+    <br>
+
+
+<audio controls="">
+													<source src="https://mp3.duas.org/Misc%20Duas/alamaan.mp3" type="audio/mpeg">
+													<a href="https://mp3.duas.org/Misc%20Duas/alamaan.mp3"></a>
+												</audio>
+
+
+
+<article id="fontSize" class="mt-3" style="font-size: 16px;">                     
+<!-- Pane "one" content begins -->
+<br><div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان يوم " لا يستأخرون ساعة ولا يستقدمون ".</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection: on the day when they can neither delay (the event) by a single moment, nor can they hasten it (death).</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان عند سكرات الموت، وعند مفارقة الروح وعند معاينة الموت.</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : at the time of the parting of the soul from the body and in the presence of death.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان عند هول المطلع وعند الوقوف بين يديك.</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : at the time of the narration (of our sins) and at the time of our tarrying in front of Thee.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان عند هول القيامة وشدائدها.</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : from the dread of Doom and its severity.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم يكون الناس كالفراش المبثوث ".</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : When mankind shall swarn like moths (resurrection of mankind).</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم تقوم الساعة ".</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم يقوم الناس لرب العالمين "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : On the day when mankind shall stand before Thee, Lord of the worlds.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+&nbsp;إلهي، الأمان الأمان " يوم لا تملك نفس لنفس شيئا والأمر يومئذ لله "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم تبيض وجوه وتسود وجوه "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when some faces will be bright and some faces will be black.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم يفر المرء من أخيه وأمه وأبيه و صاحبته وبنيه لكل امرئ منهم يومئذ شأن يغنيه</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : When man will flee from his brother, and his mother and his father, and his wife, and his children; for everyone of them they shall be in such anxiety for his own self as will make him oblivious of all other things.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم يقوم الروح والملائكة صفا لا يتكلمون إلا من أذن له الرحمن وقال صوابا "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when the angles and the spirit shall stand to order, lined up, and none shall be able to speak, except those whom the All-merciful shall permit, and they shall say only what is proper.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم ينظر المرء ما قدمت يداه ويقول الكافر يا ليتني كنت ترابا "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when man shall see what his hands have sent before him, and the disbeliever shall say, “Would that I were dust.”</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " في يوم كان مقداره خمسين ألف سنة فاصبر صبرا جميلا "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day, the duration whereof is equal to fifty thousand years.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم يود المجرم لو يفتدي من عذاب يومئذ ببنيه وصاحبته وأخيه ".</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when the sinner would wish that he could reason himself from the torment of that day by substituting for himself his son, or wife, or brother, or the kindred with whom he passed his life or all the inhabitants of the earth put together, and thus save himself, But no! Verily it is a flaming fire, and it will scorch the skin.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم ترجف الراجفة تتبعها الرادفة قلوب يومئذ واجفة أبصارها خاشعة "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when the earth quake will shake the earth, and its sequel (another earthquake) shall follow it. Hearts on that day shall palpitate, and eyes shall be down caste.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم يرون الملائكة لا بشرى يومئذ للمجرمين ويقولون حجرا محجورا ".</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when the angels shall say : “There is no good news today for the sinners” And “Be gone, away with you”</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم يعض الظالم على يديه يقول يا ليتني اتخذت مع الرسول سبيلا يا ويلتي ليتني لم أتخذ فلانا خليلا "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when the wrongdoer shall bite his own hands and say “ Ah! Would that I had chosen a way of life with the prophet; also for me! Ah ! Would that I had not taken so and so for a friend.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم يجعل الولدان شيبا السماء منفطر به كان وعده مفعولا "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم نقول لجهنم هل امتلأت وتقول هل من مزيد "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم لا يغني مولى عن مولى شيئا ولا هم ينصرون "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : When man will flee from his brother, and his mother and his father, and his wife, and his children; for everyone of them they shall be in such anxiety for his own self as will make him oblivious of all other things.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم تأتي كل نفس بما كسبت وهم لا يظلمون "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم لا تجزي نفس عن نفس شيئا ولا يقبل منها شفاعة ولا يؤخذ منها عدل ولا هم ينصرون "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when neither wealth nor sons shall avail any man, except one who comes to God with a pure man, except one who comes to God with a pure heart by Thy mercy, O most Merciful of all.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم تذهل كل مرضعة عما أرضعت وتضع كل ذات حمل حملها وترى الناس سكارى وما هم بسكارى ولكن عذاب الله شديد "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when the angles and the spirit shall stand to order, lined up, and none shall be able to speak, except those whom the All-merciful shall permit, and they shall say only what is proper.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم أزفت الآزفة ليس لها من دون الله كاشفة ".</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when man shall see what his hands have sent before him, and the disbeliever shall say, “Would that I were dust.”</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم لا يجزي والد عن ولده ولا مولود هو جاز عن والده شيئا إن وعد الله حق "</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when the sinner would wish that he could reason himself from the torment of that day by substituting for himself his son, or wife, or brother, or the kindred with whom he passed his life or all the inhabitants of the earth put together, and thus save himself, But no! Verily it is a flaming fire, and it will scorch the skin.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان " يوم لا ينفع مال ولا بنون إلا من أتى الله بقلب سليم</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day when neither wealth nor sons shall avail any man, except one who comes to God with a pure man, except one who comes to God with a pure heart by Thy mercy, O most Merciful of all.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+إلهي، الأمان الأمان بحق محمد، وبحق الأنبياء والمرسلين، والأئمة الطاهرين، برحمتك يا أرحم الراحمين، وصلى الله على خير خلقه محمد وآله أجمعين، وسلم تسليما كثيرا كثيرا. </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+My God, Thy protection, Thy protection : on the day, the duration whereof is equal to fifty thousand years.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لا إله إلا الله الموجود في كل زمان</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+There is no god except Allah, who is present at all times.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لا إله إلا الله المعبود في كل مكان</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+There is no god except Allah, who is worshipped in every place.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لا إله إلا الله المعروف بالإحسان</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+There is no god except Allah, who is known by His Kindness.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+لا إله إلا الله الأمان الأمان</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+There is no god except ALLAH.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+يا دائم المعروف يا قديم </a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Thy protection, Thy protection, O Eternally Good,</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+الإحسان يا هادي المضلين</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+O Anciently Kind, O Guide of those who go astray.</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ إياك نعبد وإياك نستعين يا غفور يا غفار برحمتك</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+Thee (alone we worship, and Thee (alone) we ask fo help.O Forgiver, O All (forgiving).</t1></div><br>
+<div class="Ara" style="font-size: 16px;"><a1 style="font-size: 38px;">
+ يا أرحم الراحمين وصل الله على محمد وآله أجمعين</a1></div><div class="Tra" style="font-size: 16px;"><t1 style="font-size: 18px;">
+By Thy mercy, O Most Merciful of all;Bless Mohammed and his progeny, all of them.</t1></div><br>
+
+<!-- PANES "ONE" CONTENT END -->    
+<!-- Do Not alter -->
+<br><br><br><br>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</main></body><chatgpt-sidebar data-gpts-theme="light"></chatgpt-sidebar></html>
