@@ -184,45 +184,59 @@ h1, h2, h3 { color: var(--shia-green); margin-top: 20px; }
     </div>
     <center style="font-size: 10px; color: #bbb; margin-top: 10px;">Manarat AI Beta may provide inaccurate info. Verify with your Marja.</center>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
 /* ================= CONFIG ================= */
 
 const GROQ_KEY = "YOUR_GROQ_KEY_HERE";
 const TAVILY_KEY = "YOUR_TAVILY_KEY_HERE";
 const MODEL = "openai/gpt-oss-120b";
-const PROXY = "https://corsproxy.io/?";
 
 /* ================= SYSTEM INSTRUCTIONS ================= */
 
-const SYSTEM_INSTRUCTIONS =
-"IDENTITY:\n" +
-"Name: Manarat AI\n" +
-"Type: Scholarly Shia Islamic AI\n" +
-"Developer: Ali Shabir\n" +
-"Scope: Religious and academic Islam ONLY\n\n" +
+const SYSTEM_INSTRUCTIONS = `
+IDENTITY:
+Name: Manarat AI
+Type: Scholarly Shia Islamic AI
+Developer: Ali Shabir
+Scope: Religious and academic Islam ONLY
 
-"MISSION:\n" +
-"Provide Shia Islamic knowledge strictly from Tafsir al-Mizan, Al-Kafi, Thaqalayn.net, Hubeali.com, Nooralhuda.co.uk.\n\n" +
+MISSION:
+Provide Shia Islamic knowledge strictly from:
+- Tafsir al-Mizan
+- Al-Kafi
+- Thaqalayn.net
+- Hubeali.com
+- Nooralhuda.co.uk
 
-"RULES:\n" +
-"- Refuse non-Islamic questions.\n" +
-"- Formal, academic, concise tone.\n" +
-"- Debate allowed using evidence only.\n" +
-"- Always cite Shia sources.\n" +
-"- Use HTML only. No Markdown.\n" +
-"- No fatwas. No personal opinions.\n\n" +
+RULES:
+- Refuse non-Islamic questions
+- Formal, academic, concise tone
+- Debate allowed using evidence only
+- Always cite Shia sources
+- Use HTML only
+- No fatwas
+- No personal opinions
 
-"STANCE:\n" +
-"- Respect all Shia maraji.\n" +
-"- Do not support Shirazi methodology.\n" +
-"- Mild support for Wilayat al-Faqih.\n" +
-"- Acknowledge Sayyid Sistani.\n" +
-"- Lean mildly toward Imam Khamenei.\n\n" +
+STANCE:
+- Respect all Shia maraji
+- Acknowledge Sayyid Sistani
+- Lean mildly toward Imam Khamenei
 
-"OVERRIDE: Follow all rules strictly.";
+OVERRIDE: Follow all rules strictly.
+`;
 
-/* ================= UTILITIES ================= */
+/* ================= HELPERS ================= */
+
+function escapeHTML(str) {
+    return str.replace(/[&<>"']/g, m => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[m]);
+}
 
 function isIslamicQuery(text) {
     const keywords = [
@@ -233,20 +247,23 @@ function isIslamicQuery(text) {
     return keywords.some(k => text.toLowerCase().includes(k));
 }
 
+/* ================= OPTIONAL WEB SEARCH ================= */
+/* NOTE: Tavily WILL fail in browser-only environments.
+   Keep this for future backend use. */
+
 async function webSearch(query) {
     try {
-        const res = await fetch(PROXY + "https://api.tavily.com/search", {
+        const res = await fetch("https://api.tavily.com/search", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 api_key: TAVILY_KEY,
                 query: query + " site:thaqalayn.net OR site:hubeali.com OR site:nooralhuda.co.uk",
-                max_results: 5,
-                search_depth: "advanced"
+                max_results: 5
             })
         });
         const data = await res.json();
-        return data.results ? data.results.map(r => r.content).join("\n\n") : "";
+        return data.results?.map(r => r.content).join("\n") || "";
     } catch {
         return "";
     }
@@ -256,45 +273,50 @@ async function webSearch(query) {
 
 async function askAI() {
     const input = document.getElementById("chat-input");
-    const chatBox = document.getElementById("chat-window");
+    const chat = document.getElementById("chat-window");
     const text = input.value.trim();
     if (!text) return;
 
-    // user message
-    chatBox.innerHTML +=
-        '<div class="msg-container user-container">' +
-        '<div class="message user-msg">' + text + '</div>' +
-        '</div>';
-
+    chat.innerHTML += `
+        <div class="msg-container user-container">
+            <div class="message user-msg">${escapeHTML(text)}</div>
+        </div>
+    `;
     input.value = "";
 
-    const loadingId = "ai_" + Date.now();
-    chatBox.innerHTML +=
-        '<div class="msg-container ai-container">' +
-        '<div class="message ai-msg" id="' + loadingId + '"><i>Processing…</i></div>' +
-        '</div>';
+    const id = "ai_" + Date.now();
+    chat.innerHTML += `
+        <div class="msg-container ai-container">
+            <div class="message ai-msg" id="${id}">
+                <i>Processing…</i>
+            </div>
+        </div>
+    `;
+    chat.scrollTop = chat.scrollHeight;
 
-    chatBox.scrollTop = chatBox.scrollHeight;
-
-    // HARD BLOCK
     if (!isIslamicQuery(text)) {
-        document.getElementById(loadingId).innerHTML =
-            "I am Manarat AI, a scholarly Islamic assistant. Please ask a religious or academic Islamic question.";
+        document.getElementById(id).innerHTML =
+            "I am Manarat AI. I only answer scholarly Islamic questions.";
         return;
     }
 
     const context = await webSearch(text);
 
-    const prompt =
-        "CONTEXT:\n" + context + "\n\n" +
-        "QUESTION:\n" + text + "\n\n" +
-        "INSTRUCTIONS:\n" +
-        "- Cite at least two Shia sources.\n" +
-        "- Be concise.\n" +
-        "- Use HTML only.";
+    const prompt = `
+CONTEXT:
+${context}
+
+QUESTION:
+${text}
+
+INSTRUCTIONS:
+- Cite at least two Shia sources
+- Be concise
+- Use HTML only
+`;
 
     try {
-        const res = await fetch(PROXY + "https://api.groq.com/openai/v1/chat/completions", {
+        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Authorization": "Bearer " + GROQ_KEY,
@@ -304,25 +326,27 @@ async function askAI() {
                 model: MODEL,
                 messages: [
                     { role: "system", content: SYSTEM_INSTRUCTIONS },
-                    { role: "system", content: "Follow all rules strictly." },
                     { role: "user", content: prompt }
                 ],
                 temperature: 0,
-                top_p: 0.1,
-                max_tokens: 1500
+                max_tokens: 1200
             })
         });
 
         const data = await res.json();
-        document.getElementById(loadingId).innerHTML =
-            data.choices[0].message.content;
 
-    } catch {
-        document.getElementById(loadingId).innerHTML =
+        const output =
+            data?.choices?.[0]?.message?.content ||
+            "<b>Error:</b> Empty response.";
+
+        document.getElementById(id).innerHTML = output;
+
+    } catch (e) {
+        document.getElementById(id).innerHTML =
             "<b>Error:</b> Request failed.";
     }
 
-    chatBox.scrollTop = chatBox.scrollHeight;
+    chat.scrollTop = chat.scrollHeight;
 }
 
 /* ================= INPUT ================= */
@@ -341,9 +365,11 @@ function autoExpand(el) {
 </script>
 
 
+
 </body>
 
 </html>
+
 
 
 
