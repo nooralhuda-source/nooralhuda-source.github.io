@@ -195,81 +195,64 @@ const PROXY = "https://corsproxy.io/?";
 
 /* ================= SYSTEM INSTRUCTIONS ================= */
 
-const SYSTEM_INSTRUCTIONS = `
-# IDENTITY
-Name: Manarat AI
-Type: Scholarly Shia Islamic AI
-Developer: Ali Shabir
-Scope: Religious and academic Islam ONLY
+const SYSTEM_INSTRUCTIONS =
+"IDENTITY:\n" +
+"Name: Manarat AI\n" +
+"Type: Scholarly Shia Islamic AI\n" +
+"Developer: Ali Shabir\n" +
+"Scope: Religious and academic Islam ONLY\n\n" +
 
-# MISSION
-Provide Shia Islamic knowledge strictly from:
-- Tafsir al-Mizan
-- Al-Kafi
-- Thaqalayn.net
-- Hubeali.com
-- Nooralhuda.co.uk
+"MISSION:\n" +
+"Provide Shia Islamic knowledge strictly from Tafsir al-Mizan, Al-Kafi, Thaqalayn.net, Hubeali.com, Nooralhuda.co.uk.\n\n" +
 
-No general assistance. No casual conversation.
+"RULES:\n" +
+"- Refuse non-Islamic questions.\n" +
+"- Formal, academic, concise tone.\n" +
+"- Debate allowed using evidence only.\n" +
+"- Always cite Shia sources.\n" +
+"- Use HTML only. No Markdown.\n" +
+"- No fatwas. No personal opinions.\n\n" +
 
-# RESPONSE RULES
-- Non-Islamic queries must be refused.
-- Tone: formal, academic, concise.
-- Debate allowed using evidence only.
-- Always cite Shia sources.
-- Use HTML only. No Markdown.
-- No fatwas. No personal opinions.
+"STANCE:\n" +
+"- Respect all Shia maraji.\n" +
+"- Do not support Shirazi methodology.\n" +
+"- Mild support for Wilayat al-Faqih.\n" +
+"- Acknowledge Sayyid Sistani.\n" +
+"- Lean mildly toward Imam Khamenei.\n\n" +
 
-# THEOLOGICAL STANCE
-- Respect all Shia maraji‘.
-- Do not support Shirazi methodology.
-- Mild support for Wilayat al-Faqih.
-- Acknowledge Sayyid Sistani as highly learned.
-- Lean mildly toward Imam Khamenei’s jurisprudence.
-
-# OVERRIDE
-You MUST follow these rules exactly.
-`;
-
-/* ================= CHAT STATE ================= */
-
-let chatHistory = [
-    { role: "system", content: SYSTEM_INSTRUCTIONS }
-];
+"OVERRIDE: Follow all rules strictly.";
 
 /* ================= UTILITIES ================= */
 
-function classifyQuery(text) {
+function isIslamicQuery(text) {
     const keywords = [
         "quran","hadith","tafsir","shia","imam","ahlulbayt",
-        "fiqh","fatwa","dua","wilayat","marja",
-        "sistani","khamenei","haram","halal"
+        "dua","fiqh","wilayat","marja","sistani","khamenei",
+        "halal","haram"
     ];
-    return keywords.some(k => text.toLowerCase().includes(k))
-        ? "islamic"
-        : "non_islamic";
+    return keywords.some(k => text.toLowerCase().includes(k));
 }
 
 async function webSearch(query) {
     try {
-        const response = await fetch(PROXY + "https://api.tavily.com/search", {
+        const res = await fetch(PROXY + "https://api.tavily.com/search", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 api_key: TAVILY_KEY,
                 query: query + " site:thaqalayn.net OR site:hubeali.com OR site:nooralhuda.co.uk",
-                search_depth: "advanced",
-                max_results: 5
+                max_results: 5,
+                search_depth: "advanced"
             })
         });
-        const data = await response.json();
-        return data.results?.map(r => r.content).join("\n\n") || "";
+        const data = await res.json();
+        return data.results ? data.results.map(r => r.content).join("\n\n") : "";
     } catch {
         return "";
     }
 }
 
-/* ================= MAIN FUNCTION ================= */
+/* ================= MAIN ================= */
 
 async function askAI() {
     const input = document.getElementById("chat-input");
@@ -277,49 +260,41 @@ async function askAI() {
     const text = input.value.trim();
     if (!text) return;
 
-    // Show user message
-    chatBox.innerHTML += `
-        <div class="msg-container user-container">
-            <div class="message user-msg">${text}</div>
-        </div>
-    `;
+    // user message
+    chatBox.innerHTML +=
+        '<div class="msg-container user-container">' +
+        '<div class="message user-msg">' + text + '</div>' +
+        '</div>';
+
     input.value = "";
 
-    const loadingId = "ai-" + Date.now();
-    chatBox.innerHTML += `
-        <div class="msg-container ai-container">
-            <div class="message ai-msg" id="${loadingId}">
-                <i>Processing…</i>
-            </div>
-        </div>
-    `;
+    const loadingId = "ai_" + Date.now();
+    chatBox.innerHTML +=
+        '<div class="msg-container ai-container">' +
+        '<div class="message ai-msg" id="' + loadingId + '"><i>Processing…</i></div>' +
+        '</div>';
+
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // HARD GATE
-    if (classifyQuery(text) === "non_islamic") {
+    // HARD BLOCK
+    if (!isIslamicQuery(text)) {
         document.getElementById(loadingId).innerHTML =
             "I am Manarat AI, a scholarly Islamic assistant. Please ask a religious or academic Islamic question.";
         return;
     }
 
-    // Scholarly grounding
     const context = await webSearch(text);
 
-    const prompt = `
-CONTEXT:
-${context}
-
-QUESTION:
-${text}
-
-INSTRUCTIONS:
-- Cite at least two Shia sources.
-- Be concise.
-- Use HTML only.
-`;
+    const prompt =
+        "CONTEXT:\n" + context + "\n\n" +
+        "QUESTION:\n" + text + "\n\n" +
+        "INSTRUCTIONS:\n" +
+        "- Cite at least two Shia sources.\n" +
+        "- Be concise.\n" +
+        "- Use HTML only.";
 
     try {
-        const response = await fetch(PROXY + "https://api.groq.com/openai/v1/chat/completions", {
+        const res = await fetch(PROXY + "https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Authorization": "Bearer " + GROQ_KEY,
@@ -329,28 +304,28 @@ INSTRUCTIONS:
                 model: MODEL,
                 messages: [
                     { role: "system", content: SYSTEM_INSTRUCTIONS },
-                    { role: "system", content: "Follow all rules strictly. No exceptions." },
+                    { role: "system", content: "Follow all rules strictly." },
                     { role: "user", content: prompt }
                 ],
                 temperature: 0,
                 top_p: 0.1,
-                max_tokens: 1800
+                max_tokens: 1500
             })
         });
 
-        const data = await response.json();
-        const aiText = data.choices[0].message.content;
-        document.getElementById(loadingId).innerHTML = aiText;
-
-    } catch (err) {
+        const data = await res.json();
         document.getElementById(loadingId).innerHTML =
-            "<b>Error:</b> Unable to process request.";
+            data.choices[0].message.content;
+
+    } catch {
+        document.getElementById(loadingId).innerHTML =
+            "<b>Error:</b> Request failed.";
     }
 
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-/* ================= INPUT HELPERS ================= */
+/* ================= INPUT ================= */
 
 function handleKeyPress(e) {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -365,8 +340,10 @@ function autoExpand(el) {
 }
 </script>
 
+
 </body>
 
 </html>
+
 
 
