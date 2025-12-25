@@ -529,13 +529,14 @@ letter-spacing: 0.3px;
 
     <div id="manarat-popup">
         <div id="manarat-header">
-            
+            <div class="feature-tip">
+                For different modes (Debate, Research, etc.), please use the <b>Main Interface</b>.
+            </div>
             <button onclick="toggleManarat()" id="close-btn">&times;</button>
         </div>
         <iframe src="manarat-ai.html" id="manarat-iframe"></iframe>
     </div>
 </div>
-
 <style>
     /* Launcher Styling: Changed to a Pill Shape for text */
     #manarat-launcher {
@@ -622,6 +623,71 @@ letter-spacing: 0.3px;
         70% { box-shadow: 0 0 0 12px rgba(27, 94, 32, 0); }
         100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
     }
+  /* --- Desktop Defaults --- */
+#manarat-popup {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 380px;
+    height: 600px;
+    display: none; /* Controlled by toggleManarat() */
+    flex-direction: column;
+    z-index: 10000;
+}
+
+#manarat-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 12px;
+}
+
+/* Feature Tip Styling */
+.feature-tip {
+    background: #f1f8f5;
+    color: #2e7d32; /* Your Shia Green */
+    font-size: 11px;
+    padding: 8px 12px;
+    text-align: center;
+    border-radius: 8px;
+    margin-right: 10px;
+    border: 1px solid #c8e6c9;
+    flex-grow: 1;
+}
+
+#manarat-header {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+/* --- MOBILE OPTIMIZATIONS (The "Magic" part) --- */
+@media screen and (max-width: 600px) {
+    #manarat-popup {
+        bottom: 0;
+        right: 0;
+        width: 100vw;  /* Full width on phone */
+        height: 85vh; /* 85% of screen height */
+        border-radius: 20px 20px 0 0; /* Rounded top only */
+        box-shadow: 0px -5px 25px rgba(0,0,0,0.2);
+    }
+    
+    #manarat-launcher {
+        bottom: 15px;
+        right: 15px;
+        padding: 12px 20px; /* Slightly bigger for thumbs */
+    }
+
+    #manarat-iframe {
+        border-radius: 0; /* Remove corners on full-screen mobile */
+    }
+
+    /* Make text slightly larger for readability on small screens */
+    .feature-tip {
+        font-size: 10px;
+        padding: 6px;
+    }
+}
 </style>
 
 <script>
@@ -880,6 +946,7 @@ document.body.prepend(banner);
 </script>
 </body>
 </html>
+
 
 
 
