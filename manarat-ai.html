@@ -125,24 +125,13 @@
             color: #555;
         }
         .chip:hover { border-color: var(--shia-green); color: var(--shia-green); }
-/* Table Styling */
-table { 
-    border-collapse: collapse; 
-    width: 100%; 
-    margin: 15px 0; 
-    font-size: 13px;
-}
-th, td { 
-    border: 1px solid var(--border); 
-    padding: 10px; 
-    text-align: left; 
-}
-th { 
-    background-color: var(--bg-gray); 
-    color: var(--shia-green); 
-}
-/* Heading Styling */
-h1, h2, h3 { color: var(--shia-green); margin-top: 20px; }
+
+        /* Table Styling */
+        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 13px; }
+        th, td { border: 1px solid var(--border); padding: 10px; text-align: left; }
+        th { background-color: var(--bg-gray); color: var(--shia-green); }
+        h1, h2, h3 { color: var(--shia-green); margin-top: 20px; }
+        
         /* File Preview */
         #file-preview { display: none; align-items: center; gap: 10px; padding: 10px; background: #eee; border-radius: 8px; margin-bottom: 10px; }
     </style>
@@ -174,10 +163,19 @@ h1, h2, h3 { color: var(--shia-green); margin-top: 20px; }
             <span id="preview-name" style="font-size:12px;"></span>
             <button onclick="clearFile()" style="background:none; border:none; cursor:pointer;">✕</button>
         </div>
-        <textarea id="chat-input" placeholder="Ask a question (mention 'search' for live web)..." rows="1" oninput="autoExpand(this)" onkeypress="handleKeyPress(event)"></textarea>
+        <select id="mode-selector" style="font-size: 11px; border-radius: 5px; border: 1px solid var(--border); padding: 2px 5px; color: var(--shia-green);">
+    <option value="moderate">Moderate (Default)</option>
+    <option value="debate">Debate</option>
+    <option value="essay">Essay</option>
+    <option value="simple">Simple Answer</option>
+    <option value="research">Research</option>
+    <option value="explain">Explain</option>
+    <option value="test">Test Yourself</option>
+</select>
+        <textarea id="chat-input" placeholder="Ask a question..." rows="1" oninput="autoExpand(this)" onkeypress="handleKeyPress(event)"></textarea>
         <div class="controls">
             <label style="cursor:pointer; font-size:18px;">
-                📎 <input type="file" id="file-input" style="display:none" onchange="previewFile(event)">
+                📎 <input type="file" id="file-input" style="display:none">
             </label>
             <button id="send-btn" onclick="askAI()">Send</button>
         </div>
@@ -185,347 +183,169 @@ h1, h2, h3 { color: var(--shia-green); margin-top: 20px; }
     <center style="font-size: 10px; color: #bbb; margin-top: 10px;">Manarat AI Beta may provide inaccurate info. Verify with your Marja.</center>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <script>
-/* ================= CONFIG ================= */
+    const GROQ_KEY = "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"; 
+    const TAVILY_KEY = "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"; 
+    const TEXT_MODEL = "openai/gpt-oss-120b"; 
+    const PROXY = "https://corsproxy.io/?";
 
-const GROQ_KEY = "YOUR_GROQ_KEY_HERE";
-const TAVILY_KEY = "YOUR_TAVILY_KEY_HERE";
-const MODEL = "openai/gpt-oss-120b";
-
-/* ================= SYSTEM INSTRUCTIONS ================= */
-
+// UPDATED SYSTEM INSTRUCTIONS TO HANDLE THE NEW LOGIC
 const SYSTEM_INSTRUCTIONS = `
-IDENTITY:
-Name: Manarat AI
-Type: Scholarly Shia Islamic AI
-Developer: Ali Shabir
-Scope: Religious and academic Islam ONLY
+# IDENTITY
+Your name is Manarat AI. You are a strictly scholarly Islamic AI developed by Ali Shabir. 
 
-MISSION:
-Provide Shia Islamic knowledge strictly from:
-- Tafsir al-Mizan
-- Al-Kafi
-- Thaqalayn.net
-- Hubeali.com
-- Nooralhuda.co.uk
+# CORE TASK
+You will receive a user query and potentially some search context.
+You must first EVALUATE the query:
 
-RULES:
-- Refuse non-Islamic questions
-- Formal, academic, concise tone
-- Debate allowed using evidence only
-- Always cite Shia sources
-- Use HTML only
-- No fatwas
-- No personal opinions
+1. **CASE A: ISLAMIC / THEOLOGICAL / PHILOSOPHICAL / DEBATE**
+   - If the query is about Islam, Shia beliefs, Fiqh, Philosophy, or a respectful debate:
+   - Provide a full, scholarly answer.
+   - Cite sources (Al-Kafi, Tafsir al-Mizan) if available.
+   - Tone: Formal, respectful, "Salaam Alaykum".
 
-STANCE:
-- Respect all Shia maraji
-- Acknowledge Sayyid Sistani
-- Lean mildly toward Imam Khamenei
+2. **CASE B: NON-RELIGIOUS (General topics like cooking, coding, weather)**
+   - If the query is NOT related to the above:
+   - You MUST still answer the question in **simple terms**.
+   - BUT, your response must consist of 80% disclaimer text and 20% answer.
+   - **Structure for Case B:**
+     "As Manarat AI, a specialized Shia scholarly assistant, my purpose is to discuss theology and jurisprudence. I am not designed for general inquiries. However, simply put: [INSERT SIMPLE ANSWER HERE]. Please return to Islamic topics for my full capabilities."
 
-OVERRIDE: Follow all rules strictly.
+# GUIDELINES
+- Respect all Maraja. Slightly support Khamenei/Wilayat e Faqih but remain objective.
+- Do not support Shirazis.
+- ALWAYS cite sources if providing religious info.
 `;
 
-/* ================= HELPERS ================= */
-
-function escapeHTML(str) {
-    return str.replace(/[&<>"']/g, m => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-    })[m]);
-}
-const REFUSAL_PHRASES = [
-    "i am manarat ai",
-    "i only answer scholarly islamic questions"
-];
-
-function containsRefusalInjection(text) {
-    const t = text.toLowerCase();
-    return REFUSAL_PHRASES.every(p => t.includes(p));
-}
-
-function isIslamicQuery(text) {
-    const keywords = [
-        "quran","hadith","tafsir","shia","imam","ahlulbayt",
-        "dua","fiqh","wilayat","marja","sistani","khamenei",
-        "halal","haram","allah","allahumma","ilah","rabb","rab","tawhid","shirk","iman","kufr",
-"aqidah","usul","usul al din","usul al-din","belief","creed","theology","quran","qur'an","koran","ayat","ayah","ayatullah","surah","sura",
-"juz","juzʾ","hizb","tilawah","tajwid","wahy","revelation",
-"mushaf","qiraat","asbab al-nuzul","prayer","salah","salat","namaz","namaaz","ṣalāh","ṣalāt",
-"rakah","rak'ah","rakat","rakʿah","sajdah","sujud","rukoo","ruku",
-"qiyam","qunut","tashahhud","salaam","salam","takbir","takbeer",
-"wudhu","wudu","ablution","ghusl","tayammum",
-"fajr","zuhr","dhuhr","asr","maghrib","isha","isha'a","ishaʾ",
-"jummah","jumuah","jumua","eid","eid salah","eid prayer","dua","du'a","supplication","dhikr","zikr","tasbih","tasbeeh",
-"istighfar","astaghfirullah","salawat","salawat ala muhammad",
-"zikrullah","remembrance","munajat","dua kumayl","dua nudbah",
-"dua tawassul","dua mashlool","dua ahad","dua iftitah","dua jawshan kabir","hadith","hadis","riwayah","riwayat","narration","isnad","sanad",
-"matn","sunna","sunnah","seerah","sirah","akhlaq",
-"al-kafi","bihar al-anwar","wasail al-shia","thaqalayn",
-"hubeali","nooralhuda","fiqh","sharia","shari'ah","shariyah","ahkam","hukm","fatwa",
-"ijtihad","taqlid","marja","marjaʿ","marja taqlid","risalah",
-"najis","najasah","tahir","taharah","haram","halal","makruh",
-"mustahabb","wajib","mubah","qada","ada","kaffarah","shia","shi'a","shiite","twelver","ithna ashari","ahlulbayt",
-"ahl al-bayt","imamate","imamah","imam","imams","twelve imams",
-"imam ali","fatima","zahra","hasan","husayn","hussain",
-"karbala","ashura","arbaeen","wilayat","wilayah","wilayat al-faqih",
-"ghadir","hadith ghadir","hadith kisa","kisa", "rafidah", "akhlaq","adab","taqwa","piety","sabr","shukr","ikhlas",
-"niyyah","intention","tawakkul","hijab","modesty",
-"zina","backbiting","ghibah","namima","halal income","haram income", "akhira","akhirah","hereafter","qiyamah","qiyamat","day of judgment",
-"barzakh","jannah","jannat","jahannam","hellfire","paradise",
-"grave","qabr","munkar","nakir","sirat","mizan","hisab","resurrection", "islam","islamic","muslim","ummah","deen","din",
-"bismillah","inshallah","mashallah","alhamdulillah",
-"subhanallah","la ilaha illa allah","allah akbar",
-"ya allah","ya ali","ya husayn", "muhammad","rasulullah","prophet","nabi","messenger",
-"ibrahim","musa","isa","nuh","adam","yusuf","yaqub",
-"ismail","ishaq","dawud","sulayman","yunus","ayyub",
-"zakariya","yahya","maryam","mary","jesus","moses", "ahlulbayt","ahl al-bayt","imam ali","ali ibn abi talib",
-"fatima","fatimah","zahra","hasan","husayn","hussain",
-"zayn al-abidin","baqir","ja'far","jafar al-sadiq",
-"musa al-kazim","ridha","reza","jawad","hadi","askari",
-"mahdi","imam mahdi","qaim","sahib al-zaman", "sahaba","companions","tabi'in","ulama","ulema","fuqaha",
-"mujtahid","ayatollah","ayatullah","marja","marja taqlid",
-"sistani","sayyid sistani","khamenei","imam khamenei",
-"khoei","al-khoei","tabatabai","allama tabatabai",
-"mutahhari","shariati","majlesi","kulayni","tusi","taba taba'i", "al-kafi","bihar al-anwar","tahdhib","istibsar",
-"wasail al-shia","nahj al-balagha","sahifa sajjadiyya",
-"tafsir al-mizan","tafsir namuna","thaqalayn",
-"hubeali","nooralhuda","hawza","najaf","qum", "shia","shi'a","sunni","wahhabi","salafi","ashari",
-"maturidi","mutazila","kharijite","zaydi","ismaili",
-"twelver","ithna ashari","imamate","caliphate",
-"khilafah","wilayat","wilayah","bada","raj'a","ghaibah",
-"occultation","mahdiology", "debate","polemics","refutation","rebuttal","response",
-"critique","counter-argument","sectarian","interfaith",
-"shia vs sunni","imamate debate","caliphate debate",
-"ghadir","saqifah","hadith authority","hadith rejection",
-"taqlid vs ijtihad","wilayat al-faqih debate",
-"tahrif","isnad criticism","hadith grading", "islamic governance","wilayat al-faqih","faqih",
-"marjaiyyah","ummah leadership","islamic state",
-"resistance","oppression","justice in islam", "prove","disprove","evidence","dalil","burhan",
-"refute","respond","answer","explain","defend",
-"claim","argument","counter","source","citation"
-
-,
-
+    let chatHistory = JSON.parse(localStorage.getItem('manarat_history')) || [
+        { role: "system", content: SYSTEM_INSTRUCTIONS }
     ];
-    return keywords.some(k => text.toLowerCase().includes(k));
-}
-async function aiIslamicCheck(text) {
-    try {
-        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer " + GROQ_KEY,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                model: MODEL,
-                messages: [
-                    {
-                        role: "system",
-                        content:
-                          "You are a classifier. Answer ONLY 'YES' or 'NO'."
-                    },
-                    {
-                        role: "user",
-                        content:
-                          "Is the following a scholarly Islamic or religious question?\n\n" +
-                          text
-                    }
-                ],
-                temperature: 0,
-                max_tokens: 3
-            })
-        });
 
-        const data = await res.json();
-        const reply = data?.choices?.[0]?.message?.content?.trim();
-
-        return reply === "YES";
-
-    } catch {
-        return false;
-    }
-}
-
-/* ================= OPTIONAL WEB SEARCH ================= */
-/* NOTE: Tavily WILL fail in browser-only environments.
-   Keep this for future backend use. */
-
-async function webSearch(query) {
-    try {
-        const res = await fetch("https://api.tavily.com/search", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                api_key: TAVILY_KEY,
-                query: query + " site:thaqalayn.net OR site:hubeali.com OR site:nooralhuda.co.uk",
-                max_results: 5
-            })
-        });
-        const data = await res.json();
-        return data.results?.map(r => r.content).join("\n") || "";
-    } catch {
-        return "";
-    }
-}
-
-/* ================= MAIN ================= */
-
-async function askAI() {
-    const input = document.getElementById("chat-input");
-    const chat = document.getElementById("chat-window");
-    const text = input.value.trim();
-    if (!text) return;
-
-    // Render user message
-    chat.innerHTML += `
-        <div class="msg-container user-container">
-            <div class="message user-msg">${escapeHTML(text)}</div>
-        </div>
-    `;
-    input.value = "";
-
-    const id = "ai_" + Date.now();
-    chat.innerHTML += `
-        <div class="msg-container ai-container">
-            <div class="message ai-msg" id="${id}">
-                <i>Processing…</i>
-            </div>
-        </div>
-    `;
-    chat.scrollTop = chat.scrollHeight;
-
-    /* === ISLAMIC CHECK (STEP 1: KEYWORDS) === */
-    let isIslamic = isIslamicQuery(text);
-
-    /* === ISLAMIC CHECK (STEP 2: AI FALLBACK) === */
-    if (!isIslamic) {
-        isIslamic = await aiIslamicCheck(text);
-    }
-
-    if (!isIslamic) {
-        document.getElementById(id).innerHTML =
-            "I am Manarat AI. I only answer scholarly Islamic questions.";
-        return;
-    }
-
-    /* === AI REQUEST === */
-    try {
-        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer " + GROQ_KEY,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                model: MODEL,
-                messages: [
-                    { role: "system", content: SYSTEM_INSTRUCTIONS },
-                    { role: "user", content: text }
-                ],
-                temperature: 0,
-                max_tokens: 1200
-            })
-        });
-
-        const data = await res.json();
-        const reply = data?.choices?.[0]?.message?.content;
-
-        document.getElementById(id).innerHTML =
-            reply ? reply : "<b>Error:</b> Empty response from model.";
-
-    } catch (err) {
-        document.getElementById(id).innerHTML =
-            "<b>Error:</b> Request failed.";
-    }
-
-    chat.scrollTop = chat.scrollHeight;
-}
-
-    /* ================= OPTIONAL WEB CONTEXT ================= */
-
-    const context = await webSearch(text);
-
-    /* ================= AI PROMPT ================= */
-
-    const prompt = `
-CONTEXT:
-${context}
-
-QUESTION:
-${text}
-
-INSTRUCTIONS:
-- Cite at least two Shia sources
-- Be concise
-- Use HTML only
-`;
-
-    /* ================= GROQ REQUEST ================= */
-
-    try {
-        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer " + GROQ_KEY,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                model: MODEL,
-                messages: [
-                    { role: "system", content: SYSTEM_INSTRUCTIONS },
-                    { role: "user", content: prompt }
-                ],
-                temperature: 0,
-                max_tokens: 1200
-            })
-        });
-
-        const data = await res.json();
-
-        const output =
-            data?.choices?.[0]?.message?.content ||
-            "<b>Error:</b> Empty response.";
-
-        document.getElementById(id).innerHTML = output;
-
-    } catch (e) {
-        document.getElementById(id).innerHTML =
-            "<b>Error:</b> Request failed.";
-    }
-
-    chat.scrollTop = chat.scrollHeight;
-}
-
-
-/* ================= INPUT ================= */
-
-function handleKeyPress(e) {
-    if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
+    function useChip(text) {
+        document.getElementById('chat-input').value = text;
         askAI();
     }
-}
 
-function autoExpand(el) {
-    el.style.height = "auto";
-    el.style.height = el.scrollHeight + "px";
+    function autoExpand(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    function handleKeyPress(e) { 
+        if (e.key === 'Enter' && !e.shiftKey) { 
+            e.preventDefault(); 
+            askAI(); 
+        } 
+    }
+
+    async function webSearch(query) {
+        const filter = "site:shiachat.com OR site:nooralhuda.co.uk OR site:thaqalayn.net OR site:hubeali.com";
+        const targetedQuery = `${query} ${filter}`;
+        try {
+            const response = await fetch(PROXY + "https://api.tavily.com/search", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    api_key: TAVILY_KEY,
+                    query: targetedQuery,
+                    search_depth: "advanced",
+                    max_results: 5,
+                    include_answer: true
+                })
+            });
+            const data = await response.json();
+            let knowledge = data.results.map(r => `Source (${r.url}): ${r.content}`).join("\n\n");
+            return knowledge || "No specific results found.";
+        } catch (e) {
+            return "Search failed.";
+        }
+    }
+
+ 
+   async function askAI() {
+    const input = document.getElementById('chat-input');
+    const chatBox = document.getElementById('chat-window');
+    const mode = document.getElementById('mode-selector').value; 
+    
+    let text = input.value.trim();
+    if (!text) return;
+
+    // 1. UI: Show User Message
+    chatBox.innerHTML += `<div class="msg-container user-container"><div class="message user-msg">${text}</div></div>`;
+    input.value = "";
+    
+    const loadingId = "L-" + Date.now();
+    chatBox.innerHTML += `<div class="msg-container ai-container"><div class="message ai-msg" id="${loadingId}"><i>Processing...</i></div></div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // 2. Mode Rules
+    const modeInstructions = {
+              "moderate": "Provide 1 really large paragraph or 2 moderate-to-large paragraphs. Balanced scholarly tone.",
+        "debate": "Adopt a debating tone. Support the user's view (if applicable) while actively debunking counter-claims. Focus on logical refutation. Include at least 4-5 key quotes/sources only from quran and hadith, but keep the text concise and hard-hitting. Length: essay size.",
+        "essay": "Provide a 5 page style long-form answer. Include various points of view, detailed analysis, and multiple scholarly sources. Structure with headings.when mentioning quotes/sources mention refrences in text and after not just at the end, use more hadiths and quran than debate forums, mk",
+        "simple": "Provide a 2-3 sentence maximum response. Use very simple language. No waffle, no extra text.",
+        "research": "Focus entirely on evidence. Provide as many sources, book references, and texts from the internet/traditions as possible. High density of citations.",
+        "explain": "Provide a very detailed, long-winded explanation. Feel free to 'waffle' to ensure every minor detail of the 'how' and 'why' is covered.",
+        "test": "Do not answer the question. Instead, provide exactly 5 multiple-choice questions to test the user's knowledge on this topic."
+    };
+
+    // 3. Search & Context Logic
+    const islamicKeywords = ["hadith", "quran", "tafsir", "shia", "imam", "fatwa", "fiqh", "prayer", "halal", "haram", "who are you", "ali shabir", "manarat", "god", "allah", "prophet", "debate", "sunni", "religion"];
+    const isIslamicQuery = islamicKeywords.some(keyword => text.toLowerCase().includes(keyword.toLowerCase()));
+    
+    let searchContext = "";
+    if (isIslamicQuery) {
+        document.getElementById(loadingId).innerHTML = "<i>Searching scholarly databases...</i>";
+        searchContext = await webSearch(text);
+    }
+
+    // 4. THE FIX: Separate Context from User Input
+    // We send the "Context" as a System or separate note so the AI doesn't think it's the User's question.
+    const userMessageForAI = {
+        role: "user",
+        content: `[MODE: ${mode.toUpperCase()}] [RULE: ${modeInstructions[mode]}]
+                  [SEARCH CONTEXT: ${searchContext}]
+                  USER QUESTION: ${text}`
+    };
+
+    chatHistory.push(userMessageForAI);
+
+    // 5. API Call
+    try {
+        const response = await fetch(PROXY + "https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: { "Authorization": `Bearer ${GROQ_KEY}`, "Content-Type": "application/json" },
+            body: JSON.stringify({
+                model: "llama-3.3-70b-versatile",
+                messages: chatHistory,
+                temperature: (mode === 'debate' || mode === 'essay') ? 0.7 : 0.2,
+                max_tokens: (mode === 'essay') ? 3000 : 1500
+            })
+        });
+
+        const data = await response.json();
+        if (data.choices && data.choices.length > 0) {
+            let aiText = data.choices[0].message.content;
+            
+            // Save Assistant response to history
+            chatHistory.push({ role: "assistant", content: aiText });
+            
+            // Keep history from getting too long (keep last 15 messages)
+            if (chatHistory.length > 15) {
+                chatHistory = [chatHistory[0], ...chatHistory.slice(-14)];
+            }
+            
+            localStorage.setItem('manarat_history', JSON.stringify(chatHistory));
+            document.getElementById(loadingId).innerHTML = marked.parse(aiText);
+        }
+    } catch (e) {
+        document.getElementById(loadingId).innerHTML = "<b>Error:</b> " + e.message;
+    } finally {
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 }
 </script>
 
-
-
 </body>
-
 </html>
-
-
-
-
-
-
-
