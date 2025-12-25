@@ -381,7 +381,7 @@ async function askAI() {
     const text = input.value.trim();
     if (!text) return;
 
-    // Show user message
+    // Render user message
     chat.innerHTML += `
         <div class="msg-container user-container">
             <div class="message user-msg">${escapeHTML(text)}</div>
@@ -389,7 +389,6 @@ async function askAI() {
     `;
     input.value = "";
 
-    // Show loading AI message
     const id = "ai_" + Date.now();
     chat.innerHTML += `
         <div class="msg-container ai-container">
@@ -400,22 +399,52 @@ async function askAI() {
     `;
     chat.scrollTop = chat.scrollHeight;
 
-    /* ================= ISLAMIC VALIDATION ================= */
-
-    // 1) Keyword-based check
+    /* === ISLAMIC CHECK (STEP 1: KEYWORDS) === */
     let isIslamic = isIslamicQuery(text);
 
-    // 2) AI fallback if keywords fail
+    /* === ISLAMIC CHECK (STEP 2: AI FALLBACK) === */
     if (!isIslamic) {
         isIslamic = await aiIslamicCheck(text);
     }
 
-    // 3) Final refusal
     if (!isIslamic) {
         document.getElementById(id).innerHTML =
             "I am Manarat AI. I only answer scholarly Islamic questions.";
         return;
     }
+
+    /* === AI REQUEST === */
+    try {
+        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + GROQ_KEY,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: MODEL,
+                messages: [
+                    { role: "system", content: SYSTEM_INSTRUCTIONS },
+                    { role: "user", content: text }
+                ],
+                temperature: 0,
+                max_tokens: 1200
+            })
+        });
+
+        const data = await res.json();
+        const reply = data?.choices?.[0]?.message?.content;
+
+        document.getElementById(id).innerHTML =
+            reply ? reply : "<b>Error:</b> Empty response from model.";
+
+    } catch (err) {
+        document.getElementById(id).innerHTML =
+            "<b>Error:</b> Request failed.";
+    }
+
+    chat.scrollTop = chat.scrollHeight;
+}
 
     /* ================= OPTIONAL WEB CONTEXT ================= */
 
@@ -493,6 +522,7 @@ function autoExpand(el) {
 </body>
 
 </html>
+
 
 
 
