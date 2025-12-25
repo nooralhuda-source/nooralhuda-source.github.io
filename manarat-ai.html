@@ -381,6 +381,7 @@ async function askAI() {
     const text = input.value.trim();
     if (!text) return;
 
+    // Show user message
     chat.innerHTML += `
         <div class="msg-container user-container">
             <div class="message user-msg">${escapeHTML(text)}</div>
@@ -388,6 +389,7 @@ async function askAI() {
     `;
     input.value = "";
 
+    // Show loading AI message
     const id = "ai_" + Date.now();
     chat.innerHTML += `
         <div class="msg-container ai-container">
@@ -398,13 +400,28 @@ async function askAI() {
     `;
     chat.scrollTop = chat.scrollHeight;
 
-    if (!isIslamicQuery(text)) {
+    /* ================= ISLAMIC VALIDATION ================= */
+
+    // 1) Keyword-based check
+    let isIslamic = isIslamicQuery(text);
+
+    // 2) AI fallback if keywords fail
+    if (!isIslamic) {
+        isIslamic = await aiIslamicCheck(text);
+    }
+
+    // 3) Final refusal
+    if (!isIslamic) {
         document.getElementById(id).innerHTML =
             "I am Manarat AI. I only answer scholarly Islamic questions.";
         return;
     }
 
+    /* ================= OPTIONAL WEB CONTEXT ================= */
+
     const context = await webSearch(text);
+
+    /* ================= AI PROMPT ================= */
 
     const prompt = `
 CONTEXT:
@@ -418,6 +435,8 @@ INSTRUCTIONS:
 - Be concise
 - Use HTML only
 `;
+
+    /* ================= GROQ REQUEST ================= */
 
     try {
         const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -451,23 +470,8 @@ INSTRUCTIONS:
     }
 
     chat.scrollTop = chat.scrollHeight;
-    const isKeywordIslamic = keywordMatch(text);
-
-let isIslamic = isKeywordIslamic;
-
-if (!isIslamic) {
-    isIslamic = await aiIslamicCheck(text);
 }
 
-if (!isIslamic) {
-    document.getElementById(loadingId).innerHTML =
-        "I am Manarat AI. I only answer scholarly Islamic questions.";
-    return;
-}
-
-}
-
-}
 
 /* ================= INPUT ================= */
 
@@ -489,6 +493,7 @@ function autoExpand(el) {
 </body>
 
 </html>
+
 
 
 
