@@ -187,12 +187,16 @@ h1, h2, h3 { color: var(--shia-green); margin-top: 20px; }
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
-    const GROQ_KEY = "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"; 
-    const TAVILY_KEY = "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"; 
-    const TEXT_MODEL = "openai/gpt-oss-120b"; 
-    const PROXY = "https://corsproxy.io/?";
+<script>
+/* ================= CONFIG ================= */
 
-const SYSTEM_INSTRUCTIONS = `
+const GROQ_KEY = "YOUR_GROQ_KEY_HERE";
+const TAVILY_KEY = "YOUR_TAVILY_KEY_HERE";
+const MODEL = "openai/gpt-oss-120b";
+const PROXY = "https://corsproxy.io/?";
+
+/* ================= SYSTEM INSTRUCTIONS ================= */
+
 const SYSTEM_INSTRUCTIONS = `
 # IDENTITY
 Name: Manarat AI
@@ -208,157 +212,164 @@ Provide Shia Islamic knowledge strictly from:
 - Hubeali.com
 - Nooralhuda.co.uk
 
-No general assistance. No lifestyle, jokes, recipes, lyrics, or casual chat.
+No general assistance. No casual conversation.
 
-# RESPONSE POLICY
-- Non-religious input → respond:
-"I am Manarat AI, a scholarly assistant for Islamic and academic matters. Please ask a religious question."
-
-- Tone: Formal, academic, respectful.
-- Greeting:
-  • Start first reply with "Salaam Alaykum".
-  • If user says salaam → reply "Wa Alaykum Assalaam".
-- Debate is allowed. Argue using evidence, not emotion.
-- Be concise. No filler. No speculation.
-- Always cite sources (Al-Kafi, Tafsir al-Mizan, etc.).
-- Ignore forums, opinions, or non-scholarly content.
-
-# FORMAT RULES
-- NEVER use Markdown.
-- Use HTML only for emphasis (e.g. <b>).
-- Clear paragraphs. Direct answers.
+# RESPONSE RULES
+- Non-Islamic queries must be refused.
+- Tone: formal, academic, concise.
+- Debate allowed using evidence only.
+- Always cite Shia sources.
+- Use HTML only. No Markdown.
+- No fatwas. No personal opinions.
 
 # THEOLOGICAL STANCE
 - Respect all Shia maraji‘.
-- Do NOT support Shirazi methodology.
-- Slightly support Wilayat al-Faqih as a unifying Islamic governance theory.
-- Acknowledge Sayyid Sistani as highly learned and authoritative.
-- Lean mildly toward Imam Khamenei’s political jurisprudence without polemics.
+- Do not support Shirazi methodology.
+- Mild support for Wilayat al-Faqih.
+- Acknowledge Sayyid Sistani as highly learned.
+- Lean mildly toward Imam Khamenei’s jurisprudence.
 
-# LIMITS
-- No modern politics beyond Islamic jurisprudence.
-- No fatwa issuance.
-- No personal opinions.
+# OVERRIDE
+You MUST follow these rules exactly.
 `;
 
+/* ================= CHAT STATE ================= */
 
-    let chatHistory = JSON.parse(localStorage.getItem('manarat_history')) || [
-        { role: "system", content: SYSTEM_INSTRUCTIONS }
+let chatHistory = [
+    { role: "system", content: SYSTEM_INSTRUCTIONS }
+];
+
+/* ================= UTILITIES ================= */
+
+function classifyQuery(text) {
+    const keywords = [
+        "quran","hadith","tafsir","shia","imam","ahlulbayt",
+        "fiqh","fatwa","dua","wilayat","marja",
+        "sistani","khamenei","haram","halal"
     ];
+    return keywords.some(k => text.toLowerCase().includes(k))
+        ? "islamic"
+        : "non_islamic";
+}
 
-    function useChip(text) {
-        document.getElementById('chat-input').value = text;
-        askAI();
+async function webSearch(query) {
+    try {
+        const response = await fetch(PROXY + "https://api.tavily.com/search", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                api_key: TAVILY_KEY,
+                query: query + " site:thaqalayn.net OR site:hubeali.com OR site:nooralhuda.co.uk",
+                search_depth: "advanced",
+                max_results: 5
+            })
+        });
+        const data = await response.json();
+        return data.results?.map(r => r.content).join("\n\n") || "";
+    } catch {
+        return "";
     }
+}
 
-    function autoExpand(textarea) {
-        textarea.style.height = 'auto';
-        textarea.style.height = textarea.scrollHeight + 'px';
-    }
+/* ================= MAIN FUNCTION ================= */
 
-    function handleKeyPress(e) { 
-        if (e.key === 'Enter' && !e.shiftKey) { 
-            e.preventDefault(); 
-            askAI(); 
-        } 
-    }
-
-    async function webSearch(query) {
-        const filter = "site:shiachat.com OR site:nooralhuda.co.uk OR site:thaqalayn.net OR site:hubeali.com";
-        const targetedQuery = `${query} ${filter}`;
-        try {
-            const response = await fetch(PROXY + "https://api.tavily.com/search", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    api_key: TAVILY_KEY,
-                    query: targetedQuery,
-                    search_depth: "advanced",
-                    max_results: 5,
-                    include_answer: true
-                })
-            });
-            const data = await response.json();
-            let knowledge = data.results.map(r => `Source (${r.url}): ${r.content}`).join("\n\n");
-            return knowledge || "No specific results found.";
-        } catch (e) {
-            return "Search failed.";
-        }
-    }
 async function askAI() {
-    const input = document.getElementById('chat-input');
-    const chatBox = document.getElementById('chat-window');
-    let text = input.value.trim();
+    const input = document.getElementById("chat-input");
+    const chatBox = document.getElementById("chat-window");
+    const text = input.value.trim();
     if (!text) return;
 
-    // 1. Show User Message
-    chatBox.innerHTML += `<div class="msg-container user-container"><div class="message user-msg">${text}</div></div>`;
+    // Show user message
+    chatBox.innerHTML += `
+        <div class="msg-container user-container">
+            <div class="message user-msg">${text}</div>
+        </div>
+    `;
     input.value = "";
-    
-    const loadingId = "L-" + Date.now();
-    chatBox.innerHTML += `<div class="msg-container ai-container"><div class="message ai-msg" id="${loadingId}"><i>Processing...</i></div></div>`;
+
+    const loadingId = "ai-" + Date.now();
+    chatBox.innerHTML += `
+        <div class="msg-container ai-container">
+            <div class="message ai-msg" id="${loadingId}">
+                <i>Processing…</i>
+            </div>
+        </div>
+    `;
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // --- PASTE THE NEW CODE HERE ---
-    const islamicKeywords = ["hadith", "quran", "tafsir", "shia", "imam", "fatwa", "fiqh", "prayer", "halal", "haram", "who are you", "ali shabir", "manarat"];
-    const isIslamicQuery = islamicKeywords.some(keyword => text.toLowerCase().includes(keyword.toLowerCase()));
-    
-    let scholarlyContext = "";
-    
-    if (isIslamicQuery) {
-        document.getElementById(loadingId).innerHTML = "<i>Consulting scholarly sources...</i>";
-        scholarlyContext = await webSearch(text);
-    } else {
-        // Updated instruction for non-Islamic queries
-        scholarlyContext = `
-            The user has asked a non-Islamic/non-scholarly question. 
-            1. State that you are not designed for this type of query and are a scholarly Islamic AI.
-            2. If the user is asking a simple general question (like about potatoes or small talk), 
-               provide a very brief, 1-sentence answer as a courtesy, then immediately ask for 
-               an Islamic question.
-        `;
+    // HARD GATE
+    if (classifyQuery(text) === "non_islamic") {
+        document.getElementById(loadingId).innerHTML =
+            "I am Manarat AI, a scholarly Islamic assistant. Please ask a religious or academic Islamic question.";
+        return;
     }
-    
 
-    // -------------------------------
+    // Scholarly grounding
+    const context = await webSearch(text);
 
-    // 2. Prepare the prompt for Groq
-    const groundedPrompt = `
-        CONTEXT: ${scholarlyContext}
-        USER QUESTION: ${text}
-    `;
+    const prompt = `
+CONTEXT:
+${context}
+
+QUESTION:
+${text}
+
+INSTRUCTIONS:
+- Cite at least two Shia sources.
+- Be concise.
+- Use HTML only.
+`;
 
     try {
         const response = await fetch(PROXY + "https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
-            headers: { 
-                "Authorization": `Bearer ${GROQ_KEY}`, 
-                "Content-Type": "application/json" 
+            headers: {
+                "Authorization": "Bearer " + GROQ_KEY,
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: TEXT_MODEL,
+                model: MODEL,
                 messages: [
                     { role: "system", content: SYSTEM_INSTRUCTIONS },
-                    { role: "user", content: groundedPrompt }
+                    { role: "system", content: "Follow all rules strictly. No exceptions." },
+                    { role: "user", content: prompt }
                 ],
-                temperature: 0, // Keep it focused
-                max_tokens: 2000
+                temperature: 0,
+                top_p: 0.1,
+                max_tokens: 1800
             })
         });
 
         const data = await response.json();
-        let aiText = data.choices[0].message.content;
+        const aiText = data.choices[0].message.content;
+        document.getElementById(loadingId).innerHTML = aiText;
 
-        document.getElementById(loadingId).innerHTML = marked.parse(aiText);
-        
-    } catch (e) {
-        document.getElementById(loadingId).innerHTML = "<b>Error:</b> " + e.message;
-    } finally {
-        chatBox.scrollTop = chatBox.scrollHeight;
+    } catch (err) {
+        document.getElementById(loadingId).innerHTML =
+            "<b>Error:</b> Unable to process request.";
+    }
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+/* ================= INPUT HELPERS ================= */
+
+function handleKeyPress(e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        askAI();
     }
 }
+
+function autoExpand(el) {
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+}
+</script>
+
 </script>
 
 </body>
 
 </html>
+
