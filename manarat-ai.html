@@ -237,14 +237,118 @@ function escapeHTML(str) {
         "'": "&#039;"
     })[m]);
 }
+const REFUSAL_PHRASES = [
+    "i am manarat ai",
+    "i only answer scholarly islamic questions"
+];
+
+function containsRefusalInjection(text) {
+    const t = text.toLowerCase();
+    return REFUSAL_PHRASES.every(p => t.includes(p));
+}
 
 function isIslamicQuery(text) {
     const keywords = [
         "quran","hadith","tafsir","shia","imam","ahlulbayt",
         "dua","fiqh","wilayat","marja","sistani","khamenei",
-        "halal","haram"
+        "halal","haram","allah","allahumma","ilah","rabb","rab","tawhid","shirk","iman","kufr",
+"aqidah","usul","usul al din","usul al-din","belief","creed","theology","quran","qur'an","koran","ayat","ayah","ayatullah","surah","sura",
+"juz","juzʾ","hizb","tilawah","tajwid","wahy","revelation",
+"mushaf","qiraat","asbab al-nuzul","prayer","salah","salat","namaz","namaaz","ṣalāh","ṣalāt",
+"rakah","rak'ah","rakat","rakʿah","sajdah","sujud","rukoo","ruku",
+"qiyam","qunut","tashahhud","salaam","salam","takbir","takbeer",
+"wudhu","wudu","ablution","ghusl","tayammum",
+"fajr","zuhr","dhuhr","asr","maghrib","isha","isha'a","ishaʾ",
+"jummah","jumuah","jumua","eid","eid salah","eid prayer","dua","du'a","supplication","dhikr","zikr","tasbih","tasbeeh",
+"istighfar","astaghfirullah","salawat","salawat ala muhammad",
+"zikrullah","remembrance","munajat","dua kumayl","dua nudbah",
+"dua tawassul","dua mashlool","dua ahad","dua iftitah","dua jawshan kabir","hadith","hadis","riwayah","riwayat","narration","isnad","sanad",
+"matn","sunna","sunnah","seerah","sirah","akhlaq",
+"al-kafi","bihar al-anwar","wasail al-shia","thaqalayn",
+"hubeali","nooralhuda","fiqh","sharia","shari'ah","shariyah","ahkam","hukm","fatwa",
+"ijtihad","taqlid","marja","marjaʿ","marja taqlid","risalah",
+"najis","najasah","tahir","taharah","haram","halal","makruh",
+"mustahabb","wajib","mubah","qada","ada","kaffarah","shia","shi'a","shiite","twelver","ithna ashari","ahlulbayt",
+"ahl al-bayt","imamate","imamah","imam","imams","twelve imams",
+"imam ali","fatima","zahra","hasan","husayn","hussain",
+"karbala","ashura","arbaeen","wilayat","wilayah","wilayat al-faqih",
+"ghadir","hadith ghadir","hadith kisa","kisa", "rafidah", "akhlaq","adab","taqwa","piety","sabr","shukr","ikhlas",
+"niyyah","intention","tawakkul","hijab","modesty",
+"zina","backbiting","ghibah","namima","halal income","haram income", "akhira","akhirah","hereafter","qiyamah","qiyamat","day of judgment",
+"barzakh","jannah","jannat","jahannam","hellfire","paradise",
+"grave","qabr","munkar","nakir","sirat","mizan","hisab","resurrection", "islam","islamic","muslim","ummah","deen","din",
+"bismillah","inshallah","mashallah","alhamdulillah",
+"subhanallah","la ilaha illa allah","allah akbar",
+"ya allah","ya ali","ya husayn", "muhammad","rasulullah","prophet","nabi","messenger",
+"ibrahim","musa","isa","nuh","adam","yusuf","yaqub",
+"ismail","ishaq","dawud","sulayman","yunus","ayyub",
+"zakariya","yahya","maryam","mary","jesus","moses", "ahlulbayt","ahl al-bayt","imam ali","ali ibn abi talib",
+"fatima","fatimah","zahra","hasan","husayn","hussain",
+"zayn al-abidin","baqir","ja'far","jafar al-sadiq",
+"musa al-kazim","ridha","reza","jawad","hadi","askari",
+"mahdi","imam mahdi","qaim","sahib al-zaman", "sahaba","companions","tabi'in","ulama","ulema","fuqaha",
+"mujtahid","ayatollah","ayatullah","marja","marja taqlid",
+"sistani","sayyid sistani","khamenei","imam khamenei",
+"khoei","al-khoei","tabatabai","allama tabatabai",
+"mutahhari","shariati","majlesi","kulayni","tusi","taba taba'i", "al-kafi","bihar al-anwar","tahdhib","istibsar",
+"wasail al-shia","nahj al-balagha","sahifa sajjadiyya",
+"tafsir al-mizan","tafsir namuna","thaqalayn",
+"hubeali","nooralhuda","hawza","najaf","qum", "shia","shi'a","sunni","wahhabi","salafi","ashari",
+"maturidi","mutazila","kharijite","zaydi","ismaili",
+"twelver","ithna ashari","imamate","caliphate",
+"khilafah","wilayat","wilayah","bada","raj'a","ghaibah",
+"occultation","mahdiology", "debate","polemics","refutation","rebuttal","response",
+"critique","counter-argument","sectarian","interfaith",
+"shia vs sunni","imamate debate","caliphate debate",
+"ghadir","saqifah","hadith authority","hadith rejection",
+"taqlid vs ijtihad","wilayat al-faqih debate",
+"tahrif","isnad criticism","hadith grading", "islamic governance","wilayat al-faqih","faqih",
+"marjaiyyah","ummah leadership","islamic state",
+"resistance","oppression","justice in islam", "prove","disprove","evidence","dalil","burhan",
+"refute","respond","answer","explain","defend",
+"claim","argument","counter","source","citation"
+
+,
+
     ];
     return keywords.some(k => text.toLowerCase().includes(k));
+}
+async function aiIslamicCheck(text) {
+    try {
+        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + GROQ_KEY,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: MODEL,
+                messages: [
+                    {
+                        role: "system",
+                        content:
+                          "You are a classifier. Answer ONLY 'YES' or 'NO'."
+                    },
+                    {
+                        role: "user",
+                        content:
+                          "Is the following a scholarly Islamic or religious question?\n\n" +
+                          text
+                    }
+                ],
+                temperature: 0,
+                max_tokens: 3
+            })
+        });
+
+        const data = await res.json();
+        const reply = data?.choices?.[0]?.message?.content?.trim();
+
+        return reply === "YES";
+
+    } catch {
+        return false;
+    }
 }
 
 /* ================= OPTIONAL WEB SEARCH ================= */
@@ -347,6 +451,22 @@ INSTRUCTIONS:
     }
 
     chat.scrollTop = chat.scrollHeight;
+    const isKeywordIslamic = keywordMatch(text);
+
+let isIslamic = isKeywordIslamic;
+
+if (!isIslamic) {
+    isIslamic = await aiIslamicCheck(text);
+}
+
+if (!isIslamic) {
+    document.getElementById(loadingId).innerHTML =
+        "I am Manarat AI. I only answer scholarly Islamic questions.";
+    return;
+}
+
+}
+
 }
 
 /* ================= INPUT ================= */
@@ -369,6 +489,7 @@ function autoExpand(el) {
 </body>
 
 </html>
+
 
 
 
