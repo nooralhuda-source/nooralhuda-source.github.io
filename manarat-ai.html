@@ -185,10 +185,18 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
-    const GROQ_KEY = "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"; 
-    const TAVILY_KEY = "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"; 
-    const TEXT_MODEL = "openai/gpt-oss-120b"; 
-    const PROXY = "https://corsproxy.io/?";
+// Add all your friends' keys here in this list
+const GROQ_KEYS = [
+    "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",
+    "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",
+    "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"
+];
+
+const TAVILY_KEY = "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"; 
+const TEXT_MODEL = "openai/gpt-oss-120b"; 
+const FALLBACK_MODEL = "openai/gpt-oss-20b"; // If 120b is out, use 20b
+
+let currentKeyIndex = 0; // Starts with the first key
 
 // UPDATED SYSTEM INSTRUCTIONS TO HANDLE THE NEW LOGIC
 const SYSTEM_INSTRUCTIONS = `
@@ -239,30 +247,33 @@ You must first EVALUATE the query:
         } 
     }
 
-    async function webSearch(query) {
-        const filter = "site:shiachat.com OR site:nooralhuda.co.uk OR site:thaqalayn.net OR site:hubeali.com";
-        const targetedQuery = `${query} ${filter}`;
-        try {
-            const response = await fetch(PROXY + "https://api.tavily.com/search", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    api_key: TAVILY_KEY,
-                    query: targetedQuery,
-                    search_depth: "advanced",
-                    max_results: 5,
-                    include_answer: true
-                })
-            });
-            const data = await response.json();
-            let knowledge = data.results.map(r => `Source (${r.url}): ${r.content}`).join("\n\n");
-            return knowledge || "No specific results found.";
-        } catch (e) {
-            return "Search failed.";
-        }
+async function webSearch(query) {
+    const filter = "site:shiachat.com OR site:nooralhuda.co.uk OR site:thaqalayn.net OR site:hubeali.com";
+    const targetedQuery = `${query} ${filter}`;
+    try {
+        const response = await fetch(PROXY + "https://api.tavily.com/search", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                api_key: TAVILY_KEY,
+                query: targetedQuery,
+                search_depth: "basic", // Basic is faster and uses fewer tokens
+                max_results: 3 // Reduced from 5 to 3
+            })
+        });
+        const data = await response.json();
+        
+        // CRITICAL: Limit each result to 500 characters so we don't hit the TPM limit
+        let knowledge = data.results.map(r => 
+            `Source: ${r.url} | Content: ${r.content.substring(0, 500)}`
+        ).join("\n\n");
+        
+        return knowledge || "No specific results found.";
+    } catch (e) {
+        return "Search failed.";
     }
+}
 
- 
    async function askAI() {
     const input = document.getElementById('chat-input');
     const chatBox = document.getElementById('chat-window');
@@ -276,76 +287,100 @@ You must first EVALUATE the query:
     input.value = "";
     
     const loadingId = "L-" + Date.now();
-    chatBox.innerHTML += `<div class="msg-container ai-container"><div class="message ai-msg" id="${loadingId}"><i>Processing...</i></div></div>`;
+    chatBox.innerHTML += `<div class="msg-container ai-container"><div class="message ai-msg" id="${loadingId}"><i>Manarat AI is thinking...</i></div></div>`;
     chatBox.scrollTop = chatBox.scrollHeight;
 
     // 2. Mode Rules
     const modeInstructions = {
-              "moderate": "Provide 1 really large paragraph or 2 moderate-to-large paragraphs. Balanced scholarly tone.",
-        "debate": "Adopt a debating tone. Support the user's view (if applicable) while actively debunking counter-claims. Focus on logical refutation. Include at least 4-5 key quotes/sources only from quran and hadith, but keep the text concise and hard-hitting. Length: essay size.",
-        "essay": "Provide a 5 page style long-form answer. Include various points of view, detailed analysis, and multiple scholarly sources. Structure with headings.when mentioning quotes/sources mention refrences in text and after not just at the end, use more hadiths and quran than debate forums, mk",
-        "simple": "Provide a 2-3 sentence maximum response. Use very simple language. No waffle, no extra text.",
-        "research": "Focus entirely on evidence. Provide as many sources, book references, and texts from the internet/traditions as possible. High density of citations.",
-        "explain": "Provide a very detailed, long-winded explanation. Feel free to 'waffle' to ensure every minor detail of the 'how' and 'why' is covered.",
-        "test": "Do not answer the question. Instead, provide exactly 5 multiple-choice questions to test the user's knowledge on this topic."
+                "moderate": "1-2 large paragraphs. Balanced scholarly tone.",
+        "debate": "Debating tone. Support user, debunk counters. 4-5 quotes. Essay length.",
+        "essay": "5-page style. Headings, analysis, many sources/hadith references.",
+        "simple": "MAX 2-3 sentences. Simple language. No waffle.",
+        "research": "Extreme evidence focus. High density of book citations.",
+        "explain": "Very detailed, long-winded. Waffle allowed.",
+        "test": "Provide exactly 5 MCQ questions only."
     };
 
-    // 3. Search & Context Logic
-    const islamicKeywords = ["hadith", "quran", "tafsir", "shia", "imam", "fatwa", "fiqh", "prayer", "halal", "haram", "who are you", "ali shabir", "manarat", "god", "allah", "prophet", "debate", "sunni", "religion"];
+
+
+    // 3. Search Logic (STRICT LIMITS to prevent 8000 token error)
+    const islamicKeywords = ["hadith", "quran", "tafsir", "shia", "imam", "fatwa", "fiqh", "prayer", "halal", "haram", "ali shabir", "manarat", "allah", "prophet", "debate", "sunni"];
     const isIslamicQuery = islamicKeywords.some(keyword => text.toLowerCase().includes(keyword.toLowerCase()));
     
     let searchContext = "";
     if (isIslamicQuery) {
-        document.getElementById(loadingId).innerHTML = "<i>Searching scholarly databases...</i>";
+        document.getElementById(loadingId).innerHTML = "<i>Searching scholarly sources...</i>";
         searchContext = await webSearch(text);
     }
 
-    // 4. THE FIX: Separate Context from User Input
-    // We send the "Context" as a System or separate note so the AI doesn't think it's the User's question.
-    const userMessageForAI = {
+    // 4. Update History (Keeping it lean)
+    chatHistory.push({
         role: "user",
-        content: `[MODE: ${mode.toUpperCase()}] [RULE: ${modeInstructions[mode]}]
-                  [SEARCH CONTEXT: ${searchContext}]
-                  USER QUESTION: ${text}`
-    };
+        content: `[MODE: ${mode}] [RULE: ${modeInstructions[mode]}] [CONTEXT: ${searchContext}] QUESTION: ${text}`
+    });
 
-    chatHistory.push(userMessageForAI);
+    // 5. THE API CALL WITH KEY ROTATION
+    await performApiCall(loadingId, mode);
+}
 
-    // 5. API Call
+// This handles the actual talking to Groq and switching keys if one is full
+async function performApiCall(loadingId, mode, modelToUse = TEXT_MODEL) {
+    const activeKey = GROQ_KEYS[currentKeyIndex];
+
     try {
-        const response = await fetch(PROXY + "https://api.groq.com/openai/v1/chat/completions", {
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
-            headers: { "Authorization": `Bearer ${GROQ_KEY}`, "Content-Type": "application/json" },
+            headers: { 
+                "Authorization": `Bearer ${activeKey}`, 
+                "Content-Type": "application/json" 
+            },
             body: JSON.stringify({
-                model: "llama-3.3-70b-versatile",
+                model: modelToUse,
                 messages: chatHistory,
-                temperature: (mode === 'debate' || mode === 'essay') ? 0.7 : 0.2,
-                max_tokens: (mode === 'essay') ? 3000 : 1500
+                temperature: (mode === 'debate') ? 0.7 : 0.3
             })
         });
 
         const data = await response.json();
+
+        // IF KEY IS OUT OF TOKENS (Error 429)
+        if (response.status === 429) {
+            if (currentKeyIndex < GROQ_KEYS.length - 1) {
+                currentKeyIndex++; // Switch to next friend's key
+                return performApiCall(loadingId, mode, modelToUse);
+            } else if (modelToUse === TEXT_MODEL) {
+                currentKeyIndex = 0; // Reset keys and try the smaller model
+                return performApiCall(loadingId, mode, FALLBACK_MODEL);
+            }
+        }
+
+        // IF MESSAGE IS TOO LARGE (The 8156 tokens error)
+        if (data.error && data.error.code === "rate_limit_exceeded" && data.error.message.includes("TPM")) {
+            // Remove the oldest message from history and try again
+            if (chatHistory.length > 2) {
+                chatHistory.splice(1, 1); // Remove the oldest message after System Instructions
+                return performApiCall(loadingId, mode, modelToUse);
+            }
+        }
+
         if (data.choices && data.choices.length > 0) {
             let aiText = data.choices[0].message.content;
-            
-            // Save Assistant response to history
             chatHistory.push({ role: "assistant", content: aiText });
-            
-            // Keep history from getting too long (keep last 15 messages)
-            if (chatHistory.length > 15) {
-                chatHistory = [chatHistory[0], ...chatHistory.slice(-14)];
+
+            // STRICT HISTORY LIMIT (Only keep System + Last 3 messages)
+            if (chatHistory.length > 4) {
+                chatHistory = [chatHistory[0], ...chatHistory.slice(-3)];
             }
-            
+
             localStorage.setItem('manarat_history', JSON.stringify(chatHistory));
             document.getElementById(loadingId).innerHTML = marked.parse(aiText);
         }
     } catch (e) {
-        document.getElementById(loadingId).innerHTML = "<b>Error:</b> " + e.message;
+        document.getElementById(loadingId).innerHTML = "<b>Status:</b> " + e.message;
     } finally {
-        chatBox.scrollTop = chatBox.scrollHeight;
+        document.getElementById('chat-window').scrollTop = document.getElementById('chat-window').scrollHeight;
     }
 }
 </script>
-
 </body>
 </html>
