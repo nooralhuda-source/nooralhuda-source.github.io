@@ -52,13 +52,8 @@ body.dark-mode{--bg:#111827;--text:#f9fafb;--muted:#9ca3af;--card:#1f2937;--bord
 <body>
 <header>
   <h1><a href="https://nooralhuda.co.uk">Noor Al Huda</a></h1>
-
-  <div style="display:flex;gap:10px;align-items:center;">
-    <div id="language-switcher"></div>
-    <button class="btn" onclick="location.href='settings.html'">Settings</button>
-  </div>
+  <button class="btn" onclick="location.href='settings.html'">Settings</button>
 </header>
-
 
 
 
@@ -434,28 +429,6 @@ letter-spacing: 0.3px;
 
 }
 
-/* Language dropdown styling */
-#language-switcher select {
-  padding: 6px 10px;
-  border-radius: 10px;
-  border: 1px solid #c8e6c9;
-  background: white;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 600;
-  cursor: pointer;
-}
-html[lang="ar"],
-html[lang="fa"],
-html[lang="ur"] {
-  direction: rtl;
-}
-
-html[lang="ar"] body,
-html[lang="fa"] body,
-html[lang="ur"] body {
-  text-align: right;
-}
-
 
 </style>
 
@@ -468,8 +441,7 @@ html[lang="ur"] body {
 
   <!-- Widgets Section -->
   <div id="salahWidget" class="widget-card" data-link="https://nooralhuda.co.uk/salah.html">
-  <h4 data-i18n="salah_times"></h4>
-
+  <h4>Salah Times</h4>
   
   
 
@@ -534,7 +506,7 @@ html[lang="ur"] body {
       <h4>Calendar</h4>
       <p>Islamic dates and Shia events.</p>
     </article>
-    <article class="card" onclick="location.href='https://nooralhuda.co.uk/manarat-ai'">
+    <article class="card" onclick="location.href='manarat-ai.html'">
       <h4>Manarat AI</h4>
       <p>Beta test the new shia scholarly AI</p>
     </article>
@@ -668,15 +640,8 @@ html[lang="ur"] body {
 </script>
 <script>
   const darkToggle = document.getElementById("darkModeToggle");
-  document.documentElement.lang = LANG;
-const LANG =
-  localStorage.getItem("lang") ||
-  navigator.language.slice(0,2) ||
-  "en";
 
-
- document.documentElement.lang = LANG;
-
+ src="auth.js"
 
 
 /* === Salah Widget JS === */
@@ -743,20 +708,6 @@ async function fetchSalahTimes(cityKey){
   // Refresh every 10 min
   setInterval(()=>fetchSalahTimes(citySelect.value),10*60*1000);
 })();
-const i18n = {
-  en: { salah_times: "Salah Times" },
-  ar: { salah_times: "أوقات الصلاة" },
-  fa: { salah_times: "اوقات نماز" },
-  ur: { salah_times: "نماز کے اوقات" }
-};
-function applyTranslations() {
-  document.querySelectorAll("[data-i18n]").forEach(el => {
-    const key = el.dataset.i18n;
-    if (i18n[LANG] && i18n[LANG][key]) {
-      el.textContent = i18n[LANG][key];
-    }
-  });
-}
 
 /* === Quran Widget JS === */
 const verseEl = document.getElementById('dailyVerse');
@@ -926,28 +877,8 @@ banner.textContent = '⚠️ This site is in BETA — features may change.';
 
 
 document.body.prepend(banner);
-
-
-
-
 </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
