@@ -676,15 +676,32 @@ function toggleHyder() {
 
     if (popup.style.display === 'none' || popup.style.display === '') {
         popup.style.display = 'flex';
+
+        // Try embedding first
         iframe.src = 'https://hyder.ai';
+
+        // If the iframe fails due to X-Frame restrictions,
+        // show a message instead of embedding
+        setTimeout(() => {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (!iframeDoc || iframeDoc.body.childElementCount === 0) {
+                iframe.style.display = 'none';
+                document.getElementById('hyder-fallback').style.display = 'block';
+            }
+        }, 500);
+
         text.innerHTML = 'Close ✕';
     } else {
+        // Close
         popup.style.display = 'none';
         iframe.src = '';
+        iframe.style.display = 'block';
+        document.getElementById('hyder-fallback').style.display = 'none';
         text.innerHTML = 'Hyder.ai';
     }
 }
 </script>
+
 
 <script>
   const darkToggle = document.getElementById("darkModeToggle");
@@ -928,6 +945,7 @@ document.body.prepend(banner);
 </script>
 </body>
 </html>
+
 
 
 
