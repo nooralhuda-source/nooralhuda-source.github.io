@@ -477,7 +477,8 @@ html[lang="ur"] body {
 
   <!-- Widgets Section -->
   <div id="salahWidget" class="widget-card" data-link="https://nooralhuda.co.uk/salah.html">
-  <h4>Salah Times</h4>
+  <h4 data-i18n="salah_times"></h4>
+
   
   
 
@@ -676,6 +677,7 @@ html[lang="ur"] body {
 </script>
 <script>
   const darkToggle = document.getElementById("darkModeToggle");
+const LANG = localStorage.getItem("lang") || "en";
 
  src="auth.js"
 
@@ -744,6 +746,12 @@ async function fetchSalahTimes(cityKey){
   // Refresh every 10 min
   setInterval(()=>fetchSalahTimes(citySelect.value),10*60*1000);
 })();
+const i18n = {
+  en: { salah_times: "Salah Times" },
+  ar: { salah_times: "أوقات الصلاة" },
+  fa: { salah_times: "اوقات نماز" },
+  ur: { salah_times: "نماز کے اوقات" }
+};
 
 /* === Quran Widget JS === */
 const verseEl = document.getElementById('dailyVerse');
@@ -914,22 +922,14 @@ banner.textContent = '⚠️ This site is in BETA — features may change.';
 
 document.body.prepend(banner);
 
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement(
-    {
-      pageLanguage: 'en',
-      includedLanguages: 'en,ar,fa,ur',
-      autoDisplay: false
-    },
-    'language-switcher'
-  );
-}
+
 
 
 </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
+
 
 
 
