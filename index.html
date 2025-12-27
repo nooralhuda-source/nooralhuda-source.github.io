@@ -522,187 +522,122 @@ letter-spacing: 0.3px;
 
 
 <footer>© 2025 Noor Al Huda — All in one Shia website</footer>
-<div id="hyder-wrapper">
-    <div id="hyder-launcher" onclick="toggleHyder()" title="Ask Hyder.ai">
-        <span id="hyder-launcher-text">Hyder.ai</span>
+<div id="manarat-wrapper">
+    <div id="manarat-launcher" onclick="toggleManarat()" title="Ask Manarat AI (Beta)">
+        <span id="launcher-text">Manarat AI <b>Beta</b></span>
     </div>
 
-    <div id="hyder-popup">
-        <div id="hyder-header">
-            <div class="feature-tip">
-                This opens the official <b>Hyder.ai</b> interface.
-            </div>
-            <button onclick="toggleHyder()" id="hyder-close-btn">&times;</button>
+    <div id="manarat-popup">
+        <div id="manarat-header">
+            
+            <button onclick="toggleManarat()" id="close-btn">&times;</button>
         </div>
-        <iframe src="" id="hyder-iframe"></iframe>
+        <iframe src="manarat-ai.html" id="manarat-iframe"></iframe>
     </div>
 </div>
 
 <style>
-/* --- LAUNCHER --- */
-#hyder-launcher {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #1b5e20, #2e7d32);
-    border-radius: 50px;
-    border: 2px solid #d4af37;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    animation: pulse 3s infinite;
-}
-
-#hyder-launcher:hover {
-    transform: scale(1.05);
-    background: #2e7d32;
-}
-
-#hyder-launcher-text {
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    white-space: nowrap;
-}
-
-/* --- POPUP --- */
-#hyder-popup {
-    display: none;
-    position: fixed;
-    bottom: 90px;
-    right: 25px;
-    width: 380px;
-    height: 600px;
-    max-height: 80vh;
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    box-shadow: 0 15px 50px rgba(0,0,0,0.15);
-    z-index: 10000;
-    flex-direction: column;
-    animation: slideUp 0.4s ease-out;
-}
-
-#hyder-header {
-    background: #1b5e20;
-    color: white;
-    padding: 6px 10px;
-    display: flex;
-    align-items: center;
-    border-bottom: 3px solid #d4af37;
-}
-
-#hyder-close-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* --- IFRAME --- */
-#hyder-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* --- FEATURE TIP --- */
-.feature-tip {
-    background: #f1f8f5;
-    color: #2e7d32;
-    font-size: 11px;
-    padding: 8px 12px;
-    text-align: center;
-    border-radius: 8px;
-    margin-right: 10px;
-    border: 1px solid #c8e6c9;
-    flex-grow: 1;
-    font-family: 'Segoe UI', sans-serif;
-}
-
-/* --- ANIMATIONS --- */
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0.4); }
-    70% { box-shadow: 0 0 0 12px rgba(27, 94, 32, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
-}
-
-/* --- MOBILE --- */
-@media screen and (max-width: 600px) {
-    #hyder-popup {
-        bottom: 0;
-        right: 0;
-        width: 100vw;
-        height: 85vh;
-        border-radius: 20px 20px 0 0;
-        box-shadow: 0px -5px 25px rgba(0,0,0,0.2);
+    /* Launcher Styling: Changed to a Pill Shape for text */
+    #manarat-launcher {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        padding: 12px 24px; /* Flexible width for text */
+        background: linear-gradient(135deg, #1b5e20, #2e7d32);
+        border-radius: 50px; /* Pill shape */
+        border: 2px solid #d4af37;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+        animation: pulse 3s infinite;
     }
 
-    #hyder-launcher {
-        bottom: 15px;
-        right: 15px;
-        padding: 12px 20px;
+    #manarat-launcher:hover { transform: scale(1.05); background: #2e7d32; }
+    
+    #launcher-text { 
+        color: white; 
+        font-family: 'Segoe UI', sans-serif; 
+        font-size: 16px; 
+        font-weight: 500;
+        white-space: nowrap;
+    }
+    
+    #launcher-text b { 
+        font-size: 10px; 
+        background: #d4af37; 
+        color: #1b5e20; 
+        padding: 2px 6px; 
+        border-radius: 4px; 
+        margin-left: 8px; 
+        text-transform: uppercase;
     }
 
-    #hyder-iframe {
-        border-radius: 0;
+    /* Popup Window Styling */
+    #manarat-popup {
+        display: none;
+        position: fixed;
+        bottom: 90px;
+        right: 25px;
+        width: 380px;
+        height: 600px;
+        max-height: 80vh;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        z-index: 10000;
+        flex-direction: column;
+        animation: slideUp 0.4s ease-out;
     }
 
-    .feature-tip {
-        font-size: 10px;
-        padding: 6px;
+    #manarat-header {
+        background: #1b5e20;
+        color: white;
+        padding: 10px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'Segoe UI', sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        border-bottom: 3px solid #d4af37;
     }
-}
+
+    #close-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+
+    #manarat-iframe { width: 100%; flex: 1; border: none; }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0.4); }
+        70% { box-shadow: 0 0 0 12px rgba(27, 94, 32, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
+    }
 </style>
 
 <script>
-function toggleHyder() {
-    const popup = document.getElementById('hyder-popup');
-    const iframe = document.getElementById('hyder-iframe');
-    const text = document.getElementById('hyder-launcher-text');
-
-    if (popup.style.display === 'none' || popup.style.display === '') {
-        popup.style.display = 'flex';
-
-        // Try embedding first
-        iframe.src = 'https://hyder.ai';
-
-        // If the iframe fails due to X-Frame restrictions,
-        // show a message instead of embedding
-        setTimeout(() => {
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            if (!iframeDoc || iframeDoc.body.childElementCount === 0) {
-                iframe.style.display = 'none';
-                document.getElementById('hyder-fallback').style.display = 'block';
-            }
-        }, 500);
-
-        text.innerHTML = 'Close ✕';
-    } else {
-        // Close
-        popup.style.display = 'none';
-        iframe.src = '';
-        iframe.style.display = 'block';
-        document.getElementById('hyder-fallback').style.display = 'none';
-        text.innerHTML = 'Hyder.ai';
+    function toggleManarat() {
+        const popup = document.getElementById('manarat-popup');
+        const text = document.getElementById('launcher-text');
+        
+        if (popup.style.display === 'none' || popup.style.display === '') {
+            popup.style.display = 'flex';
+            text.innerHTML = 'Close ✕';
+        } else {
+            popup.style.display = 'none';
+            text.innerHTML = 'Manarat AI <b>Beta</b>';
+        }
     }
-}
 </script>
-
-
 <script>
   const darkToggle = document.getElementById("darkModeToggle");
 
@@ -945,6 +880,7 @@ document.body.prepend(banner);
 </script>
 </body>
 </html>
+
 
 
 
