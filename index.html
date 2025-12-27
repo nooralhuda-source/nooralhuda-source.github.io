@@ -433,15 +433,6 @@ letter-spacing: 0.3px;
   pointer-events: none;
 
 }
-/* Hide Google Translate banner */
-.goog-te-banner-frame,
-.goog-te-balloon-frame {
-  display: none !important;
-}
-
-body {
-  top: 0 !important;
-}
 
 /* Language dropdown styling */
 #language-switcher select {
@@ -677,9 +668,15 @@ html[lang="ur"] body {
 </script>
 <script>
   const darkToggle = document.getElementById("darkModeToggle");
-const LANG = localStorage.getItem("lang") || "en";
+  document.documentElement.lang = LANG;
+const LANG =
+  localStorage.getItem("lang") ||
+  navigator.language.slice(0,2) ||
+  "en";
 
- src="auth.js"
+
+ document.documentElement.lang = LANG;
+
 
 
 /* === Salah Widget JS === */
@@ -752,6 +749,14 @@ const i18n = {
   fa: { salah_times: "اوقات نماز" },
   ur: { salah_times: "نماز کے اوقات" }
 };
+function applyTranslations() {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[LANG] && i18n[LANG][key]) {
+      el.textContent = i18n[LANG][key];
+    }
+  });
+}
 
 /* === Quran Widget JS === */
 const verseEl = document.getElementById('dailyVerse');
@@ -929,6 +934,7 @@ document.body.prepend(banner);
 
 </body>
 </html>
+
 
 
 
