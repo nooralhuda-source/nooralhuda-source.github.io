@@ -605,266 +605,209 @@ body.dark-mode .widget-card {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.18);
 }
-
+.surah-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+.surah-card p {
+  margin-bottom: 2px !important;
+  line-height: 1.3;
+}
   </style>
-  <div id="manarat-wrapper">
-    <div id="manarat-launcher" onclick="toggleManarat()" title="Ask Manarat AI (Beta)">
-        <span id="launcher-text">Manarat AI <b>Beta</b></span>
-    </div>
-
-    <div id="manarat-popup">
-        <div id="manarat-header">
-            
-            <button onclick="toggleManarat()" id="close-btn">&times;</button>
-        </div>
-        <iframe src="manarat-ai.html" id="manarat-iframe"></iframe>
-    </div>
-</div>
-
-<style>
-    /* Launcher Styling: Changed to a Pill Shape for text */
-    #manarat-launcher {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        padding: 12px 24px; /* Flexible width for text */
-        background: linear-gradient(135deg, #1b5e20, #2e7d32);
-        border-radius: 50px; /* Pill shape */
-        border: 2px solid #d4af37;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-        animation: pulse 3s infinite;
-    }
-
-    #manarat-launcher:hover { transform: scale(1.05); background: #2e7d32; }
-    
-    #launcher-text { 
-        color: white; 
-        font-family: 'Segoe UI', sans-serif; 
-        font-size: 16px; 
-        font-weight: 500;
-        white-space: nowrap;
-    }
-    
-    #launcher-text b { 
-        font-size: 10px; 
-        background: #d4af37; 
-        color: #1b5e20; 
-        padding: 2px 6px; 
-        border-radius: 4px; 
-        margin-left: 8px; 
-        text-transform: uppercase;
-    }
-
-    /* Popup Window Styling */
-    #manarat-popup {
-        display: none;
-        position: fixed;
-        bottom: 90px;
-        right: 25px;
-        width: 380px;
-        height: 600px;
-        max-height: 80vh;
-        background: white;
-        border-radius: 20px;
-        overflow: hidden;
-        border: 1px solid rgba(212, 175, 55, 0.3);
-        box-shadow: 0 15px 50px rgba(0,0,0,0.15);
-        z-index: 10000;
-        flex-direction: column;
-        animation: slideUp 0.4s ease-out;
-    }
-
-    #manarat-header {
-        background: #1b5e20;
-        color: white;
-        padding: 10px 18px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-family: 'Segoe UI', sans-serif;
-        font-weight: 600;
-        font-size: 13px;
-        border-bottom: 3px solid #d4af37;
-    }
-
-    #close-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
-
-    #manarat-iframe { width: 100%; flex: 1; border: none; }
-
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0.4); }
-        70% { box-shadow: 0 0 0 12px rgba(27, 94, 32, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
-    }
-</style>
-
-<script>
-    function toggleManarat() {
-        const popup = document.getElementById('manarat-popup');
-        const text = document.getElementById('launcher-text');
-        
-        if (popup.style.display === 'none' || popup.style.display === '') {
-            popup.style.display = 'flex';
-            text.innerHTML = 'Close ✕';
-        } else {
-            popup.style.display = 'none';
-            text.innerHTML = 'Manarat AI <b>Beta</b>';
-        }
-    }
-</script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   // Element refs
   const mainNav = document.getElementById("mainNav");
   const hamburger = document.querySelector(".hamburger");
   const grid = document.getElementById("surahGrid");
-  const searchInput = document.getElementById("searchSurah"); // matches your HTML
+
   const darkToggle = document.getElementById("darkModeToggle");
+// Add this inside your existing <script> window.addEventListener or DOMContentLoaded
+const lang = localStorage.getItem('userLang') || 'en';
 
-  // Surah list (complete)
-  const surahs = [
-    { number: 1, name_en: "Al-Fatiha", name_ar: "الفاتحة" },
-    { number: 2, name_en: "Al-Baqarah", name_ar: "البقرة" },
-    { number: 3, name_en: "Aal-E-Imran", name_ar: "آل عمران" },
-    { number: 4, name_en: "An-Nisa", name_ar: "النساء" },
-    { number: 5, name_en: "Al-Ma'idah", name_ar: "المائدة" },
-    { number: 6, name_en: "Al-An'am", name_ar: "الأنعام" },
-    { number: 7, name_en: "Al-A'raf", name_ar: "الأعراف" },
-    { number: 8, name_en: "Al-Anfal", name_ar: "الأنفال" },
-    { number: 9, name_en: "At-Tawbah", name_ar: "التوبة" },
-    { number: 10, name_en: "Yunus", name_ar: "يونس" },
-    { number: 11, name_en: "Hud", name_ar: "هود" },
-    { number: 12, name_en: "Yusuf", name_ar: "يوسف" },
-    { number: 13, name_en: "Ar-Ra'd", name_ar: "الرعد" },
-    { number: 14, name_en: "Ibrahim", name_ar: "ابراهيم" },
-    { number: 15, name_en: "Al-Hijr", name_ar: "الحجر" },
-    { number: 16, name_en: "An-Nahl", name_ar: "النحل" },
-    { number: 17, name_en: "Al-Isra", name_ar: "الإسراء" },
-    { number: 18, name_en: "Al-Kahf", name_ar: "الكهف" },
-    { number: 19, name_en: "Maryam", name_ar: "مريم" },
-    { number: 20, name_en: "Ta-Ha", name_ar: "طه" },
-    { number: 21, name_en: "Al-Anbiya", name_ar: "الأنبياء" },
-    { number: 22, name_en: "Al-Hajj", name_ar: "الحج" },
-    { number: 23, name_en: "Al-Mu’minun", name_ar: "المؤمنون" },
-    { number: 24, name_en: "An-Nur", name_ar: "النور" },
-    { number: 25, name_en: "Al-Furqan", name_ar: "الفرقان" },
-    { number: 26, name_en: "Ash-Shu'ara", name_ar: "الشعراء" },
-    { number: 27, name_en: "An-Naml", name_ar: "النمل" },
-    { number: 28, name_en: "Al-Qasas", name_ar: "القصص" },
-    { number: 29, name_en: "Al-Ankabut", name_ar: "العنكبوت" },
-    { number: 30, name_en: "Ar-Rum", name_ar: "الروم" },
-    { number: 31, name_en: "Luqman", name_ar: "لقمان" },
-    { number: 32, name_en: "As-Sajda", name_ar: "السجدة" },
-    { number: 33, name_en: "Al-Ahzab", name_ar: "الأحزاب" },
-    { number: 34, name_en: "Saba", name_ar: "سبأ" },
-    { number: 35, name_en: "Fatir", name_ar: "فاطر" },
-    { number: 36, name_en: "Ya-Sin", name_ar: "يس" },
-    { number: 37, name_en: "As-Saffat", name_ar: "الصافات" },
-    { number: 38, name_en: "Sad", name_ar: "ص" },
-    { number: 39, name_en: "Az-Zumar", name_ar: "الزمر" },
-    { number: 40, name_en: "Ghafir", name_ar: "غافر" },
-    { number: 41, name_en: "Fussilat", name_ar: "فصلت" },
-    { number: 42, name_en: "Ash-Shura", name_ar: "الشورى" },
-    { number: 43, name_en: "Az-Zukhruf", name_ar: "الزخرف" },
-    { number: 44, name_en: "Ad-Dukhan", name_ar: "الدخان" },
-    { number: 45, name_en: "Al-Jathiya", name_ar: "الجاثية" },
-    { number: 46, name_en: "Al-Ahqaf", name_ar: "الأحقاف" },
-    { number: 47, name_en: "Muhammad", name_ar: "محمد" },
-    { number: 48, name_en: "Al-Fath", name_ar: "الفتح" },
-    { number: 49, name_en: "Al-Hujurat", name_ar: "الحجرات" },
-    { number: 50, name_en: "Qaf", name_ar: "ق" },
-    { number: 51, name_en: "Adh-Dhariyat", name_ar: "الذاريات" },
-    { number: 52, name_en: "At-Tur", name_ar: "الطور" },
-    { number: 53, name_en: "An-Najm", name_ar: "النجم" },
-    { number: 54, name_en: "Al-Qamar", name_ar: "القمر" },
-    { number: 55, name_en: "Ar-Rahman", name_ar: "الرحمن" },
-    { number: 56, name_en: "Al-Waqia", name_ar: "الواقعة" },
-    { number: 57, name_en: "Al-Hadid", name_ar: "الحديد" },
-    { number: 58, name_en: "Al-Mujadila", name_ar: "المجادلة" },
-    { number: 59, name_en: "Al-Hashr", name_ar: "الحشر" },
-    { number: 60, name_en: "Al-Mumtahina", name_ar: "الممتحنة" },
-    { number: 61, name_en: "As-Saff", name_ar: "الصف" },
-    { number: 62, name_en: "Al-Jumua", name_ar: "الجمعة" },
-    { number: 63, name_en: "Al-Munafiqoon", name_ar: "المنافقون" },
-    { number: 64, name_en: "At-Taghabun", name_ar: "التغابن" },
-    { number: 65, name_en: "At-Talaq", name_ar: "الطلاق" },
-    { number: 66, name_en: "At-Tahrim", name_ar: "التحريم" },
-    { number: 67, name_en: "Al-Mulk", name_ar: "الملك" },
-    { number: 68, name_en: "Al-Qalam", name_ar: "القلم" },
-    { number: 69, name_en: "Al-Haaqqa", name_ar: "الحاقة" },
-    { number: 70, name_en: "Al-Maarij", name_ar: "المعارج" },
-    { number: 71, name_en: "Nuh", name_ar: "نوح" },
-    { number: 72, name_en: "Al-Jinn", name_ar: "الجن" },
-    { number: 73, name_en: "Al-Muzzammil", name_ar: "المزمل" },
-    { number: 74, name_en: "Al-Muddathir", name_ar: "المدثر" },
-    { number: 75, name_en: "Al-Qiyama", name_ar: "القيامة" },
-    { number: 76, name_en: "Al-Insan", name_ar: "الانسان" },
-    { number: 77, name_en: "Al-Mursalat", name_ar: "المرسلات" },
-    { number: 78, name_en: "An-Naba", name_ar: "النبأ" },
-    { number: 79, name_en: "An-Nazi'at", name_ar: "النازعات" },
-    { number: 80, name_en: "Abasa", name_ar: "عبس" },
-    { number: 81, name_en: "At-Takwir", name_ar: "التكوير" },
-    { number: 82, name_en: "Al-Infitar", name_ar: "الإنفطار" },
-    { number: 83, name_en: "Al-Mutaffifin", name_ar: "المطففين" },
-    { number: 84, name_en: "Al-Inshiqaq", name_ar: "الإنشقاق" },
-    { number: 85, name_en: "Al-Burooj", name_ar: "البروج" },
-    { number: 86, name_en: "At-Tariq", name_ar: "الطارق" },
-    { number: 87, name_en: "Al-Ala", name_ar: "الأعلى" },
-    { number: 88, name_en: "Al-Ghashiya", name_ar: "الغاشية" },
-    { number: 89, name_en: "Al-Fajr", name_ar: "الفجر" },
-    { number: 90, name_en: "Al-Balad", name_ar: "البلد" },
-    { number: 91, name_en: "Ash-Shams", name_ar: "الشمس" },
-    { number: 92, name_en: "Al-Lail", name_ar: "الليل" },
-    { number: 93, name_en: "Ad-Duhaa", name_ar: "الضحى" },
-    { number: 94, name_en: "Ash-Sharh", name_ar: "الشرح" },
-    { number: 95, name_en: "At-Tin", name_ar: "التين" },
-    { number: 96, name_en: "Al-Alaq", name_ar: "العلق" },
-    { number: 97, name_en: "Al-Qadr", name_ar: "القدر" },
-    { number: 98, name_en: "Al-Bayyina", name_ar: "البينة" },
-    { number: 99, name_en: "Az-Zalzalah", name_ar: "الزلزلة" },
-    { number: 100, name_en: "Al-Adiyat", name_ar: "العاديات" },
-    { number: 101, name_en: "Al-Qari'a", name_ar: "القارعة" },
-    { number: 102, name_en: "At-Takathur", name_ar: "التكاثر" },
-    { number: 103, name_en: "Al-Asr", name_ar: "العصر" },
-    { number: 104, name_en: "Al-Humazah", name_ar: "الهمزة" },
-    { number: 105, name_en: "Al-Fil", name_ar: "الفيل" },
-    { number: 106, name_en: "Quraish", name_ar: "قريش" },
-    { number: 107, name_en: "Al-Ma'un", name_ar: "الماعون" },
-    { number: 108, name_en: "Al-Kawthar", name_ar: "الكوثر" },
-    { number: 109, name_en: "Al-Kafiroon", name_ar: "الكافرون" },
-    { number: 110, name_en: "An-Nasr", name_ar: "النصر" },
-    { number: 111, name_en: "Al-Masad", name_ar: "المسد" },
-    { number: 112, name_en: "Al-Ikhlas", name_ar: "الإخلاص" },
-    { number: 113, name_en: "Al-Falaq", name_ar: "الفلق" },
-    { number: 114, name_en: "An-Nas", name_ar: "الناس" }
-  ];
+// 1. Translate Menu Links and Headings
+document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+  el.textContent = el.getAttribute('data-' + lang);
+});
 
-  // Generate cards only if grid exists
-  if (grid) {
-    grid.innerHTML = "";
-    surahs.forEach(function(surah) {
-      var card = document.createElement("div");
-      card.className = "surah-card";
-      card.innerHTML = "<h3>" + surah.number + ". " + surah.name_en + "</h3><p>" + surah.name_ar + "</p>";
-      card.addEventListener("click", function () {
-        // use string concatenation to avoid template/backtick issues
-        window.location.href = "surah.html?id=" + encodeURIComponent(surah.number);
-      });
-      grid.appendChild(card);
+// 2. Translate Search Placeholder
+const searchInput = document.getElementById('searchSurah');
+if (searchInput) {
+  const ph = searchInput.getAttribute('data-' + lang + '-ph');
+  if (ph) searchInput.placeholder = ph;
+}
+
+// 3. Handle Right-to-Left (RTL) Layout
+if (['ar', 'fa', 'ur'].includes(lang)) {
+  document.body.dir = "rtl";
+  document.body.style.textAlign = "right";
+  // Fix search bar alignment for RTL
+  document.querySelector('.surah-search').style.flexDirection = "row-reverse";
+} else {
+  document.body.dir = "ltr";
+  document.body.style.textAlign = "left";
+}
+const surahs = [
+  { number: 1, trans: "Al-Fatiha", ar: "الفاتحة", en: "The Opening", fa: "گشایش", ur: "آغاز" },
+  { number: 2, trans: "Al-Baqarah", ar: "البقرة", en: "The Cow", fa: "ماده‌گاو", ur: "گائے" },
+  { number: 3, trans: "Aal-E-Imran", ar: "آل عمران", en: "Family of Imran", fa: "خانواده عمران", ur: "عمران کی آل" },
+  { number: 4, trans: "An-Nisa", ar: "النساء", en: "The Women", fa: "زنان", ur: "عورتیں" },
+  { number: 5, trans: "Al-Ma'idah", ar: "المائدة", en: "The Table Spread", fa: "سفره غذا", ur: "دسترخوان" },
+  { number: 6, trans: "Al-An'am", ar: "الأنعام", en: "The Cattle", fa: "چهارپایان", ur: "مویشی" },
+  { number: 7, trans: "Al-A'raf", ar: "الأعراف", en: "The Heights", fa: "اعراف", ur: "بلندیاں" },
+  { number: 8, trans: "Al-Anfal", ar: "الأنفال", en: "The Spoils of War", fa: "غنایم جنگی", ur: "مالِ غنیمت" },
+  { number: 9, trans: "At-Tawbah", ar: "التوبة", en: "The Repentance", fa: "توبه", ur: "توبہ" },
+  { number: 10, trans: "Yunus", ar: "يونس", en: "Jonah", fa: "یونس", ur: "یونس" },
+  { number: 11, trans: "Hud", ar: "هود", en: "Hud", fa: "هود", ur: "ہود" },
+  { number: 12, trans: "Yusuf", ar: "يوسف", en: "Joseph", fa: "یوسف", ur: "یوسف" },
+  { number: 13, trans: "Ar-Ra'd", ar: "الرعد", en: "The Thunder", fa: "رعد", ur: "گرج" },
+  { number: 14, trans: "Ibrahim", ar: "ابراهيم", en: "Abraham", fa: "ابراهیم", ur: "ابراہیم" },
+  { number: 15, trans: "Al-Hijr", ar: "الحجر", en: "The Rocky Tract", fa: "حجر", ur: "پتھریلی زمین" },
+  { number: 16, trans: "An-Nahl", ar: "النحل", en: "The Bee", fa: "زنبور عسل", ur: "شہد کی مکھی" },
+  { number: 17, trans: "Al-Isra", ar: "الإسراء", en: "The Night Journey", fa: "سفر شبانه", ur: "رات کا سفر" },
+  { number: 18, trans: "Al-Kahf", ar: "الكهف", en: "The Cave", fa: "غار", ur: "غار" },
+  { number: 19, trans: "Maryam", ar: "مريم", en: "Mary", fa: "مریم", ur: "مریم" },
+  { number: 20, trans: "Ta-Ha", ar: "طه", en: "Ta-Ha", fa: "طه", ur: "طہ" },
+  { number: 21, trans: "Al-Anbiya", ar: "الأنبياء", en: "The Prophets", fa: "پیامبران", ur: "انبیاء" },
+  { number: 22, trans: "Al-Hajj", ar: "الحج", en: "The Pilgrimage", fa: "حج", ur: "حج" },
+  { number: 23, trans: "Al-Mu'minun", ar: "المؤمنون", en: "The Believers", fa: "مؤمنان", ur: "مومنون" },
+  { number: 24, trans: "An-Nur", ar: "النور", en: "The Light", fa: "نور", ur: "نور" },
+  { number: 25, trans: "Al-Furqan", ar: "الفرقان", en: "The Criterion", fa: "فرقان", ur: "فرقان" },
+  { number: 26, trans: "Ash-Shu'ara", ar: "الشعراء", en: "The Poets", fa: "شاعران", ur: "شعراء" },
+  { number: 27, trans: "An-Naml", ar: "النمل", en: "The Ant", fa: "مورچه", ur: "چیونٹی" },
+  { number: 28, trans: "Al-Qasas", ar: "القصص", en: "The Stories", fa: "داستان‌ها", ur: "قصص" },
+  { number: 29, trans: "Al-Ankabut", ar: "العنكبوت", en: "The Spider", fa: "عنکبوت", ur: "مکڑی" },
+  { number: 30, trans: "Ar-Rum", ar: "الروم", en: "The Romans", fa: "رومیان", ur: "رومی" },
+  { number: 31, trans: "Luqman", ar: "لقمان", en: "Luqman", fa: "لقمان", ur: "لقمان" },
+  { number: 32, trans: "As-Sajda", ar: "السجدة", en: "The Prostration", fa: "سجده", ur: "سجدہ" },
+  { number: 33, trans: "Al-Ahzab", ar: "الأحزاب", en: "The Combined Forces", fa: "احزاب", ur: "لشکر" },
+  { number: 34, trans: "Saba", ar: "سبأ", en: "Sheba", fa: "سبا", ur: "سبا" },
+  { number: 35, trans: "Fatir", ar: "فاطر", en: "The Originator", fa: "پدیدآورنده", ur: "پیدا کرنے والا" },
+  { number: 36, trans: "Ya-Sin", ar: "يس", en: "Ya-Sin", fa: "یاسین", ur: "یس" },
+  { number: 37, trans: "As-Saffat", ar: "الصافات", en: "Those who set the Ranks", fa: "صف‌بستگان", ur: "صف بستہ" },
+  { number: 38, trans: "Sad", ar: "ص", en: "The Letter Sad", fa: "صاد", ur: "ص" },
+  { number: 39, trans: "Az-Zumar", ar: "الزمر", en: "The Troops", fa: "گروه‌ها", ur: "گروہ" },
+  { number: 40, trans: "Ghafir", ar: "غافر", en: "The Forgiver", fa: "آمرزنده", ur: "بخشنے والا" },
+  { number: 41, trans: "Fussilat", ar: "فصلت", en: "Explained in Detail", fa: "بخش‌بندی شده", ur: "واضح" },
+  { number: 42, trans: "Ash-Shura", ar: "الشورى", en: "The Consultation", fa: "شورا", ur: "مشورہ" },
+  { number: 43, trans: "Az-Zukhruf", ar: "الزخرف", en: "The Ornaments of Gold", fa: "زیور", ur: "آرائش" },
+  { number: 44, trans: "Ad-Dukhan", ar: "الدخان", en: "The Smoke", fa: "دود", ur: "دھواں" },
+  { number: 45, trans: "Al-Jathiya", ar: "الجاثية", en: "The Crouching", fa: "زانو زده", ur: "گھٹنوں کے بل" },
+  { number: 46, trans: "Al-Ahqaf", ar: "الأحقاف", en: "The Wind-Curved Sandhills", fa: "ریگزار", ur: "ریت کے ٹیلے" },
+  { number: 47, trans: "Muhammad", ar: "محمد", en: "Muhammad", fa: "محمد", ur: "محمد" },
+  { number: 48, trans: "Al-Fath", ar: "الفتح", en: "The Victory", fa: "پیروزی", ur: "فتح" },
+  { number: 49, trans: "Al-Hujurat", ar: "الحجرات", en: "The Dwellings", fa: "اتاق‌ها", ur: "حجرے" },
+  { number: 50, trans: "Qaf", ar: "ق", en: "The Letter Qaf", fa: "قاف", ur: "ق" },
+  { number: 51, trans: "Adh-Dhariyat", ar: "الذاريات", en: "The Winnowing Winds", fa: "پراکننده‌کنندگان", ur: "بکھیرنے والی ہوائیں" },
+  { number: 52, trans: "At-Tur", ar: "الطور", en: "The Mount", fa: "کوه طور", ur: "طور" },
+  { number: 53, trans: "An-Najm", ar: "النجم", en: "The Star", fa: "ستاره", ur: "ستارہ" },
+  { number: 54, trans: "Al-Qamar", ar: "القمر", en: "The Moon", fa: "ماه", ur: "چاند" },
+  { number: 55, trans: "Ar-Rahman", ar: "الرحمن", en: "The Beneficent", fa: "بخشاینده", ur: "رحمان" },
+  { number: 56, trans: "Al-Waqi'a", ar: "الواقعة", en: "The Inevitable", fa: "واقعه", ur: "واقعہ" },
+  { number: 57, trans: "Al-Hadid", ar: "الحديد", en: "The Iron", fa: "آهن", ur: "لوہا" },
+  { number: 58, trans: "Al-Mujadila", ar: "المجادلة", en: "The Pleading Woman", fa: "زن مجادله‌گر", ur: "بحث کرنے والی" },
+  { number: 59, trans: "Al-Hashr", ar: "الhashر", en: "The Exile", fa: "حشر", ur: "حشر" },
+  { number: 60, trans: "Al-Mumtahina", ar: "الممتحنة", en: "She that is to be examined", fa: "زن آزمون‌داده", ur: "امتحان لینے والی" },
+  { number: 61, trans: "As-Saff", ar: "الصف", en: "The Ranks", fa: "صف", ur: "صف" },
+  { number: 62, trans: "Al-Jumu'a", ar: "الجمعة", en: "The Congregation, Friday", fa: "جمعه", ur: "جمعہ" },
+  { number: 63, trans: "Al-Munafiqun", ar: "المنافقون", en: "The Hypocrites", fa: "منافقان", ur: "منافق" },
+  { number: 64, trans: "At-Taghabun", ar: "التغابن", en: "The Mutual Disillusion", fa: "تغابن", ur: "ہار جیت" },
+  { number: 65, trans: "At-Talaq", ar: "الطلاق", en: "The Divorce", fa: "طلاق", ur: "طلاق" },
+  { number: 66, trans: "At-Tahrim", ar: "التحريم", en: "The Prohibition", fa: "تحریم", ur: "تحریم" },
+  { number: 67, trans: "Al-Mulk", ar: "الملك", en: "The Sovereignty", fa: "فرمانروایی", ur: "بادشاہی" },
+  { number: 68, trans: "Al-Qalam", ar: "القلم", en: "The Pen", fa: "قلم", ur: "قلم" },
+  { number: 69, trans: "Al-Haaqqa", ar: "الحاقة", en: "The Reality", fa: "آنچه حتمی است", ur: "برحق" },
+  { number: 70, trans: "Al-Ma'arij", ar: "المعارج", en: "The Ascending Stairways", fa: "درجات", ur: "سیڑھیاں" },
+  { number: 71, trans: "Nuh", ar: "نوح", en: "Noah", fa: "نوح", ur: "نوح" },
+  { number: 72, trans: "Al-Jinn", ar: "الجن", en: "The Jinn", fa: "جن", ur: "جن" },
+  { number: 73, trans: "Al-Muzzammil", ar: "المزمل", en: "The Enshrouded One", fa: "جامه به خود پیچیده", ur: "اوڑھنے والا" },
+  { number: 74, trans: "Al-Muddathir", ar: "المدثر", en: "The Cloaked One", fa: "جامه بر سر کشیده", ur: "چادر پوش" },
+  { number: 75, trans: "Al-Qiyama", ar: "القيامة", en: "The Resurrection", fa: "قیامت", ur: "قیامت" },
+  { number: 76, trans: "Al-Insan", ar: "الانسان", en: "The Man", fa: "انسان", ur: "انسان" },
+  { number: 77, trans: "Al-Mursalat", ar: "المرسلات", en: "The Emissaries", fa: "فرستادگان", ur: "بھیجی ہوئی ہوائیں" },
+  { number: 78, trans: "An-Naba", ar: "النبأ", en: "The Tidings", fa: "خبر", ur: "خبر" },
+  { number: 79, trans: "An-Nazi'at", ar: "النازعات", en: "Those who drag forth", fa: "کشندگان", ur: "کھینچنے والے" },
+  { number: 80, trans: "Abasa", ar: "عبس", en: "He Frowned", fa: "چهره در هم کشید", ur: "ماتھے پر بل لایا" },
+  { number: 81, trans: "At-Takwir", ar: "التكوير", en: "The Overthrowing", fa: "در هم پیچیده شدن", ur: "لپیٹنا" },
+  { number: 82, trans: "Al-Infitar", ar: "الإنفطار", en: "The Cleaving", fa: "شکافتن", ur: "پھٹنا" },
+  { number: 83, trans: "Al-Mutaffifin", ar: "المطففين", en: "The Defrauding", fa: "کم‌فروشان", ur: "ناپ تول میں کمی" },
+  { number: 84, trans: "Al-Inshiqaq", ar: "الإنشقاق", en: "The Sundering", fa: "دو نیم شدن", ur: "ٹکڑے ہونا" },
+  { number: 85, trans: "Al-Burooj", ar: "البروج", en: "The Mansions of the Stars", fa: "برج‌ها", ur: "بروج" },
+  { number: 86, trans: "At-Tariq", ar: "الطارق", en: "The Nightcomer", fa: "شبانگرد", ur: "رات کو آنے والا" },
+  { number: 87, trans: "Al-A'la", ar: "الأعلى", en: "The Most High", fa: "برترین", ur: "اعلیٰ" },
+  { number: 88, trans: "Al-Ghashiya", ar: "الغاشية", en: "The Overwhelming", fa: "فراگیر", ur: "چھا جانے والی" },
+  { number: 89, trans: "Al-Fajr", ar: "الفجر", en: "The Dawn", fa: "سپیده دم", ur: "فجر" },
+  { number: 90, trans: "Al-Balad", ar: "البلد", en: "The City", fa: "شهر", ur: "شہر" },
+  { number: 91, trans: "Ash-Shams", ar: "الشمس", en: "The Sun", fa: "خورشید", ur: "سورج" },
+  { number: 92, trans: "Al-Layl", ar: "الليل", en: "The Night", fa: "شب", ur: "رات" },
+  { number: 93, trans: "Ad-Duha", ar: "الضحى", en: "The Morning Hours", fa: "چاشت", ur: "چاشت" },
+  { number: 94, trans: "Ash-Sharh", ar: "الشرح", en: "The Relief", fa: "شرح صدر", ur: "تسکین" },
+  { number: 95, trans: "At-Tin", ar: "التين", en: "The Fig", fa: "انجیر", ur: "انجیر" },
+  { number: 96, trans: "Al-Alaq", ar: "العلق", en: "The Clot", fa: "علق", ur: "خون کا لوتھڑا" },
+  { number: 97, trans: "Al-Qadr", ar: "القدر", en: "The Power", fa: "قدر", ur: "قدر" },
+  { number: 98, trans: "Al-Bayyina", ar: "البينة", en: "The Clear Proof", fa: "بینه", ur: "واضح دلیل" },
+  { number: 99, trans: "Az-Zalzala", ar: "الزلزلة", en: "The Earthquake", fa: "زلزله", ur: "زلزلہ" },
+  { number: 100, trans: "Al-Adiyat", ar: "العاديات", en: "The Courser", fa: "دوندگان", ur: "تیز گھوڑے" },
+  { number: 101, trans: "Al-Qari'a", ar: "القارعة", en: "The Calamity", fa: "کوبنده", ur: "کھڑکھڑانے والی" },
+  { number: 102, trans: "At-Takathur", ar: "التكاثر", en: "The Rivalry in World Increase", fa: "افزون‌طلبی", ur: "زیادتی کی ہوس" },
+  { number: 103, trans: "Al-Asr", ar: "العصر", en: "The Declining Day", fa: "عصر", ur: "زمانہ" },
+  { number: 104, trans: "Al-Humaza", ar: "الهمزة", en: "The Traducer", fa: "عیب‌جو", ur: "عیب نکالنے والا" },
+  { number: 105, trans: "Al-Fil", ar: "الفيل", en: "The Elephant", fa: "فیل", ur: "ہاتھی" },
+  { number: 106, trans: "Quraysh", ar: "قريش", en: "Quraysh", fa: "قریش", ur: "قریش" },
+  { number: 107, trans: "Al-Ma'un", ar: "الماعون", en: "The Small Kindnesses", fa: "ماعون", ur: "عام ضرورت کی چیزیں" },
+  { number: 108, trans: "Al-Kawthar", ar: "الكوثر", en: "The Abundance", fa: "کوثر", ur: "کوثر" },
+  { number: 109, trans: "Al-Kafirun", ar: "الكافرون", en: "The Disbelievers", fa: "کافران", ur: "کافر" },
+  { number: 110, trans: "An-Nasr", ar: "النصر", en: "The Divine Support", fa: "یاری", ur: "مدد" },
+  { number: 111, trans: "Al-Masad", ar: "المسد", en: "The Palm Fiber", fa: "مسد", ur: "کھجور کی چھال" },
+  { number: 112, trans: "Al-Ikhlas", ar: "الإخلاص", en: "The Sincerity", fa: "اخلاص", ur: "خلوص" },
+  { number: 113, trans: "Al-Falaq", ar: "الفلق", en: "The Daybreak", fa: "سپیده دم", ur: "سپیدۂ سحر" },
+  { number: 114, trans: "An-Nas", ar: "الناس", en: "Mankind", fa: "مردم", ur: "لوگ" }
+];
+if (grid) {
+  grid.innerHTML = "";
+  const lang = localStorage.getItem('userLang') || 'en';
+
+  surahs.forEach(function(surah) {
+    const card = document.createElement("div");
+    card.className = "surah-card";
+
+    let htmlContent = "";
+
+    if (lang === 'ur') {
+      // Urdu: Arabic Main, Urdu Smaller
+      htmlContent = `
+        <h3>${surah.number}. ${surah.ar}</h3>
+        <p style="font-size: 0.9rem;">${surah.ur}</p>
+      `;
+    } 
+    else if (lang === 'fa') {
+      // Farsi: Arabic Main, Farsi Smaller
+      htmlContent = `
+        <h3>${surah.number}. ${surah.ar}</h3>
+        <p style="font-size: 0.9rem;">${surah.fa}</p>
+      `;
+    } 
+    else if (lang === 'ar') {
+      // Arabic: Arabic Main Only
+      htmlContent = `<h3>${surah.number}. ${surah.ar}</h3>`;
+    } 
+    else {
+      // English (Default): Arabic Main, Translit Medium, Meaning Smaller
+      htmlContent = `
+        <h3>${surah.number}. ${surah.ar}</h3>
+        <p style="font-size: 1.1rem; font-weight: 600;">${surah.trans}</p>
+        <p style="font-size: 0.85rem; opacity: 0.7;">${surah.en}</p>
+      `;
+    }
+
+    card.innerHTML = htmlContent;
+    
+    card.addEventListener("click", function () {
+      window.location.href = "surah.html?id=" + encodeURIComponent(surah.number);
     });
-  }
-
+    grid.appendChild(card);
+  });
+}
   // Dark mode (support both 'dark' and 'dark-mode' used in your CSS)
   function applyThemeClass(isDark) {
     if (isDark) {
@@ -923,16 +866,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Search/filter (if search input exists)
-  if (searchInput) {
-    searchInput.addEventListener("input", function (ev) {
-      var q = (ev.target.value || "").trim().toLowerCase();
-      var cards = document.querySelectorAll(".surah-card");
-      cards.forEach(function (card) {
-        var text = (card.textContent || "").toLowerCase();
-        card.style.display = q === "" || text.indexOf(q) !== -1 ? "" : "none";
-      });
+if (searchInput) {
+  searchInput.addEventListener("input", function (ev) {
+    var q = (ev.target.value || "").trim().toLowerCase();
+    var cards = document.querySelectorAll(".surah-card");
+    cards.forEach(function (card) {
+      // This checks every word inside the card
+      var text = (card.innerText || "").toLowerCase();
+      card.style.display = q === "" || text.indexOf(q) !== -1 ? "" : "none";
     });
-  }
+  });
+}
 });
 </script>
 
@@ -940,41 +884,52 @@ document.addEventListener("DOMContentLoaded", () => {
 </head>
 <body>
   <!-- Header (your locked-in version) -->
- <header>
-  <div class="brand">
-    
-    <h1><a href="index.html">Noor Al Huda</a></h1>
-  </div>
-
-  <!-- Hamburger -->
+<header>
+  <div class="brand"><h1><a href="index.html" data-en="Noor Al Huda" data-ar="نور الهدى" data-fa="نور الهدی" data-ur="نور الہدی">Noor Al Huda</a></h1></div>
   <button class="hamburger" aria-label="Open menu">☰</button>
-
 </header>
+
 <nav id="mainNav">
-  <a href="quran.html">Quran</a>
-  <a href="duas.html">Duas</a>
-  <a href="hadiths-home.html">Hadiths</a>
-  <a href="calendar.html">Calendar</a>
-  <a href="salah.html">Salah</a>
-  <a href="shiatube/index.html">ShiaTube</a>
-  <a href="index.html">Home</a>
-  <a href="settings.html">Settings</a>
-  
+  <a href="quran.html" data-en="Quran" data-ar="القرآن" data-fa="قرآن" data-ur="قرآن">Quran</a>
+  <a href="duas.html" data-en="Duas" data-ar="الأدعية" data-fa="دعاها" data-ur="دعائیں">Duas</a>
+  <a href="hadiths-home.html" data-en="Hadiths" data-ar="الأحاديث" data-fa="احادیث" data-ur="احادیث">Hadiths</a>
+  <a href="calendar.html" data-en="Calendar" data-ar="التقويم" data-fa="تقویم" data-ur="تقویم">Calendar</a>
+  <a href="salah.html" data-en="Salah" data-ar="الصلاة" data-fa="نماز" data-ur="نماز">Salah</a>
+  <a href="shiatube/index.html" data-en="ShiaTube" data-ar="شيعة توب" data-fa="شیعه تیوب" data-ur="شیعہ ٹیوب">ShiaTube</a>
+  <a href="index.html" data-en="Home" data-ar="الرئيسية" data-fa="خانه" data-ur="ہوم">Home</a>
+  <a href="settings.html" data-en="Settings" data-ar="الإعدادات" data-fa="تنظیمات" data-ur="سیٹنگز">Settings</a>
 </nav>
+
 <main class="container">
-  <h2>Select a Surah</h2>
+  <h2 id="pageTitle" 
+      data-en="Select a Surah" 
+      data-ar="اختر سورة" 
+      data-fa="انتخاب سوره" 
+      data-ur="سورہ منتخب کریں">
+      Select a Surah
+  </h2>
+  
   <div class="surah-search">
-  <input type="text" id="searchSurah" placeholder="Search Surah...">
-</div>
+    <input type="text" id="searchSurah" 
+           placeholder="Search Surah..."
+           data-en-ph="Search Surah..." 
+           data-ar-ph="ابحث عن سورة..." 
+           data-fa-ph="جستجوی سوره..." 
+           data-ur-ph="سورہ تلاش کریں...">
+  </div>
+</main>
 
   <div class="surah-grid" id="surahGrid"></div>
 </main>
   <!-- Footer -->
-  <footer>
+<footer data-en="© 2025 Noor Al Huda — All in one Shia website" 
+        data-ar="© 2025 نور الهدى — موقع شيعي متكامل" 
+        data-fa="© 2025 نور الهدی — وب‌سایت جامع شیعه" 
+        data-ur="© 2025 نور الہدیٰ — ہمہ گیر شیعہ ویب سائٹ">
     © 2025 Noor Al Huda — All in one Shia website
-  </footer>
+</footer>
 
 
+</script>
 </body>
-
 </html>
