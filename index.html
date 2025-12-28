@@ -451,7 +451,23 @@ letter-spacing: 0.3px;
 
 }
 
+/* Standard size for Desktop/Tablets */
+.bismillah-img {
+    width: 300px; /* Adjust this to your preferred desktop size */
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
 
+/* Specific adjustment for Mobile Phones */
+@media screen and (max-width: 600px) {
+    .bismillah-img {
+        /* This makes the PNG much larger on phones */
+        width: 90%; 
+        max-width: 500px; /* Prevents it from becoming blurry if the file is small */
+        margin: 30px auto;
+    }
+}
 </style>
 
 <main class="container">
