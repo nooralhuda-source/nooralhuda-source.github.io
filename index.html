@@ -51,11 +51,33 @@ body.dark-mode{--bg:#111827;--text:#f9fafb;--muted:#9ca3af;--card:#1f2937;--bord
 
 <body>
 <header>
-  <h1><a href="https://nooralhuda.co.uk">Noor Al Huda</a></h1>
-  <button class="btn" onclick="location.href='settings.html'">Settings</button>
+  <h1>
+    <a href="https://nooralhuda.co.uk" 
+       data-en="Noor Al Huda" 
+       data-ar="نور الهدى" 
+       data-fa="نور الهدی" 
+       data-ur="نور الہدیٰ">
+       Noor Al Huda
+    </a>
+  </h1>
+
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <select id="langSwitcher" class="btn" onchange="toggleLang(this.value)" style="vertical-align: middle; appearance: auto;">
+        <option value="en">English</option>
+        <option value="ar">العربية</option>
+        <option value="fa">فارسی</option>
+        <option value="ur">اردو</option>
+    </select>
+
+    <button class="btn" onclick="location.href='settings.html'" 
+            data-en="Settings" 
+            data-ar="الإعدادات" 
+            data-fa="تنظیمات" 
+            data-ur="ترتیبات">
+            Settings
+    </button>
+  </div>
 </header>
-
-
 
 <style>
 /* ───────────────────────────────
@@ -435,58 +457,71 @@ letter-spacing: 0.3px;
 <main class="container">
 <div class="page-title">
   <img src="bismillah.png" alt="Bismillah" class="bismillah-img">
-  <h2 class="site-name">Noor Al Huda</h2>
+  <h2 class="site-name" 
+    data-en="Noor Al Huda" 
+    data-ar="نور الهدى" 
+    data-fa="نور الهدی" 
+    data-ur="نور الہدیٰ">
+    Noor Al Huda
+</h2>
 </div>
 
 
   <!-- Widgets Section -->
-  <div id="salahWidget" class="widget-card" data-link="https://nooralhuda.co.uk/salah.html">
-  <h4>Salah Times</h4>
+ <div id="salahWidget" class="widget-card" data-link="https://nooralhuda.co.uk/salah.html">
+  <h4 data-en="Salah Times" data-ar="أوقات الصلاة" data-fa="اوقات شرعی" data-ur="نماز کے اوقات">Salah Times</h4>
   
-  
+  <label>
+    <strong data-en="City:" data-ar="المدينة:" data-fa="شهر:" data-ur="شہر:">City:</strong>
+    <select id="citySelect" style="padding: 2px; border-radius: 4px; font-family: inherit;">
+      <option value="London" data-en="London" data-ar="لندن" data-fa="لندن" data-ur="لندن">London, UK</option>
+      <option value="Bedford" selected data-en="Bedford" data-ar="بيدفورد" data-fa="بدفورد" data-ur="بیڈفورڈ">Bedford, UK</option>
+      <option value="Islamabad" data-en="Islamabad" data-ar="إسلام آباد" data-fa="اسلام‌آباد" data-ur="اسلام آباد">Islamabad, Pakistan</option>
+      <option value="Tehran" data-en="Tehran" data-ar="طهران" data-fa="تهران" data-ur="تہران">Tehran, Iran</option>
+      <option value="Karbala" data-en="Karbala" data-ar="كربلاء" data-fa="کربلا" data-ur="کربلا">Karbala, Iraq</option>
+      <option value="Najaf" data-en="Najaf" data-ar="النجف" data-fa="نجف" data-ur="نجف">Najaf, Iraq</option>
+      <option value="Qom" data-en="Qom" data-ar="قم" data-fa="قم" data-ur="قم">Qom, Iran</option>
+      <option value="Mashhad" data-en="Mashhad" data-ar="مشهد" data-fa="مشهد" data-ur="مشہد">Mashhad, Iran</option>
+      <option value="Beirut" data-en="Beirut" data-ar="بيروت" data-fa="بیروت" data-ur="بیروت">Beirut, Lebanon</option>
+      <option value="Dearborn" data-en="Dearborn" data-ar="ديربورن" data-fa="دیربورن" data-ur="ڈیئربورن">Dearborn, USA</option>
+      <option value="Mumbai" data-en="Mumbai" data-ar="مومباي" data-fa="بمبئی" data-ur="ممبئی">Mumbai, India</option>
+      <option value="Toronto" data-en="Toronto" data-ar="تورونتو" data-fa="تورنتو" data-ur="ٹورنٹو">Toronto, Canada</option>
+      <option value="NewYork" data-en="New York" data-ar="نيويورك" data-fa="نیویورک" data-ur="نیویارک">New York, USA</option>
+      <option value="LosAngeles" data-en="Los Angeles" data-ar="لوس أنجلوس" data-fa="لس آنجلس" data-ur="لاس اینجلس">Los Angeles, USA</option>
+      <option value="Sydney" data-en="Sydney" data-ar="سيدني" data-fa="سیدنی" data-ur="سڈنی">Sydney, Australia</option>
+      <option value="Cairo" data-en="Cairo" data-ar="القاهرة" data-fa="قاهره" data-ur="قاہرہ">Cairo, Egypt</option>
+      <option value="Riyadh" data-en="Riyadh" data-ar="الرياض" data-fa="ریاض" data-ur="ریاض">Riyadh, Saudi Arabia</option>
+    </select>
+  </label>
 
-      <label>
-        <strong>City:</strong>
-        <select id="citySelect">
-          <option value="London">London, UK</option>
-          <option value="Bedford" selected>Bedford, UK</option>
-          <option value="Islamabad">Islamabad, Pakistan</option>
-          <option value="Tehran">Tehran, Iran</option>
-          <option value="Karbala">Karbala, Iraq</option>
-          <option value="Najaf">Najaf, Iraq</option>
-          <option value="Qom">Qom, Iran</option>
-          <option value="Mashhad">Mashhad, Iran</option>
-          <option value="Beirut">Beirut, Lebanon</option>
-          <option value="Dearborn">Dearborn, USA</option>
-          <option value="Mumbai">Mumbai, India</option>
-          <option value="Toronto">Toronto, Canada</option>
-          <option value="NewYork">New York, USA</option>
-          <option value="LosAngeles">Los Angeles, USA</option>
-          <option value="Sydney">Sydney, Australia</option>
-          <option value="Cairo">Cairo, Egypt</option>
-          <option value="Riyadh">Riyadh, Saudi Arabia</option>
-        </select>
-      </label>
-      <ul class="widget-list" id="salahTimes">
-        <li>Fajr — <span id="fajr">—</span></li>
-        <li>Sunrise — <span id="sunrise">—</span></li>
-        <li>Dhuhr — <span id="dhuhr">—</span></li>
-        <li>Asr — <span id="asr">—</span></li>
-        <li>Maghrib — <span id="maghrib">—</span></li>
-        <li>Isha — <span id="isha">—</span></li>
-      </ul>
-      <a href="salah.html">Full Salah Page</a>
-    </article>
+  <ul class="widget-list" id="salahTimes">
+    <li><span data-en="Fajr" data-ar="الفجر" data-fa="فجر" data-ur="فجر">Fajr</span> — <span id="fajr">—</span></li>
+    <li><span data-en="Sunrise" data-ar="الشروق" data-fa="طلوع آفتاب" data-ur="طلوع آفتاب">Sunrise</span> — <span id="sunrise">—</span></li>
+    <li><span data-en="Dhuhr" data-ar="الظهر" data-fa="ظهر" data-ur="ظہر">Dhuhr</span> — <span id="dhuhr">—</span></li>
+    <li><span data-en="Asr" data-ar="العصر" data-fa="عصر" data-ur="عصر">Asr</span> — <span id="asr">—</span></li>
+    <li><span data-en="Maghrib" data-ar="المغرب" data-fa="مغرب" data-ur="مغرب">Maghrib</span> — <span id="maghrib">—</span></li>
+    <li><span data-en="Isha" data-ar="العشاء" data-fa="عشا" data-ur="عشاء">Isha</span> — <span id="isha">—</span></li>
+  </ul>
+  
+  <a href="salah.html" data-en="Full Salah Page" data-ar="صفحة الصلاة الكاملة" data-fa="صفحه کامل اوقات" data-ur="نماز کا مکمل صفحہ">Full Salah Page</a>
 </div>
     <!-- Quran Daily Verse Widget -->
 <br>
 
-<div id="quranWidget" class="widget-card"id="quranWidget"  data-link="quran.html"> 
-  <article
-      <h4>Daily Quran Verse</h4>
-      <p id="dailyVerse">Loading...</p>
-      <a href="quran.html">Read Quran</a>
-    </article>
+<div id="quranWidget" class="widget-card" data-link="quran.html">
+    <h4 data-en="Daily Quran Verse" data-ar="آية قرآنية يومية" data-fa="آیه روزانه قرآن" data-ur="روزانہ کی قرآنی آیت">Daily Quran Verse</h4>
+    <div id="quran-display">
+        <p id="arabic-text" style="font-weight: bold; font-size: 1.2rem; color: var(--green); margin-bottom: 8px;">Loading...</p>
+        <p id="translation-text" style="font-style: italic; color: var(--muted);">...</p>
+        <small id="verse-ref" style="color: var(--green); font-weight: bold;"></small>
+    </div>
+    <a href="quran.html" 
+   data-en="Read Quran" 
+   data-ar="اقرأ القرآن" 
+   data-fa="خواندن قرآن" 
+   data-ur="قرآن پڑھیں">
+   Read Quran
+</a>
 </div>
 
   </div>
@@ -495,37 +530,84 @@ letter-spacing: 0.3px;
   <!-- Static Cards Section -->
 <div class="grid">
     <article class="card" onclick="location.href='hadiths-home.html'">
-      <h4>Hadiths</h4>
-      <p>Books like Al-Kafi, Tahdhib, and Faqih.</p>
+        <h4 data-en="Hadiths" data-ar="الأحاديث" data-fa="احادیث" data-ur="احادیث">Hadiths</h4>
+        <p data-en="Books like Al-Kafi and Man la Yahduruhu al-Faqih" 
+           data-ar="كتب مثل الكافي ومن لا يحضره الفقيه" 
+           data-fa="کتاب‌هایی مانند الکافی و من لا یحضره الفقیه" 
+           data-ur="الکافی اور من لا یحضرہ الفقیہ جیسی کتب">
+           Books like Al-Kafi and Man la Yahduruhu al-Faqih
+        </p>
     </article>
+
     <article class="card" onclick="location.href='duas.html'">
-      <h4>Duas</h4>
-      <p>Separate duas like Dua Nudbah.</p>
+        <h4 data-en="Duas" data-ar="الأدعية" data-fa="دعاها" data-ur="دعائیں">Duas</h4>
+        <p data-en="Separate duas like Dua Nudbah." 
+           data-ar="أدعية منفصلة مثل دعاء الندبة." 
+           data-fa="دعاهای جداگانه مانند دعای ندبه." 
+           data-ur="علیحدہ دعائیں جیسے دعاے ندبہ۔">
+           Separate duas like Dua Nudbah.
+        </p>
     </article>
+
     <article class="card" onclick="location.href='calendar.html'">
-      <h4>Calendar</h4>
-      <p>Islamic dates and Shia events.</p>
+        <h4 data-en="Calendar" data-ar="التقويم" data-fa="تقویم" data-ur="کیلنڈر">Calendar</h4>
+        <p data-en="Islamic dates and Shia events." 
+           data-ar="التواريخ الإسلامية والمناسبات الشيعية." 
+           data-fa="تاریخ های اسلامی و وقایع شیعه." 
+           data-ur="اسلامی تواریخ اور شیعہ واقعات۔">
+           Islamic dates and Shia events.
+        </p>
     </article>
+
     <article class="card" onclick="location.href='manarat-ai.html'">
-      <h4>Manarat AI</h4>
-      <p>Beta test the new shia scholarly AI</p>
+        <h4 data-en="Manarat AI" data-ar="منارات AI" data-fa="منارات AI" data-ur="منارات AI">Manarat AI</h4>
+        <p data-en="Beta test the new shia scholarly AI" 
+           data-ar="اختبار النسخة التجريبية للذكاء الاصطناعي الشيعي" 
+           data-fa="تست بتای هوش مصنوعی علمی شیعه" 
+           data-ur="شیعہ علمی AI کا بیٹا ٹیسٹ">
+           Beta test the new shia scholarly AI
+        </p>
     </article>
+
     <article class="card" onclick="location.href='https://heardle.nooralhuda.co.uk'">
-      <h4>Heardle</h4>
-      <p>Test your memory with Shia nasheeds.</p>
+        <h4 data-en="Heardle" data-ar="هيردل" data-fa="هردل" data-ur="ہیرڈل">Heardle</h4>
+        <p data-en="Test your memory with Shia nasheeds." 
+           data-ar="اختبر ذاكرتك مع الأناشيد الشيعية." 
+           data-fa="حافظه خود را با نشیدهای شیعه امتحان کنید." 
+           data-ur="شیعہ نشیدوں کے ساتھ اپنی یادداشت کا امتحان لیں۔">
+           Test your memory with Shia nasheeds.
+        </p>
     </article>
+
     <article class="card" onclick="location.href='https://tube.nooralhuda.co.uk'">
-      <h4>ShiaTube</h4>
-      <p>Watch Islamic and Shia videos.</p>
+        <h4 data-en="ShiaTube" data-ar="شيعة تيوب" data-fa="شیعه تیوب" data-ur="شیعہ ٹیوب">ShiaTube</h4>
+        <p data-en="Watch Islamic and Shia videos." 
+           data-ar="شاهد فيديوهات إسلامية وشيعية." 
+           data-fa="ویدیوهای اسلامی و شیعه را تماشا کنید." 
+           data-ur="اسلامی اور شیعہ ویڈیوز دیکھیں۔">
+           Watch Islamic and Shia videos.
+        </p>
     </article>
+</div>
 </main>
 
 
-<footer>© 2025 Noor Al Huda — All in one Shia website</footer>
+<footer data-en="© 2025 Noor Al Huda — All in one Shia website" 
+        data-ar="© 2025 نور الهدى — موقع شيعي متكامل" 
+        data-fa="© 2025 نور الهدی — وب‌سایت جامع شیعه" 
+        data-ur="© 2025 نور الہدیٰ — ہمہ گیر شیعہ ویب سائٹ">
+    © 2025 Noor Al Huda — All in one Shia website
+</footer>
 <div id="manarat-wrapper">
     <div id="manarat-launcher" onclick="toggleManarat()" title="Ask Manarat AI (Beta)">
-        <span id="launcher-text">Manarat AI <b>Beta</b></span>
-    </div>
+    <span id="launcher-text" 
+      data-en="Manarat AI <b>Beta</b>" 
+      data-ar="منارات <b>بيتا</b>" 
+      data-fa="منارات <b>بتا</b>" 
+      data-ur="منارات <b>بیٹا</b>">
+    Manarat AI <b>Beta</b>
+</span>
+</div>
 
     <div id="manarat-popup">
         <div id="manarat-header">
@@ -625,161 +707,271 @@ letter-spacing: 0.3px;
 </style>
 
 <script>
-    function toggleManarat() {
-        const popup = document.getElementById('manarat-popup');
-        const text = document.getElementById('launcher-text');
-        
-        if (popup.style.display === 'none' || popup.style.display === '') {
-            popup.style.display = 'flex';
-            text.innerHTML = 'Close ✕';
-        } else {
-            popup.style.display = 'none';
-            text.innerHTML = 'Manarat AI <b>Beta</b>';
-        }
+function toggleManarat() {
+    const popup = document.getElementById('manarat-popup');
+    const text = document.getElementById('launcher-text');
+    const lang = localStorage.getItem('userLang') || 'en';
+
+    if (popup.style.display === 'none' || popup.style.display === '') {
+        popup.style.display = 'flex';
+        // Define translations for the "Close" state
+        const closeLabels = { 
+            en: 'Close ✕', 
+            ar: 'إغلاق ✕', 
+            fa: 'بستن ✕', 
+            ur: 'بند کریں ✕' 
+        };
+        // Use .innerText here because "Close" is just plain text
+        text.innerText = closeLabels[lang] || closeLabels['en'];
+    } else {
+        popup.style.display = 'none';
+        // Use .innerHTML here to render the <b> tag as a gold badge
+        const originalTranslation = text.getAttribute('data-' + lang);
+        text.innerHTML = originalTranslation; 
     }
+}
 </script>
 <script>
   const darkToggle = document.getElementById("darkModeToggle");
 
  src="auth.js"
 
-
-/* === Salah Widget JS === */
-const CITY_COUNTRY = {
-  London: {city:"London",country:"United Kingdom"},
-  Bedford:{city:"Bedford",country:"United Kingdom"},
-  Islamabad:{city:"Islamabad",country:"Pakistan"},
-  Tehran:{city:"Tehran",country:"Iran"},
-  Karbala:{city:"Karbala",country:"Iraq"},
-  Najaf:{city:"Najaf",country:"Iraq"},
-  Qom:{city:"Qom",country:"Iran"},
-  Mashhad:{city:"Mashhad",country:"Iran"},
-  Beirut:{city:"Beirut",country:"Lebanon"},
-  Dearborn:{city:"Dearborn",country:"United States"},
-  Mumbai:{city:"Mumbai",country:"India"},
-  Toronto:{city:"Toronto",country:"Canada"},
-  NewYork:{city:"New York",country:"United States"},
-  LosAngeles:{city:"Los Angeles",country:"United States"},
-  Sydney:{city:"Sydney",country:"Australia"},
-  Cairo:{city:"Cairo",country:"Egypt"},
-  Riyadh:{city:"Riyadh",country:"Saudi Arabia"}
+/* === CONFIGURATION === */
+const CITY_DATA = {
+    London: { city: "London", country: "United Kingdom" },
+    Bedford: { city: "Bedford", country: "United Kingdom" },
+    Islamabad: { city: "Islamabad", country: "Pakistan" },
+    Tehran: { city: "Tehran", country: "Iran" },
+    Karbala: { city: "Karbala", country: "Iraq" },
+    Najaf: { city: "Najaf", country: "Iraq" },
+    Qom: { city: "Qom", country: "Iran" },
+    Mashhad: { city: "Mashhad", country: "Iran" },
+    Beirut: { city: "Beirut", country: "Lebanon" },
+    Dearborn: { city: "Dearborn", country: "United States" },
+    Mumbai: { city: "Mumbai", country: "India" },
+    Toronto: { city: "Toronto", country: "Canada" },
+    NewYork: { city: "New York", country: "United States" },
+    LosAngeles: { city: "Los Angeles", country: "United States" },
+    Sydney: { city: "Sydney", country: "Australia" },
+    Cairo: { city: "Cairo", country: "Egypt" },
+    Riyadh: { city: "Riyadh", country: "Saudi Arabia" }
 };
-const API_METHOD = 0; // Jafari/Shia
-const DELAY_MINUTES = 3;
 
-const citySelect = document.getElementById('citySelect');
-const salahTimesList = document.getElementById('salahTimes');
+// Method 0 = Leva Institute (Qom) - often used as base for Shia
+// You can adjust these IDs if you find a specific "Sistani" API method later
+const METHOD_KHAMENEI = 0; 
+const METHOD_SISTANI = 0; 
 
-async function fetchSalahTimes(cityKey){
-  const info = CITY_COUNTRY[cityKey];
-  salahTimesList.innerHTML = "<li>Loading...</li>";
-  try{
-    const resp = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(info.city)}&country=${encodeURIComponent(info.country)}&method=${API_METHOD}`);
-    const data = await resp.json();
-    if(data.code !== 200 || !data.data || !data.data.timings) throw new Error("Invalid API response");
-    const times = data.data.timings;
-    const prayers = ["Fajr","Sunrise","Dhuhr","Asr","Maghrib","Isha"];
-    salahTimesList.innerHTML = "";
-    prayers.forEach(p=>{
-      const li = document.createElement("li");
-      const dtLocal = new Date();
-      const [hh,mm] = times[p].split(":");
-      dtLocal.setHours(hh,mm);
-      dtLocal.setMinutes(dtLocal.getMinutes()+DELAY_MINUTES);
-      li.textContent = `${p}: ${String(dtLocal.getHours()).padStart(2,'0')}:${String(dtLocal.getMinutes()).padStart(2,'0')}`;
-      salahTimesList.appendChild(li);
+/* === SAFETY LOGIC === */
+function timeToMins(t) {
+    if (!t) return 0;
+    const [h, m] = t.split(':').map(Number);
+    return h * 60 + m;
+}
+
+function calculateSafeTimes(khamenei, sistani) {
+    const safe = {};
+    const keys = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+
+    keys.forEach(key => {
+        // Clean the time string (remove metadata like "(GMT)")
+        const kTime = khamenei[key].split(" ")[0];
+        const sTime = sistani[key].split(" ")[0];
+        
+        let bestTime = kTime; // Default starting point
+
+        // 1. SAFETY LOGIC: Pick the LATER time for Fajr, Maghrib, and Isha
+        if (['Fajr', 'Maghrib', 'Isha'].includes(key)) {
+            bestTime = timeToMins(kTime) > timeToMins(sTime) ? kTime : sTime;
+        } else {
+            // Default to Khamenei/Method 0 for Sunrise, Dhuhr, and Asr
+            bestTime = kTime; 
+        }
+
+        // 2. APPLY CUSTOM OFFSETS
+        let totalMins = timeToMins(bestTime);
+
+        if (key === 'Fajr') {
+            // Add 25 minutes to Fajr
+            totalMins += 25;
+            bestTime = minsToTime(totalMins);
+        } 
+        else if (key === 'Dhuhr') {
+            // Add 8 minutes to Dhuhr (Zohr)
+            totalMins += 8;
+            bestTime = minsToTime(totalMins);
+        }
+
+        safe[key.toLowerCase()] = bestTime;
     });
-  }catch(e){
-    console.error(e);
-    salahTimesList.innerHTML="<li>Failed to load Salah times</li>";
-  }
+    
+    // Save the adjusted times for use across your site
+    localStorage.setItem('cachedSafeTimes', JSON.stringify(safe));
+    return safe;
 }
 
-// Init Salah widget
-(function(){
-  const savedCity = localStorage.getItem("salah_city") || "Bedford";
-  if(CITY_COUNTRY[savedCity]) citySelect.value = savedCity;
-  fetchSalahTimes(citySelect.value);
-  citySelect.addEventListener("change",e=>{
-    const val = e.target.value;
-    localStorage.setItem("salah_city", val);
-    fetchSalahTimes(val);
-  });
-  // Refresh every 10 min
-  setInterval(()=>fetchSalahTimes(citySelect.value),10*60*1000);
-})();
+/* === FETCHING DATA === */
+async function fetchSalahTimes(cityKey) {
+    const info = CITY_DATA[cityKey];
+    if (!info) return;
 
-/* === Quran Widget JS === */
-const verseEl = document.getElementById('dailyVerse');
-async function fetchQuranVerse(){
-  try{
-    // Example: use day-of-year modulo total ayahs to select a verse
-    const d = new Date();
-    const dayOfYear = Math.floor((d - new Date(d.getFullYear(),0,0)) / 86400000);
-    const resp = await fetch(`https://api.alquran.cloud/v1/ayah/${(dayOfYear%6236)+1}/editions/quran-uthmani,en.asad`);
-    const data = await resp.json();
-    if(data.code !== 200 || !data.data) throw new Error("Invalid response");
-    const ar = data.data[0].text;
-    const en = data.data[1].text;
-    verseEl.innerHTML = `<strong>${ar}</strong><br><em>${en}</em>`;
-  }catch(e){
-    console.error(e);
-    verseEl.textContent="Failed to load verse";
-  }
-}
-fetchQuranVerse();
-// Refresh daily at midnight
-const now = new Date();
-const msUntilMidnight = new Date(now.getFullYear(),now.getMonth(),now.getDate()+1)-now;
-setTimeout(()=>{
-  fetchQuranVerse();
-  setInterval(fetchQuranVerse,24*60*60*1000);
-},msUntilMidnight);
+    // Display loading state
+    document.getElementById('fajr').innerText = "--:--";
+    
+    try {
+        // Fetch BOTH methods in parallel
+        const [resK, resS] = await Promise.all([
+            fetch(`https://api.aladhan.com/v1/timingsByCity?city=${info.city}&country=${info.country}&method=${METHOD_KHAMENEI}`),
+            fetch(`https://api.aladhan.com/v1/timingsByCity?city=${info.city}&country=${info.country}&method=${METHOD_SISTANI}`)
+        ]);
 
-// Fetch Quran daily verse
-async function fetchDailyVerse() {
-  try {
-    // API: random verse (you can change to a fixed "daily" algorithm if you want)
-    const response = await fetch("https://api.alquran.cloud/v1/ayah/random/en.asad"); 
-    if (!response.ok) throw new Error("Network response was not ok");
-    const data = await response.json();
+        const dataK = await resK.json();
+        const dataS = await resS.json();
 
-    const verse = data.data.text;       // Arabic text
-    const surahName = data.data.surah.englishName;
-    const ayahNumber = data.data.numberInSurah;
+        if (dataK.code === 200 && dataS.code === 200) {
+            const timingsK = dataK.data.timings;
+            const timingsS = dataS.data.timings;
 
-    document.getElementById("dailyVerse").textContent =
-      `"${verse}" — ${surahName} [${ayahNumber}]`;
-
-  } catch (err) {
-    console.error(err);
-    document.getElementById("dailyVerse").textContent =
-      "Could not load verse. Please try again later.";
-  }
+            // Calculate the "Safer" times
+            const safeTimes = calculateSafeTimes(timingsK, timingsS);
+            
+            // Update UI
+            document.getElementById('fajr').innerText = safeTimes.fajr;
+            document.getElementById('sunrise').innerText = safeTimes.sunrise;
+            document.getElementById('dhuhr').innerText = safeTimes.dhuhr;
+            document.getElementById('asr').innerText = safeTimes.asr;
+            document.getElementById('maghrib').innerText = safeTimes.maghrib;
+            document.getElementById('isha').innerText = safeTimes.isha;
+        }
+    } catch (e) {
+        console.error("Salah Fetch Error:", e);
+        document.getElementById('fajr').innerText = "Error";
+    }
 }
 
-// Call on page load
-fetchDailyVerse();
+/* === LANGUAGE & INIT === */
+function toggleLang(lang) {
+    localStorage.setItem('userLang', lang);
+    const isRTL = ['ar', 'fa', 'ur'].includes(lang);
+    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
 
-// Optional: refresh daily at midnight
-function scheduleDailyRefresh() {
-  const now = new Date();
-  const millisTillMidnight = new Date(
-    now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0
-  ) - now;
-  setTimeout(() => {
-    fetchDailyVerse();
-    scheduleDailyRefresh(); // schedule next day
-  }, millisTillMidnight);
+    // Update all text elements
+    document.querySelectorAll('[data-en]').forEach(el => {
+        const translation = el.getAttribute('data-' + lang);
+        if (translation) {
+            if (el.tagName === 'OPTION') {
+                el.text = translation;
+            } else {
+                el.innerText = translation;
+            }
+        }
+    });
+
+    // Refresh Quran if function exists
+    if (typeof updateDailyVerse === 'function') updateDailyVerse();
 }
-scheduleDailyRefresh();
-// Make all cards with data-link clickable
-document.querySelectorAll('.widget-card[data-link]').forEach(card => {
-  card.addEventListener('click', () => {
-    const url = card.getAttribute('data-link');
-    window.location.href = url;
-  });
+// Helper: Convert total minutes back to "HH:MM"
+function minsToTime(totalMins) {
+    let h = Math.floor(totalMins / 60) % 24;
+    let m = totalMins % 60;
+    // Adds a zero in front if single digit (e.g. 5 becomes 05)
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+}
+// Initialize on Load
+window.addEventListener('DOMContentLoaded', () => {
+    // 1. Load Language
+    const savedLang = localStorage.getItem('userLang') || 'en';
+    const langSwitcher = document.getElementById('langSwitcher');
+    if (langSwitcher) langSwitcher.value = savedLang;
+    toggleLang(savedLang);
+
+    // 2. Load Salah City
+    const citySelect = document.getElementById('citySelect');
+    const savedCity = localStorage.getItem('salah_city') || 'Bedford';
+    if (citySelect) {
+        citySelect.value = savedCity;
+        fetchSalahTimes(savedCity);
+        
+        citySelect.addEventListener('change', (e) => {
+            localStorage.setItem('salah_city', e.target.value);
+            fetchSalahTimes(e.target.value);
+        });
+    }
 });
+const QURAN_URLS = {
+    en: "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/eng-aliquliqarai1.txt",
+    fa: "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/fas-drhussientagi.txt",
+    ur: "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/urd-syedzeeshanhaid.txt",
+    ar: "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/ara-quranindopak.txt"
+};
+
+async function updateDailyVerse() {
+    // Get the current language directly from the switcher or storage
+    const langSwitcher = document.getElementById('langSwitcher');
+    const lang = langSwitcher ? langSwitcher.value : (localStorage.getItem('userLang') || 'en');
+    
+    const translationEl = document.getElementById('translation-text');
+    const arabicEl = document.getElementById('arabic-text');
+    const refEl = document.getElementById('verse-ref');
+    
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const dayOfYear = Math.floor((now - start) / 86400000);
+    let targetIndex = (dayOfYear % 6236) + 1;
+    if (targetIndex === 1) targetIndex = 2;
+
+    try {
+        // Fetch Arabic and the SPECIFIC language file
+        const [resAr, resTrans] = await Promise.all([
+            fetch(QURAN_URLS.ar),
+            fetch(QURAN_URLS[lang]) // Uses the actual selected language
+        ]);
+
+        const textAr = await resAr.text();
+        const textTrans = await resTrans.text();
+
+        const getAyah = (rawText, index) => {
+            const lines = rawText.split('\n');
+            const line = lines[index - 1]; 
+            if(!line) return {ref: "", content: ""};
+            const parts = line.split('|');
+            return {
+                ref: `${parts[0]}:${parts[1]}`,
+                content: parts[2]
+            };
+        };
+
+        const ayahAr = getAyah(textAr, targetIndex);
+        const ayahTrans = getAyah(textTrans, targetIndex);
+
+        // Display Logic
+        arabicEl.innerText = ayahAr.content;
+        refEl.innerText = `[${ayahAr.ref}]`;
+
+        if (lang === 'ar') {
+            translationEl.innerText = ""; 
+            translationEl.style.display = "none";
+        } else {
+            translationEl.innerText = ayahTrans.content;
+            translationEl.style.display = "block";
+            // Ensure font matches the language style
+            translationEl.style.fontFamily = "inherit";
+        }
+
+    } catch (e) {
+        console.error("Quran Fetch Error:", e);
+    }
+}
+
+// Ensure this runs when language changes
+const originalToggleLang = toggleLang;
+toggleLang = function(lang) {
+    originalToggleLang(lang); // Run your existing translation logic
+    updateDailyVerse();       // Update the Quran widget to the new translation
+};
+
+// Run on load
+window.addEventListener('DOMContentLoaded', updateDailyVerse);
 // Make the widgets clickable
 document.querySelectorAll('.widget-card[data-link]').forEach(card => {
   card.addEventListener('click', e => {
@@ -877,6 +1069,28 @@ banner.textContent = '⚠️ This site is in BETA — features may change.';
 
 
 document.body.prepend(banner);
+
+function toggleLang(lang) {
+    localStorage.setItem('userLang', lang);
+    const isRTL = ['ar', 'fa', 'ur'].includes(lang);
+    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+        const translation = el.getAttribute('data-' + lang);
+        if (translation) {
+            // Check if this is the launcher text specifically
+            if (el.id === 'launcher-text') {
+                el.innerHTML = translation; // Use innerHTML to render the <b> badge
+            } else if (el.tagName === 'OPTION') {
+                el.text = translation;
+            } else {
+                el.innerText = translation;
+            }
+        }
+    });
+
+    if (typeof updateDailyVerse === 'function') updateDailyVerse();
+}
 </script>
 </body>
 </html>
