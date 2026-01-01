@@ -1,0 +1,30 @@
+body {
+  font-family: system-ui, sans-serif;
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+}
+
+textarea {
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#answer {
+  margin-top: 20px;
+  white-space: pre-wrap;
+}
+
+#sources {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}
