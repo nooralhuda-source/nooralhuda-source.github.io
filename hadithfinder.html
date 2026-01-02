@@ -116,6 +116,7 @@ body {
 <body>
 
 <h1>Hadith Finder</h1>
+<input type="number" id="numResults" placeholder="Number of results" min="1" max="50" value="10" style="width: 120px; margin-left: 10px;">
 
 <input type="text" id="query" placeholder="Ask something..." />
 <button id="ask">Search</button>
@@ -127,6 +128,8 @@ body {
 const askBtn = document.getElementById("ask");
 const queryInput = document.getElementById("query");
 const answerDiv = document.getElementById("answer");
+const numResultsInput = document.getElementById("numResults");
+
 
 // List all JSON files you have
 const DATASETS = [
@@ -208,20 +211,24 @@ function computeScore(entry, queryWords) {
 }
 
 // 3️⃣ Button click
+// 3️⃣ Button click
 askBtn.onclick = () => {
   const query = queryInput.value.trim().toLowerCase();
   if (!query) return;
 
   const queryWords = query.split(/\s+/);
 
+  const maxResults = parseInt(numResultsInput.value) || 10;
+
   const results = allData
     .map(entry => ({ ...entry, score: computeScore(entry, queryWords) }))
     .filter(e => e.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 10); // top 10 results
+    .slice(0, maxResults); // use dynamic number from input
 
   renderAnswer(results);
 };
+
 
 // 4️⃣ Render results with source
 function renderAnswer(results) {
