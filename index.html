@@ -468,6 +468,94 @@ letter-spacing: 0.3px;
         margin: 30px auto;
     }
 }
+  /* Launcher */
+#marja-launcher {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    padding: 14px 26px;
+    background: #0c1a2b; /* dark navy */
+    border-radius: 50px;
+    border: 2px solid #ffb98a; /* peach accent */
+    cursor: pointer;
+    z-index: 10000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
+}
+
+#marja-launcher:hover {
+    transform: scale(1.05);
+    background: #12233a;
+}
+
+#marja-launcher-text {
+    color: white;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* Popup */
+#marja-popup {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    width: 380px;
+    height: 600px;
+    max-height: 80vh;
+    background: #0c1a2b;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255,185,138,0.35);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    z-index: 10000;
+    animation: slideUp 0.35s ease;
+}
+
+/* Header */
+#marja-header {
+    background: #0c1a2b;
+    color: white;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 2px solid #ffb98a;
+}
+
+#marja-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* Iframe */
+#marja-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+}
+
+/* Animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 </style>
 
 <main class="container">
@@ -622,139 +710,38 @@ letter-spacing: 0.3px;
         data-ur="© 2025 نور الہدیٰ — ہمہ گیر شیعہ ویب سائٹ">
     © 2025 Noor Al Huda — All in one Shia website
 </footer>
-<div id="manarat-wrapper">
-    <div id="manarat-launcher" onclick="toggleManarat()" title="Ask Manarat AI (Beta)">
-    <span id="launcher-text" 
-      data-en="Manarat AI <b>Beta</b>" 
-      data-ar="منارات <b>بيتا</b>" 
-      data-fa="منارات <b>بتا</b>" 
-      data-ur="منارات <b>بیٹا</b>">
-    Manarat AI <b>Beta</b>
-</span>
-</div>
+<div id="marja-wrapper">
+    <div id="marja-launcher" onclick="toggleMarja()" title="Ask Marja AI">
+        <span id="marja-launcher-text">
+            Marja AI
+        </span>
+    </div>
 
-    <div id="manarat-popup">
-        <div id="manarat-header">
-            
-            <button onclick="toggleManarat()" id="close-btn">&times;</button>
+    <div id="marja-popup">
+        <div id="marja-header">
+            <span>Marja AI</span>
+            <button onclick="toggleMarja()" id="marja-close">&times;</button>
         </div>
-        <iframe src="manarat-ai.html" id="manarat-iframe"></iframe>
+
+        <iframe 
+            src="https://marja.ai/ask" 
+            id="marja-iframe"
+            loading="lazy">
+        </iframe>
     </div>
 </div>
-
-<style>
-    /* Launcher Styling: Changed to a Pill Shape for text */
-    #manarat-launcher {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        padding: 12px 24px; /* Flexible width for text */
-        background: linear-gradient(135deg, #1b5e20, #2e7d32);
-        border-radius: 50px; /* Pill shape */
-        border: 2px solid #d4af37;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-        animation: pulse 3s infinite;
-    }
-
-    #manarat-launcher:hover { transform: scale(1.05); background: #2e7d32; }
-    
-    #launcher-text { 
-        color: white; 
-        font-family: 'Segoe UI', sans-serif; 
-        font-size: 16px; 
-        font-weight: 500;
-        white-space: nowrap;
-    }
-    
-    #launcher-text b { 
-        font-size: 10px; 
-        background: #d4af37; 
-        color: #1b5e20; 
-        padding: 2px 6px; 
-        border-radius: 4px; 
-        margin-left: 8px; 
-        text-transform: uppercase;
-    }
-
-    /* Popup Window Styling */
-    #manarat-popup {
-        display: none;
-        position: fixed;
-        bottom: 90px;
-        right: 25px;
-        width: 380px;
-        height: 600px;
-        max-height: 80vh;
-        background: white;
-        border-radius: 20px;
-        overflow: hidden;
-        border: 1px solid rgba(212, 175, 55, 0.3);
-        box-shadow: 0 15px 50px rgba(0,0,0,0.15);
-        z-index: 10000;
-        flex-direction: column;
-        animation: slideUp 0.4s ease-out;
-    }
-
-    #manarat-header {
-        background: #1b5e20;
-        color: white;
-        padding: 10px 18px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-family: 'Segoe UI', sans-serif;
-        font-weight: 600;
-        font-size: 13px;
-        border-bottom: 3px solid #d4af37;
-    }
-
-    #close-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
-
-    #manarat-iframe { width: 100%; flex: 1; border: none; }
-
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0.4); }
-        70% { box-shadow: 0 0 0 12px rgba(27, 94, 32, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
-    }
-</style>
-
 <script>
-function toggleManarat() {
-    const popup = document.getElementById('manarat-popup');
-    const text = document.getElementById('launcher-text');
-    const lang = localStorage.getItem('userLang') || 'en';
+function toggleMarja() {
+    const popup = document.getElementById('marja-popup');
 
     if (popup.style.display === 'none' || popup.style.display === '') {
-        popup.style.display = 'flex';
-        // Define translations for the "Close" state
-        const closeLabels = { 
-            en: 'Close ✕', 
-            ar: 'إغلاق ✕', 
-            fa: 'بستن ✕', 
-            ur: 'بند کریں ✕' 
-        };
-        // Use .innerText here because "Close" is just plain text
-        text.innerText = closeLabels[lang] || closeLabels['en'];
+        popup.style.display = 'block';
     } else {
         popup.style.display = 'none';
-        // Use .innerHTML here to render the <b> tag as a gold badge
-        const originalTranslation = text.getAttribute('data-' + lang);
-        text.innerHTML = originalTranslation; 
     }
 }
 </script>
+
 <script>
   const darkToggle = document.getElementById("darkModeToggle");
 
@@ -1118,6 +1105,7 @@ function toggleLang(lang) {
 </script>
 </body>
 </html>
+
 
 
 
