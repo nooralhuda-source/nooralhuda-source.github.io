@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Noor Al Huda — Shia AI Models</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+/* === UPDATED THEME FOR SHIA AI === */
+:root {
+  --green: #276540; 
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 4.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + LOGO AREA ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+  background: #276540;
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-left { display: flex; align-items: center; gap: 12px; }
+
+/* Placeholder for your Logo */
+.logo-box {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.logo-box img { max-width: 100%; height: auto; }
+
+header h1 { font-size: 1.2rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; transition: transform 0.3s;
+}
+
+/* ─── NAVIGATION ─── */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 220px; height: 100%;
+  background: #276540;
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 24px 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.6rem 1rem; border-radius: 12px;
+  font-weight: 600; text-decoration: none;
+  transition: transform 0.2s;
+}
+#mainNav a:hover { transform: translateX(-5px); }
+
+/* ─── SEARCH ─── */
+.search-container {
+  max-width: 500px; margin: 2rem auto 1rem; padding: 0 1rem;
+}
+.surah-search {
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.7rem 1.2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent;
+}
+
+/* ─── DYNAMIC CARDS (Less Repetitive) ─── */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+
+.surah-card {
+  background: var(--card); 
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem; 
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-left: 5px solid var(--green); /* Unique edge */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
+}
+
+/* To reduce repetition, we alternate styles using nth-child */
+.surah-card:nth-child(even) { border-left-color: #d4af37; /* Gold accent */ }
+.surah-card:nth-child(3n) { border-left-color: #2e86de; /* Blue accent */ }
+
+.surah-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(145deg, #ffffff, #f0fdf4);
+}
+
+.surah-card h3 { font-size: 1.1rem; color: var(--text); margin-bottom: 5px; }
+.surah-card p { color: var(--muted); font-size: 0.9rem; }
+.surah-card .ai-badge {
+    align-self: flex-start;
+    font-size: 0.7rem;
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.85rem; border-top: 1px solid var(--border);
+}
+
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+body.dark-mode .surah-card:hover { background: #1e293b; border-color: #4ade80; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="logo-box">
+      <img src="logo.png" alt="Logo"> 
+    </div>
+    <div class="brand">
+        <h1><a href="index.html" data-en="Noor Al Huda AI" data-ar="نور الهدى للذكاء الاصطناعي">Noor Al Huda AI</a></h1>
+    </div>
+  </div>
+  <button class="hamburger" aria-label="Open menu">☰</button>
+</header>
+
+<nav id="mainNav">
+  <a href="index.html">Home</a>
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="ai-chat.html" style="background: #FFD700; color: #000;">AI Chat</a>
+</nav>
+
+<main class="container">
+  <h2 id="page-title" style="text-align:center; margin-top:2rem;" 
+      data-en="Explore Shia AI Models" 
+      data-ar="استكشف نماذج الذكاء الاصطناعي الشيعية">
+      Explore Shia AI Models
+  </h2>
+  
+  <div class="search-container">
+    <div class="surah-search">
+      <input type="text" id="searchAI" placeholder="Search for an AI model...">
+    </div>
+  </div>
+
+  <div class="surah-grid" id="aiGrid"></div>
+</main>
+
+<footer data-en="© 2025 Noor Al Huda — Powered by Shia AI Technology">
+    © 2025 Noor Al Huda — Powered by Shia AI Technology
+</footer>
+
+<script>
+const aiModels = [
+    { 
+        name_en: "Marja AI",  
+        desc_en: "Specialized in Jurisprudence (Fiqh) and Laws of sistani for now.",
+        href: "marja-ai.html",
+        type: "scholar"
+    },
+
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+    const savedLang = localStorage.getItem('userLang') || 'en';
+    const savedTheme = localStorage.getItem("theme");
+    applyThemeClass(savedTheme === "dark");
+    
+    renderAICards(savedLang);
+    setupUI();
+});
+
+function renderAICards(lang) {
+    const grid = document.getElementById("aiGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+    
+    aiModels.forEach(model => {
+        const card = document.createElement("div");
+        card.className = "surah-card";
+
+        const title = lang === 'ar' ? model.name_ar : model.name_en;
+        const sub = model.desc_en;
+
+        card.innerHTML = `
+            <div>
+                <h3>${title}</h3>
+                <p>${sub}</p>
+            </div>
+            <span class="ai-badge">${model.type}</span>
+        `;
+        card.onclick = () => window.location.href = model.href;
+        grid.appendChild(card);
+    });
+}
+
+function setupUI() {
+    const mainNav = document.getElementById("mainNav");
+    const hamburger = document.querySelector(".hamburger");
+    const searchInput = document.getElementById("searchAI");
+
+    hamburger.onclick = (e) => {
+        e.stopPropagation();
+        mainNav.classList.toggle("open");
+    };
+
+    document.onclick = (e) => {
+        if (!mainNav.contains(e.target) && !hamburger.contains(e.target))
+            mainNav.classList.remove("open");
+    };
+
+    if (searchInput) {
+        searchInput.oninput = (e) => {
+            const q = e.target.value.toLowerCase();
+            document.querySelectorAll(".surah-card").forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(q) ? "" : "none";
+            });
+        };
+    }
+}
+
+function applyThemeClass(isDark) {
+    document.body.classList.toggle("dark-mode", isDark);
+}
+</script>
+</body>
+</html>
