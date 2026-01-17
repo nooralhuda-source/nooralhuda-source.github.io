@@ -283,6 +283,70 @@ if (!savedList) {
    Utilities
    ------------------------- */
 function save(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
+function smartSplitArabic(arabicText, englishSanad = '') {
+  if (!arabicText) return { sanad: '', matn: '' };
+
+  const text = arabicText.trim();
+
+  // 1️⃣ Candidate split points (ordered by reliability)
+  const splitMarkers = [
+    /(?:قال رسول الله|قال النبي|قال أمير المؤمنين)/,
+    /(?:قال أبو عبد الله|قال أبو جعفر)/,
+    /(?:عن أبي عبد الله|عن أبي جعفر)/,
+    /:/ // fallback
+  ];
+
+  let candidates = [];
+
+  splitMarkers.forEach(rx => {
+    let m;
+    while ((m = rx.exec(text)) !== null) {
+      candidates.push(m.index);
+      if (!rx.global) break;
+    }
+  });
+
+  // Always include fallback "no split"
+  candidates.push(-1);
+
+  let best = { score: -Infinity, sanad: '', matn: text };
+
+  candidates.forEach(idx => {
+    let sanad = '';
+    let matn = text;
+
+    if (idx !== -1) {
+      sanad = text.slice(0, idx).trim();
+      matn  = text.slice(idx).trim();
+    }
+
+    // 🔍 Scoring (NO guessing, just elimination)
+    let score = 0;
+
+    // Penalize absurdly long sanad
+    if (sanad.length > matn.length) score -= 3;
+
+    // Reward presence of Arabic connectors in sanad
+    if (/عن|حدثنا|حدثني|قال/.test(sanad)) score += 2;
+
+    // Penalize doctrinal language inside sanad
+    if (/قال رسول الله|الجنة|النار|فرض|حرام/.test(sanad)) score -= 4;
+
+    // English-length sanity check (weak signal)
+    if (englishSanad) {
+      const ratio = sanad.length / englishSanad.length;
+      if (ratio > 3 || ratio < 0.3) score -= 1;
+      else score += 1;
+    }
+
+    if (score > best.score) {
+      best = { score, sanad, matn };
+    }
+  });
+
+  return best;
+}
+
 function load(key, fallback){ try{ const v = JSON.parse(localStorage.getItem(key)); return v === null ? fallback : (v || fallback); }catch(e){ return fallback; } }
 function el(tag, attrs = {}, text = ''){ const e = document.createElement(tag); for(const k in attrs) { if(k === 'style') e.style.cssText = attrs[k]; else e.setAttribute(k, attrs[k]); } if(text) e.innerText = text; return e; }
 function escapeHtml(s){ return String(s === undefined || s === null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
@@ -407,21 +471,11 @@ if (hasSanad && hasMatn) {
 
   const fullArabic = String(h.arabicText || '').trim();
 
-  // 🔑 split Arabic by LAST colon
-  const lastColon = fullArabic.lastIndexOf(':');
 
-  if (lastColon !== -1) {
-    arabicSanad = fullArabic.slice(0, lastColon + 1).trim();
-    arabicMatn  = fullArabic.slice(lastColon + 1).trim();
-  } else {
-    arabicMatn = fullArabic;
-  }
+const split = smartSplitArabic(fullArabic, sanad);
+arabicSanad = split.sanad;
+arabicMatn  = split.matn;
 
-} else {
-  english = String(h.englishText || h.thaqalaynMatn || '').trim();
-  arabicMatn = String(h.arabicText || '').trim();
-  sanad = '';
-}
 
     const contextP = el('div', { class: 'hadith-context' }, sanad ? `Sanad: ${sanad}` : '');
     const enP = el('div', { class: 'hadith-en' }, english || '');
@@ -592,19 +646,10 @@ function openHadithModal(idx){
     english = String(h.thaqalaynMatn).trim();
 
     const fullArabic = String(h.arabicText || '').trim();
-    const lastColon = fullArabic.lastIndexOf(':');
+   const split = smartSplitArabic(fullArabic, sanad);
+arabicSanad = split.sanad;
+arabicMatn  = split.matn;
 
-    if (lastColon !== -1) {
-      arabicSanad = fullArabic.slice(0, lastColon + 1).trim();
-      arabicMatn  = fullArabic.slice(lastColon + 1).trim();
-    } else {
-      arabicMatn = fullArabic;
-    }
-
-  } else {
-    english = String(h.englishText || h.thaqalaynMatn || '').trim();
-    arabicMatn = String(h.arabicText || '').trim();
-  }
     /* main grid */
   const modalGrid = document.querySelector('.modal-grid');
   modalGrid.innerHTML = '';
