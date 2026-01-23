@@ -274,7 +274,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           // 🔑 CLEAN URL — THIS IS THE FIX
           card.onclick = () => {
-            window.location.href = `/al-tawhid.html#${chapterId}`;
+            window.location.href = `al-tawhid.html#${chapterId}`; // relative to current folder
+
 
           };
 
