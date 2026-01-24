@@ -837,7 +837,7 @@ function applyChapterFromHash() {
 
   // Run again if hash changes
   window.addEventListener('hashchange', applyChapterFromHash);
-})();
+
 function checkAndOpenSavedHadith(){
   const pinned = load(STORAGE_PINNED, null);
   if(!pinned) return;
