@@ -817,10 +817,7 @@ applyThemeClass(localStorage.getItem('theme') === 'dark');
     let chapterKey = hash || 'foreword';
 
     // 🔴 IMPORTANT:
-    // Override any existing global filters here
-    if (typeof FILTER_CATEGORY_ID !== 'undefined') {
-      FILTER_CATEGORY_ID = 1;
-    }
+
 
     // Filter hadiths by chapter
     if (typeof HADITHS !== 'undefined') {
