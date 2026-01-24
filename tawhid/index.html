@@ -560,14 +560,26 @@ function openHadithModal(idx){
   let arabicSanad = '';
   let arabicMatn = '';
 
-  if (hasSanad && hasMatn) {
-    sanad   = String(h.thaqalaynSanad).trim();
-    english = String(h.thaqalaynMatn).trim();
+sanad = h.thaqalaynSanad
+  ? String(h.thaqalaynSanad).trim()
+  : '';
 
-    const fullArabic = String(h.arabicText || '').trim();
-const split = splitArabicSanadMatnByEnglish(fullArabic, sanad);
-arabicSanad = split.sanad;
-arabicMatn  = split.matn;
+// English: Thaqalayn → fallback to englishText
+english =
+  h.thaqalaynMatn
+    ? String(h.thaqalaynMatn).trim()
+    : (h.englishText ? String(h.englishText).trim() : '');
+
+// Arabic
+const fullArabic = h.arabicText ? String(h.arabicText).trim() : '';
+
+if (fullArabic && sanad) {
+  const split = splitArabicSanadMatnByEnglish(fullArabic, sanad);
+  arabicSanad = split.sanad;
+  arabicMatn  = split.matn;
+} else {
+  arabicMatn = fullArabic;
+}
 
 
     /* main grid */
@@ -619,7 +631,7 @@ arabicMatn  = split.matn;
   modalNote.value = notes[h.id] || '';
 
   modalBackdrop.style.display = 'flex';
-}
+
 }
 
 /* modal nav */
@@ -880,4 +892,5 @@ loadHadiths();
 
 
 </html>
+
 
