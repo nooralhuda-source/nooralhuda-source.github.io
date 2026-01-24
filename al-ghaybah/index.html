@@ -313,16 +313,28 @@ let arabicSanad = '';
 let arabicMatn = '';
 
 
-if (hasSanad && hasMatn) {
-  sanad = String(h.thaqalaynSanad).trim();
-  english = String(h.thaqalaynMatn).trim();
+// Sanad (optional)
+sanad = h.thaqalaynSanad
+  ? String(h.thaqalaynSanad).trim()
+  : '';
 
-  const fullArabic = String(h.arabicText || '').trim();
+// English: Thaqalayn → fallback to englishText
+english =
+  h.thaqalaynMatn
+    ? String(h.thaqalaynMatn).trim()
+    : (h.englishText ? String(h.englishText).trim() : '');
 
-const split = splitArabicSanadMatnByEnglish(fullArabic, sanad);
-arabicSanad = split.sanad;
-arabicMatn  = split.matn;
+// Arabic
+const fullArabic = h.arabicText ? String(h.arabicText).trim() : '';
+
+if (fullArabic && sanad) {
+  const split = splitArabicSanadMatnByEnglish(fullArabic, sanad);
+  arabicSanad = split.sanad;
+  arabicMatn  = split.matn;
+} else {
+  arabicMatn = fullArabic;
 }
+
 
     const contextP = el('div', { class: 'hadith-context' }, sanad ? `Sanad: ${sanad}` : '');
     const enP = el('div', { class: 'hadith-en' }, english || '');
