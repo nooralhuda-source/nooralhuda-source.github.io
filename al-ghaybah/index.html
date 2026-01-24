@@ -572,15 +572,24 @@ function openHadithModal(idx){
   let arabicSanad = '';
   let arabicMatn = '';
 
+sanad = h.thaqalaynSanad
+  ? cleanEnglishText(h.thaqalaynSanad)
+  : '';
 
-if (hasSanad && hasMatn) {
-  sanad   = cleanEnglishText(h.thaqalaynSanad);
-  english = cleanEnglishText(h.thaqalaynMatn || h.englishText);
+english =
+  h.thaqalaynMatn
+    ? cleanEnglishText(h.thaqalaynMatn)
+    : (h.englishText ? cleanEnglishText(h.englishText) : '');
 
-  const fullArabic = String(h.arabicText || '').trim();
+const fullArabic = String(h.arabicText || '').trim();
+if (fullArabic && sanad) {
   const split = splitArabicSanadMatnByEnglish(fullArabic, sanad);
   arabicSanad = split.sanad;
   arabicMatn  = split.matn;
+} else {
+  arabicMatn = fullArabic;
+}
+
 
   /* main grid */
   const modalGrid = document.querySelector('.modal-grid');
@@ -631,7 +640,6 @@ if (hasSanad && hasMatn) {
   modalNote.value = notes[h.id] || '';
 
   modalBackdrop.style.display = 'flex';
-}
 
 
 /* modal nav */
@@ -762,6 +770,23 @@ async function populateSavedList(){
     savedList.appendChild(row);
   });
 }
+modalPrev.onclick = () => {
+  if (visibleIndex > 0) {
+    visibleIndex--;
+    openHadithModal(visibleIndex);
+    scrollToCard();
+  }
+};
+
+modalNext.onclick = () => {
+  if (visibleIndex < HADITHS.length - 1) {
+    visibleIndex++;
+    openHadithModal(visibleIndex);
+    scrollToCard();
+  }
+};
+
+modalClose.onclick = () => modalBackdrop.style.display = 'none';
 
 /* -------------------------
    Helper: target page mapping
@@ -818,37 +843,15 @@ function applyThemeClass(isDark) {
 }
 applyThemeClass(localStorage.getItem('theme') === 'dark');
 
-/* -------------------------
-   Check URL open param (when navigated from saved list)
-   ------------------------- */
-function applyChapterFromHash() {
-  const hash = window.location.hash.replace('#', '');
 
-  // Always reset from full book
-  HADITHS = ALL_HADITHS.slice();
 
-  if (hash && hash !== 'foreword') {
-    HADITHS = HADITHS.filter(
-      h => String(h.chapterInCategoryId) === String(hash)
-    );
-    document.title = `Al-Ghaybah — Chapter ${hash}`;
-  } else {
-    // Foreword / intro
-    HADITHS = HADITHS.filter(h =>
-      h.category === 'Introduction' || h.chapterInCategoryId === 0
-    );
-    document.title = 'Al-Ghaybah — Foreword';
+window.addEventListener('hashchange', () => {
+  const ch = getChapterFromHash();
+  if (ch && PAGES[ch]) {
+    showChapter(ch);
   }
+});
 
-  renderList();
-}
-
-
-  // Run once on load
-  window.addEventListener('load', applyChapterFromHash);
-
-  // Run again if hash changes
-  window.addEventListener('hashchange', applyChapterFromHash);
 
 function checkAndOpenSavedHadith(){
   const pinned = load(STORAGE_PINNED, null);
