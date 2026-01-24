@@ -573,15 +573,18 @@ function openHadithModal(idx){
   let arabicMatn = '';
 
 sanad = h.thaqalaynSanad
-  ? cleanEnglishText(h.thaqalaynSanad)
+  ? String(h.thaqalaynSanad).trim()
   : '';
 
+// English: Thaqalayn → fallback to englishText
 english =
   h.thaqalaynMatn
-    ? cleanEnglishText(h.thaqalaynMatn)
-    : (h.englishText ? cleanEnglishText(h.englishText) : '');
+    ? String(h.thaqalaynMatn).trim()
+    : (h.englishText ? String(h.englishText).trim() : '');
 
-const fullArabic = String(h.arabicText || '').trim();
+// Arabic
+const fullArabic = h.arabicText ? String(h.arabicText).trim() : '';
+
 if (fullArabic && sanad) {
   const split = splitArabicSanadMatnByEnglish(fullArabic, sanad);
   arabicSanad = split.sanad;
