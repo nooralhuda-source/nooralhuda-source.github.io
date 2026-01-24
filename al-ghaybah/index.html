@@ -269,23 +269,46 @@ const pinned = load(STORAGE_PINNED, null);
 
 // 1. Check if a pinned hadith exists
 if (pinned) {
-    // 2. Find the index of the pinned hadith in the CURRENT loaded list
-    const idx = HADITHS.findIndex(h => String(h.id) === String(pinned.id));
+  const idx = HADITHS.findIndex(
+    h => String(h.id) === String(pinned.id)
+  );
 
-    // 3. Verify the hadith exists in the current array AND matches the current Category/Volume
-    // This ensures it only opens if you are on the "Right Page"
-    if (idx >= 0 && Number(HADITHS[idx].categoryId) === FILTER_CATEGORY_ID) {
-        setTimeout(() => { 
-            openHadithModal(idx); 
-            const card = document.getElementById('hadith-card-' + HADITHS[idx].id); 
-            if (card) {
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
-            }
-        }, 260);
-    } else {
-        console.log("Pinned hadith is on a different page. Modal will not open.");
-    }
+  if (idx === -1) return;
+
+  const hadith = HADITHS[idx];
+
+  // Get current chapter from URL hash
+  const currentChapter = getChapterFromHash();
+
+  // Only open if the pinned hadith belongs to THIS chapter
+  const sameChapter =
+    String(hadith.chapterInCategoryId) === String(currentChapter);
+
+  const sameCategory =
+    Number(hadith.categoryId) === Number(FILTER_CATEGORY_ID);
+
+  if (sameCategory && sameChapter) {
+    setTimeout(() => {
+      openHadithModal(idx);
+
+      const card = document.getElementById(
+        'hadith-card-' + hadith.id
+      );
+
+      if (card) {
+        card.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }
+    }, 260);
+  } else {
+    console.log(
+      'Pinned hadith exists, but not in this chapter — modal not opened.'
+    );
+  }
 }
+
 
   } catch (err) {
     console.error(err);
