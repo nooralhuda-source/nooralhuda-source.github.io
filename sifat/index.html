@@ -324,15 +324,26 @@ function renderList(){
   if(!HADITHS.length){ hadithContainer.innerHTML = '<em style="color:var(--muted);padding:12px">No hadiths found.</em>'; return; }
 
   const currentPinned = load(STORAGE_PINNED, null);
+const chapterCounters = {};
+
 
   HADITHS.forEach((h, i) => {
+    const ch = h.chapterInCategoryId || 'unknown';
+chapterCounters[ch] = (chapterCounters[ch] || 0) + 1;
+const chapterHadithNumber = chapterCounters[ch];
+
     const card = el('div', {
         class: 'hadith-card',
         id: 'hadith-card-' + h.id,
         'data-chapter': h.chapterInCategoryId || 'unknown'
     });
 
-    const meta = el('div', { class: 'hadith-meta' }, `#${h.id}`);
+const meta = el(
+  'div',
+  { class: 'hadith-meta' },
+  `Hadith ${chapterHadithNumber}`
+);
+
 
     const body = el('div', { class: 'hadith-body' });
     const leftCol = el('div', { class: 'hadith-col' });
