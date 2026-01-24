@@ -137,6 +137,7 @@ const savedBackdrop = document.getElementById('savedBackdrop');
 const savedPopup = document.getElementById('savedPopup');
 const closeSaved = document.getElementById('closeSaved');
 const backBeginning = document.getElementById('backBeginning');
+let ALL_HADITHS = [];
 
 let HADITHS = [];
 let visibleIndex = 0;
@@ -255,14 +256,13 @@ async function loadHadiths(){
     const arr = await res.json();
 
     // Filter by volume/category and book id string that includes Al-Kafi-Volume-2 (keeps old logic)
-const filtered = arr.filter(h =>
+ALL_HADITHS = arr.filter(h =>
   Number(h.categoryId) === FILTER_CATEGORY_ID
 );
 
+HADITHS = ALL_HADITHS.slice(); // copy, not reference
+renderList();
 
-    filtered.sort((a,b) => (Number(a.id)||0) - (Number(b.id)||0));
-    HADITHS = filtered;
-    renderList();
 
     // Auto-open pinned if present and present on this page
     const pinned = load(STORAGE_PINNED, null);
@@ -809,41 +809,28 @@ applyThemeClass(localStorage.getItem('theme') === 'dark');
 /* -------------------------
    Check URL open param (when navigated from saved list)
    ------------------------- */
-(function () {
-  function applyChapterFromHash() {
-    const hash = window.location.hash.replace('#', '');
+function applyChapterFromHash() {
+  const hash = window.location.hash.replace('#', '');
 
-    // Default = foreword
-    let chapterKey = hash || 'foreword';
+  // Always reset from full book
+  HADITHS = ALL_HADITHS.slice();
 
-    // 🔴 IMPORTANT:
-    // Override any existing global filters here
-    if (typeof FILTER_CATEGORY_ID !== 'undefined') {
-      FILTER_CATEGORY_ID = null;
-    }
-
-    // Filter hadiths by chapter
-    if (typeof HADITHS !== 'undefined') {
-      if (chapterKey === 'foreword') {
-        HADITHS = HADITHS.filter(h => h.category === 'Introduction');
-      } else {
-        HADITHS = HADITHS.filter(
-          h => String(h.chapterInCategoryId) === String(chapterKey)
-        );
-      }
-    }
-
-    // Update title (browser tab)
-    document.title =
-      chapterKey === 'foreword'
-        ? 'Al-Ghaybah — Foreword'
-        : `Al-Ghaybah — Chapter ${chapterKey}`;
-
-    // Re-render using EXISTING logic
-    if (typeof renderList === 'function') {
-      renderList();
-    }
+  if (hash && hash !== 'foreword') {
+    HADITHS = HADITHS.filter(
+      h => String(h.chapterInCategoryId) === String(hash)
+    );
+    document.title = `Al-Ghaybah — Chapter ${hash}`;
+  } else {
+    // Foreword / intro
+    HADITHS = HADITHS.filter(h =>
+      h.category === 'Introduction' || h.chapterInCategoryId === 0
+    );
+    document.title = 'Al-Ghaybah — Foreword';
   }
+
+  renderList();
+}
+
 
   // Run once on load
   window.addEventListener('load', applyChapterFromHash);
