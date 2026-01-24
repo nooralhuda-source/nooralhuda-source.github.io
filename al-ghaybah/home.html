@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Kitab Al-Ghaybah by Sheikh Tusi</title>
+  <title>Kitab Al-Ghaybah</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
 /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
@@ -202,7 +202,7 @@ body.dark-mode {
 <main class="container">
   <div class="top-row">
   <a class="back-home" href="../hadiths-home.html">← Back</a>
-  <h2>Kitab Al-Tawhid</h2>
+  <h2>Kitab Al-Ghaybah</h2>
 </div>
   <div class="surah-search">
     <input type="text" id="searchBook" placeholder="Search Chapter ...">
@@ -215,80 +215,43 @@ body.dark-mode {
 </footer>
 
 <script>
-
-
-document.addEventListener("DOMContentLoaded", async () => {
+async function loadChapters() {
   const grid = document.getElementById("bookGrid");
-  const searchInput = document.getElementById("searchBook");
 
   const res = await fetch(
     "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/27.json"
   );
   const data = await res.json();
 
-  // categoryId → { name, chapters }
-  const categories = {};
+  const seen = new Set();
 
   data.forEach(h => {
-    const catId = h.categoryId;
-    const chapId = h.chapterInCategoryId;
+    // handle foreword separately
+    const chapterKey =
+      h.category === "Introduction"
+        ? "foreword"
+        : h.chapterInCategoryId;
 
-    if (!categories[catId]) {
-      categories[catId] = {
-        name: h.category,
-        chapters: {}
-      };
-    }
+    if (seen.has(chapterKey)) return;
+    seen.add(chapterKey);
 
-    // ONE entry per chapter
-    if (!categories[catId].chapters[chapId]) {
-      categories[catId].chapters[chapId] = h.chapter;
-    }
+    const card = document.createElement("div");
+    card.className = "surah-card";
+    card.innerHTML = `
+      <h3>${chapterKey === "foreword" ? "Foreword" : "Chapter " + chapterKey}</h3>
+      <p>${h.chapter}</p>
+    `;
+
+    card.onclick = () => {
+      window.location.href = `./#${chapterKey}`;
+    };
+
+    grid.appendChild(card);
   });
+}
 
-  function render(filter = "") {
-    grid.innerHTML = "";
+document.addEventListener("DOMContentLoaded", loadChapters);
 
-    Object.values(categories).forEach(cat => {
-      // Category heading
-      const heading = document.createElement("h3");
-      heading.textContent = cat.name;
-      heading.style.gridColumn = "1 / -1";
-      heading.style.marginTop = "2rem";
-      grid.appendChild(heading);
-
-      Object.entries(cat.chapters)
-        .sort((a, b) => Number(a[0]) - Number(b[0]))
-        .forEach(([chapterId, chapterName]) => {
-          if (
-            filter &&
-            !chapterName.toLowerCase().includes(filter)
-          ) return;
-
-          const card = document.createElement("div");
-          card.className = "surah-card";
-          card.innerHTML = `
-            <h3>Chapter ${chapterId}</h3>
-            <p>${chapterName}</p>
-          `;
-
-          // 🔑 CLEAN URL — THIS IS THE FIX
-          card.onclick = () => {
-            window.location.href = `/al-tawhid.html#${chapterId}`;
-
-          };
-
-          grid.appendChild(card);
-        });
-    });
-  }
-
-  render();
-
-  searchInput.addEventListener("input", e => {
-    render(e.target.value.toLowerCase());
-  });
-});
 
 
 document.addEventListener("DOMContentLoaded", () => {
