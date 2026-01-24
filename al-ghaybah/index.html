@@ -265,13 +265,27 @@ renderList();
 
 
     // Auto-open pinned if present and present on this page
-    const pinned = load(STORAGE_PINNED, null);
-    if (pinned && String(pinned.volume) === String(FILTER_VOLUME)) {
-      const idx = HADITHS.findIndex(h => String(h.id) === String(pinned.id));
-      if (idx >= 0) {
-        setTimeout(() => { openHadithModal(idx); const card = document.getElementById('hadith-card-' + HADITHS[idx].id); if(card) card.scrollIntoView({behavior:'smooth', block:'center'}); }, 260);
-      }
+const pinned = load(STORAGE_PINNED, null);
+
+// 1. Check if a pinned hadith exists
+if (pinned) {
+    // 2. Find the index of the pinned hadith in the CURRENT loaded list
+    const idx = HADITHS.findIndex(h => String(h.id) === String(pinned.id));
+
+    // 3. Verify the hadith exists in the current array AND matches the current Category/Volume
+    // This ensures it only opens if you are on the "Right Page"
+    if (idx >= 0 && Number(HADITHS[idx].categoryId) === FILTER_CATEGORY_ID) {
+        setTimeout(() => { 
+            openHadithModal(idx); 
+            const card = document.getElementById('hadith-card-' + HADITHS[idx].id); 
+            if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+            }
+        }, 260);
+    } else {
+        console.log("Pinned hadith is on a different page. Modal will not open.");
     }
+}
 
   } catch (err) {
     console.error(err);
