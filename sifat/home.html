@@ -222,54 +222,58 @@ async function loadChapters() {
   const res = await fetch(
     "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/26.json"
   );
-  const data = await res.json();
+  let data = await res.json();
 
+  // 1. Get unique chapters only
+  const uniqueChapters = [];
   const seen = new Set();
 
   data.forEach(h => {
     const chapterKey = h.category === "Introduction" ? "foreword" : h.chapterInCategoryId;
-    if (seen.has(chapterKey)) return;
-    seen.add(chapterKey);
+    if (!seen.has(chapterKey)) {
+      seen.add(chapterKey);
+      uniqueChapters.push({
+        key: chapterKey,
+        title: h.chapter || "",
+        sortOrder: chapterKey === "foreword" ? 0 : parseInt(chapterKey)
+      });
+    }
+  });
 
+  // 2. SORT the unique chapters numerically
+  uniqueChapters.sort((a, b) => a.sortOrder - b.sortOrder);
+
+  // 3. Render the sorted chapters
+  uniqueChapters.forEach(ch => {
     const card = document.createElement("div");
     card.className = "surah-card";
     
-    // We add the search text inside the HTML
-    const chapterTitle = h.chapter || "";
-    const chapterDisplay = chapterKey === "foreword" ? "Foreword" : "Chapter " + chapterKey;
+    const chapterDisplay = ch.key === "foreword" ? "Foreword" : "Chapter " + ch.key;
 
     card.innerHTML = `
       <h3>${chapterDisplay}</h3>
-      <p class="chapter-name">${chapterTitle}</p>
+      <p class="chapter-name">${ch.title}</p>
     `;
 
     card.onclick = () => {
-     window.location.href = `./#${chapterKey}`;
-
+      // Use the actual key for the URL hash
+      window.location.href = `hadith-details.html?book=26&chapter=${ch.key}`;
     };
 
     grid.appendChild(card);
   });
 
-  // --- SEARCH LOGIC START ---
+  // --- SEARCH LOGIC ---
   searchInput.addEventListener("input", function() {
     const query = this.value.toLowerCase().trim();
     const cards = grid.getElementsByClassName("surah-card");
 
     Array.from(cards).forEach(card => {
-      // Get the text from the <h3> and the <p>
       const title = card.querySelector("h3").innerText.toLowerCase();
       const subTitle = card.querySelector("p").innerText.toLowerCase();
-
-      // If the query matches either, show the card, otherwise hide it
-      if (title.includes(query) || subTitle.includes(query)) {
-        card.style.display = ""; // Shows the card
-      } else {
-        card.style.display = "none"; // Hides the card
-      }
+      card.style.display = (title.includes(query) || subTitle.includes(query)) ? "" : "none";
     });
   });
-  // --- SEARCH LOGIC END ---
 }
 
 document.addEventListener("DOMContentLoaded", loadChapters);
