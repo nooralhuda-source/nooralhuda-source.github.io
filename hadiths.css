@@ -84,7 +84,7 @@
   .hadith-body { flex:1; display:flex; gap:12px; align-items:flex-start; }
   .hadith-col { flex:1; min-width:0; }
   
-  .hadith-en { font-size:0.98rem; color:var(--text); margin-bottom:8px; text-align:left; }
+  .hadith-en { font-size:1rem; color:var(--text); margin-bottom:8px; text-align:left; }
   .hadith-context { font-size:0.88rem; color:var(--muted); margin-bottom:8px; }
   .hadith-ar { font-family: 'Parastoo'; direction:rtl; font-size: clamp(18px, 4vw, 27px); line-height:1.5; text-align:right; }
 
@@ -468,5 +468,6 @@ body.dark-mode .note-input::placeholder {
 .modal-ar.matn {
   margin-top: .5rem;
 }
+
 
 
