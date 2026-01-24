@@ -217,6 +217,7 @@ body.dark-mode {
 <script>
 async function loadChapters() {
   const grid = document.getElementById("bookGrid");
+  const searchInput = document.getElementById("searchBook");
 
   const res = await fetch(
     "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/27.json"
@@ -226,31 +227,53 @@ async function loadChapters() {
   const seen = new Set();
 
   data.forEach(h => {
-    // handle foreword separately
-    const chapterKey =
-      h.category === "Introduction"
-        ? "foreword"
-        : h.chapterInCategoryId;
-
+    const chapterKey = h.category === "Introduction" ? "foreword" : h.chapterInCategoryId;
     if (seen.has(chapterKey)) return;
     seen.add(chapterKey);
 
     const card = document.createElement("div");
     card.className = "surah-card";
+    
+    // We add the search text inside the HTML
+    const chapterTitle = h.chapter || "";
+    const chapterDisplay = chapterKey === "foreword" ? "Foreword" : "Chapter " + chapterKey;
+
     card.innerHTML = `
-      <h3>${chapterKey === "foreword" ? "Foreword" : "Chapter " + chapterKey}</h3>
-      <p>${h.chapter}</p>
+      <h3>${chapterDisplay}</h3>
+      <p class="chapter-name">${chapterTitle}</p>
     `;
 
     card.onclick = () => {
-      window.location.href = `./#${chapterKey}`;
+      window.location.href = `/#${chapterKey}`;
     };
 
     grid.appendChild(card);
   });
+
+  // --- SEARCH LOGIC START ---
+  searchInput.addEventListener("input", function() {
+    const query = this.value.toLowerCase().trim();
+    const cards = grid.getElementsByClassName("surah-card");
+
+    Array.from(cards).forEach(card => {
+      // Get the text from the <h3> and the <p>
+      const title = card.querySelector("h3").innerText.toLowerCase();
+      const subTitle = card.querySelector("p").innerText.toLowerCase();
+
+      // If the query matches either, show the card, otherwise hide it
+      if (title.includes(query) || subTitle.includes(query)) {
+        card.style.display = ""; // Shows the card
+      } else {
+        card.style.display = "none"; // Hides the card
+      }
+    });
+  });
+  // --- SEARCH LOGIC END ---
 }
 
 document.addEventListener("DOMContentLoaded", loadChapters);
+
+// ... rest of your existing nav and theme scripts ...
 
 
 
