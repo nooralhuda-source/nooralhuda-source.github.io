@@ -809,7 +809,48 @@ applyThemeClass(localStorage.getItem('theme') === 'dark');
 /* -------------------------
    Check URL open param (when navigated from saved list)
    ------------------------- */
+(function () {
+  function applyChapterFromHash() {
+    const hash = window.location.hash.replace('#', '');
 
+    // Default = foreword
+    let chapterKey = hash || 'foreword';
+
+    // 🔴 IMPORTANT:
+    // Override any existing global filters here
+    if (typeof FILTER_CATEGORY_ID !== 'undefined') {
+      FILTER_CATEGORY_ID = null;
+    }
+
+    // Filter hadiths by chapter
+    if (typeof HADITHS !== 'undefined') {
+      if (chapterKey === 'foreword') {
+        HADITHS = HADITHS.filter(h => h.category === 'Introduction');
+      } else {
+        HADITHS = HADITHS.filter(
+          h => String(h.chapterInCategoryId) === String(chapterKey)
+        );
+      }
+    }
+
+    // Update title (browser tab)
+    document.title =
+      chapterKey === 'foreword'
+        ? 'Al-Tawhid — Foreword'
+        : `Al-Tawhid — Chapter ${chapterKey}`;
+
+    // Re-render using EXISTING logic
+    if (typeof renderList === 'function') {
+      renderList();
+    }
+  }
+
+  // Run once on load
+  window.addEventListener('load', applyChapterFromHash);
+
+  // Run again if hash changes
+  window.addEventListener('hashchange', applyChapterFromHash);
+})();
 function checkAndOpenSavedHadith(){
   const pinned = load(STORAGE_PINNED, null);
   if(!pinned) return;
@@ -836,5 +877,6 @@ loadHadiths();
 
 </script>
 </body>
+
 
 </html>
