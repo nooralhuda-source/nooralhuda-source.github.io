@@ -36,9 +36,9 @@
     <a class="back-home" href="home">← Go Back</a>
     <button id="openSaved" class="btn-3d">Saved</button>
     <div style="text-align:center; flex:1;">
-      <div class="surah-title-en">كتاب الغيبة للشيخ محمد بن الحسن الطوسي</div>
+      <div class="surah-title-en">كتاب التوحيد للشيخ الصدوق</div>
       <div class="surah-title-ar">Book of Oneness of Allah</div>
-      <div class="book-meta">Kitab Al-Ghaybah by Sheikh Muhammad bin al-Hasan al-Tusi</div>
+      <div class="book-meta">Kitab Al-Tawhid by Shaykh Muhammad bin Ali al-Saduq</div>
     </div>
   </div>
 </div>
@@ -98,7 +98,7 @@
 
     <div style="padding:10px 0; line-height:1.6; font-size:.95rem;">
       This feature is currently in beta testing.<br>
-      I am still working on it, and it will be available in april 2026, insha’Allah.
+      I am still working on it, and it will be available in January 2026, insha’Allah.
     </div>
 
     <div style="text-align:right;margin-top:12px">
@@ -817,7 +817,10 @@ applyThemeClass(localStorage.getItem('theme') === 'dark');
     let chapterKey = hash || 'foreword';
 
     // 🔴 IMPORTANT:
-
+    // Override any existing global filters here
+    if (typeof FILTER_CATEGORY_ID !== 'undefined') {
+      FILTER_CATEGORY_ID = null;
+    }
 
     // Filter hadiths by chapter
     if (typeof HADITHS !== 'undefined') {
