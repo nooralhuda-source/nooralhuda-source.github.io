@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>404 — Page Not Found | Noor al Huda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root {
+      --green: #2db574;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #f7f9f8;
+      font-family: "SF Pro Display", "Helvetica Neue", sans-serif;
+      text-align: center;
+      color: #222;
+    }
+
+    img.clipart {
+      width: 320px;
+      max-width: 90%;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      margin-bottom: 1rem;
+      animation: fadeIn 1.5s ease both;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      color: var(--green);
+      margin-bottom: 0.4rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 1.5rem;
+    }
+
+    a {
+      background-color: var(--green);
+      color: white;
+      padding: 0.65rem 1.4rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #1e8b58;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Central image like a YouTube thumbnail -->
+  <img src="clipart.jpeg"
+       alt="Masjid al-Haram under construction illustration"
+       class="clipart">
+
+  <h1>404 — Page Not Found</h1>
+  <p>This page is either being built… or does not exist yet.</p>
+
+  <a href="index.html">Return to Home</a>
+</body>
+</html>
