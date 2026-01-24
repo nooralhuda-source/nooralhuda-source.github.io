@@ -573,30 +573,16 @@ function openHadithModal(idx){
   let arabicMatn = '';
 
 
-// Sanad (optional)
-sanad = h.thaqalaynSanad
-  ? String(h.thaqalaynSanad).trim()
-  : '';
+if (hasSanad && hasMatn) {
+  sanad   = cleanEnglishText(h.thaqalaynSanad);
+  english = cleanEnglishText(h.thaqalaynMatn || h.englishText);
 
-// English: Thaqalayn → fallback to englishText
-english =
-  h.thaqalaynMatn
-    ? String(h.thaqalaynMatn).trim()
-    : (h.englishText ? String(h.englishText).trim() : '');
-
-// Arabic
-const fullArabic = h.arabicText ? String(h.arabicText).trim() : '';
-
-if (fullArabic && sanad) {
+  const fullArabic = String(h.arabicText || '').trim();
   const split = splitArabicSanadMatnByEnglish(fullArabic, sanad);
   arabicSanad = split.sanad;
   arabicMatn  = split.matn;
-} else {
-  arabicMatn = fullArabic;
-}
 
-
-    /* main grid */
+  /* main grid */
   const modalGrid = document.querySelector('.modal-grid');
   modalGrid.innerHTML = '';
 
@@ -646,7 +632,7 @@ if (fullArabic && sanad) {
 
   modalBackdrop.style.display = 'flex';
 }
-}
+
 
 /* modal nav */
 modalPrev.addEventListener('click', () => { if(visibleIndex > 0) { visibleIndex--; openHadithModal(visibleIndex); scrollToCard(); }});
