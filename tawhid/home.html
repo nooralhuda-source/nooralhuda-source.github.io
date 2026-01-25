@@ -223,9 +223,9 @@ async function loadChapters() {
   );
   const data = await res.json();
 
-  // categoryId → { name, chapters }
   const categories = {};
 
+  // Build structure
   data.forEach(h => {
     const catId = h.categoryId ?? "unknown";
     const catName = h.category || "Miscellaneous";
@@ -249,19 +249,19 @@ async function loadChapters() {
 
   // Render
   Object.values(categories).forEach(cat => {
-    // Category card (major group)
-    const catCard = document.createElement("div");
-    catCard.className = "surah-card";
-    catCard.innerHTML = `
-      <h3>${cat.name}</h3>
-      <p>Major section</p>
-    `;
-    grid.appendChild(catCard);
+    /* ── Category TITLE (not a card) ── */
+    const title = document.createElement("h3");
+    title.textContent = cat.name;
+    title.style.margin = "2.5rem 2rem 0.75rem";
+    title.style.color = "var(--green)";
+    title.style.fontWeight = "700";
+    grid.appendChild(title);
 
-    // Chapters inside category
+    /* ── Chapters under this category ── */
     cat.chapters.forEach((chapterTitle, chapterKey) => {
       const card = document.createElement("div");
       card.className = "surah-card";
+
       card.innerHTML = `
         <h3>${chapterKey === "foreword" ? "Foreword" : "Chapter " + chapterKey}</h3>
         <p>${chapterTitle || ""}</p>
@@ -277,6 +277,8 @@ async function loadChapters() {
 }
 
 document.addEventListener("DOMContentLoaded", loadChapters);
+
+
 
 
 
