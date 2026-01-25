@@ -248,79 +248,73 @@ body.dark-mode {
 </footer>
 
 <script>
-async function loadChapters() {
+document.addEventListener("DOMContentLoaded", async () => {
   const grid = document.getElementById("bookGrid");
+  const searchInput = document.getElementById("searchBook");
 
   const res = await fetch(
     "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/14.json"
   );
   const data = await res.json();
 
+  // categoryId → { name, chapters }
   const categories = {};
 
-  // Group chapters by category
   data.forEach(h => {
-    const catId = h.categoryId ?? "unknown";
-    const catName = h.category || "Miscellaneous";
-
-    const chapterKey =
-      h.category === "Introduction"
-        ? "foreword"
-        : h.chapterInCategoryId;
+    const catId = h.categoryId;
+    const chapId = h.chapterInCategoryId;
 
     if (!categories[catId]) {
       categories[catId] = {
-        name: catName,
-        chapters: new Map()
+        name: h.category,
+        chapters: {}
       };
     }
 
-    if (!categories[catId].chapters.has(chapterKey)) {
-      categories[catId].chapters.set(chapterKey, h.chapter);
+    // ONE entry per chapter
+    if (!categories[catId].chapters[chapId]) {
+      categories[catId].chapters[chapId] = h.chapter;
     }
   });
 
-  // Render
-  Object.values(categories).forEach(cat => {
-    // Category header (full width, not a card)
-    const header = document.createElement("div");
-    header.className = "category-title";
-    header.innerHTML = `<span>▾</span>${cat.name}`;
-    grid.appendChild(header);
+  function render(filter = "") {
+    grid.innerHTML = "";
 
-    // Chapter cards container
-    const list = document.createElement("div");
-    list.className = "category-list";
-    grid.appendChild(list);
+    Object.values(categories).forEach(cat => {
+      // Category heading
+      const heading = document.createElement("h3");
+      heading.textContent = cat.name;
+      heading.style.gridColumn = "1 / -1";
+      heading.style.marginTop = "2rem";
+      grid.appendChild(heading);
 
-    // Collapse toggle
-    header.addEventListener("click", () => {
-      const isCollapsed = list.classList.toggle("collapsed");
-      header.querySelector("span").textContent = isCollapsed ? "▸" : "▾";
+      Object.entries(cat.chapters)
+        .sort((a, b) => Number(a[0]) - Number(b[0]))
+        .forEach(([chapterId, chapterName]) => {
+          if (
+            filter &&
+            !chapterName.toLowerCase().includes(filter)
+          ) return;
+
+          const card = document.createElement("div");
+          card.className = "surah-card";
+          card.innerHTML = `
+            <h3>Chapter ${chapterId}</h3>
+            <p>${chapterName}</p>
+          `;
+
+          // 🔑 CLEAN URL — THIS IS THE FIX
+          card.onclick = () => {
+            window.location.href = `./#${chapterId}`;
+
+          };
+
+          grid.appendChild(card);
+        });
     });
+  }
 
-    // Chapter cards
-    cat.chapters.forEach((chapterTitle, chapterKey) => {
-      const card = document.createElement("div");
-      card.className = "surah-card";
-
-      card.innerHTML = `
-        <h3>${chapterKey === "foreword"
-          ? "Foreword"
-          : "Chapter " + chapterKey}</h3>
-        <p>${chapterTitle || ""}</p>
-      `;
-
-      card.onclick = () => {
-        window.location.href = `./#${chapterKey}`;
-      };
-
-      list.appendChild(card);
-    });
-  });
-}
-
-document.addEventListener("DOMContentLoaded", loadChapters);
+  render();
 
 
 
