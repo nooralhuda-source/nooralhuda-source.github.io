@@ -113,7 +113,7 @@
    ------------------------- */
 const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/14.json';
 const FILTER_VOLUME = 1;
-const FILTER_CATEGORY_ID = 2;
+
 
 
 
@@ -277,6 +277,8 @@ HADITHS = ALL_HADITHS.slice();
     console.error(err);
     hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Failed to load hadiths.</div>';
   }
+  applyChapterFromHash();
+
 }
 
 /* -------------------------
@@ -822,46 +824,32 @@ applyThemeClass(localStorage.getItem('theme') === 'dark');
    Check URL open param (when navigated from saved list)
    ------------------------- */
 (function () {
-  function applyChapterFromHash() {
+  window.applyChapterFromHash = function () {
     const hash = window.location.hash.replace('#', '');
     const chapterKey = hash || 'foreword';
 
-    // Disable category filtering
     if (typeof FILTER_CATEGORY_ID !== 'undefined') {
       FILTER_CATEGORY_ID = null;
     }
 
-    // Always filter from ALL_HADITHS
-    if (typeof ALL_HADITHS !== 'undefined') {
-      HADITHS = ALL_HADITHS.filter(h =>
-        chapterKey === 'foreword'
-          ? h.category === 'Introduction'
-          : String(h.chapterInCategoryId) === String(chapterKey)
-      );
-    }
+    HADITHS = ALL_HADITHS.filter(h =>
+      chapterKey === 'foreword'
+        ? h.category === 'Introduction'
+        : String(h.chapterInCategoryId) === String(chapterKey)
+    );
 
-    // Update title
     document.title =
       chapterKey === 'foreword'
         ? 'Al-Tawhid — Foreword'
         : `Al-Tawhid — Chapter ${chapterKey}`;
 
-    // Render
-    if (typeof renderList === 'function') {
-      renderList();
-    }
+    renderList();
+    showChapter(chapterKey);
+  };
 
-    if (typeof showChapter === 'function') {
-      showChapter(chapterKey);
-    }
-  }
-
-  // Initial load
-  window.addEventListener('load', applyChapterFromHash);
-
-  // On hash change
-  window.addEventListener('hashchange', applyChapterFromHash);
+  window.addEventListener('hashchange', window.applyChapterFromHash);
 })();
+
 
 function checkAndOpenSavedHadith(){
   const pinned = load(STORAGE_PINNED, null);
@@ -892,6 +880,7 @@ loadHadiths();
 
 
 </html>
+
 
 
 
