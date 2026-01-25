@@ -137,6 +137,7 @@ const savedBackdrop = document.getElementById('savedBackdrop');
 const savedPopup = document.getElementById('savedPopup');
 const closeSaved = document.getElementById('closeSaved');
 const backBeginning = document.getElementById('backBeginning');
+let ALL_HADITHS = [];
 
 let HADITHS = [];
 let visibleIndex = 0;
@@ -255,14 +256,13 @@ async function loadHadiths(){
     const arr = await res.json();
 
     // Filter by volume/category and book id string that includes Al-Kafi-Volume-2 (keeps old logic)
-const filtered = arr.filter(h =>
-  Number(h.categoryId) === FILTER_CATEGORY_ID
+// Store full book
+ALL_HADITHS = arr.slice().sort(
+  (a, b) => (Number(a.id) || 0) - (Number(b.id) || 0)
 );
 
-
-    filtered.sort((a,b) => (Number(a.id)||0) - (Number(b.id)||0));
-    HADITHS = filtered;
-    renderList();
+// Default: show everything
+HADITHS = ALL_HADITHS.slice();
 
     // Auto-open pinned if present and present on this page
     const pinned = load(STORAGE_PINNED, null);
@@ -824,45 +824,45 @@ applyThemeClass(localStorage.getItem('theme') === 'dark');
 (function () {
   function applyChapterFromHash() {
     const hash = window.location.hash.replace('#', '');
+    const chapterKey = hash || 'foreword';
 
-    // Default = foreword
-    let chapterKey = hash || 'foreword';
-
-    // 🔴 IMPORTANT:
-    // Override any existing global filters here
+    // Disable category filtering
     if (typeof FILTER_CATEGORY_ID !== 'undefined') {
       FILTER_CATEGORY_ID = null;
     }
 
-    // Filter hadiths by chapter
-    if (typeof HADITHS !== 'undefined') {
-      if (chapterKey === 'foreword') {
-        HADITHS = HADITHS.filter(h => h.category === 'Introduction');
-      } else {
-        HADITHS = HADITHS.filter(
-          h => String(h.chapterInCategoryId) === String(chapterKey)
-        );
-      }
+    // Always filter from ALL_HADITHS
+    if (typeof ALL_HADITHS !== 'undefined') {
+      HADITHS = ALL_HADITHS.filter(h =>
+        chapterKey === 'foreword'
+          ? h.category === 'Introduction'
+          : String(h.chapterInCategoryId) === String(chapterKey)
+      );
     }
 
-    // Update title (browser tab)
+    // Update title
     document.title =
       chapterKey === 'foreword'
         ? 'Al-Tawhid — Foreword'
         : `Al-Tawhid — Chapter ${chapterKey}`;
 
-    // Re-render using EXISTING logic
+    // Render
     if (typeof renderList === 'function') {
       renderList();
     }
+
+    if (typeof showChapter === 'function') {
+      showChapter(chapterKey);
+    }
   }
 
-  // Run once on load
+  // Initial load
   window.addEventListener('load', applyChapterFromHash);
 
-  // Run again if hash changes
+  // On hash change
   window.addEventListener('hashchange', applyChapterFromHash);
 })();
+
 function checkAndOpenSavedHadith(){
   const pinned = load(STORAGE_PINNED, null);
   if(!pinned) return;
@@ -892,5 +892,6 @@ loadHadiths();
 
 
 </html>
+
 
 
