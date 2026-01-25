@@ -176,6 +176,30 @@ body.dark-mode {
     transform: none;
     align-self: flex-start; /* stays left */
     margin-left: clamp(0.75rem, 4vw, 1.25rem);
+.category-header {
+  grid-column: 1 / -1;      /* full width */
+  cursor: pointer;
+  user-select: none;
+  font-weight: 700;
+  color: var(--green);
+  margin: 2.5rem 2rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.category-header span {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.category-chapters {
+  display: contents; /* keeps grid layout intact */
+}
+
+.category-chapters.collapsed {
+  display: none;
+}
 
   }
 }
@@ -249,15 +273,23 @@ async function loadChapters() {
 
   // Render
   Object.values(categories).forEach(cat => {
-    /* ── Category TITLE (not a card) ── */
-    const title = document.createElement("h3");
-    title.textContent = cat.name;
-    title.style.margin = "2.5rem 2rem 0.75rem";
-    title.style.color = "var(--green)";
-    title.style.fontWeight = "700";
-    grid.appendChild(title);
+    /* ── Category header (clickable) ── */
+    const header = document.createElement("div");
+    header.className = "category-header";
+    header.innerHTML = `<span>▾</span>${cat.name}`;
+    grid.appendChild(header);
 
-    /* ── Chapters under this category ── */
+    /* ── Container for chapters ── */
+    const chapterContainer = document.createElement("div");
+    chapterContainer.className = "category-chapters";
+    grid.appendChild(chapterContainer);
+
+    header.addEventListener("click", () => {
+      const collapsed = chapterContainer.classList.toggle("collapsed");
+      header.querySelector("span").textContent = collapsed ? "▸" : "▾";
+    });
+
+    /* ── Chapter cards ── */
     cat.chapters.forEach((chapterTitle, chapterKey) => {
       const card = document.createElement("div");
       card.className = "surah-card";
@@ -271,12 +303,13 @@ async function loadChapters() {
         window.location.href = `./#${chapterKey}`;
       };
 
-      grid.appendChild(card);
+      chapterContainer.appendChild(card);
     });
   });
 }
 
 document.addEventListener("DOMContentLoaded", loadChapters);
+
 
 
 
