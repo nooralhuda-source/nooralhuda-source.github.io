@@ -176,30 +176,39 @@ body.dark-mode {
     transform: none;
     align-self: flex-start; /* stays left */
     margin-left: clamp(0.75rem, 4vw, 1.25rem);
-.category-header {
-  grid-column: 1 / -1;      /* full width */
-  cursor: pointer;
-  user-select: none;
+/* Category title styling (full width) */
+.category-title {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--green);
-  margin: 2.5rem 2rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  margin-top: 1.5rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.category-header span {
-  font-size: 0.9rem;
-  opacity: 0.7;
+.category-title span {
+  font-size: 0.85rem;
+  color: var(--muted);
 }
 
-.category-chapters {
-  display: contents; /* keeps grid layout intact */
+/* Chapters container directly under a category */
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 0.75rem 0 1.5rem;
 }
 
-.category-chapters.collapsed {
+/* Hide when collapsed */
+.category-list.collapsed {
   display: none;
 }
+
 
   }
 }
@@ -249,7 +258,7 @@ async function loadChapters() {
 
   const categories = {};
 
-  // Build structure
+  // Group chapters by category
   data.forEach(h => {
     const catId = h.categoryId ?? "unknown";
     const catName = h.category || "Miscellaneous";
@@ -273,29 +282,32 @@ async function loadChapters() {
 
   // Render
   Object.values(categories).forEach(cat => {
-    /* ── Category header (clickable) ── */
+    // Category header (full width, not a card)
     const header = document.createElement("div");
-    header.className = "category-header";
+    header.className = "category-title";
     header.innerHTML = `<span>▾</span>${cat.name}`;
     grid.appendChild(header);
 
-    /* ── Container for chapters ── */
-    const chapterContainer = document.createElement("div");
-    chapterContainer.className = "category-chapters";
-    grid.appendChild(chapterContainer);
+    // Chapter cards container
+    const list = document.createElement("div");
+    list.className = "category-list";
+    grid.appendChild(list);
 
+    // Collapse toggle
     header.addEventListener("click", () => {
-      const collapsed = chapterContainer.classList.toggle("collapsed");
-      header.querySelector("span").textContent = collapsed ? "▸" : "▾";
+      const isCollapsed = list.classList.toggle("collapsed");
+      header.querySelector("span").textContent = isCollapsed ? "▸" : "▾";
     });
 
-    /* ── Chapter cards ── */
+    // Chapter cards
     cat.chapters.forEach((chapterTitle, chapterKey) => {
       const card = document.createElement("div");
       card.className = "surah-card";
 
       card.innerHTML = `
-        <h3>${chapterKey === "foreword" ? "Foreword" : "Chapter " + chapterKey}</h3>
+        <h3>${chapterKey === "foreword"
+          ? "Foreword"
+          : "Chapter " + chapterKey}</h3>
         <p>${chapterTitle || ""}</p>
       `;
 
@@ -303,12 +315,13 @@ async function loadChapters() {
         window.location.href = `./#${chapterKey}`;
       };
 
-      chapterContainer.appendChild(card);
+      list.appendChild(card);
     });
   });
 }
 
 document.addEventListener("DOMContentLoaded", loadChapters);
+
 
 
 
