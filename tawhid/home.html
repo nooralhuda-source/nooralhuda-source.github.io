@@ -223,34 +223,61 @@ async function loadChapters() {
   );
   const data = await res.json();
 
-  const seen = new Set();
+  // categoryId → { name, chapters }
+  const categories = {};
 
   data.forEach(h => {
-    // handle foreword separately
+    const catId = h.categoryId ?? "unknown";
+    const catName = h.category || "Miscellaneous";
+
     const chapterKey =
       h.category === "Introduction"
         ? "foreword"
         : h.chapterInCategoryId;
 
-    if (seen.has(chapterKey)) return;
-    seen.add(chapterKey);
+    if (!categories[catId]) {
+      categories[catId] = {
+        name: catName,
+        chapters: new Map()
+      };
+    }
 
-    const card = document.createElement("div");
-    card.className = "surah-card";
-    card.innerHTML = `
-      <h3>${chapterKey === "foreword" ? "Foreword" : "Chapter " + chapterKey}</h3>
-      <p>${h.chapter}</p>
+    if (!categories[catId].chapters.has(chapterKey)) {
+      categories[catId].chapters.set(chapterKey, h.chapter);
+    }
+  });
+
+  // Render
+  Object.values(categories).forEach(cat => {
+    // Category card (major group)
+    const catCard = document.createElement("div");
+    catCard.className = "surah-card";
+    catCard.innerHTML = `
+      <h3>${cat.name}</h3>
+      <p>Major section</p>
     `;
+    grid.appendChild(catCard);
 
-    card.onclick = () => {
-      window.location.href = `./#${chapterKey}`;
-    };
+    // Chapters inside category
+    cat.chapters.forEach((chapterTitle, chapterKey) => {
+      const card = document.createElement("div");
+      card.className = "surah-card";
+      card.innerHTML = `
+        <h3>${chapterKey === "foreword" ? "Foreword" : "Chapter " + chapterKey}</h3>
+        <p>${chapterTitle || ""}</p>
+      `;
 
-    grid.appendChild(card);
+      card.onclick = () => {
+        window.location.href = `./#${chapterKey}`;
+      };
+
+      grid.appendChild(card);
+    });
   });
 }
 
 document.addEventListener("DOMContentLoaded", loadChapters);
+
 
 
 
