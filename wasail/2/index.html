@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Wasail al-Shia V2</title>
+  <title>Wasail al-Shia</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
     <a href="../../hadiths-home.html">Hadiths</a>
     <a href="../../calendar.html">Calendar</a>
     <a href="../../salah.html">Salah</a>
-    <a href="../../shiatube/index.html">ShiaTube</a>
+    <a href="https://tube.nooralhuda.co.uk/">ShiaTube</a>
     <a href="../../index.html">Home</a>
     <a href="../../settings.html">Settings</a>
   </nav>
@@ -36,9 +36,9 @@
     <a class="back-home" href="home">← Go Back</a>
     <button id="openSaved" class="btn-3d">Saved</button>
     <div style="text-align:center; flex:1;">
-      <div class="surah-title-en">وسائل الشيعة ج2 للشيخ الحر العاملي</div>
+      <div class="surah-title-en">فضائل الشيعة للشيخ محمد بن علي الصدوق</div>
       <div class="surah-title-ar">Book of Oneness of Allah</div>
-      <div class="book-meta">Wasail al-Shia V2 by Shaykh Hurr Amili</div>
+      <div class="book-meta">Fadail al-Shia by Shaykh Muhammad bin Ali al-Saduq</div>
     </div>
   </div>
 </div>
@@ -324,15 +324,22 @@ function renderList(){
   if(!HADITHS.length){ hadithContainer.innerHTML = '<em style="color:var(--muted);padding:12px">No hadiths found.</em>'; return; }
 
   const currentPinned = load(STORAGE_PINNED, null);
+const chapterCounters = {};
+
 
   HADITHS.forEach((h, i) => {
+    const ch = h.chapterInCategoryId || 'unknown';
+chapterCounters[ch] = (chapterCounters[ch] || 0) + 1;
+const chapterHadithNumber = chapterCounters[ch];
+
     const card = el('div', {
         class: 'hadith-card',
         id: 'hadith-card-' + h.id,
         'data-chapter': h.chapterInCategoryId || 'unknown'
     });
 
-    const meta = el('div', { class: 'hadith-meta' }, `#${h.id}`);
+const meta = el('div', { class: 'hadith-meta' }, `#${h.id}`);
+
 
     const body = el('div', { class: 'hadith-body' });
     const leftCol = el('div', { class: 'hadith-col' });
