@@ -129,6 +129,66 @@ body.dark-mode {
   --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
   --card:#1e293b; --border:#334155;
 }
+    /* Updated Grid for Book Covers */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Narrower for books */
+  gap: 2rem;
+  margin: 2rem auto 4rem;
+  padding: 0 2rem;
+  max-width: 1200px;
+}
+
+.surah-card {
+  background: transparent; /* Card background is now the image */
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: var(--transition);
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+/* The Book Cover Image Container */
+.book-cover-wrapper {
+  width: 100%;
+  aspect-ratio: 3 / 4; /* Standard book ratio */
+  background: #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.book-cover-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Thaqalayn-style Hover Effect */
+.surah-card:hover .book-cover-wrapper {
+  transform: rotateY(-10deg) translateX(5px);
+  box-shadow: -10px 15px 30px rgba(0,0,0,0.25);
+}
+
+.surah-card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text);
+  margin-top: 5px;
+}
+
+.surah-card p {
+  color: var(--green);
+  font-size: 0.85rem;
+  margin-top: 2px;
+  font-weight: 600;
+}
   </style>
 </head>
 <body>
@@ -314,6 +374,7 @@ const books = [
         name_ar: "الكافي", 
         name_fa: "الکافی", 
         name_ur: "الکافی", 
+        cover: "https://thaqalayn.net/_next/image?url=%2Fimages%2Fhadith%2Fcovers%2Fcompressed%2F1-round.webp&w=256&q=75",
         href: "alkafi.html" 
     },
     { 
@@ -321,6 +382,7 @@ const books = [
         name_ar: "من لا يحضره الفقيه", 
         name_fa: "من لایحضره الفقیه", 
         name_ur: "من لا یحضرہ الفقیہ", 
+        cover: "https://thaqalayn.net/_next/image?url=%2Fimages%2Fhadith%2Fcovers%2Fcompressed%2F34-round.webp&w=256&q=75",
         href: "man-la-yahduruh.html" 
     },
     {
@@ -449,20 +511,24 @@ function renderHadithCards(lang) {
         const card = document.createElement("div");
         card.className = "surah-card";
 
-        // Logic: Main Title (Top) swaps based on language
         let mainTitle;
-        if (lang === 'fa') {
-            mainTitle = book.name_fa;
-        } else if (lang === 'ur') {
-            mainTitle = book.name_ur;
-        } else {
-            mainTitle = book.name_en; // Default to English for 'en' and 'ar'
-        }
+        if (lang === 'fa') mainTitle = book.name_fa;
+        else if (lang === 'ur') mainTitle = book.name_ur;
+        else mainTitle = book.name_en;
 
-        // Logic: Subtitle (Bottom) ALWAYS stays Arabic
         const subTitle = book.name_ar;
+        
+        // Placeholder image if cover is missing
+        const coverImg = book.cover || 'https://via.placeholder.com/300x400?text=No+Cover';
 
-        card.innerHTML = `<h3>${mainTitle}</h3><p>${subTitle}</p>`;
+        card.innerHTML = `
+            <div class="book-cover-wrapper">
+                <img src="${coverImg}" alt="${book.name_en}">
+            </div>
+            <h3>${mainTitle}</h3>
+            <p>${subTitle}</p>
+        `;
+        
         card.onclick = () => window.location.href = book.href;
         grid.appendChild(card);
     });
@@ -505,4 +571,5 @@ function applyThemeClass(isDark) {
 </script>
 </body>
 </html>
+
 
