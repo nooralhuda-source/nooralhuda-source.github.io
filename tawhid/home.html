@@ -310,18 +310,18 @@ body.dark-mode {
   <div id="bookGrid" class="surah-grid"></div>
 </main>
 
-<script>
 document.addEventListener("DOMContentLoaded", async () => {
   const grid = document.getElementById("bookGrid");
   const searchInput = document.getElementById("searchBook");
 
-  // Fetch the data
-  const res = await fetch("https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/14.json");
+  const res = await fetch(
+    "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/14.json"
+  );
   const data = await res.json();
 
   const categories = {};
 
-  // Build the Map: Allowing for multiple category IDs
+  // Build categories mapping
   data.forEach(h => {
     const catId = h.categoryId;
     const chapId = h.chapterInCategoryId;
@@ -329,62 +329,56 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!categories[catId]) {
       categories[catId] = {
         name: h.category,
-        chapters: [] // Use an array to store chapter objects
+        chapters: {}
       };
     }
 
-    // Push chapter info into the array
-    categories[catId].chapters.push({
-      id: chapId,
-      name: h.chapter,
-      key: h.id // Assuming 'id' is the unique identifier for the specific hadith/chapter entry
-    });
+    if (!categories[catId].chapters[chapId]) {
+      categories[catId].chapters[chapId] = h.chapter;
+    }
   });
 
   function render(filter = "") {
     grid.innerHTML = "";
 
-    // Sort categories by ID to keep order consistent
-    const sortedCatIds = Object.keys(categories).sort((a, b) => Number(a) - Number(b));
+    Object.entries(categories).forEach(([catId, cat]) => {
+      const heading = document.createElement("h3");
+      heading.textContent = cat.name;
+      heading.style.gridColumn = "1 / -1";
+      heading.style.marginTop = "2rem";
+      grid.appendChild(heading);
 
-    sortedCatIds.forEach(catId => {
-      const cat = categories[catId];
-      
-      // Filter chapters first
-      const filteredChapters = cat.chapters.filter(ch => 
-        ch.name.toLowerCase().includes(filter)
-      );
+      Object.entries(cat.chapters)
+        .sort((a, b) => Number(a[0]) - Number(b[0]))
+        .forEach(([chapterId, chapterName]) => {
 
-      // Only show category header if it has chapters matching the search
-      if (filteredChapters.length > 0) {
-        const heading = document.createElement("h2");
-        heading.className = "category-header";
-        heading.textContent = cat.name;
-        grid.appendChild(heading);
+          if (filter && !chapterName.toLowerCase().includes(filter)) return;
 
-        filteredChapters.sort((a, b) => Number(a.id) - Number(b.id)).forEach(ch => {
           const card = document.createElement("div");
           card.className = "surah-card";
+
           card.innerHTML = `
-            <h3>Chapter ${ch.id}</h3>
-            <p>${ch.name}</p>
+            <h3>Chapter ${chapterId}</h3>
+            <p>${chapterName}</p>
           `;
-          
-          // Updated onclick to use the specific item key
+
+          // ✅ FIXED LINK LOGIC
           card.onclick = () => {
-             // Change this to your desired navigation logic
-             window.location.href = `chapter-view.html?id=${ch.key}`;
+            location.hash = `${catId}-${chapterId}`;
           };
 
           grid.appendChild(card);
         });
-      }
     });
   }
 
   render();
 
-  searchInput.addEventListener("input", e => render(e.target.value.toLowerCase()));
+  if (searchInput) {
+    searchInput.addEventListener("input", e => {
+      render(e.target.value.toLowerCase());
+    });
+  }
 });
 
 // Sidebar Logic
