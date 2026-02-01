@@ -249,40 +249,17 @@ body.dark-mode {
 
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
-
   const grid = document.getElementById("bookGrid");
   const searchInput = document.getElementById("searchBook");
-  const hadithContainer = document.getElementById("hadithContainer");
 
-  const API_URL =
-    "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/14.json";
-
-  let ALL_HADITHS = [];
-  let HADITHS = [];
-
-  /* ===============================
-     HASH HELPER
-  =============================== */
-  function getHashParams() {
-    if (!location.hash) return null;
-
-    const [cat, ch] = location.hash.replace('#','').split('-');
-    return { cat, ch };
-  }
-
-  /* ===============================
-     LOAD DATA
-  =============================== */
-  const res = await fetch(API_URL);
+  const res = await fetch(
+    "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/14.json"
+  );
   const data = await res.json();
 
-  ALL_HADITHS = data;
-
-  /* ===============================
-     BUILD CATEGORY MAP
-  =============================== */
   const categories = {};
 
+  // build categories → chapters
   data.forEach(h => {
     const catId = h.categoryId;
     const chapId = h.chapterInCategoryId;
@@ -299,13 +276,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  /* ===============================
-     RENDER BOOK GRID
-  =============================== */
-  function renderGrid(filter = "") {
-
-    if (!grid) return;
-
+  function render(filter = "") {
     grid.innerHTML = "";
 
     Object.entries(categories).forEach(([catId, cat]) => {
@@ -317,7 +288,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       grid.appendChild(heading);
 
       Object.entries(cat.chapters)
-        .sort((a, b) => Number(a[0]) - Number(b[0]))
+        .sort((a,b) => Number(a[0]) - Number(b[0]))
         .forEach(([chapterId, chapterName]) => {
 
           if (filter && !chapterName.toLowerCase().includes(filter)) return;
@@ -326,17 +297,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           card.className = "surah-card";
 
           card.innerHTML = `
-            <img src="./covers/${catId}.jpg" class="cover">
-            <div class="info">
-              <h3>Chapter ${chapterId}</h3>
-              <p>${chapterName}</p>
-            </div>
+            <h3>Chapter ${chapterId}</h3>
+            <p>${chapterName}</p>
           `;
 
-          /* 🔑 ONLY CHANGE HASH (no navigation) */
+          // ✅ THIS IS THE ONLY LINE THAT MATTERS
           card.onclick = () => {
-            window.location.hash = `${catId}-${chapterId}`;
-
+            location.hash = `${catId}-${chapterId}`;
           };
 
           grid.appendChild(card);
@@ -344,64 +311,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  /* ===============================
-     RENDER HADITH LIST
-  =============================== */
-  function renderHadiths() {
+  render();
 
-    if (!hadithContainer) return;
-
-    hadithContainer.innerHTML = "";
-
-    if (!HADITHS.length) {
-      hadithContainer.innerHTML =
-        '<div style="padding:12px;color:var(--muted)">No hadiths found.</div>';
-      return;
-    }
-
-    HADITHS.forEach(h => {
-      const div = document.createElement("div");
-      div.className = "hadith";
-      div.textContent = h.hadith;
-      hadithContainer.appendChild(div);
+  if (searchInput) {
+    searchInput.addEventListener("input", e => {
+      render(e.target.value.toLowerCase());
     });
   }
-
-  /* ===============================
-     FILTER HADITHS BY HASH
-  =============================== */
-  function loadHadithsFromHash() {
-
-    const params = getHashParams();
-
-    if (!params) {
-      HADITHS = [];
-    } else {
-      HADITHS = ALL_HADITHS.filter(h =>
-        String(h.categoryId) === params.cat &&
-        String(h.chapterInCategoryId) === params.ch
-      );
-    }
-
-    renderHadiths();
-  }
-
-  /* ===============================
-     EVENTS
-  =============================== */
-  searchInput?.addEventListener("input", e =>
-    renderGrid(e.target.value.toLowerCase())
-  );
-
-  window.addEventListener("hashchange", loadHadithsFromHash);
-
-  /* ===============================
-     INITIAL LOAD
-  =============================== */
-  renderGrid();
-  loadHadithsFromHash();
-
 });
+
 
 
 
