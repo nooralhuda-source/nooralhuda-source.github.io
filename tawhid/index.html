@@ -723,24 +723,40 @@ function splitArabicSanadMatn(arabicText) {
 /* -------------------------
    Data loader
    ------------------------- */
-async function loadHadiths(){
-  hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
+async function loadHadiths() {
+
+  hadithContainer.innerHTML =
+    '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
+
   try {
     const res = await fetch(API_URL);
-    if(!res.ok) throw new Error('API fetch failed');
+    if (!res.ok) throw new Error('API fetch failed');
+
     const arr = await res.json();
 
-    // Remove the old filter
-    ALL_HADITHS = arr.slice(); // copy all hadiths
-    HADITHS = ALL_HADITHS.slice();
+    // store full copy
+    ALL_HADITHS = arr.slice();
+
+    // apply optional category filter
+    if (FILTER_CATEGORY_ID && FILTER_CATEGORY_ID.length) {
+      HADITHS = ALL_HADITHS.filter(h =>
+        FILTER_CATEGORY_ID.includes(Number(h.categoryId))
+      );
+    } else {
+      // show everything
+      HADITHS = ALL_HADITHS.slice();
+    }
 
     renderList();
 
   } catch (err) {
     console.error(err);
-    hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Failed to load hadiths.</div>';
+
+    hadithContainer.innerHTML =
+      '<div style="padding:12px;color:var(--muted)">Failed to load hadiths.</div>';
   }
 }
+
 
 
 
@@ -1356,5 +1372,6 @@ loadHadiths();
 
 
 </html>
+
 
 
