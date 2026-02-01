@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -5,8 +6,80 @@
   <title>Kitab Al-Tawhid</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-/* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
-:root {
+    /* ... [Keeping your existing root and basic styles] ... */
+    :root {
+      --green: #276540;
+      --bg: #f8fafb;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --radius: 20px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+      padding-top: 3.5rem;
+    }
+
+    header {
+      position: fixed; top: 0; left: 0; width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      background: #276540; color: #FFFFFF; padding: 0.75rem 1.25rem;
+      z-index: 1000;
+    }
+    header h1 a { text-decoration: none; color: inherit; }
+
+    .hamburger {
+      font-size: 1.5rem; background: transparent; color: #fff;
+      border: none; cursor: pointer;
+    }
+
+    #mainNav {
+      position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+      background: #276540; padding: 2rem 1.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      transition: right 0.35s ease; z-index: 1050;
+    }
+    #mainNav.open { right: 0; }
+    #mainNav a { background: #fff; color: var(--green); padding: 0.5rem 0.8rem; border-radius: 16px; text-decoration: none; font-weight: 600; }
+
+    .surah-search {
+      max-width: 400px; margin: 2rem auto 1rem;
+      display: flex; background: #fff; border-radius: 16px;
+      padding: 0.5rem 1rem; box-shadow: var(--shadow-sm);
+    }
+    .surah-search input { border: none; outline: none; flex: 1; font-size: 1rem; }
+
+    .surah-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin: 2rem auto; padding: 0 2rem; max-width: 1200px;
+    }
+    .surah-card {
+      background: var(--card); border-radius: var(--radius);
+      box-shadow: var(--shadow-md); padding: 1.5rem; transition: var(--transition);
+      cursor: pointer;
+    }
+    .surah-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .surah-card h3 { font-size: 0.9rem; color: var(--green); text-transform: uppercase; }
+    .surah-card p { font-size: 1.1rem; font-weight: 600; margin-top: 0.5rem; }
+
+    .category-header {
+      grid-column: 1 / -1; margin-top: 2.5rem; padding-left: 0.5rem;
+      border-left: 4px solid var(--green); font-size: 1.4rem; color: var(--text);
+    }
+
+    .top-row { display: flex; align-items: center; justify-content: center; position: relative; margin-top: 2rem; }
+    .back-home { background: var(--green); color: white; padding: 0.4rem 0.8rem; border-radius: 10px; text-decoration: none; position: absolute; left: 2rem; }
+    
+    body.dark-mode { --bg:#0f172a; --text:#f9fafb; --card:#1e293b; --border:#334155; }
+    :root {
   --green: #276540; /* 🎨 exact material green 800 */
   --bg: #f8fafb;
   --text: #1f2937;
@@ -212,54 +285,43 @@ body.dark-mode {
 
   }
 }
-
   </style>
 </head>
 <body>
+
 <header>
   <div class="brand"><h1><a href="../index.html">Noor Al Huda</a></h1></div>
-  <button class="hamburger" aria-label="Open menu">☰</button>
+  <button class="hamburger">☰</button>
 </header>
 
 <nav id="mainNav">
-  <a href="../quran.html">Quran</a>
-  <a href="../duas.html">Duas</a>
   <a href="../hadiths-home.html">Hadiths</a>
-  <a href="../calendar.html">Calendar</a>
-  <a href="../salah.html">Salah</a>
-  <a href="../shiatube/index.html">ShiaTube</a>
   <a href="../index.html">Home</a>
-  <a href="../settings.html">Settings</a>
 </nav>
 
 <main class="container">
   <div class="top-row">
-  <a class="back-home" href="../hadiths-home.html">← Back</a>
-  <h2>Kitab Al-Tawhid</h2>
-</div>
+    <a class="back-home" href="../hadiths-home.html">← Back</a>
+    <h2>Kitab Al-Tawhid</h2>
+  </div>
   <div class="surah-search">
     <input type="text" id="searchBook" placeholder="Search Chapter ...">
   </div>
-  <div class="surah-grid" id="bookGrid"></div>
+  <div id="bookGrid" class="surah-grid"></div>
 </main>
-
-<footer>
-  © 2025 Noor Al Huda — All in one Shia website
-</footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
   const grid = document.getElementById("bookGrid");
   const searchInput = document.getElementById("searchBook");
 
-  const res = await fetch(
-    "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/14.json"
-  );
+  // Fetch the data
+  const res = await fetch("https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/14.json");
   const data = await res.json();
 
   const categories = {};
 
-  // build categories → chapters
+  // Build the Map: Allowing for multiple category IDs
   data.forEach(h => {
     const catId = h.categoryId;
     const chapId = h.chapterInCategoryId;
@@ -267,105 +329,77 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!categories[catId]) {
       categories[catId] = {
         name: h.category,
-        chapters: {}
+        chapters: [] // Use an array to store chapter objects
       };
     }
 
-    if (!categories[catId].chapters[chapId]) {
-      categories[catId].chapters[chapId] = h.chapter;
-    }
+    // Push chapter info into the array
+    categories[catId].chapters.push({
+      id: chapId,
+      name: h.chapter,
+      key: h.id // Assuming 'id' is the unique identifier for the specific hadith/chapter entry
+    });
   });
 
   function render(filter = "") {
     grid.innerHTML = "";
 
-    Object.entries(categories).forEach(([catId, cat]) => {
+    // Sort categories by ID to keep order consistent
+    const sortedCatIds = Object.keys(categories).sort((a, b) => Number(a) - Number(b));
 
-      const heading = document.createElement("h3");
-      heading.textContent = cat.name;
-      heading.style.gridColumn = "1 / -1";
-      heading.style.marginTop = "2rem";
-      grid.appendChild(heading);
+    sortedCatIds.forEach(catId => {
+      const cat = categories[catId];
+      
+      // Filter chapters first
+      const filteredChapters = cat.chapters.filter(ch => 
+        ch.name.toLowerCase().includes(filter)
+      );
 
-      Object.entries(cat.chapters)
-        .sort((a,b) => Number(a[0]) - Number(b[0]))
-        .forEach(([chapterId, chapterName]) => {
+      // Only show category header if it has chapters matching the search
+      if (filteredChapters.length > 0) {
+        const heading = document.createElement("h2");
+        heading.className = "category-header";
+        heading.textContent = cat.name;
+        grid.appendChild(heading);
 
-          if (filter && !chapterName.toLowerCase().includes(filter)) return;
-
+        filteredChapters.sort((a, b) => Number(a.id) - Number(b.id)).forEach(ch => {
           const card = document.createElement("div");
           card.className = "surah-card";
-
           card.innerHTML = `
-            <h3>Chapter ${chapterId}</h3>
-            <p>${chapterName}</p>
+            <h3>Chapter ${ch.id}</h3>
+            <p>${ch.name}</p>
           `;
-
-          // ✅ THIS IS THE ONLY LINE THAT MATTERS
           
-            card.onclick = () => {
-  location.hash = ch.key;
-};
-
+          // Updated onclick to use the specific item key
+          card.onclick = () => {
+             // Change this to your desired navigation logic
+             window.location.href = `chapter-view.html?id=${ch.key}`;
+          };
 
           grid.appendChild(card);
         });
+      }
     });
   }
 
   render();
 
-  if (searchInput) {
-    searchInput.addEventListener("input", e => {
-      render(e.target.value.toLowerCase());
-    });
-  }
+  searchInput.addEventListener("input", e => render(e.target.value.toLowerCase()));
 });
 
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const mainNav = document.getElementById("mainNav");
-  const hamburger = document.querySelector(".hamburger");
-
-
-hamburger.addEventListener("click", e => {
-  e.stopPropagation();
-  mainNav.classList.toggle("open");
+// Sidebar Logic
+const hamburger = document.querySelector(".hamburger");
+const mainNav = document.getElementById("mainNav");
+hamburger.addEventListener("click", () => mainNav.classList.toggle("open"));
+document.addEventListener("click", (e) => {
+  if (!mainNav.contains(e.target) && !hamburger.contains(e.target)) mainNav.classList.remove("open");
 });
 
-document.addEventListener("click", e => {
-  if (!mainNav.contains(e.target) && !hamburger.contains(e.target))
-    mainNav.classList.remove("open");
-});
-
-
-});
-function applyThemeClass(isDark) {
-    if (isDark) {
-      document.body.classList.add("dark");
-      document.body.classList.add("dark-mode");
-    } else {
-      document.body.classList.remove("dark");
-      document.body.classList.remove("dark-mode");
-    }
-  }
-  var savedTheme = localStorage.getItem("theme");
-  applyThemeClass(savedTheme === "dark");
-
-  if (darkToggle) {
-    darkToggle.checked = savedTheme === "dark";
-    darkToggle.addEventListener("change", function (ev) {
-      var isDarkNow = !!ev.target.checked;
-      applyThemeClass(isDarkNow);
-      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
-    });
-  }
-
+// Theme Logic
+const applyThemeClass = (isDark) => {
+  document.body.classList.toggle("dark-mode", isDark);
+};
+applyThemeClass(localStorage.getItem("theme") === "dark");
 </script>
 
 </body>
