@@ -249,15 +249,38 @@ body.dark-mode {
 
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
+
   const grid = document.getElementById("bookGrid");
   const searchInput = document.getElementById("searchBook");
+  const hadithContainer = document.getElementById("hadithContainer");
 
-  const res = await fetch(
-    "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/14.json"
-  );
+  const API_URL =
+    "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/14.json";
+
+  let ALL_HADITHS = [];
+  let HADITHS = [];
+
+  /* ===============================
+     HASH HELPER
+  =============================== */
+  function getHashParams() {
+    if (!location.hash) return null;
+
+    const [cat, ch] = location.hash.replace('#','').split('-');
+    return { cat, ch };
+  }
+
+  /* ===============================
+     LOAD DATA
+  =============================== */
+  const res = await fetch(API_URL);
   const data = await res.json();
 
-  // categoryId → { name, chapters }
+  ALL_HADITHS = data;
+
+  /* ===============================
+     BUILD CATEGORY MAP
+  =============================== */
   const categories = {};
 
   data.forEach(h => {
@@ -271,17 +294,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       };
     }
 
-    // ONE entry per chapter
     if (!categories[catId].chapters[chapId]) {
       categories[catId].chapters[chapId] = h.chapter;
     }
   });
 
-  function render(filter = "") {
+  /* ===============================
+     RENDER BOOK GRID
+  =============================== */
+  function renderGrid(filter = "") {
+
+    if (!grid) return;
+
     grid.innerHTML = "";
 
-    Object.values(categories).forEach(cat => {
-      // Category heading
+    Object.entries(categories).forEach(([catId, cat]) => {
+
       const heading = document.createElement("h3");
       heading.textContent = cat.name;
       heading.style.gridColumn = "1 / -1";
@@ -291,22 +319,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       Object.entries(cat.chapters)
         .sort((a, b) => Number(a[0]) - Number(b[0]))
         .forEach(([chapterId, chapterName]) => {
-          if (
-            filter &&
-            !chapterName.toLowerCase().includes(filter)
-          ) return;
+
+          if (filter && !chapterName.toLowerCase().includes(filter)) return;
 
           const card = document.createElement("div");
           card.className = "surah-card";
+
           card.innerHTML = `
-            <h3>Chapter ${chapterId}</h3>
-            <p>${chapterName}</p>
+            <img src="./covers/${catId}.jpg" class="cover">
+            <div class="info">
+              <h3>Chapter ${chapterId}</h3>
+              <p>${chapterName}</p>
+            </div>
           `;
 
-          // 🔑 CLEAN URL — THIS IS THE FIX
+          /* 🔑 ONLY CHANGE HASH (no navigation) */
           card.onclick = () => {
-            window.location.href = `./#${chapterId}`;
-
+            window.location.hash = `${catId}-${chapterId}`;
           };
 
           grid.appendChild(card);
@@ -314,7 +343,62 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  render();
+  /* ===============================
+     RENDER HADITH LIST
+  =============================== */
+  function renderHadiths() {
+
+    if (!hadithContainer) return;
+
+    hadithContainer.innerHTML = "";
+
+    if (!HADITHS.length) {
+      hadithContainer.innerHTML =
+        '<div style="padding:12px;color:var(--muted)">No hadiths found.</div>';
+      return;
+    }
+
+    HADITHS.forEach(h => {
+      const div = document.createElement("div");
+      div.className = "hadith";
+      div.textContent = h.hadith;
+      hadithContainer.appendChild(div);
+    });
+  }
+
+  /* ===============================
+     FILTER HADITHS BY HASH
+  =============================== */
+  function loadHadithsFromHash() {
+
+    const params = getHashParams();
+
+    if (!params) {
+      HADITHS = [];
+    } else {
+      HADITHS = ALL_HADITHS.filter(h =>
+        String(h.categoryId) === params.cat &&
+        String(h.chapterInCategoryId) === params.ch
+      );
+    }
+
+    renderHadiths();
+  }
+
+  /* ===============================
+     EVENTS
+  =============================== */
+  searchInput?.addEventListener("input", e =>
+    renderGrid(e.target.value.toLowerCase())
+  );
+
+  window.addEventListener("hashchange", loadHadithsFromHash);
+
+  /* ===============================
+     INITIAL LOAD
+  =============================== */
+  renderGrid();
+  loadHadithsFromHash();
 
 });
 
