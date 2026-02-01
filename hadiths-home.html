@@ -104,8 +104,8 @@ header h1 a:hover { opacity: 0.85; }
 .surah-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem; margin: 2rem auto 4rem;
-  padding: 0 2rem; max-width: 1200px;
+  gap: 2rem; margin: 2rem auto 5rem;
+  padding: 0 10rem; max-width: 1450px;
 }
 .surah-card {
   background: var(--card); border-radius: var(--radius);
@@ -129,38 +129,20 @@ body.dark-mode {
   --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
   --card:#1e293b; --border:#334155;
 }
-    /* Updated Grid for Book Covers */
-.surah-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Narrower for books */
-  gap: 2rem;
-  margin: 2rem auto 4rem;
-  padding: 0 2rem;
-  max-width: 1200px;
-}
+/* add small cover on left — nothing else changes */
 
 .surah-card {
-  background: transparent; /* Card background is now the image */
-  border-radius: 12px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  transition: var(--transition);
-  cursor: pointer;
-  perspective: 1000px;
+  gap: 10px;
 }
 
-/* The Book Cover Image Container */
 .book-cover-wrapper {
-  width: 100%;
-  aspect-ratio: 3 / 4; /* Standard book ratio */
-  background: #e5e7eb;
-  border-radius: 8px;
+  width: 100px;
+  height: 145px;
+  flex-shrink: 0;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
+  border-radius: 3px;
 }
 
 .book-cover-wrapper img {
@@ -168,27 +150,89 @@ body.dark-mode {
   height: 100%;
   object-fit: cover;
 }
-
-/* Thaqalayn-style Hover Effect */
-.surah-card:hover .book-cover-wrapper {
-  transform: rotateY(-10deg) translateX(5px);
-  box-shadow: -10px 15px 30px rgba(0,0,0,0.25);
+.text-group {
+  display: flex;
+  flex-direction: column;
 }
 
-.surah-card h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  text-align: center;
-  color: var(--text);
-  margin-top: 5px;
-}
-
-.surah-card p {
-  color: var(--green);
-  font-size: 0.85rem;
-  margin-top: 2px;
+.title-en {
   font-weight: 600;
+  font-size: 1rem;
 }
+
+.title-ar {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+/* bigger book cover like Thaqalayn */
+
+.surah-card {
+  display: flex;
+  align-items: stretch; /* makes image match row height */
+  gap: 14px;
+  padding: 10px 8px;
+}
+
+.book-cover-wrapper {
+  width: 100px;
+  height: 145px;          /* your new size */
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.book-cover-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* =========================
+   MOBILE ONLY ADJUSTMENTS
+   ========================= */
+
+@media (max-width: 600px) {
+
+  /* make list narrower and centered */
+  .surah-grid {
+    max-width: 420px;
+    margin: 8px 8px ;
+    align-items: center;
+  }
+
+  /* shrink row width */
+  .surah-card {
+    margin: 0 auto;
+    width: 92%;
+    padding: 10px 10px 10px 5px; /* smaller left space for smaller cover */
+    align-items: center; /* center vertically on phone */
+  }
+
+  /* smaller cover on phone */
+  .book-cover-wrapper {
+    width: 100px;
+    height: 145px;
+    left: 0;
+  }
+  .surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem; margin: 2rem auto 5rem;
+  padding: 0 1rem; max-width: 1450px;
+}
+
+}
+/* center grid on phone */
+@media (max-width: 600px) {
+
+  .surah-grid {
+    width: 92%;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
+
   </style>
 </head>
 <body>
@@ -228,15 +272,6 @@ body.dark-mode {
 </main>
 
 
-<div id="manarat-wrapper">
-    <div id="manarat-launcher" onclick="toggleManarat()" title="Ask Manarat AI (Beta)">
-    <span id="launcher-text" 
-      data-en="Manarat AI <b>Beta</b>" 
-      data-ar="منارات <b>بيتا</b>" 
-      data-fa="منارات <b>بتا</b>" 
-      data-ur="منارات <b>بیٹا</b>">
-    Manarat AI <b>Beta</b>
-</span>
 </div>
 <footer data-en="© 2025 Noor Al Huda — All in one Shia website" 
         data-ar="© 2025 نور الهدى — موقع شيعي متكامل" 
@@ -244,128 +279,9 @@ body.dark-mode {
         data-ur="© 2025 نور الہدیٰ — ہمہ گیر شیعہ ویب سائٹ">
     © 2025 Noor Al Huda — All in one Shia website
 </footer>
-    <div id="manarat-popup">
-        <div id="manarat-header">
-            
-            <button onclick="toggleManarat()" id="close-btn">&times;</button>
-        </div>
-        <iframe src="manarat-ai.html" id="manarat-iframe"></iframe>
-    </div>
-</div>
-
-<style>
-    /* Launcher Styling: Changed to a Pill Shape for text */
-    #manarat-launcher {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        padding: 12px 24px; /* Flexible width for text */
-        background: linear-gradient(135deg, #1b5e20, #2e7d32);
-        border-radius: 50px; /* Pill shape */
-        border: 2px solid #d4af37;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-        animation: pulse 3s infinite;
-    }
-
-    #manarat-launcher:hover { transform: scale(1.05); background: #2e7d32; }
     
-    #launcher-text { 
-        color: white; 
-        font-family: 'Segoe UI', sans-serif; 
-        font-size: 16px; 
-        font-weight: 500;
-        white-space: nowrap;
-    }
-    
-    #launcher-text b { 
-        font-size: 10px; 
-        background: #d4af37; 
-        color: #1b5e20; 
-        padding: 2px 6px; 
-        border-radius: 4px; 
-        margin-left: 8px; 
-        text-transform: uppercase;
-    }
 
-    /* Popup Window Styling */
-    #manarat-popup {
-        display: none;
-        position: fixed;
-        bottom: 90px;
-        right: 25px;
-        width: 380px;
-        height: 600px;
-        max-height: 80vh;
-        background: white;
-        border-radius: 20px;
-        overflow: hidden;
-        border: 1px solid rgba(212, 175, 55, 0.3);
-        box-shadow: 0 15px 50px rgba(0,0,0,0.15);
-        z-index: 10000;
-        flex-direction: column;
-        animation: slideUp 0.4s ease-out;
-    }
 
-    #manarat-header {
-        background: #1b5e20;
-        color: white;
-        padding: 10px 18px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-family: 'Segoe UI', sans-serif;
-        font-weight: 600;
-        font-size: 13px;
-        border-bottom: 3px solid #d4af37;
-    }
-
-    #close-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
-
-    #manarat-iframe { width: 100%; flex: 1; border: none; }
-
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0.4); }
-        70% { box-shadow: 0 0 0 12px rgba(27, 94, 32, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
-    }
-</style>
-
-<script>
-function toggleManarat() {
-    const popup = document.getElementById('manarat-popup');
-    const text = document.getElementById('launcher-text');
-    const lang = localStorage.getItem('userLang') || 'en';
-
-    if (popup.style.display === 'none' || popup.style.display === '') {
-        popup.style.display = 'flex';
-        // Define translations for the "Close" state
-        const closeLabels = { 
-            en: 'Close ✕', 
-            ar: 'إغلاق ✕', 
-            fa: 'بستن ✕', 
-            ur: 'بند کریں ✕' 
-        };
-        // Use .innerText here because "Close" is just plain text
-        text.innerText = closeLabels[lang] || closeLabels['en'];
-    } else {
-        popup.style.display = 'none';
-        // Use .innerHTML here to render the <b> tag as a gold badge
-        const originalTranslation = text.getAttribute('data-' + lang);
-        text.innerHTML = originalTranslation; 
-    }
-}
-</script>
 <script>
 // 1. Define books at the TOP so all functions can see them
 const books = [
@@ -383,13 +299,38 @@ const books = [
         name_fa: "من لایحضره الفقیه", 
         name_ur: "من لا یحضرہ الفقیہ", 
         cover: "https://thaqalayn.net/_next/image?url=%2Fimages%2Fhadith%2Fcovers%2Fcompressed%2F34-round.webp&w=256&q=75",
-        href: "man-la-yahduruh.html" 
+        href: "man-la-yahduruhu-al-faqih.html" 
     },
-    {
+    { 
+        name_en: "Uyun Akhbar al-Rida", 
+        name_ar: "عيون أخبار الرضا", 
+        name_fa: "عیون اخبار الرضا", 
+        name_ur: "عیون اخبار الرضا", 
+        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F11-round.jpeg&w=1920&q=75",
+        href: "uyun-akhbar-al-rida.html" 
+    },
+    { 
+        name_en: "Nahj al-Balagha", 
+        name_ar: "نهج البلاغة", 
+        name_fa: "نهج البلاغه", 
+        name_ur: " نہج البلاغہ", 
+        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F32-round.jpeg&w=1920&q=75",
+        href: "nahj-al-balagha.html" 
+    },
+    { 
+        name_en: "Mujam al-Ahadith al-Mutabara", 
+        name_ar: "معجم الأحاديث المعتبرة", 
+        name_fa: "معجم الاحادیث المعتبره", 
+        name_ur: "معجم الاحادیث المطابرہ",
+        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F9-round.jpeg&w=1920&q=75", 
+        href: "Mujam-al-Ahadith-al-Mutabara.html" 
+    },
+     {
         name_en: "Kitab al-Tawhid",
         name_ar: "كتاب التوحيد",
         name_fa: "کتاب التوحید",
         name_ur: "کتاب التوحید",
+        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F14-round.jpeg&w=1920&q=75",
         href: "tawhid/home"
     },
 {
@@ -397,6 +338,7 @@ const books = [
     name_ar: "فضائل الشيعة",
     name_fa: "فضائل الشیعه",
     name_ur: "فضائل الشیعة",
+    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F25-round.jpeg&w=1920&q=75",
     href: "fadail/home"
 },
   {
@@ -404,6 +346,7 @@ const books = [
     name_ar: "رسالة الحقوق",
     name_fa: "رساله حقوق",
     name_ur: "رسالۃ الحقوق",
+    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F33-round.jpeg&w=1920&q=75",
     href: "huquq/home"
 },
   {
@@ -411,6 +354,7 @@ const books = [
     name_ar: "كتاب المؤمن",
     name_fa: "کتاب المؤمن",
     name_ur: "کتاب المؤمن",
+    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F30-round.jpeg&w=1920&q=75",
     href: "momin/home"
 },
     {
@@ -418,6 +362,7 @@ const books = [
         name_ar: "كتاب الغيبة للشيخ الطوسي",
         name_fa: "کتاب الغیبه شیخ طوسی",
         name_ur: "کتاب الغیبہ از شیخ طوسی",
+        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F27-round.jpeg&w=1920&q=75",
         href: "al-ghaybah/home"
     },
   {
@@ -425,6 +370,7 @@ const books = [
     name_ar: "الأمالي",
     name_fa: "الأمالی",
     name_ur: "الأمالی",
+    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F29-round.jpeg&w=1920&q=75",
     href: "amali/home"
 },
 {
@@ -432,6 +378,7 @@ const books = [
   name_ar: "وسائل الشيعة",
   name_fa: "وسائل الشیعة",
   name_ur: "وسائل الشیعہ",
+  cover: "https://upload.wikimedia.org/wikipedia/en/f/f2/Was%C4%81'il_al-Sh%C4%AB%CA%BFa.jpg",
   href: "wasail/home"
 },
 
@@ -440,30 +387,33 @@ const books = [
     name_ar: "صفات الشيعة",
     name_fa: "صفات الشيعه",
     name_ur: "صفات الشیعہ",
+    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F26-round.jpeg&w=1920&q=75",
     href: "sifat/home"
 },
-
+    { 
+        name_en: "Uyun Akhbar al-Rida", 
+        name_ar: "عيون أخبار الرضا", 
+        name_fa: "عیون اخبار الرضا", 
+        name_ur: "عیون اخبار الرضا", 
+        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F11-round.jpeg&w=1920&q=75",
+        href: "uyun-akhbar-al-rida.html" 
+    },
     { 
         name_en: "Nahj al-Balagha", 
         name_ar: "نهج البلاغة", 
         name_fa: "نهج البلاغه", 
         name_ur: " نہج البلاغہ", 
+        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F32-round.jpeg&w=1920&q=75",
         href: "nahj-al-balagha.html" 
     },
-  {
-    name_en: "Uyun Akhbar al-Rida",
-   name_ar: "عيون أخبار الرضا", 
-    name_fa: "عیون اخبار الرضا", 
-    name_ur: "عیون اخبار الرضا", 
-    href: "uyun-akhbar-al-rida.html"
-  },
     { 
         name_en: "Mujam al-Ahadith al-Mutabara", 
         name_ar: "معجم الأحاديث المعتبرة", 
         name_fa: "معجم الاحادیث المعتبره", 
-        name_ur: "معجم الاحادیث المطابرہ", 
+        name_ur: "معجم الاحادیث المطابرہ",
+        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F9-round.jpeg&w=1920&q=75", 
         href: "Mujam-al-Ahadith-al-Mutabara.html" 
-    }
+    },
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -522,18 +472,21 @@ function renderHadithCards(lang) {
         const coverImg = book.cover || 'https://via.placeholder.com/300x400?text=No+Cover';
 
         card.innerHTML = `
-            <div class="book-cover-wrapper">
-                <img src="${coverImg}" alt="${book.name_en}">
-            </div>
-            <h3>${mainTitle}</h3>
-            <p>${subTitle}</p>
-        `;
+  <div class="book-cover-wrapper">
+    <img src="${coverImg}" alt="${book.name_en}">
+  </div>
+
+  <div class="text-group">
+    <h3 class="title-en">${mainTitle}</h3>
+    <p class="title-ar">${subTitle}</p>
+  </div>
+`;
+
         
         card.onclick = () => window.location.href = book.href;
         grid.appendChild(card);
     });
 }
-
 function setupUI() {
     const mainNav = document.getElementById("mainNav");
     const hamburger = document.querySelector(".hamburger");
@@ -571,5 +524,3 @@ function applyThemeClass(isDark) {
 </script>
 </body>
 </html>
-
-
