@@ -302,9 +302,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           `;
 
           // ✅ THIS IS THE ONLY LINE THAT MATTERS
-          card.onclick = () => {
-            location.hash = `${catId}-${chapterId}`;
-          };
+          
+            card.onclick = () => {
+  location.hash = ch.key;
+};
+
 
           grid.appendChild(card);
         });
