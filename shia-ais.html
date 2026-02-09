@@ -1,10 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda — Shia AI Models</title>
+  <title>Noor Al Huda — Hadith Books</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+/* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+
 /* === UPDATED THEME FOR SHIA AI === */
 :root {
   --green: #276540; 
@@ -158,29 +161,252 @@ body.dark-mode {
   --card:#1e293b; --border:#334155;
 }
 body.dark-mode .surah-card:hover { background: #1e293b; border-color: #4ade80; }
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem; margin: 2rem auto 5rem;
+  padding: 0 10rem; max-width: 1450px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+/* add small cover on left — nothing else changes */
+
+.surah-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.book-cover-wrapper {
+  width: 100px;
+  height: 145px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.book-cover-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-en {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.title-ar {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+/* bigger book cover like Thaqalayn */
+
+.surah-card {
+  display: flex;
+  align-items: stretch; /* makes image match row height */
+  gap: 14px;
+  padding: 10px 8px;
+}
+
+.book-cover-wrapper {
+  width: 100px;
+  height: 145px;          /* your new size */
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.book-cover-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* =========================
+   MOBILE ONLY ADJUSTMENTS
+   ========================= */
+
+@media (max-width: 600px) {
+
+  /* make list narrower and centered */
+  .surah-grid {
+    max-width: 420px;
+    margin: 8px 8px ;
+    align-items: center;
+  }
+
+  /* shrink row width */
+  .surah-card {
+    margin: 0 auto;
+    width: 92%;
+    padding: 10px 10px 10px 5px; /* smaller left space for smaller cover */
+    align-items: center; /* center vertically on phone */
+  }
+
+  /* smaller cover on phone */
+  .book-cover-wrapper {
+    width: 100px;
+    height: 145px;
+    left: 0;
+  }
+  .surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem; margin: 2rem auto 5rem;
+  padding: 0 1rem; max-width: 1450px;
+}
+
+}
+/* center grid on phone */
+@media (max-width: 600px) {
+
+  .surah-grid {
+    width: 92%;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
+
   </style>
 </head>
 <body>
-
 <header>
-  <div class="header-left">
-    <div class="logo-box">
-      <img src="logo.png" alt="Logo"> 
-    </div>
-    <div class="brand">
-        <h1><a href="index.html" data-en="Noor Al Huda AI" data-ar="نور الهدى للذكاء الاصطناعي">Noor Al Huda AI</a></h1>
-    </div>
-  </div>
+  <div class="brand"><h1><a href="index.html" data-en="Noor Al Huda" data-ar="نور الهدى" data-fa="نور الهدی" data-ur="نور الہدی">Noor Al Huda</a></h1></div>
   <button class="hamburger" aria-label="Open menu">☰</button>
 </header>
 
 <nav id="mainNav">
-  <a href="index.html">Home</a>
-  <a href="quran.html">Quran</a>
-  <a href="duas.html">Duas</a>
-  <a href="hadiths-home.html">Hadiths</a>
-  <a href="ai-chat.html" style="background: #FFD700; color: #000;">AI Chat</a>
+  <a href="quran.html" data-en="Quran" data-ar="القرآن" data-fa="قرآن" data-ur="قرآن">Quran</a>
+  <a href="duas.html" data-en="Duas" data-ar="أدعية" data-fa="دعاها" data-ur="دعائیں">Duas</a>
+  <a href="hadiths-home.html" data-en="Hadiths" data-ar="الأحاديث" data-fa="احادیث" data-ur="احادیث">Hadiths</a>
+  <a href="calendar.html" data-en="Calendar" data-ar="التقويم" data-fa="تقویم" data-ur="تقویم">Calendar</a>
+  <a href="salah.html" data-en="Salah" data-ar="الصلاة" data-fa="نماز" data-ur="نماز">Salah</a>
+  <a href="shiatube/index.html" data-en="ShiaTube" data-ar="شيعة تيوب" data-fa="شیعه تیوب" data-ur="شیعہ ٹیوب">ShiaTube</a>
+  <a href="index.html" data-en="Home" data-ar="الرئيسية" data-fa="خانه" data-ur="ہوم">Home</a>
+  <a href="settings.html" data-en="Settings" data-ar="الإعدادات" data-fa="تنظیمات" data-ur="ترتیبات">Settings</a>
 </nav>
+
 
 <main class="container">
   <h2 id="page-title" style="text-align:center; margin-top:2rem;" 
@@ -205,10 +431,16 @@ body.dark-mode .surah-card:hover { background: #1e293b; border-color: #4ade80; }
 <script>
 const aiModels = [
     { 
+        name_en: "Shia GPT",  
+        desc_en: "Specialized in General Shia beliefs and practices.",
+        href: "shiagpt.html",
+        type: "General"
+    },
+    { 
         name_en: "Marja AI",  
         desc_en: "Specialized in Jurisprudence (Fiqh) and Laws of sistani for now.",
         href: "marja-ai.html",
-        type: "scholar"
+        type: "Fiqh"
     },
 
 ];
