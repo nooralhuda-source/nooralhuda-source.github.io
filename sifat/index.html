@@ -926,12 +926,14 @@ function checkAndOpenSavedHadith(){
 }
 loadHadiths();
 
-/* =========================================================
-   NOOR HADITH – SAVED SYSTEM PATCH (drop-in, safe)
-   Paste at VERY BOTTOM of your script
-   ========================================================= */
+/* =====================================================
+   NOOR – CLEAN SAVED SYSTEM FIX (integrates with v16)
+   ===================================================== */
 
-/* ---------- 1. Ensure saved list container exists ---------- */
+
+/* -----------------------------------------------------
+   1. Ensure saved list container exists
+----------------------------------------------------- */
 let savedList = document.getElementById('savedList');
 
 if (!savedList) {
@@ -942,36 +944,26 @@ if (!savedList) {
 }
 
 
-/* ---------- 2. Helper: highlight saved cards ---------- */
-function refreshSavedHighlights() {
-  const saved = load(STORAGE_SAVED, []);
-
-  document.querySelectorAll('.hadith-card').forEach(card => {
-    const id = card.id.replace('hadith-card-', '');
-    const isSaved = saved.some(x => String(x.id) === String(id));
-
-    card.classList.toggle('saved', isSaved);
-  });
-}
-
-
-/* ---------- 3. Make WHOLE CARD clickable (open modal) ---------- */
+/* -----------------------------------------------------
+   2. Whole card clickable → open modal
+----------------------------------------------------- */
 hadithContainer.addEventListener('click', (e) => {
 
-  // ignore menu clicks
   if (e.target.closest('.hadith-menu-wrap')) return;
 
   const card = e.target.closest('.hadith-card');
   if (!card) return;
 
   const id = card.id.replace('hadith-card-', '');
-  const index = HADITHS.findIndex(h => String(h.id) === String(id));
 
-  if (index !== -1) openHadithModal(index);
+  const idx = HADITHS.findIndex(h => String(h.id) === String(id));
+  if (idx !== -1) openHadithModal(idx);
 });
 
 
-/* ---------- 4. Replace Save button behaviour (toggle, instant) ---------- */
+/* -----------------------------------------------------
+   3. SAVE button → toggle using YOUR STORAGE_SAVED key
+----------------------------------------------------- */
 document.addEventListener('click', (e) => {
 
   const btn = e.target.closest('.hadith-popup button');
@@ -982,16 +974,24 @@ document.addEventListener('click', (e) => {
   const id = card.id.replace('hadith-card-', '');
 
   let saved = load(STORAGE_SAVED, []);
+
   const idx = saved.findIndex(x => String(x.id) === String(id));
 
+  const h = HADITHS.find(x => String(x.id) === String(id));
+
   if (idx >= 0) {
+    // remove
     saved.splice(idx, 1);
   } else {
-    const h = HADITHS.find(x => String(x.id) === String(id));
+    // add (store required metadata)
     saved.unshift({
-      id: id,
-      snippet: (h?.thaqalaynMatn || h?.englishText || '').slice(0,160),
-      note: ''
+      id: h.id,
+      bookId: h.bookId,
+      volume: h.volume,
+      categoryId: h.categoryId,
+      chapterInCategoryId: h.chapterInCategoryId,
+      chapter: h.chapter_en || h.chapter || '',
+      matn: (h.thaqalaynMatn || '').split('\n')[0].slice(0, 160)
     });
   }
 
@@ -1004,26 +1004,127 @@ document.addEventListener('click', (e) => {
 });
 
 
-/* ---------- 5. Auto-highlight after render ---------- */
-const oldRenderList = renderList;
+/* -----------------------------------------------------
+   4. Highlight saved cards visually
+----------------------------------------------------- */
+function refreshSavedHighlights() {
 
-renderList = function () {
-  oldRenderList();
+  const saved = load(STORAGE_SAVED, []);
+
+  document.querySelectorAll('.hadith-card').forEach(card => {
+    const id = card.id.replace('hadith-card-', '');
+    const isSaved = saved.some(x => String(x.id) === String(id));
+    card.classList.toggle('saved', isSaved);
+  });
+}
+
+
+/* -----------------------------------------------------
+   5. Override populateSavedList to show YOUR fields
+----------------------------------------------------- */
+populateSavedList = async function(){
+
+  const savedItems = load(STORAGE_SAVED, []);
+  savedList.innerHTML = '';
+
+  if (!savedItems.length) {
+    savedList.innerHTML = '<em style="color:var(--muted)">No saved hadiths</em>';
+    return;
+  }
+
+  for (const item of savedItems) {
+
+    const row = document.createElement('div');
+    row.style.cssText = `
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 0;
+      border-bottom:1px dashed var(--border);
+      flex-wrap:wrap;
+    `;
+
+    const left = document.createElement('div');
+
+    left.innerHTML = `
+      <strong>${escapeHtml(item.chapter)}</strong><br>
+      <small style="color:var(--muted)">
+      Book: ${escapeHtml(item.bookId)} |
+      Vol: ${escapeHtml(item.volume)} |
+      Cat: ${escapeHtml(item.categoryId)} |
+      Ch: ${escapeHtml(item.chapterInCategoryId)} |
+      #${escapeHtml(item.id)}
+      </small>
+      <div style="margin-top:6px;font-size:.9rem">
+        ${escapeHtml(item.matn)}
+      </div>
+    `;
+
+    const right = document.createElement('div');
+    right.style.display = 'flex';
+    right.style.gap = '6px';
+
+    /* OPEN → navigate to correct page and auto open */
+    const openBtn = el('button',{class:'btn-3d'},'Open');
+
+    openBtn.onclick = () => {
+
+      const target = getTargetPageFromHadith(item);
+
+      const pathArray = window.location.pathname.split('/');
+      pathArray[pathArray.length - 1] = target;
+
+      const newUrl =
+        window.location.origin +
+        pathArray.join('/') +
+        '#'+ item.chapterInCategoryId +
+        '?id=' + item.id +
+        '&open=true';
+
+      window.location.href = newUrl;
+    };
+
+    /* DELETE */
+    const delBtn = el('button',{class:'btn-3d'},'Delete');
+
+    delBtn.onclick = () => {
+      const updated = savedItems.filter(x => String(x.id) !== String(item.id));
+      save(STORAGE_SAVED, updated);
+      populateSavedList();
+      refreshSavedHighlights();
+    };
+
+    right.append(openBtn, delBtn);
+
+    row.append(left, right);
+    savedList.appendChild(row);
+  }
+};
+
+
+/* -----------------------------------------------------
+   6. Auto highlight after render
+----------------------------------------------------- */
+const oldRender = renderList;
+
+renderList = function(){
+  oldRender();
   refreshSavedHighlights();
 };
 
 
-/* ---------- 6. CSS for saved state ---------- */
+/* -----------------------------------------------------
+   7. Visual style
+----------------------------------------------------- */
 const style = document.createElement('style');
 style.innerHTML = `
 .hadith-card.saved {
-  border: 2px solid #2ecc71 !important;
-  background: rgba(46,204,113,0.08);
+  border:2px solid #2ecc71 !important;
+  background:rgba(46,204,113,0.08);
 }
-.hadith-card { cursor: pointer; }
+.hadith-card { cursor:pointer; }
 `;
 document.head.appendChild(style);
-
 
 </script>
 </body>
