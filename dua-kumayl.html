@@ -725,15 +725,12 @@ function splitArabicSanadMatn(arabicText) {
 async function loadHadiths(){
   hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
   try {
-    const res = await fetch(API_URL);
-    if(!res.ok) throw new Error('API fetch failed');
-    const arr = await res.json();
+    import HADITHS from './duas/kumayl.js';
+ALL_HADITHS = HADITHS;
+HADITHS = HADITHS;
+renderList();
 
-    // Remove the old filter
-    ALL_HADITHS = arr.slice(); // copy all hadiths
-    HADITHS = ALL_HADITHS.slice();
 
-    renderList();
 
   } catch (err) {
     console.error(err);
@@ -1355,3 +1352,4 @@ loadHadiths();
 
 
 </html>
+
