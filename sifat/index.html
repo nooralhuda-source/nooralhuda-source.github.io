@@ -926,6 +926,103 @@ function checkAndOpenSavedHadith(){
 }
 loadHadiths();
 
+/* =========================================================
+   NOOR HADITH – SAVED SYSTEM PATCH (drop-in, safe)
+   Paste at VERY BOTTOM of your script
+   ========================================================= */
+
+/* ---------- 1. Ensure saved list container exists ---------- */
+let savedList = document.getElementById('savedList');
+
+if (!savedList) {
+  savedList = document.createElement('div');
+  savedList.id = 'savedList';
+  savedList.style.marginTop = '12px';
+  savedPopup.insertBefore(savedList, savedPopup.lastElementChild);
+}
+
+
+/* ---------- 2. Helper: highlight saved cards ---------- */
+function refreshSavedHighlights() {
+  const saved = load(STORAGE_SAVED, []);
+
+  document.querySelectorAll('.hadith-card').forEach(card => {
+    const id = card.id.replace('hadith-card-', '');
+    const isSaved = saved.some(x => String(x.id) === String(id));
+
+    card.classList.toggle('saved', isSaved);
+  });
+}
+
+
+/* ---------- 3. Make WHOLE CARD clickable (open modal) ---------- */
+hadithContainer.addEventListener('click', (e) => {
+
+  // ignore menu clicks
+  if (e.target.closest('.hadith-menu-wrap')) return;
+
+  const card = e.target.closest('.hadith-card');
+  if (!card) return;
+
+  const id = card.id.replace('hadith-card-', '');
+  const index = HADITHS.findIndex(h => String(h.id) === String(id));
+
+  if (index !== -1) openHadithModal(index);
+});
+
+
+/* ---------- 4. Replace Save button behaviour (toggle, instant) ---------- */
+document.addEventListener('click', (e) => {
+
+  const btn = e.target.closest('.hadith-popup button');
+  if (!btn || btn.innerText !== 'Save') return;
+
+  const popup = btn.closest('.hadith-popup');
+  const card = popup.closest('.hadith-card');
+  const id = card.id.replace('hadith-card-', '');
+
+  let saved = load(STORAGE_SAVED, []);
+  const idx = saved.findIndex(x => String(x.id) === String(id));
+
+  if (idx >= 0) {
+    saved.splice(idx, 1);
+  } else {
+    const h = HADITHS.find(x => String(x.id) === String(id));
+    saved.unshift({
+      id: id,
+      snippet: (h?.thaqalaynMatn || h?.englishText || '').slice(0,160),
+      note: ''
+    });
+  }
+
+  save(STORAGE_SAVED, saved);
+
+  popup.style.display = 'none';
+
+  refreshSavedHighlights();
+  populateSavedList();
+});
+
+
+/* ---------- 5. Auto-highlight after render ---------- */
+const oldRenderList = renderList;
+
+renderList = function () {
+  oldRenderList();
+  refreshSavedHighlights();
+};
+
+
+/* ---------- 6. CSS for saved state ---------- */
+const style = document.createElement('style');
+style.innerHTML = `
+.hadith-card.saved {
+  border: 2px solid #2ecc71 !important;
+  background: rgba(46,204,113,0.08);
+}
+.hadith-card { cursor: pointer; }
+`;
+document.head.appendChild(style);
 
 
 </script>
