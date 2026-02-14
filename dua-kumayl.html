@@ -482,7 +482,9 @@ body.dark-mode .note-input::placeholder {
 .modal-ar.matn {
   margin-top: .5rem;
 }
-
+.three-dots {
+  display: none !important;
+}
 
   </style>
 </head>
@@ -843,7 +845,27 @@ if (arabicMatn) {
     leftCol.appendChild(actions);
 
     // popup menu (pin/save/copy/open)
-    
+    const rightWrap = el('div', { class: 'hadith-menu-wrap', style: 'position:absolute;top:6px;right:6px' });
+    const dot = el('button', { class: 'three-dots', 'aria-label': 'Menu' }, '⋯');
+    const popup = el('div', { class: 'hadith-popup', id: `popup-${h.id}` });
+
+    const pinBtn = el('button', {}, currentPinned && String(currentPinned.id) === String(h.id) ? 'Unpin' : 'Pin');
+    const saveBtn = el('button', {}, 'Save');
+    const copyBtn = el('button', {}, 'Copy');
+    const openFullBtn = el('button', {}, 'Open');
+
+    popup.append(pinBtn, saveBtn, copyBtn, openFullBtn);
+    rightWrap.append(dot, popup);
+
+    // toggle popup
+    dot.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      document.querySelectorAll('.hadith-popup').forEach(p => { if(p !== popup) p.style.display = 'none'; });
+      popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', (e) => {
+      if(!popup.contains(e.target) && e.target !== dot) popup.style.display = 'none';
+    });
 
     // PIN / UNPIN: checks + confirmation
     pinBtn.addEventListener('click', () => {
