@@ -585,15 +585,15 @@ body.dark-mode .note-input::placeholder {
 /* -------------------------
    Configuration & Storage
    ------------------------- */
-const API_URL = 'duas/kumayl.js'; // Local file
-const FILTER_VOLUME = null;
+const API_URL = 'duas/kumayl.json'; // Local file
+const FILTER_VOLUME = 1;
 const FILTER_CATEGORY_ID = null;
 
 
 
-const STORAGE_SAVED = 'noor_saved_hadiths_v51';
-const STORAGE_PINNED = 'noor_pinned_hadith_v51';
-const STORAGE_NOTES = 'noor_hadith_notes_v51';
+const STORAGE_SAVED = 'noor_saved_hadiths_v100';
+const STORAGE_PINNED = 'noor_pinned_hadith_v100';
+const STORAGE_NOTES = 'noor_hadith_notes_v100';
 
 
 /* -------------------------
@@ -725,12 +725,15 @@ function splitArabicSanadMatn(arabicText) {
 async function loadHadiths(){
   hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
   try {
-    import HADITHS from './duas/kumayl.js';
-ALL_HADITHS = HADITHS;
-HADITHS = HADITHS;
-renderList();
+    const res = await fetch(API_URL);
+    if(!res.ok) throw new Error('API fetch failed');
+    const arr = await res.json();
 
+    // Remove the old filter
+    ALL_HADITHS = arr.slice(); // copy all hadiths
+    HADITHS = ALL_HADITHS.slice();
 
+    renderList();
 
   } catch (err) {
     console.error(err);
@@ -1352,4 +1355,3 @@ loadHadiths();
 
 
 </html>
-
