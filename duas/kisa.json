@@ -1,0 +1,800 @@
+[
+  {
+    "id": 1,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَ آلِ مُحَمَّدٍ",
+    "englishText": "O' Allāh send Your blessings on Muhammad and the family of Muhammad."
+  },
+  {
+    "id": 2,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِسْمِ ٱللَّـهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+    "englishText": "In the Name of Allāh,the All-beneficent, the All-merciful."
+  },
+  {
+    "id": 3,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "عَنْ فاطِمَةَ الزَّهْراءِ عَلَيْهَا اَلسلام بِنْتِ رَسُول ِاللّه صَلَّى اللهُ عَلَيْهِ وَآلِهِ أَنَّها قالَتْ :",
+    "englishText": "Fatimatuz-Zahra, the daughter of the Prophet (s), peace be on them, is to have thus related ( an event ) :"
+  },
+  {
+    "id": 4,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "دَخَلَ عَلَيَّ أَبِي رَسُولُ اللّهِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ فِي بَعْضِ الاْيَّامِ فَقالَ:",
+    "englishText": "My father, the Prophet (s) of Allah, came to my house one day and said to me:"
+  },
+  {
+    "id": 5,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "السَّلامُ عَلَيْكِ يَا فاطِمَةُ",
+    "englishText": "\"Peace be on you, Fatimah\""
+  },
+  {
+    "id": 6,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقُلْتُ: عَلَيْكَ السَّلامُ",
+    "englishText": "I replied : \"And upon you be peace\""
+  },
+  {
+    "id": 7,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "قالَ: إِنِّي أَجِدُ فِي بَدَنِي ضُعْفا",
+    "englishText": "Then he said : \"I feel weakness in my body\""
+  },
+  {
+    "id": 8,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقُلْتُ لَهُ: أُعِيذُكَ بِاللّهِ يَا أَبَتاهُ مِنَ الضُّعْفِ",
+    "englishText": "I said : \"May Allah protect you from weakness, father\""
+  },
+  {
+    "id": 9,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقَالَ: ”يَا فَاطِمَةُ! ٱئْتِينِي بِٱلْكِسَاءِ ٱلْيَمَانِيِّ فَغَطِّينِي بِهِ.",
+    "englishText": "He said : \"Fatimah, please bring the Yemeni cloak and cover me with it\""
+  },
+  {
+    "id": 10,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَأَتَيْتُهُ بالْكِساءِ الْـيَمانِي فَغَطَّيْتُهُ بِهِ",
+    "englishText": "So, I brought the Yemeni cloak and covered him with it."
+  },
+  {
+    "id": 11,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَصرْتُ أَنْظُرُ إِلَيْهِ وَإِذا وَجْهُهُ يَتَلَأَلَؤُ",
+    "englishText": "Then, I looked at him and saw that his face was shining"
+  },
+  {
+    "id": 12,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "كَأَنَّهُ الْبَدْرُ فِي لَيْلَة تَمامِهِ وَكَمالِهِ",
+    "englishText": "like a full moon with its glory and splendor"
+  },
+  {
+    "id": 13,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَمَا كانَتْ إِلاّ ساعَةً وَإِذا بِوَلَدِيَ الْحَسَنِ عليه السلام قَدْ أَقْبَلَ",
+    "englishText": "After a while, my son Hasan came in"
+  },
+  {
+    "id": 14,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقالَ: السَّلامُ عَلَيْكِ يَا أُمَّاهُ",
+    "englishText": "and said : \"Peace be on you, mother\""
+  },
+  {
+    "id": 15,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقُلتُ: وَعَلَيْكَ السَّلامُ يَا قُرَّةَ عَيْنِي وَثَمَرَةَ فُؤَادِي",
+    "englishText": "I replied : \"And upon you be peace, O light of my eyes, and the delight of my heart\""
+  },
+  {
+    "id": 16,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقَالَ: يَا أُمَّاهُ إِنِّي أَشَمُّ عِنْدَكِ رائِحَةً طَيِّبَةً",
+    "englishText": "He then said : \"O Mother! I smell a fragrance so sweet"
+  },
+  {
+    "id": 17,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "كَأَنَّها رائِحَةُ جَدِّي رَسُولِ اللّه صَلَّى اللهُ عَلَيْهِ وَآلِهِ",
+    "englishText": "and so pure as that of my grandfather, the Prophet (s) of Allah\""
+  },
+  {
+    "id": 18,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقُلْتُ: نَعَمْ إِنَّ جَدَّكَ تَحْتَ الْكِساءِ",
+    "englishText": "I replied : \"Yes. Your grandfather is underneath the cloak\""
+  },
+  {
+    "id": 19,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَأَقْبَلَ الْحَسَنُ نَحْوَ الْكِساءِ وَقالَ: السَّلامُ عَلَيْكَ يَا جَدَّاهُ يَا رَسُولَ اللّهِ",
+    "englishText": "Hasan went near the cloak and said : \"Peace be on you, my grandfather, the Prophet (s) of Allah;"
+  },
+  {
+    "id": 20,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَتَأْذَنُ لِي أَنْ أَدْخُلَ مَعَكَ تَحْتَ الْكِساءِ",
+    "englishText": "May I enter the cloak with you?\""
+  },
+  {
+    "id": 21,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ: وَعَلَيْكَ السَّلامُ يَا وَلَدِي وَيَا صاحِبَ حَوْضِي",
+    "englishText": "He replied : \"And upon you be peace, my son and the master of my fountain (Kauthar),"
+  },
+  {
+    "id": 22,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "قَدْ أَذِنْتُ لَكَ ِ",
+    "englishText": "you are given the permission to enter\""
+  },
+  {
+    "id": 23,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَدَخَلَ مَعَهُ تَحْتَ الْكِساء",
+    "englishText": "So, Hasan entered the cloak with him"
+  },
+  {
+    "id": 24,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَمَا كانَتْ إِلاَّ ساعَةً وَإِذا بِوَلَدِيَ الْحُسَيْنِ قَدْ أَقْبَلَ وَقالَ",
+    "englishText": "After a while, my Husain came in and said :"
+  },
+  {
+    "id": 25,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "السَّلامُ عَلَيْكِ يَا أُمَّاهُ.",
+    "englishText": "\"Peace be on you, mother\""
+  },
+  {
+    "id": 26,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقُلْتُ: وَعَلَيْكَ السَّلامُ يَا وَلَدِي وَيَا قُرَّةَ عَيْنِي وَثَمَرَةَ فُؤَادِي.",
+    "englishText": "I replied : \"And upon you be peace, O light of my eyes, and the delight of my heart\""
+  },
+  {
+    "id": 27,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقَالَ لِي: يَا أُمَّاهُ إِنِّي أَشَمُّ عِنْدَكِ رائِحَةً طَيِّبَةً",
+    "englishText": "He then said : \"O Mother! I smell a fragrance so sweet"
+  },
+  {
+    "id": 28,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "كَأَنَّها رائِحَةُ جَدِّي رَسُولِ اللّهُ صَلَّى اللهُ عَلَيْهِ وَآلِهِ.",
+    "englishText": "and so pure as that of my grandfather, the Prophet (s) of Allah\""
+  },
+  {
+    "id": 29,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقُلْتُ: نَعَمْ إِنَّ جَدَّكَ وَأَخاكَ تَحْتَ الْكِساءِ.",
+    "englishText": "I replied : \"Yes. Your grandfather and your brother are underneath the cloak\""
+  },
+  {
+    "id": 30,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَدَنَا الْحُسَيْنُ نَحْوَ الْكِساءِ",
+    "englishText": "Husain stepped towards the cloak"
+  },
+  {
+    "id": 31,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقالَ: السَّلامُ عَلَيْكَ يَا جَدَّاهُ السَّلامُ عَلَيْكَ يَا مَنِ اخْتارَهُ اللّهُ",
+    "englishText": "and said : \"Peace be on you, my grandfather, the Chosen of Allah;"
+  },
+  {
+    "id": 32,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَتَأْذَنُ لِي أَنْ أَكُونَ مَعَكُما تَحْتَ الْكِساءِ",
+    "englishText": "May I enter the cloak with you?\""
+  },
+  {
+    "id": 33,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ: وَعَلَيْكَ السَّلامُ يَا وَلَدِي",
+    "englishText": "He replied : \"And upon you be peace, my son"
+  },
+  {
+    "id": 34,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيَا شافِعَ أُمَّتِي قَدْ أَذِنْتُ لَكَ.",
+    "englishText": "and interceder of my followers, you are given the permission to enter\""
+  },
+  {
+    "id": 35,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَدَخَلَ مَعَهُما تَحْتَ الْكِساء",
+    "englishText": "So, Husain entered the cloak with them."
+  },
+  {
+    "id": 36,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَأَ قْبَلَ عِنْدَ ذلِكَ أَبُو الْحَسَنِ عَلِيُّ بْنُ أَبِي طالِبٍ",
+    "englishText": "After a while, Abul Hasan, Ali bin Abi Talib came in"
+  },
+  {
+    "id": 37,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقالَ: السَّلامُ عَلَيْكِ يَا بِنْتَ رَسُولِ اللّهِ.",
+    "englishText": "and said : \"Peace be on you, O daughter of the Prophet (s) of Allah\""
+  },
+  {
+    "id": 38,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقُلْتُ: وَعَلَيْكَ السَّلامُ يَا أَبَا الْحَسَنِ وَيَا أَمِيرَ الْمُؤْمِنِينَ.",
+    "englishText": "I replied : \"And upon you be peace, O father of Hasan, and the Commander of the faithful\""
+  },
+  {
+    "id": 39,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ: يَا فاطِمَةُ إِنِّي أَشَمُّ عِنْدَكِ رائِحَةً طَيِّبَةً",
+    "englishText": "He then said : \"O Fatima! I smell a fragrance so sweet and so pure"
+  },
+  {
+    "id": 40,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "كَانَّهَا رائِحَةُ أَخِي وَابْنِ عَمِّي رَسُولِ اللّه صَلَّى اللهُ عَلَيْهِ وَآلِهِ.",
+    "englishText": "as that of my brother and my cousin, the Prophet (s) of Allah\""
+  },
+  {
+    "id": 41,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقُلْتُ: نَعَمْ هَا هُوَ مَعَ وَلَدَيْكَ تَحْتَ الْكِساءِ",
+    "englishText": "I replied: \"Yes. He is underneath the cloak with your two sons\""
+  },
+  {
+    "id": 42,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَأَقْبَلَ عَلِيٌّ نَحْوَ الْكِساءِ",
+    "englishText": "So, Ali went near the cloak"
+  },
+  {
+    "id": 43,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقالَ: السَّلامُ عَلَيْكَ يَا رَسُولَ اللّهِ",
+    "englishText": "and said : \"Peace be on you, Prophet (s) of Allah;"
+  },
+  {
+    "id": 44,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وأَتَأْذَنُ لِي أَنْ أَكُونَ مَعَكُمْ تَحْتَ الْكِساءِ",
+    "englishText": "May I enter the cloak with you?\""
+  },
+  {
+    "id": 45,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "قالَ لَهُ: وَعَلَيْكَ السَّلامُ يَا أَخِي ويَا وَصِيِّي",
+    "englishText": "He replied : \"And upon you be peace, my brother, my successor,"
+  },
+  {
+    "id": 46,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخَلِيفَتِي وَصاحِبَ لِوَائِي قَدْ أَذِنْتُ لَكَ",
+    "englishText": "my successor, and my standard bearer, you are given the permission to enter\""
+  },
+  {
+    "id": 47,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَدَخَلَ عَلِيٌّ تَحْتَ الْكِساءِ",
+    "englishText": "So, Ali entered the cloak with them."
+  },
+  {
+    "id": 48,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ثُمَّ أَتَيْتُ نَحْوَ الْكِساءِ",
+    "englishText": "Then I stepped forward"
+  },
+  {
+    "id": 49,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقُلْتُ: السَّلامُ عَلَيْكَ يَا أَبَتاهُ يَا رَسُولَ اللّهِ",
+    "englishText": "and said : \"Peace be on you, my father, O Prophet (s) of Allah;"
+  },
+  {
+    "id": 50,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَتَأْذَنُ لِي أَنْ أَكُونَ مَعَكُمْ تَحْتَ الْكِساءِ",
+    "englishText": "May I enter the cloak with you?\""
+  },
+  {
+    "id": 51,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "قالَ: وَعَلَيْكِ السَّلامُ يَا بِنْتِي وَيَا بِضْعَتِي قَدْ أَذِنْتُ لَكِ",
+    "englishText": "He replied : \"And upon you be peace, my daughter, O part of myself; you are given the permission to enter\""
+  },
+  {
+    "id": 52,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَدَخَلْتُ تَحْتَ الْكِساءِ",
+    "englishText": "So, I entered the cloak with them."
+  },
+  {
+    "id": 53,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَلَمَّا اكْتَمَلْنا جَمِيعاً تَحْتَ الْكِساءِ أَخَذَ أَبِي رَسُولُ اللّه بِطَرَفَي الْكِساءِ",
+    "englishText": "Getting together underneath the cloak, my father, the Prophet (s) of Allah, held the two ends of the cloak"
+  },
+  {
+    "id": 54,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَوْمَأَ بِيَدِهِ ٱلْيُمْـنٰى إِلَى السَّماءِ وَقالَ:",
+    "englishText": "and raised his right hand towards the heavens and prayed :"
+  },
+  {
+    "id": 55,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اللّهُمَّ إِنَّ هَؤُلاءِ أَهْلُ بَيْتِي وَخاصَّتِي وَحامَّتِي",
+    "englishText": "\"O Allah, these are the people of my Household (Ahlul-Bayt). They are my confidants and my supporters."
+  },
+  {
+    "id": 56,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "لَحْمُهُمْ لَحْمِي وَدَمُهُمْ دَمِي",
+    "englishText": "Their flesh is my flesh and their blood is my blood."
+  },
+  {
+    "id": 57,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يُؤْلِمُنِي مَا يُؤْلِمُهُمْ",
+    "englishText": "Whoever hurts them, hurts me too."
+  },
+  {
+    "id": 58,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيَحْزُنُنِي مَا يَحْزُنُهُمْ",
+    "englishText": "Whoever displeases them, displeases me too."
+  },
+  {
+    "id": 59,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَنَا حَرْبٌ لِمَنْ حارَبَهُمْ",
+    "englishText": "I am at war with those who are at war with them."
+  },
+  {
+    "id": 60,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَسِلْمٌ لِمَنْ سالَمَهُمْ",
+    "englishText": "I am at peace with those who are at peace with them."
+  },
+  {
+    "id": 61,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَدُوٌّ لِمَنْ عَاداهُمْ",
+    "englishText": "I am the enemy of their enemies"
+  },
+  {
+    "id": 62,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمُحِبٌّ لِمَنْ أَحَبَّهُمْ",
+    "englishText": "and I am the friend of their friends."
+  },
+  {
+    "id": 63,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّهُمْ مِنِّي وَأَنَا مِنْهُمْ",
+    "englishText": "They are from me and I am from them."
+  },
+  {
+    "id": 64,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَاجْعَلْ صَلَواتِكَ وَبَرَكاتِكَ وَرَحْمَتَكَ",
+    "englishText": "O Allah! Bestow Your Blessings, Benevolence,"
+  },
+  {
+    "id": 65,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَغُفْرانَكَ وَرِضْوانَكَ عَلَيَّ",
+    "englishText": "Forgiveness and Your pleasure upon me and upon them."
+  },
+  {
+    "id": 66,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَلَيْهِمْ وَأَذْهِبْ عَنْهُمُ الرِّجْسَ وَطَهِّرْهُمْ تَطْهِيراً.",
+    "englishText": "And keep them away from impurity (and flaws) and keep them thoroughly purified\""
+  },
+  {
+    "id": 67,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ اللّهُ عَزَّ وَجَلَّ:",
+    "englishText": "Then the Lord, Almighty Allah said :"
+  },
+  {
+    "id": 68,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَلائِكَتِي وَيَا سُكَّانَ سَمَاواتِي",
+    "englishText": "\"O My angels! O Residents of My Heavens,"
+  },
+  {
+    "id": 69,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنِّي إمَا خَلَقْتُ سَماءً مَبْنِيَّةً وَلاَ أَرْضاً مَدْحِيَّةً وَلاَ قَمَراً مُنِيراً",
+    "englishText": "verily, I have not created the erected Sky, the stretched earth, the illuminated moon,"
+  },
+  {
+    "id": 70,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ شَمْساً مُضِيئَةً وَلاَ فَلَكاً يَدُورُ وَلاَ بَحْراً يَجْرِي وَلاَ فُلْكاً يَسْرِي",
+    "englishText": "the bright sun, the rotating planets, the flowing seas and the sailing ships,"
+  },
+  {
+    "id": 71,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِلاَّ فِي مَحَبَّةِ هَؤلاءِ الْخَمْسَةِ الَّذِينَ هُمْ تَحْتَ الْكِساءِ.",
+    "englishText": "but for the love of these Five underneath the cloak\""
+  },
+  {
+    "id": 72,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ الاْمِينُ جَبْرائِيلُ: يَارَبِّ وَمَنْ تَحْتَ الْكِساءِ",
+    "englishText": "Gabriel, the trusted angel, asked : \"Who are under the cloak?\""
+  },
+  {
+    "id": 73,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ عَزَّ وَجَلَّ:",
+    "englishText": "The Almighty answered :"
+  },
+  {
+    "id": 74,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "هُمْ أَهْلُ بَيْتِ النُّبُوَّةِ وَمَعْدِنُ الرِّسالَةِ",
+    "englishText": "\"They are the Household of the Prophet (s) and the assets of Prophet hood."
+  },
+  {
+    "id": 75,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "هُمْ فاطِمَةُ وَأَبُوها وَبَعْلُها وَبَنُوها.",
+    "englishText": "They are : Fatimah, her father, her husband and her two sons\""
+  },
+  {
+    "id": 76,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ جَبْرائِيلُ: يَارَبِّ أَتَأْذَنُ لِي أَنْ أَهْبِطَ إِلَى الاْرْضِ",
+    "englishText": "Gabriel said : \"O Lord, May I fly to earth"
+  },
+  {
+    "id": 77,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "لأِكُونَ مَعَهُمْ سادِساً",
+    "englishText": "to be the sixth of them?\""
+  },
+  {
+    "id": 78,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ اللّهُ: نَعَمْ قَدْ أَذِنْتُ لَكَ.",
+    "englishText": "Allah replied: \"Yes. You are given the permission\""
+  },
+  {
+    "id": 79,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَهَبَطَ الاْمِينُ جَبْرائِيلُ وَقالَ: السَّلامُ عَلَيْكَ يَا رَسُولَ اللّهِ",
+    "englishText": "Gabriel, the trusted, landed near them and said : \"Peace be on you, O Prophet (s) of Allah."
+  },
+  {
+    "id": 80,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "الْعَلِيُّ الاْعْلى يُقْرِئُكَ السَّلام َوَيَخُصُّكَ بِالتَّحِيَّةِ وَالاْكْرامِ",
+    "englishText": "The All-Highest conveys His peace on you and His greetings"
+  },
+  {
+    "id": 81,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيَقُوْلُ لَكَ :وَعِزَّتِي وَجَلالِي",
+    "englishText": "and says: \"By My Honor and Glory, O My angels! O Residents of My Heavens,"
+  },
+  {
+    "id": 82,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنِّي مَا خَلَقْتُ سَماءً مَبْنِيَّةً",
+    "englishText": "verily, I have not created the erected Sky,"
+  },
+  {
+    "id": 83,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ أَرْضاً مَدْحِيَّةً وَلاَ قَمَراً مُنِيراً وَلاَ شَمْساً مُضِيئَةً",
+    "englishText": "the stretched earth, the illuminated moon, the bright sun,"
+  },
+  {
+    "id": 84,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ فَلَكاً يَدُورُ وَلاَ بَحْراً يَجْرِي وَلاَ فُلْكاً يَسْرِي",
+    "englishText": "the rotating planets, the flowing seas and the sailing ships,"
+  },
+  {
+    "id": 85,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِلاَّ لاِجْلِكُمْ وَمَحَبَّتِكُمْ",
+    "englishText": "but for your sake and love\""
+  },
+  {
+    "id": 86,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدْ أَذِنَ لِي أَنْ أَدْخُلَ مَعَكُمْ",
+    "englishText": "and Allah has given me permission to enter the cloak with you."
+  },
+  {
+    "id": 87,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَهَلْ تَأْذَنُ لِي يَا رَسُولَ اللّه",
+    "englishText": "May I join you, O Prophet (s) of Allah?\""
+  },
+  {
+    "id": 88,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ رَسُولُ اللّه: وَعَلَيْكَ السَّلامُ يَا أَمِينَ وَحْي اللّهِ",
+    "englishText": "The Prophet (s) replied : \"And peace be on you, O trusted bearer of Allah's Revelations!"
+  },
+  {
+    "id": 89,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فإِنَّهُ نَعَمْ قَدْ أَذِنْتُ لَكَ.",
+    "englishText": "you are granted the permission\""
+  },
+  {
+    "id": 90,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَدَخَلَ جَبْرائِيلُ مَعَنا تَحْتَ الْكِساءِ",
+    "englishText": "So, Gabriel entered the cloak with us"
+  },
+  {
+    "id": 91,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ لاِبِي: إِنَّ اللّهَ قَدْ أَوْحَى إِلَيْكُمْ يَقُولُ:",
+    "englishText": "and said to my father : Allah sends His Revelations to you;"
+  },
+  {
+    "id": 92,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّمَا يُرِيدُ اللّهُ لِيُذْهِبَ عَنْكُمُ الرِّجْسَ",
+    "englishText": "\"Verily Allah's desire is to keep you away from impurity (and flaws),"
+  },
+  {
+    "id": 93,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَهْلَ الْبَيْتِ وَيُطَهِّرَكُمْ تَطْهِيراً.",
+    "englishText": "O People of Household (Ahlul-Bayt) and keep you thoroughly purified\""
+  },
+  {
+    "id": 94,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ عَلِيٌّ لاِبِي: يَا رَسُولَ اللّه أَخْبِرْنِي مَا لِجُلُوسِنا",
+    "englishText": "Then Ali said to my father : \"O Prophet (s) of Allah, tell me"
+  },
+  {
+    "id": 95,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "هذَا تَحْتَ الْكِساءِ مِنَ الْفَضْلِ عِنْدَ اللّهُ",
+    "englishText": "what significance has Allah given for getting together underneath this cloak ?\""
+  },
+  {
+    "id": 96,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ النَّبِيُّ صَلَّى اللهُ عَلَيْهِ وَآلِهِ:",
+    "englishText": "The Prophet (s) replied :"
+  },
+  {
+    "id": 97,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَالَّذِي بَعَثَنِي بِالْحَقِّ نَبِيَّاً",
+    "englishText": "\"By Him who rightfully appointed me a Prophet (s)"
+  },
+  {
+    "id": 98,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاصْطَفانِي بِالرِّسالَةِ نَجِيّاً",
+    "englishText": "and chose me a Messenger for the salvation of the mankind."
+  },
+  {
+    "id": 99,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مَا ذُكِرَ خَبَرُنا هذَا فِي مَحْفِلٍ مِنْ مَحافِلِ",
+    "englishText": "whenever and wherever an assembly"
+  },
+  {
+    "id": 100,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَهْلِ الاْرْضِ وَفِيهِ جَمْعٌ مِنْ شِيعَتِنا وَمُحِّبِينا",
+    "englishText": "of our followers and friends mention this event,"
+  },
+  {
+    "id": 101,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِلاَّ وَنَزَلَتْ عَلَيْهِمُ الرَّحْمَةُ",
+    "englishText": "Allah will bestow on them His Blessings and Mercy;"
+  },
+  {
+    "id": 102,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَحَفَّتْ بِهِمُ الْمَلائِكَةُ وَاسْتَغْفَرَتْ لَهُمْ إِلى أَنْ يَتَفَرَّقُوا.",
+    "englishText": "angels will encircle them asking Allah the remission of their sins until the assembly disperses"
+  },
+  {
+    "id": 103,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ عَلِيٌّ عَلَيْهِ السَّلامُ: إِذنْ وَاللّهِ فُزْنَا وَفازَ شِيعَتُنا وَرَبِّ الْكَعْبَةِ.",
+    "englishText": "So Ali said : \"Verily, by the Lord of Kabaa! we and our followers are the winners\""
+  },
+  {
+    "id": 104,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ أَبِي رَسُولُ اللّهِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ:",
+    "englishText": "Then my father replied :"
+  },
+  {
+    "id": 105,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَلِيُّ وَالَّذِي بَعَثَنِي بِالْحَقِّ نَبِيّاً",
+    "englishText": "\"By Him who rightfully appointed me a Prophet"
+  },
+  {
+    "id": 106,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاصْطَفَانِي بِالرِّسالَةِ نَجِيّاً",
+    "englishText": "and chose me a Messenger for the salvation of the mankind,"
+  },
+  {
+    "id": 107,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مَا ذُكِرَ خَبَرُنا هذَا فِي مَحْفِلٍ مِنْ مَحَافِلِ أَهْلِ الاْرْضِ",
+    "englishText": "whenever and wherever an assembly"
+  },
+  {
+    "id": 108,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَفِيهِ جَمْعٌ مِنْ شِيعَتِنا وَمُحِبِّينا",
+    "englishText": "our followers and friends mentions this event,"
+  },
+  {
+    "id": 109,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَفِيهِمْ مَهْمُومٌ إِلاَّ وَفَرَّجَ اللّهُ هَمَّهُ",
+    "englishText": "there shall remain none grieved but Allah will remove his grief,"
+  },
+  {
+    "id": 110,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ مَغْمُومٌ إِلاَّ وَكَشَفَ اللّهُ غَمَّهُ",
+    "englishText": "there shall remain none distressed but Allah will dispel his distress,"
+  },
+  {
+    "id": 111,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ طالِبُ حاجَةٍ إِلاَّ وَقَضَى اللّهُ حاجَتَهُ.",
+    "englishText": "there shall remain none wish-seeker but Allah will grant his wish.\""
+  },
+  {
+    "id": 112,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقالَ عَلِيٌّ عَلَيْهِ السَّلامُ: إِذن وَاللّه فُزْنا وَسُعِدْنا وَكَذلِكَ شِيعَتُنا",
+    "englishText": "`Ali, peace be upon him, said, \"Then, we have won and attained pleasure. I swear it by Allah. So have our adherents;"
+  },
+  {
+    "id": 113,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فازُوا وَسُعِدُوا فِي الدُّنْيا وَالاْخِرَةِ وَرَبِّ الْكَعْبَةِ.",
+    "englishText": "they have won and attained pleasure in this world and in the Hereafter. I swear it by the Lord of the Ka`bah.\""
+  },
+  {
+    "id": 114,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَآلِ مُحَمَّدٍ",
+    "englishText": "O' Allāh send Your blessings on Muhammad and the family of Muhammad."
+  }
+]
