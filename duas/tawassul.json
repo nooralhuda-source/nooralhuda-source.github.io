@@ -1,0 +1,1185 @@
+[
+  {
+    "id": 1,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ إِنِّي أَسْأَلُكَ وَأَتَوَجَّهُ إِلَيْكَ",
+    "englishText": "O Allah, I beseech You and turn my face toward You"
+  },
+  {
+    "id": 2,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِنَبِيِّكَ نَبِيِّ ٱلرَّحْمَةِ",
+    "englishText": "in the name of Your Prophet; the Prophet of Mercy,"
+  },
+  {
+    "id": 3,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مُحَمَّدٍ صَلَّىٰ ٱللَّهُ عَلَيْهِ وَآلِهِ",
+    "englishText": "Muhammad—may Allah send blessings to him and his Household."
+  },
+  {
+    "id": 4,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا ٱلْقَاسِمِ",
+    "englishText": "O Abu’l-Qasim!"
+  },
+  {
+    "id": 5,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَسُولَ ٱللَّهِ",
+    "englishText": "O Allah’s Messenger!"
+  },
+  {
+    "id": 6,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا إِمَامَ ٱلرَّحْمَةِ",
+    "englishText": "O Chief of Mercy!"
+  },
+  {
+    "id": 7,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 8,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "We are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 9,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 10,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 11,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 12,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 13,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا ٱلْحَسَنِ",
+    "englishText": "O Abu’l-Hasan!"
+  },
+  {
+    "id": 14,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَمِيرَ ٱلْمُؤْمِنِينَ",
+    "englishText": "O commander of the Believers!"
+  },
+  {
+    "id": 15,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَلِيُّ بْنَ أَبِي طَالِبٍ",
+    "englishText": "O `Ali, son of Abu-Talib!"
+  },
+  {
+    "id": 16,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 17,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 18,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "We are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 19,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ اللّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 20,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 21,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 22,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 23,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا فَاطِمَةُ ٱلزَّهْرَاءُ",
+    "englishText": "O Fatimah, the Luminous Lady!"
+  },
+  {
+    "id": 24,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بِنْتَ مُحَمَّدٍ",
+    "englishText": "O daughter of Muhammad!"
+  },
+  {
+    "id": 25,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا قُرَّةَ عَيْنِ ٱلرَّسُولِ",
+    "englishText": "O delight of the Messenger’s eyes!"
+  },
+  {
+    "id": 26,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَتَنَا وَمَوْلاَتَنَا",
+    "englishText": "O our chief!"
+  },
+  {
+    "id": 27,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "We are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 28,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكِ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 29,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكِ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 30,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهَةً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 31,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعي لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 32,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا مُحَمَّدٍ",
+    "englishText": "O Abu-Muhammad!"
+  },
+  {
+    "id": 33,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حَسَنُ بْنَ عَلِيٍّ",
+    "englishText": "O Hasan the son of `Ali!"
+  },
+  {
+    "id": 34,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَيُّهَا ٱلْمجْتَبَىٰ",
+    "englishText": "O well-Chosen one!"
+  },
+  {
+    "id": 35,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بْنَ رَسُولِ ٱللَّهِ",
+    "englishText": "O son of Allah’s Messenger!"
+  },
+  {
+    "id": 36,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 37,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 38,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "we are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 39,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 40,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 41,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 42,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 43,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا عَبْدِ ٱللَّهِ",
+    "englishText": "O Abu-`Abdullah!"
+  },
+  {
+    "id": 44,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُسَيْنُ بْنَ عَلِيٍّ",
+    "englishText": "O Husayn the son of `Ali!"
+  },
+  {
+    "id": 45,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَيُّهَا ٱلشَّهِيدُ",
+    "englishText": "O Martyr!"
+  },
+  {
+    "id": 46,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بْنَ رَسُولِ ٱللَّهِ",
+    "englishText": "O son of Allah’s Messenger!"
+  },
+  {
+    "id": 47,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 48,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 49,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "we are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 50,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 51,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 52,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 53,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 54,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا ٱلْحَسَنِ",
+    "englishText": "O Abu’l-Hasan!"
+  },
+  {
+    "id": 55,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَلِيُّ بْنَ ٱلْحُسَيْنِ",
+    "englishText": "O `Ali the son of al-Husayn!"
+  },
+  {
+    "id": 56,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا زَيْنَ ٱلْعَابِدينَ",
+    "englishText": "O Ornament of the Worshippers!"
+  },
+  {
+    "id": 57,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بْنَ رَسُولِ ٱللَّهِ",
+    "englishText": "O son of Allah’s Messenger!"
+  },
+  {
+    "id": 58,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 59,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 60,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "we are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 61,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 62,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 63,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 64,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 65,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا جَعْفَرٍ",
+    "englishText": "O Abu-Ja`far!"
+  },
+  {
+    "id": 66,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُحَمَّدُ بْنَ عَلِيٍّ",
+    "englishText": "O Muhammad the son of `Ali!"
+  },
+  {
+    "id": 67,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَيُّهَا ٱلْبَاقِرُ",
+    "englishText": "O Cleaver [of knowledge]!"
+  },
+  {
+    "id": 68,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بْنَ رَسُولِ ٱللَّهِ",
+    "englishText": "O son of Allah’s Messenger!"
+  },
+  {
+    "id": 69,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 70,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 71,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "we are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 72,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 73,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 74,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 75,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 76,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا عَبْدِ ٱللَّهِ",
+    "englishText": "O Abu-`Abdullah!"
+  },
+  {
+    "id": 77,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا جَعْفَرُ بْنَ مُحَمَّدٍ",
+    "englishText": "O Ja`far the son of Muhammad!"
+  },
+  {
+    "id": 78,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَيُّهَا ٱلصَّادِقُ",
+    "englishText": "O Veracious!"
+  },
+  {
+    "id": 79,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بْنَ رَسُولِ ٱللَّهِ",
+    "englishText": "O son of Allah’s Messenger!"
+  },
+  {
+    "id": 80,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 81,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 82,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "we are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 83,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 84,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 85,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 86,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 87,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا ٱلْحَسَنِ",
+    "englishText": "O Abu’l-Hasan!"
+  },
+  {
+    "id": 88,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُوسَىٰ بْنَ جَعْفَرٍ",
+    "englishText": "O Musa the son of Ja`far!"
+  },
+  {
+    "id": 89,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَيُّهَا ٱلْكَاظِمُ",
+    "englishText": "O Suppressor [of rage]!"
+  },
+  {
+    "id": 90,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بْنَ رَسُولِ ٱللَّهِ",
+    "englishText": "O son of Allah’s Messenger!"
+  },
+  {
+    "id": 91,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 92,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 93,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "we are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 94,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 95,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 96,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 97,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 98,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا ٱلْحَسَنِ",
+    "englishText": "O Abu’l-Hasan!"
+  },
+  {
+    "id": 99,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَلِيُّ بْنَ مُوسَىٰ",
+    "englishText": "O `Ali the son of Musa!"
+  },
+  {
+    "id": 100,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَيُّهَا ٱلرِّضَا",
+    "englishText": "O Amicable!"
+  },
+  {
+    "id": 101,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بْنَ رَسُولِ ٱللَّهِ",
+    "englishText": "O son of Allah’s Messenger!"
+  },
+  {
+    "id": 102,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 103,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 104,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتشْفَعْنَا",
+    "englishText": "we are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 105,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 106,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 107,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 108,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 109,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا جَعْفَرٍ",
+    "englishText": "O Abu-Ja`far!"
+  },
+  {
+    "id": 110,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُحَمَّدُ بْنَ عَلِيٍّ",
+    "englishText": "O Muhammad the son of `Ali!"
+  },
+  {
+    "id": 111,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَيُّهَا ٱلتَّقِيُّ ٱلْجَوَادُ",
+    "englishText": "O pious and magnanimous!"
+  },
+  {
+    "id": 112,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بْنَ رَسُولِ ٱللَّهِ",
+    "englishText": "O son of Allah’s Messenger!"
+  },
+  {
+    "id": 113,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 114,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 115,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "we are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 116,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 117,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 118,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 119,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 120,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا ٱلْحَسَنِ",
+    "englishText": "O Abu’l-Hasan!"
+  },
+  {
+    "id": 121,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَلِيُّ بْنَ مُحَمَّدٍ",
+    "englishText": "O `Ali the son of Muhammad!"
+  },
+  {
+    "id": 122,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَيُّهَا ٱلْهَادِي ٱلنَّقِيُّ",
+    "englishText": "O guide and pure!"
+  },
+  {
+    "id": 123,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بْنَ رَسُولِ ٱللَّهِ",
+    "englishText": "O son of Allah’s Messenger!"
+  },
+  {
+    "id": 124,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 125,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 126,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "we are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 127,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 128,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 129,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 130,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 131,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا أَبَا مُحَمَّدٍ",
+    "englishText": "O Abu-Muhammad!"
+  },
+  {
+    "id": 132,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حَسَنُ بْنَ عَلِيٍّ",
+    "englishText": "O Hasan the son of `Ali!"
+  },
+  {
+    "id": 133,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَيُّهَا ٱلزَّكِيُّ ٱلْعَسْكَرِيُّ",
+    "englishText": "O immaculate resident of `Askar [city]!"
+  },
+  {
+    "id": 134,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بْنَ رَسُولِ ٱللَّهِ",
+    "englishText": "O son of Allah’s Messenger!"
+  },
+  {
+    "id": 135,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 136,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 137,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتشْفَعْنَا",
+    "englishText": "we are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 138,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 139,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 140,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 141,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 142,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَصِيَّ ٱلْحَسَنِ",
+    "englishText": "O successor of al-Hasan!"
+  },
+  {
+    "id": 143,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْخَلَفُ ٱلْحُجَّةُ",
+    "englishText": "O descendant [of the Infallibles] and Argument [of Allah]!"
+  },
+  {
+    "id": 144,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَيُّهَا ٱلْقَائِمُ ٱلْمُنْتَظَرُ ٱلْمَهْدِيُّ",
+    "englishText": "O Riser, Awaited, and Well-guided!"
+  },
+  {
+    "id": 145,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بْنَ رَسُولِ ٱللَّهِ",
+    "englishText": "O son of Allah’s Messenger!"
+  },
+  {
+    "id": 146,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حُجَّةَ ٱللَّهِ عَلَىٰ خَلْقِهِ",
+    "englishText": "O Allah’s Argument against His creatures!"
+  },
+  {
+    "id": 147,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَيِّدَنَا وَمَوْلاَنَا",
+    "englishText": "O our master and chief!"
+  },
+  {
+    "id": 148,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّا تَوَجَّهْنَا وَٱسْتَشْفَعْنَا",
+    "englishText": "we are turning our faces toward you, seeking your intercession"
+  },
+  {
+    "id": 149,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْنَا بِكَ إِلَىٰ ٱللَّهِ",
+    "englishText": "and your advocacy for us before Allah;"
+  },
+  {
+    "id": 150,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا",
+    "englishText": "and we are presenting you [as our intermediary] for the settlement of our needs."
+  },
+  {
+    "id": 151,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَجِيهاً عِنْدَ ٱللَّهِ",
+    "englishText": "O well-esteemed with Allah,"
+  },
+  {
+    "id": 152,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِشْفَعْ لَنَا عِنْدَ ٱللَّهِ",
+    "englishText": "intercede for us before Allah."
+  },
+  {
+    "id": 153,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَادَتِي وَمَوَالِيَّ",
+    "englishText": "O my chiefs and masters!"
+  },
+  {
+    "id": 154,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنِّي تَوَجَّهْتُ بِكُمْ",
+    "englishText": "I am turning my face toward Allah in the names of you [all],"
+  },
+  {
+    "id": 155,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ائِمَّتِي وَعُدَّتِي",
+    "englishText": "for you are my leaders and my supporters"
+  },
+  {
+    "id": 156,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "لِيَوْمِ فَقْرِي وَحَاجَتِي",
+    "englishText": "on the day of my destitution and neediness"
+  },
+  {
+    "id": 157,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِلَىٰ ٱللَّهِ",
+    "englishText": "before Allah."
+  },
+  {
+    "id": 158,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَوَسَّلْتُ بِكُمْ إِلَىٰ ٱللَّهِ",
+    "englishText": "I am seeking your advocacy for me before Allah"
+  },
+  {
+    "id": 159,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱسْتَشْفَعْتُ بِكُمْ إِلَىٰ ٱللَّهِ",
+    "englishText": "and seeking your intercession for me before Allah;"
+  },
+  {
+    "id": 160,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَٱشْفَعُوا لِي عِنْدَ ٱللَّهِ",
+    "englishText": "so, (please) intercede for me before Allah"
+  },
+  {
+    "id": 161,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱسْتَنْقِذُونِي مِنْ ذُنُوبِي عِنْدَ ٱللَّهِ",
+    "englishText": "and save me from my sins before Allah,"
+  },
+  {
+    "id": 162,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَإنَّكُمْ وَسيلَتِي إِلَىٰ ٱللَّهِ",
+    "englishText": "for you are my means to Allah"
+  },
+  {
+    "id": 163,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِحُبِّكُمْ وَبِقُرْبِكُمْ ارْجُو نَجَاةً مِنَ ٱللَّهِ",
+    "englishText": "and through my love for you and my seeking nearness to you do I hope for salvation from Allah."
+  },
+  {
+    "id": 164,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَكُونُوا عِنْدَ ٱللَّهِ رَجَائِي",
+    "englishText": "So, be my hope before Allah."
+  },
+  {
+    "id": 165,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَادَتِي يَا اوْلِيَاءَ ٱللَّهِ",
+    "englishText": "O my masters! O Allah’s intimate servants!"
+  },
+  {
+    "id": 166,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "صَلَّىٰ ٱللَّهُ عَلَيْهِمْ اجْمَعينَ",
+    "englishText": "May Allah bless you all"
+  },
+  {
+    "id": 167,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلَعَنَ ٱللَّهُ اعْدَاءَ ٱللَّهِ ظَالِمِيهِمْ",
+    "englishText": "and may Allah curse the enemies of Allah; those who wronged you,"
+  },
+  {
+    "id": 168,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مِنَ ٱلاوَّلِينَ وَٱلآخِرِينَ",
+    "englishText": "from the past and the last generations."
+  },
+  {
+    "id": 169,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "آمِينَ رَبَّ ٱلْعَالَمينَ",
+    "englishText": "Respond to us, O Lord of the Worlds!"
+  }
+]
