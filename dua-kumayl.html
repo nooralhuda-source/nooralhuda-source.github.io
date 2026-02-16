@@ -752,14 +752,14 @@ const chapterCounters = {};
 
 
   HADITHS.forEach((h, i) => {
-    const ch = h.chapterInCategoryId || 'unknown';
+    const ch = h.chapterInCategoryId;
 chapterCounters[ch] = (chapterCounters[ch] || 0) + 1;
 const chapterHadithNumber = chapterCounters[ch];
 
     const card = el('div', {
         class: 'hadith-card',
         id: 'hadith-card-' + h.id,
-        'data-chapter': h.chapterInCategoryId || 'unknown'
+        'data-chapter': h.chapterInCategoryId
     });
 
 const meta = el('div', { class: 'hadith-meta' }, `#${h.id}`);
@@ -886,7 +886,7 @@ if (arabicMatn) {
       save(STORAGE_PINNED, { id: h.id, volume: FILTER_VOLUME });
       alert(`Pinned hadith #${h.id}`);
       popup.style.display = 'none';
-      const chapter = h.chapterInCategoryId || 'unknown';
+      const chapter = h.chapterInCategoryId;
       showChapter(chapter); 
     });
 
@@ -950,7 +950,7 @@ if (arabicMatn) {
 function organizeByChapter() {
   PAGES = {};
   HADITHS.forEach(h => {
-    const chapter = h.chapterInCategoryId || 'unknown';
+    const chapter = h.chapterInCategoryId;
     if (!PAGES[chapter]) {
       PAGES[chapter] = [];
     }
@@ -1332,11 +1332,7 @@ function checkAndOpenSavedHadith(){
 
   // Find the pinned hadith to get its chapter
   const hadith = HADITHS[index];
-  if(hadith){
-    const chapter = hadith.chapterInCategoryId || 'unknown';
-    // Switch to correct chapter before opening modal
-    showChapter(chapter);
-  }
+  
 
   // Open modal AFTER switching to correct chapter
   setTimeout(() => {
@@ -1352,3 +1348,4 @@ loadHadiths();
 
 
 </html>
+
