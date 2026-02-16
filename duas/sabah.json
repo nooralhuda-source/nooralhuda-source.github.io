@@ -1,0 +1,744 @@
+[
+  {
+    "id": 1,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اللَّهُمَّ يَا مَنْ دَلَعَ لِسَانَ ٱلصَّبَاحِ بِنُطْقِ تَبَلُّجِهِ",
+    "englishText": "O Allah, O He Who extended the morning's tongue in the speech of its dawning,"
+  },
+  {
+    "id": 2,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَسَرَّحَ قِطَعَ ٱللَّيْلِ ٱلْمُظْلِمِ بِغَيَاهِبِ تَلَجْلُجِهِ",
+    "englishText": "dispatched the fragments of the dark night into the gloom of its stammering,"
+  },
+  {
+    "id": 3,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَتْقَنَ صُنْعَ ٱلْفَلَكِ الدَّوَّارِ فِي مَقَادِيرِ تَبَرُّجِهِ",
+    "englishText": "made firm the structure of the turning spheres in the measure of its display,"
+  },
+  {
+    "id": 4,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَشَعْشَعَ ضِيَاءَ ٱلشَّمْسِ بِنُورِ تَأَجُّجِهِ",
+    "englishText": "and beamed forth the brightness of the sun through the light of its blazing!"
+  },
+  {
+    "id": 5,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ دَلَّ عَلَىٰ ذَاتِهِ بِذَاتِهِ",
+    "englishText": "O He Who demonstrates His Essence by His Essence,"
+  },
+  {
+    "id": 6,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَنَزَّهَ عَنْ مُجَانَسَةِ مَخْلُوقَاتِهِ",
+    "englishText": "transcends from congeniality with His creatures,"
+  },
+  {
+    "id": 7,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَلَّ عَنْ مُلائَمَةِ كَيْفِيَاتِهِ",
+    "englishText": "and is exalted beyond conformity with His qualities!"
+  },
+  {
+    "id": 8,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ قَرُبَ مِنْ خَطَرَاتِ ٱلظُّنُونِ",
+    "englishText": "O He Who is near to the passing thoughts of opinions,"
+  },
+  {
+    "id": 9,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبَعُدَ عَنْ لَحَظَاتِ ٱلْعُيُونِ",
+    "englishText": "far from the regards of eyes,"
+  },
+  {
+    "id": 10,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَلِمَ بِمَا كَانَ قَبْلَ أَن يَكُونَ",
+    "englishText": "and knows what will be before it comes to be!"
+  },
+  {
+    "id": 11,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ أَرْقَدَنِي فِي مِهَادِ أَمْنِهِ وَأَمَانِهِ",
+    "englishText": "O He Who has put me at ease in the cradle of His security and sanctuary,"
+  },
+  {
+    "id": 12,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَيْقَظَنِي إِلَىٰ مَا مَنَحَنِي بِهِ مِنْ مِنَنِهِ وَإِحْسَانِهِ",
+    "englishText": "awakened me to the favors and kindness that He has bestowed upon me,"
+  },
+  {
+    "id": 13,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَكَفَّ أَكُفَّ السُّوءِ عَنِّي بِيَدِهِ وَسُلْطَانِهِ",
+    "englishText": "and held back from me the claws of evil with His hand and His authority!"
+  },
+  {
+    "id": 14,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "صَلِّ اللَّهُمَّ عَلَىٰ ٱلدَّلِيلِ إِلَيْكَ فِي ٱللَّيْلِ ٱلأَلْيَلِ",
+    "englishText": "Bless, O Allah, the guide to You in the darkest night,"
+  },
+  {
+    "id": 15,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْمَاسِكِ مِنْ أَسْبَابِكَ بِحَبْلِ ٱلشَّرَفِ ٱلأَطْوَلِ",
+    "englishText": "who, of Your ropes, clings to the cord of the longest nobility,"
+  },
+  {
+    "id": 16,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلنَّاصِعِ ٱلْحَسَبِ فِي ذِرْوَةِ ٱلْكَاهِلِ ٱلأَعْبَلِ",
+    "englishText": "whose pure lineage evident at the summit of stout shoulders,"
+  },
+  {
+    "id": 17,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلثَّابِتِ ٱلْقَدَمِ عَلَىٰ زَحَاِليْفِهَا فِي ٱلزَّمَنِ ٱلأَوَّلِ",
+    "englishText": "and whose feet were entrenched in spite of slippery places in ancient time."
+  },
+  {
+    "id": 18,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَلَىٰ آلِهِ ٱلأَخْيَارِ ٱلْمُصْطَفَيْنَ ٱلأَبْرَارِ",
+    "englishText": "And [bless] his household, the good, chosen, and pious."
+  },
+  {
+    "id": 19,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وٱفْتَحِ اللَّهُمَّ لَنَا مَصَارِيعَ ٱلصَّبَاحِ",
+    "englishText": "Open for us, O Allah, the leaves of the morning's door"
+  },
+  {
+    "id": 20,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِمَفَاتِيحِ ٱلرَّحْمَةِ وَٱلْفَلاَحِ",
+    "englishText": "with the keys of mercy and prosperity!"
+  },
+  {
+    "id": 21,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَلْبِسْنِي ٱللَّهُمَّ مِنْ أَفْضَلِ خِلَعِ ٱلْهِدَايَةِ وَٱلصَّلاَحِ",
+    "englishText": "Clothe me, O Allah, with the most excellent robes of guidance and righteousness!"
+  },
+  {
+    "id": 22,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱغْرِسِ اللَّهُمَّ بِعَظَمَتِكَ فِي شِرْبِ جَنَانِي يَنَابِيعَ ٱلْخُشُوعِ",
+    "englishText": "Plant, O Allah, through Your tremendousness, the springs of humility in the watering place of my heart!"
+  },
+  {
+    "id": 23,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَجْرِ ٱللَّهُمَّ لِهَيْبَتِكَ مِنْ آمَاقِي زَفَرَاتِ ٱلدُّمُوعِ",
+    "englishText": "Cause to flow, O Allah, through fear of You, tears of moaning from the corners of my eyes!"
+  },
+  {
+    "id": 24,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَدِّبِ ٱللَّهُمَّ نَزَقَ ٱلْخُرْقِ مِنِّي بِأَزِمَّةِ ٱلْقُنُوعِ",
+    "englishText": "Chastise, O Allah, the recklessness of my clumsiness with the reins of contentment!"
+  },
+  {
+    "id": 25,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِلٰهِي إِن لَمْ تَبْتَدِئْنِي ٱلرَّحْمَةُ مِنْكَ بِحُسْنِ ٱلتَّوْفِيقِ",
+    "englishText": "My God, if mercy from You does not begin with fair success for me,"
+  },
+  {
+    "id": 26,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَمَنِ ٱلسَّاِلكُ بِي إِلَيْكَ فِي وَاضِحِ ٱلطَّرِيقِ",
+    "englishText": "then who can take me to You upon the evident path?"
+  },
+  {
+    "id": 27,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِنْ أَسْلَمَتْنِي أَنَاتُكَ لِقَائِدِ ٱلأَمَلِ وَٱلْمُنَىٰ",
+    "englishText": "If Your deliberateness should turn me over to the guide of hope and wishes,"
+  },
+  {
+    "id": 28,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَمَنِ ٱلْمُقِيلُ عَثَرَاتِي مِنْ كَبَوَاتِ ٱلْهَوَىٰ",
+    "englishText": "then who will annul my slips from the stumbles of caprice?"
+  },
+  {
+    "id": 29,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِنْ خَذَلَنِي نَصْرُكَ عِنْدَ مُحَارَبَةِ ٱلنَّفْسِ وَٱلشَّيْطَانِ",
+    "englishText": "If Your help should forsake me in the battle against the soul and Satan,"
+  },
+  {
+    "id": 30,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَقَدْ وَكَلَنِي خِذْلاَنُكَ إِلَىٰ حَيْثُ ٱلنَّصَبِ وَٱلْحِرْمَانِ",
+    "englishText": "then Your forsaking will have submitted me to where there is hardship and deprivation."
+  },
+  {
+    "id": 31,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِلٰهِي أَتَرَانِي مَا أَتَيْتُكَ إِلاَّ مِنْ حَيْثُ ٱلآمَاِل",
+    "englishText": "My God, do You see that I have only come to You from the direction of hopes,"
+  },
+  {
+    "id": 32,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَمْ عَلِقْتُ بِأَطْرَافِ حِبَاِلكَ إِلاَّ حِينَ بَاعَدَتْنِي ذُنُوبِي عَنْ دَارِ ٱلْوِصَاِل",
+    "englishText": "or clung to the ends of Your cords when my sins have driven me from the house of union?"
+  },
+  {
+    "id": 33,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَبِئْسَ ٱلْمَطِيَّةُ الَّتِي ٱمْتَطَتْ نَفْسِي مِنْ هَوَاهَا",
+    "englishText": "So what an evil mount upon which my soul has mounted-its caprice!"
+  },
+  {
+    "id": 34,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَوَاهاً لَهَا لِمَا سَوَّلَتْ لَهَا ظُنُونُهَا وَمُنَاهَا",
+    "englishText": "Woe upon it for being seduced by its own opinions and wishes!"
+  },
+  {
+    "id": 35,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَبّاً لَهَا لِجُرْأَتِهَا عَلَىٰ سَيِّدِهَا وَمَوْلاهَا",
+    "englishText": "Destruction be upon it for its audacity toward its Master and Protector!"
+  },
+  {
+    "id": 36,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِلٰهِي قَرَعْتُ بَابَ رَحْمَتِكَ بِيَدِ رَجَائِي",
+    "englishText": "My God, I have knocked upon the door of Your mercy with the hand of my hope,"
+  },
+  {
+    "id": 37,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَهَرَبْتُ إِلَيْكَ لاَجِئاً مِنْ فَرْطِ أَهْوَائِي",
+    "englishText": "fled to You seeking refuge from my excessive caprice,"
+  },
+  {
+    "id": 38,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَلَّقْتُ بِأَطْرَافِ حِبَاِلكَ أَنَامِلَ وَلائِي",
+    "englishText": "and fixed the fingers of my love to the ends of Your cords."
+  },
+  {
+    "id": 39,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَٱصْفَحِ اللَّهُمَّ عَمَّا كُنتُ أَجْرَمْتُهُ مِنْ زَلَلِي وَخَطَائِي",
+    "englishText": "So pardon, O Allah, the slips and errors I have committed,"
+  },
+  {
+    "id": 40,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَقِلْنِي مِنْ صَرْعَةِ رِدَائِي",
+    "englishText": "and release me from the foot-tangling of my robe,"
+  },
+  {
+    "id": 41,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَإِنَّكَ سَيِّدِي وَمَوْلايَ وَمُعْتَمَدِي وَرَجَائِي",
+    "englishText": "for You are my Master, my Protector, my Support and my Hope,"
+  },
+  {
+    "id": 42,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَنتَ غَايَةُ مَطْلُوبِي وَمُنَايَ فِي مُنْقَلَبِي وَمَثْوايَ",
+    "englishText": "and You are the object of my search and my desire in my ultimate end and stable abode."
+  },
+  {
+    "id": 43,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِلٰهِي كَيْفَ تَطْرُدُ مِسْكِيناً ٱلْتَجَأَ إِلَيْكَ مِنَ ٱلذُّنُوبِ هَارِباً",
+    "englishText": "My God, how could You drive away a poor beggar who seeks refuge in You from sins, fleeing?"
+  },
+  {
+    "id": 44,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَم كَيْفَ تُخَيِّبُ مُستَرْشِداً قَصَدَ إِلَىٰ جَنَابِكَ سَاعِياً",
+    "englishText": "How could You disappoint one seeking guidance who repairs to Your threshold, running?"
+  },
+  {
+    "id": 45,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَمْ كَيْفَ تَرُدُّ ظَمْآناً وَرَدَ إِلَىٰ حِيَاضِكَ شَارِباً",
+    "englishText": "How could You reject a thirsty man who comes to Your pools to drink?"
+  },
+  {
+    "id": 46,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "كَلاَّ وَحِيَاضُكَ مُتْرَعَةٌ فِي ضَنْكِ ٱلْمُحُولِ",
+    "englishText": "Never! For Your pools are full in the hardship of drought,"
+  },
+  {
+    "id": 47,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبَابُكَ مَفْتُوحٌ لِلطَّلَبِ وَٱلْوُغُولِ",
+    "englishText": "Your door is open for seeking and penetration,"
+  },
+  {
+    "id": 48,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَنتَ غَايَةُ ٱلْمَسْؤُولِ وَنِهَايَةُ ٱلْمَأْمُولِ",
+    "englishText": "and You are the goal of requests and the object of hopes."
+  },
+  {
+    "id": 49,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِلٰهِي هٰذِهِ أَزِمَّةُ نَفْسِي عَقَلْتُهَا بِعِقَاِل مَشِيئَتِكَ",
+    "englishText": "My God, these are the reins of my soul I have bounded with the ties of Your will."
+  },
+  {
+    "id": 50,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَهٰذِهِ أَعْبَاءُ ذُنُوبِي دَرَاْتُهَا بِعَفْوِكَ وَرَحْمَتِكَ",
+    "englishText": "These are the burdens of my sins I have averted with Your pardon and mercy."
+  },
+  {
+    "id": 51,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَهٰذِهِ أَهْوَائِيَ ٱلْمُضِلَّةُ وَكَلْتُهَا إِلَىٰ جَنَابِ لُطفِكَ وَرَاْفَتِكَ",
+    "englishText": "These are my misleading caprices I have referred to the threshold of Your gentleness and kindliness."
+  },
+  {
+    "id": 52,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَٱجْعَلِ ٱللَّهُمَّ صَبَاحِي هٰذَا نَازِلاً عَلَيَّ بِضِيَاءِ ٱلْهُدَىٰ",
+    "englishText": "So, make this morning of mine, O Allah, descend upon me with the radiance of guidance"
+  },
+  {
+    "id": 53,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِٱلسَّلاَمَةِ فِي ٱلدِّينِ وَٱلدُّنْيَا",
+    "englishText": "and safety in religion and this world!"
+  },
+  {
+    "id": 54,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمَسَائِيَ جُنَّةً مِنْ كَيْدِ ٱلْعِدَىٰ",
+    "englishText": "And [make] my evening a shield against the deception of enemies"
+  },
+  {
+    "id": 55,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَوِقَايَةً مِنْ مُرْدِيَاتِ ٱلْهَوَىٰ",
+    "englishText": "and a protection against the destructive blows of caprice!"
+  },
+  {
+    "id": 56,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّكَ قَادِرٌ عَلَىٰ مَا تَشَاءُ",
+    "englishText": "Verily, You have power to do what You will!"
+  },
+  {
+    "id": 57,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تُؤْتِي ٱلْمُلْكَ مَنْ تَشَاءُ",
+    "englishText": "You give the kingdom to whom You will,"
+  },
+  {
+    "id": 58,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَنْزِعُ ٱلْمُلْكَ مِمَّن تَشَاءُ",
+    "englishText": "seize the kingdom from whom You will,"
+  },
+  {
+    "id": 59,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتُعِزُّ مَنْ تَشَاءُ",
+    "englishText": "exalt whom You will,"
+  },
+  {
+    "id": 60,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتُذِلُّ مَنْ تَشَاءُ",
+    "englishText": "and abase whom You will."
+  },
+  {
+    "id": 61,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِيَدِكَ ٱلْخَيرُ",
+    "englishText": "In Your hand is the good"
+  },
+  {
+    "id": 62,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+    "englishText": "and You are powerful over all things."
+  },
+  {
+    "id": 63,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تُولِجُ ٱللَّيْلَ فِي ٱلنَّهَارِ",
+    "englishText": "You make the night to enter into the day,"
+  },
+  {
+    "id": 64,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتُولِجُ ٱلنَّهَارَ فِي ٱللَّيْلِ",
+    "englishText": "make the day to enter into the night,"
+  },
+  {
+    "id": 65,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتُخْرِجُ ٱلْحَيَّ مِنَ ٱلمَيِّتِ",
+    "englishText": "bring forth the living from the dead,"
+  },
+  {
+    "id": 66,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتُخْرِجُ ٱلْمَيِّتَ مِنَ ٱلحَيِّ",
+    "englishText": "bring forth the dead from the living,"
+  },
+  {
+    "id": 67,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَرْزُقُ مَنْ تَشَاءُ بِغَيْرِ حِسَابٍ",
+    "englishText": "and provide whomsoever You will without measure!"
+  },
+  {
+    "id": 68,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "لاَ إِلٰهَ إِلاَّ أَنتَ",
+    "englishText": "There is no god but You!"
+  },
+  {
+    "id": 69,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ ٱللَّهُمَّ وَبِحَمْدِكَ",
+    "englishText": "Glory be to You, O Allah, and Yours is the praise!"
+  },
+  {
+    "id": 70,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مَنْ ذَا يَعْرِفُ قَدْرَكَ فَلاَ يَخَافُكَ",
+    "englishText": "Who knows Your measure and yet does not fear You?"
+  },
+  {
+    "id": 71,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمَن ذَا يَعْلَمُ مَا أَنتَ فَلاَ يَهَابُكَ",
+    "englishText": "Who knows what You are and yet does not stand in awe of You?"
+  },
+  {
+    "id": 72,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَلَّفْتَ بِقُدْرَتِكَ ٱلْفِرَقَ",
+    "englishText": "Through Your power, You have joined disparate things,"
+  },
+  {
+    "id": 73,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَفَلَقْتَ بِلُطْفِكَ ٱلْفَلَقَ",
+    "englishText": "through Your gentleness, You have cleaved apart the daybreak,"
+  },
+  {
+    "id": 74,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَنَرْتَ بِكَرَمِكَ ديَاجِيَ ٱلْغَسَقِ",
+    "englishText": "through Your generosity, You have illumined the dark shrouds of night,"
+  },
+  {
+    "id": 75,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَنْهَرْتَ ٱلْمِيَاهَ مِنَ ٱلصُّمِّ ٱلصَّيَاخِيدِ عَذْباً وَأُجَاجاً",
+    "englishText": "made waters, sweet and salt, flow forth from hard shining stones,"
+  },
+  {
+    "id": 76,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَنزَلْتَ مِنَ ٱلمُعْصِرَاتِ مَاءً ثَجَّاجاً",
+    "englishText": "sent dawn out of rain-clouds water cascading,"
+  },
+  {
+    "id": 77,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَعَلْتَ ٱلشَّمْسَ وَٱلْقَمَرَ لِلْبَرِيَّةِ سِرَاجاً وَهَّاجاً",
+    "englishText": "and appointed the sun and the moon a blazing lamp for the creatures"
+  },
+  {
+    "id": 78,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مِنْ غَيْرِ أَن تُمَارِسَ فِيمَا ٱبْتَدَأْتَ بِهِ لُغُوباً وَلاَ عِلاَجاً",
+    "englishText": "without experiencing in that which You originated either weariness or effort."
+  },
+  {
+    "id": 79,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَيَا مَنْ تَوَحَّدَ بِٱلْعِزِّ وَٱلْبَقَاءِ",
+    "englishText": "So, O He Who is alone in might and subsistence"
+  },
+  {
+    "id": 80,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَهَرَ عِبَادَهُ بِٱلْمَوْتِ وَٱلْفَنَاءِ",
+    "englishText": "and dominates His slaves with death and annihilation,"
+  },
+  {
+    "id": 81,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "صَلِّ عَلَىٰ مُحَمَّدٍ وَآلِهِ ٱلأَتْقِيَاءِ",
+    "englishText": "(please) bless Muhammad and his household, the god-fearing,"
+  },
+  {
+    "id": 82,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱسْمَعْ نِدَائِي وَٱسْتَجِبْ دُعَائِي",
+    "englishText": "answer my supplication, hear my call,"
+  },
+  {
+    "id": 83,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَحَقِّقْ بِفَضْلِكَ أَمَلِي وَرَجَائِي",
+    "englishText": "and actualize through Your favor my hope and desire."
+  },
+  {
+    "id": 84,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا خَيْرَ مَنْ دُعِيَ لِكَشْفِ ٱلضُّرِّ",
+    "englishText": "O Best of those who are called to remove affliction"
+  },
+  {
+    "id": 85,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْمَأْمُولِ فِي كُلِّ عُسْرٍ وَيُسْرٍ",
+    "englishText": "and object of hope in difficulty and ease!"
+  },
+  {
+    "id": 86,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِكَ أَنزَلْتُ حَاجَتِي فَلاَ تَرُدَّنِي مِنْ سَنِيِّ مَوَاهِبِكَ خَائِباً",
+    "englishText": "I have stated my need to You; so, do not reject me despairing of Your exalted gifts."
+  },
+  {
+    "id": 87,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا كَرِيمُ يَا كَرِيمُ يَا كَرِيمُ",
+    "englishText": "O All-generous! O All-generous! O All-generous!"
+  },
+  {
+    "id": 88,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِرَحْمَتِكَ يَا أَرْحَمَ ٱلرَّاحِمِينَ",
+    "englishText": "By Your mercy, O Most Merciful of the merciful!"
+  },
+  {
+    "id": 89,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَصَلَّىٰ ٱللَّهُ عَلَىٰ خَيْرِ خَلْقِهِ",
+    "englishText": "May Allah bless the best of His creatures,"
+  },
+  {
+    "id": 90,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مُحَمَّدٍ وَآلِهِ أَجْمَعِينَ",
+    "englishText": "Muhammad, and his entire Household!"
+  },
+  {
+    "id": 91,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اسجد وقل (في السجدة)",
+    "englishText": "Prostrate and say (in Sajdah)"
+  },
+  {
+    "id": 92,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِلٰهِي قَلْبِي مَحْجُوبٌ",
+    "englishText": "My God, my heart is veiled,"
+  },
+  {
+    "id": 93,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَنَفْسِي مَعْيُوبٌ",
+    "englishText": "my soul is deficient,"
+  },
+  {
+    "id": 94,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَقْلِي مَغْلُوبٌ",
+    "englishText": "my intelligence is defeated,"
+  },
+  {
+    "id": 95,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَهَوَائِي غَاِلبٌ",
+    "englishText": "my caprice is triumphant,"
+  },
+  {
+    "id": 96,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَطَاعَتِي قَلِيلٌ",
+    "englishText": "my obedience is little,"
+  },
+  {
+    "id": 97,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمَعْصِيَتِي كَثِيرٌ",
+    "englishText": "my disobedience is much,"
+  },
+  {
+    "id": 98,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلِسَانِي مُقِرٌّ بِٱلذُّنُوبِ",
+    "englishText": "and my tongue confesses of sinning;"
+  },
+  {
+    "id": 99,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَكَيْفَ حِيلَتِي",
+    "englishText": "so, what am I to do?"
+  },
+  {
+    "id": 100,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَتَّارَ ٱلْعُيُوبِ",
+    "englishText": "O He Who covers defects!"
+  },
+  {
+    "id": 101,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيَا عَلاَّمَ ٱلْغُيُوبِ",
+    "englishText": "O He Who knows the unseen!"
+  },
+  {
+    "id": 102,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيَا كَاشِفَ ٱلْكُرُوبِ",
+    "englishText": "O He Who removes troubles!"
+  },
+  {
+    "id": 103,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِغْفِر ذُنُوبِي كُلَّهَا",
+    "englishText": "Forgive my sins, all of them,"
+  },
+  {
+    "id": 104,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِحُرْمَةِ مُحَمَّدٍ وَآلِ مُحَمَّدٍ",
+    "englishText": "in the name of the sacredness of Muhammad and the household of Muhammad!"
+  },
+  {
+    "id": 105,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا غَفَّارُ يَا غَفَّارُ يَا غَفَّارُ",
+    "englishText": "O All-forgiver! O All-forgiver! O All-forgiver!"
+  },
+  {
+    "id": 106,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِرَحْمَتِكَ يَا ارْحَمَ ٱلرَّاحِمِينَ",
+    "englishText": "By Your mercy, O Most Merciful of the merciful!"
+  }
+]
