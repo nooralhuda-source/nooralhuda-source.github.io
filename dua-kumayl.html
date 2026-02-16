@@ -962,20 +962,8 @@ function getChapterFromHash() {
   if (!hash) return null;
   return isNaN(hash) ? null : String(hash);
 }
-function getChapterTitle(chapterId) {
-  const list = PAGES[chapterId];
-  if (!list || !list.length) return `Chapter ${chapterId}`;
 
-  const h = list[0];
 
-  return (
-    h.chapter_en ||
-    h.chapter ||
-    h.chapterTitle ||
-    h.categoryName ||
-    `Chapter ${chapterId}`
-  );
-}
 
 // Show/hide hadiths for a specific chapter
 function showChapter(chapterId) {
@@ -986,14 +974,7 @@ function showChapter(chapterId) {
     card.style.display = (ch === String(chapterId)) ? "block" : "none";
   });
 
-  const chapterTitle = getChapterTitle(chapterId);
 
-  // 🔹 On-page title
-  const titleEn = document.querySelector('.surah-title-ar');
-  if (titleEn) titleEn.textContent = chapterTitle;
-
-  // 🔹 Browser tab title
-  document.title = `${chapterTitle} | Kitab al-Tawhid`;
 
   updatePageNavigation();
 }
