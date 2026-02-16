@@ -1,0 +1,1220 @@
+[
+  {
+    "id": 1,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اللَّهُمَّ إِنِّي اسْالُكَ بِٱسْمِكَ ٱلْعَظِيمِ ٱلاعْظَمِ",
+    "englishText": "O Allah, I beseech You by Your Name, the most great, most majestic,"
+  },
+  {
+    "id": 2,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱلاعَزِّ ٱلاجَلِّ ٱلاكْرَمِ",
+    "englishText": "most magnificent, and most noble;"
+  },
+  {
+    "id": 3,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱلَّذِي إِذَا دُعِيتَ بِهِ عَلَىٰ مَغَاِلقِ ابْوَابِ ٱلسَّمَاء لِلْفَتْحِ بِٱلرَّحْمَةِ ٱنْفَتَحَتْ",
+    "englishText": "if You are besought thereby to open the closed doors of the sky, they will be opened with Your mercy,"
+  },
+  {
+    "id": 4,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِذَا دُعِيتَ بِهِ عَلَىٰ مَضَائقِ ابْوَابِ ٱلسَّمَاء مَضَائقِ ابْوَابِ ٱلارْضِ لِلْفَرَجِ ٱنْفَرَجَتْ",
+    "englishText": "if You are besought thereby to remove the narrow doors of the heavens for relief, they will be opened wide,"
+  },
+  {
+    "id": 5,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِذَا دُعِيتَ بِهِ عَلىٰ ٱلْعُسْرِ لِلْيُسْرِ تَيَسَّرَتْ",
+    "englishText": "if You are besought thereby to make easy the difficulty, it will be easy,"
+  },
+  {
+    "id": 6,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِذَا دُعِيتَ بِهِ عَلىٰ ٱلامْوَاتِ لِلنُّشُورِ ٱنتَشَرَتْ",
+    "englishText": "if You are besought thereby to restore the dead to life, they will rise from their graves,"
+  },
+  {
+    "id": 7,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِذَا دُعِيتَ بِهِ عَلَىٰ كَشْفِ ٱلْبَاسَاء وَٱلضَّرَّاء ٱنْكَشَفَتْ",
+    "englishText": "if You are besought thereby to remove misery and adversity, they will be removed."
+  },
+  {
+    "id": 8,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِجَلاَلِ وَجْهِكَ ٱلْكَرِيمِ",
+    "englishText": "I also beseech You in the name of the Majesty of Your Noble Face;"
+  },
+  {
+    "id": 9,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اكْرَمِ ٱلْوُجُوهِ وَاعَزِّ ٱلْوُجُوهِ",
+    "englishText": "the Noblest and most Honored of all faces"
+  },
+  {
+    "id": 10,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱلَّذِي عَنَتْ لَهُ ٱلْوُجُوهُ",
+    "englishText": "before Whom all faces bow down in submission,"
+  },
+  {
+    "id": 11,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخَضَعَتْ لَهُ ٱلرِّقَابُ",
+    "englishText": "all necks bend down in reverence,"
+  },
+  {
+    "id": 12,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخَشَعَتْ لَهُ ٱلاصْوَاتُ",
+    "englishText": "all sounds yield,"
+  },
+  {
+    "id": 13,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَوَجِلَتْ لَهُ ٱلْقُلُوبُ مِنْ مَخَافَتِكَ",
+    "englishText": "and all hearts tremble out of fear of You."
+  },
+  {
+    "id": 14,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِقُوَّتِكَ ٱلَّتِي بِهَا",
+    "englishText": "I also beseech You by Your Might"
+  },
+  {
+    "id": 15,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تُمْسِكُ ٱلسَّمَاء ان تَقَعَ عَلىٰ ٱلارْضِ إِلاَّ بِإِذْنِكَ",
+    "englishText": "by which You prevent the sky from falling on the earth except with Your permission,"
+  },
+  {
+    "id": 16,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتُمْسِكُ ٱلسَّمَاوَاتِ وَٱلارْضَ ان تَزُولاَ",
+    "englishText": "and control the heavens and the earth so closely that they cannot move away from their positions,"
+  },
+  {
+    "id": 17,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِمَشِيئَتِكَ ٱلَّتِي دَان لَهَا ٱلْعَالَمُونَ",
+    "englishText": "by Your Will, which the whole world obeys,"
+  },
+  {
+    "id": 18,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِكَلِمَتِكَ ٱلَّتِي خَلَقْتَ بِهَا ٱلسَّمَاوَاتِ وَٱلارْضَ",
+    "englishText": "by Your Word by which You have created the heavens and the earth,"
+  },
+  {
+    "id": 19,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِحِكْمَتِكَ ٱلَّتِي صَنَعْتَ بِهَا ٱلْعَجَائبَ",
+    "englishText": "by Your Wisdom with which You have created the wonderful things,"
+  },
+  {
+    "id": 20,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخَلَقْتَ بِهَا ٱلظُّلْمَةَ وَجَعَلْتَهَا لَيْلاً",
+    "englishText": "created darkness, made it night,"
+  },
+  {
+    "id": 21,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَعَلْتَ ٱللَّيْلَ سَكَناً",
+    "englishText": "made night the time of quiet and rest,"
+  },
+  {
+    "id": 22,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخَلَقْتَ بِهَا ٱلنُّورَ وَجَعَلْتَهُ نَهَاراً",
+    "englishText": "created light, made it daylight,"
+  },
+  {
+    "id": 23,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَعَلْتَ ٱلنَّهَارَ نُشُوراً مُبْصِراً",
+    "englishText": "made day the time of movement and observation,"
+  },
+  {
+    "id": 24,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخَلَقْتَ بِهَا ٱلشَّمْسَ وَجَعَلْتَ ٱلشَّمْسَ ضِيَاءاً",
+    "englishText": "created the sun, made the sun light,"
+  },
+  {
+    "id": 25,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخَلَقْتَ بِهَا ٱلقَمَرَ وَجَعَلْتَ ٱلقَمَرَ نُوراً",
+    "englishText": "created the moon, made the moon of light,"
+  },
+  {
+    "id": 26,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخَلَقْتَ بِهَا ٱلْكَوَاكِبَ",
+    "englishText": "created heavenly bodies,"
+  },
+  {
+    "id": 27,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَعَلْتَهَا نُجُوماً وبُرُوجاً وَمَصَابِيحَ وَزِينَةً وَرُجُوماً",
+    "englishText": "made them fixed stars, planets, lamps for guidance at night, means of decoration, and missiles,"
+  },
+  {
+    "id": 28,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَعَلْتَ لَهَا مَشَارِقَ وَمَغَارِبَ",
+    "englishText": "created for them east and west,"
+  },
+  {
+    "id": 29,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَعَلْتَ لَهَا مَطَاِلعَ وَمَجَارِيَ",
+    "englishText": "created for them places of ascendancy and orbits,"
+  },
+  {
+    "id": 30,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَعَلْتَ لَهَا فَلَكاً وَمَسَابِحَ",
+    "englishText": "created for them a firmament and spheres,"
+  },
+  {
+    "id": 31,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدَّرْتَهَا فِي ٱلسَّمَاء مَنَازِلَ فَاحْسَنتَ تَقْدِيرَهَا",
+    "englishText": "fixed for them stages in the heaven with excellent fixing,"
+  },
+  {
+    "id": 32,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَصَوَّرْتَهَا فَاحْسَنتَ تَصْوِيرَهَا",
+    "englishText": "shaped the stars with excellent shaping,"
+  },
+  {
+    "id": 33,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاحْصَيْتَهَا بِاسْمَائكَ إِحْصَاءاً",
+    "englishText": "measured them through Your Names with exact measurement,"
+  },
+  {
+    "id": 34,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَدَبَّرْتَهَا بِحِكْمَتِكَ تَدْبِيراً وَاحْسَنتَ تَدْبِيرَهَا",
+    "englishText": "designed through Your wisdom a system for them with excellent design,"
+  },
+  {
+    "id": 35,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَسَخَّرْتَهَا بِسُلْطَانِ ٱللَّيْلِ وَسُلْطَانِ ٱلنَّهَارِ",
+    "englishText": "controlled the heavenly bodies through the influence of night and the influence of day,"
+  },
+  {
+    "id": 36,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلسَّاعَاتِ وَعَدَدِ ٱلسِّنِينَ وَٱلْحِسَابِ",
+    "englishText": "and through hours, making them a means for the reckoning of years and counting,"
+  },
+  {
+    "id": 37,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَعَلْتَ رُؤْيَتَهَا لِجَمِيعِ النَّاسِ مَرْأىً وَاحِداً",
+    "englishText": "and made all people see them alike."
+  },
+  {
+    "id": 38,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاسْالُكَ ٱللَّهُمَّ بِمَجْدِكَ",
+    "englishText": "I beseech You, O Allah, in the name of Your glory"
+  },
+  {
+    "id": 39,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱلَّذِي كَلَّمْتَ بِهِ عَبْدَكَ وَرَسُولَكَ مُوسَىٰ بْنَ عِمْرَانَ عَلَيْهِ ٱلسَّلاَمُ فِي ٱلْمُقَدَّسِينَ",
+    "englishText": "with which You addressed Your servant and Messenger, Moses the son of `Imran (`a) while he was in the company of angels;"
+  },
+  {
+    "id": 40,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَوْقَ إِحْسَاسِ ٱلكَرُوبِيِّينَ",
+    "englishText": "an address even the favorite cherubim could not ever hear,"
+  },
+  {
+    "id": 41,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَوْقَ غَمَائمِ ٱلنُّورِ",
+    "englishText": "above the clouds of light,"
+  },
+  {
+    "id": 42,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَوْقَ تَابُوتِ ٱلشَّهَادَةِ",
+    "englishText": "above the box of evidence,"
+  },
+  {
+    "id": 43,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فِي عَمُودِ ٱلنَّارِ وَفِي طُورِ سَيْنَاء",
+    "englishText": "within the pillar of fire on Mount Sinai"
+  },
+  {
+    "id": 44,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَفِي جَبَلِ حُورِيثَ",
+    "englishText": "and on Mount Hurith"
+  },
+  {
+    "id": 45,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فِي ٱلْوَادِي ٱلْمُقَدَّسِ",
+    "englishText": "in the Holy Vale"
+  },
+  {
+    "id": 46,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فِي ٱلْبُقْعَةِ ٱلْمُبَارَكَةِ",
+    "englishText": "in the sacred tract of land"
+  },
+  {
+    "id": 47,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مِن جَانِبِ ٱلطُّورِ ٱلايْمَنِ مِنَ ٱلشَّجَرَةِ",
+    "englishText": "to the right of Taurus Mountain through a tree,"
+  },
+  {
+    "id": 48,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَفِي ارْضِ مِصْرَ بِتِسْعِ آيَاتٍ بَيِّنَاتٍ",
+    "englishText": "[and again addressed him] on the land of Egypt, after showing nine clear signs,"
+  },
+  {
+    "id": 49,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيَوْمَ فَرَقْتَ لِبَنِي إِسْرَائيلَ ٱلْبَحْرَ",
+    "englishText": "and on the day You split the sea for the children of Israel,"
+  },
+  {
+    "id": 50,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَفِي ٱلْمُنْبَجِسَاتِ ٱلَّتِي صَنَعْتَ بِهَا ٱلْعَجَائبَ فِي بَحْرِ سُوفٍ",
+    "englishText": "and caused springs to flow from a stone, thereby displaying wonders of Your might in a deep sea,"
+  },
+  {
+    "id": 51,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَقَدْتَ مَاء ٱلْبَحْرِ فِي قَلْبِ ٱلْغَمْرِ كَٱلْحِجَارَةِ",
+    "englishText": "on the day when You solidified the water of the sea in the midst of the storm,"
+  },
+  {
+    "id": 52,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَاوَزْتَ بِبَنِي إِسْرَائيلَ ٱلْبَحْرَ",
+    "englishText": "caused the children of Israel to pass by the sea,"
+  },
+  {
+    "id": 53,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَمَّتْ كَلِمَتُكَ ٱلْحُسْنَىٰ عَلَيْهِم بِمَا صَبرُوٱ",
+    "englishText": "and fulfilled Your excellent promises made to them because of their calm endurance,"
+  },
+  {
+    "id": 54,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاوْرَثْتَهُم مَشَارِقَ ٱلارْضِ وَمَغَارِبَهَا ٱلَّتِي بَارَكْتَ فِيهَا لِلْعَالَمِينَ",
+    "englishText": "made them the master of the East and the West in the earth wherein there are blessings for all the worlds,"
+  },
+  {
+    "id": 55,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاغْرَقْتَ فِرْعَوْنَ وَجُنُودَهُ وَمَرَاكِبَهُ فِي ٱليَمِّ",
+    "englishText": "drowned Pharaoh, his armies, and boats in the water."
+  },
+  {
+    "id": 56,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِٱسْمِكَ ٱلْعَظِيمِ ٱلاعْظَمِ",
+    "englishText": "[I beseech You] by Your Name, the great, the Most Great,"
+  },
+  {
+    "id": 57,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱلاعَزِّ ٱلاجَلِّ ٱلاكْرَمِ",
+    "englishText": "the Most Honorable, Most Majestic, and Most Noble,"
+  },
+  {
+    "id": 58,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِمَجْدِكَ ٱلَّذِي تَجَلَّيْتَ بِهِ لِمُوسَىٰ كَلِيمِكَ عَلَيْهِ ٱلسَّلاَمُ فِي طُورِ سَيْنَاء",
+    "englishText": "and by Your Glory with which You revealed Yourself as light to Moses, Your addressee, peace be on him, on Mount Sinai,"
+  },
+  {
+    "id": 59,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِبْرَاهِيمَ عَلَيْهِ ٱلسَّلاَمُ خَلِيلِكَ مِنْ قَبْلُ فِي مَسْجِدِ ٱلْخِيفِ",
+    "englishText": "and earlier radiated the light for Abraham, Your sincere friend peace be on him, in the Mosque of al-Khif,"
+  },
+  {
+    "id": 60,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِسْحَاقَ صَفِيِّكَ عَلَيْهِ ٱلسَّلاَمُ فِي بِئْرِ شِيعٍ",
+    "englishText": "and for Isaac, Your chosen Prophet, peace be on him, in Shi` Well,"
+  },
+  {
+    "id": 61,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلِيَعْقُوبَ نَبِيِّكَ عَلَيْهِ ٱلسَّلاَمُ فِي بَيْتِ إِيلٍ",
+    "englishText": "and for Your Prophet Jacob, peace be on him, in Bayt «l,"
+  },
+  {
+    "id": 62,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاوْفَيْتَ إِبْرِاهِيمَ عَلَيْهِ ٱلسَّلاَمُ بِمِيثَاقِكَ",
+    "englishText": "and You fulfilled Your promise to Abraham, peace be on him,"
+  },
+  {
+    "id": 63,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِسْحَاقَ بِحِلْفِكَ",
+    "englishText": "Your oath in favor of Isaac,"
+  },
+  {
+    "id": 64,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلِيَعْقُوبَ بِشَهَادَتِكَ",
+    "englishText": "Your witnessing favoring Jacob,"
+  },
+  {
+    "id": 65,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلِلْمُؤْمِنِينَ بِوَعْدِكَ",
+    "englishText": "the fulfillments of Your promise to the faithful believers,"
+  },
+  {
+    "id": 66,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلِلدَّاعِينَ بِاسْمَائكَ فَاجَبْتَ",
+    "englishText": "and Your Names with which You accepted the prayers of supplicants,"
+  },
+  {
+    "id": 67,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِمَجْدِكَ ٱلَّذِي ظَهَرَ لِمُوسَىٰ بْنِ عِمْرَانَ عَلَيْهِ ٱلسَّلاَمُ عَلَىٰ قُبَّةِ ٱلرُّمَّانِ",
+    "englishText": "and by Your Glory, which appeared to Moses, the son of `Imran, in al-Rumman Dome,"
+  },
+  {
+    "id": 68,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِآيَاتِكَ ٱلَّتِي وَقَعَتْ عَلَىٰ ارْضِ مِصْرَ",
+    "englishText": "and by Your Signs, which appeared in the land of Egypt"
+  },
+  {
+    "id": 69,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِمَجْدِ ٱلْعِزَّةِ وَٱلْغَلَبَةِ",
+    "englishText": "with great might and victory,"
+  },
+  {
+    "id": 70,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِآيَاتٍ عَزِيزَةٍ",
+    "englishText": "with powerful signs,"
+  },
+  {
+    "id": 71,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِسُلْطَانِ ٱلْقُوَّةِ",
+    "englishText": "with the display of full command,"
+  },
+  {
+    "id": 72,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِعِزَّةِ ٱلْقُدْرَةِ",
+    "englishText": "great power,"
+  },
+  {
+    "id": 73,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِشَاْنِ ٱلْكَلِمَةِ ٱلتَّامَّةِ",
+    "englishText": "the affair of the perfect word,"
+  },
+  {
+    "id": 74,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِكَلِمَاتِكَ ٱلَّتِي تَفَضَّلْتَ بِهَا عَلَىٰ اهْلِ ٱلسَّمَاوَاتِ وَٱلارْضِ",
+    "englishText": "and by Your words with which You do a favor to the inhabitants of the skies and the earth"
+  },
+  {
+    "id": 75,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاهْلِ ٱلدُّنْيَا وَاهْلِ ٱلآخِرَةِ",
+    "englishText": "and the people of this world and the Next World,"
+  },
+  {
+    "id": 76,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِرَحْمَتِكَ ٱلَّتِي مَنَنتَ بِهَا عَلَىٰ جَمِيعِ خَلْقِكَ",
+    "englishText": "and by Your Mercy with which You bestow graces upon all Your creatures,"
+  },
+  {
+    "id": 77,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِٱسْتِطَاعَتِكَ الَّتِي اقَمْتَ بِهَا عَلىٰ ٱلْعَالَمِينَ",
+    "englishText": "and by Your Power with which You dominate the worlds,"
+  },
+  {
+    "id": 78,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِنُورِكَ ٱلَّذِي قَدْ خَرَّ مِنْ فَزَعِهِ طُورُ سَيْنَاء",
+    "englishText": "and by Your Light through fear of which Mount Sinai collapsed,"
+  },
+  {
+    "id": 79,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِعِلْمِكَ وَجَلاَلِكَ وَكِبْرِيَائكَ وَعِزَّتِكَ",
+    "englishText": "and by Your Knowledge, Majesty, Greatness, Honor,"
+  },
+  {
+    "id": 80,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَبرُوتِكَ ٱلَّتِي لَمْ تَسْتَقِلَّهَا ٱلارَضُ",
+    "englishText": "and Might, which the earth could not bear,"
+  },
+  {
+    "id": 81,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱنْخَفَضَتْ لَهَا ٱلسَّمَاوَاتُ",
+    "englishText": "the heavens bent down,"
+  },
+  {
+    "id": 82,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱنْزَجَرَ لَهَا ٱلْعُمْقُ ٱلاكْبرُ",
+    "englishText": "the great depths restrained themselves,"
+  },
+  {
+    "id": 83,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَرَكَدَتْ لَهَا ٱلْبِحَارُ وَٱلانْهَارُ",
+    "englishText": "oceans and rivers became stable,"
+  },
+  {
+    "id": 84,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخَضَعَتْ لَهَا ٱلْجِبَالُ",
+    "englishText": "mountains yielded,"
+  },
+  {
+    "id": 85,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَسَكَنَتْ لَهَا ٱلارْضُ بِمَنَاكِبِهَا",
+    "englishText": "the earth became firm on its shoulders,"
+  },
+  {
+    "id": 86,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱسْتَسْلَمَتْ لَهَا ٱلْخَلائقُ كُلُّهَا",
+    "englishText": "all creatures surrendered,"
+  },
+  {
+    "id": 87,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخَفَقَتْ لَهَا ٱلرِّيَاحُ فِي جَرَيَانِهَا",
+    "englishText": "the winds breathed in their flow,"
+  },
+  {
+    "id": 88,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخَمَدَتْ لَهَا ٱلنِّيـرَانُ فِي اوْطَانِهَا",
+    "englishText": "and the flaming fires were extinguished in their places,"
+  },
+  {
+    "id": 89,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِسُلْطَانِكَ ٱلَّذِي عُرِفَتْ لَكَ بِهِ ٱلْغَلَبَةُ دَهْرَ ٱلدُّهُورِ",
+    "englishText": "and by Your authority through which You are acknowledged to have All-powerfulness all the times"
+  },
+  {
+    "id": 90,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَحُمِدْتَ بِهِ فِي ٱلسَّمَاوَاتِ وَٱلارَضِينَ",
+    "englishText": "and for which You are praised in the heavens and the earth,"
+  },
+  {
+    "id": 91,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِكَلِمَتِكَ كَلِمَةِ ٱلصِّدْقِ ٱلَّتِي سَبَقَتْ لابِينَا آدَمَ عَلَيْهِ ٱلسَّلاَمُ وَذُرِّيَّتِهِ بٱلرَّحْمَةِ",
+    "englishText": "and by Your word, the Word of Truth, which had became mercy for our father Adam and his offspring,"
+  },
+  {
+    "id": 92,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاسْالُكَ بِكَلِمَتِكَ ٱلَّتِي غَلَبَتْ كُلَّ شَيْءٍ",
+    "englishText": "and by Your word that overcame everything,"
+  },
+  {
+    "id": 93,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِنُورِ وَجْهِكَ ٱلَّذِي تَجَلَّيْتَ بِهِ لِلْجَبَلِ",
+    "englishText": "and by the light of Your Face, which when You showed to the Mount,"
+  },
+  {
+    "id": 94,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَجَعَلْتَهُ دَكّاً وَخَرَّ مُوسَىٰ صَعِقاً",
+    "englishText": "You caused it to crush into pieces, whereby Moses fainted and fell down,"
+  },
+  {
+    "id": 95,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِمَجْدِكَ ٱلَّذِي ظَهَرَ عَلَىٰ طُورِ سَينْاءَ",
+    "englishText": "and by Your Glory, which appeared on Mount Sinai,"
+  },
+  {
+    "id": 96,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَكَلَّمْتَ بِهِ عَبْدَكَ وَرَسُولَكَ مُوسَىٰ بْنَ عِمْرَانَ",
+    "englishText": "and through which You addressed Your servant and Messenger, Moses, the son of `Imran,"
+  },
+  {
+    "id": 97,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِطَلْعَتِكَ فِي سَاعِيرَ",
+    "englishText": "and by Your appearance in Sa`ir,"
+  },
+  {
+    "id": 98,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَظُهُورِكَ فِي جَبَلِ فَارَانَ بِرَبَوَاتِ ٱلْمُقَدَّسِينَ",
+    "englishText": "and by Your appearance on Mount Faran on the heights of the holy ones,"
+  },
+  {
+    "id": 99,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجُنُودِ ٱلْمَلائكَةِ ٱلصَّافِّينَ",
+    "englishText": "When the troops of angels were in rows,"
+  },
+  {
+    "id": 100,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَخُشُوعِ ٱلْمَلائكَةِ ٱلْمُسَبِّحِينَ",
+    "englishText": "and with the submissiveness of the angels glorifying You,"
+  },
+  {
+    "id": 101,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِبَرَكَاتِكَ ٱلَّتِي بَارَكْتَ فِيهَا عَلَىٰ إِبْرَاهِيمَ خَلِيلِكَ عَلَيْهِ ٱلسَّلاَمُ",
+    "englishText": "and by Your blessings by which You honored Abraham, Your sincere friend (`a)"
+  },
+  {
+    "id": 102,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فِي امَّةِ مُحَمَّدٍ صَلَّىٰ ٱللَّهُ عَلَيْهِ وَآلِهِ",
+    "englishText": "among the people of Muhammad, Your blessings be upon him and his household,"
+  },
+  {
+    "id": 103,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبَارَكْتَ لإِسْحَاقَ صَفِيِّكَ",
+    "englishText": "and You blessed Isaac, Your chosen prophet,"
+  },
+  {
+    "id": 104,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فِي امَّةِ عِيسَىٰ عَلَيْهِمَا ٱلسَّلاَمُ",
+    "englishText": "among the followers of Jesus, peace be on them both,"
+  },
+  {
+    "id": 105,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبَارَكْتَ لِيَعْقُوبَ إِسْرَائيلِكَ",
+    "englishText": "and You blessed Jacob, Your favored servant,"
+  },
+  {
+    "id": 106,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فِي امَّةِ مُوسَىٰ عَلَيْهِمَا ٱلسَّلاَمُ",
+    "englishText": "by including him among the followers of Moses, peace be on them both,"
+  },
+  {
+    "id": 107,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبَارَكْتَ لِحَبِيبِكَ مُحَمَّدٍ صَلَّىٰ ٱللَّهُ عَلَيْهِ وَآلِهِ",
+    "englishText": "and blessed Your intimate beloved, Muhammad, may the blessings of Allah be upon him and his Household,"
+  },
+  {
+    "id": 108,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فِي عِتْرَتِهِ وَذُرِّيَّتِهِ وَامَّتِهِ",
+    "englishText": "in his offspring, offspring, and people."
+  },
+  {
+    "id": 109,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اللَّهُمَّ وَكَمَا غِبْنَا عَنْ ذٰلِكَ وَلَمْ نَشْهَدْهُ وَآمَنَّا بِهِ وَلَمْ نَرَهُ صِدْقاً وَعَدْلاً",
+    "englishText": "O Allah! Just as we were absent from that but we believe in it honestly and truly,"
+  },
+  {
+    "id": 110,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ان تُصَلِّيَ عَلَىٰ مُحَمَّدٍ وَآلِ مُحَمَّدٍ",
+    "englishText": "So we beseech You to send Your benedictions upon Muhammad and the Household of Muhammad,"
+  },
+  {
+    "id": 111,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَان تُبَارِكَ عَلَىٰ مُحَمَّدٍ وَآلِ مُحَمَّدٍ",
+    "englishText": "to bless Muhammad and the household of Muhammad,"
+  },
+  {
+    "id": 112,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتَرَحَّمْ عَلَىٰ مُحَمَّدٍ وَآلِ مُحَمَّدٍ",
+    "englishText": "and to have mercy on Muhammad and the Household of Muhammad"
+  },
+  {
+    "id": 113,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "كَافْضَلِ مَا صَلَّيْتَ وَبَارَكْتَ وَتَرَحَّمْتَ عَلَىٰ إِبْرَاهِيمَ وَآلِ إِبْرَاهِيمَ",
+    "englishText": "with the most auspicious benedictions, blessings, and mercy that You sent to Abraham and the posterity of Abraham."
+  },
+  {
+    "id": 114,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    "englishText": "Surely, You are Praiseworthy, Glorious,"
+  },
+  {
+    "id": 115,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَعَّالٌ لِمَا تُرِيدُ",
+    "englishText": "and Doer of what You will."
+  },
+  {
+    "id": 116,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَانتَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+    "englishText": "You are Powerful over all things."
+  },
+  {
+    "id": 117,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يمكنك الآن أن تتضرع إلى الله تعالى أن يستجيب لدعائك الشخصي. ثم قل ما يلي:",
+    "englishText": "O Allah, in the name of this prayer"
+  },
+  {
+    "id": 118,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اللَّهُمَّ بِحَقِّ هٰذَا ٱلدُّعَاءِ",
+    "englishText": "and in the name of these Names"
+  },
+  {
+    "id": 119,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِحَقِّ هٰذِهِ ٱلاسْمَاءِ",
+    "englishText": "which none knows their exegesis"
+  },
+  {
+    "id": 120,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱلَّتِي لاَ يَعْلَمُ تَفْسِيرَهَا",
+    "englishText": "or their implicit meanings save You,"
+  },
+  {
+    "id": 121,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ يَعْلَمُ بَاطِنَهَا غَيْرُكَ",
+    "englishText": "(please) send Your blessings upon Muhammad and the Household of Muhammad,"
+  },
+  {
+    "id": 122,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "صَلِّ عَلَىٰ مُحَمَّدٍ وَآلِ مُحَمَّدٍ",
+    "englishText": "do to me that of which You are worthy,"
+  },
+  {
+    "id": 123,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱفْعَلْ بِي مَا انتَ اهْلُهُ",
+    "englishText": "do not do to me what I deserve,"
+  },
+  {
+    "id": 124,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ تَفْعَلْ بِي مَا انَا اهْلُهُ",
+    "englishText": "forgive my sins—past and future,"
+  },
+  {
+    "id": 125,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱغْفِرْ لِي مِنْ ذُنُوبِي مَا تَقَدَّمَ مِنْهَا وَمَا تَاخَّرَ",
+    "englishText": "increase Your lawful sustenance for me,"
+  },
+  {
+    "id": 126,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَوَسِّعْ عَلَيَّ مِنْ حَلاَلِ رِزْقِكَ",
+    "englishText": "and save me from the trouble of wicked men,"
+  },
+  {
+    "id": 127,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱكْفِنِي مَؤُونَةَ إِنْسَانِ سَوٍْء",
+    "englishText": "wicked neighbors,"
+  },
+  {
+    "id": 128,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَارِ سَوٍْء",
+    "englishText": "wicked companions,"
+  },
+  {
+    "id": 129,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَرِينِ سَوٍْء",
+    "englishText": "and wicked rulers."
+  },
+  {
+    "id": 130,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَسُلْطَانِ سَوٍْء",
+    "englishText": "Verily, You have power over all that You will to do"
+  },
+  {
+    "id": 131,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّكَ عَلَىٰ مَا تَشَاء قَدِيرٌ",
+    "englishText": "and You have full knowledge of all things."
+  },
+  {
+    "id": 132,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِكُلِّ شَيْءٍ عَلِيمٌ",
+    "englishText": "Respond to me, O Lord of the worlds."
+  },
+  {
+    "id": 133,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "آمِين رَبَّ ٱلْعَالَمِينَ",
+    "englishText": "According to some copies of the supplication, the following statement is added before the latter portion:\nO Allah! O All-tender! O Bestower!"
+  },
+  {
+    "id": 134,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بحسب بعض نسخ الدعاء، تمت إضافة العبارة التالية قبل الجزء الأخير:\nيَا اللَّهُ يَا حَنَّانُ يَا مَنَّانُ",
+    "englishText": "O Fashioner of the heavens and the earth!"
+  },
+  {
+    "id": 135,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بَدِيعَ ٱلسَّمَاوَاتِ وَٱلارْضِ",
+    "englishText": "O Lord of Majesty and Honor!"
+  },
+  {
+    "id": 136,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذَا ٱلْجَلاَلِ وَٱلإكْرَامِ",
+    "englishText": "O most Merciful of all those who show mercy!"
+  },
+  {
+    "id": 137,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ارْحَمَ ٱلرَّاحِمِينَ",
+    "englishText": "(O Allah! I beseech You in the name of this prayer)...…"
+  },
+  {
+    "id": 138,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "(اللَّهُمَّ بِحَقِّ هٰذَا ٱلدُّعَاءِ)",
+    "englishText": "Shaykh al-Majlisi has quoted Sayyid Ibn Baqi as saying, in al-Misbah, that the following supplicatory prayer is advisably said after Du`a' al-Simat:"
+  },
+  {
+    "id": 139,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وقد نقل الشيخ المجلسي عن السيد ابن باقي قوله في كتاب المصباح: إن الدعاء التالي يُستحب قوله بعد دعاء السماط:",
+    "englishText": "O Allah! I beseech You in the name of this prayer"
+  },
+  {
+    "id": 140,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اللَّهُمَّ بِحَقِّ هٰذَا الدُّعَاءِ",
+    "englishText": "and in the name of these Names"
+  },
+  {
+    "id": 141,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِحَقِّ هٰذِهِ ٱلاسْمَاءِ",
+    "englishText": "which none knows their exegesis or interpretation"
+  },
+  {
+    "id": 142,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱلَّتِي لاَ يَعْلَمُ تَفْسِيرَهَا وَلاَ تَاْوِيلَهَا",
+    "englishText": "and none knows their implicit or explicit meanings save You,"
+  },
+  {
+    "id": 143,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ يَعْلَمُ بَاطِنَهَا وَلاَ ظَاهِرَهَا غَيْرُكَ",
+    "englishText": "to send Your blessings upon Muhammad and the Household of Muhammad"
+  },
+  {
+    "id": 144,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "انْ تُصَلِّيَ عَلَىٰ مُحَمَّدٍ وَآلِ مُحَمَّدٍ",
+    "englishText": "and to provide me with the good of this world and the Next World."
+  },
+  {
+    "id": 145,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَان تَرْزُقَنِي خَيْرَ ٱلدُّنْيَا وَٱلآخِرَةِ",
+    "englishText": "You may then mention your need and continue as follows:\nDo to me that of which You are worthy"
+  },
+  {
+    "id": 146,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يمكنك بعد ذلك ذكر حاجتك والمتابعة على النحو التالي:\nوَٱفْعَلْ بِي مَا انتَ اهْلُهُ",
+    "englishText": "but do not do to me what I deserve,"
+  },
+  {
+    "id": 147,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ تَفْعَلْ بِي مَا انَا اهْلُهُ",
+    "englishText": "and exact vengeance from… [so-and-so]"
+  },
+  {
+    "id": 148,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱنْتَقِمْ لِي مِنْ",
+    "englishText": "You may here mention the name of your enemy\nforgive my sins—past and future,"
+  },
+  {
+    "id": 149,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يمكنك هنا ذكر اسم عدوك\nوَٱغْفِرْ لِي مِنْ ذُنُوبِي مَا تَقَدَّمَ مِنْهَا وَمَا تَاخَّرَ",
+    "englishText": "forgive my parents and all faithful believers—men and women,"
+  },
+  {
+    "id": 150,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلِوَاِلدَيَّ وَلِجَمِيعِ ٱلْمُؤْمِنِينَ وَٱلْمُؤْمِنَاتِ",
+    "englishText": "increase Your lawful sustenance for me,"
+  },
+  {
+    "id": 151,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَوَسِّعْ عَلَيَّ مِنْ حَلاَلِ رِزْقِكَ",
+    "englishText": "save me from the troubles of wicked men,"
+  },
+  {
+    "id": 152,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱكْفِنِي مَؤُونَةَ إِنْسَانِ سَوٍْء",
+    "englishText": "wicked neighbors,"
+  },
+  {
+    "id": 153,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَارِ سَوٍْء",
+    "englishText": "wicked rulers,"
+  },
+  {
+    "id": 154,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَسُلْطَانِ سَوٍْء",
+    "englishText": "wicked companions,"
+  },
+  {
+    "id": 155,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَرِينِ سَوٍْء",
+    "englishText": "evil days,"
+  },
+  {
+    "id": 156,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيَوْمِ سَوٍْء",
+    "englishText": "and evil hours,"
+  },
+  {
+    "id": 157,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَسَاعَةِ سَوٍْء",
+    "englishText": "and exact vengeance for me on everyone who hatches secret plots against me,"
+  },
+  {
+    "id": 158,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱنْتَقِمْ لِي مِمَّن يَكِيدُنِي",
+    "englishText": "on everyone who oppresses me,"
+  },
+  {
+    "id": 159,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمِمَّن يَبْغِي عَلَيَّ",
+    "englishText": "seeks to do injustice to me, my wife,"
+  },
+  {
+    "id": 160,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيُرِيدُ بِي وَبِاهْلِي",
+    "englishText": "my children, my brothers,"
+  },
+  {
+    "id": 161,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاوْلادِي وَإِخْوَانِي",
+    "englishText": "my neighbors, and my relatives"
+  },
+  {
+    "id": 162,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجِيرَانِي وَقَرَابَاتِي",
+    "englishText": "among faithful men and women."
+  },
+  {
+    "id": 163,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مِنَ ٱلْمُؤْمِنِينَ وَٱلْمُؤْمِنَاتِ ظُلْماً",
+    "englishText": "Verily, You have power to do whatever You will to do"
+  },
+  {
+    "id": 164,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّكَ عَلَىٰ مَا تَشَاء قَدِيرٌ",
+    "englishText": "and You have full knowledge of all things."
+  },
+  {
+    "id": 165,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِكُلِّ شَيْءٍ عَلِيمٌ",
+    "englishText": "Respond to me, O Lord of the worlds."
+  },
+  {
+    "id": 166,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "آمِين رَبَّ ٱلْعَالَمِينَ",
+    "englishText": "You may then say the following:\nO Allah! In the name of this prayer, I beseech You"
+  },
+  {
+    "id": 167,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يمكنك حينها أن تقول ما يلي:\nاللَّهُمَّ بِحَقِّ هٰذَا الدُّعَاءِ",
+    "englishText": "to grant wealth and affluence to indigent faithful men and women,"
+  },
+  {
+    "id": 168,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَفَضَّلْ عَلَىٰ فُقَرَاء ٱلْمُؤْمِنِينَ وَٱلْمُؤْمِنَاتِ بِٱلْغِنَىٰ وَٱلثَّرْوَةِ",
+    "englishText": "recovery and wellbeing to the sick faithful men and women,"
+  },
+  {
+    "id": 169,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَلَىٰ مَرْضَىٰ ٱلْمُؤْمِنِينَ وَٱلْمُؤْمِنَاتِ بِٱلشِّفَاء وَٱلصِّحَّةِ",
+    "englishText": "bliss and clemency to the living faithful men and women,"
+  },
+  {
+    "id": 170,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَلَىٰ احْيَاء ٱلْمُؤْمِنِينَ وَٱلْمُؤْمِنَاتِ بِٱللُّطْفِ وَٱلْكَرَامَةِ",
+    "englishText": "remit the sins of, and have mercy on, the deceased faithful men and women,"
+  },
+  {
+    "id": 171,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَلَىٰ امْوَاتِ ٱلْمُؤْمِنِينَ وَٱلْمُؤْمِنَاتِ بِٱلْمَغْفِرَةِ وَٱلرَّحْمَةِ",
+    "englishText": "and arrange the return of all faithful travelers with safety and gain,"
+  },
+  {
+    "id": 172,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَلَىٰ مُسَافِرِي ٱلْمُؤْمِنِينَ وَٱلْمُؤْمِنَاتِ بِٱلرَّدِّ إِلَىٰ اوْطَانِهِمْ سَالِمِينَ غَانِمِينَ",
+    "englishText": "by Your mercy, O Most Merciful of all those who show mercy."
+  },
+  {
+    "id": 173,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِرَحْمَتِكَ يَا ارْحَمَ ٱلرَّاحِمِينَ",
+    "englishText": "May Allah send blessings to our master Muhammad, the Seal of the Prophets, and upon his Household, the purified"
+  },
+  {
+    "id": 174,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَصَلَّىٰ ٱللَّهُ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ خَاتَمِ ٱلنَّبِيِّينَ وَعِتْرَتِهِ ٱلطَّاهِرِينَ",
+    "englishText": "and send peace upon them in abundant measure."
+  }
+]
