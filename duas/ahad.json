@@ -1,0 +1,555 @@
+[
+  {
+    "id": 1,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ رَبَّ ٱلنُّورِ ٱلْعَظِيمِ",
+    "englishText": "O Allah the Lord of the Great Light,"
+  },
+  {
+    "id": 2,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَرَبَّ ٱلْكُرْسِيِّ ٱلرَّفِيعِ",
+    "englishText": "the Lord of the Elevated Throne,"
+  },
+  {
+    "id": 3,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَرَبَّ ٱلْبَحْرِ ٱلْمَسْجُورِ",
+    "englishText": "the Lord of the swollen ocean,"
+  },
+  {
+    "id": 4,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمُنْزِلَ ٱلتَّوْرَاةِ وَٱلإِنْجِيلِ وَٱلزَّبُورِ",
+    "englishText": "the Revealer of the Torah, the Gospel, and the Psalms,"
+  },
+  {
+    "id": 5,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَرَبَّ ٱلظِّلِّ وَٱلْحَرُورِ",
+    "englishText": "the Lord of shade and heat,"
+  },
+  {
+    "id": 6,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمُنْزِلَ ٱلْقُرْآنِ ٱلْعَظِيمِ",
+    "englishText": "the Revealer of the Great Qur'an,"
+  },
+  {
+    "id": 7,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَرَبَّ ٱلْمَلاَئِكَةِ ٱلْمُقَرَّبِينَ",
+    "englishText": "and the Lord of the Archangels,"
+  },
+  {
+    "id": 8,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلأَنْبِيَاءِ وَٱلْمُرْسَلِينَ",
+    "englishText": "the Prophets, and the Messengers:"
+  },
+  {
+    "id": 9,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ إِنِّي أَسْأَلُكَ بِٱسْمِكَ ٱلْكَرِيـمِ",
+    "englishText": "O Allah, I beseech You in Your Noble Name,"
+  },
+  {
+    "id": 10,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِنُورِ وَجْهِكَ ٱلْمُنِيرِ",
+    "englishText": "in the Light of Your Luminous Face"
+  },
+  {
+    "id": 11,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمُلْكِكَ ٱلْقَدِيمِ",
+    "englishText": "and Your Eternal Kingdom."
+  },
+  {
+    "id": 12,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حَيُّ يَا قَيُّومُ",
+    "englishText": "O Ever-living! O Self-Subsistent!"
+  },
+  {
+    "id": 13,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "أَسْأَلُكَ بِٱسْمِكَ ٱلَّذِي أَشْرَقَتْ بِهِ ٱلسَّمَاوَاتُ وَٱلأَرَضُونَ",
+    "englishText": "I beseech You in the name of Your Name with which the heavens and the earth have lit up"
+  },
+  {
+    "id": 14,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِٱسْمِكَ ٱلَّذِي يَصْلَحُ بِهِ ٱلأَوَّلُونَ وَٱلآخِرُونَ",
+    "englishText": "and in Your Name with which the past and the coming generations have become upright!"
+  },
+  {
+    "id": 15,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حَيّاً قَبْلَ كُلِّ حَيٍّ",
+    "englishText": "O He Who has been always alive before the existence of all living things!"
+  },
+  {
+    "id": 16,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيَا حَيّاً بَعْدَ كُلِّ حَيٍّ",
+    "englishText": "O He Who shall be alive after the extinction of all living things!"
+  },
+  {
+    "id": 17,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيَا حَيّاً حِينَ لا حَيُّ",
+    "englishText": "O He Who has been always alive even when there was nothing else alive!"
+  },
+  {
+    "id": 18,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُحْيِيَ ٱلْمَوْتَىٰ وَمُمِيتَ ٱلأَحْيَاءِ",
+    "englishText": "O He Who revives the dead ones and causes the living ones to die!"
+  },
+  {
+    "id": 19,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حَيُّ لا إِلٰهَ إِلاَّ أَنْتَ",
+    "englishText": "O Ever-living! There is no god save You."
+  },
+  {
+    "id": 20,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ بَلِّغْ مَوْلاَنَا ٱلإِمَامَ ٱلْهَادِيَ ٱلْمَهْدِيَّ ٱلْقَائِمَ بِأَمْرِكَ",
+    "englishText": "O Allah, convey to our master Imam al-Mahdi, the guide who is to undertake Your orders,"
+  },
+  {
+    "id": 21,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "صَلَوَاتُ ٱللَّهِ عَلَيْهِ وَعَلَىٰ آبَائِهِ ٱلطَّاهِرِينَ",
+    "englishText": "may Allah’s blessings be upon him and upon his immaculate fathers,"
+  },
+  {
+    "id": 22,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "عَنْ جَمِيعِ ٱلْمُؤْمِنِينَ وَٱلْمُؤْمِنَاتِ",
+    "englishText": "on behalf of all of the believing men and women"
+  },
+  {
+    "id": 23,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فِي مَشَارِقِ ٱلأَرْضِ وَمَغَارِبِهَا",
+    "englishText": "in the east and west of the earth"
+  },
+  {
+    "id": 24,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سَهْلِهَا وَجَبَلِهَا",
+    "englishText": "and in plains, mountains,"
+  },
+  {
+    "id": 25,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبَرِّهَا وَبَحْرِهَا",
+    "englishText": "lands, and seas,"
+  },
+  {
+    "id": 26,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَنِّي وَعَنْ وَالِدَيَّ",
+    "englishText": "and on behalf of my parents"
+  },
+  {
+    "id": 27,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مِنَ ٱلصَّلَوَاتِ زِنَةَ عَرْشِ ٱللَّهِ",
+    "englishText": "(convey to him) blessings that are as weighty as Allah’s Throne,"
+  },
+  {
+    "id": 28,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمِدَادَ كَلِمَاتِهِ",
+    "englishText": "as much as the ink of His Words,"
+  },
+  {
+    "id": 29,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمَا أَحْصَاهُ عِلْمُهُ وَأَحَاطَ بِهِ كِتَابُهُ",
+    "englishText": "and as many as that which is counted by His knowledge and encompassed by His Book."
+  },
+  {
+    "id": 30,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ إِنِّي أُجَدِّدُ لَهُ فِي صَبِيحَةِ يَوْمِي هٰذَا",
+    "englishText": "O Allah, I update to him in the beginning of this day"
+  },
+  {
+    "id": 31,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمَا عِشْتُ مِنْ أَيَّامِي",
+    "englishText": "and throughout the days of lifetime a pledge,"
+  },
+  {
+    "id": 32,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "عَهْداً وَعَقْداً وَبَيْعَةً لَهُ فِي عُنُقِي",
+    "englishText": "a covenant, and allegiance to which I commit myself"
+  },
+  {
+    "id": 33,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "لا أَحُولُ عنها وَلا أَزُولُ أَبَداً",
+    "englishText": "and from which I neither convert nor change."
+  },
+  {
+    "id": 34,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ ٱجْعَلْنِي مِنْ أَنْصَارِهِ",
+    "englishText": "O Allah, (please do) make me of his supporters,"
+  },
+  {
+    "id": 35,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَعْوَانِهِ وَٱلذَّابِّينَ عَنْهُ",
+    "englishText": "sponsors, defenders,"
+  },
+  {
+    "id": 36,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْمُسَارِعِينَ إِلَيْهِ فِي قَضَاءِ حَوَائِجِهِ",
+    "englishText": "and those who hurry in carrying out his instructions,"
+  },
+  {
+    "id": 37,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْمُمْتَثِلِينَ لأَوَامِرِهِ",
+    "englishText": "those who comply with his orders,"
+  },
+  {
+    "id": 38,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْمُحَامِينَ عَنْهُ",
+    "englishText": "those who uphold him,"
+  },
+  {
+    "id": 39,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلسَّابِقِينَ إِلَىٰ إِرَادَتِهِ",
+    "englishText": "those who precede others to implementing his will,"
+  },
+  {
+    "id": 40,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْمُسْتَشْهَدِينَ بَيْنَ يَدَيْهِ",
+    "englishText": "and those who will be martyred before him."
+  },
+  {
+    "id": 41,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ إِنْ حَالَ بَيْنِي وَبَيْنَهُ ٱلْمَوْتُ ٱلَّذِي جَعَلْتَهُ عَلَىٰ عِبَادِكَ حَتْماً مَقْضِيّاً",
+    "englishText": "O Allah, if death that You have made inevitably and certainly incumbent upon Your servants stands between me and him,"
+  },
+  {
+    "id": 42,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَأَخْرِجْنِي مِنْ قَبْرِي مُؤْتَزِراً كَفَنِي",
+    "englishText": "then (please do) take me out of my grave using my shroud as dress,"
+  },
+  {
+    "id": 43,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "شَاهِراً سَيْفِي",
+    "englishText": "unsheathing my sword,"
+  },
+  {
+    "id": 44,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مُجَرِّداً قَنَاتِي",
+    "englishText": "holding my lance in my hand,"
+  },
+  {
+    "id": 45,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مُلَبِّياً دَعْوَةَ ٱلدَّاعِي فِي ٱلْحَاضِرِ وَٱلْبَادِي",
+    "englishText": "and responding to the call of the Caller who shall announce (his advent) in urban areas and deserts."
+  },
+  {
+    "id": 46,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ أَرِنِي ٱلطَّلْعَةَ ٱلرَّشِيدَةَ",
+    "englishText": "O Allah, (please do) show me his magnificent mien"
+  },
+  {
+    "id": 47,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْغُرَّةَ ٱلْحَمِيدَةَ",
+    "englishText": "and his praiseworthy forehead,"
+  },
+  {
+    "id": 48,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱكْحُلْ نَاظِرِي بِنَظْرَةٍ مِنِّي إِلَيْهِ",
+    "englishText": "delight my eyes by letting me have a look at him."
+  },
+  {
+    "id": 49,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَجِّلْ فَرَجَهُ",
+    "englishText": "And (please) expedite his relief,"
+  },
+  {
+    "id": 50,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَسَهِّلْ مَخْرَجَهُ",
+    "englishText": "make his reappearance easy,"
+  },
+  {
+    "id": 51,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَوْسِعْ مَنْهَجَهُ",
+    "englishText": "clear a spacious space for him,"
+  },
+  {
+    "id": 52,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱسْلُكْ بِي مَحَجَّتَهُ",
+    "englishText": "guide me to follow his course,"
+  },
+  {
+    "id": 53,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَنْفِذْ أَمْرَهُ",
+    "englishText": "give success to his issues,"
+  },
+  {
+    "id": 54,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱشْدُدْ أَزْرَهُ",
+    "englishText": "and confirm his strength."
+  },
+  {
+    "id": 55,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱعْمُرِ ٱللَّهُمَّ بِهِ بِلادَكَ",
+    "englishText": "O Allah, construct Your lands through him"
+  },
+  {
+    "id": 56,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَأَحْيِ بِهِ عِبَادَكَ",
+    "englishText": "and refresh Your servants through him,"
+  },
+  {
+    "id": 57,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَإِنَّكَ قُلْتَ وَقَوْلُكَ ٱلْحَقُّ:",
+    "englishText": "For You have said, and true are Your words:"
+  },
+  {
+    "id": 58,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "«ظَهَرَ ٱلْفَسَادُ فِي ٱلْبَرِّ وَٱلْبَحْرِ",
+    "englishText": "“Corruption has appeared in the land and the sea"
+  },
+  {
+    "id": 59,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِمَا كَسَبَتْ أَيْدِي ٱلنَّاسِ.»",
+    "englishText": "on account of what the hands of men have wrought.”"
+  },
+  {
+    "id": 60,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَأَظْهِرِ ٱللَّهُمَّ لَنَا وَلِيَّكَ",
+    "englishText": "So, O Allah, (please) show us Your vicegerent,"
+  },
+  {
+    "id": 61,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱبْنَ بِنْتِ نَبِيِّكَ",
+    "englishText": "the son of Your Prophet,"
+  },
+  {
+    "id": 62,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱلْمُسَمَّىٰ بِٱسْمِ رَسُولِكَ",
+    "englishText": "and the namesake of Your Messenger,"
+  },
+  {
+    "id": 63,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "صَلَّىٰ ٱللَّهُ عَلَيْهِ وَآلِهِ",
+    "englishText": "peace be upon him and his Household,"
+  },
+  {
+    "id": 64,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "حَتَّىٰ لا يَظْفَرَ بِشَيْءٍ مِنَ ٱلْبَاطِلِ إِلاَّ مَزَّقَهُ",
+    "englishText": "so that he shall tear up any wrong item that he will face"
+  },
+  {
+    "id": 65,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيُحِقُّ ٱلْحَقَّ وَيُحَقِّقَهُ وَٱجْعَلْهُ",
+    "englishText": "and shall confirm and approve of the truth."
+  },
+  {
+    "id": 66,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱللَّهُمَّ مَفْزَعاً لِمَظْلُومِ عِبَادِكَ",
+    "englishText": "O Allah, (please) make him the shelter to whom Your wronged servants shall resort,"
+  },
+  {
+    "id": 67,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَنَاصِراً لِمَنْ لا يَجِدُ لَهُ نَاصِراً غَيْرَكَ",
+    "englishText": "the supporter of those who cannot find any supporter save You,"
+  },
+  {
+    "id": 68,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمُجَدِّداً لِمَا عُطِّلَ مِنْ أَحْكَامِ كِتَابِكَ",
+    "englishText": "the reviver of the laws of Your Book that have been suspended,"
+  },
+  {
+    "id": 69,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَمُشَيِّداً لِمَا وَرَدَ مِنْ أَعْلامِ دِينِكَ وَسُنَنِ نَبِيِّكَ",
+    "englishText": "and the constructor of all signs of Your religion and instructions of Your Messenger,"
+  },
+  {
+    "id": 70,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "صَلَّىٰ ٱللَّهُ عَلَيْهِ وآلِهِ وَٱجْعَلْهُ",
+    "englishText": "peace be upon him and his Household, that he will see."
+  },
+  {
+    "id": 71,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱللَّهُمَّ مِمَّنْ حَصَّنْتَهُ مِنْ بَأُسِ ٱلْمُعْتَدِينَ",
+    "englishText": "O Allah, (please) include him with those whom You protect from the domination of the aggressors."
+  },
+  {
+    "id": 72,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ وَسُرَّ نَبِيَّكَ مُحَمَّداً",
+    "englishText": "O Allah, (please) delight Your Prophet Muhammad,"
+  },
+  {
+    "id": 73,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "صَلَّىٰ ٱللَّهُ عَلَيْهِ وآلِهِ",
+    "englishText": "peace be upon him and his Household,"
+  },
+  {
+    "id": 74,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِرُؤْيَتِهِ وَمَنْ تَبِعَهُ عَلَىٰ دَعْوَتِهِ",
+    "englishText": "as well as all those who followed him in his promulgation by making (us) see him,"
+  },
+  {
+    "id": 75,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱرْحَمِ ٱسْتِكَانَتَنَا بَعْدَهُ",
+    "englishText": "and (please) have mercy upon our humiliation after him."
+  },
+  {
+    "id": 76,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ ٱكْشِفْ هٰذِهِ ٱلْغُمَّةَ عَنْ هٰذِهِ ٱلأُمَّةِ بِحُضُورِهِ",
+    "englishText": "O Allah, (please) relieve this community from the (current) grief through presenting him"
+  },
+  {
+    "id": 77,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَجِّلْ لَنَا ظُهُورَهُ",
+    "englishText": "and expedite his advent for us:"
+  },
+  {
+    "id": 78,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "«إِنَّهُمْ يَرَوْنَهُ بَعِيداً وَنَرَاهُ قَرِيباً.»",
+    "englishText": "“Surely, they think it to be far off, and We see it nigh.”"
+  },
+  {
+    "id": 79,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِرَحْمَتِكَ يَا أَرْحَمَ ٱلرَّاحِمِينَ",
+    "englishText": "[do all that] In the name of Your mercy; O most merciful of all those who show mercy."
+  }
+]
