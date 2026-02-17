@@ -1,0 +1,1920 @@
+[
+  {
+    "id": 1,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا اللَّهُ",
+    "englishText": "Glory be to You. O Allah!"
+  },
+  {
+    "id": 2,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا رَحْمٰنُ",
+    "englishText": "Exalted are You. O Beneficent!"
+  },
+  {
+    "id": 3,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 4,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا رَحِيمُ",
+    "englishText": "Glory be to You. O Merciful!"
+  },
+  {
+    "id": 5,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا كَرِيمُ",
+    "englishText": "Exalted are You. O Generous!"
+  },
+  {
+    "id": 6,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 7,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مَلِكُ",
+    "englishText": "Glory be to You. O Sovereign!"
+  },
+  {
+    "id": 8,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مَالِكُ",
+    "englishText": "Exalted are You. O Master!"
+  },
+  {
+    "id": 9,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 10,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا قُدُّوسُ",
+    "englishText": "Glory be to You. O Holy!"
+  },
+  {
+    "id": 11,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا سَلاَمُ",
+    "englishText": "Exalted are You. O Peace!"
+  },
+  {
+    "id": 12,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 13,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُؤْمِنُ",
+    "englishText": "Glory be to You. O Source of security!"
+  },
+  {
+    "id": 14,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُهَيْمِنُ",
+    "englishText": "Exalted are You. O Loving Protector!"
+  },
+  {
+    "id": 15,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 16,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا عَزِيزُ",
+    "englishText": "Glory be to You. O Glorious!"
+  },
+  {
+    "id": 17,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا جَبَّارُ",
+    "englishText": "Exalted are You. O Omnipotent!"
+  },
+  {
+    "id": 18,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 19,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُتَكَبِّرُ",
+    "englishText": "Glory be to You. O Proud!"
+  },
+  {
+    "id": 20,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُتَجَبِّرُ",
+    "englishText": "Exalted are You. O Dominant Helper!"
+  },
+  {
+    "id": 21,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 22,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا خَالِقُ",
+    "englishText": "Glory be to You. O Creator!"
+  },
+  {
+    "id": 23,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا بَارِئُ",
+    "englishText": "Exalted are You. O Maker!"
+  },
+  {
+    "id": 24,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 25,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُصَوِّرُ",
+    "englishText": "Glory be to You. O Fashioner!"
+  },
+  {
+    "id": 26,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُقَدِّرُ",
+    "englishText": "Exalted are You. O Pre-ordainer!"
+  },
+  {
+    "id": 27,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 28,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا هَادِي",
+    "englishText": "Glory be to You. O Guide!"
+  },
+  {
+    "id": 29,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا بَاقِي",
+    "englishText": "Exalted are You. O Ever-Living!"
+  },
+  {
+    "id": 30,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 31,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا وَهَّابُ",
+    "englishText": "Glory be to You. O Liberal!"
+  },
+  {
+    "id": 32,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا تَوَّابُ",
+    "englishText": "Exalted are You. O to Whom return all repentant!"
+  },
+  {
+    "id": 33,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 34,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا فَتَّاحُ",
+    "englishText": "Glory be to You. O Liberator!"
+  },
+  {
+    "id": 35,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُرْتَاحُ",
+    "englishText": "Exalted are You. O Comforter!"
+  },
+  {
+    "id": 36,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 37,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا سَيِّدِي",
+    "englishText": "Glory be to You. O Chief!"
+  },
+  {
+    "id": 38,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مَوْلاَيَ",
+    "englishText": "Exalted are You. O Liege-Lord!"
+  },
+  {
+    "id": 39,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 40,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا قَرِيبُ",
+    "englishText": "Glory be to You. O Near!"
+  },
+  {
+    "id": 41,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا رَقِيبُ",
+    "englishText": "Exalted are You. O Preserver!"
+  },
+  {
+    "id": 42,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 43,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُبْدِئُ",
+    "englishText": "Glory be to You. O Originator!"
+  },
+  {
+    "id": 44,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُعِيدُ",
+    "englishText": "Exalted are You. O Resurrector!"
+  },
+  {
+    "id": 45,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 46,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا حَمِيدُ",
+    "englishText": "Glory be to You. O Praiseworthy!"
+  },
+  {
+    "id": 47,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مَجِيدُ",
+    "englishText": "Exalted are You. O Glorified!"
+  },
+  {
+    "id": 48,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 49,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا قَدِيمُ",
+    "englishText": "Glory be to You. O Eternal!"
+  },
+  {
+    "id": 50,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا عَظِيمُ",
+    "englishText": "Exalted are You. O Mighty!"
+  },
+  {
+    "id": 51,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 52,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا غَفُورُ",
+    "englishText": "Glory be to You. O Very Forgiving!"
+  },
+  {
+    "id": 53,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا شَكُورُ",
+    "englishText": "Exalted are You. O Appreciator!"
+  },
+  {
+    "id": 54,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 55,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا شَاهِدُ",
+    "englishText": "Glory be to You. O Ever-present!"
+  },
+  {
+    "id": 56,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا شَهِيدُ",
+    "englishText": "Exalted are You. O Witness!"
+  },
+  {
+    "id": 57,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 58,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا حَنَّانُ",
+    "englishText": "Glory be to You. O Compassionate!"
+  },
+  {
+    "id": 59,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مَنَّانُ",
+    "englishText": "Exalted are You. O Kind!"
+  },
+  {
+    "id": 60,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 61,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا بَاعِثُ",
+    "englishText": "Glory be to You. O Causer!"
+  },
+  {
+    "id": 62,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا وَارِثُ",
+    "englishText": "Exalted are You. O Lord-possessor!"
+  },
+  {
+    "id": 63,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 64,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُحْيِي",
+    "englishText": "Glory be to You. O Vivifying!"
+  },
+  {
+    "id": 65,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُمِيتُ",
+    "englishText": "Exalted are You. O Annihilator!"
+  },
+  {
+    "id": 66,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 67,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا شَفِيقُ",
+    "englishText": "Glory be to You. O Loving!"
+  },
+  {
+    "id": 68,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا رَفِيقُ",
+    "englishText": "Exalted are You. O Helping Friend!"
+  },
+  {
+    "id": 69,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 70,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا انِيسُ",
+    "englishText": "Glory be to You. O Companion!"
+  },
+  {
+    "id": 71,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُؤْنِسُ",
+    "englishText": "Exalted are You. O Familiar!"
+  },
+  {
+    "id": 72,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 73,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا جَلِيلُ",
+    "englishText": "Glory be to You. O Magnificent!"
+  },
+  {
+    "id": 74,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا جَمِيلُ",
+    "englishText": "Exalted are You. O Elegant!"
+  },
+  {
+    "id": 75,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 76,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا خَبِيرُ",
+    "englishText": "Glory be to You. O All-knowing!"
+  },
+  {
+    "id": 77,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا بَصِيرُ",
+    "englishText": "Exalted are You. O All-seeing!"
+  },
+  {
+    "id": 78,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 79,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا حَفِيُّ",
+    "englishText": "Glory be to You. O Benevolent!"
+  },
+  {
+    "id": 80,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مَلِيُّ",
+    "englishText": "Exalted are You. O Possessor of fortune!"
+  },
+  {
+    "id": 81,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 82,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مَعْبُودُ",
+    "englishText": "Glory be to You. O Adored!"
+  },
+  {
+    "id": 83,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مَوْجُودُ",
+    "englishText": "Exalted are You. O Ever-Existing!"
+  },
+  {
+    "id": 84,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 85,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا غَفَّارُ",
+    "englishText": "Glory be to You. O Forgiver!"
+  },
+  {
+    "id": 86,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا قَهَّارُ",
+    "englishText": "Exalted are You. O Subduer!"
+  },
+  {
+    "id": 87,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 88,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مَذْكُورُ",
+    "englishText": "Glory be to You. O Rememberable!"
+  },
+  {
+    "id": 89,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مَشْكُورُ",
+    "englishText": "Exalted are You. O Thankworthy!"
+  },
+  {
+    "id": 90,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 91,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا جَوَادُ",
+    "englishText": "Glory be to You. O Liberal Bestower!"
+  },
+  {
+    "id": 92,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مَعَاذُ",
+    "englishText": "Exalted are You. O Whom everything returns to!"
+  },
+  {
+    "id": 93,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 94,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا جَمَالُ",
+    "englishText": "Glory be to You. O Pure Beauty!"
+  },
+  {
+    "id": 95,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا جَلاَلُ",
+    "englishText": "Exalted are You. O Majesty!"
+  },
+  {
+    "id": 96,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 97,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا سَابِقُ",
+    "englishText": "Glory be to You. O Ever-foremost!"
+  },
+  {
+    "id": 98,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا رَازِقُ",
+    "englishText": "Exalted are You. O Giver of Livelihood!"
+  },
+  {
+    "id": 99,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 100,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا صَادِقُ",
+    "englishText": "Glory be to You. O Truthful!"
+  },
+  {
+    "id": 101,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا فَالِقُ",
+    "englishText": "Exalted are You. O Splitter!"
+  },
+  {
+    "id": 102,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 103,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا سَمِيعُ",
+    "englishText": "Glory be to You. O Hearer!"
+  },
+  {
+    "id": 104,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا سَرِيعُ",
+    "englishText": "Exalted are You. O Quick!"
+  },
+  {
+    "id": 105,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 106,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا رَفِيعُ",
+    "englishText": "Glory be to You. O Sublime!"
+  },
+  {
+    "id": 107,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا بَدِيعُ",
+    "englishText": "Exalted are You. O Original Inventor!"
+  },
+  {
+    "id": 108,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 109,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا فَعَّالُ",
+    "englishText": "Glory be to You. O Perpetrator!"
+  },
+  {
+    "id": 110,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُتَعَالٍ",
+    "englishText": "Exalted are You. O Most High!"
+  },
+  {
+    "id": 111,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 112,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا قَاضِي",
+    "englishText": "Glory be to You. O Judge!"
+  },
+  {
+    "id": 113,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا رَاضِي",
+    "englishText": "Exalted are You. O Consenting!"
+  },
+  {
+    "id": 114,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 115,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا قَاهِرُ",
+    "englishText": "Glory be to You. O Conqueror!"
+  },
+  {
+    "id": 116,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا طَاهِرُ",
+    "englishText": "Exalted are You. O Pure!"
+  },
+  {
+    "id": 117,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 118,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا عَالِمُ",
+    "englishText": "Glory be to You. O All-Knowing!"
+  },
+  {
+    "id": 119,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا حَاكِمُ",
+    "englishText": "Exalted are You. O Ruler!"
+  },
+  {
+    "id": 120,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 121,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا دَائِمُ",
+    "englishText": "Glory be to You. O Ever-Lasting!"
+  },
+  {
+    "id": 122,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا قَائِمُ",
+    "englishText": "Exalted are You. O Ever-enduring!"
+  },
+  {
+    "id": 123,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 124,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا عَاصِمُ",
+    "englishText": "Glory be to You. O Defended!"
+  },
+  {
+    "id": 125,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا قَاسِمُ",
+    "englishText": "Exalted are You. O Distributer!"
+  },
+  {
+    "id": 126,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 127,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا غَنِيُّ",
+    "englishText": "Glory be to You. O Independent!"
+  },
+  {
+    "id": 128,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُغْنِي",
+    "englishText": "Exalted are You. O Enricher!"
+  },
+  {
+    "id": 129,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 130,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا وَفِيُّ",
+    "englishText": "Glory be to You. O True to His word!"
+  },
+  {
+    "id": 131,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا قَوِيُّ",
+    "englishText": "Exalted are You. O Strong!"
+  },
+  {
+    "id": 132,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 133,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا كَافِي",
+    "englishText": "Glory be to You. O Self-sufficient!"
+  },
+  {
+    "id": 134,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا شَافِي",
+    "englishText": "Exalted are You. O Effective Restorer of health!"
+  },
+  {
+    "id": 135,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 136,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُقَدِّمُ",
+    "englishText": "Glory be to You. O Leader!"
+  },
+  {
+    "id": 137,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُؤَخِّرُ",
+    "englishText": "Exalted are You. O Conclusion!"
+  },
+  {
+    "id": 138,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 139,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا اوَّلُ",
+    "englishText": "Glory be to You. O First!"
+  },
+  {
+    "id": 140,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا آخِرُ",
+    "englishText": "Exalted are You. O Eternal Last!"
+  },
+  {
+    "id": 141,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 142,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا ظَاهِرُ",
+    "englishText": "Glory be to You. O Evident!"
+  },
+  {
+    "id": 143,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا بَاطِنُ",
+    "englishText": "Exalted are You. O Hidden!"
+  },
+  {
+    "id": 144,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 145,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا رَجَاءُ",
+    "englishText": "Glory be to You. O Hope!"
+  },
+  {
+    "id": 146,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُرْتَجَىٰ",
+    "englishText": "Exalted are You. O Who is invoked!"
+  },
+  {
+    "id": 147,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 148,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا ذَا ٱلْمَنِّ",
+    "englishText": "Glory be to You. O Lord of Favors!"
+  },
+  {
+    "id": 149,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا ذَا ٱلطَّوْلِ",
+    "englishText": "Exalted are You. O Lord of Bounties!"
+  },
+  {
+    "id": 150,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 151,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا حَيُّ",
+    "englishText": "Glory be to You. O Ever-Alive!"
+  },
+  {
+    "id": 152,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا قَيُّومُ",
+    "englishText": "Exalted are You. O Ever-Durable!"
+  },
+  {
+    "id": 153,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 154,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا وَاحِدُ",
+    "englishText": "Glory be to You. O One!"
+  },
+  {
+    "id": 155,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا احَدُ",
+    "englishText": "Exalted are You. O Unique!"
+  },
+  {
+    "id": 156,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 157,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا سَيِّدُ",
+    "englishText": "Glory be to You. O Chief!"
+  },
+  {
+    "id": 158,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا صَمَدُ",
+    "englishText": "Exalted are You. O Self-Subsisting!"
+  },
+  {
+    "id": 159,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 160,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا قَدِيرُ",
+    "englishText": "Glory be to You. O Able to do (Everything)!"
+  },
+  {
+    "id": 161,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا كَبِيرُ",
+    "englishText": "Exalted are You. O Great!"
+  },
+  {
+    "id": 162,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 163,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا وَالِي",
+    "englishText": "Glory be to You. O Governor!"
+  },
+  {
+    "id": 164,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا عَالِي",
+    "englishText": "Exalted are You. O Exalted!"
+  },
+  {
+    "id": 165,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 166,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا عَلِيُّ",
+    "englishText": "Glory be to You. O Most High!"
+  },
+  {
+    "id": 167,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا اعْلَىٰ",
+    "englishText": "Exalted are You. O Supreme!"
+  },
+  {
+    "id": 168,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 169,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا وَلِيُّ",
+    "englishText": "Glory be to You. O Friend!"
+  },
+  {
+    "id": 170,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مَوْلَىٰ",
+    "englishText": "Exalted are You. O Master!"
+  },
+  {
+    "id": 171,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 172,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا ذَارِئُ",
+    "englishText": "Glory be to You. O Resolute!"
+  },
+  {
+    "id": 173,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا بَارِئُ",
+    "englishText": "Exalted are You. O Foremost Creator!"
+  },
+  {
+    "id": 174,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 175,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا خَافِضُ",
+    "englishText": "Glory be to You. O Mortifying!"
+  },
+  {
+    "id": 176,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا رَافِعُ",
+    "englishText": "Exalted are You. O Deliverer!"
+  },
+  {
+    "id": 177,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 178,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُقْسِطُ",
+    "englishText": "Glory be to You. O Who throws down!"
+  },
+  {
+    "id": 179,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا جَامِعُ",
+    "englishText": "Exalted are You. O Gatherer!"
+  },
+  {
+    "id": 180,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 181,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُعِزُّ",
+    "englishText": "Glory be to You. O Who does Honor!"
+  },
+  {
+    "id": 182,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُذِلُّ",
+    "englishText": "Exalted are You. O Subduer!"
+  },
+  {
+    "id": 183,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 184,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا حَافِظُ",
+    "englishText": "Glory be to You. O Guardian!"
+  },
+  {
+    "id": 185,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا حَفِيظُ",
+    "englishText": "Exalted are You. O Defending Administrator!"
+  },
+  {
+    "id": 186,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 187,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا قَادِرُ",
+    "englishText": "Glory be to You. O Capable Power!"
+  },
+  {
+    "id": 188,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُقْتَدِرُ",
+    "englishText": "Exalted are You. O Impenetrable!"
+  },
+  {
+    "id": 189,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 190,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا عَلِيمُ",
+    "englishText": "Glory be to You. O Wise!"
+  },
+  {
+    "id": 191,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا حَلِيمُ",
+    "englishText": "Exalted are You. O Forbearing!"
+  },
+  {
+    "id": 192,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 193,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا حَكَمُ",
+    "englishText": "Glory be to You. O Authority!"
+  },
+  {
+    "id": 194,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا حَكِيمُ",
+    "englishText": "Exalted are You. O All-wise!"
+  },
+  {
+    "id": 195,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 196,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُعْطِي",
+    "englishText": "Glory be to You. O Liberal Giver!"
+  },
+  {
+    "id": 197,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مَانِعُ",
+    "englishText": "Exalted are You. O Preventer!"
+  },
+  {
+    "id": 198,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 199,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا ضَارُّ",
+    "englishText": "Glory be to You. O Who brings about distress!"
+  },
+  {
+    "id": 200,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا نَافِعُ",
+    "englishText": "Exalted are You. O Who allows gains!"
+  },
+  {
+    "id": 201,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 202,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُجِيبُ",
+    "englishText": "Glory be to You. O Who comes to help!"
+  },
+  {
+    "id": 203,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا حَسِيبُ",
+    "englishText": "Exalted are You. O Reckoner!"
+  },
+  {
+    "id": 204,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 205,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا عَادِلُ",
+    "englishText": "Glory be to You. O Just!"
+  },
+  {
+    "id": 206,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا فَاصِلُ",
+    "englishText": "Exalted are You. O Distinguisher!"
+  },
+  {
+    "id": 207,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 208,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا لَطِيفُ",
+    "englishText": "Glory be to You. O Subtle!"
+  },
+  {
+    "id": 209,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا شَرِيفُ",
+    "englishText": "Exalted are You. O Noble!"
+  },
+  {
+    "id": 210,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 211,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا رَبُّ",
+    "englishText": "Glory be to You. O Lord!"
+  },
+  {
+    "id": 212,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا حَقُّ",
+    "englishText": "Exalted are You. O Truth!"
+  },
+  {
+    "id": 213,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 214,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مَاجِدُ",
+    "englishText": "Glory be to You. O Splendid!"
+  },
+  {
+    "id": 215,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا وَاجِِدُ",
+    "englishText": "Exalted are You. O Author!"
+  },
+  {
+    "id": 216,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 217,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا عَفُوُّ",
+    "englishText": "Glory be to You. O Granter of amnesty!"
+  },
+  {
+    "id": 218,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُنْتَقِمُ",
+    "englishText": "Exalted are You. O Avenger!"
+  },
+  {
+    "id": 219,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 220,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا وَاسِعُ",
+    "englishText": "Glory be to You. O Bountiful!"
+  },
+  {
+    "id": 221,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُوَسِّعُ",
+    "englishText": "Exalted are You. O Plentiful!"
+  },
+  {
+    "id": 222,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 223,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا رَءُوفُ",
+    "englishText": "Glory be to You. O Clement!"
+  },
+  {
+    "id": 224,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا عَطُوفُ",
+    "englishText": "Exalted are You. O Affectionate!"
+  },
+  {
+    "id": 225,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 226,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا فَرْدُ",
+    "englishText": "Glory be to You. O Alone!"
+  },
+  {
+    "id": 227,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا وِتْرُ",
+    "englishText": "Exalted are You. O Single!"
+  },
+  {
+    "id": 228,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 229,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُقِيتُ",
+    "englishText": "Glory be to You. O Over-Seer!"
+  },
+  {
+    "id": 230,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُحِيطُ",
+    "englishText": "Exalted are You. O Who surrounds everything!"
+  },
+  {
+    "id": 231,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 232,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا وَكِيلُ",
+    "englishText": "Glory be to You. O Protecting Advocate!"
+  },
+  {
+    "id": 233,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا عَدْلُ",
+    "englishText": "Exalted are You. O Justice!"
+  },
+  {
+    "id": 234,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 235,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُبِينُ",
+    "englishText": "Glory be to You. O Manifest!"
+  },
+  {
+    "id": 236,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مَتِينُ",
+    "englishText": "Exalted are You. O Persevering!"
+  },
+  {
+    "id": 237,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 238,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا بَرُّ",
+    "englishText": "Glory be to You. O Benign!"
+  },
+  {
+    "id": 239,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا وَدُودُ",
+    "englishText": "Exalted are You. O Beloved One!"
+  },
+  {
+    "id": 240,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 241,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا رَشِيدُ",
+    "englishText": "Glory be to You. O Who guides on the right path!"
+  },
+  {
+    "id": 242,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُرْشِدُ",
+    "englishText": "Exalted are You. O Who leads on to the true path!"
+  },
+  {
+    "id": 243,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 244,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا نُورُ",
+    "englishText": "Glory be to You. O Light!"
+  },
+  {
+    "id": 245,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُنَوِّرُ",
+    "englishText": "Exalted are You. O Illuminator!"
+  },
+  {
+    "id": 246,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 247,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا نَصِيرُ",
+    "englishText": "Glory be to You. O Ally!"
+  },
+  {
+    "id": 248,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا نَاصِرُ",
+    "englishText": "Exalted are You. O Helper!"
+  },
+  {
+    "id": 249,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 250,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا صَبُورُ",
+    "englishText": "Glory be to You. O Patient!"
+  },
+  {
+    "id": 251,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا صَابِرُ",
+    "englishText": "Exalted are You. O Enduring!"
+  },
+  {
+    "id": 252,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 253,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُحْصِي",
+    "englishText": "Glory be to You. O Who takes away!"
+  },
+  {
+    "id": 254,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا مُنْشِئُ",
+    "englishText": "Exalted are You. O Who brings about!"
+  },
+  {
+    "id": 255,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 256,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا سُبْحَانُ",
+    "englishText": "Glory be to You. O Glorious!"
+  },
+  {
+    "id": 257,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا دَيَانُ",
+    "englishText": "Exalted are You. O Requiter!"
+  },
+  {
+    "id": 258,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 259,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا مُغِيثُ",
+    "englishText": "Glory be to You. O Who gives help!"
+  },
+  {
+    "id": 260,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا غِيَاثُ",
+    "englishText": "Exalted are You. O Who is called for help!"
+  },
+  {
+    "id": 261,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 262,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا فَاطِرُ",
+    "englishText": "Glory be to You. O Splitter!"
+  },
+  {
+    "id": 263,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَعَالَيْتَ يَا حَاضِرُ",
+    "englishText": "Exalted are You. O Ever-Present!"
+  },
+  {
+    "id": 264,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِرْنَا مِنَ ٱلنَّارِ يَا مُجِيرُ",
+    "englishText": "Keep us safe from the everlasting fire O Giver of Refuge!"
+  },
+  {
+    "id": 265,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ يَا ذَٱ الْعِزِّ وَٱلْجَمَالِ",
+    "englishText": "Glory be to You. O Lord of Honor and Grace, invoked for blessings."
+  },
+  {
+    "id": 266,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "تَبَارَكْتَ يَا ذَا ٱلْجَبَرُوتِ وَٱلْجَلاَلِ",
+    "englishText": "O Lord of Might and Majesty, Glory be to You."
+  },
+  {
+    "id": 267,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ لاَ إِلٰهَ إِلاَّ انْتَ",
+    "englishText": "There is no god but You."
+  },
+  {
+    "id": 268,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "سُبْحَانَكَ إِنِّي كُنْتُ مِنَ ٱلظَّالِمِينَ",
+    "englishText": "“Glory be to You. Verily, I have been a wrongdoer.”"
+  },
+  {
+    "id": 269,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَٱسْتَجَبْنَا لَهُ وَنَجَّيْنَاهُ مِنَ ٱلغَمِّ",
+    "englishText": "“So We heard his prayer and saved him from the anguish"
+  },
+  {
+    "id": 270,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَكَذٰلِكَ نُنْجِي ٱلْمُؤْمِنِينَ",
+    "englishText": "Thus We save believers.”"
+  },
+  {
+    "id": 271,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَصَلَّىٰ ٱللَّهُ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ وَآلِهِ اجْمَعِينَ",
+    "englishText": "Blessings of Allah be on our chief, Muhammad and his Household, one and all."
+  },
+  {
+    "id": 272,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَالَمِينَ",
+    "englishText": "(All) praise be to Allah the Lord of the worlds."
+  },
+  {
+    "id": 273,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَحَسْبُنَا ٱللَّهُ وَنِعْمَ ٱلْوَكِيلُ",
+    "englishText": "Sufficient for us is Allah. He is the Best Protector."
+  },
+  {
+    "id": 274,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِٱللَّهِ ٱلْعَلِيِّ ٱلْعَظِيمِ",
+    "englishText": "There is no power and no might except (with) Allah, the High, the Great."
+  }
+]
