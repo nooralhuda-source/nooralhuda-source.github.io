@@ -1,0 +1,345 @@
+[
+  {
+    "id": 1,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ مَنْ تَعَبَّا وَتَهَيَّا",
+    "englishText": "O Allah, One may call up, prepare,"
+  },
+  {
+    "id": 2,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاعَدَّ وَٱسْتَعَدَّ",
+    "englishText": "ready oneself, and stand prepared"
+  },
+  {
+    "id": 3,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "لِوِفَادَةٍ إِلَىٰ مَخْلُوقٍ",
+    "englishText": "for purpose of coming to a creature"
+  },
+  {
+    "id": 4,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "رَجَاءَ رِفْدِهِ",
+    "englishText": "in the hope of gaining his aid"
+  },
+  {
+    "id": 5,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَطَلَبَ نَائِلِهِ وَجَائِزَتِهِ",
+    "englishText": "and asking for his gift and present."
+  },
+  {
+    "id": 6,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَإلَيْكَ يَا رَبِّ تَعْبِيَتِي وَٱسْتِعْدَادِي",
+    "englishText": "As for myself, to You—O my Lord—I make my preparations and readiness"
+  },
+  {
+    "id": 7,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "رَجَاءَ عَفْوِكَ",
+    "englishText": "hoping for Your pardon"
+  },
+  {
+    "id": 8,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَطَلَبَ نَائِلِكَ وَجَائِزَتِكَ",
+    "englishText": "and asking for Your gift and present."
+  },
+  {
+    "id": 9,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَلاَ تُخَيِّبْ دُعَائي",
+    "englishText": "So, (please) do not disappoint my entreaty."
+  },
+  {
+    "id": 10,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ لاَ يَخِيبُ عَلَيْهِ سَائِلٌ",
+    "englishText": "O He Who never disappoints His beseechers"
+  },
+  {
+    "id": 11,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ يَنْقُصُهُ نَائِلٌ",
+    "englishText": "and Whose prizes never decrease His ample-giving!"
+  },
+  {
+    "id": 12,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَإنّي لَمْ آتِكَ ثِقَةً بِعَمَلٍ صَالِحٍ عَمِلْتُهُ",
+    "englishText": "I have not come to You with confidence of a righteous deed that I have done"
+  },
+  {
+    "id": 13,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ لِوِفَادَةِ مَخْلُوقٍ رَجَوْتُهُ",
+    "englishText": "nor have I had any hope in a grant of any creature."
+  },
+  {
+    "id": 14,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اتَيْتُكَ مُقِرّاً عَلَىٰ نَفْسِي بِٱلإسَاءَةِ وَٱلظُّلْمِ",
+    "englishText": "Rather, I have come to You professing myself to be evildoer and transgressor"
+  },
+  {
+    "id": 15,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مُعْتَرِفاً بِانْ لاَ حُجَّةَ لِي وَلاَ عُذْرَ",
+    "englishText": "and confessing that I lack any pretext or excuse."
+  },
+  {
+    "id": 16,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اتَيْتُكَ ارْجُو عَظِيمَ عَفْوِكَ",
+    "englishText": "I have come to You hoping for Your great pardon"
+  },
+  {
+    "id": 17,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱلَّذِي عَفَوْتَ بِهِ عَنِ ٱلْخَاطِئينَ",
+    "englishText": "due to which You have pardoned the wrongdoers."
+  },
+  {
+    "id": 18,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَلَمْ يَمْنَعْكَ طُولُ عُكُوفِهِمْ عَلِي عَظِيمِ ٱلْجُرْمِ",
+    "englishText": "Hence, their long-lasting retirement to their grave offenses has not prevented You"
+  },
+  {
+    "id": 19,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "انْ عُدْتَ عَلَيْهِمْ بِٱلرَّحْمَةِ",
+    "englishText": "from turning to them with mercy."
+  },
+  {
+    "id": 20,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَيَا مَنْ رَحْمَتُهُ وَاسِعَةٌ",
+    "englishText": "O He Whose mercy is huge"
+  },
+  {
+    "id": 21,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَفْوُهُ عَظيمٌ",
+    "englishText": "and Whose pardon is great;"
+  },
+  {
+    "id": 22,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَظيـمُ يَا عَظيـمُ يَا عَظيـمُ",
+    "englishText": "O All-great, O All-great, O All-great;"
+  },
+  {
+    "id": 23,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "لاَ يَرُدُّ غَضَبَكَ إِلاَّ حِلْمُكَ",
+    "englishText": "nothing can repel Your rage except Your forbearance"
+  },
+  {
+    "id": 24,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ يُنْجِي مِنْ سَخَطِكَ إِلاَّ ٱلتَّضَرُّعُ إِلَيْكَ",
+    "englishText": "and nothing can save from Your wrath except imploring earnestly to You."
+  },
+  {
+    "id": 25,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَهَبْ لِي يَا إِلٰهِي فَرَجاً",
+    "englishText": "So, my God, (please) grant me a relief"
+  },
+  {
+    "id": 26,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِٱلْقُدْرَةِ ٱلَّتِي تُحْيِي بِهَا مَيْتَ ٱلْبِلاَدِ",
+    "englishText": "in the name of the power through which You restore to life the derelict lands,"
+  },
+  {
+    "id": 27,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ تُهْلِكْنِي غَمّاً حَتَّىٰ تَسْتَجِيبَ لِي",
+    "englishText": "and do not cause me to perish out of grief until You respond to me"
+  },
+  {
+    "id": 28,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتُعَرِّفَنِي ٱلإِجَابَةَ فِي دُعَائِي",
+    "englishText": "and show me signs of Your response to my prayers."
+  },
+  {
+    "id": 29,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاذِقْنِي طَعْمَ ٱلْعَافِيَةِ إلَىٰ مُنَتَهَىٰ اجَلِي",
+    "englishText": "(please) Make me taste the flavor of wellbeing up to the end of my lifetime,"
+  },
+  {
+    "id": 30,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ تُشْمِتْ بِي عَدُوِّي",
+    "englishText": "do not make my enemies gloat over me,"
+  },
+  {
+    "id": 31,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ تُسَلِّطْهُ عَلَيَّ",
+    "englishText": "do not give them a hand over me,"
+  },
+  {
+    "id": 32,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ تُمَكِّنْهُ مِنْ عُنُقِي",
+    "englishText": "and do not make them control over me."
+  },
+  {
+    "id": 33,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ إِنْ وَضَعْتَنِي فَمَنْ ذَا ٱلَّذِي يَرْفَعُنِي",
+    "englishText": "O Allah, If You humiliate me, who can then exalt me?"
+  },
+  {
+    "id": 34,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِنْ رَفَعْتَنِي فَمَنْ ذَا ٱلَّذِي يَضَعُنِي",
+    "englishText": "And if You exalt me, who can then humiliate me?"
+  },
+  {
+    "id": 35,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِنْ اهْلَكْتَنِي فَمَنْ ذَا ٱلَّذِي يَعْرِضُ لَكَ فِي عَبْدِكَ",
+    "englishText": "If You annihilate me, who can then interfere before You concerning the affair of me—Your slave"
+  },
+  {
+    "id": 36,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اوْ يَسْالُكَ عَنْ امْرِهِ",
+    "englishText": "or who can intercede to ask You about it?"
+  },
+  {
+    "id": 37,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدْ عَلِمْتُ انَّهُ لَيْسَ فِي حُكْمِكَ ظُلْمٌ",
+    "englishText": "I have already known for sure that Your decrees are devoid of injustice"
+  },
+  {
+    "id": 38,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ فِي نَقَمَتِكَ عَجَلَةٌ",
+    "englishText": "and Your punishment does not count on immediateness."
+  },
+  {
+    "id": 39,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِنَّمَا يَعْجَلُ مَنْ يَخَافُ ٱلْفَوْتَ",
+    "englishText": "Verily, immediateness is the work of him who fears lest he may miss,"
+  },
+  {
+    "id": 40,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَإِنَّمَا يَحْتَاجُ إِلَىٰ ٱلظُّلْمِ ٱلضَّعِيفُ",
+    "englishText": "and only do the weak need injustice."
+  },
+  {
+    "id": 41,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدْ تَعَالَيْتَ يَا إِلٰهِي عَنْ ذٰلِكَ عُلُوّاً كَبِيراً",
+    "englishText": "As for You, O my God, You are too exalted to be so—Exalted and Great You are beyond all measure!"
+  },
+  {
+    "id": 42,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ إِنِّي اعُوذُ بِكَ فَاعِذْنِي",
+    "englishText": "O Allah, I take refuge in You; so, (please) have protection upon me!"
+  },
+  {
+    "id": 43,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاسْتَجيرُ بِكَ فَاجِرْنِي",
+    "englishText": "I call for Your safekeeping; so, (please) keep me under Your security!"
+  },
+  {
+    "id": 44,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاسْتَرْزِقُكَ فَٱرْزُقْنِي",
+    "englishText": "I appeal for Your sustenance; so, (please) provide me with sustenance!"
+  },
+  {
+    "id": 45,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاتَوَكَّلُ عَلَيْكَ فَٱكْفِنِي",
+    "englishText": "I put trust in You; so, (please) keep me under Your supervision!"
+  },
+  {
+    "id": 46,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاستَنْصِرُكَ عَلَىٰ عَدُوِّي فَٱنْصُرْنِي",
+    "englishText": "I call for Your aid against my enemy; so, (please) grant me support!"
+  },
+  {
+    "id": 47,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاسْتَعينُ بِكَ فَاعِنِّي",
+    "englishText": "I seek Your assistance; so, (please) assist me!"
+  },
+  {
+    "id": 48,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاسْتَغْفِرُكَ يَا إِلٰهِي فَٱغْفِرْ لِي",
+    "englishText": "I ask for Your forgiveness; so, (please) forgive me."
+  },
+  {
+    "id": 49,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "آمِينَ آمِينَ آمِينَ",
+    "englishText": "So, respond! Respond! Respond!"
+  }
+]
