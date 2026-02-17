@@ -1,0 +1,1815 @@
+[
+  {
+    "id": 1,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اَللَّهُمَّ إِنِّي اسْالُكَ بِٱسْمِكَ",
+    "englishText": "O Allah, verily I beseech You by Your Name:"
+  },
+  {
+    "id": 2,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِسْمِ ٱللَّهِ ٱلرَّحْمٰنِ ٱلرَّحِيمِ",
+    "englishText": "In the Name of Allah, the All-beneficent, the All-merciful."
+  },
+  {
+    "id": 3,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذَا ٱلْجَلاَلِ وَٱلإِكْرَامِ",
+    "englishText": "O Lord of majesty and honor!"
+  },
+  {
+    "id": 4,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حَيُّ يَا قَيُّومُ",
+    "englishText": "O Ever-living! O Self-subsistent!"
+  },
+  {
+    "id": 5,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حَيُّ لاَ إِلٰهَ إِلاَّ انتَ",
+    "englishText": "O Ever-Living! There is no god but You!"
+  },
+  {
+    "id": 6,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا هُوَ يَا مَنْ لاَ يَعْلَمُ مَا هُوَ",
+    "englishText": "O He Whom none knows what He is,"
+  },
+  {
+    "id": 7,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ كَيْفَ هُوَ",
+    "englishText": "nor how He is,"
+  },
+  {
+    "id": 8,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ ايْنَ هُوَ",
+    "englishText": "nor where He is,"
+  },
+  {
+    "id": 9,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ حَيْثُ هُوَ إِلاَّ هُوَ",
+    "englishText": "nor in what respect He is, but He!"
+  },
+  {
+    "id": 10,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذَا ٱلْمُلْكِ وَٱلْمَلَكُوتِ",
+    "englishText": "O Possessor of dominion and kingdom!"
+  },
+  {
+    "id": 11,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذَا ٱلعِزَّةِ وَٱلْجَبرُوتِ",
+    "englishText": "O Possessor of might and invincibility!"
+  },
+  {
+    "id": 12,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَلِكُ يَا قُدُّوسُ يَا سَلاَمُ",
+    "englishText": "O King! O All-holy! O Giver of peace!"
+  },
+  {
+    "id": 13,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُؤْمِنُ يَا مُهَيْمِنُ",
+    "englishText": "O Granter of security! O All-preserver!"
+  },
+  {
+    "id": 14,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَزِيزُ يَا جَبَّارُ يَا مُتَكَبِّرُ",
+    "englishText": "O Almighty! O All-compeller! O All-sublime!"
+  },
+  {
+    "id": 15,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا خَاِلقُ يَا بَارِئُ يَا مُصَوِّرُ",
+    "englishText": "O Creator! O Maker! O Shaper!"
+  },
+  {
+    "id": 16,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُفِيدُ يَا مُدَبِّرُ",
+    "englishText": "O grantor of Benefits! O Director!"
+  },
+  {
+    "id": 17,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا شَدِيدُ يَا مُبْدِئُ",
+    "englishText": "O Severe (in punishing the evildoers)! O Originator!"
+  },
+  {
+    "id": 18,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُعِيدُ يَا مُبِيدُ",
+    "englishText": "O Returner! O Destroyer!"
+  },
+  {
+    "id": 19,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَدُودُ يَا مَحْمُودُ يَا مَعْبُودُ",
+    "englishText": "O All-loving! O All-praiseworthy! O All-worshipped!"
+  },
+  {
+    "id": 20,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بَعِيدُ يَا قَرِيبُ",
+    "englishText": "O Far! O Nigh!"
+  },
+  {
+    "id": 21,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُجِيبُ يَا رَقِيبُ يَا حَسِيبُ",
+    "englishText": "O Responder! O Watcher! O Reckoner!"
+  },
+  {
+    "id": 22,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بَدِيعُ يَا رَفِيعُ",
+    "englishText": "O Innovator! O Exalter!"
+  },
+  {
+    "id": 23,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنِيعُ يَا سَمِيعُ",
+    "englishText": "O Inaccessible! O All-hearing!"
+  },
+  {
+    "id": 24,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَلِيمُ يَا حَلِيمُ يَا كَرِيمُ",
+    "englishText": "O All-knowing! O All-clement! O All-generous!"
+  },
+  {
+    "id": 25,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حَكِيمُ يَا قَدِيمُ",
+    "englishText": "O All-wise! O Eternal!"
+  },
+  {
+    "id": 26,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَلِيُّ يَا عَظِيمُ",
+    "englishText": "O All-high! O All-tremendous!"
+  },
+  {
+    "id": 27,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حَنَّانُ يَا مَنَّانُ",
+    "englishText": "O All-commiserating! O All-gracious!"
+  },
+  {
+    "id": 28,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا دَيَّانُ يَا مُسْتَعَانُ",
+    "englishText": "O Condemner! O Recourse!"
+  },
+  {
+    "id": 29,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا جَلِيلُ يَا جَمِيلُ",
+    "englishText": "O All-majestic! O All-handsome!"
+  },
+  {
+    "id": 30,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَكِيلُ يَا كَفِيلُ",
+    "englishText": "O Guardian! O Surety!"
+  },
+  {
+    "id": 31,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُقِيلُ يَا مُنِيلُ",
+    "englishText": "O Annuller! O Bestower!"
+  },
+  {
+    "id": 32,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا نَبِيلُ يَا دَلِيلُ",
+    "englishText": "O All-noble! O Leader!"
+  },
+  {
+    "id": 33,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا هَادِي يَا بَادِي",
+    "englishText": "O Guide! O All-Apparent!"
+  },
+  {
+    "id": 34,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا اوَّلُ يَا آخِرُ",
+    "englishText": "O First! O Last!"
+  },
+  {
+    "id": 35,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ظَاهِرُ يَا بَاطِنُ",
+    "englishText": "O Outward! O Inward!"
+  },
+  {
+    "id": 36,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا قَائِمُ يَا دَائِمُ",
+    "englishText": "O All-steadfast! O Everlasting!"
+  },
+  {
+    "id": 37,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَالِمُ يَا حَاكِمُ",
+    "englishText": "O Knower! O Decider!"
+  },
+  {
+    "id": 38,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا قَاضِي يَا عَادِلُ",
+    "englishText": "O Judge! O Just!"
+  },
+  {
+    "id": 39,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا فَاصِلُ يَا وَاصِلُ",
+    "englishText": "O Separator! O Joiner!"
+  },
+  {
+    "id": 40,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا طَاهِرُ يَا مُطَهِّرُ",
+    "englishText": "O Pure! O Purifier!"
+  },
+  {
+    "id": 41,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا قَادِرُ يَا مُقْتَدِرُ",
+    "englishText": "O All-powerful! O All-able!"
+  },
+  {
+    "id": 42,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا كَبِيرُ يَا مُتَكَبِّرُ",
+    "englishText": "O All-great! O All-sublime!"
+  },
+  {
+    "id": 43,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَاحِدُ يَا احَدُ يَا صَمَدُ",
+    "englishText": "O One! O Unique! O eternally Besought of all!"
+  },
+  {
+    "id": 44,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ لَمْ يَلِدْ وَلَمْ يُولَدْ",
+    "englishText": "O He Who begets not and was not begotten,"
+  },
+  {
+    "id": 45,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلَمْ يَكُن لَهُ كُفُواً احَدٌ",
+    "englishText": "equal to Whom is none,"
+  },
+  {
+    "id": 46,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلَمْ يَكُن لَهُ صَاحِبَةً",
+    "englishText": "Who has no consort,"
+  },
+  {
+    "id": 47,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ كَانَ مَعَهُ وَزِيرٌ",
+    "englishText": "with Him is no aide"
+  },
+  {
+    "id": 48,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ ٱتَّخَذَ مَعَهُ مُشِيراً",
+    "englishText": "nor has He taken any adviser,"
+  },
+  {
+    "id": 49,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ ٱحْتَاجَ إِلَىٰ ظَهِيرٍ",
+    "englishText": "nor needs He any assistant,"
+  },
+  {
+    "id": 50,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ كَانَ مَعَهُ مِنَ إِلٰهٍ غَيْرُهُ",
+    "englishText": "nor with Him is any god but He—"
+  },
+  {
+    "id": 51,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "لاَ إِلٰهَ إِلاَّ انتَ",
+    "englishText": "there is no god but You."
+  },
+  {
+    "id": 52,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَتَعَالَيْتَ عَمَّا يَقُولُ ٱلظَّالِمُونَ عُلُوّاً كَبِيراً",
+    "englishText": "So exalted are You above what the evildoers say, a great exaltation!"
+  },
+  {
+    "id": 53,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَلِيُّ يَا شَامِخُ يَا بَاِذخُ",
+    "englishText": "O All-high! O All-lofty! O All-towering!"
+  },
+  {
+    "id": 54,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا فَتَّاحُ يَا نَفَّاحُ يَا مُرْتَاحُ",
+    "englishText": "O All-opener! O All-diffuser! O All-restful!"
+  },
+  {
+    "id": 55,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُفَرِّجُ يَا نَاصِرُ يَا مُنْتَصِرُ",
+    "englishText": "O Bestower of relief! O Helper! O Giver of victory!"
+  },
+  {
+    "id": 56,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُدْرِكُ يَا مُهْلِكُ يَا مُنْتَقِمُ",
+    "englishText": "O Comprehender! O Destroyer! O Avenger!"
+  },
+  {
+    "id": 57,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بَاعِثُ يَا وَارِثُ",
+    "englishText": "O Upraiser! O Inheritor!"
+  },
+  {
+    "id": 58,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا طَاِلبُ يَا غَاِلبُ",
+    "englishText": "O Seeker! O Vanquisher!"
+  },
+  {
+    "id": 59,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ لاَ يَفُوتُهُ هَارِبٌ",
+    "englishText": "O He from Whom no fugitive can escape!"
+  },
+  {
+    "id": 60,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا تَوَّابُ يَا اوَّابُ يَا وَهَّابُ",
+    "englishText": "O All-relenting! O All-forbearing! O All-bestower!"
+  },
+  {
+    "id": 61,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُسَبِّبَ ٱلاسْبَابِ",
+    "englishText": "O Originator of all means!"
+  },
+  {
+    "id": 62,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُفَتِّحَ ٱلابْوَابِ",
+    "englishText": "O Opener of all doors!"
+  },
+  {
+    "id": 63,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ حَيْثُ مَا دُعِي اجَابَ",
+    "englishText": "O He Who answers wherever He is called upon!"
+  },
+  {
+    "id": 64,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا طَهُورُ يَا شَكُورَ",
+    "englishText": "O All-Pure! O All-thankful!"
+  },
+  {
+    "id": 65,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَفُوُّ يَا غَفُورُ",
+    "englishText": "O Exempter! O Forgiver!"
+  },
+  {
+    "id": 66,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا نُورَ ٱلنُّورِ",
+    "englishText": "O Light of light!"
+  },
+  {
+    "id": 67,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُدَبِّرَ ٱلامُورِ",
+    "englishText": "O Director of all affairs!"
+  },
+  {
+    "id": 68,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا لَطِيفُ يَا خَبِيرُ",
+    "englishText": "O All-subtle! O All-aware!"
+  },
+  {
+    "id": 69,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُجِيرُ يَا مُنِيرُ",
+    "englishText": "O Protector! O Illuminator!"
+  },
+  {
+    "id": 70,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بَصِيرُ يَا ظَهِيرُ يَا كَبِيرُ",
+    "englishText": "O All-seeing! O All-aiding! O All-great!"
+  },
+  {
+    "id": 71,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وِتْرُ يَا فَرْدُ",
+    "englishText": "O Alone! O Solitary!"
+  },
+  {
+    "id": 72,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ابَدُ يَا سَنَدُ يَا صَمَدُ",
+    "englishText": "O Eternity without end! O Support! O Everlasting Refuge!"
+  },
+  {
+    "id": 73,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا كَافِي يَا شَافِي",
+    "englishText": "O All-sufficient! O All-healing!"
+  },
+  {
+    "id": 74,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَافِي يَا مُعَافِي",
+    "englishText": "O All-fulfilling! O All-relieving!"
+  },
+  {
+    "id": 75,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُحْسِنُ يَا مُجْمِلُ",
+    "englishText": "O All-kind! O All-gracious!"
+  },
+  {
+    "id": 76,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُنْعِمُ يَا مُفْضِلُ",
+    "englishText": "O All-benevolent! O All-bountiful!"
+  },
+  {
+    "id": 77,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُتَكَرِّمُ يَا مُتَفَرِّدُ",
+    "englishText": "O All-beneficent! O All-solitary!"
+  },
+  {
+    "id": 78,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ عَلاَ فَقَهَرَ",
+    "englishText": "O He Who is exalted and dominates!"
+  },
+  {
+    "id": 79,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ مَلَكَ فَقَدَرَ",
+    "englishText": "O He Who is master and exercises power!"
+  },
+  {
+    "id": 80,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ بَطَنَ فَخَبَرَ",
+    "englishText": "O He Who is inward and aware!"
+  },
+  {
+    "id": 81,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ عُبِدَ فَشَكَرَ",
+    "englishText": "O He Who is worshipped and thankful!"
+  },
+  {
+    "id": 82,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ عُصِي فَغَفَرَ",
+    "englishText": "O He Who is disobeyed and forgives!"
+  },
+  {
+    "id": 83,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ لاَ تَحْوِيهِ ٱلْفِكَرُ",
+    "englishText": "O He Who is not encompassed by thoughts,"
+  },
+  {
+    "id": 84,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ يُدْرِكُهُ بَصَرٌ",
+    "englishText": "nor perceived by vision,"
+  },
+  {
+    "id": 85,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ يَخْفَىٰ عَلَيْهِ اثَرٌ",
+    "englishText": "and from Whom no trace remains hidden!"
+  },
+  {
+    "id": 86,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَازِقَ ٱلْبَشَرِ",
+    "englishText": "O Provider of mankind!"
+  },
+  {
+    "id": 87,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُقَدِّرَ كُلِّ قَدَرٍ",
+    "englishText": "O Determiner of every lot!"
+  },
+  {
+    "id": 88,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَالِي ٱلْمَكَانِ",
+    "englishText": "O Lofty in place!"
+  },
+  {
+    "id": 89,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا شَدِيدَ ٱلارْكَانِ",
+    "englishText": "O Firm in supports!"
+  },
+  {
+    "id": 90,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُبَدِّلَ ٱلزَّمَانِ",
+    "englishText": "O Transformer of times!"
+  },
+  {
+    "id": 91,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا قَابِلَ ٱلقُرْبَانِ",
+    "englishText": "O Accepter of sacrifices!"
+  },
+  {
+    "id": 92,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذَا ٱلْمَنِّ وَٱلإِحْسَانِ",
+    "englishText": "O Lord of graciousness and benevolence!"
+  },
+  {
+    "id": 93,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذَا ٱلْعِزَّةِ وَٱلسُّلْطَانِ",
+    "englishText": "O Lord of might and force!"
+  },
+  {
+    "id": 94,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَحِيمُ يَا رَحْمٰنُ",
+    "englishText": "O All-compassionate! O All-merciful!"
+  },
+  {
+    "id": 95,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ هُوَ كُلَّ يَوْمٍ فِي شَانٍ",
+    "englishText": "O He Who is every day upon some labor!"
+  },
+  {
+    "id": 96,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ لاَ يَشْغَلُهُ شَانٌ عَنْ شَانٍ",
+    "englishText": "O He Who is not distracted from one labor by another!"
+  },
+  {
+    "id": 97,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عَظِيمَ ٱلشَّانِ",
+    "englishText": "O Tremendous in rank!"
+  },
+  {
+    "id": 98,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ هُوَ بِكُلِّ مَكَانٍ",
+    "englishText": "O He Who is in every place!"
+  },
+  {
+    "id": 99,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَامِعَ ٱلاصْوَاتِ",
+    "englishText": "O He Who hears all sounds!"
+  },
+  {
+    "id": 100,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُجِيبَ ٱلدَّعَوَاتِ",
+    "englishText": "O He Who answers all supplications!"
+  },
+  {
+    "id": 101,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُنجِحَ ٱلطَّلِبَاتِ",
+    "englishText": "O He Who fulfils all entreaties!"
+  },
+  {
+    "id": 102,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا قَاضِي ٱلْحَاجَاتِ",
+    "englishText": "O He Who provides all needs!"
+  },
+  {
+    "id": 103,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُنْزِلَ ٱلْبَرَكَاتِ",
+    "englishText": "O He Who sends down blessings!"
+  },
+  {
+    "id": 104,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَاحِمَ ٱلْعَبَرَاتِ",
+    "englishText": "O He Who has mercy upon tears!"
+  },
+  {
+    "id": 105,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُقِيلَ ٱلْعَثَرَاتِ",
+    "englishText": "O He Who annuls slips!"
+  },
+  {
+    "id": 106,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا كَاشِفَ ٱلْكُرُبَاتِ",
+    "englishText": "O He Who removes troubles!"
+  },
+  {
+    "id": 107,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَلِيَّ ٱلْحَسَنَاتِ",
+    "englishText": "O He Who sponsors good things!"
+  },
+  {
+    "id": 108,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَافِعَ ٱلدَّرَجَاتِ",
+    "englishText": "O He Who exalts in rank!"
+  },
+  {
+    "id": 109,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُؤْتِي ٱلسُّؤْلاَتِ",
+    "englishText": "O He Who bestows requests!"
+  },
+  {
+    "id": 110,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُحْيِي ٱلامْوَاتِ",
+    "englishText": "O He Who gives life to the dead!"
+  },
+  {
+    "id": 111,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا جَامِعَ ٱلشَّتَاتِ",
+    "englishText": "O He Who gathers all scattered things!"
+  },
+  {
+    "id": 112,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُطَّلِعاً عَلىٰ ٱلنِّيَاتِ",
+    "englishText": "O He Who is aware of all intentions!"
+  },
+  {
+    "id": 113,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَادَّ مَا قَدْ فَاتَ",
+    "englishText": "O He Who brings back what has passed away!"
+  },
+  {
+    "id": 114,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ لاَ تَشْتَبِهُ عَلَيْهِ ٱلاصْوَاتُ",
+    "englishText": "O He for Whom sounds are never indistinct!"
+  },
+  {
+    "id": 115,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ لاَ تُضْجِرُهُ ٱلْمَسْالاَتُ",
+    "englishText": "O He Who never becomes annoyed at requests"
+  },
+  {
+    "id": 116,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَلاَ تَغْشَاهُ ٱلظُّلُمَاتُ",
+    "englishText": "nor covered by shadows!"
+  },
+  {
+    "id": 117,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا نُورَ ٱلارْضِ وَٱلسَّمَاوَاتِ",
+    "englishText": "O Light of the earth and the heavens!"
+  },
+  {
+    "id": 118,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَاِبغَ ٱلنِّعَمِ",
+    "englishText": "O Ample in blessings!"
+  },
+  {
+    "id": 119,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا دَافِعَ ٱلنِّقمِ",
+    "englishText": "O Repeller of adversities!"
+  },
+  {
+    "id": 120,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بَارِئَ ٱلنَّسَمِ",
+    "englishText": "O Maker of the breaths of life!"
+  },
+  {
+    "id": 121,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا جَامِعَ ٱلامَمِ",
+    "englishText": "O He Who gathers together the nations!"
+  },
+  {
+    "id": 122,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا شَافِي ٱلسَّقَمِ",
+    "englishText": "O Healer of illnesses!"
+  },
+  {
+    "id": 123,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا خَاِلقَ ٱلنُّورِ وَٱلظُّلَمِ",
+    "englishText": "O Creator of light and darkness!"
+  },
+  {
+    "id": 124,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذَا ٱلْجُودِ وَٱلْكَرَمِ",
+    "englishText": "O Lord of munificence and generosity!"
+  },
+  {
+    "id": 125,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ لاَ يَطَا عَرْشَهُ قَدَمٌ",
+    "englishText": "O He upon Whose Throne no foot treads!"
+  },
+  {
+    "id": 126,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا اجْوَدَ ٱلاجْوَدِينَ",
+    "englishText": "O Most Munificent of the most munificent!"
+  },
+  {
+    "id": 127,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا اكْرَمَ ٱلاكْرَمِينَ",
+    "englishText": "O Most Generous of the most generous!"
+  },
+  {
+    "id": 128,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا اسْمَعَ ٱلسَّامِعِينَ",
+    "englishText": "O Most Hearing of the hearers!"
+  },
+  {
+    "id": 129,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ابْصَرَ ٱلنَّاظِرِينَ",
+    "englishText": "O Most Seeing of the viewers!"
+  },
+  {
+    "id": 130,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا جَارَ ٱلْمُسْتَجِيرِينَ",
+    "englishText": "O Protector of those who seek protection!"
+  },
+  {
+    "id": 131,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا امَانَ ٱلْخَائِفِينَ",
+    "englishText": "O Sanctuary of the fearful!"
+  },
+  {
+    "id": 132,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ظَهْرَ ٱللاَّجِينَ",
+    "englishText": "O Asylum of the refugees!"
+  },
+  {
+    "id": 133,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَلِيَّ ٱلْمُؤْمِنِينَ",
+    "englishText": "O Patron of the believers!"
+  },
+  {
+    "id": 134,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا غِيَاثَ ٱلْمَسْتَغِيثِينَ",
+    "englishText": "O Helper of those who seek aid!"
+  },
+  {
+    "id": 135,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا غَايَةَ ٱلطَّاِلبِينَ",
+    "englishText": "O Goal of the seekers!"
+  },
+  {
+    "id": 136,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا صَاحِبَ كُلِّ غَرِيبٍ",
+    "englishText": "O Companion of every stranger!"
+  },
+  {
+    "id": 137,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُؤْنِسَ كُلِّ وَحِيدٍ",
+    "englishText": "O Intimate of everyone alone!"
+  },
+  {
+    "id": 138,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَلْجَا كُلِّ طَرِيدٍ",
+    "englishText": "O Refuge of every outcast!"
+  },
+  {
+    "id": 139,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَاوَىٰ كُلِّ شَرِيدٍ",
+    "englishText": "O Shelter of every wanderer!"
+  },
+  {
+    "id": 140,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حَافِظَ كُلِّ ضَالَّةٍ",
+    "englishText": "O Custodian of everyone astray!"
+  },
+  {
+    "id": 141,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَاحِمَ ٱلشَّيْخِ ٱلْكَبِيرِ",
+    "englishText": "O He Who is merciful to old men!"
+  },
+  {
+    "id": 142,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَازِقَ ٱلطِّفْلِ ٱلصَّغِيرِ",
+    "englishText": "O He Who provides for small infants!"
+  },
+  {
+    "id": 143,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا جَابِرَ ٱلْعَظْمِ ٱلْكَسِيرِ",
+    "englishText": "O He Who sets broken bones!"
+  },
+  {
+    "id": 144,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا فَاكَّ كُلِّ اسِيرٍ",
+    "englishText": "O He Who releases every prisoner!"
+  },
+  {
+    "id": 145,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُغْنِي ٱلْبَائِسِ ٱلْفَقِيرِ",
+    "englishText": "O He Who enriches the miserable pauper!"
+  },
+  {
+    "id": 146,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عِصْمَةَ ٱلْخَائِفِ ٱلْمُسْتَجِيرِ",
+    "englishText": "O He Who safeguards the fearful seeker of protection!"
+  },
+  {
+    "id": 147,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ لَهُ ٱلتَّدْبِيرُ وَٱلتَّقْدِيرُ",
+    "englishText": "O He Who governs and determines!"
+  },
+  {
+    "id": 148,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنِ ٱلْعَسِيرُ عَلَيْهِ سَهْلٌ يَسِيرٌ",
+    "englishText": "O He for Whom the difficult is simple and easy!"
+  },
+  {
+    "id": 149,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ لاَ يَحْتَاجُ إِلَىٰ تَفْسِيرٍ",
+    "englishText": "O He Who never needs an explanation!"
+  },
+  {
+    "id": 150,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ هُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+    "englishText": "O He Who is powerful over everything!'"
+  },
+  {
+    "id": 151,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ هُوَ بِكُلِّ شَيْءٍ خَبِيرٌ",
+    "englishText": "O He Who is aware of everything!"
+  },
+  {
+    "id": 152,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ هُوَ بِكُلِّ شَيءٍ بَصِيرٌ",
+    "englishText": "O He Who sees everything!"
+  },
+  {
+    "id": 153,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُرْسِلَ ٱلرِّيَاحِ",
+    "englishText": "O Sender of the winds!"
+  },
+  {
+    "id": 154,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا فَاِلقَ ٱلإِصْبَاحِ",
+    "englishText": "O Cleaver of the dawn!"
+  },
+  {
+    "id": 155,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا بَاعِثَ ٱلارْوَاحِ",
+    "englishText": "O Dispatcher of the spirits!"
+  },
+  {
+    "id": 156,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذَا ٱلْجُودِ وَٱلسَّمَاحِ",
+    "englishText": "O Lord of munificence and forbearance!"
+  },
+  {
+    "id": 157,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ بِيَدِهِ كُلُّ مِفْتَاحٍ",
+    "englishText": "O He in Whose Hand is every key!"
+  },
+  {
+    "id": 158,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَامِعَ كُلِّ صَوْتٍ",
+    "englishText": "O He Who hears every sound!"
+  },
+  {
+    "id": 159,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَابِقَ كُلِّ فَوْتٍ",
+    "englishText": "O He Who takes precedence over everything that passes away!"
+  },
+  {
+    "id": 160,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُحْيِي كُلِّ نَفْسٍ بَعْدَ ٱلْمَوْتِ",
+    "englishText": "O He Who gives life to every soul after death!"
+  },
+  {
+    "id": 161,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عُدَّتِي فِي شِدَّتِي",
+    "englishText": "O my Provision in my hardship!"
+  },
+  {
+    "id": 162,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حَافِظِي فِي غُرْبَتِي",
+    "englishText": "O my Maintainer in my exile!"
+  },
+  {
+    "id": 163,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُؤْنِسِي فِي وَحْدَتِي",
+    "englishText": "O my Intimate in my lonesomeness!"
+  },
+  {
+    "id": 164,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا وَلِيِّي فِي نِعْمَتِي",
+    "englishText": "O my Sponsor in my blessings!"
+  },
+  {
+    "id": 165,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا كَهْفِي حِينَ تُعْيِينِيِ ٱلْمَذَاهِبُ",
+    "englishText": "O my haven when the ways make me weary,"
+  },
+  {
+    "id": 166,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَتُسْلِّمُنِي ٱلاقَارِبُ",
+    "englishText": "when relatives give me up"
+  },
+  {
+    "id": 167,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَيَخْذُلُنِي كُلُّ صَاحِبٍ",
+    "englishText": "and when every companion forsakes me!"
+  },
+  {
+    "id": 168,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا عِمَادَ مَنْ لاَ عِمَادَ لَهُ",
+    "englishText": "O Backing of him who has no backing!"
+  },
+  {
+    "id": 169,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا سَنَدَ مَنْ لاَ سَنَدَ لَهُ",
+    "englishText": "O Support of him who has no support!"
+  },
+  {
+    "id": 170,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذُخْرَ مَنْ لاَ ذُخْرَ لَهُ",
+    "englishText": "O Store of him who has no store!"
+  },
+  {
+    "id": 171,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا حِرْزَ مَنْ لاَ حِرْزَ لَهُ",
+    "englishText": "O Sanctuary of him who has no sanctuary!"
+  },
+  {
+    "id": 172,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا كَهْفَ مَنْ لاَ كَهْفَ لَهُ",
+    "englishText": "O Cave of him who has no cave!"
+  },
+  {
+    "id": 173,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا كَنْزَ مَنْ لاَ كَنْزَ لَهُ",
+    "englishText": "O Treasure of him who has no treasure!"
+  },
+  {
+    "id": 174,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رُكْنَ مَنْ لاَ رُكْنَ لَهُ",
+    "englishText": "O castle of him who has no castle!"
+  },
+  {
+    "id": 175,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا غِيَاثَ مَنْ لاَ غِيَاثَ لَهُ",
+    "englishText": "O Help of him who has no help!"
+  },
+  {
+    "id": 176,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا جَارَ مَنْ لاَ جَارَ لَهُ",
+    "englishText": "O backer of him who has no backer!"
+  },
+  {
+    "id": 177,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا جَارِي ٱللَّصِيقَ",
+    "englishText": "O my Adjacent Neighbor!"
+  },
+  {
+    "id": 178,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رُكْنِي ٱلْوَثِيقَ",
+    "englishText": "O my Sturdy Pillar!"
+  },
+  {
+    "id": 179,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا إِلٰهِي بَٱلتَّحْقِيقِ",
+    "englishText": "O My God in truth!"
+  },
+  {
+    "id": 180,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَبَّ ٱلْبَيْتِ ٱلْعَتِيقِ",
+    "englishText": "O Lord of the Ancient House!"
+  },
+  {
+    "id": 181,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا شَفِيقُ يَا رَفِيقُ",
+    "englishText": "O All-affectionate! O Friend!"
+  },
+  {
+    "id": 182,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فُكَّنِي مِنْ حَلَقِ ٱلْمَضِيقِ",
+    "englishText": "Deliver me from the chains of strictures,"
+  },
+  {
+    "id": 183,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱصْرِفْ عَنِّي كُلَّ هَمٍّ وَغَمٍّ وَضِيقٍ",
+    "englishText": "turn away from me every care, grief and distress,"
+  },
+  {
+    "id": 184,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱكْفِنِي شَرَّ مَا لاَ اطِيقُ",
+    "englishText": "protect me from the evil of that which I cannot bear,"
+  },
+  {
+    "id": 185,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاعِنِّي عَلَىٰ مَا اطِيقُ",
+    "englishText": "and help me in that which I am able to bear!"
+  },
+  {
+    "id": 186,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَادَّ يُوسُفَ عَلَىٰ يَعْقُوبَ",
+    "englishText": "O He Who returned Joseph to Jacob!"
+  },
+  {
+    "id": 187,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا كَاشِفَ ضُرَّ ايُّوبَ",
+    "englishText": "O He Who removed the affliction of Job!"
+  },
+  {
+    "id": 188,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا غَافِرَ ذَنْبِ دَاوُودَ",
+    "englishText": "O He Who forgave the sin of David!"
+  },
+  {
+    "id": 189,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَافِعَ عِيسَىٰ بْنِ مَرْيَمَ وَمُنجِيهِ مِنْ ايْدِي ٱلْيَهُودِ",
+    "englishText": "O He Who caused Jesus, the son of Mary, to ascend and delivered him from the hands of the Jews!"
+  },
+  {
+    "id": 190,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُجِيبَ نِدَاءِ يُونُسَ فِي ٱلظُّلُمَاتِ",
+    "englishText": "O He Who answered Jonah's call in the darkness!"
+  },
+  {
+    "id": 191,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُصْطُفِي مُوسَىٰ بِٱلْكَلِمَاتِ",
+    "englishText": "O He Who chose Moses by spoken words!"
+  },
+  {
+    "id": 192,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ غَفَرَ لآِدَمَ خَطِيئَتَهُ",
+    "englishText": "O He Who forgave Adam his slip"
+  },
+  {
+    "id": 193,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَرَفَعَ إِدْرِيسَ مَكَاناً عَلِيّاً بِرَحْمَتِهِ",
+    "englishText": "and raised Idris to a high place through his mercy!"
+  },
+  {
+    "id": 194,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ نَجَّىٰ نُوحاً مِنَ ٱلغَرَقِ",
+    "englishText": "O He Who saved Noah from drowning!"
+  },
+  {
+    "id": 195,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ اهْلَكَ عَاداً ٱلاولَىٰ",
+    "englishText": "O He Who destroyed `ªd, the ancient,"
+  },
+  {
+    "id": 196,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَثَمُودَ فَمَا ابْقَىٰ",
+    "englishText": "and Thamud, and did not spare them,"
+  },
+  {
+    "id": 197,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَوْمَ نُوحٍ مِنْ قَبْلُ",
+    "englishText": "and the people of Noah before;"
+  },
+  {
+    "id": 198,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّهُمْ كَانُوا هُمْ اظْلَمَ وَاطْغَىٰ",
+    "englishText": "certainly, they were most unjust and more rebellious,"
+  },
+  {
+    "id": 199,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْمُؤْتَفِكَةَ اهْوَىٰ",
+    "englishText": "and al-Mu'tafikah, He also overthrew."
+  },
+  {
+    "id": 200,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ دَمَّرَ عَلَىٰ قَوْمِ لُوطٍ",
+    "englishText": "O He Who destroyed the people of Lot"
+  },
+  {
+    "id": 201,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَدَمْدَمَ عَلَىٰ قَوْمِ شُعَيْبٍ",
+    "englishText": "and crushed the people of Shu`ayb!"
+  },
+  {
+    "id": 202,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنِ ٱتَّخَذَ إِبْرَاهِيمَ خَلِيلاً",
+    "englishText": "O He Who took Abraham for a friend!"
+  },
+  {
+    "id": 203,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنِ ٱتَّخَذَ مُوسَىٰ كَلِيماً",
+    "englishText": "O You Who took Moses for an object of His words,"
+  },
+  {
+    "id": 204,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱتَّخَذَ مُحَمَّداً صَلَّىٰ اللَّهُ عَلَيْهِ وَآلِهِ وَعَلَيْهِمْ اجْمَعِينَ حَبِيباً",
+    "englishText": "and took Muhammad, may Allah bless him and his Household, for a beloved!"
+  },
+  {
+    "id": 205,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مُؤْتِي لُقْمَانَ ٱلْحِكْمَةَ",
+    "englishText": "O He Who gave Luqman wisdom,"
+  },
+  {
+    "id": 206,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْوَاهِبَ لِسُلَيْمَانَ مُلْكاً",
+    "englishText": "and bestowed upon Solomon a kingdom"
+  },
+  {
+    "id": 207,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "لاَ يَنْبَغِي لاحَدٍ مِنْ بَعْدِهِ",
+    "englishText": "such as may not befit anyone after him!"
+  },
+  {
+    "id": 208,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ نَصَرَ ذَا ٱلْقَرْنَيْنِ عَلىٰ ٱلْمُلُوكِ ٱلْجَبَابِرَةِ",
+    "englishText": "O He Who gave Dhul-Qarnayn victory over the tyrannical kings!"
+  },
+  {
+    "id": 209,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ اعْطَىٰ ٱلْخِضْرَ ٱلْحَيَاةَ",
+    "englishText": "O He Who gave al-Khadir (eternal) life"
+  },
+  {
+    "id": 210,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَرَدَّ لِيُوشَعَ بْنِ نُونٍ ٱلشَّمْسَ بَعْدَ غُرُوبِهَا",
+    "englishText": "and returned the sun to Joshua, the son of Nun, after its setting!"
+  },
+  {
+    "id": 211,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ رَبَطَ عَلَىٰ قَلْبِ امِّ مُوسَىٰ",
+    "englishText": "O He Who strengthened the heart of Moses' mother,"
+  },
+  {
+    "id": 212,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاحْصَنَ فَرْجَ مَرْيَمَ ٱبْنَةِ عِمْرَانَ",
+    "englishText": "and guarded the virginity of Mary, the daughter of `Imran!"
+  },
+  {
+    "id": 213,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ حَصَّنَ يَحْيَىٰ بْنَ زَكَرِيَّا مِنَ ٱلذَّنْبِ",
+    "englishText": "O He Who fortified John, the son of Zachariah, against sins"
+  },
+  {
+    "id": 214,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَسَكَّنَ عَنْ مُوسَىٰ ٱلْغَضَبَ",
+    "englishText": "and calmed the anger of Moses!"
+  },
+  {
+    "id": 215,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ بَشَّرَ زَكَرِيَا بِيَحْيَىٰ",
+    "englishText": "O He Who gave Zachariah the good news of the birth of John!"
+  },
+  {
+    "id": 216,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ فَدَىٰ إِسْمَاعِيلَ مِنَ ٱلذَّبْحِ بِذِبْحٍ عَظِيمٍ",
+    "englishText": "O He Who ransomed Ishmael from the sacrifice with a mighty sacrifice!"
+  },
+  {
+    "id": 217,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا مَنْ قَبِلَ قُرْبَانَ هَابِيلَ",
+    "englishText": "O He Who accepted the sacrifice of Abel"
+  },
+  {
+    "id": 218,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَجَعَلَ ٱللَّعْنَةَ عَلَىٰ قَابِيلَ",
+    "englishText": "and placed a curse upon Cain!"
+  },
+  {
+    "id": 219,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا هَازِمَ ٱلاحْزَابَ لِمُحَمَّدٍ صَلَّىٰ ٱللَّهُ عَلَيْهِ وَآلِهِ",
+    "englishText": "O He Who routed the parties for Muhammad, may Allah bless him and his Household!"
+  },
+  {
+    "id": 220,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "صَلِّ عَلَىٰ مُحَمَّدٍ وَآلِ مُحَمَّدٍ",
+    "englishText": "(please do) Bless Muhammad, the household of Muhammad,"
+  },
+  {
+    "id": 221,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَعَلَىٰ جَمِيعِ ٱلْمُرْسَلِينَ وَمَلائِكَتِكَ ٱلْمُقَرَّبِينَ",
+    "englishText": "all the messengers, Your archangels,"
+  },
+  {
+    "id": 222,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاهْلِ طَاعَتِكَ اجْمَعِينَ",
+    "englishText": "and all those who obey You!"
+  },
+  {
+    "id": 223,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاسْالُكَ بِكُلِّ مَسْالَةٍ سَالَكَ بِهَا احَدٌ",
+    "englishText": "I beseech You the supplication of every one who has besought you"
+  },
+  {
+    "id": 224,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مِمَنْ رَضِيتَ عَنْهُ فَحَتَمْتَ لَهُ عَلىٰ ٱلإِجَابَةِ",
+    "englishText": "and with whom You have been pleased and thus decided to grant his request."
+  },
+  {
+    "id": 225,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا اَللَّهُ يَا اَللَّهُ يَا اَللَّهُ",
+    "englishText": "O Allah! O Allah! O Allah!"
+  },
+  {
+    "id": 226,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَحْمٰنُ يَا رَحْمٰنُ يَا رَحْمٰنُ",
+    "englishText": "O All-merciful! O All-merciful! O All-merciful!"
+  },
+  {
+    "id": 227,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا رَحِيمُ يَا رَحِيمُ يَا رَحِيمُ",
+    "englishText": "O All-compassionate! O All-compassionate! O All-compassionate!"
+  },
+  {
+    "id": 228,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذَا ٱلْجَلاَ لِ وَٱلإِكْرَامِ",
+    "englishText": "O Lord of majesty and honor!"
+  },
+  {
+    "id": 229,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذَا ٱلْجَلاَ لِ وَٱلإِكْرَامِ",
+    "englishText": "O Lord of majesty and honor!"
+  },
+  {
+    "id": 230,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "يَا ذَا ٱلْجَلاَلِ وَٱلإِكْرَامِ",
+    "englishText": "O Lord of majesty and honor!"
+  },
+  {
+    "id": 231,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "بِهِ بِهِ بِهِ بِهِ بِهِ بِهِ بِهِ",
+    "englishText": "By Him! By Him! By Him! By Him! By Him! By Him! By Him!"
+  },
+  {
+    "id": 232,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اسْالُكَ بِكُلِّ ٱسْمٍ سَمَّيْتَ بِهِ نَفْسَكَ",
+    "englishText": "I beseech You by every Name with which You have named Yourself"
+  },
+  {
+    "id": 233,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اوْ انْزَلْتَهُ فِي شَيْءٍ مِنْ كُتُبِكَ",
+    "englishText": "or which You have sent down in one of Your scriptures"
+  },
+  {
+    "id": 234,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اوِ ٱسْتَاثَرْتَ بِهِ فِي عِلْمِ ٱلْغَيْبِ ٱلَّذِي عِنْدَكَ",
+    "englishText": "or kept for Yourself in the knowledge of the Unseen with You,"
+  },
+  {
+    "id": 235,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِمَعَاِقدِ ٱلْعِزِّ مِنْ عَرْشِكَ",
+    "englishText": "by the junctures of might for Your Throne,"
+  },
+  {
+    "id": 236,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِمُنْتَهَىٰ ٱلرَّحْمَةِ مِنْ كِتَابِكَ",
+    "englishText": "by the utmost limit of mercy from Your Book,"
+  },
+  {
+    "id": 237,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَبِمَا ﴿وَلَوْ انّ َمَا فِي ٱلارْضِ مِنْ شَجَرَةٍ اقْلاَمٌ",
+    "englishText": "by the fact that, “though all the trees in the earth were pens"
+  },
+  {
+    "id": 238,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْبَحْرُ يَمُدُّهُ مِنْ بَعْدِهِ سَبْعَةُ ابْحُرٍ",
+    "englishText": "and the sea - seven seas after it to replenish it,"
+  },
+  {
+    "id": 239,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "مَا نَفِدَتْ كَلِمَاتُ ٱللَّهِ",
+    "englishText": "yet the words of Allah not be spent."
+  },
+  {
+    "id": 240,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّ ٱللَّهَ عَزِيزٌ حَكِيمٌ﴾",
+    "englishText": "Allah is All-mighty, All-wise.”"
+  },
+  {
+    "id": 241,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاسْالُكَ بِاسْمَائِكَ ٱلْحُسْنَىٰ",
+    "englishText": "And I beseech You by Your Most Excellent Names"
+  },
+  {
+    "id": 242,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ٱلَّتِي نَعَتَّهَا فِي كِتَابِكَ فَقُلْتَ:",
+    "englishText": "that You have described in Your book thus saying,"
+  },
+  {
+    "id": 243,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "﴿وَلِلَّهِ ٱلاسْمَاءُ ٱلْحُسْنَىٰ فَٱدْعُوهُ بِهَا﴾",
+    "englishText": "“To Allah belong the Most Excellent Names, so call Him by them!”"
+  },
+  {
+    "id": 244,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقُلْتَ: ﴿ادْعُونِي اسْتَجِبْ لَكُمْ﴾",
+    "englishText": "And You said: “Call upon Me and I will answer you.”"
+  },
+  {
+    "id": 245,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقُلْتَ: ﴿وَإِذَا سَالَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ",
+    "englishText": "And You said: “And when My servants ask you concerning Me, then surely I am very near;"
+  },
+  {
+    "id": 246,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "اجِيبُ دَعْوَةَ ٱلدَّاعِي إِذَا دَعَانِي﴾",
+    "englishText": "I answer the prayer of the suppliant when he calls on Me.”"
+  },
+  {
+    "id": 247,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقُلْتَ: ﴿قُلْ يَا عِبَادِي ٱلَّذِينَ اسْرَفُوا عَلَىٰ انْفُسِهِمْ",
+    "englishText": "And You said: “Say: O My servants who have been prodigal against yourselves;"
+  },
+  {
+    "id": 248,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "لاَ تَقْنَطُوا مِنْ رَحْمَةِ ٱللَّهِ",
+    "englishText": "do not despair of Allah's mercy."
+  },
+  {
+    "id": 249,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّ ٱللَّهَ يَغْفِرُ ٱلذُّنُوبَ جَمِيعاً",
+    "englishText": "Surely, Allah forgives all sins."
+  },
+  {
+    "id": 250,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "إِنَّهُ هُوَ ٱلْغَفُورُ ٱلرَّحِيمُ﴾",
+    "englishText": "Surely, He is the All-forgiving, the All-compassionate.”"
+  },
+  {
+    "id": 251,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَانَا اسْالُكَ يَا إِلٰهِي",
+    "englishText": "And I ask You, O my God,"
+  },
+  {
+    "id": 252,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَادْعُوكَ يَا رَبِّ",
+    "englishText": "I call You, O my Lord,"
+  },
+  {
+    "id": 253,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَارْجَوكَ يَا سَيِّدِي",
+    "englishText": "I please You, O my Master,"
+  },
+  {
+    "id": 254,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَاطْمَعُ فِي إِجَابَتِي يَا مَوْلايَ كَمَا وَعَدتَّنِي",
+    "englishText": "and I desire for You to respond to me, O my Protector, just as You have promised me—"
+  },
+  {
+    "id": 255,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَقَدْ دَعَوْتُكَ كَمَا امَرْتَنِي",
+    "englishText": "for I have called You just as You have commanded me."
+  },
+  {
+    "id": 256,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "فَٱفْعَلْ بِي مَا انتَ اهْلُهُ يَا كَرِيمُ",
+    "englishText": "So, do to me what is worthy of You, O All-generous!"
+  },
+  {
+    "id": 257,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَالَمِينَ",
+    "englishText": "All praise be to Allah, the Lord of the Worlds."
+  },
+  {
+    "id": 258,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "وَصَلَّىٰ ٱللَّهُ عَلَىٰ مُحَمَّدٍ وَآلِهِ اجْمَعِينَ",
+    "englishText": "May Allah bless Muhammad and his entire Household."
+  },
+  {
+    "id": 259,
+    "categoryId": 1,
+    "volume": 1,
+    "arabicText": "ثم يمكنك أن تدعو الله القدير أن يستجيب لطلباتك الشخصية وسوف يستجيب لها بإذن الله.",
+    "englishText": "Then you may pray Almighty Allah to grant you your personal requests and they will be granted, Allah willing."
+  }
+]
