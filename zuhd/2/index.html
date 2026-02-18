@@ -696,7 +696,7 @@ function splitArabicSanadMatnByEnglish(arabicText, englishSanad = '') {
 
 
 function buildHadithUrl(bookSlug, categoryId, chapterId) {
-  if (!categoryId || Number(categoryId) === 1) {
+  if (!categoryId || Number(categoryId) === 2) {
     return `/${bookSlug}/#${chapterId}`;
   }
   return `/${bookSlug}/${categoryId}/#${chapterId}`;
