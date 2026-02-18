@@ -1,0 +1,1395 @@
+
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Kitab Al-Zuhd/title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Kufi+Arabic:wght@100..900&family=Noto+Sans+Arabic:wght@100..900&family=Parastoo:wght@400..700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../hadiths.css">
+  <style>
+      :root{
+    --green:#276540;
+    --bg: rgba(248,250,251,0.98);
+    --text:#1f2937;
+    --muted:#6b7280;
+    --card: rgba(255,255,255,0.86);
+    --border: rgba(15,23,36,0.06);
+    --radius:14px;
+    --shadow-3d: 0 18px 36px rgba(8,20,10,0.12);
+    --tap:52px;
+  }
+  
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  
+  body{
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(180deg, var(--bg), var(--bg));
+    color:var(--text); line-height:1.45;
+    padding-top:3.6rem; -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  header {
+    position: fixed; top: 0; left: 0; width: 100%;
+    display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(14px) saturate(160%);
+    background: var(--green);
+    color: #FFFFFF;
+    padding: 0.75rem 1.25rem;
+    z-index: 1400;
+  }
+  
+  .brand h1 { font-size: 1.4rem; font-weight: 700; margin:0; }
+  .brand a { color: #fff; text-decoration: none; }
+  .hamburger { font-size: 1.5rem; background: transparent; color: #fff; border: none; padding: 0.1rem 0.7rem; cursor: pointer; }
+
+  #mainNav {
+    position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+    background: #276540;
+    padding: 2rem 1.5rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    border-radius: 0 0 0 24px;
+    transition: right 0.35s ease, opacity 0.35s ease;
+    opacity: 0; pointer-events: none; z-index: 1450;
+  }
+  
+  #mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+  #mainNav a {
+    background: #fff; color: var(--green);
+    padding: 0.5rem 0.8rem; border-radius: 16px;
+    font-weight: 600; text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .page { padding: 5.2rem 0.9rem 6.5rem 0.9rem; max-width:1100px; margin: 0 auto; }
+  
+  .surah-header { display:flex; flex-direction:column; align-items:center; gap:6px; margin-bottom:12px; text-align:center; padding:0 12px; }
+  .header-row { display:flex; align-items:center; gap:12px; width:100%; }
+  .back-home { margin-right:auto; color:#fff; text-decoration:none; background:var(--green); padding:.35rem .6rem; border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,0.08); font-size:.92rem; }
+
+  .surah-title-en { font-size:1.05rem; color:var(--muted); text-align:center;}
+  .surah-title-ar { font-size:1.6rem; font-weight:800; color:var(--green); line-height:1.05; font-family: 'Parastoo'; text-align:center; }
+
+  #bismillahWrap { text-align:center; margin:12px 0; }
+  #bismillahWrap img { max-width:360px; width:85%; filter: drop-shadow(0 8px 22px rgba(0,0,0,0.06)); }
+
+  #hadithContainer { margin-top:8px; display:flex; flex-direction:column; gap:12px; padding:0 6px 120px 6px; }
+  
+  .hadith-card {
+    display:flex; gap:12px; align-items:flex-start;
+    background: var(--card);
+    border-radius:12px;
+    border:1px solid var(--border);
+    padding:12px;
+    box-shadow: var(--shadow-3d);
+    position:relative;
+    overflow:hidden;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  
+  .hadith-card:active{ transform: translateY(2px); }
+  .hadith-meta { width:72px; text-align:center; color:var(--muted); font-weight:700; font-size:.9rem; flex-shrink:0; }
+  .hadith-body { flex:1; display:flex; gap:12px; align-items:flex-start; }
+  .hadith-col { flex:1; min-width:0; }
+  
+  .hadith-en { font-size:1rem; color:var(--text); margin-bottom:8px; text-align:left; }
+  .hadith-context { font-size:0.88rem; color:var(--muted); margin-bottom:8px; }
+  .hadith-ar { font-family: 'Parastoo'; direction:rtl; font-size: clamp(18px, 4vw, 27px); line-height:1.5; text-align:right; }
+
+  .three-dots { background: rgba(255,255,255,0.9); border:1px solid var(--border); padding:8px 10px; border-radius:10px; cursor:pointer; box-shadow:0 8px 26px rgba(0,0,0,0.08); min-width:44px; min-height:var(--tap); display:flex; align-items:center; justify-content:center; }
+  
+  .hadith-popup {
+    position:absolute; right:12px; top:56px;
+    background: white;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:4px 0;
+    display:none;
+    z-index:1600;
+    width:max-content;
+    max-width:160px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  
+  .hadith-popup button {
+    display:block;
+    width:100%;
+    padding:.4rem .6rem;
+    border:0;
+    background:transparent;
+    text-align:left;
+    cursor:pointer;
+    font-weight:600;
+    color:var(--green);
+    border-radius:0;
+    font-size:.85rem;
+    white-space:nowrap;
+  }
+  
+  .hadith-popup button:hover{ background: rgba(39,101,64,0.06); }
+
+  .gradings { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+  .grade-chip { padding:.25rem .5rem; border-radius:999px; font-size:.75rem; color:#fff; white-space:nowrap; }
+  .grade-good { background: #2b9348; }
+  .grade-mid { background: #ff9800; }
+  .grade-bad { background: #d9534f; }
+  .grade-none { background: #6b7280; }
+
+  .card-actions { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+
+  .modal-backdrop { position:fixed; inset:0; background:rgba(2,6,23,0.6); display:none; align-items:center; justify-content:center; z-index:1700; padding:20px; }
+  
+  .modal { width:min(980px,96%); max-height:92vh; overflow:auto; background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9)); border-radius:12px; padding:18px; box-shadow:0 28px 80px rgba(0,0,0,0.28); color:var(--text); }
+  .modal-grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; align-items:start; }
+  
+  .modal-ar { font-family: 'Parastoo'; direction:rtl; font-size: clamp(18px, 3.5vw, 24px); line-height:1.7; text-align:right; }
+  .modal-en { font-size: clamp(14px, 2.5vw, 16px); color:#000; text-align:left; line-height:1.6; }
+  .modal-meta { margin-top:10px; color:var(--muted); font-size:.9rem; }
+
+  .bottom-actions { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); display:flex; gap:10px; z-index:1500; }
+
+  #savedPopup .saved-row { display:flex; justify-content:space-between; gap:8px; padding:8px 0; border-bottom:1px dashed var(--border); flex-wrap:wrap; }
+  .note-input { width:100%; min-height:70px; border:1px solid var(--border); padding:8px; border-radius:8px; font-size:.95rem; }
+
+  .btn-3d {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: var(--green);
+  }
+
+  .btn-3d:hover {
+    background: rgba(39, 101, 64, 0.1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .btn-3d:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  #backBeginning {
+    background: var(--green);
+    color: #fff;
+    padding: 0.5rem 1rem;
+  }
+
+  #backBeginning:hover {
+    background: #2d7f4b;
+  }
+
+  #openSaved {
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--green);
+  }
+
+  #openSaved:hover {
+    background: rgba(39, 101, 64, 0.15);
+  }
+
+  @media (max-width:920px){
+    .modal-grid { grid-template-columns: 1fr; }
+    .hadith-card { flex-direction:column; }
+    .hadith-meta { display:flex; width:100%; justify-content:flex-start; gap:8px; padding-bottom:6px; }
+    .header-row { flex-wrap:wrap; }
+  }
+
+  @media (max-width:720px){
+    body{ padding-top:3.2rem; }
+    .hadith-ar { font-size: clamp(16px, 4.5vw, 24px); }
+    .hadith-en { font-size: clamp(13px, 3.5vw, 16px); }
+    .hadith-context { font-size: clamp(11px, 3vw, 14px); }
+    .three-dots{ padding:6px 8px; }
+    .bottom-actions { bottom: 10px; }
+  }
+
+  @media (max-width:600px){
+    .hadith-card { flex-direction: column; }
+    .hadith-meta { width:100%; text-align:left; padding-bottom:6px; }
+    .hadith-body { flex-direction:column; gap:10px; }
+    
+    .hadith-ar { order: 1; }
+    .hadith-context { order: 2; }
+    .hadith-en { order: 3; }
+    .gradings { order: 4; }
+    .card-actions { order: 5; }
+    
+    .modal-grid { grid-template-columns: 1fr !important; }
+    .modal-ar { order: 1; }
+    .modal-en { order: 2; }
+    .hadith-popup { max-width: 70vw; transform: translateX(-8px); }
+    
+    .header-row { flex-direction:column; gap:8px; }
+    .back-home { margin-right:0; }
+    #openSaved { width:100%; }
+  }
+
+  @media (max-width:430px){
+    .modal-ar { font-size: clamp(12px, 5vw, 22px); }
+    .modal-en { font-size: clamp(10px, 3vw, 14px); }
+  }
+    @media (max-width:600px){
+    .hadith-card { flex-direction: column; }
+    .hadith-meta { width:100%; text-align:left; padding-bottom:6px; }
+    .hadith-body { flex-direction:column; gap:10px; }
+    
+    .hadith-ar { order: 1; }
+    .hadith-context { order: 2; }
+    .hadith-en { order: 3; }
+    .gradings { order: 4; }
+    .card-actions { order: 5; }
+    
+    .modal-grid { grid-template-columns: 1fr !important; }
+    .modal-ar { order: 1; }
+    .modal-en { order: 2; }
+    .hadith-popup { max-width: 70vw; transform: translateX(-8px); }
+    
+    .header-row { flex-direction:column; gap:8px; }
+    .back-home { margin-right:0; }
+    #openSaved { width:100%; }
+  }
+  @media (max-width:600px){
+  .modal-grid > div:first-child {
+    order: 2; /* English/Sanad goes second */
+  }
+  
+  .modal-grid > div:last-child {
+    order: 1; /* Arabic goes first */
+  }
+}
+@media (max-width:600px){
+  .hadith-body {
+    flex-direction: column;
+  }
+  
+  .hadith-col:first-child {
+    order: 2; /* English/Sanad goes second */
+  }
+  
+  .hadith-col:last-child {
+    order: 1; /* Arabic goes first */
+  }
+}
+.surah-header { display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:12px; text-align:center; padding:0 12px; }
+  .header-row { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; flex-wrap:wrap; }
+  .back-home { color:#fff; text-decoration:none; background:var(--green); padding:.4rem .7rem; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); font-size:.9rem; white-space:nowrap; }
+
+  .surah-title-en { font-size:0.95rem; color:var(--muted); text-align:center; margin:0; }
+  .surah-title-ar { font-size:1.4rem; font-weight:800; color:var(--green); line-height:1.1; font-family: 'Parastoo'; text-align:center; margin:0; }
+
+  @media (max-width:720px){
+    .surah-header { gap:10px; margin-bottom:10px; }
+    .header-row { flex-direction:column; gap:10px; }
+    .back-home { align-self:flex-start; padding:.35rem .6rem; font-size:.85rem; }
+    .openSaved { align-self:flex-start; padding:.35rem .6rem; font-size:.85rem; }
+    .surah-title-en { font-size:.9rem; }
+    .surah-title-ar { font-size:1.2rem; }
+  }
+
+  @media (max-width:600px){
+    .surah-header { gap:8px; padding:0 8px; }
+    .header-row { gap:8px; }
+    .back-home { padding:.3rem .5rem; font-size:.8rem; }
+    .surah-title-en { font-size:.9rem; }
+    .surah-title-ar { font-size:1.2rem; }
+    .openSaved { padding:.3rem .5rem; font-size:.8rem; }
+  }
+ .header-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "back title saved";
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* map elements into grid areas */
+.back-home { grid-area: back; justify-self: start; }
+.header-row > div { grid-area: title; justify-self: center; }
+#openSaved { grid-area: saved; justify-self: end; }
+
+/* Responsive: stack volume + saved on one row above the title for tablets/phones */
+@media (max-width:720px){
+  .header-row {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "back saved"
+      "title title";
+    gap: 8px;
+    padding: 0 12px;
+  }
+
+  .back-home { justify-self: start; }
+  #openSaved { justify-self: end; }
+  .surah-title-ar { font-size: 1.4rem; }
+  .surah-title-en { font-size: 1rem; color:var(--muted); }
+}
+
+/* Slightly smaller on small phones */
+@media (max-width:600px){
+  .header-row { gap: 6px; padding: 0 10px; }
+  #openSaved, .back-home { padding: .35rem .55rem; font-size: .85rem; }
+  .surah-title-ar { font-size: 1.2rem; }
+  .surah-title-en { font-size: 1rem; }
+}
+.grading-full { display: block; }
+.gradings-chips { display: none; }
+
+@media (max-width:720px) {
+  .grading-full { display: none; }    /* hide full details on phone */
+  .gradings-chips { display: flex; }  /* show compact chips on phone */
+  .gradings-chips .grade-chip { margin-right:6px; }
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+
+body.dark-mode .modal {
+  background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(30,41,59,0.9));
+  color: #f9fafb;
+}
+
+body.dark-mode .modal-ar,
+body.dark-mode .modal-en {
+  color: #f9fafb;
+}
+
+body.dark-mode .modal-meta {
+  color: #94a3b8;
+}
+
+body.dark-mode .modal-backdrop {
+  background: rgba(0,0,0,0.8);
+}
+
+body.dark-mode .btn-3d {
+  background: rgba(30,41,59,0.9);
+  color: #276540;
+  border: 1px solid #475569;
+}
+
+body.dark-mode .btn-3d:hover {
+  background: rgba(51,65,85,0.9);
+  border-color: #64748b;
+}
+
+body.dark-mode #modalGradings .grade-chip {
+  opacity: 0.9;
+}
+
+body.dark-mode .note-input {
+  background: #1e293b;
+  border: 1px solid #475569;
+  color: #f9fafb;
+}
+
+body.dark-mode .note-input::placeholder {
+  color: #94a3b8;
+}
+.book-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 4px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width:720px) {
+  .book-meta {
+    font-size: 0.75rem;
+    margin-top: 2px;
+  }
+}
+
+@media (max-width:600px) {
+  .book-meta {
+    font-size: 0.7rem;
+    margin-top: 2px;
+  }
+}
+
+@media (max-width:720px){
+  body { padding-top: 2.8rem; }
+  .surah-header { gap: 0; margin-bottom: 8px; padding: 0 10px; }
+  .header-row { gap: 6px; }
+  .back-home { padding: .3rem .5rem; font-size: .8rem; }
+  #openSaved { padding: .3rem .5rem; font-size: .75rem; width: auto; max-width: 70px; }
+  .surah-title-en { font-size: 1.2rem; margin: 0; }
+  .surah-title-ar { font-size: 1.4rem; margin: 0; }
+  .book-meta { font-size: 1.1rem; margin-top: 1px; }
+}
+
+@media (max-width:600px){
+  body { padding-top: 2.5rem; }
+  .surah-header { gap: 2px; margin-bottom: 6px; padding: 0 8px; }
+  .header-row { gap: 4px; }
+  #openSaved { max-width: 70px; padding: 0.5rem .5rem; font-size: 1.2rem; }
+  #bismillahWrap { margin: 6px 0; }
+  #hadithContainer { margin-top: 4px; padding: 0 4px 120px 4px; }
+}
+#partNav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+#partNav .btn-3d {
+  margin: 0; /* keep margin zero so gap fully controls spacing */
+}
+#partButtons {
+  display: flex;
+  flex-wrap: wrap;      /* allows automatic wrapping */
+  gap: 10px;            /* controls spacing between buttons */
+  justify-content: center; /* optional: center them */
+  margin-bottom: 20px;
+}
+
+#partButtons button {
+  margin: 0;            /* ensures gap controls spacing */
+}
+.hadith-ar.sanad {
+  opacity: 0.65;
+  font-size: 1.4em;
+}
+
+.hadith-ar.matn {
+  margin-top: .4rem;
+}
+.modal-ar.sanad {
+  opacity: 0.65;
+  font-size: 1.4em;
+}
+
+.modal-ar.matn {
+  margin-top: .5rem;
+}
+
+.hadith-en {
+  font-size: 1.15rem;   /* bigger */
+}
+.hadith-context {
+  font-size: 0.95rem;
+}
+.modal-en {
+  font-size: clamp(14px, 2.5vw, 16px);
+  line-height: 1.8; 
+}
+.modal-meta {
+  font-size: 1rem;
+}
+.hadith-en {
+  
+  line-height: 1.75;   /* ← slightly more space */
+}
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><h1><a href="https://nooralhuda.co.uk/">Noor Al Huda</a></h1></div>
+  <button class="hamburger" aria-label="Open menu">☰</button>
+</header>
+
+<nav id="mainNav">
+  <a href="https://nooralhuda.co.uk/quran">Quran</a>
+  <a href="https://nooralhuda.co.uk/duas">Duas</a>
+  <a href="https://nooralhuda.co.uk/hadiths-home">Hadiths</a>
+  <a href="https://nooralhuda.co.uk/calendar">Calendar</a>
+  <a href="https://nooralhuda.co.uk/salah">Salah</a>
+  <a href="https://tube.nooralhuda.co.uk">ShiaTube</a>
+  <a href="https://nooralhuda.co.uk/">Home</a>
+  <a href="https://nooralhuda.co.uk/settings">Settings</a>
+</nav>
+
+  <main class="page" id="page">
+    <div class="surah-header" role="banner">
+  <div class="header-row">
+    <a class="back-home" href="home">← Go Back</a>
+    <button id="openSaved" class="btn-3d">Saved</button>
+    <div style="text-align:center; flex:1;">
+      <div class="surah-title-en">كتاب الزهد للشيخ حسين بن سعيد الأحوازي</div>
+      <div class="surah-title-ar">Book of Oneness of Allah</div>
+      <div class="book-meta">Kitab Al-Zuhd by Sheikh Hussein bin Saeed Al-Ahwazi</div>
+    </div>
+  </div>
+</div>
+        
+       
+      </div>
+    </div>
+
+    <div id="bismillahWrap">
+      <img src="../../bismillah.png" alt="Bismillah" onerror="this.style.display='none'">
+    </div>
+
+    <div id="pageNav" style="text-align:center; margin:20px 0; border-bottom:1px solid var(--border); padding-bottom:10px;"></div>
+
+    <div id="hadithContainer" aria-live="polite"></div>
+  </main>
+
+  <div class="bottom-actions">
+    <button id="backBeginning" class="btn-3d">Back to Top</button>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+        <div style="display:flex;gap:8px">
+          <button id="modalPrev" class="btn-3d">← Prev</button>
+          <button id="modalNext" class="btn-3d">Next →</button>
+        </div>
+        <button id="modalClose" class="btn-3d">Close</button>
+      </div>
+
+      <div class="modal-grid">
+        <div>
+          <div class="modal-meta" id="modalSanad"></div>
+          <div class="modal-en" id="modalEnglish"></div>
+        </div>
+        <div>
+          <div class="modal-ar" id="modalArabic"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <strong style="font-size:.95rem">Gradings</strong>
+        <div class="gradings" id="modalGradings" style="margin-top:6px"></div>
+      </div>
+
+      <div style="margin-top:12px">
+        <strong style="font-size:.95rem">Notes</strong>
+        <textarea id="modalNote" class="note-input" placeholder="Add a private note"></textarea>
+      </div>
+    </div>
+  </div>
+
+<div class="modal-backdrop" id="savedBackdrop" style="display:none">
+  <div class="modal" id="savedPopup">
+    <h3 style="margin-bottom:8px">Saved Hadiths</h3>
+
+    <div style="padding:10px 0; line-height:1.6; font-size:.95rem;">
+      This feature is currently in beta testing.<br>
+      I am still working on it, and it will be available in April 2026, insha’Allah.
+    </div>
+
+    <div style="text-align:right;margin-top:12px">
+      <button id="closeSaved" class="btn-3d">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* -------------------------
+   Configuration & Storage
+   ------------------------- */
+const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/31.json'; // Local file
+const FILTER_VOLUME = 1;
+const FILTER_CATEGORY_ID = 2;
+
+
+
+const STORAGE_SAVED = 'noor_saved_hadiths_v61';
+const STORAGE_PINNED = 'noor_pinned_hadith_v61';
+const STORAGE_NOTES = 'noor_hadith_notes_v61';
+
+
+/* -------------------------
+   DOM refs & state
+   ------------------------- */
+const hadithContainer = document.getElementById('hadithContainer');
+const modalBackdrop = document.getElementById('modalBackdrop');
+const modalGradings = document.getElementById('modalGradings');
+const modalNote = document.getElementById('modalNote');
+const modalPrev = document.getElementById('modalPrev');
+const modalNext = document.getElementById('modalNext');
+const modalClose = document.getElementById('modalClose');
+const openSavedBtn = document.getElementById('openSaved');
+const savedBackdrop = document.getElementById('savedBackdrop');
+const savedPopup = document.getElementById('savedPopup');
+const closeSaved = document.getElementById('closeSaved');
+const backBeginning = document.getElementById('backBeginning');
+let ALL_HADITHS = [];
+
+let HADITHS = [];
+let visibleIndex = 0;
+let ALL_SAVED_CORPUS = null;
+let PAGES = {}; // Maps chapterInCategoryId to array of hadiths
+let currentPage = null; // Currently displayed page/chapter
+
+/* Ensure saved list container exists inside savedPopup 
+let savedList = document.getElementById('savedList');
+if (!savedList) {
+  savedList = document.createElement('div');
+  savedList.id = 'savedList';
+  savedList.style.marginTop = '12px';
+  savedPopup.insertBefore(savedList, savedPopup.querySelector('div[style*="text-align:right"]') || null);
+}
+*/
+/* -------------------------
+   Utilities
+   ------------------------- */
+function save(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
+function splitArabicSanadMatnByEnglish(arabicText, englishSanad = '') {
+  if (!arabicText) return { sanad: '', matn: '' };
+  const text = arabicText.trim();
+
+  // English word count
+  let englishWordCount = englishSanad ? englishSanad.trim().split(/\s+/).length : 0;
+
+  // Subtract 5 words to compensate for Arabic shorter length (minimum 1)
+  englishWordCount = Math.max(1, englishWordCount - 5);
+
+  // find all colons in Arabic text
+  const colonIndexes = [];
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === ':') colonIndexes.push(i);
+  }
+
+  // if no colon, return all as matn
+  if (!colonIndexes.length) return { sanad: '', matn: text };
+
+  if (!englishWordCount) {
+    // fallback: use last colon
+    const idx = colonIndexes[colonIndexes.length - 1];
+    return { sanad: text.slice(0, idx + 1).trim(), matn: text.slice(idx + 1).trim() };
+  }
+
+  // pick colon where Arabic word count up to it is closest to adjusted English word count
+  let bestIdx = colonIndexes[0];
+  let bestDiff = Infinity;
+  colonIndexes.forEach(idx => {
+    const words = text.slice(0, idx).trim().split(/\s+/).length;
+    const diff = Math.abs(words - englishWordCount);
+    if (diff < bestDiff) {
+      bestDiff = diff;
+      bestIdx = idx;
+    }
+  });
+
+  return {
+    sanad: text.slice(0, bestIdx + 1).trim(),
+    matn: text.slice(bestIdx + 1).trim()
+  };
+}
+
+
+
+function load(key, fallback){ try{ const v = JSON.parse(localStorage.getItem(key)); return v === null ? fallback : (v || fallback); }catch(e){ return fallback; } }
+function el(tag, attrs = {}, html = ''){
+  const e = document.createElement(tag);
+
+  for(const k in attrs){
+    if(k === 'style') e.style.cssText = attrs[k];
+    else e.setAttribute(k, attrs[k]);
+  }
+
+  if (html) {
+    e.innerHTML = String(html).replace(/<br\s*\/?>/gi, '<br><br>');
+  }
+
+  return e;
+}
+
+
+function escapeHtml(s){ return String(s === undefined || s === null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function gradeClass(text){
+  if (!text) return 'grade-none';
+  const t = String(text).trim();
+
+  // ✅ GOOD / GREEN
+  if (/صحيح|حسن|معتبر|Sahih|Hasan|sound|authentic/i.test(t)) {
+    return 'grade-good';
+  }
+
+  // ❌ WEAK / RED
+  if (/ضعيف|weak|Daif/i.test(t)) {
+    return 'grade-bad';
+  }
+
+  // ⚠️ UNKNOWN / MID
+  return 'grade-mid';
+}
+
+
+function extractGradeOnly(fullText){
+  if(!fullText) return '';
+  const match = fullText.match(/^[^—]*?(?=\s*(?:—|$))/);
+  return match ? match[0].trim() : fullText.trim();
+}
+function splitArabicSanadMatn(arabicText) {
+  if (!arabicText) return { sanad: '', matn: '' };
+
+  const idx = arabicText.lastIndexOf(':');
+  if (idx === -1) {
+    return { sanad: '', matn: arabicText.trim() };
+  }
+
+  return {
+    sanad: arabicText.slice(0, idx + 1).trim(),
+    matn: arabicText.slice(idx + 1).trim()
+  };
+}
+
+
+/* -------------------------
+   Data loader
+   ------------------------- */
+async function loadHadiths(){
+  hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
+  try {
+    const res = await fetch(API_URL);
+    if(!res.ok) throw new Error('API fetch failed');
+    const arr = await res.json();
+
+// ✅ Filter here only once
+ALL_HADITHS = arr.filter(h =>
+  Number(h.categoryId) === FILTER_CATEGORY_ID &&
+  Number(h.volume) === FILTER_VOLUME
+);
+
+HADITHS = ALL_HADITHS.slice();
+
+
+    renderList();
+
+  } catch (err) {
+    console.error(err);
+    hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Failed to load hadiths.</div>';
+  }
+}
+
+
+
+/* -------------------------
+   Render list / cards
+   ------------------------- */
+function renderList(){
+  hadithContainer.innerHTML = '';
+  if(!HADITHS.length){ hadithContainer.innerHTML = '<em style="color:var(--muted);padding:12px">No hadiths found.</em>'; return; }
+
+  const currentPinned = load(STORAGE_PINNED, null);
+const chapterCounters = {};
+
+
+  HADITHS.forEach((h, i) => {
+    const ch = h.chapterInCategoryId || 'unknown';
+chapterCounters[ch] = (chapterCounters[ch] || 0) + 1;
+const chapterHadithNumber = chapterCounters[ch];
+
+    const card = el('div', {
+        class: 'hadith-card',
+        id: 'hadith-card-' + h.id,
+        'data-chapter': h.chapterInCategoryId || 'unknown'
+    });
+
+const meta = el('div', { class: 'hadith-meta' }, `#${h.id}`);
+
+    const body = el('div', { class: 'hadith-body' });
+    const leftCol = el('div', { class: 'hadith-col' });
+    const rightCol = el('div', { class: 'hadith-col' });
+
+    // Decide which content to show: prefer Thaqalayn sanad+matn when both exist,
+    // otherwise fallback to englishText or thaqalaynMatn
+    const hasSanad = h.thaqalaynSanad && String(h.thaqalaynSanad).trim() !== '';
+    const hasMatn = h.thaqalaynMatn && String(h.thaqalaynMatn).trim() !== '';
+
+let sanad = '';
+let english = '';
+let arabic = '';
+let arabicSanad = '';
+let arabicMatn = '';
+
+
+// Sanad (optional)
+sanad = h.thaqalaynSanad
+  ? String(h.thaqalaynSanad).trim()
+  : '';
+
+// English: Thaqalayn → fallback to englishText
+english =
+  h.thaqalaynMatn
+    ? String(h.thaqalaynMatn).trim()
+    : (h.englishText ? String(h.englishText).trim() : '');
+
+// Arabic
+const fullArabic = h.arabicText ? String(h.arabicText).trim() : '';
+
+if (fullArabic && sanad) {
+  const split = splitArabicSanadMatnByEnglish(fullArabic, sanad);
+  arabicSanad = split.sanad;
+  arabicMatn  = split.matn;
+} else {
+  arabicMatn = fullArabic;
+}
+
+
+    const contextP = el('div', { class: 'hadith-context' }, sanad ? `Sanad: ${sanad}` : '');
+    const enP = el('div', { class: 'hadith-en' }, english || '');
+
+
+    leftCol.appendChild(contextP);
+    if (english) leftCol.appendChild(enP);
+
+if (arabicSanad) {
+  rightCol.appendChild(
+    el('div', { class: 'hadith-ar sanad' }, arabicSanad)
+  );
+}
+
+if (arabicMatn) {
+  rightCol.appendChild(
+    el('div', { class: 'hadith-ar matn' }, arabicMatn)
+  );
+}
+
+
+    // gradings
+    const gradWrap = el('div', { class: 'gradings' });
+    (h.gradingsFull || []).slice(0,2).forEach(g => {
+      const grade = extractGradeOnly(g.grade_ar || g.grade || '—');
+      const chip = el('div', { class: 'grade-chip ' + gradeClass(grade) }, grade);
+      gradWrap.appendChild(chip);
+    });
+
+    const actions = el('div', { class: 'card-actions' });
+    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
+    openBtn.addEventListener('click', () => openHadithModal(i));
+    actions.appendChild(openBtn);
+
+    leftCol.appendChild(gradWrap);
+    leftCol.appendChild(actions);
+
+    // popup menu (pin/save/copy/open)
+    const rightWrap = el('div', { class: 'hadith-menu-wrap', style: 'position:absolute;top:6px;right:6px' });
+    const dot = el('button', { class: 'three-dots', 'aria-label': 'Menu' }, '⋯');
+    const popup = el('div', { class: 'hadith-popup', id: `popup-${h.id}` });
+
+    const pinBtn = el('button', {}, currentPinned && String(currentPinned.id) === String(h.id) ? 'Unpin' : 'Pin');
+    const saveBtn = el('button', {}, 'Save');
+    const copyBtn = el('button', {}, 'Copy');
+    const openFullBtn = el('button', {}, 'Open');
+
+    popup.append(pinBtn, saveBtn, copyBtn, openFullBtn);
+    rightWrap.append(dot, popup);
+
+    // toggle popup
+    dot.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      document.querySelectorAll('.hadith-popup').forEach(p => { if(p !== popup) p.style.display = 'none'; });
+      popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', (e) => {
+      if(!popup.contains(e.target) && e.target !== dot) popup.style.display = 'none';
+    });
+
+    // PIN / UNPIN: checks + confirmation
+    pinBtn.addEventListener('click', () => {
+      const currentPinnedNow = load(STORAGE_PINNED, null);
+
+      // if already pinned -> unpin
+      if (currentPinnedNow && String(currentPinnedNow.id) === String(h.id)) {
+        localStorage.removeItem(STORAGE_PINNED);
+        alert(`Unpinned hadith #${h.id}`);
+        popup.style.display = 'none';
+        renderList();
+        return;
+      }
+
+      // if another pinned exists -> confirm overwrite
+      if (currentPinnedNow && String(currentPinnedNow.id) !== String(h.id)) {
+        if (!confirm(`Hadith #${currentPinnedNow.id} is already pinned.\n\nReplace it with #${h.id}?`)) {
+          return;
+        }
+      }
+
+      // save pin (include volume so we know where it's pinned)
+      save(STORAGE_PINNED, { id: h.id, volume: FILTER_VOLUME });
+      alert(`Pinned hadith #${h.id}`);
+      popup.style.display = 'none';
+      const chapter = h.chapterInCategoryId || 'unknown';
+      showChapter(chapter); 
+    });
+
+    // SAVE (to saved list) + optional note
+    saveBtn.addEventListener('click', () => {
+      const notes = load(STORAGE_NOTES, {});
+      const currentNote = notes[h.id] || '';
+      const note = prompt('Add note (optional):', currentNote) || '';
+
+      const saved = load(STORAGE_SAVED, []);
+      const idx = saved.findIndex(x => String(x.id) === String(h.id));
+      if (idx === -1) {
+        saved.unshift({ id: h.id, snippet: (h.thaqalaynMatn || h.englishText || '').slice(0,160), note: note || '' });
+      } else {
+        saved[idx].note = note || '';
+        saved[idx].snippet = (h.thaqalaynMatn || h.englishText || '').slice(0,160);
+      }
+
+      if (note && note.trim()) {
+        notes[h.id] = note.trim();
+        save(STORAGE_NOTES, notes);
+      } else {
+        // remove note if blank
+        delete notes[h.id];
+        save(STORAGE_NOTES, notes);
+      }
+
+      save(STORAGE_SAVED, saved);
+      alert('Saved hadith #' + h.id);
+      popup.style.display = 'none';
+      populateSavedList();
+    });
+
+    // COPY
+    copyBtn.addEventListener('click', async () => {
+      const txt = `Hadith #${h.id}\n\n${arabic || ''}\n\n${english || ''}`;
+      try { await navigator.clipboard.writeText(txt); alert('Copied'); }
+      catch(e){ alert('Copy failed'); }
+      popup.style.display = 'none';
+    });
+
+    // Open modal
+    openFullBtn.addEventListener('click', () => { openHadithModal(i); popup.style.display = 'none'; });
+
+    // assemble
+    body.appendChild(leftCol);
+    body.appendChild(rightCol);
+
+    card.appendChild(meta);
+    card.appendChild(body);
+    card.appendChild(rightWrap);
+    hadithContainer.appendChild(card);
+  });
+
+  // Organize hadiths by chapter and show first chapter by default
+  organizeByChapter();
+  showFirstChapter();
+}
+
+// Organize hadiths by chapterInCategoryId
+function organizeByChapter() {
+  PAGES = {};
+  HADITHS.forEach(h => {
+    const chapter = h.chapterInCategoryId || 'unknown';
+    if (!PAGES[chapter]) {
+      PAGES[chapter] = [];
+    }
+    PAGES[chapter].push(h);
+  });
+}
+function getChapterFromHash() {
+  const hash = window.location.hash.replace('#', '');
+  if (!hash) return null;
+  return isNaN(hash) ? null : String(hash);
+}
+function getChapterTitle(chapterId) {
+  const list = PAGES[chapterId];
+  if (!list || !list.length) return `Chapter ${chapterId}`;
+
+  const h = list[0];
+
+  return (
+    h.chapter_en ||
+    h.chapter ||
+    h.chapterTitle ||
+    h.categoryName ||
+    `Chapter ${chapterId}`
+  );
+}
+
+// Show/hide hadiths for a specific chapter
+function showChapter(chapterId) {
+  currentPage = chapterId;
+
+  document.querySelectorAll(".hadith-card").forEach(card => {
+    const ch = card.dataset.chapter;
+    card.style.display = (ch === String(chapterId)) ? "block" : "none";
+  });
+
+  const chapterTitle = getChapterTitle(chapterId);
+
+  // 🔹 On-page title
+  const titleEn = document.querySelector('.surah-title-ar');
+  if (titleEn) titleEn.textContent = chapterTitle;
+
+  // 🔹 Browser tab title
+  document.title = `${chapterTitle} | Kitab al-Tawhid`;
+
+  updatePageNavigation();
+}
+
+
+
+// Show the first chapter by default
+function showFirstChapter() {
+  const chapters = Object.keys(PAGES).sort((a, b) => {
+    const numA = parseInt(a) || 0;
+    const numB = parseInt(b) || 0;
+    return numA - numB;
+  });
+
+  if (!chapters.length) return;
+
+  const fromHash = getChapterFromHash();
+
+  if (fromHash && PAGES[fromHash]) {
+    showChapter(fromHash);
+  } else {
+    showChapter(chapters[0]);
+  }
+}
+
+
+// Generate and update page navigation buttons
+function updatePageNavigation() {
+
+}
+
+
+function openHadithModal(idx){
+  if (idx < 0 || idx >= HADITHS.length) return;
+  visibleIndex = idx;
+  const h = HADITHS[idx];
+
+  const hasSanad = h.thaqalaynSanad && String(h.thaqalaynSanad).trim() !== '';
+  const hasMatn  = h.thaqalaynMatn  && String(h.thaqalaynMatn).trim() !== '';
+
+  let sanad = '';
+  let english = '';
+  let arabicSanad = '';
+  let arabicMatn = '';
+
+sanad = h.thaqalaynSanad
+  ? String(h.thaqalaynSanad).trim()
+  : '';
+
+// English: Thaqalayn → fallback to englishText
+english =
+  h.thaqalaynMatn
+    ? String(h.thaqalaynMatn).trim()
+    : (h.englishText ? String(h.englishText).trim() : '');
+
+// Arabic
+const fullArabic = h.arabicText ? String(h.arabicText).trim() : '';
+
+if (fullArabic && sanad) {
+  const split = splitArabicSanadMatnByEnglish(fullArabic, sanad);
+  arabicSanad = split.sanad;
+  arabicMatn  = split.matn;
+} else {
+  arabicMatn = fullArabic;
+}
+
+
+  /* main grid */
+  const modalGrid = document.querySelector('.modal-grid');
+  modalGrid.innerHTML = '';
+
+  const leftDiv = el('div');
+
+  if (sanad) {
+    leftDiv.appendChild(
+      el('div', { class: 'modal-meta' }, sanad)
+    );
+  }
+
+  if (english) {
+    leftDiv.appendChild(
+      el('div', { class: 'modal-en' }, english)
+    );
+  }
+
+  const rightDiv = el('div');
+
+  if (arabicSanad) {
+    rightDiv.appendChild(
+      el('div', { class: 'modal-ar sanad' }, arabicSanad)
+    );
+  }
+
+  if (arabicMatn) {
+    rightDiv.appendChild(
+      el('div', { class: 'modal-ar matn' }, arabicMatn)
+    );
+  }
+
+  modalGrid.appendChild(leftDiv);
+  modalGrid.appendChild(rightDiv);
+
+  /* gradings */
+  modalGradings.innerHTML = '';
+  (h.gradingsFull || []).forEach(g => {
+    const grade = extractGradeOnly(g.grade_ar || g.grade || '—');
+    modalGradings.appendChild(
+      el('div', { class: 'grade-chip ' + gradeClass(grade) }, grade)
+    );
+  });
+
+  /* notes */
+  const notes = load(STORAGE_NOTES, {});
+  modalNote.value = notes[h.id] || '';
+
+  modalBackdrop.style.display = 'flex';
+
+
+/* modal nav */
+modalPrev.addEventListener('click', () => { if(visibleIndex > 0) { visibleIndex--; openHadithModal(visibleIndex); scrollToCard(); }});
+modalNext.addEventListener('click', () => { if(visibleIndex < HADITHS.length - 1) { visibleIndex++; openHadithModal(visibleIndex); scrollToCard(); }});
+modalClose.addEventListener('click', () => modalBackdrop.style.display = 'none');
+modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) modalBackdrop.style.display = 'none'; });
+
+/* notes autosave */
+let noteTimer = null;
+modalNote.addEventListener('input', () => {
+  clearTimeout(noteTimer);
+  noteTimer = setTimeout(() => {
+    const h = HADITHS[visibleIndex];
+    if (!h) return;
+    const notes = load(STORAGE_NOTES, {});
+    if (modalNote.value && modalNote.value.trim()) notes[h.id] = modalNote.value.trim();
+    else delete notes[h.id];
+    save(STORAGE_NOTES, notes);
+
+    // reflect note in saved list if present
+    const saved = load(STORAGE_SAVED, []);
+    const sidx = saved.findIndex(x => String(x.id) === String(h.id));
+    if (sidx >= 0) {
+      saved[sidx].note = modalNote.value.trim();
+      save(STORAGE_SAVED, saved);
+      populateSavedList();
+    }
+  }, 400);
+});
+}
+/* -------------------------
+   Saved list modal
+   ------------------------- */
+openSavedBtn.addEventListener('click', () => { populateSavedList(); savedBackdrop.style.display = 'flex'; });
+closeSaved.addEventListener('click', () => savedBackdrop.style.display = 'none');
+savedBackdrop.addEventListener('click', (e) => { if (e.target === savedBackdrop) savedBackdrop.style.display = 'none'; });
+
+async function populateSavedList(){
+  const savedItems = load(STORAGE_SAVED, []);
+  savedList.innerHTML = '';
+
+  if (!savedItems.length) {
+    savedList.innerHTML = '<em style="color:var(--muted)">No saved hadiths</em>';
+    return;
+  }
+
+  // try to reuse cached corpus
+  if (!ALL_SAVED_CORPUS) {
+    try {
+      const res = await fetch(API_URL);
+      ALL_SAVED_CORPUS = res.ok ? await res.json() : HADITHS.slice();
+    } catch (e) {
+      ALL_SAVED_CORPUS = HADITHS.slice();
+    }
+  }
+
+  const notes = load(STORAGE_NOTES, {});
+  savedItems.forEach((item) => {
+    const hadith = ALL_SAVED_CORPUS.find(h => String(h.id) === String(item.id));
+    const row = el('div', { class: 'saved-row', style: 'display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed var(--border);flex-wrap:wrap' });
+
+    const left = el('div');
+    let metaHtml = '';
+    if (hadith) {
+      const book = escapeHtml(hadith.book || hadith.bookId || '(Unknown book)');
+      const vol = escapeHtml(hadith.volume || '(?)');
+      const ch = escapeHtml(hadith.chapter || hadith.category || hadith.categoryId || '(?)');
+      metaHtml = `<strong>${book}</strong><br>Vol. ${vol} — Ch. ${ch} — #${escapeHtml(hadith.id)}`;
+    } else {
+      metaHtml = `<strong>Hadith #${escapeHtml(item.id)}</strong><br><small style="color:var(--muted)">${escapeHtml(item.snippet || '')}</small>`;
+    }
+    const meta = el('div', { style: 'font-size:.85rem;color:var(--muted)' });
+    meta.innerHTML = metaHtml;
+
+    const noteText = notes[item.id] || item.note || '(no note)';
+    const noteEl = el('div', { style: 'margin-top:4px;font-size:.9rem' }, noteText);
+
+    left.append(meta, noteEl);
+
+    const right = el('div', { style: 'display:flex;gap:6px' });
+
+    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
+    openBtn.addEventListener('click', async () => {
+      if (!hadith) { alert('Hadith data not found'); return; }
+
+      const indexInPage = HADITHS.findIndex(h => String(h.id) === String(hadith.id));
+      if (indexInPage >= 0) {
+        openHadithModal(indexInPage);
+        savedBackdrop.style.display = 'none';
+        return;
+      }
+
+      // navigate to proper page with id=open
+      const targetPage = getTargetPageFromHadith(hadith);
+      const hadithId = hadith.id;
+      const pathArray = window.location.pathname.split('/');
+      pathArray[pathArray.length - 1] = targetPage;
+      const newPath = pathArray.join('/');
+      const newUrl = window.location.origin + newPath + '?id=' + encodeURIComponent(hadithId) + '&open=true';
+      window.location.href = newUrl;
+    });
+
+    const editBtn = el('button', { class: 'btn-3d' }, 'Edit');
+    editBtn.addEventListener('click', () => {
+      const current = notes[item.id] || item.note || '';
+      const newNote = prompt('Edit note:', current) || '';
+      if (newNote.trim()) notes[item.id] = newNote.trim();
+      else delete notes[item.id];
+      save(STORAGE_NOTES, notes);
+
+      // Update saved list entry
+      const saved = load(STORAGE_SAVED, []);
+      const idx = saved.findIndex(x => String(x.id) === String(item.id));
+      if (idx >= 0) { saved[idx].note = newNote.trim(); save(STORAGE_SAVED, saved); }
+      populateSavedList();
+    });
+
+    const delBtn = el('button', { class: 'btn-3d' }, 'Delete');
+    delBtn.addEventListener('click', () => {
+      const updated = savedItems.filter(x => String(x.id) !== String(item.id));
+      save(STORAGE_SAVED, updated);
+      populateSavedList();
+    });
+
+    right.append(openBtn, editBtn, delBtn);
+    row.append(left, right);
+    savedList.appendChild(row);
+  });
+}
+modalPrev.onclick = () => {
+  if (visibleIndex > 0) {
+    visibleIndex--;
+    openHadithModal(visibleIndex);
+    scrollToCard();
+  }
+};
+
+modalNext.onclick = () => {
+  if (visibleIndex < HADITHS.length - 1) {
+    visibleIndex++;
+    openHadithModal(visibleIndex);
+    scrollToCard();
+  }
+};
+
+modalClose.onclick = () => modalBackdrop.style.display = 'none';
+
+/* -------------------------
+   Helper: target page mapping
+   ------------------------- */
+function getTargetPageFromHadith(hadith) {
+  // sensible fallback
+  let targetPage = 'hadiths.html';
+  if (!hadith) return targetPage;
+
+  // if BOOKS_CONFIG present, use it
+  if (window.BOOKS_CONFIG && Array.isArray(window.BOOKS_CONFIG)) {
+    const book = window.BOOKS_CONFIG.find(b =>
+      b.bookId === hadith.bookId || b.book === hadith.book || String(b.id) === String(hadith.bookId)
+    );
+    if (book && book.chapters) {
+      const chapter = book.chapters.find(ch =>
+        Number(ch.id) === Number(hadith.chapter) ||
+        Number(ch.categoryId) === Number(hadith.categoryId)
+      );
+      if (chapter && chapter.filename) return chapter.filename;
+    }
+  }
+
+  // Simple heuristics: use book/volume to infer local filenames (customize per your site)
+  const vol = Number(hadith.volume);
+  if (vol === 1) return 'alkafi-volume1.html';
+  if (vol === 2) return 'alkafi-volume2.html';
+  return targetPage;
+}
+
+/* -------------------------
+   Misc helpers & UI
+   ------------------------- */
+function scrollToCard(){
+  const id = HADITHS[visibleIndex] && HADITHS[visibleIndex].id;
+  if (!id) return;
+  const elCard = document.getElementById('hadith-card-' + id);
+  if (elCard) elCard.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+backBeginning.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* hamburger/menu */
+document.querySelectorAll('.hamburger').forEach(h => h.addEventListener('click', (e) => { e.stopPropagation(); document.getElementById('mainNav').classList.toggle('open'); }));
+document.addEventListener('click', (e) => { if(!document.getElementById('mainNav').contains(e.target) && !e.target.closest('.hamburger')) document.getElementById('mainNav').classList.remove('open'); });
+
+/* theme apply */
+function applyThemeClass(isDark) {
+  if (isDark) {
+    document.body.classList.add('dark', 'dark-mode');
+  } else {
+    document.body.classList.remove('dark', 'dark-mode');
+  }
+}
+applyThemeClass(localStorage.getItem('theme') === 'dark');
+
+
+
+window.addEventListener('hashchange', () => {
+  const ch = getChapterFromHash();
+  if (ch && PAGES[ch]) {
+    showChapter(ch);
+  }
+});
+
+
+function checkAndOpenSavedHadith(){
+  const pinned = load(STORAGE_PINNED, null);
+  if(!pinned) return;
+
+  const index = HADITHS.findIndex(h => String(h.id) === String(pinned.id));
+  if(index === -1) return;
+
+  // Find the pinned hadith to get its chapter
+  const hadith = HADITHS[index];
+  if(hadith){
+    const chapter = hadith.chapterInCategoryId || 'unknown';
+    // Switch to correct chapter before opening modal
+    showChapter(chapter);
+  }
+
+  // Open modal AFTER switching to correct chapter
+  setTimeout(() => {
+    openHadithModal(index);
+  }, 30);
+}
+loadHadiths();
+
+
+
+</script>
+</body>
+
+
+</html>
