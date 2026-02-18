@@ -1286,12 +1286,19 @@ async function populateSavedList(){
         return;
       }
 
-const slug = getSavedBookSlug(hadith);
-const url = (!hadith.categoryId || Number(hadith.categoryId) === 1)
-  ? `/${slug}/#${hadith.chapterInCategoryId}`
-  : `/${slug}/${hadith.categoryId}/#${hadith.chapterInCategoryId}`;
+let bookSlug = BOOKS_CONFIG.find(b => b.book === hadith.book)?.slug || 'zuhd';
+
+let url;
+if (!hadith.categoryId || Number(hadith.categoryId) === 1) {
+  // Use /1/ if multiple categories exist
+  const multipleCats = ALL_SAVED_CORPUS.some(h => Number(h.categoryId) !== 1);
+  url = multipleCats ? `/${bookSlug}/1/#${hadith.chapterInCategoryId}` : `/${bookSlug}/#${hadith.chapterInCategoryId}`;
+} else {
+  url = `/${bookSlug}/${hadith.categoryId}/#${hadith.chapterInCategoryId}`;
+}
 
 window.location.href = url;
+
 
 
 
