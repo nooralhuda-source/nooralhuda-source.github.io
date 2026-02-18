@@ -792,25 +792,7 @@ function splitArabicSanadMatn(arabicText) {
 }
 
 // Call this on page load, after HADITHS is populated
-function openHadithFromQuery() {
-  const params = new URLSearchParams(window.location.search);
-  const idToOpen = params.get('openHadithId');
-  if (!idToOpen) return;
 
-  const index = HADITHS.findIndex(h => String(h.id) === String(idToOpen));
-  if (index >= 0) {
-    // Switch to the correct chapter first
-    const hadith = HADITHS[index];
-    const chapter = hadith.chapterInCategoryId || 'unknown';
-    showChapter(chapter);
-
-    // Open modal and scroll
-    setTimeout(() => {
-      openHadithModal(index);
-      scrollToCard();
-    }, 30);
-  }
-}
 
 // Call after you load the hadiths
 loadHadiths().then(() => openHadithFromQuery());
@@ -1451,6 +1433,27 @@ window.addEventListener('hashchange', () => {
   }
 });
 
+function openHadithFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('openHadithId');
+  if (!id) return;
+
+  const index = HADITHS.findIndex(h => String(h.id) === String(id));
+  if (index === -1) return;
+
+  const hadith = HADITHS[index];
+  if (!hadith) return;
+
+  // Show the correct chapter first
+  const chapter = hadith.chapterInCategoryId || 'unknown';
+  showChapter(chapter);
+
+  // Open modal AFTER a small delay to let the DOM update
+  setTimeout(() => {
+    openHadithModal(index);
+    scrollToCard();
+  }, 50);
+}
 
 function checkAndOpenSavedHadith(){
   const pinned = load(STORAGE_PINNED, null);
@@ -1472,7 +1475,9 @@ function checkAndOpenSavedHadith(){
     openHadithModal(index);
   }, 30);
 }
-loadHadiths().then(() => openHadithFromQuery());
+loadHadiths().then(() => {
+  openHadithFromQuery();
+});
 
 
 
