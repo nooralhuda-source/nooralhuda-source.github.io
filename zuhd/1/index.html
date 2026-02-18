@@ -607,12 +607,15 @@ const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/re
 const FILTER_VOLUME = 1;
 const FILTER_CATEGORY_ID = 1;
 
-const BOOK_SLUG = 'zuhd';
 
 
-const STORAGE_SAVED = 'noor_saved_hadiths_v62';
-const STORAGE_PINNED = 'noor_pinned_hadith_v62';
-const STORAGE_NOTES = 'noor_hadith_notes_v62';
+
+// Pick your version once
+const STORAGE_VERSION = 62;  // change this number per release
+
+const STORAGE_SAVED   = `noor_saved_hadiths_v${STORAGE_VERSION}`;
+const STORAGE_PINNED  = `noor_pinned_hadith_v${STORAGE_VERSION}`;
+const STORAGE_NOTES   = `noor_hadith_notes_v${STORAGE_VERSION}`;
 
 
 /* -------------------------
@@ -694,6 +697,14 @@ function splitArabicSanadMatnByEnglish(arabicText, englishSanad = '') {
   };
 }
 
+function loadAllSaved() {
+  let allSaved = [];
+  for(let v=1; v<=STORAGE_VERSION; v++){
+    const saved = load(`noor_saved_hadiths_v${v}`, []);
+    allSaved = allSaved.concat(saved);
+  }
+  return allSaved;
+}
 
 function buildHadithUrl(bookSlug, categoryId, chapterId) {
   if (!categoryId || Number(categoryId) === 1) {
@@ -721,6 +732,23 @@ function el(tag, attrs = {}, html = ''){
   }
 
   return e;
+}
+// Mapping of keywords in saved hadiths 'book' to your site slug/folder
+const BOOK_KEYWORDS = [
+  { keyword: 'zuhd', slug: 'zuhd' },
+  { keyword: 'kamal', slug: 'kamal' },
+  { keyword: 'tawhid', slug: 'tawhid' },
+  { keyword: 'duafa', slug: 'duafa' },
+  { keyword: 'wasail', slug: 'wasail' },
+  // add more as needed
+];
+
+// Get the slug for a saved hadith based on its 'book' field
+function getSavedBookSlug(hadith) {
+  if (!hadith.book) return 'wasail'; // fallback
+  const lowerBook = hadith.book.toLowerCase();
+  const entry = BOOK_KEYWORDS.find(b => lowerBook.includes(b.keyword));
+  return entry ? entry.slug : 'wasail'; // fallback if no match
 }
 
 
@@ -1203,7 +1231,8 @@ closeSaved.addEventListener('click', () => savedBackdrop.style.display = 'none')
 savedBackdrop.addEventListener('click', (e) => { if (e.target === savedBackdrop) savedBackdrop.style.display = 'none'; });
 
 async function populateSavedList(){
-  const savedItems = load(STORAGE_SAVED, []);
+  const savedItems = loadAllSaved();
+
   savedList.innerHTML = '';
 
   if (!savedItems.length) {
@@ -1257,31 +1286,37 @@ async function populateSavedList(){
         return;
       }
 
-let url;
-
-if (!hadith.categoryId || Number(hadith.categoryId) === 1) {
-  url = `/${BOOK_SLUG}/#${hadith.chapterInCategoryId}`;
-} else {
-  url = `/${BOOK_SLUG}/${hadith.categoryId}/#${hadith.chapterInCategoryId}`;
-}
+const slug = getSavedBookSlug(hadith);
+const url = (!hadith.categoryId || Number(hadith.categoryId) === 1)
+  ? `/${slug}/#${hadith.chapterInCategoryId}`
+  : `/${slug}/${hadith.categoryId}/#${hadith.chapterInCategoryId}`;
 
 window.location.href = url;
 
+
+
     });
 
-    const editBtn = el('button', { class: 'btn-3d' }, 'Edit');
-    editBtn.addEventListener('click', () => {
-      const current = notes[item.id] || item.note || '';
-      if (newNote.trim()) notes[item.id] = newNote.trim();
-      else delete notes[item.id];
-      save(STORAGE_NOTES, notes);
+const editBtn = el('button', { class: 'btn-3d' }, 'Edit');
+editBtn.addEventListener('click', () => {
+  const current = notes[item.id] || item.note || '';
+  const newNote = prompt('Edit note:', current) || '';  // <-- missing prompt before
+  if (newNote.trim()) notes[item.id] = newNote.trim();
+  else delete notes[item.id];
+  save(STORAGE_NOTES, notes);
 
-      // Update saved list entry
-      const saved = load(STORAGE_SAVED, []);
-      const idx = saved.findIndex(x => String(x.id) === String(item.id));
-      if (idx >= 0) { saved[idx].note = newNote.trim(); save(STORAGE_SAVED, saved); }
-      populateSavedList();
-    });
+  // Update saved list entry
+  const saved = load(STORAGE_SAVED, []);
+  const idx = saved.findIndex(x => String(x.id) === String(item.id));
+  if (idx >= 0) {
+    saved[idx].note = newNote.trim();
+    save(STORAGE_SAVED, saved);
+  }
+
+  // Refresh list to show updated note
+  populateSavedList();
+});
+
 
     const delBtn = el('button', { class: 'btn-3d' }, 'Delete');
     delBtn.addEventListener('click', () => {
