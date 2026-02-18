@@ -1252,91 +1252,100 @@ async function populateSavedList(){
 
   const notes = load(STORAGE_NOTES, {});
   savedItems.forEach((item) => {
-    const hadith = ALL_SAVED_CORPUS.find(h => String(h.id) === String(item.id));
-    const row = el('div', { class: 'saved-row', style: 'display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed var(--border);flex-wrap:wrap' });
+  const hadith = ALL_SAVED_CORPUS.find(h => String(h.id) === String(item.id));
+  const row = el('div', {
+    class: 'saved-row',
+    style: 'display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed var(--border);flex-wrap:wrap'
+  });
 
-    const left = el('div');
-    let metaHtml = '';
-    if (hadith) {
-      const book = escapeHtml(hadith.book || hadith.bookId || '(Unknown book)');
-      const vol = escapeHtml(hadith.volume || '(?)');
-      const ch = escapeHtml(hadith.chapter || hadith.category || hadith.categoryId || '(?)');
-      metaHtml = `<strong>${book}</strong><br>Vol. ${vol} — Ch. ${ch} — #${escapeHtml(hadith.id)}`;
-    } else {
-      metaHtml = `<strong>Hadith #${escapeHtml(item.id)}</strong><br><small style="color:var(--muted)">${escapeHtml(item.snippet || '')}</small>`;
-    }
-    const meta = el('div', { style: 'font-size:.85rem;color:var(--muted)' });
-    meta.innerHTML = metaHtml;
-
-    const noteText = notes[item.id] || item.note || '(no note)';
-    const noteEl = el('div', { style: 'margin-top:4px;font-size:.9rem' }, noteText);
-
-    left.append(meta, noteEl);
-
-    const right = el('div', { style: 'display:flex;gap:6px' });
-
-    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
-    openBtn.addEventListener('click', async () => {
-      if (!hadith) { alert('Hadith data not found'); return; }
-
-      const indexInPage = HADITHS.findIndex(h => String(h.id) === String(hadith.id));
-      if (indexInPage >= 0) {
-        openHadithModal(indexInPage);
-        savedBackdrop.style.display = 'none';
-        return;
-      }
-
-let bookSlug = BOOKS_CONFIG.find(b => b.book === hadith.book)?.slug || 'zuhd';
-
-let url;
-if (!hadith.categoryId || Number(hadith.categoryId) === 1) {
-  // Use /1/ if multiple categories exist
-  const multipleCats = ALL_SAVED_CORPUS.some(h => Number(h.categoryId) !== 1);
-  url = multipleCats ? `/${bookSlug}/1/#${hadith.chapterInCategoryId}` : `/${bookSlug}/#${hadith.chapterInCategoryId}`;
-} else {
-  url = `/${bookSlug}/${hadith.categoryId}/#${hadith.chapterInCategoryId}`;
-}
-
-window.location.href = url;
-
-
-
-
-    });
-
-const editBtn = el('button', { class: 'btn-3d' }, 'Edit');
-editBtn.addEventListener('click', () => {
-  const current = notes[item.id] || item.note || '';
-  const newNote = prompt('Edit note:', current) || '';  // <-- missing prompt before
-  if (newNote.trim()) notes[item.id] = newNote.trim();
-  else delete notes[item.id];
-  save(STORAGE_NOTES, notes);
-
-  // Update saved list entry
-  const saved = load(STORAGE_SAVED, []);
-  const idx = saved.findIndex(x => String(x.id) === String(item.id));
-  if (idx >= 0) {
-    saved[idx].note = newNote.trim();
-    save(STORAGE_SAVED, saved);
+  const left = el('div');
+  let metaHtml = '';
+  if (hadith) {
+    const book = escapeHtml(hadith.book || hadith.bookId || '(Unknown book)');
+    const vol = escapeHtml(hadith.volume || '(?)');
+    const ch = escapeHtml(hadith.chapter || hadith.category || hadith.categoryId || '(?)');
+    metaHtml = `<strong>${book}</strong><br>Vol. ${vol} — Ch. ${ch} — #${escapeHtml(hadith.id)}`;
+  } else {
+    metaHtml = `<strong>Hadith #${escapeHtml(item.id)}</strong><br><small style="color:var(--muted)">${escapeHtml(item.snippet || '')}</small>`;
   }
+  const meta = el('div', { style: 'font-size:.85rem;color:var(--muted)' });
+  meta.innerHTML = metaHtml;
 
-  // Refresh list to show updated note
-  populateSavedList();
+  const noteText = notes[item.id] || item.note || '(no note)';
+  const noteEl = el('div', { style: 'margin-top:4px;font-size:.9rem' }, noteText);
+
+  left.append(meta, noteEl);
+
+  const right = el('div', { style: 'display:flex;gap:6px' });
+
+  // --- Open Button ---
+  const openBtn = el('button', { class: 'btn-3d' }, 'Open');
+  openBtn.addEventListener('click', async () => {
+    if (!hadith) { alert('Hadith data not found'); return; }
+
+    // Try opening on current page
+    const indexInPage = HADITHS.findIndex(h => String(h.id) === String(hadith.id));
+    if (indexInPage >= 0) {
+      openHadithModal(indexInPage);
+      savedBackdrop.style.display = 'none';
+      scrollToCard();
+      return;
+    }
+
+    // Determine bookSlug from keywords
+    let bookSlug = 'zuhd'; // fallback
+    if (hadith.book) {
+      const match = BOOK_KEYWORDS.find(bk =>
+        hadith.book.toLowerCase().includes(bk.keyword.toLowerCase())
+      );
+      if (match) bookSlug = match.slug;
+    }
+
+    // Determine category segment
+    let categorySegment = (!hadith.categoryId || Number(hadith.categoryId) === 1)
+                          ? '1'
+                          : hadith.categoryId;
+
+    // Redirect to the correct page & chapter
+    const url = `/${bookSlug}/${categorySegment}/#${hadith.chapterInCategoryId}?openHadithId=${hadith.id}`;
+    window.location.href = url;
+  });
+
+  // --- Edit Button ---
+  const editBtn = el('button', { class: 'btn-3d' }, 'Edit');
+  editBtn.addEventListener('click', () => {
+    const current = notes[item.id] || item.note || '';
+    const newNote = prompt('Edit note:', current) || '';
+    if (newNote.trim()) notes[item.id] = newNote.trim();
+    else delete notes[item.id];
+    save(STORAGE_NOTES, notes);
+
+    const saved = load(STORAGE_SAVED, []);
+    const idx = saved.findIndex(x => String(x.id) === String(item.id));
+    if (idx >= 0) { saved[idx].note = newNote.trim(); save(STORAGE_SAVED, saved); }
+
+    populateSavedList(); // refresh
+  });
+
+  // --- Delete Button ---
+  const delBtn = el('button', { class: 'btn-3d' }, 'Delete');
+  delBtn.addEventListener('click', () => {
+    const updated = savedItems.filter(x => String(x.id) !== String(item.id));
+    save(STORAGE_SAVED, updated);
+    populateSavedList();
+  });
+
+  right.append(openBtn, editBtn, delBtn);
+  row.append(left, right);
+  savedList.appendChild(row);
 });
 
-
-    const delBtn = el('button', { class: 'btn-3d' }, 'Delete');
-    delBtn.addEventListener('click', () => {
-      const updated = savedItems.filter(x => String(x.id) !== String(item.id));
-      save(STORAGE_SAVED, updated);
-      populateSavedList();
-    });
 
     right.append(openBtn, editBtn, delBtn);
     row.append(left, right);
     savedList.appendChild(row);
-  });
-}
+  };
+
 modalPrev.onclick = () => {
   if (visibleIndex > 0) {
     visibleIndex--;
