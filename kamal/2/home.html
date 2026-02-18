@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Kamal Al-Din wa Tamam Al-Ni'ama</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+/* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+:root {
+  --green: #276540; /* 🎨 exact material green 800 */
+  --bg: #f8fafb;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 20px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  padding-top: 3.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── HEADER + NAV ─── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(14px) saturate(160%);
+    background: #276540;
+  color: #FFFFFF;
+  padding: 16px;
+  font-weight: bold;
+  border-radius: 0px;
+
+  color: #fff;
+  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
+  z-index: 1000;
+}
+header h1 { font-size: 1.4rem; font-weight: 700; }
+header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+header h1 a:hover { opacity: 0.85; }
+
+.hamburger {
+  font-size: 1.5rem; background: transparent; color: #fff;
+  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s, background 0.3s;
+}
+.hamburger:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: #276540;
+}
+
+/* Navigation Drawer */
+#mainNav {
+  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
+  background: #276540; /* ✅ */
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  border-radius: 0 0 0 24px;
+  transition: right 0.35s ease, opacity 0.35s ease;
+  opacity: 0; pointer-events: none; z-index: 1050;
+}
+#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
+#mainNav a {
+  background: #fff; color: var(--green);
+  padding: 0.5rem 0.8rem; border-radius: 16px;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+#mainNav a:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Search Bar */
+.surah-search {
+  max-width: 400px; margin: 2rem auto 1rem;
+  display: flex; align-items: center;
+  background: #fff; border-radius: 16px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.surah-search input {
+  border: none; outline: none; flex: 1;
+  font-size: 1rem; background: transparent; color: #1f2937;
+}
+.surah-search:hover { transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* Cards */
+.surah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem auto 4rem;
+  padding: 0 2rem; max-width: 1200px;
+}
+.surah-card {
+  background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem; transition: var(--transition);
+  cursor: pointer; transform-style: preserve-3d;
+}
+.surah-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
+.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+
+footer {
+  margin-top: 4rem; padding: 2rem 1rem;
+  text-align: center; color: var(--muted);
+  font-size: 0.95rem; border-top: 1px solid var(--border);
+}
+body.dark-mode {
+  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
+  --card:#1e293b; --border:#334155;
+}
+.top-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* keeps title centered */
+  position: relative;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+/* Back button – desktop positioning */
+.top-row .back-home {
+  position: absolute;
+  left: 25rem;               /* safe fixed padding instead of % */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Button styles */
+.back-home {
+  color: #fff;
+  background: var(--green);
+  padding: .35rem .7rem;
+  border-radius: 10px;
+  font-size: .9rem;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.back-home:hover {
+  background: #2d7f4b;
+}
+
+.top-row h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .top-row {
+    flex-direction: column;
+    gap: .75rem;
+  }
+
+  .top-row .back-home {
+    position: static;       /* remove absolute positioning */
+    transform: none;
+    align-self: flex-start; /* stays left */
+    margin-left: clamp(0.75rem, 4vw, 1.25rem);
+
+  }
+}
+
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand"><h1><a href="https://nooralhuda.co.uk/">Noor Al Huda</a></h1></div>
+  <button class="hamburger" aria-label="Open menu">☰</button>
+</header>
+
+<nav id="mainNav">
+  <a href="https://nooralhuda.co.uk/quran">Quran</a>
+  <a href="https://nooralhuda.co.uk/duas">Duas</a>
+  <a href="https://nooralhuda.co.uk/hadiths-home">Hadiths</a>
+  <a href="https://nooralhuda.co.uk/calendar">Calendar</a>
+  <a href="https://nooralhuda.co.uk/salah">Salah</a>
+  <a href="https://tube.nooralhuda.co.uk">ShiaTube</a>
+  <a href="https://nooralhuda.co.uk/">Home</a>
+  <a href="https://nooralhuda.co.uk/settings">Settings</a>
+</nav>
+
+<main class="container">
+  <div class="top-row">
+  <a class="back-home" href="https://nooralhuda.co.uk/kamal/home">← Back</a>
+  <h2>Kamal Al-Din wa Tamam Al-Ni'ama - The Occultations and the Proofs</h2>
+</div>
+  <div class="surah-search">
+    <input type="text" id="searchBook" placeholder="Search Chapter ...">
+  </div>
+  <div class="surah-grid" id="bookGrid"></div>
+</main>
+
+<footer>
+  © 2025 Noor Al Huda — All in one Shia website
+</footer>
+
+<script>
+async function loadChapters() {
+  const grid = document.getElementById("bookGrid");
+  const searchInput = document.getElementById("searchBook");
+
+  const res = await fetch(
+    "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/39.json"
+  );
+  let data = await res.json();
+
+  // 1. Get unique chapters only
+
+
+// ONLY categoryId = 2
+data = data.filter(h => h.categoryId === 2);
+
+// get unique chapters normally (no foreword nonsense)
+const uniqueChapters = [];
+const seen = new Set();
+
+data.forEach(h => {
+  const chapterKey = h.chapterInCategoryId;
+
+  if (!seen.has(chapterKey)) {
+    seen.add(chapterKey);
+
+    uniqueChapters.push({
+      key: chapterKey,
+      title: h.chapter || ""
+    });
+  }
+});
+
+// numeric sort
+uniqueChapters.sort((a, b) => Number(a.key) - Number(b.key));
+
+// render
+uniqueChapters.forEach(ch => {
+  const card = document.createElement("div");
+  card.className = "surah-card";
+
+  card.innerHTML = `
+    <h3>Chapter ${ch.key}</h3>
+    <p class="chapter-name">${ch.title}</p>
+  `;
+
+  card.onclick = () => {
+    window.location.href = `./#${ch.key}`;
+  };
+
+  grid.appendChild(card);
+});
+
+
+  // --- SEARCH LOGIC ---
+  searchInput.addEventListener("input", function() {
+    const query = this.value.toLowerCase().trim();
+    const cards = grid.getElementsByClassName("surah-card");
+
+    Array.from(cards).forEach(card => {
+      const title = card.querySelector("h3").innerText.toLowerCase();
+      const subTitle = card.querySelector("p").innerText.toLowerCase();
+      card.style.display = (title.includes(query) || subTitle.includes(query)) ? "" : "none";
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", loadChapters);
+
+// ... rest of your existing nav and theme scripts ...
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const mainNav = document.getElementById("mainNav");
+  const hamburger = document.querySelector(".hamburger");
+
+
+hamburger.addEventListener("click", e => {
+  e.stopPropagation();
+  mainNav.classList.toggle("open");
+});
+
+document.addEventListener("click", e => {
+  if (!mainNav.contains(e.target) && !hamburger.contains(e.target))
+    mainNav.classList.remove("open");
+});
+
+
+});
+function applyThemeClass(isDark) {
+    if (isDark) {
+      document.body.classList.add("dark");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark");
+      document.body.classList.remove("dark-mode");
+    }
+  }
+  var savedTheme = localStorage.getItem("theme");
+  applyThemeClass(savedTheme === "dark");
+
+  if (darkToggle) {
+    darkToggle.checked = savedTheme === "dark";
+    darkToggle.addEventListener("change", function (ev) {
+      var isDarkNow = !!ev.target.checked;
+      applyThemeClass(isDarkNow);
+      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
+    });
+  }
+</script>
+
+</body>
+</html>
