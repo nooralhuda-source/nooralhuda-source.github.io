@@ -678,7 +678,19 @@ function splitArabicSanadMatnByEnglish(arabicText, englishSanad = '') {
 
 
 function load(key, fallback){ try{ const v = JSON.parse(localStorage.getItem(key)); return v === null ? fallback : (v || fallback); }catch(e){ return fallback; } }
-function el(tag, attrs = {}, text = ''){ const e = document.createElement(tag); for(const k in attrs) { if(k === 'style') e.style.cssText = attrs[k]; else e.setAttribute(k, attrs[k]); } if(text) e.innerText = text; return e; }
+function el(tag, attrs = {}, html = ''){
+  const e = document.createElement(tag);
+
+  for(const k in attrs) {
+    if(k === 'style') e.style.cssText = attrs[k];
+    else e.setAttribute(k, attrs[k]);
+  }
+
+  if(html) e.innerHTML = html;   // ✅ renders <br> as line break
+
+  return e;
+}
+
 function escapeHtml(s){ return String(s === undefined || s === null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function gradeClass(text){
   if (!text) return 'grade-none';
