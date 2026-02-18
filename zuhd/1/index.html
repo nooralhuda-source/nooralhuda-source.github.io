@@ -733,6 +733,26 @@ function el(tag, attrs = {}, html = ''){
 
   return e;
 }
+function openHadithFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const idToOpen = params.get('openHadithId');
+  if (!idToOpen) return;
+
+  const index = HADITHS.findIndex(h => String(h.id) === String(idToOpen));
+  if (index >= 0) {
+    // Switch to the correct chapter first
+    const hadith = HADITHS[index];
+    const chapter = hadith.chapterInCategoryId || 'unknown';
+    showChapter(chapter);
+
+    // Open modal and scroll
+    setTimeout(() => {
+      openHadithModal(index);
+      scrollToCard();
+    }, 30);
+  }
+}
+
 // Mapping of keywords in saved hadiths 'book' to your site slug/folder
 const BOOK_KEYWORDS = [
   { keyword: 'zuhd', slug: 'zuhd' },
@@ -1449,7 +1469,7 @@ function checkAndOpenSavedHadith(){
     openHadithModal(index);
   }, 30);
 }
-loadHadiths();
+loadHadiths().then(() => openHadithFromQuery());
 
 
 
