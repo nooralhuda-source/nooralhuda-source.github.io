@@ -522,7 +522,7 @@ body.dark-mode .note-input::placeholder {
     </div>
 
     <div id="bismillahWrap">
-      <img src="../bismillah.png" alt="Bismillah" onerror="this.style.display='none'">
+      <img src="../../bismillah.png" alt="Bismillah" onerror="this.style.display='none'">
     </div>
 
     <div id="pageNav" style="text-align:center; margin:20px 0; border-bottom:1px solid var(--border); padding-bottom:10px;"></div>
@@ -681,15 +681,18 @@ function load(key, fallback){ try{ const v = JSON.parse(localStorage.getItem(key
 function el(tag, attrs = {}, html = ''){
   const e = document.createElement(tag);
 
-  for(const k in attrs) {
+  for(const k in attrs){
     if(k === 'style') e.style.cssText = attrs[k];
     else e.setAttribute(k, attrs[k]);
   }
 
-  if(html) e.innerHTML = html;   // ✅ renders <br> as line break
+  if (html) {
+    e.innerHTML = String(html).replace(/<br\s*\/?>/gi, '<br><br>');
+  }
 
   return e;
 }
+
 
 function escapeHtml(s){ return String(s === undefined || s === null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function gradeClass(text){
