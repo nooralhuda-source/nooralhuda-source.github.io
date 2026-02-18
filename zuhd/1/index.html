@@ -588,9 +588,8 @@ body.dark-mode .note-input::placeholder {
   <div class="modal" id="savedPopup">
     <h3 style="margin-bottom:8px">Saved Hadiths</h3>
 
-    <div style="padding:10px 0; line-height:1.6; font-size:.95rem;">
-      This feature is currently in beta testing.<br>
-      I am still working on it, and it will be available in April 2026, insha’Allah.
+    <div id="savedList" style="padding:10px 0; line-height:1.6; font-size:.95rem;">
+      <!-- Saved hadiths will be appended here by populateSavedList() -->
     </div>
 
     <div style="text-align:right;margin-top:12px">
@@ -598,6 +597,7 @@ body.dark-mode .note-input::placeholder {
     </div>
   </div>
 </div>
+
 
 <script>
 /* -------------------------
@@ -607,6 +607,7 @@ const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/re
 const FILTER_VOLUME = 1;
 const FILTER_CATEGORY_ID = 1;
 
+const BOOK_SLUG = 'zuhd';
 
 
 const STORAGE_SAVED = 'noor_saved_hadiths_v62';
@@ -694,6 +695,17 @@ function splitArabicSanadMatnByEnglish(arabicText, englishSanad = '') {
 }
 
 
+function buildHadithUrl(bookSlug, categoryId, chapterId) {
+  if (!categoryId || Number(categoryId) === 1) {
+    return `/${bookSlug}/#${chapterId}`;
+  }
+  return `/${bookSlug}/${categoryId}/#${chapterId}`;
+}
+
+function getCategoryFromPath() {
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  return (!parts[1] || isNaN(parts[1])) ? 1 : Number(parts[1]);
+}
 
 function load(key, fallback){ try{ const v = JSON.parse(localStorage.getItem(key)); return v === null ? fallback : (v || fallback); }catch(e){ return fallback; } }
 function el(tag, attrs = {}, html = ''){
@@ -755,16 +767,17 @@ function splitArabicSanadMatn(arabicText) {
 /* -------------------------
    Data loader
    ------------------------- */
-async function loadHadiths(){
+async function loadHadiths(categoryId = 1){
+
   hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
   try {
     const res = await fetch(API_URL);
     if(!res.ok) throw new Error('API fetch failed');
     const arr = await res.json();
 
-// ✅ Filter here only once
+// ✅ Filter using URL category
 ALL_HADITHS = arr.filter(h =>
-  Number(h.categoryId) === FILTER_CATEGORY_ID &&
+  Number(h.categoryId) === categoryId &&
   Number(h.volume) === FILTER_VOLUME
 );
 
@@ -1244,20 +1257,21 @@ async function populateSavedList(){
         return;
       }
 
-      // navigate to proper page with id=open
-      const targetPage = getTargetPageFromHadith(hadith);
-      const hadithId = hadith.id;
-      const pathArray = window.location.pathname.split('/');
-      pathArray[pathArray.length - 1] = targetPage;
-      const newPath = pathArray.join('/');
-      const newUrl = window.location.origin + newPath + '?id=' + encodeURIComponent(hadithId) + '&open=true';
-      window.location.href = newUrl;
+let url;
+
+if (!hadith.categoryId || Number(hadith.categoryId) === 1) {
+  url = `/${BOOK_SLUG}/#${hadith.chapterInCategoryId}`;
+} else {
+  url = `/${BOOK_SLUG}/${hadith.categoryId}/#${hadith.chapterInCategoryId}`;
+}
+
+window.location.href = url;
+
     });
 
     const editBtn = el('button', { class: 'btn-3d' }, 'Edit');
     editBtn.addEventListener('click', () => {
       const current = notes[item.id] || item.note || '';
-      const newNote = prompt('Edit note:', current) || '';
       if (newNote.trim()) notes[item.id] = newNote.trim();
       else delete notes[item.id];
       save(STORAGE_NOTES, notes);
