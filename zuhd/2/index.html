@@ -791,6 +791,29 @@ function splitArabicSanadMatn(arabicText) {
   };
 }
 
+// Call this on page load, after HADITHS is populated
+function openHadithFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const idToOpen = params.get('openHadithId');
+  if (!idToOpen) return;
+
+  const index = HADITHS.findIndex(h => String(h.id) === String(idToOpen));
+  if (index >= 0) {
+    // Switch to the correct chapter first
+    const hadith = HADITHS[index];
+    const chapter = hadith.chapterInCategoryId || 'unknown';
+    showChapter(chapter);
+
+    // Open modal and scroll
+    setTimeout(() => {
+      openHadithModal(index);
+      scrollToCard();
+    }, 30);
+  }
+}
+
+// Call after you load the hadiths
+loadHadiths().then(() => openHadithFromQuery());
 
 /* -------------------------
    Data loader
@@ -1449,7 +1472,7 @@ function checkAndOpenSavedHadith(){
     openHadithModal(index);
   }, 30);
 }
-loadHadiths();
+loadHadiths().then(() => openHadithFromQuery());
 
 
 
