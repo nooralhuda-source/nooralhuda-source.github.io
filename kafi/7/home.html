@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda — Volume 8</title>
+  <title>Al-Kafi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
 /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
@@ -201,8 +201,8 @@ body.dark-mode {
 
 <main class="container">
   <div class="top-row">
-  <a class="back-home" href="alkafi.html">← Back</a>
-  <h2>Select a Chapter</h2>
+  <a class="back-home" href="../home">← Back</a>
+  <h2>Al-Kafi Volume 7</h2>
 </div>
   <div class="surah-search">
     <input type="text" id="searchBook" placeholder="Search Hadith Book...">
@@ -221,14 +221,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("bookGrid");
   const searchInput = document.getElementById("searchBook");
 const books = [
-  { name_en: "Chapter 1 - The Book of Wills", name_ar: "كتاب الوصايا", href: "alkafi-v7-ch1.html" },
-  { name_en: "Chapter 2 - The Book of Inheritance", name_ar: "كتاب الميراث", href: "alkafi-v7-ch2.html" },
-  { name_en: "Chapter 3 - The Book of Legal Penalties", name_ar: "كتاب العقوبات القانونية", href: "alkafi-v7-ch3.html" },
-  { name_en: "Chapter 4 - The Book of Compensations", name_ar: "كتاب التعويضات", href: "alkafi-v7-ch4.html" },
-  { name_en: "Chapter 5 - The Book of Testimony", name_ar: "كتاب الشهادة", href: "alkafi-v7-ch5.html" },
-  { name_en: "Chapter 6 - The Book of Adjudication and Rules", name_ar: "كتاب التحكيم والقواعد", href: "alkafi-v7-ch6.html" },
-  { name_en: "Chapter 7 - The Book of Oaths, Vows and Expiations", name_ar: "كتاب الأيمان والنذور والتكفير", href: "alkafi-v7-ch7.html" },
-
+  { name_en: "Section 1 - The Book of Wills", name_ar: "كتاب الوصايا", href: "1/home" },
+  { name_en: "Section 2 - The Book of Inheritance", name_ar: "كتاب الميراث", href: "2/home" },
+  { name_en: "Section 3 - The Book of Legal Penalties", name_ar: "كتاب العقوبات القانونية", href: "3/home" },
+  { name_en: "Section 4 - The Book of Compensations", name_ar: "كتاب التعويضات", href: "4/home" },
+  { name_en: "Section 5 - The Book of Testimony", name_ar: "كتاب الشهادة", href: "5/home" },
+  { name_en: "Section 6 - The Book of Adjudication and Rules", name_ar: "كتاب التحكيم والقواعد", href: "6/home" },
+  { name_en: "Section 7 - The Book of Oaths, Vows and Expiations", name_ar: "كتاب الأيمان والنذور والتكفير", href: "7/home" },
 ];
 
 books.forEach(book => {
@@ -284,3 +283,4 @@ function applyThemeClass(isDark) {
 </script>
 </body>
 </html>
+
