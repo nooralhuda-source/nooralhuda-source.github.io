@@ -1322,10 +1322,10 @@ const bookSlug = BOOK_SLUG_MAP[item.book] || 'wasail';
 // only hadiths from THIS book
 const sameBook = ALL_SAVED_CORPUS.filter(h => h.book === item.book);
 
-// unique category count
 const uniqueCats = new Set(
   sameBook.map(h => Number(h.categoryId || 1))
 );
+
 
 let url;
 
