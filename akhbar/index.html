@@ -1318,8 +1318,27 @@ async function populateSavedList() {
     const openBtn = el('button',{class:'btn-3d'},'Open');
     openBtn.onclick = () => {
       const bookSlug = BOOK_SLUG_MAP[item.book] || 'wasail';
-      const url = `/${bookSlug}/${item.categoryId || 1}/#${item.chapterInCategoryId}?openHadithId=${item.id}`;
-      window.location.href = url;
+
+// get all hadiths from THIS book only
+const sameBook = ALL_SAVED_CORPUS.filter(h => h.book === item.book);
+
+// count unique categories
+const uniqueCats = new Set(
+  sameBook.map(h => Number(h.categoryId || 1))
+);
+
+// build url
+let url;
+
+if (uniqueCats.size > 1) {
+  // multi-category book
+  url = `/${bookSlug}/${hadith.categoryId}/#${hadith.chapterInCategoryId}`;
+} else {
+  // single-category book
+  url = `/${bookSlug}/#${hadith.chapterInCategoryId}`;
+}
+
+window.location.href = url;
     };
 
     /* EDIT */
