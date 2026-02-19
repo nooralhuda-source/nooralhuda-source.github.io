@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda — Hadith Books</title>
+  <title>Al-Kafi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
 /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
@@ -202,7 +202,7 @@ body.dark-mode {
 <main class="container">
   <div class="top-row">
   <a class="back-home" href="alkafi.html">← Back</a>
-  <h2>Select a Chapter</h2>
+  <h2>Al=Kafi Volume 2</h2>
 </div>
   <div class="surah-search">
     <input type="text" id="searchBook" placeholder="Search Hadith Book...">
@@ -221,12 +221,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("bookGrid");
   const searchInput = document.getElementById("searchBook");
 const books = [
-  { name_en: "Chapter 1 - The Book of Belief and Disbelief", name_ar: "كتاب الإيمان والكفر", href: "alkafi-v2-ch1.html" },
-  { name_en: "Chapter 2 - The Book of Supplication", name_ar: "كتاب الدعاء", href: "alkafi-v2-ch2.html" },
-  { name_en: "Chapter 3 - The Book of the Excellence of the Holy Quran", name_ar: "كتاب فضل القرآن الكريم", href: "alkafi-v2-ch3.html" },
-  { name_en: "Chapter 4 - The Book of Social Manners", name_ar: "كتاب الآداب الاجتماعية", href: "alkafi-v2-ch4.html" },
-
-
+  { name_en: "Section 1 - The Book of Belief and Disbelief", name_ar: "كتاب الإيمان والكفر", href: "1/home" },
+  { name_en: "Section 2 - The Book of Supplication", name_ar: "كتاب الدعاء", href: "2/home" },
+  { name_en: "Section 3 - The Book of the Excellence of the Holy Quran", name_ar: "كتاب فضل القرآن الكريم", href: "3/home" },
+  { name_en: "Section 4 - The Book of Social Manners", name_ar: "كتاب الآداب الاجتماعية", href: "4/home" },
 ];
 
 books.forEach(book => {
@@ -282,3 +280,4 @@ function applyThemeClass(isDark) {
 </script>
 </body>
 </html>
+
