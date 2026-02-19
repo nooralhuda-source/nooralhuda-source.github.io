@@ -1320,9 +1320,11 @@ async function populateSavedList() {
 const bookSlug = BOOK_SLUG_MAP[item.book] || 'wasail';
 
 // only hadiths from THIS book
-const sameBook = ALL_SAVED_CORPUS.filter(h => h.book === item.book);
+
 
 // unique category count
+const sameBook = ALL_SAVED_CORPUS.filter(h => h.book === item.book);
+
 const uniqueCats = new Set(
   sameBook.map(h => Number(h.categoryId || 1))
 );
