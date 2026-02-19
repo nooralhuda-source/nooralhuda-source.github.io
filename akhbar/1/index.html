@@ -1315,32 +1315,15 @@ async function populateSavedList() {
     const right = el('div', { style:'display:flex;gap:6px' });
 
     /* OPEN */
-const openBtn = el('button', { class: 'btn-3d' }, 'Open');
+   const openBtn = el('button', { class: 'btn-3d' }, 'Open');
 openBtn.onclick = () => {
+  sessionStorage.setItem('targetHadithId', item.id); // store hadith ID
   const slug = BOOK_SLUG_MAP[item.book] || 'wasail';
-
-  // Get all saved hadiths for this book
   const sameBook = ALL_SAVED_CORPUS.filter(h => h.book === item.book);
   const uniqueCats = new Set(sameBook.map(h => Number(h.categoryId || 1)));
-
-  let catSegment = '';
-
-  if (uniqueCats.size === 1) {
-    // Single-category book, always use /1/
-    catSegment = '/1';
-  } else {
-    // Multi-category book, use the actual category
-    catSegment = `/${item.categoryId}`;
-  }
-
+  let catSegment = uniqueCats.size === 1 ? '/1' : `/${item.categoryId}`;
   const url = `https://nooralhuda.co.uk/${slug}${catSegment}/#${item.chapterInCategoryId}`;
-sessionStorage.setItem('targetHadith', item.chapterInCategoryId);
-
-  // Remove any query string like ?openHadithId=15
-  const cleanUrl = url.split('?')[0];
-
-  // ✅ Actually open the URL
-  window.location.href = cleanUrl;
+  window.location.href = url.split('?')[0];
 };
 
 
@@ -1425,12 +1408,13 @@ function getTargetPageFromHadith(hadith) {
 /* -------------------------
    Misc helpers & UI
    ------------------------- */
-function scrollToCard(){
-  const id = HADITHS[visibleIndex] && HADITHS[visibleIndex].id;
+function scrollToCard(idx = visibleIndex){
+  const id = HADITHS[idx] && HADITHS[idx].id;
   if (!id) return;
   const elCard = document.getElementById('hadith-card-' + id);
   if (elCard) elCard.scrollIntoView({ behavior:'smooth', block:'center' });
 }
+
 
 backBeginning.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
@@ -1457,23 +1441,28 @@ window.addEventListener('hashchange', () => {
   }
 });
 
-window.addEventListener('DOMContentLoaded', () => {
-  const hadithId = sessionStorage.getItem('targetHadith');
-  if (!hadithId) return; // no hadith to open
+window.addEventListener('DOMContentLoaded', async () => {
+  const hadithId = sessionStorage.getItem('targetHadithId');
+  if (!hadithId) return;
+  sessionStorage.removeItem('targetHadithId'); // clean up
 
-  sessionStorage.removeItem('targetHadith'); // clear it so it only triggers once
+  // Wait until HADITHS are loaded
+  await loadHadiths(); // make sure HADITHS exist
 
-  const target = document.getElementById(`hadith-${hadithId}`);
-  if (!target) return;
+  const index = HADITHS.findIndex(h => String(h.id) === String(hadithId));
+  if (index === -1) return;
 
-  // Scroll to it
-  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // Switch to correct chapter first
+  const chapter = HADITHS[index].chapterInCategoryId || 'unknown';
+  showChapter(chapter);
 
-  // Open modal (replace openHadithModal with your modal function)
-  if (typeof openHadithModal === 'function') {
-    openHadithModal(hadithId);
-  }
+  // Give DOM a moment to render
+  setTimeout(() => {
+    scrollToCard(index);       // scroll to hadith
+    openHadithModal(index);    // open modal
+  }, 50);
 });
+
 
 function checkAndOpenSavedHadith(){
   const pinned = load(STORAGE_PINNED, null);
