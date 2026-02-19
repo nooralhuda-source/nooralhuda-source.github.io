@@ -611,7 +611,7 @@ const FILTER_CATEGORY_ID = 1;
 
 
 // Pick your version once
-const STORAGE_VERSION = 62;  // change this number per release
+const STORAGE_VERSION = 66;  // change this number per release
 
 const STORAGE_SAVED   = `noor_saved_hadiths_v${STORAGE_VERSION}`;
 const STORAGE_PINNED  = `noor_pinned_hadith_v${STORAGE_VERSION}`;
@@ -733,17 +733,52 @@ function el(tag, attrs = {}, html = ''){
 
   return e;
 }
+function openHadithFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const idToOpen = params.get('openHadithId');
+  if (!idToOpen) return;
 
+  const index = HADITHS.findIndex(h => String(h.id) === String(idToOpen));
+  if (index >= 0) {
+    // Switch to the correct chapter first
+    const hadith = HADITHS[index];
+    const chapter = hadith.chapterInCategoryId || 'unknown';
+    showChapter(chapter);
+
+    // Open modal and scroll
+    setTimeout(() => {
+      openHadithModal(index);
+      scrollToCard();
+    }, 30);
+  }
+}
 
 // Mapping of keywords in saved hadiths 'book' to your site slug/folder
-const BOOK_KEYWORDS = [
-  { keyword: 'zuhd', slug: 'zuhd' },
-  { keyword: 'kamal', slug: 'kamal' },
-  { keyword: 'tawhid', slug: 'tawhid' },
-  { keyword: 'duafa', slug: 'duafa' },
-  { keyword: 'wasail', slug: 'wasail' },
-  // add more as needed
-];
+const BOOK_SLUG_MAP = {
+  "Kitāb al-Zuhd": "zuhd",
+  "Kitāb al-Tawḥīd": "tawhid",
+  "Al-Kāfi": "kafi",
+  "Muʿjam al-Aḥādīth al-Muʿtabara": "mujam",
+  "Al-Khiṣāl": "khisal",
+  "'Uyūn akhbār al-Riḍā": "uyun",
+  "Al-Amālī": "al-amali",
+  "Al-Tawḥīd": "tawhid",
+  "Wasāʾil al-Shīʿa": "wasail",
+  "Kitāb al-Ḍuʿafāʾ": "duafa",
+  "Kitāb al-Ghayba": "ghaybah",
+  "Thawāb al-Aʿmāl wa ʿiqāb al-Aʿmāl": "thawab",
+  "Kāmil al-Ziyārāt": "kamil",
+  "Faḍaʾil al-Shīʿa": "fadail",
+  "Ṣifāt al-Shīʿa": "sifat",
+  "Kitāb al-Ghayba": "al-ghaybah",
+  "Maʿānī al-ʾAkhbār": "akhbar",
+  "Kitāb al-Muʾmināt": "momin",
+  "Nahj al-Balāgha": "nahj",
+  "Risālat al-Ḥuqūq": "huquq",
+  "Man Lā Yaḥḍuruh al-Faqīh": "faqih",
+  "Kamāl al-Dīn wa Tamām al-Niʿma": "kamal"
+};
+
 
 // Get the slug for a saved hadith based on its 'book' field
 function getSavedBookSlug(hadith) {
@@ -982,12 +1017,18 @@ if (arabicMatn) {
 
       const saved = load(STORAGE_SAVED, []);
       const idx = saved.findIndex(x => String(x.id) === String(h.id));
-      if (idx === -1) {
-        saved.unshift({ id: h.id, snippet: (h.thaqalaynMatn || h.englishText || '').slice(0,160), note: note || '' });
-      } else {
-        saved[idx].note = note || '';
-        saved[idx].snippet = (h.thaqalaynMatn || h.englishText || '').slice(0,160);
-      }
+if (idx === -1) {
+  saved.unshift({
+    id: h.id,
+    book: h.book,                      // ⭐ ADD
+    volume: h.volume,                  // ⭐ ADD
+    categoryId: h.categoryId,          // ⭐ ADD
+    chapterInCategoryId: h.chapterInCategoryId, // ⭐ ADD
+    snippet: (h.thaqalaynMatn || h.englishText || '').slice(0,160),
+    note: note || ''
+  });
+}
+
 
       if (note && note.trim()) {
         notes[h.id] = note.trim();
@@ -1263,7 +1304,8 @@ async function populateSavedList(){
   const left = el('div');
   let metaHtml = '';
   if (hadith) {
-    const book = escapeHtml(hadith.book || hadith.bookId || '(Unknown book)');
+    const book = escapeHtml(item.book || '(Unknown book)');
+
     const vol = escapeHtml(hadith.volume || '(?)');
     const ch = escapeHtml(hadith.chapter || hadith.category || hadith.categoryId || '(?)');
     metaHtml = `<strong>${book}</strong><br>Vol. ${vol} — Ch. ${ch} — #${escapeHtml(hadith.id)}`;
@@ -1295,13 +1337,8 @@ async function populateSavedList(){
     }
 
     // Determine bookSlug from keywords
-    let bookSlug = 'zuhd'; // fallback
-    if (hadith.book) {
-      const match = BOOK_KEYWORDS.find(bk =>
-        hadith.book.toLowerCase().includes(bk.keyword.toLowerCase())
-      );
-      if (match) bookSlug = match.slug;
-    }
+const bookSlug = BOOK_SLUG_MAP[item.book] || 'wasail';
+
 
     // Determine category segment
     let categorySegment = (!hadith.categoryId || Number(hadith.categoryId) === 1)
@@ -1429,27 +1466,6 @@ window.addEventListener('hashchange', () => {
     showChapter(ch);
   }
 });
-function openHadithFromQuery() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('openHadithId');
-  if (!id) return;
-
-  const index = HADITHS.findIndex(h => String(h.id) === String(id));
-  if (index === -1) return;
-
-  const hadith = HADITHS[index];
-  if (!hadith) return;
-
-  // Show the correct chapter first
-  const chapter = hadith.chapterInCategoryId || 'unknown';
-  showChapter(chapter);
-
-  // Open modal AFTER a small delay to let the DOM update
-  setTimeout(() => {
-    openHadithModal(index);
-    scrollToCard();
-  }, 50);
-}
 
 
 function checkAndOpenSavedHadith(){
@@ -1472,10 +1488,7 @@ function checkAndOpenSavedHadith(){
     openHadithModal(index);
   }, 30);
 }
-loadHadiths().then(() => {
-  openHadithFromQuery();
-});
-
+loadHadiths().then(() => openHadithFromQuery());
 
 
 
