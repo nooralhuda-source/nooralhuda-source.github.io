@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Noor Al Huda — Volume 8</title>
+  <title>Al-Kafi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
 /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
@@ -202,8 +202,8 @@ body.dark-mode {
 
 <main class="container">
   <div class="top-row">
-  <a class="back-home" href="alkafi.html">← Back</a>
-  <h2>Select a Chapter</h2>
+  <a class="back-home" href="../home">← Back</a>
+  <h2>Al-Kafi Volume 6</h2>
 </div>
 
   <div class="surah-search">
@@ -223,16 +223,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("bookGrid");
   const searchInput = document.getElementById("searchBook");
 const books = [
-  { name_en: "Chapter 1 - The Book of 'Aqiqah (Offering Animal Sacrifice for a Newborn Child)", name_ar: "كتاب العقيقة", href: "alkafi-v6-ch1.html" },
-  { name_en: "Chapter 2 - The Book of Talaq (Divorces)", name_ar: "كتاب الطلاق", href: "alkafi-v6-ch2.html" },
-  { name_en: "Chapter 3 - The Book of Hunting", name_ar: "كتاب الصيد", href: "alkafi-v6-ch3<|fim_middle|>oleon<|fim_middle|><|fim_middle|>Eloluta.html" },
-  { name_en: "Chapter 4 - The Book of Slaughtering Animals for Food", name_ar: "كتاب الذبح", href: "alkafi-v6-ch4.html" },
-  { name_en: "Chapter 5 - The Book of Food", name_ar: "كتاب الطعام", href: "alkafi-v6-ch5.html" },
-  { name_en: "Chapter 6 - The Book of Drinks", name_ar: "كتاب الشراب", href: "alkafi-v6-ch6.html" },
-  { name_en: "Chapter 7 - The Book of Dresses, Beautification and Kindness", name_ar: "كتاب الملابس والزينة والكرم", href: "alkafi-v6-ch7.html" },
-  { name_en: "Chapter 8 - The Book of Domestic Animals", name_ar: "كتاب الحيوانات الأليفة", href: "alkafi-v6-ch8.html" },
+  { name_en: "Section 1 - The Book of 'Aqiqah (Offering Animal Sacrifice for a Newborn Child)", name_ar: "كتاب العقيقة", href: "1/home" },
+  { name_en: "Section 2 - The Book of Talaq (Divorces)", name_ar: "كتاب الطلاق", href: "2/home" },
+  { name_en: "Section 3 - The Book of Hunting", name_ar: "كتاب الصيد", href: "3/home" },
+  { name_en: "Section 4 - The Book of Slaughtering Animals for Food", name_ar: "كتاب الذبح", href: "4/home" },
+  { name_en: "Section 5 - The Book of Food", name_ar: "كتاب الطعام", href: "5/home" },
+  { name_en: "Section 6 - The Book of Drinks", name_ar: "كتاب الشراب", href: "6/home" },
+  { name_en: "Section 7 - The Book of Dresses, Beautification and Kindness", name_ar: "كتاب الملابس والزينة والكرم", href: "7/home" },
+  { name_en: "Section 8 - The Book of Domestic Animals", name_ar: "كتاب الحيوانات الأليفة", href: "8/home" },
 ];
-
 books.forEach(book => {
   const card = document.createElement("div");
   card.className = "surah-card";
@@ -286,3 +285,4 @@ function applyThemeClass(isDark) {
 </script>
 </body>
 </html>
+
