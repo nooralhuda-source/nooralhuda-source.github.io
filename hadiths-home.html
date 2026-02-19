@@ -1,564 +1,172 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <title>Hadith Books</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-/* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+<meta charset="UTF-8" />
+<title>Hadith Books</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
 :root {
-  --green: #276540; /* 🎨 exact material green 800 */
-  --bg: #f8fafb;
-  --text: #1f2937;
-  --muted: #6b7280;
-  --card: #ffffff;
-  --border: #e5e7eb;
-  --radius: 20px;
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --green:#276540;
+  --bg:#f8fafb;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --card:#ffffff;
+  --border:#e5e7eb;
+  --radius:20px;
+  --shadow-md:0 10px 32px rgba(0,0,0,0.12);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
-  background: var(--bg); color: var(--text); line-height: 1.6;
-  padding-top: 3.5rem;
-  transition: background 0.3s ease, color 0.3s ease;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding-top:3.5rem;
 }
 
-/* ─── HEADER + NAV ─── */
-header {
-  position: fixed; top: 0; left: 0; width: 100%;
-  display: flex; justify-content: space-between; align-items: center;
-  backdrop-filter: blur(14px) saturate(160%);
-    background: #276540;
-  color: #FFFFFF;
-  padding: 16px;
-  font-weight: bold;
-  border-radius: 0px;
+/* ───────── HEADER ───────── */
 
-  color: #fff;
-  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
-  z-index: 1000;
-}
-header h1 { font-size: 1.4rem; font-weight: 700; }
-header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
-header h1 a:hover { opacity: 0.85; }
-
-.hamburger {
-  font-size: 1.5rem; background: transparent; color: #fff;
-  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
-  cursor: pointer; backdrop-filter: blur(8px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  transition: transform 0.3s, background 0.3s;
-}
-.hamburger:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  background: #276540;
+header{
+  position:fixed;
+  top:0;left:0;width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--green);
+  color:#fff;
+  padding:.75rem 1.25rem;
+  z-index:1000;
 }
 
-/* Navigation Drawer */
-#mainNav {
-  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
-  background: #276540; /* ✅ */
-  padding: 2rem 1.5rem;
-  display: flex; flex-direction: column; gap: 1rem;
-  border-radius: 0 0 0 24px;
-  transition: right 0.35s ease, opacity 0.35s ease;
-  opacity: 0; pointer-events: none; z-index: 1050;
-}
-#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
-#mainNav a {
-  background: #fff; color: var(--green);
-  padding: 0.5rem 0.8rem; border-radius: 16px;
-  font-weight: 600; text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-#mainNav a:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+header h1 a{
+  color:#fff;
+  text-decoration:none;
 }
 
-/* Search Bar */
-.surah-search {
-  max-width: 400px; margin: 2rem auto 1rem;
-  display: flex; align-items: center;
-  background: #fff; border-radius: 16px;
-  padding: 0.5rem 1rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  transition: box-shadow 0.3s, transform 0.2s;
-}
-.surah-search input {
-  border: none; outline: none; flex: 1;
-  font-size: 1rem; background: transparent; color: #1f2937;
-}
-.surah-search:hover { transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+.hamburger{
+  font-size:1.5rem;
+  background:transparent;
+  border:none;
+  color:#fff;
+  cursor:pointer;
 }
 
-/* Cards */
-.surah-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem; margin: 2rem auto 5rem;
-  padding: 0 10rem; max-width: 1450px;
-}
-.surah-card {
-  background: var(--card); border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  padding: 2rem 1.5rem; transition: var(--transition);
-  cursor: pointer; transform-style: preserve-3d;
-}
-.surah-card:hover {
-  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
-  box-shadow: var(--shadow-lg);
-}
-.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
-.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+/* ───────── NAV DRAWER ───────── */
 
-footer {
-  margin-top: 4rem; padding: 2rem 1rem;
-  text-align: center; color: var(--muted);
-  font-size: 0.95rem; border-top: 1px solid var(--border);
-}
-body.dark-mode {
-  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
-  --card:#1e293b; --border:#334155;
-}
-/* add small cover on left — nothing else changes */
-
-.surah-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+#mainNav{
+  position:fixed;
+  top:0;
+  right:-240px;
+  width:200px;
+  height:100%;
+  background:var(--green);
+  padding:2rem 1.5rem;
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+  transition:right .3s;
 }
 
-.book-cover-wrapper {
-  width: 100px;
-  height: 145px;
-  flex-shrink: 0;
-  overflow: hidden;
-  border-radius: 3px;
+#mainNav.open{ right:0; }
+
+#mainNav a{
+  background:#fff;
+  color:var(--green);
+  padding:.5rem;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:600;
 }
 
-.book-cover-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.text-group {
-  display: flex;
-  flex-direction: column;
-}
+/* ───────── MAIN CONTENT ───────── */
 
-.title-en {
-  font-weight: 600;
-  font-size: 1rem;
+main{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:70vh;
+  padding:2rem;
+  text-align:center;
 }
 
-.title-ar {
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-/* bigger book cover like Thaqalayn */
-
-.surah-card {
-  display: flex;
-  align-items: stretch; /* makes image match row height */
-  gap: 14px;
-  padding: 10px 8px;
+.notice{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:3rem 2rem;
+  max-width:520px;
+  box-shadow:var(--shadow-md);
 }
 
-.book-cover-wrapper {
-  width: 100px;
-  height: 145px;          /* your new size */
-  flex-shrink: 0;
-  overflow: hidden;
-  border-radius: 4px;
+.notice h2{
+  color:var(--green);
+  margin-bottom:1rem;
 }
 
-.book-cover-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-/* =========================
-   MOBILE ONLY ADJUSTMENTS
-   ========================= */
-
-@media (max-width: 600px) {
-
-  /* make list narrower and centered */
-  .surah-grid {
-    max-width: 420px;
-    margin: 8px 8px ;
-    align-items: center;
-  }
-
-  /* shrink row width */
-  .surah-card {
-    margin: 0 auto;
-    width: 92%;
-    padding: 10px 10px 10px 5px; /* smaller left space for smaller cover */
-    align-items: center; /* center vertically on phone */
-  }
-
-  /* smaller cover on phone */
-  .book-cover-wrapper {
-    width: 100px;
-    height: 145px;
-    left: 0;
-  }
-  .surah-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem; margin: 2rem auto 5rem;
-  padding: 0 1rem; max-width: 1450px;
+.notice p{
+  color:var(--muted);
+  line-height:1.6;
 }
 
+/* ───────── FOOTER ───────── */
+
+footer{
+  margin-top:3rem;
+  padding:2rem;
+  text-align:center;
+  color:var(--muted);
+  border-top:1px solid var(--border);
 }
-/* center grid on phone */
-@media (max-width: 600px) {
-
-  .surah-grid {
-    width: 92%;
-    max-width: 420px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-}
-
-  </style>
+</style>
 </head>
+
 <body>
+
 <header>
-  <div class="brand"><h1><a href="index.html" data-en="Noor Al Huda" data-ar="نور الهدى" data-fa="نور الهدی" data-ur="نور الہدی">Noor Al Huda</a></h1></div>
-  <button class="hamburger" aria-label="Open menu">☰</button>
+  <h1><a href="index.html">Noor Al Huda</a></h1>
+  <button class="hamburger">☰</button>
 </header>
 
 <nav id="mainNav">
-  <a href="quran.html" data-en="Quran" data-ar="القرآن" data-fa="قرآن" data-ur="قرآن">Quran</a>
-  <a href="duas.html" data-en="Duas" data-ar="أدعية" data-fa="دعاها" data-ur="دعائیں">Duas</a>
-  <a href="hadiths-home.html" data-en="Hadiths" data-ar="الأحاديث" data-fa="احادیث" data-ur="احادیث">Hadiths</a>
-  <a href="calendar.html" data-en="Calendar" data-ar="التقويم" data-fa="تقویم" data-ur="تقویم">Calendar</a>
-  <a href="salah.html" data-en="Salah" data-ar="الصلاة" data-fa="نماز" data-ur="نماز">Salah</a>
-  <a href="shiatube/index.html" data-en="ShiaTube" data-ar="شيعة تيوب" data-fa="شیعه تیوب" data-ur="شیعہ ٹیوب">ShiaTube</a>
-  <a href="index.html" data-en="Home" data-ar="الرئيسية" data-fa="خانه" data-ur="ہوم">Home</a>
-  <a href="settings.html" data-en="Settings" data-ar="الإعدادات" data-fa="تنظیمات" data-ur="ترتیبات">Settings</a>
+  <a href="quran.html">Quran</a>
+  <a href="duas.html">Duas</a>
+  <a href="hadiths-home.html">Hadiths</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="settings.html">Settings</a>
 </nav>
 
-<main class="container">
-  <h2 id="page-title" style="text-align:center; margin-top:2rem;" 
-      data-en="Select a Hadith Collection" 
-      data-ar="اختر مجموعة أحاديث" 
-      data-fa="یک مجموعه حدیث انتخاب کنید" 
-      data-ur="حدیث کا مجموعہ منتخب کریں">
-      Select a Hadith Collection
-  </h2>
-  <div class="surah-search">
-    <input type="text" id="searchBook" 
-           placeholder="Search Hadith Book..." 
-           data-en-ph="Search Hadith Book..." 
-           data-ar-ph="ابحث عن كتاب حديث..." 
-           data-fa-ph="جستجوی کتاب حدیث..." 
-           data-ur-ph="حدیث کی کتاب تلاش کریں...">
+<main>
+  <div class="notice">
+    <h2>Hadith Collections Temporarily Unavailable</h2>
+    <p>
+      The hadith library is currently being reorganised and updated.
+      <br><br>
+      Books will return shortly with improved structure, navigation,
+      and performance.
+      <br><br>
+      Please check back soon.
+    </p>
   </div>
-  <div class="surah-grid" id="bookGrid"></div>
 </main>
 
-
-</div>
-<footer data-en="© 2025 Noor Al Huda — All in one Shia website" 
-        data-ar="© 2025 نور الهدى — موقع شيعي متكامل" 
-        data-fa="© 2025 نور الهدی — وب‌سایت جامع شیعه" 
-        data-ur="© 2025 نور الہدیٰ — ہمہ گیر شیعہ ویب سائٹ">
-    © 2025 Noor Al Huda — All in one Shia website
+<footer>
+© 2025 Noor Al Huda — All in one Shia website
 </footer>
-    
-
 
 <script>
-// 1. Define books at the TOP so all functions can see them
-const books = [
-    { 
-        name_en: "Al-Kafi", 
-        name_ar: "الكافي", 
-        name_fa: "الکافی", 
-        name_ur: "الکافی", 
-        cover: "https://thaqalayn.net/_next/image?url=%2Fimages%2Fhadith%2Fcovers%2Fcompressed%2F1-round.webp&w=256&q=75",
-        href: "alkafi.html" 
-    },
-    { 
-        name_en: "Man La Yahduruhu al-Faqih", 
-        name_ar: "من لا يحضره الفقيه", 
-        name_fa: "من لایحضره الفقیه", 
-        name_ur: "من لا یحضرہ الفقیہ", 
-        cover: "https://thaqalayn.net/_next/image?url=%2Fimages%2Fhadith%2Fcovers%2Fcompressed%2F34-round.webp&w=256&q=75",
-        href: "man-la-yahduruh.html" 
-    },
-    { 
-        name_en: "Uyun Akhbar al-Rida", 
-        name_ar: "عيون أخبار الرضا", 
-        name_fa: "عیون اخبار الرضا", 
-        name_ur: "عیون اخبار الرضا", 
-        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F11-round.jpeg&w=1920&q=75",
-        href: "uyun-akhbar-al-rida.html" 
-    },
-    { 
-        name_en: "Nahj al-Balagha", 
-        name_ar: "نهج البلاغة", 
-        name_fa: "نهج البلاغه", 
-        name_ur: " نہج البلاغہ", 
-        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F32-round.jpeg&w=1920&q=75",
-        href: "nahj-al-balagha.html" 
-    },
-  {
-  name_en: "Wasa'il al-Shia",
-  name_ar: "وسائل الشيعة",
-  name_fa: "وسائل الشیعة",
-  name_ur: "وسائل الشیعہ",
-  cover: "https://upload.wikimedia.org/wikipedia/en/f/f2/Was%C4%81'il_al-Sh%C4%AB%CA%BFa.jpg",
-  href: "wasail/home"
-},
-    { 
-        name_en: "Mujam al-Ahadith al-Mutabara", 
-        name_ar: "معجم الأحاديث المعتبرة", 
-        name_fa: "معجم الاحادیث المعتبره", 
-        name_ur: "معجم الاحادیث المطابرہ",
-        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F9-round.jpeg&w=1920&q=75", 
-        href: "Mujam-al-Ahadith-al-Mutabara.html" 
-    },
-     {
-        name_en: "Kitab al-Tawhid",
-        name_ar: "كتاب التوحيد",
-        name_fa: "کتاب التوحید",
-        name_ur: "کتاب التوحید",
-        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F14-round.jpeg&w=1920&q=75",
-        href: "tawhid/home"
-    },
-{
-    name_en: "Fadhail al-Shia",
-    name_ar: "فضائل الشيعة",
-    name_fa: "فضائل الشیعه",
-    name_ur: "فضائل الشیعة",
-    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F25-round.jpeg&w=1920&q=75",
-    href: "fadail/1/home"
-},
-  {
-    name_en: "Kamil al-Ziyarat",
-    name_ar: "كامل الزيارات",
-    name_fa: "کامل الزیارات",
-    name_ur: "کامل الزیارات",
-    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F24-round.jpeg&w=1920&q=75",
-    href: "kamil/home"
-},
+const nav = document.getElementById("mainNav");
+const btn = document.querySelector(".hamburger");
 
-  {
-    name_en: "Risalat al-Huquq",
-    name_ar: "رسالة الحقوق",
-    name_fa: "رساله حقوق",
-    name_ur: "رسالۃ الحقوق",
-    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F33-round.jpeg&w=1920&q=75",
-    href: "huquq/1/home"
-},
-  {
-    name_en: "Kitab al-Mu'min",
-    name_ar: "كتاب المؤمن",
-    name_fa: "کتاب المؤمن",
-    name_ur: "کتاب المؤمن",
-    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F30-round.jpeg&w=1920&q=75",
-    href: "momin/1/home"
-},
-    {
-        name_en: "Kitab al-Ghaybah by Sheikh Tusi",
-        name_ar: "كتاب الغيبة للشيخ الطوسي",
-        name_fa: "کتاب الغیبه شیخ طوسی",
-        name_ur: "کتاب الغیبہ از شیخ طوسی",
-        cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F27-round.jpeg&w=1920&q=75",
-        href: "al-ghaybah/1/home"
-    },
-  {
-    name_en: "Al-Amali",
-    name_ar: "الأمالي",
-    name_fa: "الأمالی",
-    name_ur: "الأمالی",
-    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F29-round.jpeg&w=1920&q=75",
-    href: "amali/1/home"
-},
+btn.onclick = (e)=>{
+  e.stopPropagation();
+  nav.classList.toggle("open");
+};
 
-
-{
-    name_en: "Sifat al-Shia",
-    name_ar: "صفات الشيعة",
-    name_fa: "صفات الشيعه",
-    name_ur: "صفات الشیعہ",
-    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F26-round.jpeg&w=1920&q=75",
-    href: "sifat/1/home"
-},
-  {
-    name_en: "Thawab al-A'mal wa Iqab al-A'mal",
-    name_ar: "ثواب الأعمال و عقاب الأعمال",
-    name_fa: "ثواب الاعمال و عقاب الاعمال",
-    name_ur: "ثواب الاعمال و عقاب الاعمال",
-    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F23-round.jpeg&w=1920&q=75",
-    href: "thawab/home"
-},
-{
-    name_en: "Ma'ani al-Akhbar",
-    name_ar: "معاني الأخبار",
-    name_fa: "معانی الاخبار",
-    name_ur: "معانی الاخبار",
-    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F28-round.jpeg&w=1920&q=75",
-    href: "akhbar/1/home"
-},
-{
-    name_en: "Kamal al-Din wa Tamam al-Ni'ma",
-    name_ar: "كمال الدين و تمام النعمة",
-    name_fa: "کمال الدین و تمام النعمة",
-    name_ur: "کمال الدین و تمام النعمة",
-    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F39-round.jpeg&w=1920&q=75",
-    href: "kamal/home"
-},
-{
-    name_en: "Kitab al-Ghaybah by Shaykh al-Nu'mani",
-    name_ar: "كتاب الغيبة للشيخ النعماني",
-    name_fa: "کتاب الغیبه شیخ نعمانی",
-    name_ur: "کتاب الغیبہ از شیخ نعمانی",
-    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F22-round.jpeg&w=1920&q=75",
-    href: "ghaybah/home"
-},
-{
-    name_en: "Kitab al-Zuhd",
-    name_ar: "كتاب الزهد",
-    name_fa: "کتاب الزهد",
-    name_ur: "کتاب الزہد",
-    cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F31-round.jpeg&w=1920&q=75",
-    href: "zuhd/home"
-},
-
-
-];
-
-document.addEventListener("DOMContentLoaded", () => {
-    const savedLang = localStorage.getItem('userLang') || 'en';
-    
-    // Apply theme first
-    const savedTheme = localStorage.getItem("theme");
-    applyThemeClass(savedTheme === "dark");
-
-    // Apply translations and load UI
-    applyLanguage(savedLang);
-    renderHadithCards(savedLang);
-    setupUI();
-});
-
-function applyLanguage(lang) {
-    const isRTL = ['ar', 'fa', 'ur'].includes(lang);
-    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-
-    document.querySelectorAll('[data-en]').forEach(el => {
-        const translation = el.getAttribute('data-' + lang);
-        if (translation) {
-            // Check for launcher text to keep the gold Beta badge
-            if (el.id === 'launcher-text') {
-                el.innerHTML = translation; 
-            } else {
-                el.innerText = translation;
-            }
-        }
-    });
-
-    const searchInput = document.getElementById('searchBook');
-    if (searchInput) {
-        const ph = searchInput.getAttribute(`data-${lang}-ph`);
-        if (ph) searchInput.placeholder = ph;
-    }
-}
-
-function renderHadithCards(lang) {
-    const grid = document.getElementById("bookGrid");
-    if (!grid) return;
-    grid.innerHTML = "";
-    
-    books.forEach(book => {
-        const card = document.createElement("div");
-        card.className = "surah-card";
-
-        let mainTitle;
-        if (lang === 'fa') mainTitle = book.name_fa;
-        else if (lang === 'ur') mainTitle = book.name_ur;
-        else mainTitle = book.name_en;
-
-        const subTitle = book.name_ar;
-        
-        // Placeholder image if cover is missing
-        const coverImg = book.cover || 'https://via.placeholder.com/300x400?text=No+Cover';
-
-        card.innerHTML = `
-  <div class="book-cover-wrapper">
-    <img src="${coverImg}" alt="${book.name_en}">
-  </div>
-
-  <div class="text-group">
-    <h3 class="title-en">${mainTitle}</h3>
-    <p class="title-ar">${subTitle}</p>
-  </div>
-`;
-
-        
-        card.onclick = () => window.location.href = book.href;
-        grid.appendChild(card);
-    });
-}
-function setupUI() {
-    const mainNav = document.getElementById("mainNav");
-    const hamburger = document.querySelector(".hamburger");
-    const searchInput = document.getElementById("searchBook");
-
-    if (hamburger && mainNav) {
-        hamburger.onclick = (e) => {
-            e.stopPropagation();
-            mainNav.classList.toggle("open");
-        };
-    }
-
-    document.onclick = (e) => {
-        if (mainNav && !mainNav.contains(e.target) && !hamburger.contains(e.target))
-            mainNav.classList.remove("open");
-    };
-
-    if (searchInput) {
-        searchInput.oninput = (e) => {
-            const q = e.target.value.toLowerCase();
-            document.querySelectorAll(".surah-card").forEach(card => {
-                card.style.display = card.textContent.toLowerCase().includes(q) ? "" : "none";
-            });
-        };
-    }
-}
-
-function applyThemeClass(isDark) {
-    if (isDark) {
-        document.body.classList.add("dark-mode");
-    } else {
-        document.body.classList.remove("dark-mode");
-    }
-}
+document.onclick = ()=>{
+  nav.classList.remove("open");
+};
 </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
