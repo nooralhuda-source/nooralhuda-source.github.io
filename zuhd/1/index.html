@@ -1334,6 +1334,7 @@ openBtn.onclick = () => {
   }
 
   const url = `https://nooralhuda.co.uk/${slug}${catSegment}/#${item.chapterInCategoryId}`;
+sessionStorage.setItem('targetHadith', item.chapterInCategoryId);
 
   // Remove any query string like ?openHadithId=15
   const cleanUrl = url.split('?')[0];
@@ -1455,6 +1456,23 @@ window.addEventListener('hashchange', () => {
   }
 });
 
+window.addEventListener('DOMContentLoaded', () => {
+  const hadithId = sessionStorage.getItem('targetHadith');
+  if (!hadithId) return; // no hadith to open
+
+  sessionStorage.removeItem('targetHadith'); // clear it so it only triggers once
+
+  const target = document.getElementById(`hadith-${hadithId}`);
+  if (!target) return;
+
+  // Scroll to it
+  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  // Open modal (replace openHadithModal with your modal function)
+  if (typeof openHadithModal === 'function') {
+    openHadithModal(hadithId);
+  }
+});
 
 function checkAndOpenSavedHadith(){
   const pinned = load(STORAGE_PINNED, null);
