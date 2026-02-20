@@ -603,15 +603,15 @@ body.dark-mode .note-input::placeholder {
 /* -------------------------
    Configuration & Storage
    ------------------------- */
-const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/31.json'; // Local file
+const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/1.json'; // Local file
 const FILTER_VOLUME = 1;
-const FILTER_CATEGORY_ID = 2;
+const FILTER_CATEGORY_ID = 1;
 
 
 
 
 // Pick your version once
-const STORAGE_VERSION = 63;  // change this number per release
+const STORAGE_VERSION = 67;  // change this number per release
 
 const STORAGE_SAVED   = `noor_saved_hadiths_v${STORAGE_VERSION}`;
 const STORAGE_PINNED  = `noor_pinned_hadith_v${STORAGE_VERSION}`;
@@ -834,30 +834,28 @@ function splitArabicSanadMatn(arabicText) {
 /* -------------------------
    Data loader
    ------------------------- */
-async function loadHadiths(){
+async function loadHadiths(categoryId = 1){
 
-  hadithContainer.innerHTML =
-    '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
-
+  hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
   try {
     const res = await fetch(API_URL);
     if(!res.ok) throw new Error('API fetch failed');
-
     const arr = await res.json();
 
-    ALL_HADITHS = arr.filter(h =>
-      Number(h.categoryId) === FILTER_CATEGORY_ID &&
-      Number(h.volume) === FILTER_VOLUME
-    );
+// ✅ Filter using URL category
+ALL_HADITHS = arr.filter(h =>
+  Number(h.categoryId) === categoryId &&
+  Number(h.volume) === FILTER_VOLUME
+);
 
-    HADITHS = ALL_HADITHS.slice();
+HADITHS = ALL_HADITHS.slice();
+
 
     renderList();
 
   } catch (err) {
     console.error(err);
-    hadithContainer.innerHTML =
-      '<div style="padding:12px;color:var(--muted)">Failed to load hadiths.</div>';
+    hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Failed to load hadiths.</div>';
   }
 }
 
@@ -1022,15 +1020,16 @@ if (arabicMatn) {
       const saved = load(STORAGE_SAVED, []);
       const idx = saved.findIndex(x => String(x.id) === String(h.id));
 if (idx === -1) {
-  saved.unshift({
-    id: h.id,
-    book: h.book,                      // ⭐ ADD
-    volume: h.volume,                  // ⭐ ADD
-    categoryId: h.categoryId,          // ⭐ ADD
-    chapterInCategoryId: h.chapterInCategoryId, // ⭐ ADD
-    snippet: (h.thaqalaynMatn || h.englishText || '').slice(0,160),
-    note: note || ''
-  });
+saved.unshift({
+  id: h.id,
+  book: h.book,
+  volume: Number(h.volume),              // REQUIRED
+  categoryId: Number(h.categoryId),      // REQUIRED
+  chapterInCategoryId: Number(h.chapterInCategoryId), // REQUIRED
+  snippet: (h.thaqalaynMatn || h.englishText || '').slice(0,160),
+  note: note || ''
+});
+
 }
 
 
@@ -1319,30 +1318,32 @@ async function populateSavedList() {
     /* OPEN */
    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
 openBtn.onclick = () => {
-  // store hadith id so next page opens modal + scrolls
+
   sessionStorage.setItem('targetHadithId', item.id);
 
   const slug = BOOK_SLUG_MAP[item.book] || 'wasail';
 
-  // books that require volume in URL
-  const VOLUME_BOOKS = new Set([
-    "Al-Kāfi",
-    "Man Lā Yaḥḍuruh al-Faqīh",
-    "'Uyūn akhbār al-Riḍā"
-  ]);
+  const VOLUME_SLUGS = new Set(['kafi','faqih','uyun']);
 
   let url;
 
-  if (VOLUME_BOOKS.has(item.book)) {
-    // /slug/volume/category/#chapter
+  // ONLY these 3 ever use volume
+  if (VOLUME_SLUGS.has(slug) && item.volume) {
+
     url = `https://nooralhuda.co.uk/${slug}/${item.volume}/${item.categoryId}/#${item.chapterInCategoryId}`;
+
   } else {
-    // /slug/category/#chapter
+
     url = `https://nooralhuda.co.uk/${slug}/${item.categoryId}/#${item.chapterInCategoryId}`;
+
   }
 
   window.location.href = url;
 };
+
+
+
+
 
 
 
@@ -1360,10 +1361,18 @@ openBtn.onclick = () => {
     /* DELETE */
     const delBtn = el('button',{class:'btn-3d'},'Delete');
     delBtn.onclick = () => {
-      const updated = savedItems.filter(x => String(x.id) !== String(item.id));
-      save(STORAGE_SAVED, updated);
-      populateSavedList();
-    };
+
+  const current = load(STORAGE_SAVED) || []; // 🔥 always fresh
+
+  const updated = current.filter(x =>
+    String(x.id) !== String(item.id)
+  );
+
+  save(STORAGE_SAVED, updated);
+
+  populateSavedList();
+};
+
 
     right.append(openBtn, editBtn, delBtn);
     row.append(left, right);
@@ -1460,22 +1469,27 @@ window.addEventListener('hashchange', () => {
   }
 });
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
   const hadithId = sessionStorage.getItem('targetHadithId');
   if (!hadithId) return;
+  sessionStorage.removeItem('targetHadithId'); // clean up
 
-  sessionStorage.removeItem('targetHadithId');
+  // Wait until HADITHS are loaded
+  await loadHadiths(); // make sure HADITHS exist
 
-  // wait until HADITHS exist
+  const index = HADITHS.findIndex(h => String(h.id) === String(hadithId));
+  if (index === -1) return;
+
+  // Switch to correct chapter first
+  const chapter = HADITHS[index].chapterInCategoryId || 'unknown';
+  showChapter(chapter);
+
+  // Give DOM a moment to render
   setTimeout(() => {
-    const index = HADITHS.findIndex(h => String(h.id) === String(hadithId));
-    if (index >= 0) {
-      openHadithModal(index);
-      scrollToCard();
-    }
-  }, 100);
+    scrollToCard(index);       // scroll to hadith
+    openHadithModal(index);    // open modal
+  }, 50);
 });
-
 
 
 function checkAndOpenSavedHadith(){
