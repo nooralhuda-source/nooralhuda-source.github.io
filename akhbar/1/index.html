@@ -1321,39 +1321,38 @@ openBtn.onclick = () => {
 
   const slug = BOOK_SLUG_MAP[item.book] || 'wasail';
 
-  const VOLUME_SLUGS = new Set(['kafi','faqih','uyun']);
+  // store target hadith for AFTER navigation
+  sessionStorage.setItem('targetHadithId', item.id);
 
   let url;
 
-  if (VOLUME_SLUGS.has(slug) && item.volume) {
-    url = `https://nooralhuda.co.uk/${slug}/${item.volume}/${item.categoryId}/#${item.chapterInCategoryId}`;
+  // only these books use volume format (slug names)
+  const SPECIAL_VOLUME_SLUGS = ['kafi','faqih','uyun'];
+
+  if (SPECIAL_VOLUME_SLUGS.includes(slug)) {
+    url = `/${slug}/${item.volume}/${item.categoryId}/#${item.chapterInCategoryId}`;
   } else {
-    url = `https://nooralhuda.co.uk/${slug}/${item.categoryId}/#${item.chapterInCategoryId}`;
+    url = `/${slug}/${item.categoryId}/#${item.chapterInCategoryId}`;
   }
 
-  const targetHash = `#${item.chapterInCategoryId}`;
+  const current = location.pathname + location.hash;
 
-  // ✅ SAME PAGE (no reload happens)
-  if (location.pathname + location.hash === new URL(url).pathname + targetHash) {
+  // ✅ SAME PAGE → no navigation (best UX)
+  if (current === url) {
 
     const index = HADITHS.findIndex(h => String(h.id) === String(item.id));
 
     if (index >= 0) {
-      closeSavedPanel?.();
-      openHadithModal(index);
       scrollToCard(index);
+      openHadithModal(index);
     }
 
     return;
   }
 
-  // ✅ DIFFERENT PAGE (normal behaviour)
-  sessionStorage.setItem('targetHadithId', item.id);
+  // ✅ DIFFERENT PAGE → navigate normally
   window.location.href = url;
 };
-
-
-
 
 
 
@@ -1524,6 +1523,22 @@ function checkAndOpenSavedHadith(){
     openHadithModal(index);
   }, 30);
 }
+window.addEventListener('DOMContentLoaded', () => {
+
+  const hadithId = sessionStorage.getItem('targetHadithId');
+  if (!hadithId) return;
+
+  sessionStorage.removeItem('targetHadithId');
+
+  const index = HADITHS.findIndex(h => String(h.id) === String(hadithId));
+
+  if (index >= 0) {
+    scrollToCard(index);
+    openHadithModal(index);
+  }
+
+});
+
 loadHadiths().then(() => openHadithFromQuery());
 
 
@@ -1533,3 +1548,5 @@ loadHadiths().then(() => openHadithFromQuery());
 
 
 </html>
+
+
