@@ -1682,7 +1682,23 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
 });
+window.addEventListener('hashchange', () => {
+  const chapterId = window.location.hash.replace('#', '');
+  if (!chapterId) return;
 
+  // 1. Switch the view to the correct chapter
+  showChapter(chapterId);
+
+  // 2. Find the first hadith in this chapter and open it
+  const index = HADITHS.findIndex(h => String(h.chapterInCategoryId) === String(chapterId));
+  
+  if (index >= 0) {
+    setTimeout(() => {
+      scrollToCard(index);
+      openHadithModal(index);
+    }, 50); // Small delay to let the chapter finish rendering
+  }
+});
 loadHadiths().then(() => openHadithFromQuery());
 
 
@@ -1692,5 +1708,6 @@ loadHadiths().then(() => openHadithFromQuery());
 
 
 </html>
+
 
 
