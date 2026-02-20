@@ -1,0 +1,97 @@
+{
+  "zuhd": {
+    "titleEn": "Kitab Al-Zuhd by Sheikh Hussein bin Saeed Al-Ahwazi",
+    "titleAr": "كتاب الزهد للشيخ حسين بن سعيد الأحوازي",
+    "pageTitle": "Kitab Al-Zuhd"
+  },
+  "kafi": {
+    "titleEn": "Al-Kafi by Shaykh Muhammad bin Yaqub al-Kulayni",
+    "titleAr": "الكافي للشيخ محمد بن يعقوب الكليني",
+    "pageTitle": "Al-Kafi"
+  },
+  "faqih": {
+    "titleEn": "Man La Yahduruh Al-Faqih by Shaykh Muhammad ibn Ali Al-Saduq",
+    "titleAr": "من لا يحضره الفقيه للشيخ محمد بن علي الصدوق",
+    "pageTitle": "Man La Yahduruh Al-Faqih"
+  },
+  "uyun": {
+    "titleEn": "Uyun Akhbar al-Rida by Shaykh Muhammad Bin Ali al-Saduq",
+    "titleAr": "عيون أخبار الرضا للشيخ محمد بن علي الصدوق",
+    "pageTitle": "Uyun Akhbar al-Rida"
+  },
+  "nahj": {
+    "titleEn": "Nahj Al Balagha by Al-Sharif Al-Radi",
+    "titleAr": "نهج البلاغة للشريف الراضي",
+    "pageTitle": "Nahj Al Balagha"
+  },
+  "wasail": {
+    "titleEn": "Wasail al-Shia by Shaykh Hurr Amili",
+    "titleAr": "وسائل الشيعة للشيخ الحر العاملي",
+    "pageTitle": "Wasail al-Shia"
+  },
+  "mujam": {
+    "titleEn": "Mujam al-Ahadith al-Mutabara by Shaykh Muhammad Asif al-Muhsini",
+    "titleAr": "معجم الأحاديث المطبرة للشيخ محمد آصف المحسني",
+    "pageTitle": "Mujam al-Ahadith al-Mutabara"
+  },
+  "tawhid": {
+    "titleEn": "Kitab Al-Tawhid by Shaykh Muhammad bin Ali al-Saduq",
+    "titleAr": "كتاب التوحيد للشيخ محمد بن علي الصدوق",
+    "pageTitle": "Kitab Al-Tawhid"
+  },
+  "fadail": {
+    "titleEn": "Fadail al-Shia by Shaykh Muhammad bin Ali al-Saduq",
+    "titleAr": "فضائل الشيعة للشيخ محمد بن علي الصدوق",
+    "pageTitle": "Fadail al-Shia"
+  },
+  "kamil": {
+    "titleEn": "Kamil Al-Ziyarat by Shaykh Jaʿfar bin Muhammad al-Qummi",
+    "titleAr": "كامل الزيارات للشيخ جعفر بن محمد القمي",
+    "pageTitle": "Kamil Al-Ziyarat"
+  },
+  "huquq": {
+    "titleEn": "Risalat al-Huquq attributed to Imam Ali ibn Hussain al-Zayn al-Abideen (AS)",
+    "titleAr": "رسالة الحقوق منسوبة إلى الإمام علي بن الحسين الزين العابدين (مثل)",
+    "pageTitle": "Risalat al-Huquq"
+  },
+  "momin": {
+    "titleEn": "Kitab Al-Momin by Shaykh Husayn bin Said al-Ahwazi",
+    "titleAr": "كتاب المؤمن للشيخ حسين بن سعيد الأحوازي",
+    "pageTitle": "Kitab Al-Momin"
+  },
+  "al-ghaybah": {
+    "titleEn": "Kitab Al-Ghaybah by Shaykh Muhammad bin al-Hasan al-Tusi",
+    "titleAr": "كتاب الغيبة للشيخ محمد بن الحسن الطوسي",
+    "pageTitle": "Kitab Al-Ghaybah"
+  },
+  "amali": {
+    "titleEn": "Al-Amali by Shaykh Muhammad bin Ali al-Saduq",
+    "titleAr": "الأمالي للشيخ محمد بن علي الصدوق",
+    "pageTitle": "Al-Amali"
+  },
+  "sifat": {
+    "titleEn": "Sifat Al-Shia by Shaykh Muhammad bin Ali al-Saduq",
+    "titleAr": "صفة الشيعة للشيخ محمد بن علي الصدوق",
+    "pageTitle": "Sifat Al-Shia"
+  },
+  "thawab": {
+    "titleEn": "Thawab Al-Amal wa Iqab Al-Amal by Shaykh Muhammad bin Ali al-Saduq",
+    "titleAr": "ثواب العمل وعقاب العمل للشيخ محمد بن علي الصدوق",
+    "pageTitle": "Thawab Al-Amal wa Iqab Al-Amal"
+  },
+  "akhbar": {
+    "titleEn": "Ma'ani Al-Akhbar by Shaykh Muhammad bin Ali al-Saduq",
+    "titleAr": "معاني الأخبار للشيخ محمد بن علي الصدوق",
+    "pageTitle": "Ma'ani Al-Akhbar"
+  },
+  "kamal": {
+    "titleEn": "Kamal Al-Din wa Tamam Al-Ni'ama by Shaykh Muhammad bin Al al-Saduq",
+    "titleAr": "كمال الدين وتمام النعمة للشيخ محمد بن الصدوق",
+    "pageTitle": "Kamal Al-Din wa Tamam Al-Ni'ama"
+  },
+  "ghaybah": {
+    "titleEn": "Kitab Al-Ghaybah by Shaykh Abu Abd Allah Muhammad bin Ibrahim al-Nuʿmani",
+    "titleAr": "كتاب الغيبة للشيخ أبو عبد الله محمد بن إبراهيم النعماني",
+    "pageTitle": "Kitab Al-Ghaybah"
+  }
+}
