@@ -670,7 +670,7 @@ body.dark-mode .note-input::placeholder {
   <div class="modal" id="savedPopup">
     <h3 style="margin-bottom:8px">Saved Hadiths</h3>
 
-    <div id="savedList" style="padding:10px 0; line-height:1.3; font-size:1.2rem;">
+    <div id="savedList" style="padding:10px 0; line-height:1.1; font-size:1.2rem;">
       <!-- Saved hadiths will be appended here by populateSavedList() -->
     </div>
 
@@ -1451,11 +1451,21 @@ async function populateSavedList() {
     const vol  = escapeHtml(item.volume || '?');
     const ch   = escapeHtml(item.chapterInCategoryId || '?');
 
-    left.innerHTML = `
-      <strong>${book}</strong><br>
-      Vol. ${vol} — Ch. ${ch} — #${item.id}
-      <div style="margin-top:4px">${escapeHtml(notes[item.id] || item.note || '(no note)')}</div>
-    `;
+// Replace the internal part of your populateSavedList loop with this:
+const slug = BOOK_SLUG_MAP[item.book] || 'wasail';
+const SPECIAL_VOLUME_SLUGS = ['kafi', 'faqih', 'uyun'];
+
+// Determine if we show "V" (Volume)
+const volPart = SPECIAL_VOLUME_SLUGS.includes(slug) ? `V${item.volume}, ` : '';
+
+// Exact formatting: V1, 3, 2, #33
+left.innerHTML = `
+  <strong>${item.book}</strong><br>
+  ${volPart}${item.categoryId}, ${item.chapterInCategoryId}, #${item.id}
+  <div style="margin-top:4px; font-size: 1.1rem; color: var(--muted);">
+    ${escapeHtml(notes[item.id] || item.note || '(no note)')}
+  </div>
+`;
 
     const right = el('div', { style:'display:flex;gap:6px' });
 
@@ -1683,6 +1693,24 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 });
 
+// This listens for when you click a link to the same page but a different #
+window.addEventListener('hashchange', () => {
+  const chapterId = window.location.hash.replace('#', '');
+  if (!chapterId) return;
+
+  // 1. Switch the view to the correct chapter
+  showChapter(chapterId);
+
+  // 2. Find the first hadith in this chapter and open it
+  const index = HADITHS.findIndex(h => String(h.chapterInCategoryId) === String(chapterId));
+  
+  if (index >= 0) {
+    setTimeout(() => {
+      scrollToCard(index);
+      openHadithModal(index);
+    }, 50); // Small delay to let the chapter finish rendering
+  }
+});
 loadHadiths().then(() => openHadithFromQuery());
 
 
