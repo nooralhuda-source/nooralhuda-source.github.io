@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>Al-Kafi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="https://nooralhuda.co.uk/logo.png">
   <style>
 /* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
 :root {
@@ -202,8 +203,8 @@ body.dark-mode {
 
 <main class="container">
   <div class="top-row">
-  <a class="back-home" href="https://nooralhuda.co.uk/kafi/1/home">← Back</a>
-  <h2>Introduction</h2>
+  <a class="back-home" href="https://nooralhuda.co.uk/kafi/1/1/home">← Back</a>
+  <h2 id="categoryTitle">Loading...</h2>
 </div>
   <div class="surah-search">
     <input type="text" id="searchBook" placeholder="Search Chapter ...">
@@ -230,7 +231,14 @@ async function loadChapters() {
 
 // ONLY categoryId = 1
 data = data.filter(h => h.categoryId === 1);
+const categoryTitle = document.getElementById("categoryTitle");
 
+// Update the <h2> with the "category" name from the first item in the filtered list
+if (data.length > 0 && data[0].category) {
+    categoryTitle.innerText = data[0].category;
+} else {
+    categoryTitle.innerText = "Chapters"; // Fallback
+}
 // get unique chapters normally (no foreword nonsense)
 const uniqueChapters = [];
 const seen = new Set();
