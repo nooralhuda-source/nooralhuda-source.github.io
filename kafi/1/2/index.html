@@ -610,9 +610,9 @@ body.dark-mode .note-input::placeholder {
     <a class="back-home" href="home">← Go Back</a>
     <button id="openSaved" class="btn-3d">Saved</button>
     <div style="text-align:center; flex:1;">
-      <div class="surah-title-en">كتاب الزهد للشيخ حسين بن سعيد الأحوازي</div>
+        <div id="bookTitleAr" class="surah-title-en">الكافي للشيخ محمد بن يعقوب الكليني</div>
       <div class="surah-title-ar">Book of Oneness of Allah</div>
-      <div class="book-meta">Kitab Al-Zuhd by Sheikh Hussein bin Saeed Al-Ahwazi</div>
+      <div id="bookMeta" class="book-meta">Al-Kafi by Shaykh Muhammad bin Yaqub al-Kulayni</div>
     </div>
   </div>
 </div>
@@ -838,30 +838,16 @@ function openHadithFromQuery() {
 }
 
 // Mapping of keywords in saved hadiths 'book' to your site slug/folder
-const BOOK_SLUG_MAP = {
-  "Kitāb al-Zuhd": "zuhd",
-  "Kitāb al-Tawḥīd": "tawhid",
-  "Al-Kāfi": "kafi",
-  "Muʿjam al-Aḥādīth al-Muʿtabara": "mujam",
-  "Al-Khiṣāl": "khisal",
-  "'Uyūn akhbār al-Riḍā": "uyun",
-  "Al-Amālī": "al-amali",
-  "Al-Tawḥīd": "tawhid",
-  "Wasāʾil al-Shīʿa": "wasail",
-  "Kitāb al-Ḍuʿafāʾ": "duafa",
-  "Kitāb al-Ghayba": "ghaybah",
-  "Thawāb al-Aʿmāl wa ʿiqāb al-Aʿmāl": "thawab",
-  "Kāmil al-Ziyārāt": "kamil",
-  "Faḍaʾil al-Shīʿa": "fadail",
-  "Ṣifāt al-Shīʿa": "sifat",
-  "Kitāb al-Ghayba": "al-ghaybah",
-  "Maʿānī al-ʾAkhbār": "akhbar",
-  "Kitāb al-Muʾmināt": "momin",
-  "Nahj al-Balāgha": "nahj",
-  "Risālat al-Ḥuqūq": "huquq",
-  "Man Lā Yaḥḍuruh al-Faqīh": "faqih",
-  "Kamāl al-Dīn wa Tamām al-Niʿma": "kamal"
-};
+let BOOK_SLUG_MAP = {};
+async function loadBookSlugs() {
+  try {
+    const res = await fetch('https://nooralhuda.co.uk/books.json');
+    BOOK_SLUG_MAP = await res.json();
+  } catch (e) {
+    console.error('Failed to load books.json', e);
+  }
+}
+
 
 
 // Get the slug for a saved hadith based on its 'book' field
@@ -916,7 +902,7 @@ function splitArabicSanadMatn(arabicText) {
 /* -------------------------
    Data loader
    ------------------------- */
-async function loadHadiths(categoryId = 2){
+async function loadHadiths(){
 
   hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
   try {
@@ -926,7 +912,7 @@ async function loadHadiths(categoryId = 2){
 
 // ✅ Filter using URL category
 ALL_HADITHS = arr.filter(h =>
-  Number(h.categoryId) === categoryId &&
+  Number(h.categoryId) === FILTER_CATEGORY_ID &&
   Number(h.volume) === FILTER_VOLUME
 );
 
@@ -1049,10 +1035,13 @@ if (arabicMatn) {
 
     const pinBtn = el('button', {}, currentPinned && String(currentPinned.id) === String(h.id) ? 'Unpin' : 'Pin');
     const saveBtn = el('button', {}, 'Save');
-    const copyBtn = el('button', {}, 'Copy');
+    const copyEnBtn = el('button', {}, 'Copy (English)');
+const copyArBtn = el('button', {}, 'Copy (Arabic + English)');
+
     const openFullBtn = el('button', {}, 'Open');
 
-    popup.append(pinBtn, saveBtn, copyBtn, openFullBtn);
+    popup.append(pinBtn, saveBtn, copyEnBtn, copyArBtn, openFullBtn);
+
     rightWrap.append(dot, popup);
 
     // toggle popup
@@ -1066,32 +1055,49 @@ if (arabicMatn) {
     });
 
     // PIN / UNPIN: checks + confirmation
-    pinBtn.addEventListener('click', () => {
-      const currentPinnedNow = load(STORAGE_PINNED, null);
+pinBtn.addEventListener('click', () => {
 
-      // if already pinned -> unpin
-      if (currentPinnedNow && String(currentPinnedNow.id) === String(h.id)) {
-        localStorage.removeItem(STORAGE_PINNED);
-        alert(`Unpinned hadith #${h.id}`);
-        popup.style.display = 'none';
-        renderList();
-        return;
-      }
+  const currentPinnedNow = load(STORAGE_PINNED, null);
 
-      // if another pinned exists -> confirm overwrite
-      if (currentPinnedNow && String(currentPinnedNow.id) !== String(h.id)) {
-        if (!confirm(`Hadith #${currentPinnedNow.id} is already pinned.\n\nReplace it with #${h.id}?`)) {
-          return;
-        }
-      }
+  // already pinned → unpin
+  if (currentPinnedNow && String(currentPinnedNow.id) === String(h.id)) {
+    localStorage.removeItem(STORAGE_PINNED);
+    alert(`Unpinned hadith #${h.id}`);
+    popup.style.display = 'none';
+    renderList();
+    return;
+  }
 
-      // save pin (include volume so we know where it's pinned)
-      save(STORAGE_PINNED, { id: h.id, volume: FILTER_VOLUME });
-      alert(`Pinned hadith #${h.id}`);
-      popup.style.display = 'none';
-      const chapter = h.chapterInCategoryId || 'unknown';
-      showChapter(chapter); 
-    });
+  // another pinned → confirm replace
+  if (currentPinnedNow && String(currentPinnedNow.id) !== String(h.id)) {
+    if (!confirm(`Hadith #${currentPinnedNow.id} is already pinned.\n\nReplace it with #${h.id}?`)) {
+      return;
+    }
+  }
+
+  // ✅ SAVE FULL LOCATION (this is what fixes everything)
+  save(STORAGE_PINNED, {
+    id: h.id,
+    volume: Number(h.volume),
+    categoryId: Number(h.categoryId),
+    chapterInCategoryId: Number(h.chapterInCategoryId)
+  });
+
+  alert(`Pinned hadith #${h.id}`);
+
+  popup.style.display = 'none';
+
+  // stay on correct chapter immediately
+  showChapter(h.chapterInCategoryId);
+
+  // scroll + open now (so user sees it instantly)
+  const index = HADITHS.findIndex(x => String(x.id) === String(h.id));
+  if (index >= 0) {
+    scrollToCard(index);
+    openHadithModal(index);
+  }
+});
+
 
     // SAVE (to saved list) + optional note
     saveBtn.addEventListener('click', () => {
@@ -1131,12 +1137,56 @@ saved.unshift({
     });
 
     // COPY
-    copyBtn.addEventListener('click', async () => {
-      const txt = `Hadith #${h.id}\n\n${arabic || ''}\n\n${english || ''}`;
-      try { await navigator.clipboard.writeText(txt); alert('Copied'); }
-      catch(e){ alert('Copy failed'); }
-      popup.style.display = 'none';
-    });
+copyEnBtn.addEventListener('click', async () => {
+
+  const bookMeta =
+    `${h.book || 'Unknown book'} — ` +
+    `${h.categoryId} — ` +
+    `${h.chapterInCategoryId} — #${h.id}`;
+
+  const text =
+`${sanad || ''}
+${english || ''}
+
+${bookMeta}`;
+
+  try {
+    await navigator.clipboard.writeText(text.trim());
+    alert('Copied');
+  } catch {
+    alert('Copy failed');
+  }
+
+  popup.style.display = 'none';
+});
+copyArBtn.addEventListener('click', async () => {
+
+  const bookMeta =
+    `${h.book || 'Unknown book'} — ` +
+    `${h.categoryId} — ` +
+    `${h.chapterInCategoryId} — #${h.id}`;
+
+  const arabicFull =
+    [arabicSanad, arabicMatn].filter(Boolean).join('\n');
+
+  const text =
+`${arabicFull}
+
+${sanad || ''}
+${english || ''}
+
+${bookMeta}`;
+
+  try {
+    await navigator.clipboard.writeText(text.trim());
+    alert('Copied');
+  } catch {
+    alert('Copy failed');
+  }
+
+  popup.style.display = 'none';
+});
+
 
     // Open modal
     openFullBtn.addEventListener('click', () => { openHadithModal(i); popup.style.display = 'none'; });
@@ -1154,6 +1204,18 @@ saved.unshift({
   // Organize hadiths by chapter and show first chapter by default
   organizeByChapter();
   showFirstChapter();
+  restorePinned();
+}
+function restorePinned() {
+
+  const pinned = load(STORAGE_PINNED, null);
+  if (!pinned) return;
+
+  const index = HADITHS.findIndex(h => String(h.id) === String(pinned.id));
+  if (index === -1) return;
+
+  scrollToCard(index);
+  openHadithModal(index);
 }
 
 // Organize hadiths by chapterInCategoryId
@@ -1605,8 +1667,8 @@ function checkAndOpenSavedHadith(){
     openHadithModal(index);
   }, 30);
 }
-window.addEventListener('DOMContentLoaded', () => {
-
+window.addEventListener('DOMContentLoaded', async () => {
+  await loadBookSlugs();
   const hadithId = sessionStorage.getItem('targetHadithId');
   if (!hadithId) return;
 
@@ -1630,6 +1692,5 @@ loadHadiths().then(() => openHadithFromQuery());
 
 
 </html>
-
 
 
