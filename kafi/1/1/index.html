@@ -5,11 +5,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Kitab Al-Zuhd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Asul:wght@400;700&family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Lekton:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Kufi+Arabic:wght@100..900&family=Noto+Sans+Arabic:wght@100..900&family=Parastoo:wght@400..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Parastoo:wght@400..700&display=swap" rel="stylesheet">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="../hadiths.css">
   <style>
@@ -28,13 +34,16 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   
-  body{
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-    background: linear-gradient(180deg, var(--bg), var(--bg));
-    color:var(--text); line-height:1.45;
-    padding-top:3.6rem; -webkit-font-smoothing:antialiased;
-    -webkit-tap-highlight-color: transparent;
-  }
+body {
+  /* Updated to include Merriweather as the primary serif font */
+  font-family: "Parastoo", serif;
+  background: linear-gradient(180deg, var(--bg), var(--bg));
+  color: var(--text); 
+  line-height: 1.45;
+  padding-top: 3.6rem; 
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
 
   header {
     position: fixed; top: 0; left: 0; width: 100%;
@@ -46,9 +55,9 @@
     z-index: 1400;
   }
   
-  .brand h1 { font-size: 1.4rem; font-weight: 700; margin:0; }
+  .brand h1 { font-size: 1.4rem; font-weight: 700; margin:0;font-family:'Nunito',sans-serif; }
   .brand a { color: #fff; text-decoration: none; }
-  .hamburger { font-size: 1.5rem; background: transparent; color: #fff; border: none; padding: 0.1rem 0.7rem; cursor: pointer; }
+  .hamburger { font-size: 1.5rem; background: transparent; color: #fff; border: none; padding: 0.1rem 0.7rem; cursor: pointer; font-family:'Nunito',sans-serif; }
 
   #mainNav {
     position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
@@ -58,6 +67,7 @@
     border-radius: 0 0 0 24px;
     transition: right 0.35s ease, opacity 0.35s ease;
     opacity: 0; pointer-events: none; z-index: 1450;
+    font-family:'Nunito',sans-serif; 
   }
   
   #mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
@@ -74,8 +84,8 @@
   .header-row { display:flex; align-items:center; gap:12px; width:100%; }
   .back-home { margin-right:auto; color:#fff; text-decoration:none; background:var(--green); padding:.35rem .6rem; border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,0.08); font-size:.92rem; }
 
-  .surah-title-en { font-size:1.05rem; color:var(--muted); text-align:center;}
-  .surah-title-ar { font-size:1.6rem; font-weight:800; color:var(--green); line-height:1.05; font-family: 'Parastoo'; text-align:center; }
+  .surah-title-en { font-size:1.7rem; color:var(--muted); text-align:center;}
+  .surah-title-ar { font-size:2rem; font-weight:800; color:var(--green); line-height:1.05; font-family: 'Parastoo'; text-align:center; }
 
   #bismillahWrap { text-align:center; margin:12px 0; }
   #bismillahWrap img { max-width:360px; width:85%; filter: drop-shadow(0 8px 22px rgba(0,0,0,0.06)); }
@@ -291,8 +301,8 @@
   .header-row { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; flex-wrap:wrap; }
   .back-home { color:#fff; text-decoration:none; background:var(--green); padding:.4rem .7rem; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); font-size:.9rem; white-space:nowrap; }
 
-  .surah-title-en { font-size:0.95rem; color:var(--muted); text-align:center; margin:0; }
-  .surah-title-ar { font-size:1.4rem; font-weight:800; color:var(--green); line-height:1.1; font-family: 'Parastoo'; text-align:center; margin:0; }
+  .surah-title-en { font-size:1.6rem; color:var(--muted); text-align:center; margin:0; }
+  .surah-title-ar { font-size:1.6rem; font-weight:800; color:var(--green); line-height:1.1; font-family: 'Parastoo'; text-align:center; margin:0; }
 
   @media (max-width:720px){
     .surah-header { gap:10px; margin-bottom:10px; }
@@ -406,7 +416,7 @@ body.dark-mode .note-input::placeholder {
   color: #94a3b8;
 }
 .book-meta {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--muted);
   margin-top: 4px;
   font-weight: 500;
@@ -433,8 +443,8 @@ body.dark-mode .note-input::placeholder {
   .header-row { gap: 6px; }
   .back-home { padding: .3rem .5rem; font-size: .8rem; }
   #openSaved { padding: .3rem .5rem; font-size: .75rem; width: auto; max-width: 70px; }
-  .surah-title-en { font-size: 1.2rem; margin: 0; }
-  .surah-title-ar { font-size: 1.4rem; margin: 0; }
+  .surah-title-en { font-size: 1.6rem; margin: 0; }
+  .surah-title-ar { font-size: 1.8rem; margin: 0; }
   .book-meta { font-size: 1.1rem; margin-top: 1px; }
 }
 
@@ -501,7 +511,79 @@ body.dark-mode .note-input::placeholder {
   
   line-height: 1.75;   /* ← slightly more space */
 }
+/* The English Translation in the card */
+.hadith-en {
+  font-family: 'Merriweather', serif;
+  font-weight: 400; /* Regular weight for the body text */
+  font-size: 1.15rem;
+  color: var(--text);
+  margin-bottom: 8px;
+  text-align: left;
+  line-height: 1.75;
+}
 
+/* The Sanad / Context text */
+.hadith-context {
+  font-family: 'Merriweather', serif;
+  font-weight: 300; /* Lighter weight for narrators to distinguish from matn */
+  font-style: italic; /* Narrators often look better in italic for Merriweather */
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+/* The English Translation in the Modal */
+.modal-en {
+  font-family: 'Merriweather', serif;
+  font-size: clamp(14px, 2.5vw, 17px);
+  line-height: 1.8;
+  color: #000;
+  text-align: left;
+}
+@media (max-width:600px) {
+  .hadith-en {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 10px; /* Space out the English from the Arabic above it */
+  }
+}
+/* 1. The Chain of Narrators (Sanad) */
+.hadith-context {
+  font-family: 'Merriweather', serif; /* The font from your screenshot */
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 10px;
+  letter-spacing: -0.2px; /* Lekton is wide, this keeps it tight */
+}
+
+/* 2. The Main Hadith English Translation */
+.hadith-en {
+  font-family: "Merriweather", serif;
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 2; /* Increased for better readability with serifs */
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+/* 3. The Number/Metadata */
+.hadith-meta {
+  font-family: 'Lekton', monospace;
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* 4. The Modal English Text */
+.modal-en {
+  font-family: "Merriweather", serif;
+  font-size: clamp(14px, 2.5vw, 17px);
+  line-height: 1.9;
+  color: #000;
+}
   </style>
 </head>
 <body>
@@ -528,9 +610,9 @@ body.dark-mode .note-input::placeholder {
     <a class="back-home" href="home">← Go Back</a>
     <button id="openSaved" class="btn-3d">Saved</button>
     <div style="text-align:center; flex:1;">
-      <div class="surah-title-en">كتاب الزهد للشيخ حسين بن سعيد الأحوازي</div>
+        <div id="bookTitleAr" class="surah-title-en">الكافي للشيخ محمد بن يعقوب الكليني</div>
       <div class="surah-title-ar">Book of Oneness of Allah</div>
-      <div class="book-meta">Kitab Al-Zuhd by Sheikh Hussein bin Saeed Al-Ahwazi</div>
+      <div id="bookMeta" class="book-meta">Al-Kafi by Shaykh Muhammad bin Yaqub al-Kulayni</div>
     </div>
   </div>
 </div>
@@ -540,7 +622,7 @@ body.dark-mode .note-input::placeholder {
     </div>
 
     <div id="bismillahWrap">
-      <img src="../../bismillah.png" alt="Bismillah" onerror="this.style.display='none'">
+      <img src="../../../bismillah.png" alt="Bismillah" onerror="this.style.display='none'">
     </div>
 
     <div id="pageNav" style="text-align:center; margin:20px 0; border-bottom:1px solid var(--border); padding-bottom:10px;"></div>
@@ -588,7 +670,7 @@ body.dark-mode .note-input::placeholder {
   <div class="modal" id="savedPopup">
     <h3 style="margin-bottom:8px">Saved Hadiths</h3>
 
-    <div id="savedList" style="padding:10px 0; line-height:1.6; font-size:.95rem;">
+    <div id="savedList" style="padding:10px 0; line-height:1.3; font-size:1.2rem;">
       <!-- Saved hadiths will be appended here by populateSavedList() -->
     </div>
 
@@ -605,7 +687,7 @@ body.dark-mode .note-input::placeholder {
    ------------------------- */
 const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/1.json'; // Local file
 const FILTER_VOLUME = 1;
-const FILTER_CATEGORY_ID = 1;
+const FILTER_CATEGORY_ID = 11;
 
 
 
@@ -756,30 +838,16 @@ function openHadithFromQuery() {
 }
 
 // Mapping of keywords in saved hadiths 'book' to your site slug/folder
-const BOOK_SLUG_MAP = {
-  "Kitāb al-Zuhd": "zuhd",
-  "Kitāb al-Tawḥīd": "tawhid",
-  "Al-Kāfi": "kafi",
-  "Muʿjam al-Aḥādīth al-Muʿtabara": "mujam",
-  "Al-Khiṣāl": "khisal",
-  "'Uyūn akhbār al-Riḍā": "uyun",
-  "Al-Amālī": "al-amali",
-  "Al-Tawḥīd": "tawhid",
-  "Wasāʾil al-Shīʿa": "wasail",
-  "Kitāb al-Ḍuʿafāʾ": "duafa",
-  "Kitāb al-Ghayba": "ghaybah",
-  "Thawāb al-Aʿmāl wa ʿiqāb al-Aʿmāl": "thawab",
-  "Kāmil al-Ziyārāt": "kamil",
-  "Faḍaʾil al-Shīʿa": "fadail",
-  "Ṣifāt al-Shīʿa": "sifat",
-  "Kitāb al-Ghayba": "al-ghaybah",
-  "Maʿānī al-ʾAkhbār": "akhbar",
-  "Kitāb al-Muʾmināt": "momin",
-  "Nahj al-Balāgha": "nahj",
-  "Risālat al-Ḥuqūq": "huquq",
-  "Man Lā Yaḥḍuruh al-Faqīh": "faqih",
-  "Kamāl al-Dīn wa Tamām al-Niʿma": "kamal"
-};
+let BOOK_SLUG_MAP = {};
+async function loadBookSlugs() {
+  try {
+    const res = await fetch('https://nooralhuda.co.uk/books.json');
+    BOOK_SLUG_MAP = await res.json();
+  } catch (e) {
+    console.error('Failed to load books.json', e);
+  }
+}
+
 
 
 // Get the slug for a saved hadith based on its 'book' field
@@ -834,7 +902,7 @@ function splitArabicSanadMatn(arabicText) {
 /* -------------------------
    Data loader
    ------------------------- */
-async function loadHadiths(categoryId = 1){
+async function loadHadiths(){
 
   hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
   try {
@@ -844,7 +912,7 @@ async function loadHadiths(categoryId = 1){
 
 // ✅ Filter using URL category
 ALL_HADITHS = arr.filter(h =>
-  Number(h.categoryId) === categoryId &&
+  Number(h.categoryId) === FILTER_CATEGORY_ID &&
   Number(h.volume) === FILTER_VOLUME
 );
 
@@ -967,10 +1035,13 @@ if (arabicMatn) {
 
     const pinBtn = el('button', {}, currentPinned && String(currentPinned.id) === String(h.id) ? 'Unpin' : 'Pin');
     const saveBtn = el('button', {}, 'Save');
-    const copyBtn = el('button', {}, 'Copy');
+    const copyEnBtn = el('button', {}, 'Copy (English)');
+const copyArBtn = el('button', {}, 'Copy (Arabic + English)');
+
     const openFullBtn = el('button', {}, 'Open');
 
-    popup.append(pinBtn, saveBtn, copyBtn, openFullBtn);
+    popup.append(pinBtn, saveBtn, copyEnBtn, copyArBtn, openFullBtn);
+
     rightWrap.append(dot, popup);
 
     // toggle popup
@@ -984,32 +1055,49 @@ if (arabicMatn) {
     });
 
     // PIN / UNPIN: checks + confirmation
-    pinBtn.addEventListener('click', () => {
-      const currentPinnedNow = load(STORAGE_PINNED, null);
+pinBtn.addEventListener('click', () => {
 
-      // if already pinned -> unpin
-      if (currentPinnedNow && String(currentPinnedNow.id) === String(h.id)) {
-        localStorage.removeItem(STORAGE_PINNED);
-        alert(`Unpinned hadith #${h.id}`);
-        popup.style.display = 'none';
-        renderList();
-        return;
-      }
+  const currentPinnedNow = load(STORAGE_PINNED, null);
 
-      // if another pinned exists -> confirm overwrite
-      if (currentPinnedNow && String(currentPinnedNow.id) !== String(h.id)) {
-        if (!confirm(`Hadith #${currentPinnedNow.id} is already pinned.\n\nReplace it with #${h.id}?`)) {
-          return;
-        }
-      }
+  // already pinned → unpin
+  if (currentPinnedNow && String(currentPinnedNow.id) === String(h.id)) {
+    localStorage.removeItem(STORAGE_PINNED);
+    alert(`Unpinned hadith #${h.id}`);
+    popup.style.display = 'none';
+    renderList();
+    return;
+  }
 
-      // save pin (include volume so we know where it's pinned)
-      save(STORAGE_PINNED, { id: h.id, volume: FILTER_VOLUME });
-      alert(`Pinned hadith #${h.id}`);
-      popup.style.display = 'none';
-      const chapter = h.chapterInCategoryId || 'unknown';
-      showChapter(chapter); 
-    });
+  // another pinned → confirm replace
+  if (currentPinnedNow && String(currentPinnedNow.id) !== String(h.id)) {
+    if (!confirm(`Hadith #${currentPinnedNow.id} is already pinned.\n\nReplace it with #${h.id}?`)) {
+      return;
+    }
+  }
+
+  // ✅ SAVE FULL LOCATION (this is what fixes everything)
+  save(STORAGE_PINNED, {
+    id: h.id,
+    volume: Number(h.volume),
+    categoryId: Number(h.categoryId),
+    chapterInCategoryId: Number(h.chapterInCategoryId)
+  });
+
+  alert(`Pinned hadith #${h.id}`);
+
+  popup.style.display = 'none';
+
+  // stay on correct chapter immediately
+  showChapter(h.chapterInCategoryId);
+
+  // scroll + open now (so user sees it instantly)
+  const index = HADITHS.findIndex(x => String(x.id) === String(h.id));
+  if (index >= 0) {
+    scrollToCard(index);
+    openHadithModal(index);
+  }
+});
+
 
     // SAVE (to saved list) + optional note
     saveBtn.addEventListener('click', () => {
@@ -1049,12 +1137,56 @@ saved.unshift({
     });
 
     // COPY
-    copyBtn.addEventListener('click', async () => {
-      const txt = `Hadith #${h.id}\n\n${arabic || ''}\n\n${english || ''}`;
-      try { await navigator.clipboard.writeText(txt); alert('Copied'); }
-      catch(e){ alert('Copy failed'); }
-      popup.style.display = 'none';
-    });
+copyEnBtn.addEventListener('click', async () => {
+
+  const bookMeta =
+    `${h.book || 'Unknown book'} — ` +
+    `${h.categoryId} — ` +
+    `${h.chapterInCategoryId} — #${h.id}`;
+
+  const text =
+`${sanad || ''}
+${english || ''}
+
+${bookMeta}`;
+
+  try {
+    await navigator.clipboard.writeText(text.trim());
+    alert('Copied');
+  } catch {
+    alert('Copy failed');
+  }
+
+  popup.style.display = 'none';
+});
+copyArBtn.addEventListener('click', async () => {
+
+  const bookMeta =
+    `${h.book || 'Unknown book'} — ` +
+    `${h.categoryId} — ` +
+    `${h.chapterInCategoryId} — #${h.id}`;
+
+  const arabicFull =
+    [arabicSanad, arabicMatn].filter(Boolean).join('\n');
+
+  const text =
+`${arabicFull}
+
+${sanad || ''}
+${english || ''}
+
+${bookMeta}`;
+
+  try {
+    await navigator.clipboard.writeText(text.trim());
+    alert('Copied');
+  } catch {
+    alert('Copy failed');
+  }
+
+  popup.style.display = 'none';
+});
+
 
     // Open modal
     openFullBtn.addEventListener('click', () => { openHadithModal(i); popup.style.display = 'none'; });
@@ -1072,6 +1204,18 @@ saved.unshift({
   // Organize hadiths by chapter and show first chapter by default
   organizeByChapter();
   showFirstChapter();
+  restorePinned();
+}
+function restorePinned() {
+
+  const pinned = load(STORAGE_PINNED, null);
+  if (!pinned) return;
+
+  const index = HADITHS.findIndex(h => String(h.id) === String(pinned.id));
+  if (index === -1) return;
+
+  scrollToCard(index);
+  openHadithModal(index);
 }
 
 // Organize hadiths by chapterInCategoryId
@@ -1319,29 +1463,40 @@ async function populateSavedList() {
    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
 openBtn.onclick = () => {
 
-  sessionStorage.setItem('targetHadithId', item.id);
-
   const slug = BOOK_SLUG_MAP[item.book] || 'wasail';
 
-  const VOLUME_SLUGS = new Set(['kafi','faqih','uyun']);
+  // store target hadith for AFTER navigation
+  sessionStorage.setItem('targetHadithId', item.id);
 
   let url;
 
-  // ONLY these 3 ever use volume
-  if (VOLUME_SLUGS.has(slug) && item.volume) {
+  // only these books use volume format (slug names)
+  const SPECIAL_VOLUME_SLUGS = ['kafi','faqih','uyun'];
 
-    url = `https://nooralhuda.co.uk/${slug}/${item.volume}/${item.categoryId}/#${item.chapterInCategoryId}`;
-
+  if (SPECIAL_VOLUME_SLUGS.includes(slug)) {
+    url = `/${slug}/${item.volume}/${item.categoryId}/#${item.chapterInCategoryId}`;
   } else {
-
-    url = `https://nooralhuda.co.uk/${slug}/${item.categoryId}/#${item.chapterInCategoryId}`;
-
+    url = `/${slug}/${item.categoryId}/#${item.chapterInCategoryId}`;
   }
 
+  const current = location.pathname + location.hash;
+
+  // ✅ SAME PAGE → no navigation (best UX)
+  if (current === url) {
+
+    const index = HADITHS.findIndex(h => String(h.id) === String(item.id));
+
+    if (index >= 0) {
+      scrollToCard(index);
+      openHadithModal(index);
+    }
+
+    return;
+  }
+
+  // ✅ DIFFERENT PAGE → navigate normally
   window.location.href = url;
 };
-
-
 
 
 
@@ -1512,6 +1667,22 @@ function checkAndOpenSavedHadith(){
     openHadithModal(index);
   }, 30);
 }
+window.addEventListener('DOMContentLoaded', async () => {
+  await loadBookSlugs();
+  const hadithId = sessionStorage.getItem('targetHadithId');
+  if (!hadithId) return;
+
+  sessionStorage.removeItem('targetHadithId');
+
+  const index = HADITHS.findIndex(h => String(h.id) === String(hadithId));
+
+  if (index >= 0) {
+    scrollToCard(index);
+    openHadithModal(index);
+  }
+
+});
+
 loadHadiths().then(() => openHadithFromQuery());
 
 
@@ -1521,3 +1692,5 @@ loadHadiths().then(() => openHadithFromQuery());
 
 
 </html>
+
+
