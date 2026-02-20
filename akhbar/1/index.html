@@ -611,7 +611,7 @@ const FILTER_CATEGORY_ID = 1;
 
 
 // Pick your version once
-const STORAGE_VERSION = 66;  // change this number per release
+const STORAGE_VERSION = 67;  // change this number per release
 
 const STORAGE_SAVED   = `noor_saved_hadiths_v${STORAGE_VERSION}`;
 const STORAGE_PINNED  = `noor_pinned_hadith_v${STORAGE_VERSION}`;
@@ -1020,15 +1020,16 @@ if (arabicMatn) {
       const saved = load(STORAGE_SAVED, []);
       const idx = saved.findIndex(x => String(x.id) === String(h.id));
 if (idx === -1) {
-  saved.unshift({
-    id: h.id,
-    book: h.book,                      // ⭐ ADD
-    volume: h.volume,                  // ⭐ ADD
-    categoryId: h.categoryId,          // ⭐ ADD
-    chapterInCategoryId: h.chapterInCategoryId, // ⭐ ADD
-    snippet: (h.thaqalaynMatn || h.englishText || '').slice(0,160),
-    note: note || ''
-  });
+saved.unshift({
+  id: h.id,
+  book: h.book,
+  volume: Number(h.volume),              // REQUIRED
+  categoryId: Number(h.categoryId),      // REQUIRED
+  chapterInCategoryId: Number(h.chapterInCategoryId), // REQUIRED
+  snippet: (h.thaqalaynMatn || h.englishText || '').slice(0,160),
+  note: note || ''
+});
+
 }
 
 
@@ -1317,30 +1318,32 @@ async function populateSavedList() {
     /* OPEN */
    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
 openBtn.onclick = () => {
-  // store hadith id so next page opens modal + scrolls
+
   sessionStorage.setItem('targetHadithId', item.id);
 
   const slug = BOOK_SLUG_MAP[item.book] || 'wasail';
 
-  // books that require volume in URL
-  const VOLUME_BOOKS = new Set([
-    "Al-Kāfi",
-    "Man Lā Yaḥḍuruh al-Faqīh",
-    "'Uyūn akhbār al-Riḍā"
-  ]);
+  const VOLUME_SLUGS = new Set(['kafi','faqih','uyun']);
 
   let url;
 
-  if (VOLUME_BOOKS.has(item.book)) {
-    // /slug/volume/category/#chapter
+  // ONLY these 3 ever use volume
+  if (VOLUME_SLUGS.has(slug) && item.volume) {
+
     url = `https://nooralhuda.co.uk/${slug}/${item.volume}/${item.categoryId}/#${item.chapterInCategoryId}`;
+
   } else {
-    // /slug/category/#chapter
+
     url = `https://nooralhuda.co.uk/${slug}/${item.categoryId}/#${item.chapterInCategoryId}`;
+
   }
 
   window.location.href = url;
 };
+
+
+
+
 
 
 
@@ -1358,10 +1361,18 @@ openBtn.onclick = () => {
     /* DELETE */
     const delBtn = el('button',{class:'btn-3d'},'Delete');
     delBtn.onclick = () => {
-      const updated = savedItems.filter(x => String(x.id) !== String(item.id));
-      save(STORAGE_SAVED, updated);
-      populateSavedList();
-    };
+
+  const current = load(STORAGE_SAVED) || []; // 🔥 always fresh
+
+  const updated = current.filter(x =>
+    String(x.id) !== String(item.id)
+  );
+
+  save(STORAGE_SAVED, updated);
+
+  populateSavedList();
+};
+
 
     right.append(openBtn, editBtn, delBtn);
     row.append(left, right);
