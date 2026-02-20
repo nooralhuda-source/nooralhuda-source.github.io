@@ -1319,25 +1319,36 @@ async function populateSavedList() {
    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
 openBtn.onclick = () => {
 
-  sessionStorage.setItem('targetHadithId', item.id);
-
   const slug = BOOK_SLUG_MAP[item.book] || 'wasail';
 
   const VOLUME_SLUGS = new Set(['kafi','faqih','uyun']);
 
   let url;
 
-  // ONLY these 3 ever use volume
   if (VOLUME_SLUGS.has(slug) && item.volume) {
-
     url = `https://nooralhuda.co.uk/${slug}/${item.volume}/${item.categoryId}/#${item.chapterInCategoryId}`;
-
   } else {
-
     url = `https://nooralhuda.co.uk/${slug}/${item.categoryId}/#${item.chapterInCategoryId}`;
-
   }
 
+  const targetHash = `#${item.chapterInCategoryId}`;
+
+  // ✅ SAME PAGE (no reload happens)
+  if (location.pathname + location.hash === new URL(url).pathname + targetHash) {
+
+    const index = HADITHS.findIndex(h => String(h.id) === String(item.id));
+
+    if (index >= 0) {
+      closeSavedPanel?.();
+      openHadithModal(index);
+      scrollToCard(index);
+    }
+
+    return;
+  }
+
+  // ✅ DIFFERENT PAGE (normal behaviour)
+  sessionStorage.setItem('targetHadithId', item.id);
   window.location.href = url;
 };
 
@@ -1521,3 +1532,4 @@ loadHadiths().then(() => openHadithFromQuery());
 
 
 </html>
+
