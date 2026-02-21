@@ -1,1120 +1,1820 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noor Al Huda</title>
-<link rel="icon" href="logobg.png" type="image/png">
-  <img src="logobg.png" alt="Logo" class="logo">
-    <img src="homepage.png" alt="Homepage Preview" class="homepage-image">
-<meta name="description" content="Noor Al Huda is your personal Islamic companion, designed to bring the Qur’an, Hadith, Duas, and daily guidance into one accessible platform. Our aim is to provide a modern, user-friendly experience while preserving the timeless beauty of Islamic knowledge. Whether you are seeking spiritual growth, daily reminders, or scholarly references, Noor Al Huda is here to illuminate your path.">
-<meta property="og:title" content="Noor Al Huda">
-<meta property="og:description" content="Noor Al Huda is your personal Islamic companion, designed to bring the Qur’an, Hadith, Duas, and daily guidance into one accessible platform. Our aim is to provide a modern, user-friendly experience while preserving the timeless beauty of Islamic knowledge. Whether you are seeking spiritual growth, daily reminders, or scholarly references, Noor Al Huda is here to illuminate your path.">
-<meta property="og:image" content="homeimage.png"> 
-<meta property="og:type" content="website">
-<meta property="og:url" content="nooralhuda.co.uk">
-  <link rel="icon" type="image/png" href="favicon.png">
-<link rel="shortcut icon" href="favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --green:#136f3c;
-  --bg:#f5f5f7;
-  --text:#1f2937;
-  --muted:#6b7280;
-  --card:#ffffff;
-  --border:#e5e7eb;
-  --accent:#0ea5e9;
-  --radius:16px;
-  --shadow:0 8px 24px rgba(0,0,0,0.12);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noor Al Huda - Islamic Knowledge Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #136f3c;
+            --secondary-green: #1a8049;
+            --accent-gold: #d4af37;
+            --light-gold: #f4e4a6;
+            --dark-navy: #1a202c;
+            --white: #ffffff;
+            --light-gray: #f7fafc;
+            --medium-gray: #e2e8f0;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--medium-gray);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: 
+                linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),
+                url('karbala.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bismillah-container {
+            margin-bottom: 3rem;
+        }
+
+        .bismillah-img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 20px rgba(212, 175, 55, 0.3));
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 400;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold), #f4e4a6);
+            color: var(--dark-navy);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Scroll Morphing Sections */
+        .morphing-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 0;
+            margin: 0;
+        }
+
+        .morphing-section.active {
+            border-radius: 30px;
+            margin: 20px;
+            transform: scale(0.95);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+        }
+
+        .section-text {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-text.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .section-image {
+            opacity: 0;
+            transform: translateX(50px) scale(0.9);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .section-image.revealed {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        .section-image img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        /* Section Backgrounds */
+        .noble-hadith {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+        }
+
+        .learn-shia {
+            background: linear-gradient(135deg, #d4af37 0%, #f4e4a6 100%);
+            color: #2d3748;
+        }
+
+        .books-library {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            color: #2d3748;
+        }
+
+        .quran-study {
+            background: linear-gradient(135deg, #136f3c 0%, #1a8049 100%);
+            color: white;
+        }
+
+        .duas-collection {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+        }
+
+        /* Typography for sections */
+        .section-title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .section-description {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .section-tags {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .learn-shia .tag {
+            background: rgba(45, 55, 72, 0.1);
+            color: #2d3748;
+            border-color: rgba(45, 55, 72, 0.2);
+        }
+
+        .books-library .tag {
+            background: rgba(19, 111, 60, 0.1);
+            color: #136f3c;
+            border-color: rgba(19, 111, 60, 0.2);
+        }
+
+        /* Arrow navigation */
+        .section-arrow {
+            position: absolute;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section-arrow:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--primary-green);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-green) 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-navy);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--accent-gold);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--primary-green));
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .section-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 2rem;
+            }
+            
+            .section-image {
+                order: -1;
+            }
+            
+            .section-image img {
+                height: 400px;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Daily Content Section */
+.daily-content {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8fffe 0%, #f0f9f7 100%);
+    position: relative;
 }
-body{margin:0;font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);}
-header{background:var(--green);color:#fff;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 4px rgba(0,0,0,0.1);}
-header h1{font-size:1.5rem;font-weight:700;}
-header .btn{appearance:none;background:#fff;color:var(--green);border:none;padding:0.5rem 0.8rem;border-radius:var(--radius);font-weight:600;cursor:pointer;}
-header .btn:hover{filter:brightness(1.05);}
-.container{max-width:1200px;margin:2rem auto;padding:0 1rem;}
-.grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
-/* Cards / Widgets */
-.card{background:var(--card);border-radius:var(--radius);padding:1.25rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:0.5rem;transition:transform 0.2s ease,box-shadow 0.2s ease;position:relative;}
-.card h4{font-weight:700;}
-.card p, .card li{color:var(--muted);}
-.card a{margin-top:auto;font-weight:700;color:var(--green);text-decoration:none;}
-.card a:hover{text-decoration:underline;}
-.widget-list{list-style:none;padding-left:0;}
-.widget-list li{margin-bottom:0.3rem;}
-footer{margin-top:2rem;padding:1.5rem 0;text-align:center;color:var(--muted);font-size:0.9rem;}
-body.dark-mode{--bg:#111827;--text:#f9fafb;--muted:#9ca3af;--card:#1f2937;--border:#374151;}
-</style>
-</head>
-<script src="global.js"></script>
 
-<body>
-<header>
-  <h1>
-    <a href="https://nooralhuda.co.uk" 
-       data-en="Noor Al Huda" 
-       data-ar="نور الهدى" 
-       data-fa="نور الهدی" 
-       data-ur="نور الہدیٰ">
-       Noor Al Huda
-    </a>
-  </h1>
-
-  <div style="display: flex; align-items: center; gap: 10px;">
-    <select id="langSwitcher" class="btn" onchange="toggleLang(this.value)" style="vertical-align: middle; appearance: auto;">
-        <option value="en">English</option>
-        <option value="ar">العربية</option>
-        <option value="fa">فارسی</option>
-        <option value="ur">اردو</option>
-    </select>
-
-    <button class="btn" onclick="location.href='settings.html'" 
-            data-en="Settings" 
-            data-ar="الإعدادات" 
-            data-fa="تنظیمات" 
-            data-ur="ترتیبات">
-            Settings
-    </button>
-  </div>
-</header>
-
-<style>
-/* ───────────────────────────────
-   🌙 Noor al-Huda — Refined Apple-like Style
-──────────────────────────────── */
-
-:root {
-  --green: #127a3d;
-  --bg: #f8fafb;
-  --text: #1f2937;
-  --muted: #6b7280;
-  --card: #ffffff;
-  --border: #e5e7eb;
-  --radius: 20px;
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.daily-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="daily-pattern" patternUnits="userSpaceOnUse" width="40" height="40"><circle cx="20" cy="20" r="1" fill="rgba(19,111,60,0.05)"/><path d="M10 10L30 10L30 30L10 30Z" fill="none" stroke="rgba(19,111,60,0.02)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23daily-pattern)"/></svg>');
+    opacity: 0.6;
 }
 
-/* Base layout */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+.daily-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  padding-top: 3.5rem;
-  transition: background 0.3s ease, color 0.3s ease;
+.daily-card {
+    background: white;
+    border-radius: 25px;
+    padding: 3rem;
+    box-shadow: 0 10px 40px rgba(19, 111, 60, 0.1);
+    border: 2px solid rgba(19, 111, 60, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
 }
 
-/* ───────────────────────────────
-   HEADER
-──────────────────────────────── */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  backdrop-filter: blur(14px) saturate(160%);
-  background: rgba(19, 111, 60, 0.9);
-  color: #fff;
-  padding: 0.75rem 1.25rem;
-  box-shadow: var(--shadow-sm);
-  z-index: 1000;
+.daily-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-green), var(--accent-gold));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
 }
 
-header h1 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+.daily-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(19, 111, 60, 0.2);
+    border-color: var(--accent-gold);
 }
 
-header .btn {
-  background: rgba(255, 255, 255, 0.85);
-  color: var(--green);
-  border: none;
-  border-radius: 12px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: var(--transition);
+.daily-card:hover::before {
+    transform: scaleX(1);
 }
 
-header .btn:hover {
-  transform: translateY(-2px);
-  background: #fff;
+.daily-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-/* ───────────────────────────────
-   WIDGET GRID
-──────────────────────────────── */
-.widget-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  margin: 3rem auto;
-  padding: 0 2rem;
-  max-width: 1200px;
+.daily-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    box-shadow: 0 8px 25px rgba(19, 111, 60, 0.3);
 }
 
-/* ───────────────────────────────
-   WIDGET CARD
-──────────────────────────────── */
-.widget-card {
-  position: relative;
-  border-radius: var(--radius);
-  padding: 1.8rem 1.5rem;
-  background: var(--card);
-  box-shadow: var(--shadow-md);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: var(--transition);
-  cursor: pointer;
-  overflow: hidden;
+.daily-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
 }
 
-.widget-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: var(--shadow-lg);
+.daily-date {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
 }
 
-/* Themed Widgets */
-#salahWidget {
-  background: linear-gradient(145deg, #e3f7e6, #bdeec7);
+.daily-content-text {
+    font-family: 'Amiri', serif;
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(19, 111, 60, 0.02);
+    border-radius: 15px;
+    border-left: 4px solid var(--accent-gold);
 }
 
-#quranWidget {
-  background: linear-gradient(145deg, #fff8db, #fff1b8);
+.daily-translation {
+    font-size: 1rem;
+    color: var(--text-light);
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
-.widget-card h4 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--green);
-  margin-bottom: 0.5rem;
+.daily-source {
+    font-size: 0.9rem;
+    color: var(--primary-green);
+    font-weight: 600;
+    text-align: right;
+    border-top: 1px solid rgba(19, 111, 60, 0.1);
+    padding-top: 1rem;
 }
 
-.widget-card p,
-.widget-card ul {
-  color: var(--muted);
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-.widget-card a {
-  align-self: flex-start;
-  text-decoration: none;
-  font-weight: 600;
-  color: var(--green);
-  background: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 14px;
-  border: 1px solid #c8e6c9;
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
-}
-
-.widget-card a:hover {
-  background: var(--green);
-  color: #fff;
-}
-
-/* ───────────────────────────────
-   STATIC CARDS (Hadiths, Duas, etc.)
-──────────────────────────────── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2.5rem;
-  margin: 2rem auto 4rem;
-  padding: 0 2rem;
-  max-width: 1200px;
-}
-
-.card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  padding: 1.8rem 1.5rem;
-  transition: var(--transition);
-  cursor: pointer;
-  transform-style: preserve-3d;
-}
-
-.card:hover {
-  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
-  box-shadow: var(--shadow-lg);
-}
-
-.card h4 {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--green);
-  margin-bottom: 0.5rem;
-}
-
-.card p {
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-}
-
-.card a {
-  text-decoration: none;
-  color: var(--green);
-  font-weight: 600;
-  background: #f9fff9;
-  padding: 0.4rem 0.9rem;
-  border-radius: 10px;
-  transition: var(--transition);
-}
-
-.card a:hover {
-  background: var(--green);
-  color: #fff;
-}
-
-/* ───────────────────────────────
-   FOOTER
-──────────────────────────────── */
-footer {
-  margin-top: 4rem;
-  padding: 2rem 1rem;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.95rem;
-  border-top: 1px solid var(--border);
-}
-
-/* ───────────────────────────────
-   RESPONSIVE DESIGN
-──────────────────────────────── */
+/* Responsive for daily content */
 @media (max-width: 768px) {
-  header h1 {
-    font-size: 1.1rem;
-  }
-
-  header .btn {
-    font-size: 0.8rem;
-    padding: 0.35rem 0.75rem;
-  }
-
-  .widget-grid,
-  .grid {
-    padding: 0 1rem;
-    gap: 1.25rem;
-  }
-
-  .widget-card,
-  .card {
-    padding: 1.2rem 1rem;
-  }
-
-  .card:hover {
-    transform: translateY(-4px) scale(1.02);
-  }
-}
-
-/* ───────────────────────────────
-   DARK MODE
-──────────────────────────────── */
-body.dark-mode {
-  --bg: #0f172a;
-  --text: #f9fafb;
-  --muted: #94a3b8;
-  --card: #1e293b;
-  --border: #334155;
-}
-
-body.dark-mode header {
-  background: rgba(18, 90, 47, 0.9);
-}
-
-body.dark-mode .card,
-body.dark-mode .widget-card {
-  box-shadow: none;
-}
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  backdrop-filter: blur(14px);
-  background: rgba(18, 90, 47, 0.9);
-  transition: box-shadow 0.3s ease;
-  z-index: 1000;
-}
-
-/* Shadow only when scrolled */
-header.scrolled {
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-header h1 a {
-  text-decoration: none;
-  color: inherit;             /* keeps the white/green depending on theme */
-  transition: opacity 0.2s ease;
-}
-
-header h1 a:hover {
-  opacity: 0.8;               /* subtle hover feedback */
-}
-
-.page-title {
-  text-align: center;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
-
-/* Image styling */
-.bismillah-img {
-  width: clamp(200px, 40vw, 500px); /* responsive */
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  opacity: 1;
-  transform: translateY(-10px);
-  transition: opacity 1.5s ease, transform 1.5s ease;
-
-  /* IMPORTANT: remove any color or filter */
-  filter: none;
-}
-
-/* Site name */
-.site-name {
-  font-family: 'Inter', 'Nunito', sans-serif;
-  font-size: clamp(1.8rem, 4vw, 3.5rem);
-  font-weight: 700;
-  color: #007f3f; /* green text beneath */
-  margin-top: 1rem;
-  opacity: 1;
-  transform: translateY(10px);
-  transition: opacity 1.5s ease, transform 1.5s ease;
-}
-
-/* Fade-in trigger */
-.page-title.loaded .bismillah-img,
-.page-title.loaded .site-name {
-  opacity: 1;
-  transform: translateY(0);
-}
-.beta-banner {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-background: #FFD500;
-color: #000;
-font-weight: 700;
-font-size: 1rem;
-text-align: center;
-padding: 14px 0;
-z-index: 9999;
-box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-letter-spacing: 0.3px;
-}
-.logo {
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
-  border: none;
-  opacity: 0;
-  pointer-events: none;
-
-}
-.homepage-image {
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
-  border: none;
-  opacity: 0;
-  pointer-events: none;
-
-}
-
-/* Standard size for Desktop/Tablets */
-.bismillah-img {
-    width: 300px; /* Adjust this to your preferred desktop size */
-    height: auto;
-    display: block;
-    margin: 20px auto;
-}
-
-/* Specific adjustment for Mobile Phones */
-@media screen and (max-width: 600px) {
-    .bismillah-img {
-        /* This makes the PNG much larger on phones */
-        width: 90%; 
-        max-width: 500px; /* Prevents it from becoming blurry if the file is small */
-        margin: 30px auto;
+    .daily-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .daily-card {
+        padding: 2rem;
+    }
+    
+    .daily-content-text {
+        font-size: 1.1rem;
     }
 }
-  /* Launcher */
-#marja-launcher {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    padding: 14px 26px;
-    background: #0c1a2b; /* dark navy */
-    border-radius: 50px;
-    border: 2px solid #ffb98a; /* peach accent */
+/* Make morphing sections clickable */
+.morphing-section {
     cursor: pointer;
-    z-index: 10000;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.morphing-section:hover {
+    transform: scale(0.98);
+}
+
+.morphing-section:active {
+    transform: scale(0.96);
+}
+/* Enhanced Hero Section with Motion */
+.hero {
+    min-height: 100vh;
+    background: 
+      
+        url('karbala.jpg') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background particles */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+   
+    animation: patternMove 60s linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes patternMove {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(-30px) translateY(-30px); }
+}
+
+/* Floating geometric shapes */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 100px;
+    height: 100px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 50%;
+    animation: floatShape1 8s ease-in-out infinite;
+}
+
+@keyframes floatShape1 {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+    50% { transform: translateY(-30px) rotate(180deg); opacity: 0.6; }
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+    animation: heroContentFloat 6s ease-in-out infinite;
+}
+
+@keyframes heroContentFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.bismillah-container {
+    margin-bottom: 3rem;
+    animation: bismillahGlow 4s ease-in-out infinite;
+}
+
+@keyframes bismillahGlow {
+    0%, 100% { 
+        transform: scale(1);
+        filter: drop-shadow(0 4px 20px rgba(212, 175, 55, 0.3));
+    }
+    50% { 
+        transform: scale(1.02);
+        filter: drop-shadow(0 8px 30px rgba(212, 175, 55, 0.5));
+    }
+}
+
+.bismillah-img {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
     transition: all 0.3s ease;
 }
 
-#marja-launcher:hover {
-    transform: scale(1.05);
-    background: #12233a;
+/* Animated title with typewriter effect */
+.hero h1 {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #ffffff, #f0f9ff, #ffffff);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleShimmer 3s ease-in-out infinite;
 }
 
-#marja-launcher-text {
-    color: white;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
+@keyframes titleShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
-/* Popup */
-#marja-popup {
-    display: none;
-    position: fixed;
-    bottom: 90px;
-    right: 25px;
-    width: 380px;
-    height: 600px;
-    max-height: 80vh;
-    background: #0c1a2b;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid rgba(255,185,138,0.35);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-    z-index: 10000;
-    animation: slideUp 0.35s ease;
+.hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-weight: 400;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: subtitleReveal 2s ease-out 0.5s forwards;
+    line-height: 1.6;
 }
 
-/* Header */
-#marja-header {
-    background: #0c1a2b;
-    color: white;
-    padding: 12px 18px;
+@keyframes subtitleReveal {
+    0% { 
+        opacity: 0; 
+        transform: translateY(30px);
+    }
+    100% { 
+        opacity: 0.95; 
+        transform: translateY(0);
+    }
+}
+
+.hero-buttons {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    border-bottom: 2px solid #ffb98a;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: buttonsSlideUp 2s ease-out 1s forwards;
 }
 
-#marja-close {
-    background: none;
-    border: none;
+@keyframes buttonsSlideUp {
+    0% { 
+        opacity: 0; 
+        transform: translateY(40px);
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-gold), #f4e4a6);
+    color: var(--dark-navy);
+    padding: 16px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    font-size: 22px;
+    padding: 16px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-secondary:hover::before {
+    left: 100%;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+}
+
+/* Floating elements */
+.floating-element {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.1;
+}
+
+.floating-element-1 {
+    top: 15%;
+    right: 15%;
+    width: 80px;
+    height: 80px;
+    background: var(--accent-gold);
+    border-radius: 50%;
+    animation: float1 10s ease-in-out infinite;
+}
+
+.floating-element-2 {
+    bottom: 20%;
+    left: 10%;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(45deg);
+    animation: float2 12s ease-in-out infinite reverse;
+}
+
+.floating-element-3 {
+    top: 60%;
+    right: 8%;
+    width: 40px;
+    height: 40px;
+    background: var(--primary-green);
+    border-radius: 50%;
+    animation: float3 8s ease-in-out infinite;
+}
+
+@keyframes float1 {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(120deg); }
+    66% { transform: translateY(10px) rotate(240deg); }
+}
+
+@keyframes float2 {
+    0%, 100% { transform: translateY(0) rotate(45deg) scale(1); }
+    50% { transform: translateY(-30px) rotate(225deg) scale(1.2); }
+}
+
+@keyframes float3 {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.3); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .floating-element {
+        display: none;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+/* Natural Morphing Sections */
+.morphing-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 0;
+    margin: 0;
     cursor: pointer;
 }
 
-/* Iframe */
-#marja-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: white;
+.morphing-section.active {
+    border-radius: 20px;
+    margin: 10px;
+    transform: scale(0.98);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Animation */
-@keyframes slideUp {
-    from {
+.section-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+    z-index: 2;
+    position: relative;
+}
+
+.section-text {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.section-text.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.section-image {
+    opacity: 0;
+    transform: translateX(30px) scale(0.95);
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.section-image.revealed {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.section-image img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.morphing-section:hover .section-image img {
+    transform: scale(1.02);
+}
+
+/* Section Backgrounds with subtle gradients */
+.noble-hadith {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    color: white;
+}
+
+.learn-shia {
+    background: linear-gradient(135deg, #d4af37 0%, #f4e4a6 100%);
+    color: #2d3748;
+}
+
+.books-library {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    color: #2d3748;
+}
+
+.quran-study {
+    background: linear-gradient(135deg, #136f3c 0%, #1a8049 100%);
+    color: white;
+}
+
+.duas-collection {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    color: white;
+}
+
+/* Typography for sections */
+.section-title {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.section-text.revealed .section-title {
+    animation: titleSlideIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+}
+
+@keyframes titleSlideIn {
+    0% {
         opacity: 0;
         transform: translateY(20px);
     }
-    to {
+    100% {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-</style>
+.section-description {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
 
-<main class="container">
-<div class="page-title">
-  <img src="bismillah.png" alt="Bismillah" class="bismillah-img">
-  <h2 class="site-name" 
-    data-en="Noor Al Huda" 
-    data-ar="نور الهدى" 
-    data-fa="نور الهدی" 
-    data-ur="نور الہدیٰ">
-    Noor Al Huda
-</h2>
-</div>
+.section-text.revealed .section-description {
+    animation: descriptionFadeIn 0.8s ease 0.4s both;
+}
 
+@keyframes descriptionFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+}
 
-  <!-- Widgets Section -->
- <div id="salahWidget" class="widget-card" data-link="https://nooralhuda.co.uk/salah.html">
-  <h4 data-en="Salah Times" data-ar="أوقات الصلاة" data-fa="اوقات شرعی" data-ur="نماز کے اوقات">Salah Times</h4>
-  
-  <label>
-    <strong data-en="City:" data-ar="المدينة:" data-fa="شهر:" data-ur="شہر:">City:</strong>
-    <select id="citySelect" style="padding: 2px; border-radius: 4px; font-family: inherit;">
-      <option value="London" data-en="London" data-ar="لندن" data-fa="لندن" data-ur="لندن">London, UK</option>
-      <option value="Bedford" selected data-en="Bedford" data-ar="بيدفورد" data-fa="بدفورد" data-ur="بیڈفورڈ">Bedford, UK</option>
-      <option value="Islamabad" data-en="Islamabad" data-ar="إسلام آباد" data-fa="اسلام‌آباد" data-ur="اسلام آباد">Islamabad, Pakistan</option>
-      <option value="Tehran" data-en="Tehran" data-ar="طهران" data-fa="تهران" data-ur="تہران">Tehran, Iran</option>
-      <option value="Karbala" data-en="Karbala" data-ar="كربلاء" data-fa="کربلا" data-ur="کربلا">Karbala, Iraq</option>
-      <option value="Najaf" data-en="Najaf" data-ar="النجف" data-fa="نجف" data-ur="نجف">Najaf, Iraq</option>
-      <option value="Qom" data-en="Qom" data-ar="قم" data-fa="قم" data-ur="قم">Qom, Iran</option>
-      <option value="Mashhad" data-en="Mashhad" data-ar="مشهد" data-fa="مشهد" data-ur="مشہد">Mashhad, Iran</option>
-      <option value="Beirut" data-en="Beirut" data-ar="بيروت" data-fa="بیروت" data-ur="بیروت">Beirut, Lebanon</option>
-      <option value="Dearborn" data-en="Dearborn" data-ar="ديربورن" data-fa="دیربورن" data-ur="ڈیئربورن">Dearborn, USA</option>
-      <option value="Mumbai" data-en="Mumbai" data-ar="مومباي" data-fa="بمبئی" data-ur="ممبئی">Mumbai, India</option>
-      <option value="Toronto" data-en="Toronto" data-ar="تورونتو" data-fa="تورنتو" data-ur="ٹورنٹو">Toronto, Canada</option>
-      <option value="NewYork" data-en="New York" data-ar="نيويورك" data-fa="نیویورک" data-ur="نیویارک">New York, USA</option>
-      <option value="LosAngeles" data-en="Los Angeles" data-ar="لوس أنجلوس" data-fa="لس آنجلس" data-ur="لاس اینجلس">Los Angeles, USA</option>
-      <option value="Sydney" data-en="Sydney" data-ar="سيدني" data-fa="سیدنی" data-ur="سڈنی">Sydney, Australia</option>
-      <option value="Cairo" data-en="Cairo" data-ar="القاهرة" data-fa="قاهره" data-ur="قاہرہ">Cairo, Egypt</option>
-      <option value="Riyadh" data-en="Riyadh" data-ar="الرياض" data-fa="ریاض" data-ur="ریاض">Riyadh, Saudi Arabia</option>
-    </select>
-  </label>
+.section-tags {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
 
-  <ul class="widget-list" id="salahTimes">
-    <li><span data-en="Fajr" data-ar="الفجر" data-fa="فجر" data-ur="فجر">Fajr</span> — <span id="fajr">—</span></li>
-    <li><span data-en="Sunrise" data-ar="الشروق" data-fa="طلوع آفتاب" data-ur="طلوع آفتاب">Sunrise</span> — <span id="sunrise">—</span></li>
-    <li><span data-en="Dhuhr" data-ar="الظهر" data-fa="ظهر" data-ur="ظہر">Dhuhr</span> — <span id="dhuhr">—</span></li>
-    <li><span data-en="Asr" data-ar="العصر" data-fa="عصر" data-ur="عصر">Asr</span> — <span id="asr">—</span></li>
-    <li><span data-en="Maghrib" data-ar="المغرب" data-fa="مغرب" data-ur="مغرب">Maghrib</span> — <span id="maghrib">—</span></li>
-    <li><span data-en="Isha" data-ar="العشاء" data-fa="عشا" data-ur="عشاء">Isha</span> — <span id="isha">—</span></li>
-  </ul>
-  
-  <a href="salah.html" data-en="Full Salah Page" data-ar="صفحة الصلاة الكاملة" data-fa="صفحه کامل اوقات" data-ur="نماز کا مکمل صفحہ">Full Salah Page</a>
-</div>
-    <!-- Quran Daily Verse Widget -->
-<br>
+.tag {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px);
+}
 
-<div id="quranWidget" class="widget-card" data-link="quran.html">
-    <h4 data-en="Daily Quran Verse" data-ar="آية قرآنية يومية" data-fa="آیه روزانه قرآن" data-ur="روزانہ کی قرآنی آیت">Daily Quran Verse</h4>
-    <div id="quran-display">
-        <p id="arabic-text" style="font-weight: bold; font-size: 1.2rem; color: var(--green); margin-bottom: 8px;">Loading...</p>
-        <p id="translation-text" style="font-style: italic; color: var(--muted);">...</p>
-        <small id="verse-ref" style="color: var(--green); font-weight: bold;"></small>
+.section-text.revealed .tag {
+    animation: tagSlideUp 0.5s ease both;
+}
+
+.section-text.revealed .tag:nth-child(1) { animation-delay: 0.6s; }
+.section-text.revealed .tag:nth-child(2) { animation-delay: 0.7s; }
+.section-text.revealed .tag:nth-child(3) { animation-delay: 0.8s; }
+.section-text.revealed .tag:nth-child(4) { animation-delay: 0.9s; }
+
+@keyframes tagSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.learn-shia .tag {
+    background: rgba(45, 55, 72, 0.1);
+    color: #2d3748;
+    border-color: rgba(45, 55, 72, 0.2);
+}
+
+.books-library .tag {
+    background: rgba(19, 111, 60, 0.1);
+    color: #136f3c;
+    border-color: rgba(19, 111, 60, 0.2);
+}
+
+/* Arrow navigation with subtle animation */
+.section-arrow {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0.7;
+}
+
+.section-arrow:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.05) translateX(5px);
+    opacity: 1;
+}
+
+/* Hover effects for entire section */
+.morphing-section:hover {
+    transform: scale(0.99);
+}
+
+.morphing-section.active:hover {
+    transform: scale(0.985);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 2rem;
+    }
+    
+    .section-image {
+        order: -1;
+    }
+    
+    .section-image img {
+        height: 400px;
+    }
+    
+    .morphing-section.active {
+        margin: 5px;
+        border-radius: 15px;
+    }
+}
+/* Smooth transition overrides */
+.morphing-section * {
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .morphing-section,
+    .section-text,
+    .section-image,
+    .section-arrow {
+        transition-duration: 0.3s;
+    }
+    
+    .morphing-section.active {
+        transform: scale(0.99);
+        border-radius: 10px;
+        margin: 5px;
+    }
+}
+
+/* Enhanced focus states for accessibility */
+.morphing-section:focus-visible {
+    outline: 3px solid var(--accent-gold);
+    outline-offset: 2px;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://nooralhuda.co.uk" class="logo">
+                
+                Noor Al Huda
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="hadiths-home.html">Hadith</a></li>
+                <li><a href="quran.html">Quran</a></li>
+                <li><a href="duas.html">Duas</a></li>
+                <li><a href="settings.html" class="cta-button">Settings</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <!-- Floating Elements -->
+    <div class="floating-element floating-element-1"></div>
+    <div class="floating-element floating-element-2"></div>
+    <div class="floating-element floating-element-3"></div>
+    
+    <div class="hero-content">
+   
+        <h1 class="typewriter-text">Illuminating the Path</h1>
+        <p class="hero-subtitle">Your comprehensive digital hub for Islamic knowledge, Quranic studies, authentic Hadith, and spiritual guidance</p>
+        <div class="hero-buttons">
+            <a href="resources.html" class="btn-primary">Explore Resources</a>
+            <a href="learn.html" class="btn-secondary">Learn More</a>
+        </div>
     </div>
-    <a href="quran.html" 
-   data-en="Read Quran" 
-   data-ar="اقرأ القرآن" 
-   data-fa="خواندن قرآن" 
-   data-ur="قرآن پڑھیں">
-   Read Quran
-</a>
-</div>
+</section>
 
-  </div>
-
-
-  <!-- Static Cards Section -->
-<div class="grid">
-    <article class="card" onclick="location.href='hadiths-home.html'">
-        <h4 data-en="Hadiths" data-ar="الأحاديث" data-fa="احادیث" data-ur="احادیث">Hadiths</h4>
-        <p data-en="Books like Al-Kafi and Man la Yahduruhu al-Faqih" 
-           data-ar="كتب مثل الكافي ومن لا يحضره الفقيه" 
-           data-fa="کتاب‌هایی مانند الکافی و من لا یحضره الفقیه" 
-           data-ur="الکافی اور من لا یحضرہ الفقیہ جیسی کتب">
-           Books like Al-Kafi and Man la Yahduruhu al-Faqih
-        </p>
-    </article>
-
-    <article class="card" onclick="location.href='duas.html'">
-        <h4 data-en="Duas" data-ar="الأدعية" data-fa="دعاها" data-ur="دعائیں">Duas</h4>
-        <p data-en="Separate duas like Dua Nudbah." 
-           data-ar="أدعية منفصلة مثل دعاء الندبة." 
-           data-fa="دعاهای جداگانه مانند دعای ندبه." 
-           data-ur="علیحدہ دعائیں جیسے دعاے ندبہ۔">
-           Separate duas like Dua Nudbah.
-        </p>
-    </article>
-
-    <article class="card" onclick="location.href='calendar.html'">
-        <h4 data-en="Calendar" data-ar="التقويم" data-fa="تقویم" data-ur="کیلنڈر">Calendar</h4>
-        <p data-en="Islamic dates and Shia events." 
-           data-ar="التواريخ الإسلامية والمناسبات الشيعية." 
-           data-fa="تاریخ های اسلامی و وقایع شیعه." 
-           data-ur="اسلامی تواریخ اور شیعہ واقعات۔">
-           Islamic dates and Shia events.
-        </p>
-    </article>
-
-<article class="card" onclick="location.href='shia-ais.html'">
-    <h4 
-        data-en="Shia AIs" 
-        data-ar="الذكاءات الشيعية" 
-        data-fa="هوش‌های مصنوعی شیعه" 
-        data-ur="شیعہ اے آئیز">
-        Shia AIs
-    </h4>
-
-    <p 
-        data-en="Explore Shia scholarly artificial intelligence" 
-        data-ar="استكشاف الذكاء الاصطناعي العلمي الشيعي" 
-        data-fa="کاوش در هوش مصنوعی علمی شیعه" 
-        data-ur="شیعہ علمی مصنوعی ذہانت کو دریافت کریں">
-        Explore Shia scholarly artificial intelligence
-    </p>
-</article>
-
-    <article class="card" onclick="location.href='https://heardle.nooralhuda.co.uk'">
-        <h4 data-en="Heardle" data-ar="هيردل" data-fa="هردل" data-ur="ہیرڈل">Heardle</h4>
-        <p data-en="Test your memory with Shia nasheeds." 
-           data-ar="اختبر ذاكرتك مع الأناشيد الشيعية." 
-           data-fa="حافظه خود را با نشیدهای شیعه امتحان کنید." 
-           data-ur="شیعہ نشیدوں کے ساتھ اپنی یادداشت کا امتحان لیں۔">
-           Test your memory with Shia nasheeds.
-        </p>
-    </article>
-    <article class="card" onclick="location.href='hadithfinder.html'">
-        <h4 data-en="Hadith Finder" data-ar="مكتشف الأحاديث" data-fa="یابنده حدیث" data-ur="حدیث تلاش کرنے والا">Heardle</h4>
-        <p data-en="Search for Hadiths" 
-           data-ar="ابحث عن الأحاديث" 
-           data-fa="جستجو در احادیث" 
-           data-ur="احادیث تلاش کریں۔">
-           Search for Hadiths
-        </p>
-    </article>
-    <article class="card" onclick="location.href='https://tube.nooralhuda.co.uk'">
-        <h4 data-en="ShiaTube" data-ar="شيعة تيوب" data-fa="شیعه تیوب" data-ur="شیعہ ٹیوب">ShiaTube</h4>
-        <p data-en="Watch Islamic and Shia videos." 
-           data-ar="شاهد فيديوهات إسلامية وشيعية." 
-           data-fa="ویدیوهای اسلامی و شیعه را تماشا کنید." 
-           data-ur="اسلامی اور شیعہ ویڈیوز دیکھیں۔">
-           Watch Islamic and Shia videos.
-        </p>
-    </article>
-</div>
-</main>
-
-
-<footer data-en="© 2025 Noor Al Huda — All in one Shia website" 
-        data-ar="© 2025 نور الهدى — موقع شيعي متكامل" 
-        data-fa="© 2025 نور الهدی — وب‌سایت جامع شیعه" 
-        data-ur="© 2025 نور الہدیٰ — ہمہ گیر شیعہ ویب سائٹ">
-    © 2025 Noor Al Huda — All in one Shia website
-</footer>
-<div id="marja-wrapper">
-    <div id="marja-launcher" onclick="toggleMarja()" title="Ask Marja AI">
-        <span id="marja-launcher-text">
-            Marja AI
-        </span>
-    </div>
-
-    <div id="marja-popup">
-        <div id="marja-header">
-            <span>Marja AI</span>
-            <button onclick="toggleMarja()" id="marja-close">&times;</button>
+<!-- Daily Content Section -->
+<section class="daily-content">
+    <div class="daily-grid">
+        <!-- Daily Quran Ayah -->
+        <div class="daily-card">
+            <div class="daily-header">
+                
+                <div>
+                    <h3 class="daily-title">Daily Quran Ayah</h3>
+                    <p class="daily-date">Today's Reflection</p>
+                </div>
+            </div>
+            <div class="daily-content-text" id="quranArabic"></div>
+<div class="daily-translation" id="quranEnglish"></div>
+<div class="daily-source" id="quranSource"></div>
         </div>
 
-        <iframe 
-            src="https://marja.ai/ask" 
-            id="marja-iframe"
-            loading="lazy">
-        </iframe>
+        <!-- Daily Hadith -->
+        <div class="daily-card">
+            <div class="daily-header">
+                
+                <div>
+                    <h3 class="daily-title">Daily Hadith</h3>
+                    <p class="daily-date">Wisdom of the Day</p>
+                </div>
+            </div>
+            <div class="daily-content-text" id="hadithArabic"></div>
+<div class="daily-translation" id="hadithEnglish"></div>
+<div class="daily-source" id="hadithSource"></div>
+        </div>
     </div>
-</div>
-<script>
-function toggleMarja() {
-    const popup = document.getElementById('marja-popup');
+</section>
+<!-- Noble Hadith Section -->
+<section class="morphing-section noble-hadith" id="noble-hadith" onclick="window.location.href='hadiths-home.html'">
+    <div class="section-content">
+        <div class="section-text">
+            <h2 class="section-title">Hadith Books</h2>
+            <p class="section-description">One of the largest online Shia Hadith collections in the world, featuring authentic narrations from the Ahlulbayt and their companions. such as Al-Kafi, Man La Yahduruhu Al-Faqih and Wasail Al-Shia</p>
 
-    if (popup.style.display === 'none' || popup.style.display === '') {
-        popup.style.display = 'block';
-    } else {
-        popup.style.display = 'none';
-    }
-}
-</script>
+        </div>
+        <div class="section-image">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c0/Hadith_Books.jpg" alt="Islamic Scholar Reading Hadith">
+        </div>
+    </div>
+    <div class="section-arrow">→</div>
+</section>
 
-<script>
-  const darkToggle = document.getElementById("darkModeToggle");
+<!-- Learn Shia Islam Section -->
 
- src="auth.js"
+<section class="morphing-section quran-study" id="quran-study" onclick="window.location.href='quran.html'">
+    <div class="section-content">
+        <div class="section-text">
+            <h2 class="section-title">Quran</h2>
+            <p class="section-description">The entire Quran, with many reciters, and translations in multiple languages. 5 Shia translations ranging from English, Farsi and Urdu as well as a single Sunni english translation.</p>
 
-/* === CONFIGURATION === */
-const CITY_DATA = {
-    London: { city: "London", country: "United Kingdom" },
-    Bedford: { city: "Bedford", country: "United Kingdom" },
-    Islamabad: { city: "Islamabad", country: "Pakistan" },
-    Tehran: { city: "Tehran", country: "Iran" },
-    Karbala: { city: "Karbala", country: "Iraq" },
-    Najaf: { city: "Najaf", country: "Iraq" },
-    Qom: { city: "Qom", country: "Iran" },
-    Mashhad: { city: "Mashhad", country: "Iran" },
-    Beirut: { city: "Beirut", country: "Lebanon" },
-    Dearborn: { city: "Dearborn", country: "United States" },
-    Mumbai: { city: "Mumbai", country: "India" },
-    Toronto: { city: "Toronto", country: "Canada" },
-    NewYork: { city: "New York", country: "United States" },
-    LosAngeles: { city: "Los Angeles", country: "United States" },
-    Sydney: { city: "Sydney", country: "Australia" },
-    Cairo: { city: "Cairo", country: "Egypt" },
-    Riyadh: { city: "Riyadh", country: "Saudi Arabia" }
-};
+        </div>
+        <div class="section-image">
+            <img src="https://islamonline.net/wp-content/uploads/2022/09/benefit-from-the-Quran.jpg" alt="Beautiful Quran with Golden Calligraphy">
+        </div>
+    </div>
+    <div class="section-arrow">→</div>
+</section>
+<!-- Books Library Section -->
+<section class="morphing-section books-library" id="books-library" onclick="window.location.href='books.html'">
+    <div class="section-content">
+        <div class="section-text">
+            <h2 class="section-title">Duas</h2>
+            <p class="section-description">Sacred supplications and prayers from the Ahlulbayt tradition. Connect with Allah through authentic duas for every occasion, spiritual state, and life circumstance.</p>
+ 
+        </div>
+        <div class="section-image">
+            <img src="https://wallpapercave.com/wp/wp9205227.jpg" alt="Islamic Books and Manuscripts">
+        </div>
+    </div>
+    <div class="section-arrow">→</div>
+</section>
 
-// Method 0 = Leva Institute (Qom) - often used as base for Shia
-// You can adjust these IDs if you find a specific "Sistani" API method later
-const METHOD_KHAMENEI = 0; 
-const METHOD_SISTANI = 0; 
+<!-- Quran Study Section -->
 
-/* === SAFETY LOGIC === */
-function timeToMins(t) {
-    if (!t) return 0;
-    const [h, m] = t.split(':').map(Number);
-    return h * 60 + m;
-}
 
-function calculateSafeTimes(khamenei, sistani) {
-    const safe = {};
-    const keys = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+<!-- Duas Collection Section -->
+<section class="morphing-section duas-collection" id="duas-collection" onclick="window.location.href='duas.html'">
+    <div class="section-content">
+        <div class="section-text">
+            <h2 class="section-title">Duas<br>Collection</h2>
+            <p class="section-description">Sacred supplications and prayers from the Ahlulbayt tradition. Connect with Allah through authentic duas for every occasion, spiritual state, and life circumstance.</p>
+            <div class="section-tags">
+                <span class="tag">Daily Duas</span>
+                <span class="tag">Dua Kumayl</span>
+                <span class="tag">Sahifa Sajjadiya</span>
+                <span class="tag">Special Occasions</span>
+            </div>
+        </div>
+        <div class="section-image">
+            <img src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&h=600&fit=crop" alt="Hands Raised in Islamic Prayer">
+        </div>
+    </div>
+    <div class="section-arrow">→</div>
+</section>
 
-    keys.forEach(key => {
-        // Clean the time string (remove metadata like "(GMT)")
-        const kTime = khamenei[key].split(" ")[0];
-        const sTime = sistani[key].split(" ")[0];
-        
-        let bestTime = kTime; // Default starting point
+    <!-- Stats Section -->
 
-        // 1. SAFETY LOGIC: Pick the LATER time for Fajr, Maghrib, and Isha
-        if (['Fajr', 'Maghrib', 'Isha'].includes(key)) {
-            bestTime = timeToMins(kTime) > timeToMins(sTime) ? kTime : sTime;
-        } else {
-            // Default to Khamenei/Method 0 for Sunrise, Dhuhr, and Asr
-            bestTime = kTime; 
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Begin Your Spiritual Journey</h2>
+               
+                <a href="resources.html" class="btn-primary">Start Your Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Noor Al Huda</h3>
+                    <p>Illuminating the path to Islamic knowledge and spiritual growth through authentic resources</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="quran.html">Holy Quran</a></li>
+                        <li><a href="hadiths-home.html">Hadith Collections</a></li>
+                        <li><a href="duas.html">Duas & Supplications</a></li>
+ 
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="learn.html">Learn More</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Noor Al Huda. All rights reserved. Illuminating the path to Islamic knowledge and spiritual growth through authentic resources</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+      // Add this to your existing DOMContentLoaded function
+document.addEventListener('DOMContentLoaded', function() {
+    // Existing code...
+
+    // Enhanced hero interactions
+    const heroContent = document.querySelector('.hero-content');
+    const bismillahImg = document.querySelector('.bismillah-img');
+    const heroTitle = document.querySelector('.hero h1');
+    const heroButtons = document.querySelectorAll('.hero-buttons a');
+
+    // Mouse movement parallax effect
+    document.addEventListener('mousemove', (e) => {
+        const mouseX = (e.clientX / window.innerWidth) - 0.5;
+        const mouseY = (e.clientY / window.innerHeight) - 0.5;
+
+        // Parallax effect on hero content
+        if (heroContent) {
+            heroContent.style.transform = `translate(${mouseX * 20}px, ${mouseY * 20}px)`;
         }
 
-        // 2. APPLY CUSTOM OFFSETS
-        let totalMins = timeToMins(bestTime);
-
-        if (key === 'Fajr') {
-            // Add 25 minutes to Fajr
-            totalMins += 25;
-            bestTime = minsToTime(totalMins);
-        } 
-        else if (key === 'Dhuhr') {
-            // Add 8 minutes to Dhuhr (Zohr)
-            totalMins += 8;
-            bestTime = minsToTime(totalMins);
-        }
-
-        safe[key.toLowerCase()] = bestTime;
+        // Floating elements follow mouse subtly
+        const floatingElements = document.querySelectorAll('.floating-element');
+        floatingElements.forEach((element, index) => {
+            const speed = (index + 1) * 0.5;
+            element.style.transform += ` translate(${mouseX * speed}px, ${mouseY * speed}px)`;
+        });
     });
-    
-    // Save the adjusted times for use across your site
-    localStorage.setItem('cachedSafeTimes', JSON.stringify(safe));
-    return safe;
-}
 
-/* === FETCHING DATA === */
-async function fetchSalahTimes(cityKey) {
-    const info = CITY_DATA[cityKey];
-    if (!info) return;
+    // Enhanced button hover effects
+    heroButtons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.08)';
+        });
 
-    // Display loading state
-    document.getElementById('fajr').innerText = "--:--";
-    
-    try {
-        // Fetch BOTH methods in parallel
-        const [resK, resS] = await Promise.all([
-            fetch(`https://api.aladhan.com/v1/timingsByCity?city=${info.city}&country=${info.country}&method=${METHOD_KHAMENEI}`),
-            fetch(`https://api.aladhan.com/v1/timingsByCity?city=${info.city}&country=${info.country}&method=${METHOD_SISTANI}`)
-        ]);
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
 
-        const dataK = await resK.json();
-        const dataS = await resS.json();
-
-        if (dataK.code === 200 && dataS.code === 200) {
-            const timingsK = dataK.data.timings;
-            const timingsS = dataS.data.timings;
-
-            // Calculate the "Safer" times
-            const safeTimes = calculateSafeTimes(timingsK, timingsS);
+        // Click ripple effect
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
             
-            // Update UI
-            document.getElementById('fajr').innerText = safeTimes.fajr;
-            document.getElementById('sunrise').innerText = safeTimes.sunrise;
-            document.getElementById('dhuhr').innerText = safeTimes.dhuhr;
-            document.getElementById('asr').innerText = safeTimes.asr;
-            document.getElementById('maghrib').innerText = safeTimes.maghrib;
-            document.getElementById('isha').innerText = safeTimes.isha;
-        }
-    } catch (e) {
-        console.error("Salah Fetch Error:", e);
-        document.getElementById('fajr').innerText = "Error";
-    }
-}
-
-/* === LANGUAGE & INIT === */
-function toggleLang(lang) {
-    localStorage.setItem('userLang', lang);
-    const isRTL = ['ar', 'fa', 'ur'].includes(lang);
-    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-
-    // Update all text elements
-    document.querySelectorAll('[data-en]').forEach(el => {
-        const translation = el.getAttribute('data-' + lang);
-        if (translation) {
-            if (el.tagName === 'OPTION') {
-                el.text = translation;
-            } else {
-                el.innerText = translation;
-            }
-        }
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 0.6s ease-out;
+                pointer-events: none;
+            `;
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
     });
 
-    // Refresh Quran if function exists
-    if (typeof updateDailyVerse === 'function') updateDailyVerse();
-}
-// Helper: Convert total minutes back to "HH:MM"
-function minsToTime(totalMins) {
-    let h = Math.floor(totalMins / 60) % 24;
-    let m = totalMins % 60;
-    // Adds a zero in front if single digit (e.g. 5 becomes 05)
-    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-}
-// Initialize on Load
-window.addEventListener('DOMContentLoaded', () => {
-    // 1. Load Language
-    const savedLang = localStorage.getItem('userLang') || 'en';
-    const langSwitcher = document.getElementById('langSwitcher');
-    if (langSwitcher) langSwitcher.value = savedLang;
-    toggleLang(savedLang);
+    // Bismillah image hover effect
+    if (bismillahImg) {
+        bismillahImg.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05) rotate(1deg)';
+            this.style.filter = 'drop-shadow(0 8px 30px rgba(212, 175, 55, 0.6))';
+        });
 
-    // 2. Load Salah City
-    const citySelect = document.getElementById('citySelect');
-    const savedCity = localStorage.getItem('salah_city') || 'Bedford';
-    if (citySelect) {
-        citySelect.value = savedCity;
-        fetchSalahTimes(savedCity);
-        
-        citySelect.addEventListener('change', (e) => {
-            localStorage.setItem('salah_city', e.target.value);
-            fetchSalahTimes(e.target.value);
+        bismillahImg.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+            this.style.filter = 'drop-shadow(0 4px 20px rgba(212, 175, 55, 0.3))';
         });
     }
-});
-const QURAN_URLS = {
-    en: "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/eng-aliquliqarai1.txt",
-    fa: "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/fas-drhussientagi.txt",
-    ur: "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/urd-syedzeeshanhaid.txt",
-    ar: "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/ara-quranindopak.txt"
-};
 
-async function updateDailyVerse() {
-    // Get the current language directly from the switcher or storage
-    const langSwitcher = document.getElementById('langSwitcher');
-    const lang = langSwitcher ? langSwitcher.value : (localStorage.getItem('userLang') || 'en');
-    
-    const translationEl = document.getElementById('translation-text');
-    const arabicEl = document.getElementById('arabic-text');
-    const refEl = document.getElementById('verse-ref');
-    
-    const now = new Date();
-    const start = new Date(now.getFullYear(), 0, 0);
-    const dayOfYear = Math.floor((now - start) / 86400000);
-    let targetIndex = (dayOfYear % 6236) + 1;
-    if (targetIndex === 1) targetIndex = 2;
+    // Scroll-based hero animations
+// Replace the morphing sections part in your JavaScript with this:
+function updateOnScroll() {
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    const windowHeight = window.innerHeight;
 
-    try {
-        // Fetch Arabic and the SPECIFIC language file
-        const [resAr, resTrans] = await Promise.all([
-            fetch(QURAN_URLS.ar),
-            fetch(QURAN_URLS[lang]) // Uses the actual selected language
-        ]);
+    // Update progress bar
+    scrollProgress.style.width = scrollPercent + '%';
 
-        const textAr = await resAr.text();
-        const textTrans = await resTrans.text();
-
-        const getAyah = (rawText, index) => {
-            const lines = rawText.split('\n');
-            const line = lines[index - 1]; 
-            if(!line) return {ref: "", content: ""};
-            const parts = line.split('|');
-            return {
-                ref: `${parts[0]}:${parts[1]}`,
-                content: parts[2]
-            };
-        };
-
-        const ayahAr = getAyah(textAr, targetIndex);
-        const ayahTrans = getAyah(textTrans, targetIndex);
-
-        // Display Logic
-        arabicEl.innerText = ayahAr.content;
-        refEl.innerText = `[${ayahAr.ref}]`;
-
-        if (lang === 'ar') {
-            translationEl.innerText = ""; 
-            translationEl.style.display = "none";
-        } else {
-            translationEl.innerText = ayahTrans.content;
-            translationEl.style.display = "block";
-            // Ensure font matches the language style
-            translationEl.style.fontFamily = "inherit";
-        }
-
-    } catch (e) {
-        console.error("Quran Fetch Error:", e);
-    }
-}
-
-// Ensure this runs when language changes
-const originalToggleLang = toggleLang;
-toggleLang = function(lang) {
-    originalToggleLang(lang); // Run your existing translation logic
-    updateDailyVerse();       // Update the Quran widget to the new translation
-};
-
-// Run on load
-window.addEventListener('DOMContentLoaded', updateDailyVerse);
-// Make the widgets clickable
-document.querySelectorAll('.widget-card[data-link]').forEach(card => {
-  card.addEventListener('click', e => {
-    // Allow inner links (<a>) to work normally
-    if (e.target.tagName.toLowerCase() !== 'a') {
-      window.location.href = card.getAttribute('data-link');
-    }
-  });
-});
-// Make all static cards clickable
-document.querySelectorAll('.grid .card').forEach(card => {
-  card.addEventListener('click', e => {
-    // If user clicks an actual link inside, do nothing (let default happen)
-    if (e.target.tagName.toLowerCase() !== 'a') {
-      const link = card.querySelector('a');
-      if (link) {
-        window.location.href = link.href;
-      }
-    }
-  });
-
-  // Optional: show pointer on hover
-  card.style.cursor = 'pointer';
-});
-
-// Use saved city from localStorage, fallback to default
-const city = localStorage.getItem('salahCity') || 'Bedford';
-
-// Then use `city` in your existing API call
-fetchPrayerTimes(city); // or however your widget fetches the times
-  window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 10) {
-      header.classList.add('scrolled');
+    // Navbar effects
+    if (scrollTop > 50) {
+        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
     } else {
-      header.classList.remove('scrolled');
+        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+        navbar.style.boxShadow = 'none';
     }
-  });
-  window.addEventListener('load', () => {
-    document.querySelector('.page-title').classList.add('loaded');
-  });
-    // Dark mode (support both 'dark' and 'dark-mode' used in your CSS)
-  function applyThemeClass(isDark) {
-    if (isDark) {
-      document.body.classList.add("dark");
-      document.body.classList.add("dark-mode");
-    } else {
-      document.body.classList.remove("dark");
-      document.body.classList.remove("dark-mode");
-    }
-  }
-  var savedTheme = localStorage.getItem("theme");
-  applyThemeClass(savedTheme === "dark");
 
-  if (darkToggle) {
-    darkToggle.checked = savedTheme === "dark";
-    darkToggle.addEventListener("change", function (ev) {
-      var isDarkNow = !!ev.target.checked;
-      applyThemeClass(isDarkNow);
-      localStorage.setItem("theme", isDarkNow ? "dark" : "light");
-    });
-  }
-  
-  const user = getCurrentUser();
-  if(!user){
-    // Optional: redirect to login page
-    // window.location='login.html';
-    console.log("No user logged in — show guest widgets only");
-  } else {
-    console.log("Logged in user:", user.displayName, "Role:", user.role);
-  }
-(function() {
-    const storageKey = "visitCount";
-    const loginPage = "/login"; // change to your actual login page path
-
-    // Get current visit count
-    let count = localStorage.getItem(storageKey);
-    count = count ? parseInt(count) : 0;
-
-    // Increment visit count
-    count++;
-    localStorage.setItem(storageKey, count);
-
-    // Redirect on the 3rd visit
-    if (count === 3) {
-        // Optionally reset counter after redirect
-        localStorage.removeItem(storageKey);
-        window.location.href = loginPage;
-    }
-})();
-
-const banner = document.createElement('div');
-banner.className = 'beta-banner'; // styled in style.css
-banner.textContent = '⚠️ This site is in BETA — features may change.';
-
-
-document.body.prepend(banner);
-
-function toggleLang(lang) {
-    localStorage.setItem('userLang', lang);
-    const isRTL = ['ar', 'fa', 'ur'].includes(lang);
-    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-
-    document.querySelectorAll('[data-en]').forEach(el => {
-        const translation = el.getAttribute('data-' + lang);
-        if (translation) {
-            // Check if this is the launcher text specifically
-            if (el.id === 'launcher-text') {
-                el.innerHTML = translation; // Use innerHTML to render the <b> badge
-            } else if (el.tagName === 'OPTION') {
-                el.text = translation;
+    // Natural morphing sections effect
+    morphingSections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        const sectionTop = rect.top;
+        const sectionBottom = rect.bottom;
+        const sectionHeight = rect.height;
+        const sectionCenter = sectionTop + sectionHeight / 2;
+        const windowCenter = windowHeight / 2;
+        
+        // Calculate how centered the section is (0 = perfectly centered, 1 = at edge)
+        const distanceFromCenter = Math.abs(sectionCenter - windowCenter) / (windowHeight / 2);
+        const centeredness = Math.max(0, 1 - distanceFromCenter);
+        
+        // Only apply effects when section is in viewport
+        if (sectionTop < windowHeight && sectionBottom > 0) {
+            // Subtle scale based on position (much less aggressive)
+            const scale = 0.96 + (centeredness * 0.04); // Scale from 0.96 to 1.0
+            
+            // Gentle border radius (less dramatic)
+            const borderRadius = Math.max(0, (1 - centeredness) * 25); // Max 25px radius
+            
+            // Subtle opacity change
+            const opacity = 0.85 + (centeredness * 0.15); // Opacity from 0.85 to 1.0
+            
+            // Gentle margin effect
+            const margin = Math.max(0, (1 - centeredness) * 15); // Max 15px margin
+            
+            // Apply transforms smoothly
+            section.style.transform = `scale(${scale})`;
+            section.style.borderRadius = `${borderRadius}px`;
+            section.style.opacity = opacity;
+            section.style.margin = `${margin}px`;
+            
+            // Add active class when section is reasonably centered (more generous)
+            if (centeredness > 0.3) { // Trigger when 30% centered (was too restrictive before)
+                if (!section.classList.contains('active')) {
+                    section.classList.add('active');
+                    
+                    // Staggered content reveal
+                    const sectionText = section.querySelector('.section-text');
+                    const sectionImage = section.querySelector('.section-image');
+                    
+                    setTimeout(() => {
+                        if (sectionText) sectionText.classList.add('revealed');
+                    }, 100);
+                    
+                    setTimeout(() => {
+                        if (sectionImage) sectionImage.classList.add('revealed');
+                    }, 300);
+                }
             } else {
-                el.innerText = translation;
+                section.classList.remove('active');
+                const sectionText = section.querySelector('.section-text');
+                const sectionImage = section.querySelector('.section-image');
+                if (sectionText) sectionText.classList.remove('revealed');
+                if (sectionImage) sectionImage.classList.remove('revealed');
+            }
+            
+            // Subtle parallax on images
+            const image = section.querySelector('.section-image img');
+            if (image) {
+                const parallaxAmount = (sectionCenter - windowCenter) * 0.05; // Very subtle
+                image.style.transform = `translateY(${parallaxAmount}px) scale(${1 + Math.abs(parallaxAmount) * 0.0005})`;
             }
         }
     });
 
-    if (typeof updateDailyVerse === 'function') updateDailyVerse();
+    lastScrollTop = scrollTop;
+    ticking = false;
 }
+
+
+    // Add to existing scroll handler
+    const originalUpdateOnScroll = updateOnScroll;
+    updateOnScroll = function() {
+        originalUpdateOnScroll();
+        updateHeroOnScroll();
+    };
+
+    // Add ripple animation CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+});
+
+        // Clean, optimized JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const navbar = document.querySelector('.navbar');
+            const morphingSections = document.querySelectorAll('.morphing-section');
+            
+            let ticking = false;
+            let lastScrollTop = 0;
+
+            // Scroll handler
+            function updateOnScroll() {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                const windowHeight = window.innerHeight;
+
+                // Update progress bar
+                scrollProgress.style.width = scrollPercent + '%';
+
+                // Navbar effects
+                if (scrollTop > 50) {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                    navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                    navbar.style.boxShadow = 'none';
+                }
+
+                // Morphing sections effect
+                // Morphing sections effect
+// Morphing sections effect
+morphingSections.forEach((section) => {
+    const rect = section.getBoundingClientRect();
+    const sectionCenter = rect.top + rect.height / 2;
+    const windowCenter = windowHeight / 2;
+    const distance = Math.abs(sectionCenter - windowCenter);
+    const maxDistance = windowHeight / 2;
+
+    if (rect.top < windowHeight && rect.bottom > 0) {
+        const scale = Math.max(0.85, 1 - (distance / maxDistance) * 0.15);
+        const borderRadius = Math.min(50, (distance / maxDistance) * 50);
+        const opacity = Math.max(0.7, 1 - (distance / maxDistance) * 0.3);
+
+        section.style.transform = `scale(${scale})`;
+        section.style.borderRadius = `${borderRadius}px`;
+        section.style.opacity = opacity;
+
+        // Show content when section is more visible (earlier trigger, later hide)
+        if (rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2) {
+            section.classList.add('active');
+            const sectionText = section.querySelector('.section-text');
+            const sectionImage = section.querySelector('.section-image');
+            if (sectionText) sectionText.classList.add('revealed');
+            if (sectionImage) sectionImage.classList.add('revealed');
+        } else {
+            section.classList.remove('active');
+            const sectionText = section.querySelector('.section-text');
+            const sectionImage = section.querySelector('.section-image');
+            if (sectionText) sectionText.classList.remove('revealed');
+            if (sectionImage) sectionImage.classList.remove('revealed');
+        }
+    }
+});
+
+
+                lastScrollTop = scrollTop;
+                ticking = false;
+            }
+
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(updateOnScroll);
+                    ticking = true;
+                }
+            }
+
+            window.addEventListener('scroll', requestTick);
+
+            // Arrow navigation
+            document.querySelectorAll('.section-arrow').forEach((arrow, index) => {
+                arrow.addEventListener('click', () => {
+                    const nextSection = morphingSections[index + 1];
+                    if (nextSection) {
+                        nextSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
+                });
+            });
+
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
+                });
+            });
+
+            // Initial call
+            updateOnScroll();
+        });
+    </script>
+    <script>
+const AR_URL =
+'https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/ara-qurannastaleeqn.txt';
+
+const EN_URL =
+'https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/eng-aliquliqarai.txt';
+
+
+/* ---------- helpers ---------- */
+
+// turn file into map: "2|255" -> text
+function parseQuranFile(text) {
+  const map = {};
+  const lines = text.split('\n');
+
+  for (const line of lines) {
+    if (!line.trim()) continue;
+
+    const [s, a, t] = line.split('|');
+    map[`${s}|${a}`] = t;
+  }
+  return map;
+}
+
+// deterministic "daily" verse (same for everyone each day)
+function dailyIndex(total) {
+  const today = new Date();
+  const dayNumber = Math.floor(today.getTime() / 86400000);
+  return dayNumber % total;
+}
+
+
+/* ---------- main ---------- */
+
+async function loadDailyQuran() {
+  try {
+    const [arRes, enRes] = await Promise.all([
+      fetch(AR_URL),
+      fetch(EN_URL)
+    ]);
+
+    const arText = await arRes.text();
+    const enText = await enRes.text();
+
+    const arMap = parseQuranFile(arText);
+    const enMap = parseQuranFile(enText);
+
+    const keys = Object.keys(arMap);
+
+    const key = keys[dailyIndex(keys.length)];
+    const [surah, ayah] = key.split('|');
+
+    const arabic = arMap[key];
+    const english = enMap[key];
+
+    document.getElementById('quranArabic').textContent = arabic;
+    document.getElementById('quranEnglish').textContent = `"${english}"`;
+    document.getElementById('quranSource').textContent =
+      `Surah ${surah}, Ayah ${ayah}`;
+
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadDailyQuran);
+</script>
+<script>
+const HADITH_URL =
+'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/allBooks.json';
+
+
+/* ---------- helpers ---------- */
+
+function dailyIndex(total) {
+  const today = new Date();
+  const dayNumber = Math.floor(today.getTime() / 86400000);
+  return dayNumber % total;
+}
+
+function clean(str) {
+  return (str || '').trim();
+}
+
+
+/* ---------- hadith loader ---------- */
+
+async function loadDailyHadith() {
+  try {
+    const res = await fetch(HADITH_URL);
+    const data = await res.json();
+
+    // choose daily
+    const h = data[dailyIndex(data.length)];
+
+    const arabic = clean(h.arabicText);
+
+    const english =
+      clean(h.thaqalaynMatn) ||
+      clean(h.englishText);
+
+    const ref =
+      `${h.book} • Vol ${h.volume} • ${h.category} • ${h.chapterInCategoryId} • #${h.id}`;
+
+    document.getElementById('hadithArabic').textContent = arabic;
+    document.getElementById('hadithEnglish').textContent = `"${english}"`;
+    document.getElementById('hadithSource').textContent = ref;
+
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadDailyHadith);
 </script>
 </body>
 </html>
-
-
-
-
-
