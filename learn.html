@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More - Noor Al Huda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #136f3c;
+            --secondary-green: #1a8049;
+            --accent-gold: #d4af37;
+            --light-gold: #f4e4a6;
+            --dark-navy: #1a202c;
+            --white: #ffffff;
+            --light-gray: #f7fafc;
+            --medium-gray: #e2e8f0;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--light-gray);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--medium-gray);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Header Section */
+        .header {
+            background: 
+            
+                url('karbala.jpg') center/cover;
+            padding: 150px 0 100px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            
+            animation: patternMove 60s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes patternMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-30px) translateY(-30px); }
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: clamp(3rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .content-section:nth-child(1) { animation-delay: 0.1s; }
+        .content-section:nth-child(2) { animation-delay: 0.2s; }
+        .content-section:nth-child(3) { animation-delay: 0.3s; }
+        .content-section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--light-gold));
+            border-radius: 2px;
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+        }
+
+        .section-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-item {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-gold);
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--primary-green);
+            color: white;
+            padding: 80px 0;
+            margin: 4rem 0;
+            border-radius: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: statSlideIn 0.8s ease-out both;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.1s; }
+        .stat-item:nth-child(2) { animation-delay: 0.2s; }
+        .stat-item:nth-child(3) { animation-delay: 0.3s; }
+        .stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes statSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-green) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 20px;
+            margin: 4rem 0;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent-gold), var(--light-gold));
+            color: var(--dark-navy);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-navy);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header {
+                padding: 120px 0 80px;
+            }
+            
+            .main-content {
+                padding: 60px 0;
+            }
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--primary-green));
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index" class="logo">
+                
+                Noor Al Huda
+            </a>
+            <ul class="nav-links">
+                <li><a href="index">Home</a></li>
+                <li><a href="resources">Resources</a></li>
+                <li><a href="learn">Learn More</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="index" class="back-button">← Back to Home</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="header">
+        <div class="header-content">
+            <h1>About Noor Al Huda</h1>
+            <p class="header-subtitle">Discover the comprehensive Islamic knowledge platform designed to illuminate your spiritual journey</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <!-- What is Noor Al Huda -->
+            <div class="content-section">
+                <h2 class="section-title">What is Noor Al Huda?</h2>
+                <div class="section-content">
+                    <p>Noor Al Huda, meaning "Light of Guidance," is a comprehensive digital platform dedicated to providing authentic Islamic knowledge and resources to Muslims worldwide. Our mission is to make Islamic knowledge, Quranic studies, and spiritual guidance accessible to everyone, regardless of their location or background.</p>
+                    <p>Built with modern technology and rooted in traditional Islamic knowledge, we bridge the gap between classical Islamic texts and contemporary digital accessibility. Our platform serves as a beacon of authentic knowledge, carefully curated to ensure accuracy and authenticity in all our resources.</p>
+                </div>
+            </div>
+
+            <!-- Our Mission -->
+            <div class="content-section">
+                <h2 class="section-title">Our Mission</h2>
+                <div class="section-content">
+                    <p>We are committed to preserving and sharing the rich heritage of Islamic knowledge through:</p>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon"></div>
+                            <h3 class="feature-title">All in one Platform</h3>
+                            <p class="feature-description">Providing access to Hadiths, Duas, Quran and more all in one place.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"></div>
+                            <h3 class="feature-title">Global Accessibility</h3>
+                            <p class="feature-description">Making Islamic knowledge available to Shias worldwide, breaking down geographical barriers.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"></div>
+                            <h3 class="feature-title">Educational Excellence</h3>
+                            <p class="feature-description">Offering structured learning paths and comprehensive study materials for all levels.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"></div>
+                            <h3 class="feature-title">User-Friendly experience</h3>
+                            <p class="feature-description">lots of websites are either non-user-friendly or dont have enough content for users.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What We Offer -->
+            <div class="content-section">
+                <h2 class="section-title">What We Offer</h2>
+                <div class="section-content">
+                    <p>Noor Al Huda provides a comprehensive suite of Islamic resources and tools:</p>
+                    
+                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Quranic Studies</h3>
+                    <p>Complete Quran with multiple translations and audio recitations from renowned Qaris.</p>
+                    
+                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Hadith Collections</h3>
+                    <p>Extensive database of authentic hadiths from major collections including Al-Kafi, Man la Yahduruhu al-Faqih, and other trusted Shia sources. Each hadith is carefully verified and includes chain of narration details.</p>
+                    
+                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Duas and Ziyarahs</h3>
+                    <p>Comprehensive collection of daily duas, special occasion prayers, and supplications from the Ahlulbayt tradition, including famous duas like Dua Kumayl, Dua Tawassul, and Ziyarah Ashura.</p>
+                    
+                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Prayer Resources</h3>
+                    <p>Accurate prayer times for locations worldwide, Qibla direction finder, Islamic calendar with important dates.</p>
+                    
+                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">AI-Powered Learning</h3>
+                    <p>With Multiple AI tools to ask questions and understand shia beliefs and practices more deeply.</p>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+
+
+            <!-- Why Choose Us -->
+            <div class="content-section">
+                <h2 class="section-title">Why Choose Noor Al Huda?</h2>
+                <div class="section-content">
+                    <p>Noor Al Huda is built to provide reliable, accessible access to authentic Islamic sources in one place. Our focus is not entertainment or trends, but preserving and presenting knowledge directly from the Qur’an, Ahl al-Bayt (ʿalayhim al-salām), and trusted classical books.</p>
+
+<p>Instead of scattered PDFs or difficult websites, you get structured libraries, searchable hadith collections, translations, and study tools which are designed for serious learning, research, and daily reflection. Everything is organised, so students, teachers, and families can quickly find what they need without distraction.</p>
+
+<p>If you want clarity, authenticity, and a clean space to study Islam properly, Noor Al Huda is made for you. A simple hub for knowledge, remembrance, and growth.</p>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <h2 class="cta-title">Begin Your Journey Today</h2>
+                <p class="cta-description">Join our growing community of learners and discover the wealth of Islamic knowledge waiting for you.</p>
+                <a href="resources" class="cta-button">Explore Our Resources</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Noor Al Huda. All rights reserved. Built with dedication to serve the Muslim community.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-progress').style.width = scrolled + '%';
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out both';
+                }
+            });
+        }, observerOptions);
+
+        // Observe content sections
+        document.querySelectorAll('.content-section, .feature-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
