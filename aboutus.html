@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn More</title>
+    <title>About Us - Noor Al Huda</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
@@ -96,7 +96,6 @@
             color: var(--text-dark);
             font-weight: 500;
             transition: var(--transition);
-            position: relative;
         }
 
         .nav-links a:hover {
@@ -122,7 +121,7 @@
         /* Header Section */
         .header {
             background: 
-            
+              
                 url('karbala.jpg') center/cover;
             padding: 150px 0 100px;
             text-align: center;
@@ -138,7 +137,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            
+           
             animation: patternMove 60s linear infinite;
             opacity: 0.6;
         }
@@ -235,15 +234,15 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Features Grid */
-        .features-grid {
+        /* Journey Cards */
+        .journey-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
 
-        .feature-item {
+        .journey-card {
             background: var(--light-gray);
             padding: 2rem;
             border-radius: 15px;
@@ -251,26 +250,120 @@
             transition: var(--transition);
         }
 
-        .feature-item:hover {
+        .journey-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
         }
 
-        .feature-icon {
+        .journey-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
 
-        .feature-title {
+        .journey-title {
             font-size: 1.3rem;
             font-weight: 600;
             color: var(--primary-green);
             margin-bottom: 1rem;
         }
 
-        .feature-description {
+        .journey-description {
             color: var(--text-light);
             line-height: 1.6;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 4rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 150px;
+            opacity: 0.1;
+            font-family: Georgia, serif;
+        }
+
+        .quote-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            line-height: 1.8;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Credits Section */
+        .credits-section {
+            background: var(--light-gray);
+            padding: 4rem;
+            border-radius: 20px;
+            margin: 4rem 0;
+        }
+
+        .credits-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .credits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .credit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .credit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .credit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .credit-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .credit-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .credit-link {
+            color: var(--accent-gold);
+            font-weight: 500;
+            font-size: 0.9rem;
         }
 
         /* Stats Section */
@@ -289,28 +382,6 @@
             text-align: center;
         }
 
-        .stat-item {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: statSlideIn 0.8s ease-out both;
-        }
-
-        .stat-item:nth-child(1) { animation-delay: 0.1s; }
-        .stat-item:nth-child(2) { animation-delay: 0.2s; }
-        .stat-item:nth-child(3) { animation-delay: 0.3s; }
-        .stat-item:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes statSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .stat-number {
             font-size: 3rem;
             font-weight: 800;
@@ -322,49 +393,6 @@
         .stat-label {
             font-size: 1.1rem;
             opacity: 0.9;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--primary-green) 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-            border-radius: 20px;
-            margin: 4rem 0;
-        }
-
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-description {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, var(--accent-gold), var(--light-gold));
-            color: var(--dark-navy);
-            padding: 16px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: var(--transition);
-            box-shadow: var(--shadow-lg);
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-xl);
         }
 
         /* Footer */
@@ -385,7 +413,8 @@
                 display: none;
             }
             
-            .features-grid {
+            .journey-grid,
+            .credits-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -393,12 +422,12 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .header {
-                padding: 120px 0 80px;
+            .quote-section {
+                padding: 2rem;
             }
             
-            .main-content {
-                padding: 60px 0;
+            .quote-text {
+                font-size: 1.2rem;
             }
         }
 
@@ -414,7 +443,6 @@
             transition: width 0.1s ease;
         }
 
-        /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
         }
@@ -427,7 +455,7 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index" class="logo">
+            <a href="index.html" class="logo">
                 
                 Noor Al Huda
             </a>
@@ -435,7 +463,7 @@
                 <li><a href="index">Home</a></li>
                 <li><a href="resources">Resources</a></li>
                 <li><a href="learn">Learn More</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="contact">Contact</a></li>
                 <li><a href="index" class="back-button">← Back to Home</a></li>
             </ul>
         </div>
@@ -444,96 +472,134 @@
     <!-- Header Section -->
     <section class="header">
         <div class="header-content">
-            <h1>About Noor Al Huda</h1>
-            <p class="header-subtitle">Discover the comprehensive Islamic knowledge platform designed to illuminate your spiritual journey</p>
+            <h1>About the Creator</h1>
+            <p class="header-subtitle">A solo journey of passion, learning, and dedication to Islamic knowledge</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <section class="main-content">
         <div class="container">
-            <!-- What is Noor Al Huda -->
+            <!-- My Story -->
             <div class="content-section">
-                <h2 class="section-title">What is Noor Al Huda?</h2>
+                <h2 class="section-title">My Journey</h2>
                 <div class="section-content">
-                    <p>Noor Al Huda, meaning "Light of Guidance," is a comprehensive digital platform dedicated to providing authentic Islamic knowledge and resources to Muslims worldwide. Our mission is to make Islamic knowledge, Quranic studies, and spiritual guidance accessible to everyone, regardless of their location or background.</p>
-                    <p>Built with modern technology and rooted in traditional Islamic knowledge, we bridge the gap between classical Islamic texts and contemporary digital accessibility. Our platform serves as a beacon of authentic knowledge, carefully curated to ensure accuracy and authenticity in all our resources.</p>
+                    <p>
+                        Assalamu Alaikum! I'm the sole creator behind Noor Al Huda, and this platform is the result of a personal journey that began with a simple desire: to make authentic Islamic knowledge accessible to everyone, everywhere.
+                    </p>
+                    <p>
+                        With no formal background in web development, I embarked on a self-taught journey to learn HTML, CSS, and JavaScript. What started as curiosity turned into a passion project that would eventually become Noor Al Huda. Every line of code, every design decision, and every feature you see on this platform was crafted by hand, driven by the vision of creating something meaningful for the Shia community.
+                    </p>
+                    <p>
+                        This project represents countless hours of learning, experimenting, and refining. From understanding the basics of web development to implementing complex features, each step was a learning experience that brought me closer to realizing this vision.
+                    </p>
                 </div>
             </div>
 
-            <!-- Our Mission -->
+            <!-- Learning Journey -->
             <div class="content-section">
-                <h2 class="section-title">Our Mission</h2>
-                <div class="section-content">
-                    <p>We are committed to preserving and sharing the rich heritage of Islamic knowledge through:</p>
-                    <div class="features-grid">
-                        <div class="feature-item">
-                            <div class="feature-icon"></div>
-                            <h3 class="feature-title">All in one Platform</h3>
-                            <p class="feature-description">Providing access to Hadiths, Duas, Quran and more all in one place.</p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"></div>
-                            <h3 class="feature-title">Global Accessibility</h3>
-                            <p class="feature-description">Making Islamic knowledge available to Shias worldwide, breaking down geographical barriers.</p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"></div>
-                            <h3 class="feature-title">Educational Excellence</h3>
-                            <p class="feature-description">Offering structured learning paths and comprehensive study materials for all levels.</p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"></div>
-                            <h3 class="feature-title">User-Friendly experience</h3>
-                            <p class="feature-description">lots of websites are either non-user-friendly or dont have enough content for users.</p>
-                        </div>
+                <h2 class="section-title">The Learning Path</h2>
+                <div class="journey-grid">
+                    <div class="journey-card">
+                        <div class="journey-icon"></div>
+                        <h3 class="journey-title">Self-Taught Developer</h3>
+                        <p class="journey-description">
+                            Started from scratch, learning HTML, CSS, and JavaScript through online resources, documentation, and countless hours of practice. Every error was a lesson, every success a milestone.
+                        </p>
                     </div>
+
+                    <div class="journey-card">
+                        <div class="journey-icon"></div>
+                        <h3 class="journey-title">First Deployment - Netlify</h3>
+                        <p class="journey-description">
+                            Initially deployed the website on Netlify, learning about continuous deployment, custom domains, and web hosting. This was my first taste of seeing my work live on the internet.
+                        </p>
+                    </div>
+
+                    <div class="journey-card">
+                        <div class="journey-icon"></div>
+                        <h3 class="journey-title">Migration to GitHub</h3>
+                        <p class="journey-description">
+                            Transitioned to GitHub Pages for better version control, collaboration potential, and integration with the developer community. Learned Git, version control, and modern development workflows.
+                        </p>
+                    </div>
+
+                    <div class="journey-card">
+                        <div class="journey-icon"></div>
+                        <h3 class="journey-title">Design & UX</h3>
+                        <p class="journey-description">
+                            Taught myself design principles, user experience, and accessibility standards to ensure the platform is not just functional, but beautiful and easy to use for everyone.
+                        </p>
+                    </div>
+
+
                 </div>
             </div>
 
-            <!-- What We Offer -->
-            <div class="content-section">
-                <h2 class="section-title">What We Offer</h2>
-                <div class="section-content">
-                    <p>Noor Al Huda provides a comprehensive suite of Islamic resources and tools:</p>
-                    
-                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Quranic Studies</h3>
-                    <p>Complete Quran with multiple translations and audio recitations from renowned Qaris.</p>
-                    
-                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Hadith Collections</h3>
-                    <p>Extensive database of authentic hadiths from major collections including Al-Kafi, Man la Yahduruhu al-Faqih, and other trusted Shia sources. Each hadith is carefully verified and includes chain of narration details.</p>
-                    
-                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Duas and Ziyarahs</h3>
-                    <p>Comprehensive collection of daily duas, special occasion prayers, and supplications from the Ahlulbayt tradition, including famous duas like Dua Kumayl, Dua Tawassul, and Ziyarah Ashura.</p>
-                    
-                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Prayer Resources</h3>
-                    <p>Accurate prayer times for locations worldwide, Qibla direction finder, Islamic calendar with important dates.</p>
-                    
-                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">AI-Powered Learning</h3>
-                    <p>With Multiple AI tools to ask questions and understand shia beliefs and practices more deeply.</p>
-                </div>
+            <!-- Quote Section -->
+            <div class="quote-section">
+                <p class="quote-text">
+                    "This project is more than just a website, it's a labor of love, a commitment to serving the Shia community, and a testament to what one person can achieve with dedication, faith, and the right tools."
+                </p>
             </div>
 
             <!-- Statistics -->
 
 
-            <!-- Why Choose Us -->
-            <div class="content-section">
-                <h2 class="section-title">Why Choose Noor Al Huda?</h2>
-                <div class="section-content">
-                    <p>Noor Al Huda is built to provide reliable, accessible access to authentic Islamic sources in one place. Our focus is not entertainment or trends, but preserving and presenting knowledge directly from the Qur’an, Ahl al-Bayt (ʿalayhim al-salām), and trusted classical books.</p>
+            <!-- Credits Section -->
+            <div class="credits-section">
+                <h2 class="credits-title">Special Thanks & Resources</h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">
+                    This project wouldn't have been possible without these amazing resources and platforms
+                </p>
+                
+                <div class="credits-grid">
+                    <a href="https://www.duas.org" target="_blank" class="credit-card">
+                        <div class="credit-icon"></div>
+                        <h3 class="credit-name">Duas.org</h3>
+                        <p class="credit-description">A valuable resource for Duas and Ziyarahs, I used it for all the Duas and Ziyarahs in this project</p>
+                        <span class="credit-link">duas.org →</span>
+                    </a>
 
-<p>Instead of scattered PDFs or difficult websites, you get structured libraries, searchable hadith collections, translations, and study tools which are designed for serious learning, research, and daily reflection. Everything is organised, so students, teachers, and families can quickly find what they need without distraction.</p>
+                    <a href="https://thaqalayn.net" target="_blank" class="credit-card">
+                        <div class="credit-icon"></div>
+                        <h3 class="credit-name">Thaqalayn</h3>
+                        <p class="credit-description">A valuable resource for Hadiths, which most of the books so far are originally from.</p>
+                        <span class="credit-link">thaqalayn.net →</span>
+                    </a>
 
-<p>If you want clarity, authenticity, and a clean space to study Islam properly, Noor Al Huda is made for you. A simple hub for knowledge, remembrance, and growth.</p>
+                    <a href="https://github.com/MohammedArab1/ThaqalaynAPI" target="_blank" class="credit-card">
+                        <div class="credit-icon"></div>
+                        <h3 class="credit-name">Thaqalayn API</h3>
+                        <p class="credit-description">An API for accessing Thaqalayn's Hadiths and other Islamic resources</p>
+                        <span class="credit-link">MuhammadArab1.github.io →</span>
+                    </a>
+
+                    <a href="https://github.com/fawazahmed0/quran-api/tree/1" target="_blank" class="credit-card">
+                        <div class="credit-icon"></div>
+                        <h3 class="credit-name">Fawazahmed0's Quran API</h3>
+                        <p class="credit-description">Used for the Daily Quran ayah and the Quranic verses in this project as well as translations.</p>
+                        <span class="credit-link">fawazahmed0.github.io →</span>
+                    </a>
+
+
                 </div>
             </div>
 
-            <!-- Call to Action -->
-            <div class="cta-section">
-                <h2 class="cta-title">Begin Your Journey Today</h2>
-                <p class="cta-description">Join our growing community of learners and discover the wealth of Islamic knowledge waiting for you.</p>
-                <a href="resources" class="cta-button">Explore Our Resources</a>
+            <!-- Final Message -->
+            <div class="content-section">
+                <h2 class="section-title">Looking Forward</h2>
+                <div class="section-content">
+                    <p>
+                        Noor Al Huda is a continuous work in progress. As I continue to learn and grow as a developer, the platform will evolve with new features, improved performance, and expanded content. This is just the beginning of a journey to serve the Shia community with authentic, accessible Islamic knowledge.
+                    </p>
+                    <p>
+                        If you have suggestions, feedback, or would like to contribute to this project, please don't hesitate to reach out. Together, we can make Noor Al Huda an even better resource for Shias worldwide.
+                    </p>
+                    <p style="font-weight: 600; color: var(--primary-green); font-size: 1.2rem; margin-top: 2rem;">
+                        JazakAllah Khair for being part of this journey!
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -541,7 +607,8 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Noor Al Huda. All rights reserved. Built with dedication to serve the Muslim community.</p>
+            <p>&copy; 2024 Noor Al Huda. All rights reserved. Illuminating the path to Islamic knowledge and spiritual growth through authentic resources</p>
+     
         </div>
     </footer>
 
@@ -578,8 +645,7 @@
             });
         }, observerOptions);
 
-        // Observe content sections
-        document.querySelectorAll('.content-section, .feature-item').forEach(el => {
+        document.querySelectorAll('.content-section, .journey-card, .credit-card').forEach(el => {
             observer.observe(el);
         });
     </script>
