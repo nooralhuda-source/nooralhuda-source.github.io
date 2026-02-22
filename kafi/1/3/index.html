@@ -7,9 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Parastoo:wght@400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
+ <style>
+             :root {
             --primary-green: #136f3c;
             --secondary-green: #1a8049;
             --accent-gold: #d4af37;
@@ -166,7 +165,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
         }
 
         #bismillahWrap {
@@ -192,7 +191,7 @@
             background: white;
             border-radius: 20px;
             border: 1px solid var(--medium-gray);
-            padding: 2rem;
+            padding: 1rem;
             box-shadow: var(--shadow-md);
             transition: var(--transition);
             position: relative;
@@ -240,7 +239,7 @@
 
         .hadith-context {
             font-family: 'Merriweather', serif;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 300;
             font-style: italic;
             color: var(--text-light);
@@ -249,7 +248,7 @@
 
         .hadith-en {
             font-family: 'Merriweather', serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 1.75;
             color: var(--text-dark);
             margin-bottom: 1rem;
@@ -261,7 +260,7 @@
             font-size: clamp(18px, 4vw, 24px);
             line-height: 1.7;
             text-align: right;
-            font-size : 2rem;
+            font-size : 1.7rem;
         }
 
         .hadith-ar.sanad {
@@ -513,12 +512,12 @@
 
             .hadith-body {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 0rem;
             }
 
             /* Arabic on top for mobile */
             .hadith-body .hadith-col:last-child {
-                order: -1;
+                order: 1;
             }
 
             .modal-grid {
@@ -535,6 +534,18 @@
                 padding: 100px 0 40px;
             }
         }
+        @media (max-width: 1100px) {
+                 .hadith-body .hadith-col:last-child {
+                order: -1;
+            }
+            .modal-grid > div:last-child {
+                order: -1;
+            }
+            .hadith-body {
+                grid-template-columns: 1fr;
+                gap: 0rem;
+            }
+        } 
 
         /* Desktop layout */
         @media (min-width: 769px) {
@@ -1909,4 +1920,5 @@ loadHadiths().then(() => openHadithFromQuery());
     </script>
 </body>
 </html>
+
 
