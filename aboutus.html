@@ -446,6 +446,159 @@
         html {
             scroll-behavior: smooth;
         }
+        /* NAVBAR BASE */
+.navbar{
+  background:white;
+  position:relative;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+
+/* top row only */
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 1.5rem;
+}
+
+/* logo */
+
+
+/* hamburger */
+.hamburger{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: #136f3c;
+}
+
+/* LINKS (desktop) */
+.nav-links{
+  display:flex;
+  gap:2.5rem;            /* ← bigger gap like you asked */
+  padding:0 2rem 1rem 2rem; /* ← space on right edge */
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;          /* ← full device width */
+    padding:1rem 1.5rem;
+    gap:1.2rem;
+    border-top:1px solid #eee;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+}
+/* ===== DESKTOP LAYOUT ===== */
+.navbar{
+  background:white;
+  border-bottom:1px solid #eee;
+}
+
+/* make navbar behave like one row on desktop */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .nav-container{
+    padding:1rem 1.5rem;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2.5rem;
+    padding-right:2rem; /* bigger right gap like you wanted */
+  }
+}
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+/* this is the important fix */
+.nav-container,
+.nav-links{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 24px;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-container{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+  }
+
+  .hamburger{
+    display:none;
+    color: #136f3c;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+}
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff; /* important so content doesn’t show through */
+}
+.hamburger{
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* when open */
+.hamburger.active{
+  font-size: 28px;
+}
     </style>
 </head>
 <body>
@@ -453,21 +606,21 @@
     <div class="scroll-progress"></div>
 
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                
-                Noor Al Huda
-            </a>
-            <ul class="nav-links">
-                <li><a href="index">Home</a></li>
-                <li><a href="resources">Resources</a></li>
-                <li><a href="learn">Learn More</a></li>
-                <li><a href="contact">Contact</a></li>
-                <li><a href="index" class="back-button">← Back to Home</a></li>
-            </ul>
-        </div>
-    </nav>
+<nav class="navbar">
+
+  <div class="nav-container">
+    <a href="index" class="logo">Noor Al Huda</a>
+    <button class="hamburger" id="hamburger">☰</button>
+
+</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index">Home</a></li>
+    <li><a href="resources">Resources</a></li>
+    <li><a href="learn">Learn More</a></li>
+    <li><a href="aboutus">About Us</a></li>
+  </ul>
+
+</nav>
 
     <!-- Header Section -->
     <section class="header">
@@ -613,6 +766,35 @@
     </footer>
 
     <script>
+                const burger = document.getElementById('hamburger');
+const nav = document.getElementById('navLinks');
+
+burger.addEventListener('click', (e) => {
+  e.stopPropagation(); // prevent immediate close
+  nav.classList.toggle('active');
+  burger.classList.toggle('active');
+
+  // change icon
+  burger.textContent = nav.classList.contains('active') ? '✕' : '☰';
+});
+
+// click anywhere outside closes menu
+document.addEventListener('click', (e) => {
+  if (!nav.contains(e.target) && !burger.contains(e.target)) {
+    nav.classList.remove('active');
+    burger.classList.remove('active');
+    burger.textContent = '☰';
+  }
+});
+
+// optional: close after clicking a link
+nav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    nav.classList.remove('active');
+    burger.classList.remove('active');
+    burger.textContent = '☰';
+  });
+});
         // Scroll Progress Bar
         window.addEventListener('scroll', () => {
             const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
