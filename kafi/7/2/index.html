@@ -394,7 +394,7 @@
             overflow: auto;
             background: white;
             border-radius: 20px;
-            padding: 2rem;
+            padding: 1rem;
             box-shadow: var(--shadow-xl);
         }
 
@@ -403,7 +403,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
             align-items: start;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
         }
 
         .modal-ar {
@@ -483,8 +483,8 @@
         .saved-row {
             display: flex;
             justify-content: space-between;
-            gap: 1rem;
-            padding: 1rem 0;
+            gap: 0.2rem;
+            padding: 0.2rem 0;
             border-bottom: 1px solid var(--medium-gray);
         }
 
@@ -737,6 +737,177 @@
 .hamburger.active{
   font-size: 28px;
 }
+/* Saved List - Improved for Mobile/Tablet */
+.saved-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.saved-row:last-child {
+  border-bottom: none;
+}
+
+/* Prevent text overflow in notes */
+.saved-row .note-text {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  white-space: normal;
+}
+
+/* Mobile/Tablet optimizations */
+@media (max-width: 1024px) {
+  .saved-row {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 0;
+  }
+
+  /* Make buttons horizontal and compact */
+  .saved-row > div:last-child {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .saved-row .btn-3d {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    flex: 1;
+    min-width: fit-content;
+  }
+
+  /* Limit note display length */
+  .saved-row .note-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 4.5em;
+    line-height: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even more compact on phones */
+  .saved-row .btn-3d {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .saved-row {
+    padding: 1rem 0;
+  }
+
+  /* Limit note to 2 lines on very small screens */
+  .saved-row .note-text {
+    -webkit-line-clamp: 2;
+    max-height: 3em;
+  }
+}
+
+/* Saved modal improvements */
+@media (max-width: 768px) {
+  #savedPopup {
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  #savedList {
+    max-height: calc(85vh - 120px);
+    overflow-y: auto;
+  }
+}
+/* Saved List - Improved for Mobile/Tablet */
+.saved-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.saved-row:last-child {
+  border-bottom: none;
+}
+
+/* Prevent text overflow in notes */
+.saved-row .note-text {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  white-space: normal;
+}
+
+/* Mobile/Tablet optimizations */
+@media (max-width: 1024px) {
+  .saved-row {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 0;
+  }
+
+  /* Make buttons horizontal and compact */
+  .saved-row > div:last-child {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .saved-row .btn-3d {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    flex: 1;
+    min-width: fit-content;
+  }
+
+  /* Limit note display length */
+  .saved-row .note-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 4.5em;
+    line-height: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even more compact on phones */
+  .saved-row .btn-3d {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .saved-row {
+    padding: 1rem 0;
+  }
+
+  /* Limit note to 2 lines on very small screens */
+  .saved-row .note-text {
+    -webkit-line-clamp: 2;
+    max-height: 3em;
+  }
+}
+
+/* Single scroll wheel - only modal scrolls when needed */
+#savedPopup {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+#savedList {
+  overflow: visible;
+  max-height: none;
+}
+
     </style>
 </head>
 <body>
@@ -890,7 +1061,7 @@ nav.querySelectorAll('a').forEach(link => {
         /* -------------------------
    Configuration & Storage
    ------------------------- */
-const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/7.json'; // Local file
+const API_URL = 'https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/6.json'; // Local file
 const FILTER_VOLUME = 7;
 const FILTER_CATEGORY_ID = 2;
 
@@ -1664,13 +1835,15 @@ const SPECIAL_VOLUME_SLUGS = ['kafi', 'faqih', 'uyun'];
 const volPart = SPECIAL_VOLUME_SLUGS.includes(slug) ? `V${item.volume}, ` : '';
 
 // Exact formatting: V1, 3, 2, #33
+// Replace the note display part in populateSavedList with this:
 left.innerHTML = `
   <strong>${item.book}</strong><br>
   ${volPart}${item.categoryId}, ${item.chapterInCategoryId}, #${item.id}
-  <div style="margin-top:4px; font-size: 1.1rem; color: var(--muted);">
+  <div class="note-text" style="margin-top:4px; font-size: 1.1rem; color: var(--muted);">
     ${escapeHtml(notes[item.id] || item.note || '(no note)')}
   </div>
 `;
+
 
     const right = el('div', { style:'display:flex;gap:6px' });
 
