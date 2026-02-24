@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Noor Al Huda — Qur'an</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Parastoo:wght@400..700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary-green: #136f3c;
+  --secondary-green: #1a8049;
+  --accent-gold: #d4af37;
+  --light-gold: #f4e4a6;
+  --dark-navy: #1a202c;
+  --white: #ffffff;
+  --light-gray: #f7fafc;
+  --medium-gray: #e2e8f0;
+  --text-dark: #2d3748;
+  --text-light: #718096;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  background: var(--light-gray);
+}
+
+/* Navigation */
+.navbar {
+  position: sticky;
+  top: 0;
+  background: white;
+  border-bottom: 1px solid #eee;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-green);
+  text-decoration: none;
+}
+
+.hamburger {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #136f3c;
+}
+
+.hamburger.active {
+  font-size: 28px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  padding: 0 2rem 0 0;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--primary-green);
+}
+
+/* Page Header */
+.page-header {
+  background: 
+    linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),
+    url('https://nooralhuda.co.uk/karbala.jpg') center/cover;
+  padding: 100px 0 60px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: patternMove 60s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes patternMove {
+  0% { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(-30px) translateY(-30px); }
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.page-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.page-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  opacity: 0.9;
+}
+
+/* Main Content */
+.page {
+  padding: 60px 0;
+  background: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Toggle Buttons */
+.view-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.toggle-btn {
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  border: 2px solid var(--medium-gray);
+  background: white;
+  color: var(--text-dark);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.toggle-btn:hover {
+  border-color: var(--primary-green);
+  color: var(--primary-green);
+}
+
+.toggle-btn.active {
+  background: var(--primary-green);
+  color: white;
+  border-color: var(--primary-green);
+}
+
+/* Search Bar */
+.search-wrapper {
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  border: 2px solid var(--medium-gray);
+  border-radius: 50px;
+  outline: none;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.search-input:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 4px rgba(19, 111, 60, 0.1);
+}
+
+/* Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.content-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid var(--medium-gray);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.content-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-green), var(--accent-gold));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.content-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-green);
+}
+
+.content-card:hover::before {
+  transform: scaleX(1);
+}
+
+.content-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: 0.5rem;
+  font-family: 'Amiri', serif;
+}
+
+.content-card p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    gap: 1.2rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .nav-links.active {
+    display: flex;
+  }
+
+  .page-header {
+    padding: 60px 0 40px;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .view-toggle {
+    flex-wrap: wrap;
+  }
+
+  .toggle-btn {
+    flex: 1;
+    min-width: 120px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--primary-green));
+  z-index: 1001;
+  transition: width 0.1s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+footer {
+  margin-top: 4rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  border-top: 1px solid var(--medium-gray);
+  background: white;
+}
+
+/* Dark mode */
+body.dark-mode {
+  --bg: #0f172a;
+  --text: #f9fafb;
+  --muted: #94a3b8;
+  --card: #1e293b;
+  --border: #334155;
+}
+ .navbar{
+  background:white;
+  position:relative;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+
+/* top row only */
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:3rem 2rem;
+}
+
+/* logo */
+
+
+/* hamburger */
+.hamburger{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: #136f3c;
+}
+
+/* LINKS (desktop) */
+.nav-links{
+  display:flex;
+  gap:2.5rem;            /* ← bigger gap like you asked */
+  padding: 2rem 2rem 2rem 2rem; /* ← space on right edge */
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;          /* ← full device width */
+    padding:1rem 1.5rem;
+    gap:1.2rem;
+    border-top:1px solid #eee;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+}
+/* ===== DESKTOP LAYOUT ===== */
+.navbar{
+  background:white;
+  border-bottom:1px solid #eee;
+}
+
+/* make navbar behave like one row on desktop */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .nav-container{
+    padding:1rem 1.5rem;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2.5rem;
+    padding-right:2rem; /* bigger right gap like you wanted */
+  }
+}
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+/* this is the important fix */
+.nav-container,
+.nav-links{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 24px;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-container{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+
+  .hamburger{
+    display:none;
+    color: #136f3c;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+}
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff; /* important so content doesn’t show through */
+}
+.hamburger{
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* when open */
+.hamburger.active{
+  font-size: 28px;
+}
+        .footer {
+            background: var(--dark-navy);
+            color: white;
+            padding: 30px 0 30px;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+        
+</style>
+</head>
+<body>
+<!-- Scroll Progress Bar -->
+<div class="scroll-progress"></div>
+
+<!-- Navigation -->
+<nav class="navbar">
+
+  <div class="nav-container">
+    <a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+    <button class="hamburger" id="hamburger">☰</button>
+
+</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="https://nooralhuda.co.uk/">Home</a></li>
+    <li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+    <li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+    <li><a href="https://nooralhuda.co.uk/aboutus">About Us</a></li>
+  </ul>
+
+</nav>
+
+<!-- Page Header -->
+<section class="page-header">
+  <div class="header-content">
+    <h1 class="page-title" id="pageTitle">Select a Surah</h1>
+    <p class="page-subtitle">Read the Holy Quran</p>
+  </div>
+</section>
+
+<!-- Main Content -->
+<main class="page">
+  <div class="container">
+    <!-- View Toggle -->
+    <div class="view-toggle">
+      <button class="toggle-btn active" id="surahBtn">Surah</button>
+      <button class="toggle-btn" id="juzBtn">Juz</button>
+    </div>
+
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search...">
+    </div>
+    
+    <div class="content-grid" id="contentGrid"></div>
+  </div>
+</main>
+
+  <footer class="footer">
+    © 2025 Noor Al Huda. All rights reserved. Illuminating the path to Islamic knowledge and spiritual growth through authentic resources
+  </footer>
+
+<script>
+// Scroll Progress Bar
+window.addEventListener('scroll', () => {
+  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  document.querySelector('.scroll-progress').style.width = scrolled + '%';
+});
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 100) {
+    navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+  } else {
+    navbar.style.boxShadow = 'none';
+  }
+});
+
+// Hamburger Menu
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+if (hamburger) {
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+    hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+      navLinks.classList.remove('active');
+      hamburger.classList.remove('active');
+      hamburger.textContent = '☰';
+    }
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      hamburger.classList.remove('active');
+      hamburger.textContent = '☰';
+    });
+  });
+}
+
+// Surah Data
+const surahs = [
+  { number: 1, trans: "Al-Fatiha", ar: "الفاتحة", en: "The Opening" },
+  { number: 2, trans: "Al-Baqarah", ar: "البقرة", en: "The Cow" },
+  { number: 3, trans: "Aal-E-Imran", ar: "آل عمران", en: "Family of Imran" },
+  { number: 4, trans: "An-Nisa", ar: "النساء", en: "The Women" },
+  { number: 5, trans: "Al-Ma'idah", ar: "المائدة", en: "The Table Spread" },
+  { number: 6, trans: "Al-An'am", ar: "الأنعام", en: "The Cattle" },
+  { number: 7, trans: "Al-A'raf", ar: "الأعراف", en: "The Heights" },
+  { number: 8, trans: "Al-Anfal", ar: "الأنفال", en: "The Spoils of War" },
+  { number: 9, trans: "At-Tawbah", ar: "التوبة", en: "The Repentance" },
+  { number: 10, trans: "Yunus", ar: "يونس", en: "Jonah" },
+  { number: 11, trans: "Hud", ar: "هود", en: "Hud" },
+  { number: 12, trans: "Yusuf", ar: "يوسف", en: "Joseph" },
+  { number: 13, trans: "Ar-Ra'd", ar: "الرعد", en: "The Thunder" },
+  { number: 14, trans: "Ibrahim", ar: "ابراهيم", en: "Abraham" },
+  { number: 15, trans: "Al-Hijr", ar: "الحجر", en: "The Rocky Tract" },
+  { number: 16, trans: "An-Nahl", ar: "النحل", en: "The Bee" },
+  { number: 17, trans: "Al-Isra", ar: "الإسراء", en: "The Night Journey" },
+  { number: 18, trans: "Al-Kahf", ar: "الكهف", en: "The Cave" },
+  { number: 19, trans: "Maryam", ar: "مريم", en: "Mary" },
+  { number: 20, trans: "Ta-Ha", ar: "طه", en: "Ta-Ha" },
+  { number: 21, trans: "Al-Anbiya", ar: "الأنبياء", en: "The Prophets" },
+  { number: 22, trans: "Al-Hajj", ar: "الحج", en: "The Pilgrimage" },
+  { number: 23, trans: "Al-Mu'minun", ar: "المؤمنون", en: "The Believers" },
+  { number: 24, trans: "An-Nur", ar: "النور", en: "The Light" },
+  { number: 25, trans: "Al-Furqan", ar: "الفرقان", en: "The Criterion" },
+  { number: 26, trans: "Ash-Shu'ara", ar: "الشعراء", en: "The Poets" },
+  { number: 27, trans: "An-Naml", ar: "النمل", en: "The Ant" },
+  { number: 28, trans: "Al-Qasas", ar: "القصص", en: "The Stories" },
+  { number: 29, trans: "Al-Ankabut", ar: "العنكبوت", en: "The Spider" },
+  { number: 30, trans: "Ar-Rum", ar: "الروم", en: "The Romans" },
+  { number: 31, trans: "Luqman", ar: "لقمان", en: "Luqman" },
+  { number: 32, trans: "As-Sajda", ar: "السجدة", en: "The Prostration" },
+  { number: 33, trans: "Al-Ahzab", ar: "الأحزاب", en: "The Combined Forces" },
+  { number: 34, trans: "Saba", ar: "سبأ", en: "Sheba" },
+  { number: 35, trans: "Fatir", ar: "فاطر", en: "The Originator" },
+  { number: 36, trans: "Ya-Sin", ar: "يس", en: "Ya-Sin" },
+  { number: 37, trans: "As-Saffat", ar: "الصافات", en: "Those who set the Ranks" },
+  { number: 38, trans: "Sad", ar: "ص", en: "The Letter Sad" },
+  { number: 39, trans: "Az-Zumar", ar: "الزمر", en: "The Troops" },
+  { number: 40, trans: "Ghafir", ar: "غافر", en: "The Forgiver" },
+  { number: 41, trans: "Fussilat", ar: "فصلت", en: "Explained in Detail" },
+  { number: 42, trans: "Ash-Shura", ar: "الشورى", en: "The Consultation" },
+  { number: 43, trans: "Az-Zukhruf", ar: "الزخرف", en: "The Ornaments of Gold" },
+  { number: 44, trans: "Ad-Dukhan", ar: "الدخان", en: "The Smoke" },
+  { number: 45, trans: "Al-Jathiya", ar: "الجاثية", en: "The Crouching" },
+  { number: 46, trans: "Al-Ahqaf", ar: "الأحقاف", en: "The Wind-Curved Sandhills" },
+  { number: 47, trans: "Muhammad", ar: "محمد", en: "Muhammad" },
+  { number: 48, trans: "Al-Fath", ar: "الفتح", en: "The Victory" },
+  { number: 49, trans: "Al-Hujurat", ar: "الحجرات", en: "The Dwellings" },
+  { number: 50, trans: "Qaf", ar: "ق", en: "The Letter Qaf" },
+  { number: 51, trans: "Adh-Dhariyat", ar: "الذاريات", en: "The Winnowing Winds" },
+  { number: 52, trans: "At-Tur", ar: "الطور", en: "The Mount" },
+  { number: 53, trans: "An-Najm", ar: "النجم", en: "The Star" },
+  { number: 54, trans: "Al-Qamar", ar: "القمر", en: "The Moon" },
+  { number: 55, trans: "Ar-Rahman", ar: "الرحمن", en: "The Beneficent" },
+  { number: 56, trans: "Al-Waqi'a", ar: "الواقعة", en: "The Inevitable" },
+  { number: 57, trans: "Al-Hadid", ar: "الحديد", en: "The Iron" },
+  { number: 58, trans: "Al-Mujadila", ar: "المجادلة", en: "The Pleading Woman" },
+  { number: 59, trans: "Al-Hashr", ar: "الحشر", en: "The Exile" },
+  { number: 60, trans: "Al-Mumtahina", ar: "الممتحنة", en: "She that is to be examined" },
+  { number: 61, trans: "As-Saff", ar: "الصف", en: "The Ranks" },
+  { number: 62, trans: "Al-Jumu'a", ar: "الجمعة", en: "The Congregation, Friday" },
+  { number: 63, trans: "Al-Munafiqun", ar: "المنافقون", en: "The Hypocrites" },
+  { number: 64, trans: "At-Taghabun", ar: "التغابن", en: "The Mutual Disillusion" },
+  { number: 65, trans: "At-Talaq", ar: "الطلاق", en: "The Divorce" },
+  { number: 66, trans: "At-Tahrim", ar: "التحريم", en: "The Prohibition" },
+  { number: 67, trans: "Al-Mulk", ar: "الملك", en: "The Sovereignty" },
+  { number: 68, trans: "Al-Qalam", ar: "القلم", en: "The Pen" },
+  { number: 69, trans: "Al-Haaqqa", ar: "الحاقة", en: "The Reality" },
+  { number: 70, trans: "Al-Ma'arij", ar: "المعارج", en: "The Ascending Stairways" },
+  { number: 71, trans: "Nuh", ar: "نوح", en: "Noah" },
+  { number: 72, trans: "Al-Jinn", ar: "الجن", en: "The Jinn" },
+  { number: 73, trans: "Al-Muzzammil", ar: "المزمل", en: "The Enshrouded One" },
+  { number: 74, trans: "Al-Muddathir", ar: "المدثر", en: "The Cloaked One" },
+  { number: 75, trans: "Al-Qiyama", ar: "القيامة", en: "The Resurrection" },
+  { number: 76, trans: "Al-Insan", ar: "الانسان", en: "The Man" },
+  { number: 77, trans: "Al-Mursalat", ar: "المرسلات", en: "The Emissaries" },
+  { number: 78, trans: "An-Naba", ar: "النبأ", en: "The Tidings" },
+  { number: 79, trans: "An-Nazi'at", ar: "النازعات", en: "Those who drag forth" },
+  { number: 80, trans: "Abasa", ar: "عبس", en: "He Frowned" },
+  { number: 81, trans: "At-Takwir", ar: "التكوير", en: "The Overthrowing" },
+  { number: 82, trans: "Al-Infitar", ar: "الإنفطار", en: "The Cleaving" },
+  { number: 83, trans: "Al-Mutaffifin", ar: "المطففين", en: "The Defrauding" },
+  { number: 84, trans: "Al-Inshiqaq", ar: "الإنشقاق", en: "The Sundering" },
+  { number: 85, trans: "Al-Burooj", ar: "البروج", en: "The Mansions of the Stars" },
+  { number: 86, trans: "At-Tariq", ar: "الطارق", en: "The Nightcomer" },
+  { number: 87, trans: "Al-A'la", ar: "الأعلى", en: "The Most High" },
+  { number: 88, trans: "Al-Ghashiya", ar: "الغاشية", en: "The Overwhelming" },
+  { number: 89, trans: "Al-Fajr", ar: "الفجر", en: "The Dawn" },
+  { number: 90, trans: "Al-Balad", ar: "البلد", en: "The City" },
+  { number: 91, trans: "Ash-Shams", ar: "الشمس", en: "The Sun" },
+  { number: 92, trans: "Al-Layl", ar: "الليل", en: "The Night" },
+  { number: 93, trans: "Ad-Duha", ar: "الضحى", en: "The Morning Hours" },
+  { number: 94, trans: "Ash-Sharh", ar: "الشرح", en: "The Relief" },
+  { number: 95, trans: "At-Tin", ar: "التين", en: "The Fig" },
+  { number: 96, trans: "Al-Alaq", ar: "العلق", en: "The Clot" },
+  { number: 97, trans: "Al-Qadr", ar: "القدر", en: "The Power" },
+  { number: 98, trans: "Al-Bayyina", ar: "البينة", en: "The Clear Proof" },
+  { number: 99, trans: "Az-Zalzala", ar: "الزلزلة", en: "The Earthquake" },
+  { number: 100, trans: "Al-Adiyat", ar: "العاديات", en: "The Courser" },
+  { number: 101, trans: "Al-Qari'a", ar: "القارعة", en: "The Calamity" },
+  { number: 102, trans: "At-Takathur", ar: "التكاثر", en: "The Rivalry in World Increase" },
+  { number: 103, trans: "Al-Asr", ar: "العصر", en: "The Declining Day" },
+  { number: 104, trans: "Al-Humaza", ar: "الهمزة", en: "The Traducer" },
+  { number: 105, trans: "Al-Fil", ar: "الفيل", en: "The Elephant" },
+  { number: 106, trans: "Quraysh", ar: "قريش", en: "Quraysh" },
+  { number: 107, trans: "Al-Ma'un", ar: "الماعون", en: "The Small Kindnesses" },
+  { number: 108, trans: "Al-Kawthar", ar: "الكوثر", en: "The Abundance" },
+  { number: 109, trans: "Al-Kafirun", ar: "الكافرون", en: "The Disbelievers" },
+  { number: 110, trans: "An-Nasr", ar: "النصر", en: "The Divine Support" },
+  { number: 111, trans: "Al-Masad", ar: "المسد", en: "The Palm Fiber" },
+  { number: 112, trans: "Al-Ikhlas", ar: "الإخلاص", en: "The Sincerity" },
+  { number: 113, trans: "Al-Falaq", ar: "الفلق", en: "The Daybreak" },
+  { number: 114, trans: "An-Nas", ar: "الناس", en: "Mankind" }
+];
+// Juz Data (30 Juz)
+const juzData = [
+  { number: 1, ar: "الجزء الأول", en: "Juz 1" },
+  { number: 2, ar: "الجزء الثاني", en: "Juz 2" },
+  { number: 3, ar: "الجزء الثالث", en: "Juz 3" },
+  { number: 4, ar: "الجزء الرابع", en: "Juz 4" },
+  { number: 5, ar: "الجزء الخامس", en: "Juz 5" },
+  { number: 6, ar: "الجزء السادس", en: "Juz 6" },
+  { number: 7, ar: "الجزء السابع", en: "Juz 7" },
+  { number: 8, ar: "الجزء الثامن", en: "Juz 8" },
+  { number: 9, ar: "الجزء التاسع", en: "Juz 9" },
+  { number: 10, ar: "الجزء العاشر", en: "Juz 10" },
+  { number: 11, ar: "الجزء الحادي عشر", en: "Juz 11" },
+  { number: 12, ar: "الجزء الثاني عشر", en: "Juz 12" },
+  { number: 13, ar: "الجزء الثالث عشر", en: "Juz 13" },
+  { number: 14, ar: "الجزء الرابع عشر", en: "Juz 14" },
+  { number: 15, ar: "الجزء الخامس عشر", en: "Juz 15" },
+  { number: 16, ar: "الجزء السادس عشر", en: "Juz 16" },
+  { number: 17, ar: "الجزء السابع عشر", en: "Juz 17" },
+  { number: 18, ar: "الجزء الثامن عشر", en: "Juz 18" },
+  { number: 19, ar: "الجزء التاسع عشر", en: "Juz 19" },
+  { number: 20, ar: "الجزء العشرون", en: "Juz 20" },
+  { number: 21, ar: "الجزء الحادي والعشرون", en: "Juz 21" },
+  { number: 22, ar: "الجزء الثاني والعشرون", en: "Juz 22" },
+  { number: 23, ar: "الجزء الثالث والعشرون", en: "Juz 23" },
+  { number: 24, ar: "الجزء الرابع والعشرون", en: "Juz 24" },
+  { number: 25, ar: "الجزء الخامس والعشرون", en: "Juz 25" },
+  { number: 26, ar: "الجزء السادس والعشرون", en: "Juz 26" },
+  { number: 27, ar: "الجزء السابع والعشرون", en: "Juz 27" },
+  { number: 28, ar: "الجزء الثامن والعشرون", en: "Juz 28" },
+  { number: 29, ar: "الجزء التاسع والعشرون", en: "Juz 29" },
+  { number: 30, ar: "الجزء الثلاثون", en: "Juz 30" }
+];
+
+// State
+let currentView = 'surah'; // 'surah' or 'juz'
+
+// Elements
+const grid = document.getElementById('contentGrid');
+const searchInput = document.getElementById('searchInput');
+const surahBtn = document.getElementById('surahBtn');
+const juzBtn = document.getElementById('juzBtn');
+const pageTitle = document.getElementById('pageTitle');
+
+// Render Surahs
+function renderSurahs() {
+  grid.innerHTML = '';
+  surahs.forEach(surah => {
+    const card = document.createElement('div');
+    card.className = 'content-card';
+    card.innerHTML = `
+      <h3>${surah.number}. ${surah.ar}</h3>
+      <p style="font-size: 1.1rem; font-weight: 600;">${surah.trans}</p>
+      <p style="font-size: 0.85rem; opacity: 0.7;">${surah.en}</p>
+    `;
+    card.addEventListener('click', () => {
+      window.location.href = `./#${surah.number}`;
+    });
+    grid.appendChild(card);
+  });
+}
+
+// Render Juz
+function renderJuz() {
+  grid.innerHTML = '';
+  juzData.forEach(juz => {
+    const card = document.createElement('div');
+    card.className = 'content-card';
+    card.innerHTML = `
+      <h3>${juz.ar}</h3>
+      <p style="font-size: 1.1rem; font-weight: 600;">${juz.en}</p>
+    `;
+    card.addEventListener('click', () => {
+      window.location.href = `./?${juz.number}`;
+    });
+    grid.appendChild(card);
+  });
+}
+
+// Toggle View
+surahBtn.addEventListener('click', () => {
+  currentView = 'surah';
+  surahBtn.classList.add('active');
+  juzBtn.classList.remove('active');
+  pageTitle.textContent = 'Select a Surah';
+  searchInput.placeholder = 'Search Surah...';
+  renderSurahs();
+});
+
+juzBtn.addEventListener('click', () => {
+  currentView = 'juz';
+  juzBtn.classList.add('active');
+  surahBtn.classList.remove('active');
+  pageTitle.textContent = 'Select a Juz';
+  searchInput.placeholder = 'Search Juz...';
+  renderJuz();
+});
+
+// Search functionality
+searchInput.addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase().trim();
+  const cards = grid.getElementsByClassName('content-card');
+  
+  Array.from(cards).forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(query) ? '' : 'none';
+  });
+});
+
+// Initial render
+renderSurahs();
+
+// Theme support
+function applyThemeClass(isDark) {
+  if (isDark) {
+    document.body.classList.add('dark');
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark');
+    document.body.classList.remove('dark-mode');
+  }
+}
+
+const savedTheme = localStorage.getItem('theme');
+applyThemeClass(savedTheme === 'dark');
+</script>
+</body>
+</html>
