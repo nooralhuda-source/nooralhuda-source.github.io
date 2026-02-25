@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="logo.png.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8" />
-  <title>Quran Reader - Noor Al Huda</title>
+  <title>Quran Reader</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1038,6 +1038,109 @@
 .hamburger.active{
   font-size: 28px;
 }
+.settings-drawer {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100%;
+  background: white;
+  box-shadow: -8px 0 28px rgba(0, 0, 0, 0.15);
+  transition: right 0.3s ease;
+  z-index: 2000;
+  overflow-y: auto;
+  padding: 1.25rem;
+}
+
+.settings-drawer.open {
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .settings-drawer {
+    right: -280px;
+    width: 280px;
+    max-width: 85vw;
+  }
+    body.reading-mode #ayahContainer {
+    padding: 2rem 0.5rem;
+  }
+  
+  body.reading-mode .container {
+    padding: 0 0.5rem;
+    max-width: 100%;
+  }
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .back-home {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .action-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .action-btn {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+  }
+  .bottom-nav {
+    width: calc(100% - 1rem);
+    left: 0.5rem;
+    transform: none;
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+  
+  .bottom-nav-btn {
+    font-size: 0.7rem;
+    padding: 0.5rem 0.6rem;
+    white-space: nowrap;
+  }
+  
+  .bottom-nav-btn#backToTopBtn {
+    flex: 0 0 auto;
+    min-width: auto;
+  }
+}
+.settings-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.settings-backdrop.show {
+  display: block;
+  opacity: 1;
+}
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  z-index: 10;
+}
+
   </style>
 </head>
 <body>
@@ -1062,11 +1165,11 @@
 
   <div class="header-content">
     <div class="header-actions">
-      <a href="quran.html" class="back-home">← Back to Surahs</a>
+      <a href="home" class="back-home">← Back to Surahs</a>
       <div style="flex: 1;"></div>
       <div class="action-buttons">
-  <button class="action-btn" id="settingsBtn">Settings</button>
-  <button class="action-btn" id="bookmarksBtn">Saved Ayahs</button>
+  <button class="action-btn" id="settingsBtn">⚙️</button>
+  <button class="action-btn" id="bookmarksBtn">🔖</button>
 </div>
 
 <div class="settings-backdrop" id="settingsBackdrop"></div>
@@ -1089,9 +1192,9 @@
     <div class="audio-player" id="audioPlayer" style="display: none;">
       <audio id="surahAudio" preload="none"></audio>
       <div class="audio-controls">
-        <button class="audio-btn" id="playBtn">▶ Play</button>
-        <button class="audio-btn" id="pauseBtn">⏸ Pause</button>
-        <button class="audio-btn" id="stopBtn">⏹ Stop</button>
+        <button class="audio-btn" id="playBtn">▶</button>
+        <button class="audio-btn" id="pauseBtn">⏸</button>
+        <button class="audio-btn" id="stopBtn">⏹</button>
         <select id="speedSelect" style="padding: 0.5rem; border-radius: 8px; border: 2px solid var(--medium-gray);">
           <option value="0.75">0.75x</option>
           <option value="1" selected>1x</option>
@@ -1124,6 +1227,7 @@
       <option value="Kolkatta">Kolkatta</option>
       <option value="Uthmani">Uthmani</option>
       <option value="maghrebi">Maghrebi</option>
+
     </select>
   </div>
 
@@ -1169,7 +1273,8 @@ const SOURCES = {
   "IndoPak": "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/ara-quranindopak.txt",
   "Uthmani": "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/ara-quranuthmanihaf.txt",
   "Kolkatta": "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/ara-quranindopak.txt",
-  "Maghrebi": "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/ara-quranindopak.txt"
+  "maghrebi": "https://raw.githubusercontent.com/fawazahmed0/quran-api/refs/heads/1/database/chapterverse/ara-quranindopak.txt",
+  
 };
 
 const JUZ_API_BASE = 'https://api.alquran.cloud/v1/juz';
@@ -1362,12 +1467,14 @@ function renderSurah(surah) {
   const nameAr = SURAH_NAMES_AR[surah - 1] || '';
   const verses = getVersesForSurah(surah);
   const type = surah === 9 ? 'Medinan' : 'Meccan';
-
   surahTitleAr.textContent = nameAr;
   surahTitleEn.textContent = nameEn;
-  surahMeta.textContent = `Surah ${surah} • ${type} • ${verses.length} Ayahs`;
+  
+  // Adjust ayah count for Fatiha (7 ayahs but we skip the first one)
+  const displayCount = surah === 1 ? verses.length - 1 : verses.length;
+  surahMeta.textContent = `Surah ${surah} • ${type} • ${displayCount} Ayahs`;
   document.title = `${nameEn} - Noor Al Huda`;
-
+  
   bismillahWrap.innerHTML = '';
   if (surah !== 9) {
     const img = document.createElement('img');
@@ -1376,14 +1483,13 @@ function renderSurah(surah) {
     img.onerror = () => img.style.display = 'none';
     bismillahWrap.appendChild(img);
   }
-
+  
   const pattern = RECITERS[selectedReciter] || RECITERS[Object.keys(RECITERS)[0]];
   if (pattern) {
     const audioSrc = pattern.replace('{ch3}', pad3(surah));
     surahAudio.src = audioSrc;
     audioPlayer.style.display = 'block';
   }
-
   ayahContainer.innerHTML = '';
   if (currentMode === 'reading') {
     renderReadingMode(surah, verses);
@@ -1392,22 +1498,24 @@ function renderSurah(surah) {
   }
 }
 
+
 function renderReadingMode(surah, verses) {
   verses.forEach(v => {
+    // Skip verse 1 of Surah Al-Fatiha (it's bismillah)
+    if (surah === 1 && v === 1) return;
+    
     const card = document.createElement('div');
     card.className = 'ayah-card';
     card.id = `ayah-${v}`;
-
     const number = document.createElement('span');
     number.className = 'ayah-number';
-    number.textContent = v;
-
+    // For Fatiha, display verse 2 as "1", verse 3 as "2", etc.
+    number.textContent = surah === 1 ? v - 1 : v;
     const arabic = document.createElement('span');
     arabic.className = 'ayah-arabic';
     arabic.style.fontFamily = getArabicFontFamily();
     arabic.style.fontSize = arabicSize + 'px';
     arabic.textContent = getText(arabicFont, surah, v) + ' ';
-
     card.appendChild(arabic);
     card.appendChild(number);
     card.appendChild(document.createTextNode(' '));
@@ -1415,12 +1523,15 @@ function renderReadingMode(surah, verses) {
   });
 }
 
+
 function renderTranslationMode(surah, verses) {
   verses.forEach(v => {
+    // Skip verse 1 of Surah Al-Fatiha (it's bismillah)
+    if (surah === 1 && v === 1) return;
+    
     const card = document.createElement('div');
     card.className = 'ayah-card';
     card.id = `ayah-${v}`;
-
     const actionsDiv = document.createElement('div');
     actionsDiv.className = 'ayah-actions';
     const dotsBtn = document.createElement('button');
@@ -1429,39 +1540,32 @@ function renderTranslationMode(surah, verses) {
     dotsBtn.setAttribute('aria-label', 'Ayah options');
     const menu = document.createElement('div');
     menu.className = 'ayah-menu';
-
     const bookmarkItem = document.createElement('button');
     bookmarkItem.className = 'ayah-menu-item';
     bookmarkItem.innerHTML = `<span class="ayah-menu-icon icon-bookmark">🔖</span><span>Bookmark</span>`;
-
     const shareItem = document.createElement('button');
     shareItem.className = 'ayah-menu-item';
     shareItem.innerHTML = `<span class="ayah-menu-icon icon-share">🔗</span><span>Share</span>`;
-
     const copyItem = document.createElement('button');
     copyItem.className = 'ayah-menu-item';
     copyItem.innerHTML = `<span class="ayah-menu-icon icon-copy">📋</span><span>Copy</span>`;
-
     menu.appendChild(bookmarkItem);
     menu.appendChild(shareItem);
     menu.appendChild(copyItem);
     actionsDiv.appendChild(dotsBtn);
     actionsDiv.appendChild(menu);
-
     const number = document.createElement('div');
     number.className = 'ayah-number';
-    number.textContent = `Ayah ${v}`;
-
+    // For Fatiha, display verse 2 as "Ayah 1", verse 3 as "Ayah 2", etc.
+    number.textContent = `Ayah ${surah === 1 ? v - 1 : v}`;
     const arabic = document.createElement('div');
     arabic.className = 'ayah-arabic';
     arabic.style.fontFamily = getArabicFontFamily();
     arabic.style.fontSize = arabicSize + 'px';
     arabic.textContent = getText(arabicFont, surah, v);
-
     card.appendChild(actionsDiv);
     card.appendChild(number);
     card.appendChild(arabic);
-
     visibleTranslations.forEach(source => {
       const text = getText(source, surah, v);
       if (text) {
@@ -1475,8 +1579,11 @@ function renderTranslationMode(surah, verses) {
         card.appendChild(sourceLabel);
       }
     });
-
     ayahContainer.appendChild(card);
+    // ... rest of event listeners stay the same
+
+
+
 
     dotsBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -1598,29 +1705,46 @@ function renderJuzReadingMode(ayahs) {
       surahHeader.style.cssText = 'text-align: center; margin: 2rem 0 1rem; padding: 1rem; background: var(--light-gray); border-radius: 12px;';
       surahHeader.innerHTML = `<h3 style="color: var(--primary-green); margin: 0;">${ayah.surahNameAr} - ${ayah.surahName}</h3>`;
       ayahContainer.appendChild(surahHeader);
+      
+      // Show bismillah IMAGE for every new surah except surah 9
+      if (ayah.surah !== 9) {
+        const bismillahDiv = document.createElement('div');
+        bismillahDiv.style.cssText = 'text-align: center; margin: 1.5rem 0;';
+        const img = document.createElement('img');
+        img.src = 'bismillah.png';
+        img.alt = 'Bismillah';
+        img.style.cssText = 'max-width: 400px; width: 85%; filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.06));';
+        img.onerror = () => bismillahDiv.style.display = 'none';
+        bismillahDiv.appendChild(img);
+        ayahContainer.appendChild(bismillahDiv);
+      }
+      
       lastSurah = ayah.surah;
     }
-
+    
+    // Skip verse 1 ONLY for Surah Al-Fatiha
+    if (ayah.surah === 1 && ayah.verse === 1) return;
+    
     const card = document.createElement('div');
     card.className = 'ayah-card';
     card.id = `ayah-${index}`;
-
     const number = document.createElement('span');
     number.className = 'ayah-number';
-    number.textContent = ayah.verse;
-
+    // For Fatiha, renumber: verse 2 becomes "1", verse 3 becomes "2", etc.
+    number.textContent = ayah.surah === 1 ? ayah.verse - 1 : ayah.verse;
     const arabic = document.createElement('span');
     arabic.className = 'ayah-arabic';
     arabic.style.fontFamily = getArabicFontFamily();
     arabic.style.fontSize = arabicSize + 'px';
     arabic.textContent = getText(arabicFont, ayah.surah, ayah.verse) + ' ';
-
     card.appendChild(arabic);
     card.appendChild(number);
     card.appendChild(document.createTextNode(' '));
     ayahContainer.appendChild(card);
   });
 }
+
+
 
 function renderJuzTranslationMode(ayahs) {
   let lastSurah = null;
@@ -1631,13 +1755,29 @@ function renderJuzTranslationMode(ayahs) {
       surahHeader.style.cssText = 'text-align: center; margin: 2rem 0 1rem; padding: 1rem; background: var(--light-gray); border-radius: 12px;';
       surahHeader.innerHTML = `<h3 style="color: var(--primary-green); margin: 0;">${ayah.surahNameAr} - ${ayah.surahName}</h3>`;
       ayahContainer.appendChild(surahHeader);
+      
+      // Show bismillah IMAGE for every new surah except surah 9
+      if (ayah.surah !== 9) {
+        const bismillahDiv = document.createElement('div');
+        bismillahDiv.style.cssText = 'text-align: center; margin: 1.5rem 0;';
+        const img = document.createElement('img');
+        img.src = 'bismillah.png';
+        img.alt = 'Bismillah';
+        img.style.cssText = 'max-width: 400px; width: 85%; filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.06));';
+        img.onerror = () => bismillahDiv.style.display = 'none';
+        bismillahDiv.appendChild(img);
+        ayahContainer.appendChild(bismillahDiv);
+      }
+      
       lastSurah = ayah.surah;
     }
-
+    
+    // Skip verse 1 ONLY for Surah Al-Fatiha
+    if (ayah.surah === 1 && ayah.verse === 1) return;
+    
     const card = document.createElement('div');
     card.className = 'ayah-card';
     card.id = `ayah-${index}`;
-
     const actionsDiv = document.createElement('div');
     actionsDiv.className = 'ayah-actions';
     const dotsBtn = document.createElement('button');
@@ -1646,39 +1786,33 @@ function renderJuzTranslationMode(ayahs) {
     dotsBtn.setAttribute('aria-label', 'Ayah options');
     const menu = document.createElement('div');
     menu.className = 'ayah-menu';
-
     const bookmarkItem = document.createElement('button');
     bookmarkItem.className = 'ayah-menu-item';
     bookmarkItem.innerHTML = `<span class="ayah-menu-icon icon-bookmark">🔖</span><span>Bookmark</span>`;
-
     const shareItem = document.createElement('button');
     shareItem.className = 'ayah-menu-item';
     shareItem.innerHTML = `<span class="ayah-menu-icon icon-share">🔗</span><span>Share</span>`;
-
     const copyItem = document.createElement('button');
     copyItem.className = 'ayah-menu-item';
     copyItem.innerHTML = `<span class="ayah-menu-icon icon-copy">📋</span><span>Copy</span>`;
-
     menu.appendChild(bookmarkItem);
     menu.appendChild(shareItem);
     menu.appendChild(copyItem);
     actionsDiv.appendChild(dotsBtn);
     actionsDiv.appendChild(menu);
-
     const number = document.createElement('div');
     number.className = 'ayah-number';
-    number.textContent = `${ayah.surahName} ${ayah.verse}`;
-
+    // For Fatiha, renumber: verse 2 becomes "Ayah 1", verse 3 becomes "Ayah 2", etc.
+    const displayVerse = ayah.surah === 1 ? ayah.verse - 1 : ayah.verse;
+    number.textContent = `${ayah.surahName} ${displayVerse}`;
     const arabic = document.createElement('div');
     arabic.className = 'ayah-arabic';
     arabic.style.fontFamily = getArabicFontFamily();
     arabic.style.fontSize = arabicSize + 'px';
     arabic.textContent = getText(arabicFont, ayah.surah, ayah.verse);
-
     card.appendChild(actionsDiv);
     card.appendChild(number);
     card.appendChild(arabic);
-
     visibleTranslations.forEach(source => {
       const text = getText(source, ayah.surah, ayah.verse);
       if (text) {
@@ -1692,9 +1826,8 @@ function renderJuzTranslationMode(ayahs) {
         card.appendChild(sourceLabel);
       }
     });
-
     ayahContainer.appendChild(card);
-
+    
     dotsBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       document.querySelectorAll('.ayah-menu').forEach(m => {
@@ -1702,16 +1835,13 @@ function renderJuzTranslationMode(ayahs) {
       });
       menu.classList.toggle('show');
     });
-
     bookmarkItem.addEventListener('click', () => {
       addBookmark(ayah.surah, ayah.verse);
       menu.classList.remove('show');
     });
-
- 
     copyItem.addEventListener('click', async () => {
       const arabicText = getText(arabicFont, ayah.surah, ayah.verse);
-      let copyText = `${ayah.surahName} ${ayah.surah}:${ayah.verse}\n\n${arabicText}\n\n`;
+      let copyText = `${ayah.surahName} ${ayah.surah}:${displayVerse}\n\n${arabicText}\n\n`;
       visibleTranslations.forEach(source => {
         const text = getText(source, ayah.surah, ayah.verse);
         if (text) {
@@ -1726,11 +1856,10 @@ function renderJuzTranslationMode(ayahs) {
       }
       menu.classList.remove('show');
     });
-
     shareItem.addEventListener('click', async () => {
       const arabicText = getText(arabicFont, ayah.surah, ayah.verse);
       const url = `${location.origin}${location.pathname}#${ayah.surah}`;
-      let shareText = `${ayah.surahName} ${ayah.surah}:${ayah.verse}\n\n${arabicText}\n\n`;
+      let shareText = `${ayah.surahName} ${ayah.surah}:${displayVerse}\n\n${arabicText}\n\n`;
       visibleTranslations.forEach(source => {
         const text = getText(source, ayah.surah, ayah.verse);
         if (text) {
@@ -1741,7 +1870,7 @@ function renderJuzTranslationMode(ayahs) {
       if (navigator.share) {
         try {
           await navigator.share({
-            title: `${ayah.surahName} ${ayah.surah}:${ayah.verse}`,
+            title: `${ayah.surahName} ${ayah.surah}:${displayVerse}`,
             text: shareText
           });
         } catch (e) {}
@@ -1757,6 +1886,7 @@ function renderJuzTranslationMode(ayahs) {
     });
   });
 }
+
 
 // Mode Toggle
 translationModeBtn.addEventListener('click', async () => {
@@ -1902,18 +2032,19 @@ function addBookmark(surah, verse) {
     return;
   }
   const nameEn = SURAH_NAMES[surah - 1];
-  const arabic = getText(arabicFont, surah, verse).substring(0, 100);
+  const translation = getText('Ali Quli Qarai (eng)', surah, verse).substring(0, 100);
   bookmarks.unshift({
     key,
     surah,
     verse,
     nameEn,
-    arabic,
+    translation,
     timestamp: Date.now()
   });
   localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   alert('Ayah bookmarked!');
 }
+
 
 function renderBookmarks() {
   const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
@@ -1927,7 +2058,7 @@ function renderBookmarks() {
     item.className = 'bookmark-item';
     const text = document.createElement('div');
     text.className = 'bookmark-text';
-    text.innerHTML = `<strong>${b.nameEn} ${b.surah}:${b.verse}</strong><br><span style="color: var(--text-light); font-size: 0.9rem;">${b.arabic}...</span>`;
+    text.innerHTML = `<strong>${b.nameEn} ${b.surah}:${b.verse}</strong><br><span style="color: var(--text-light); font-size: 0.9rem;">${b.translation || b.arabic}...</span>`;
     const actions = document.createElement('div');
     actions.className = 'bookmark-actions';
     const openBtn = document.createElement('button');
@@ -1956,6 +2087,7 @@ function renderBookmarks() {
   });
 }
 
+
 bookmarksBtn.addEventListener('click', () => {
   renderBookmarks();
   bookmarksModal.classList.add('open');
@@ -1977,7 +2109,7 @@ const backToTopBtn = document.getElementById('backToTopBtn');
 const nextBtn = document.getElementById('nextBtn');
 
 backToIndexBtn.addEventListener('click', () => {
-  window.location.href = 'quran.html';
+  window.location.href = 'home';
 });
 
 backToTopBtn.addEventListener('click', () => {
@@ -2015,6 +2147,23 @@ window.addEventListener('hashchange', async () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
+});
+// Open settings and show backdrop
+settingsBtn.addEventListener('click', () => {
+  settingsDrawer.classList.add('open');
+  settingsBackdrop.classList.add('show');
+});
+
+// Close settings
+closeSettings.addEventListener('click', () => {
+  settingsDrawer.classList.remove('open');
+  settingsBackdrop.classList.remove('show');
+});
+
+// Close when clicking backdrop
+settingsBackdrop.addEventListener('click', () => {
+  settingsDrawer.classList.remove('open');
+  settingsBackdrop.classList.remove('show');
 });
 
 // Initialize
