@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Al-Kafi</title>
+  <title>Risalat Al-Huquq</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="https://nooralhuda.co.uk/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -524,7 +524,7 @@
       <div class="header-actions">
         <a class="back-home" href="https://nooralhuda.co.uk/hadiths-home">← Go Back</a>
       </div>
-      <h1 class="category-title" id="categoryTitle">Loading...</h1>
+      <h1 class="category-title" id="categoryTitle">Risalat Al-Huquq</h1>
     </div>
   </section>
 
@@ -603,14 +603,7 @@
 
       // Filter categoryId = 1
       data = data.filter(h => h.categoryId === 1);
-      const categoryTitle = document.getElementById("categoryTitle");
-
-      // Update title
-      if (data.length > 0 && data[0].category) {
-        categoryTitle.innerText = data[0].category;
-      } else {
-        categoryTitle.innerText = "Chapters";
-      }
+    
 
       // Get unique chapters
       const uniqueChapters = [];
