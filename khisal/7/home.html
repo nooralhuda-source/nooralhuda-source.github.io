@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Al-Khisal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="https://nooralhuda.co.uk/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Parastoo:wght@400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-green: #136f3c;
+      --secondary-green: #1a8049;
+      --accent-gold: #d4af37;
+      --light-gold: #f4e4a6;
+      --dark-navy: #1a202c;
+      --white: #ffffff;
+      --light-gray: #f7fafc;
+      --medium-gray: #e2e8f0;
+      --text-dark: #2d3748;
+      --text-light: #718096;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      background: var(--light-gray);
+    }
+
+    /* Navigation */
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid #eee;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary-green);
+      text-decoration: none;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 26px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #136f3c;
+    }
+
+    .hamburger.active {
+      font-size: 28px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      padding: 0 2rem 0 0;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-green);
+    }
+
+    /* Page Header */
+    .page-header {
+      background: 
+        linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),
+        url('https://nooralhuda.co.uk/karbala.jpg') center/cover;
+      padding: 200px 0 60px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      margin-top: 0;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      animation: patternMove 60s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes patternMove {
+      0% { transform: translateX(0) translateY(0); }
+      100% { transform: translateX(-30px) translateY(-30px); }
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .header-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .back-home {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .back-home:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .category-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Main Content */
+    .page {
+      padding: 60px 0;
+      background: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Search Bar */
+    .search-wrapper {
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      border: 2px solid var(--medium-gray);
+      border-radius: 50px;
+      outline: none;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary-green);
+      box-shadow: 0 0 0 4px rgba(19, 111, 60, 0.1);
+    }
+
+    /* Chapter Grid */
+    .chapter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .chapter-card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--medium-gray);
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chapter-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-green), var(--accent-gold));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .chapter-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary-green);
+    }
+
+    .chapter-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .chapter-number {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .chapter-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.5;
+      margin-top: 0.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 1rem 1.5rem;
+        gap: 1.2rem;
+        border-top: 1px solid #eee;
+      }
+      
+      .nav-links.active {
+        display: flex;
+      }
+
+      .page-header {
+        padding: 60px 0 40px;
+      }
+
+      .chapter-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Desktop */
+    @media (min-width: 769px) {
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+        padding-right: 2rem;
+      }
+    }
+
+    /* Scroll Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--primary-green));
+      z-index: 1001;
+      transition: width 0.1s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+        .footer {
+            background: var(--dark-navy);
+            color: white;
+            padding: 30px 0 30px;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+                .navbar{
+  background:white;
+  position:relative;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+
+/* top row only */
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:3rem 2rem;
+}
+
+/* logo */
+
+
+/* hamburger */
+.hamburger{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: #136f3c;
+}
+
+/* LINKS (desktop) */
+.nav-links{
+  display:flex;
+  gap:2.5rem;            /* ← bigger gap like you asked */
+  padding: 2rem 2rem 2rem 2rem; /* ← space on right edge */
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;          /* ← full device width */
+    padding:1rem 1.5rem;
+    gap:1.2rem;
+    border-top:1px solid #eee;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+}
+/* ===== DESKTOP LAYOUT ===== */
+.navbar{
+  background:white;
+  border-bottom:1px solid #eee;
+}
+
+/* make navbar behave like one row on desktop */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .nav-container{
+    padding:1rem 1.5rem;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2.5rem;
+    padding-right:2rem; /* bigger right gap like you wanted */
+  }
+}
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+/* this is the important fix */
+.nav-container,
+.nav-links{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 24px;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-container{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+
+  .hamburger{
+    display:none;
+    color: #136f3c;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+}
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff; /* important so content doesn’t show through */
+}
+.hamburger{
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* when open */
+.hamburger.active{
+  font-size: 28px;
+}
+  </style>
+</head>
+<body>
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+      
+      <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+       </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="https://nooralhuda.co.uk/">Home</a></li>
+        <li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+        <li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+  
+        <li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
+      </ul>
+
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="header-content">
+      <div class="header-actions">
+        <a class="back-home" href="../home">← Go Back</a>
+      </div>
+      <h1 class="category-title" id="categoryTitle">Loading...</h1>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="page">
+    <div class="container">
+      <div class="search-wrapper">
+        <input type="text" id="searchBook" class="search-input" placeholder="Search chapters...">
+      </div>
+      
+      <div class="chapter-grid" id="bookGrid"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    © 2025 Noor Al Huda. All rights reserved. Illuminating the path to Islamic knowledge and spiritual growth through authentic resources
+  </footer>
+
+  <script>
+    // Scroll Progress Bar
+    window.addEventListener('scroll', () => {
+      const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      document.querySelector('.scroll-progress').style.width = scrolled + '%';
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 100) {
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+    });
+
+    // Hamburger Menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    if (hamburger) {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+          navLinks.classList.remove('active');
+          hamburger.classList.remove('active');
+          hamburger.textContent = '☰';
+        }
+      });
+
+      // Close menu after clicking a link
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          hamburger.classList.remove('active');
+          hamburger.textContent = '☰';
+        });
+      });
+    }
+
+    // Load Chapters
+    async function loadChapters() {
+      const grid = document.getElementById("bookGrid");
+      const searchInput = document.getElementById("searchBook");
+
+      const res = await fetch(
+        "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/10.json"
+      );
+      let data = await res.json();
+
+      // Filter categoryId = 1
+      data = data.filter(h => h.categoryId === 7);
+      const categoryTitle = document.getElementById("categoryTitle");
+
+      // Update title
+      if (data.length > 0 && data[0].category) {
+        categoryTitle.innerText = data[0].category;
+      } else {
+        categoryTitle.innerText = "Chapters";
+      }
+
+      // Get unique chapters
+      const uniqueChapters = [];
+      const seen = new Set();
+
+      data.forEach(h => {
+        const chapterKey = h.chapterInCategoryId;
+
+        if (!seen.has(chapterKey)) {
+          seen.add(chapterKey);
+
+          uniqueChapters.push({
+            key: chapterKey,
+            title: h.chapter || ""
+          });
+        }
+      });
+
+      // Numeric sort
+      uniqueChapters.sort((a, b) => Number(a.key) - Number(b.key));
+
+      // Render chapters
+      uniqueChapters.forEach(ch => {
+        const card = document.createElement("div");
+        card.className = "chapter-card";
+
+        card.innerHTML = `
+          <span class="chapter-number">Chapter ${ch.key}</span>
+          <div class="chapter-title">${ch.title}</div>
+        `;
+
+        card.onclick = () => {
+          window.location.href = `./#${ch.key}`;
+        };
+
+        grid.appendChild(card);
+      });
+
+      // Search functionality
+      searchInput.addEventListener("input", function() {
+        const query = this.value.toLowerCase().trim();
+        const cards = grid.getElementsByClassName("chapter-card");
+
+        Array.from(cards).forEach(card => {
+          const title = card.querySelector(".chapter-title").innerText.toLowerCase();
+          const number = card.querySelector(".chapter-number").innerText.toLowerCase();
+          card.style.display = (title.includes(query) || number.includes(query)) ? "" : "none";
+        });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", loadChapters);
+
+    // Theme support
+    function applyThemeClass(isDark) {
+      if (isDark) {
+        document.body.classList.add("dark");
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark");
+        document.body.classList.remove("dark-mode");
+      }
+    }
+    
+    var savedTheme = localStorage.getItem("theme");
+    applyThemeClass(savedTheme === "dark");
+  </script>
+</body>
+</html>
