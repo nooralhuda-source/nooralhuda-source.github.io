@@ -7,345 +7,136 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Parastoo:wght@400..700&display=swap" rel="stylesheet">
-
 <style>
 :root {
-  --primary-green: #136f3c;
-  --secondary-green: #1a8049;
-  --accent-gold: #d4af37;
-  --light-gold: #f4e4a6;
-  --dark-navy: #1a202c;
-  --white: #ffffff;
-  --light-gray: #f7fafc;
-  --medium-gray: #e2e8f0;
-  --text-dark: #2d3748;
-  --text-light: #718096;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+--primary-green: #136f3c;
+--secondary-green: #1a8049;
+--accent-gold: #d4af37;
+--light-gold: #f4e4a6;
+--dark-navy: #1a202c;
+--white: #ffffff;
+--light-gray: #f7fafc;
+--medium-gray: #e2e8f0;
+--text-dark: #2d3748;
+--text-light: #718096;
+--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+--shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.6;
-  color: var(--text-dark);
-  overflow-x: hidden;
-  background: var(--light-gray);
-}
+* {margin: 0;padding: 0;box-sizing: border-box;}
+body {font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;line-height: 1.6;color: var(--text-dark);overflow-x: hidden;background: var(--light-gray);}
 
 /* Navigation */
-.navbar {
-  position: sticky;
-  top: 0;
-  background: white;
-  border-bottom: 1px solid #eee;
-  z-index: 1000;
-}
-
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--primary-green);
-  text-decoration: none;
-}
-
-.hamburger {
-  display: none;
-  font-size: 26px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--primary-green);
-}
-
-.hamburger.active {
-  font-size: 28px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2.5rem;
-  padding: 0 2rem 0 0;
-  list-style: none;
-  align-items: center;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-.nav-links a:hover {
-  color: var(--primary-green);
-}
+.navbar {position: sticky;top: 0;background: white;border-bottom: 1px solid #eee;z-index: 1000;}
+.nav-container {display: flex;justify-content: space-between;align-items: center;padding: 2rem 1.5rem;max-width: 1200px;margin: 0 auto;}
+.logo {display: flex;align-items: center;gap: 12px;font-size: 28px;font-weight: 700;color: var(--primary-green);text-decoration: none;}
+.hamburger {display: none;font-size: 26px;background: none;border: none;cursor: pointer;color: var(--primary-green);}
+.hamburger.active {font-size: 28px;}
+.nav-links {display: flex;gap: 2.5rem;padding: 0 2rem 0 0;list-style: none;align-items: center;}
+.nav-links a {text-decoration: none;color: #333;font-weight: 500;transition: var(--transition);}
+.nav-links a:hover {color: var(--primary-green);}
 
 /* Page Header */
-.page-header {
-  background: 
-    linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),
-    url('https://nooralhuda.co.uk/karbala.jpg') center/cover;
-  padding: 100px 0 60px;
-  text-align: center;
-  color: white;
-  position: relative;
-  overflow: hidden;
-  margin-top: 0;
-}
+.page-header {background: linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),url('https://nooralhuda.co.uk/karbala.jpg') center/cover;padding: 100px 0 60px;text-align: center;color: white;position: relative;overflow: hidden;margin-top: 0;}
+.page-header::before {content: '';position: absolute;top: 0;left: 0;right: 0;bottom: 0;opacity: 0.6;}
+.header-content {max-width: 1200px;margin: 0 auto;padding: 0 2rem;position: relative;z-index: 2;}
+.page-title {font-size: clamp(2rem, 5vw, 3rem);font-weight: 800;margin-bottom: 1rem;text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);}
+.page-subtitle {font-size: clamp(1rem, 2vw, 1.2rem);opacity: 0.9;}
 
-.page-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.6;
-}
+/* Header Actions */
+.header-actions {display: flex;justify-content: space-between;align-items: center;margin-bottom: 1.5rem;gap: 1rem;}
 
-.header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  position: relative;
-  z-index: 2;
-}
+/* Back Button in Header */
+.btn-back-header {background: rgba(255, 255, 255, 0.15);color: white;padding: 12px 24px;border-radius: 50px;border: 2px solid rgba(255, 255, 255, 0.3);font-weight: 600;font-size: 1rem;cursor: pointer;transition: var(--transition);backdrop-filter: blur(10px);text-decoration: none;display: inline-flex;align-items: center;gap: 8px;}
+.btn-back-header:hover {background: rgba(255, 255, 255, 0.25);transform: translateY(-2px);box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);}
 
-.page-title {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 800;
-  margin-bottom: 1rem;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.page-subtitle {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  opacity: 0.9;
-}
+/* Saved Hadiths Button in Header */
+.btn-saved-header {background: rgba(255, 255, 255, 0.15);color: white;padding: 12px 24px;border-radius: 50px;border: 2px solid rgba(255, 255, 255, 0.3);font-weight: 600;font-size: 1rem;cursor: pointer;transition: var(--transition);backdrop-filter: blur(10px);display: inline-flex;align-items: center;gap: 8px;}
+.btn-saved-header:hover {background: rgba(255, 255, 255, 0.25);transform: translateY(-2px);box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);}
+.saved-count {background: rgba(255, 255, 255, 0.3);padding: 2px 10px;border-radius: 20px;font-size: 0.9rem;font-weight: 700;}
 
 /* Main Content */
-.page {
-  padding: 60px 0;
-  background: white;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
+.page {padding: 60px 0;background: white;}
+.container {max-width: 1200px;margin: 0 auto;padding: 0 2rem;}
 
 /* Search Bar */
-.search-wrapper {
-  max-width: 600px;
-  margin: 0 auto 3rem;
-  position: relative;
-}
-
-.search-input {
-  width: 100%;
-  padding: 1rem 1.5rem;
-  font-size: 1rem;
-  border: 2px solid var(--medium-gray);
-  border-radius: 50px;
-  outline: none;
-  transition: var(--transition);
-  font-family: inherit;
-}
-
-.search-input:focus {
-  border-color: var(--primary-green);
-  box-shadow: 0 0 0 4px rgba(19, 111, 60, 0.1);
-}
+.search-wrapper {max-width: 600px;margin: 0 auto 3rem;position: relative;}
+.search-input {width: 100%;padding: 1rem 1.5rem;font-size: 1rem;border: 2px solid var(--medium-gray);border-radius: 50px;outline: none;transition: var(--transition);font-family: inherit;}
+.search-input:focus {border-color: var(--primary-green);box-shadow: 0 0 0 4px rgba(19, 111, 60, 0.1);}
 
 /* Grid */
-.content-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+.content-grid {display: grid;grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));gap: 1.5rem;margin-top: 2rem;}
+.content-card {background: white;border-radius: 16px;border: 1px solid var(--medium-gray);padding: 0.3rem;cursor: pointer;transition: var(--transition);position: relative;overflow: hidden;display: flex;align-items: center;gap: 1rem;}
+.content-card::before {content: '';position: absolute;top: 0;left: 0;right: 0;height: 4px;background: linear-gradient(90deg, var(--primary-green), var(--accent-gold));transform: scaleX(0);transition: transform 0.3s ease;}
+.content-card:hover {transform: translateY(-8px);box-shadow: var(--shadow-xl);border-color: var(--primary-green);}
+.content-card:hover::before {transform: scaleX(1);}
+.book-cover-wrapper {width: 150px;height: 200px;flex-shrink: 0;overflow: hidden;border-radius: 8px;box-shadow: var(--shadow-sm);}
+.book-cover-wrapper img {width: 100%;height: 100%;object-fit: cover;}
+.text-group {flex: 1;display: flex;flex-direction: column;gap: 0.25rem;}
+.content-card h3 {font-size: 1.2rem;font-weight: 700;color: var(--primary-green);font-family: 'Amiri', serif;}
+.content-card p {font-size: 1.2rem;font-weight: 700;color: var(--text-light);font-family: 'Amiri', serif;}
+
+/* Buttons */
+.btn-3d {display: inline-flex;align-items: center;justify-content: center;padding: 0.5rem 1rem;font-size: 0.9rem;font-weight: 600;border-radius: 10px;background: var(--light-gray);border: 1px solid var(--medium-gray);cursor: pointer;box-shadow: var(--shadow-sm);transition: var(--transition);color: var(--primary-green);}
+.btn-3d:hover {background: rgba(19, 111, 60, 0.1);box-shadow: var(--shadow-md);transform: translateY(-1px);}
+.btn-3d:active {transform: translateY(1px);}
+
+/* Modal */
+.modal-backdrop {position: fixed;inset: 0;background: rgba(0, 0, 0, 0.7);display: none;align-items: center;justify-content: center;z-index: 1000;padding: 20px;}
+.modal {width: min(1000px, 96%);max-height: 92vh;overflow: auto;background: white;border-radius: 20px;padding: 1rem;box-shadow: var(--shadow-xl);}
+
+/* Saved List */
+.saved-row {display: flex;justify-content: space-between;gap: 1rem;padding: 1rem 0;border-bottom: 1px solid var(--medium-gray);}
+.saved-row:last-child {border-bottom: none;}
+.saved-row .note-text {word-wrap: break-word;overflow-wrap: break-word;word-break: break-word;max-width: 100%;white-space: normal;}
+
+/* Mobile/Tablet optimizations */
+@media (max-width: 1024px) {
+.saved-row {flex-direction: column;gap: 0.75rem;padding: 1.25rem 0;}
+.saved-row > div:last-child {display: flex;gap: 0.5rem;flex-wrap: wrap;}
+.saved-row .btn-3d {padding: 0.4rem 0.8rem;font-size: 0.85rem;flex: 1;min-width: fit-content;}
+.saved-row .note-text {display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;max-height: 4.5em;line-height: 1.5em;}
 }
 
-.content-card {
-  background: white;
-  border-radius: 16px;
-  border: 1px solid var(--medium-gray);
-  padding: 0.3rem;
-  cursor: pointer;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+@media (max-width: 480px) {
+.saved-row .btn-3d {padding: 0.35rem 0.7rem;font-size: 0.8rem;}
+.saved-row {padding: 1rem 0;}
+.saved-row .note-text {-webkit-line-clamp: 2;max-height: 3em;}
 }
 
-.content-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-green), var(--accent-gold));
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.content-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--primary-green);
-}
-
-.content-card:hover::before {
-  transform: scaleX(1);
-}
-
-.book-cover-wrapper {
-  width: 150px;
-  height: 200px;
-  flex-shrink: 0;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: var(--shadow-sm);
-}
-
-.book-cover-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.text-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.content-card h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--primary-green);
-  font-family: 'Amiri', serif;
-}
-
-.content-card p {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-light);
-  font-family: 'Amiri', serif;
-}
+#savedPopup {max-height: 90vh;overflow-y: auto;}
+#savedList {overflow: visible;max-height: none;}
 
 /* Footer */
-footer {
-  margin-top: 4rem;
-  padding: 2rem 1rem;
-  text-align: center;
-  color: var(--text-light);
-  font-size: 0.95rem;
-  border-top: 1px solid var(--medium-gray);
-  background: white;
-}
+footer {margin-top: 4rem;padding: 2rem 1rem;text-align: center;color: var(--text-light);font-size: 0.95rem;border-top: 1px solid var(--medium-gray);background: white;}
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-  
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    padding: 1rem 1.5rem;
-    gap: 1.2rem;
-    border-top: 1px solid #eee;
-  }
-  
-  .nav-links.active {
-    display: flex;
-  }
-
-  .page-header {
-    padding: 60px 0 40px;
-  }
-
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .book-cover-wrapper {
-    width: 100px;
-    height: 140px;
-  }
-
-  .content-card h3 {
-    font-size: 1rem;
-  }
-
-  .content-card p {
-    font-size: 0.85rem;
-  }
+.hamburger {display: block;}
+.nav-links {display: none;flex-direction: column;width: 100%;padding: 1rem 1.5rem;gap: 1.2rem;border-top: 1px solid #eee;}
+.nav-links.active {display: flex;}
+.page-header {padding: 60px 0 40px;}
+.content-grid {grid-template-columns: 1fr;}
+.book-cover-wrapper {width: 100px;height: 140px;}
+.content-card h3 {font-size: 1rem;}
+.content-card p {font-size: 0.85rem;}
+.btn-saved-header, .btn-back-header {padding: 10px 18px;font-size: 0.9rem;}
+.header-actions {flex-direction: row;justify-content: space-between;width: 100%;}
 }
 
 /* Desktop */
 @media (min-width: 769px) {
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .nav-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 2.5rem;
-    padding-right: 2rem;
-  }
+.navbar {display: flex;align-items: center;justify-content: space-between;}
+.nav-container {display: flex;align-items: center;gap: 1rem;}
+.nav-links {display: flex;align-items: center;gap: 2.5rem;padding-right: 2rem;}
 }
 
 /* Dark mode */
-body.dark-mode {
-  --light-gray: #0f172a;
-  --text-dark: #f9fafb;
-  --text-light: #94a3b8;
-  --white: #1e293b;
-  --medium-gray: #334155;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-  .navbar{
+body.dark-mode {--light-gray: #0f172a;--text-dark: #f9fafb;--text-light: #94a3b8;--white: #1e293b;--medium-gray: #334155;}
+html {scroll-behavior: smooth;}
+.navbar{
   background:white;
   position:relative;
   z-index:1000;
@@ -500,60 +291,230 @@ html {
 </style>
 </head>
 <body>
-
 <!-- Navigation -->
 <nav class="navbar">
-  <div class="nav-container">
-    <a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
-    <button class="hamburger" id="hamburger">☰</button>
-  </div>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="https://nooralhuda.co.uk/">Home</a></li>
-    <li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
-    <li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
-    <li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
-  </ul>
+<div class="nav-container">
+<a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+<button class="hamburger" id="hamburger">☰</button>
+</div>
+<ul class="nav-links" id="navLinks">
+<li><a href="https://nooralhuda.co.uk/">Home</a></li>
+<li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+<li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+<li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
+</ul>
 </nav>
 
 <!-- Page Header -->
 <section class="page-header">
-  <div class="header-content">
-    <h1 class="page-title" id="pageTitle">Select a Hadith Collection</h1>
-    <p class="page-subtitle">Explore authentic Shia hadith books</p>
-  </div>
+<div class="header-content">
+<div class="header-actions">
+<a href="https://nooralhuda.co.uk/resources" class="btn-back-header">← Resources</a>
+<button id="openSavedBtn" class="btn-saved-header" style="display: none;">
+📚 Saved Hadiths <span class="saved-count" id="savedCount">0</span>
+</button>
+</div>
+<h1 class="page-title" id="pageTitle">Select a Hadith Collection</h1>
+<p class="page-subtitle">Explore authentic Shia hadith books</p>
+</div>
 </section>
 
 <!-- Main Content -->
 <main class="page">
-  <div class="container">
-    <div class="search-wrapper">
-      <input type="text" id="searchBook" class="search-input" placeholder="Search Hadith Book...">
-    </div>
-    
-    <div class="content-grid" id="bookGrid"></div>
-  </div>
+<div class="container">
+<div class="search-wrapper">
+<input type="text" id="searchBook" class="search-input" placeholder="Search Hadith Book...">
+</div>
+<div class="content-grid" id="bookGrid"></div>
+</div>
 </main>
 
 <footer>
-  © 2025 Noor Al Huda. All rights reserved. Illuminating the path to Islamic knowledge and spiritual growth through authentic resources
+© 2025 Noor Al Huda. All rights reserved. Illuminating the path to Islamic knowledge and spiritual growth through authentic resources
 </footer>
 
+<!-- Saved Modal -->
+<div class="modal-backdrop" id="savedBackdrop" style="display:none">
+<div class="modal" id="savedPopup">
+<h3 style="margin-bottom:1rem">Saved Hadiths</h3>
+<div id="savedList"></div>
+<div style="text-align:right;margin-top:1.5rem">
+<button id="closeSaved" class="btn-3d">Close</button>
+</div>
+</div>
+</div>
+
 <script>
+const STORAGE_VERSION = 67;
+const STORAGE_SAVED = `noor_saved_hadiths_v${STORAGE_VERSION}`;
+const STORAGE_NOTES = `noor_hadith_notes_v${STORAGE_VERSION}`;
+
+let BOOK_SLUG_MAP = {};
+
 const books = [
-  { name_en: "Al-Kafi", name_ar: "الكافي", cover: "https://thaqalayn.net/_next/image?url=%2Fimages%2Fhadith%2Fcovers%2Fcompressed%2F1-round.webp&w=256&q=75", href: "kafi/home" },
-  { name_en: "Man La Yahduruhu al-Faqih", name_ar: "من لا يحضره الفقيه", cover: "https://thaqalayn.net/_next/image?url=%2Fimages%2Fhadith%2Fcovers%2Fcompressed%2F34-round.webp&w=256&q=75", href: "faqih/home" },
-  { name_en: "Uyun Akhbar al-Rida", name_ar: "عيون أخبار الرضا", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F11-round.jpeg&w=1920&q=75", href: "uyun/home" },
-  { name_en: "Nahj al-Balagha", name_ar: "نهج البلاغة", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F32-round.jpeg&w=1920&q=75", href: "nahj/home" },
-  { name_en: "Mujam al-Ahadith al-Mutabara", name_ar: "معجم الأحاديث المعتبرة", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F9-round.jpeg&w=1920&q=75", href: "mujam/home" },
-  { name_en: "Kitab al-Tawhid", name_ar: "كتاب التوحيد", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F14-round.jpeg&w=1920&q=75", href: "tawhid/home" },
-  { name_en: "Fadhail al-Shia", name_ar: "فضائل الشيعة", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F25-round.jpeg&w=1920&q=75", href: "fadail/1/home" },
-  { name_en: "Risalat al-Huquq", name_ar: "رسالة الحقوق", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F33-round.jpeg&w=1920&q=75", href: "huquq/1/home" },
-  { name_en: "Kitab al-Mu'min", name_ar: "كتاب المؤمن", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F30-round.jpeg&w=1920&q=75", href: "momin/1/home" },
-  { name_en: "Kitab al-Ghaybah by Sheikh Tusi", name_ar: "كتاب الغيبة للشيخ الطوسي", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F27-round.jpeg&w=1920&q=75", href: "al-ghaybah/1/home" },
-  { name_en: "Al-Amali", name_ar: "الأمالي", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F29-round.jpeg&w=1920&q=75", href: "amali/1/home" },
-  { name_en: "Wasa'il al-Shia", name_ar: "وسائل الشيعة", cover: "https://upload.wikimedia.org/wikipedia/en/f/f2/Was%C4%81'il_al-Sh%C4%AB%CA%BFa.jpg", href: "wasail/home" },
-  { name_en: "Sifat al-Shia", name_ar: "صفات الشيعة", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F26-round.jpeg&w=1920&q=75", href: "sifat/1/home" }
+{ name_en: "Al-Kafi", name_ar: "الكافي", cover: "https://thaqalayn.net/_next/image?url=%2Fimages%2Fhadith%2Fcovers%2Fcompressed%2F1-round.webp&w=256&q=75", href: "kafi/home" },
+{ name_en: "Man La Yahduruhu al-Faqih", name_ar: "من لا يحضره الفقيه", cover: "https://thaqalayn.net/_next/image?url=%2Fimages%2Fhadith%2Fcovers%2Fcompressed%2F34-round.webp&w=256&q=75", href: "faqih/home" },
+{ name_en: "Uyun Akhbar al-Rida", name_ar: "عيون أخبار الرضا", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F11-round.jpeg&w=1920&q=75", href: "uyun/home" },
+{ name_en: "Nahj al-Balagha", name_ar: "نهج البلاغة", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F32-round.jpeg&w=1920&q=75", href: "nahj/home" },
+{ name_en: "Mujam al-Ahadith al-Mutabara", name_ar: "معجم الأحاديث المعتبرة", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F9-round.jpeg&w=1920&q=75", href: "mujam/home" },
+{ name_en: "Kitab al-Tawhid", name_ar: "كتاب التوحيد", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F14-round.jpeg&w=1920&q=75", href: "tawhid/home" },
+{ name_en: "Fadail al-Shia", name_ar: "فضائل الشيعة", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F25-round.jpeg&w=1920&q=75", href: "fadail/home" },
+{ name_en: "Risalat al-Huquq", name_ar: "رسالة الحقوق", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F33-round.jpeg&w=1920&q=75", href: "huquq/home" },
+{ name_en: "Kitab al-Mu'min", name_ar: "كتاب المؤمن", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F30-round.jpeg&w=1920&q=75", href: "momin/home" },
+{ name_en: "Kitab al-Ghaybah by Sheikh Tusi", name_ar: "كتاب الغيبة للشيخ الطوسي", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F27-round.jpeg&w=1920&q=75", href: "al-ghaybah/home" },
+{ name_en: "Al-Amali", name_ar: "الأمالي", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F29-round.jpeg&w=1920&q=75", href: "al-amali/home" },
+{ name_en: "Wasail al-Shia", name_ar: "وسائل الشيعة", cover: "https://upload.wikimedia.org/wikipedia/en/f/f2/Was%C4%81'il_al-Sh%C4%AB%CA%BFa.jpg", href: "wasail/home" },
+{ name_en: "Sifat al-Shia", name_ar: "صفات الشيعة", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F26-round.jpeg&w=1920&q=75", href: "sifat/home" },
+{ name_en: "Kitab al-Ghaybah by al-Numani", name_ar: "كتاب الغيبة للنعماني", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F27-round.jpeg&w=1920&q=75", href: "ghaybah/home" },
+{ name_en: "Al-Khisal", name_ar: "الخصال", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F10-round.jpeg&w=1920&q=75", href: "khisal/home" },
+{ name_en: "Thawab al-A'mal wa Iqab al-A'mal", name_ar: "ثواب الأعمال وعقاب الأعمال", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F23-round.jpeg&w=1920&q=75", href: "thawab/home" },
+{ name_en: "Kamil al-Ziyarat", name_ar: "كامل الزيارات", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F24-round.jpeg&w=1920&q=75", href: "kamil/home" },
+{ name_en: "Ma'ani al-Akhbar", name_ar: "معاني الأخبار", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F28-round.jpeg&w=1920&q=75", href: "akhbar/home" },
+{ name_en: "Kitab al-Zuhd", name_ar: "كتاب الزهد", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F31-round.jpeg&w=1920&q=75", href: "zuhd/home" },
+{ name_en: "Kamal al-Din wa Tamam al-Ni'ma", name_ar: "كمال الدين وتمام النعمة", cover: "https://thaqalayn.net/_next/image?url=%2Fcss%2Fimages%2F39-round.jpeg&w=1920&q=75", href: "kamal/home" }
 ];
+
+// Utility functions
+function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+function load(key, fallback) { 
+  try { 
+    const v = JSON.parse(localStorage.getItem(key)); 
+    return v === null ? fallback : (v || fallback); 
+  } catch(e) { 
+    return fallback; 
+  } 
+}
+
+function loadAllSaved() {
+  let allSaved = [];
+  for(let v = 1; v <= STORAGE_VERSION; v++) {
+    const saved = load(`noor_saved_hadiths_v${v}`, []);
+    allSaved = allSaved.concat(saved);
+  }
+  return allSaved;
+}
+
+function escapeHtml(s) { 
+  return String(s === undefined || s === null ? '' : s)
+    .replace(/&/g,'&')
+    .replace(/</g,'<')
+    .replace(/>/g,'>')
+    .replace(/"/g,'"'); 
+}
+
+function el(tag, attrs = {}, html = '') {
+  const e = document.createElement(tag);
+  for(const k in attrs) {
+    if(k === 'style') e.style.cssText = attrs[k];
+    else e.setAttribute(k, attrs[k]);
+  }
+  if (html) {
+    e.innerHTML = String(html).replace(/<br\s*\/?>/gi, '<br><br>');
+  }
+  return e;
+}
+
+async function loadBookSlugs() {
+  try {
+    const res = await fetch('https://nooralhuda.co.uk/books.json');
+    BOOK_SLUG_MAP = await res.json();
+  } catch (e) {
+    console.error('Failed to load books.json', e);
+  }
+}
+
+// Update saved count in header
+function updateSavedCount() {
+  const savedCount = loadAllSaved().length;
+  const btn = document.getElementById('openSavedBtn');
+  const countEl = document.getElementById('savedCount');
+  
+  if (savedCount > 0) {
+    btn.style.display = 'inline-flex';
+    countEl.textContent = savedCount;
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+// Saved list modal
+const savedBackdrop = document.getElementById('savedBackdrop');
+const savedPopup = document.getElementById('savedPopup');
+const closeSaved = document.getElementById('closeSaved');
+const savedList = document.getElementById('savedList');
+const openSavedBtn = document.getElementById('openSavedBtn');
+
+openSavedBtn.addEventListener('click', () => {
+  populateSavedList();
+  savedBackdrop.style.display = 'flex';
+});
+
+closeSaved.addEventListener('click', () => savedBackdrop.style.display = 'none');
+savedBackdrop.addEventListener('click', (e) => { 
+  if (e.target === savedBackdrop) savedBackdrop.style.display = 'none'; 
+});
+
+async function populateSavedList() {
+  const savedItems = loadAllSaved();
+  savedList.innerHTML = '';
+  
+  if (!savedItems.length) {
+    savedList.innerHTML = '<em style="color:var(--text-light)">No saved hadiths</em>';
+    return;
+  }
+
+  const notes = load(STORAGE_NOTES, {});
+  
+  savedItems.forEach(item => {
+    const row = el('div', { class:'saved-row' });
+    const left = el('div');
+    
+    const slug = BOOK_SLUG_MAP[item.book] || 'wasail';
+    const SPECIAL_VOLUME_SLUGS = ['kafi', 'faqih', 'uyun'];
+    const volPart = SPECIAL_VOLUME_SLUGS.includes(slug) ? `V${item.volume}, ` : '';
+    
+    left.innerHTML = `<strong>${escapeHtml(item.book)}</strong><br>${volPart}${item.categoryId}, ${item.chapterInCategoryId}, #${item.id}<div class="note-text" style="margin-top:4px; font-size: 1.1rem; color: var(--text-light);">${escapeHtml(notes[item.id] || item.note || '(no note)')}</div>`;
+    
+    const right = el('div', { style:'display:flex;gap:6px' });
+    
+    /* OPEN */
+    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
+    openBtn.onclick = () => {
+      sessionStorage.setItem('targetHadithId', item.id);
+      let url;
+      if (SPECIAL_VOLUME_SLUGS.includes(slug)) {
+        url = `/${slug}/${item.volume}/${item.categoryId}/#${item.chapterInCategoryId}`;
+      } else {
+        url = `/${slug}/${item.categoryId}/#${item.chapterInCategoryId}`;
+      }
+      window.location.href = url;
+    };
+    
+    /* EDIT */
+    const editBtn = el('button',{class:'btn-3d'},'Edit');
+    editBtn.onclick = () => {
+      const newNote = prompt('Edit note:', notes[item.id] || item.note || '') || '';
+      if (newNote.trim()) notes[item.id] = newNote.trim();
+      else delete notes[item.id];
+      save(STORAGE_NOTES, notes);
+      populateSavedList();
+    };
+    
+    /* DELETE */
+    const delBtn = el('button',{class:'btn-3d'},'Delete');
+    delBtn.onclick = () => {
+      const current = load(STORAGE_SAVED, []);
+      const updated = current.filter(x => String(x.id) !== String(item.id));
+      save(STORAGE_SAVED, updated);
+      populateSavedList();
+      updateSavedCount();
+    };
+    
+    right.append(openBtn, editBtn, delBtn);
+    row.append(left, right);
+    savedList.appendChild(row);
+  });
+}
 
 // Hamburger Menu
 const hamburger = document.getElementById('hamburger');
@@ -594,7 +555,7 @@ function renderBooks() {
     card.className = 'content-card';
     card.innerHTML = `
       <div class="book-cover-wrapper">
-        <img src="${book.cover}" alt="${book.name_en}" onerror="this.src='https://via.placeholder.com/80x115?text=No+Cover'">
+        <img src="${book.cover}" alt="${book.name_en}" onerror="this.src='https://via.placeholder.com/150x200?text=No+Cover'">
       </div>
       <div class="text-group">
         <h3>${book.name_en}</h3>
@@ -613,7 +574,6 @@ const searchInput = document.getElementById('searchBook');
 searchInput.addEventListener('input', (e) => {
   const query = e.target.value.toLowerCase().trim();
   const cards = document.getElementsByClassName('content-card');
-  
   Array.from(cards).forEach(card => {
     const text = card.textContent.toLowerCase();
     card.style.display = text.includes(query) ? '' : 'none';
@@ -633,12 +593,11 @@ const savedTheme = localStorage.getItem('theme');
 applyThemeClass(savedTheme === 'dark');
 
 // Initial render
-renderBooks();
+window.addEventListener('DOMContentLoaded', async () => {
+  await loadBookSlugs();
+  renderBooks();
+  updateSavedCount();
+});
 </script>
 </body>
 </html>
-
-
-
-
-
