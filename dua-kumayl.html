@@ -1,1332 +1,529 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Dua Kumayl</title>
+<meta charset="UTF-8">
+<title>Dua Kumayl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Lateef:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Aalmaghribi';
+  src: url('https://nooralhuda.co.uk/quran/Aalmaghribi-pg74r.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Kufi+Arabic:wght@100..900&family=Noto+Sans+Arabic:wght@100..900&family=Parastoo:wght@400..700&display=swap" rel="stylesheet">
+@font-face {
+  font-family: 'IndoPak';
+  src: url('https://nooralhuda.co.uk/quran/Al Majeed Quranic Font_shiped.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kolkatta';
+  src: url('https://nooralhuda.co.uk/quran/Al Qalam Kolkatta Quranic font Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Uthmanic';
+  src: url('https://nooralhuda.co.uk/quran/UthmanicHafs_V22.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+--primary-green: #136f3c;
+--secondary-green: #1a8049;
+--accent-gold: #d4af37;
+--light-gold: #f4e4a6;
+--dark-navy: #1a202c;
+--white: #ffffff;
+--light-gray: #f7fafc;
+--medium-gray: #e2e8f0;
+--text-dark: #2d3748;
+--text-light: #718096;
+--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+--shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+* {margin: 0;padding: 0;box-sizing: border-box;}
+body {font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;line-height: 1.8;color: var(--text-dark);overflow-x: hidden;background: var(--light-gray);}
+
+/* Navigation */
+.navbar {position: sticky;top: 0;background: white;border-bottom: 1px solid #eee;z-index: 1000;}
+.nav-container {display: flex;justify-content: space-between;align-items: center;padding: 2rem 1.5rem;max-width: 1200px;margin: 0 auto;}
+.logo {display: flex;align-items: center;gap: 12px;font-size: 28px;font-weight: 700;color: var(--primary-green);text-decoration: none;}
+.hamburger {display: none;font-size: 26px;background: none;border: none;cursor: pointer;color: var(--primary-green);}
+.hamburger.active {font-size: 28px;}
+.nav-links {display: flex;gap: 2.5rem;padding: 0 2rem 0 0;list-style: none;align-items: center;}
+.nav-links a {text-decoration: none;color: #333;font-weight: 500;transition: var(--transition);}
+.nav-links a:hover {color: var(--primary-green);}
+
+/* Page Header */
+.page-header {background: linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),url('https://nooralhuda.co.uk/karbala.jpg') center/cover;padding: 80px 0 50px;text-align: center;color: white;position: relative;overflow: hidden;margin-top: 0;}
+.page-header::before {content: '';position: absolute;top: 0;left: 0;right: 0;bottom: 0;opacity: 0.6;}
+.header-content {max-width: 1200px;margin: 0 auto;padding: 0 2rem;position: relative;z-index: 2;}
+.page-title {font-size: clamp(2rem, 5vw, 3rem);font-weight: 800;margin-bottom: 0.5rem;text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);}
+.page-subtitle {font-size: clamp(1.5rem, 3vw, 2rem);opacity: 0.9;font-family: 'IndoPak', 'Amiri', serif;}
+
+/* Header Actions */
+.header-actions {display: flex;justify-content: space-between;align-items: center;margin-bottom: 1.5rem;gap: 1rem;flex-wrap: wrap;}
+
+/* Back Button */
+.btn-back-header {background: rgba(255, 255, 255, 0.15);color: white;padding: 12px 24px;border-radius: 50px;border: 2px solid rgba(255, 255, 255, 0.3);font-weight: 600;font-size: 1rem;cursor: pointer;transition: var(--transition);backdrop-filter: blur(10px);text-decoration: none;display: inline-flex;align-items: center;gap: 8px;}
+.btn-back-header:hover {background: rgba(255, 255, 255, 0.25);transform: translateY(-2px);box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);}
+
+/* Controls */
+.controls {display: flex;gap: 1rem;align-items: center;flex-wrap: wrap;}
+
+.font-selector {background: rgba(255, 255, 255, 0.15);color: white;border: 2px solid rgba(255, 255, 255, 0.3);padding: 10px 16px;border-radius: 50px;font-weight: 600;font-size: 0.95rem;cursor: pointer;backdrop-filter: blur(10px);transition: var(--transition);font-family: inherit;}
+
+.font-selector:hover {background: rgba(255, 255, 255, 0.25);}
+
+.font-selector option {background: var(--primary-green);color: white;}
+
+/* Audio Player */
+.audio-player-wrapper {position: sticky;top: 80px;z-index: 999;background: white;padding: 1.5rem 2rem;box-shadow: var(--shadow-md);border-radius: 16px;margin: -30px auto 2rem;max-width: 900px;}
+
+.audio-player-wrapper audio {width: 100%;outline: none;}
+
+.audio-player-wrapper audio::-webkit-media-controls-panel {background: var(--light-gray);}
+
+/* Main Content */
+.page {padding: 60px 0;background: white;min-height: 60vh;}
+.container {max-width: 900px;margin: 0 auto;padding: 0 2rem;}
+
+/* Dua Line */
+.dua-line {background: white;border-radius: 12px;border: 1px solid var(--medium-gray);padding: 2rem;margin-bottom: 1.5rem;transition: var(--transition);display: flex;gap: 1.5rem;align-items: flex-start;}
+
+.dua-line:hover {box-shadow: var(--shadow-md);border-color: var(--primary-green);}
+
+.line-number {background: var(--primary-green);color: white;min-width: 40px;height: 40px;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 0.9rem;font-weight: 600;flex-shrink: 0;}
+
+.line-content {flex: 1;display: flex;flex-direction: column;gap: 1rem;}
+
+.arabic-text {font-family: 'IndoPak', 'Amiri', serif;font-size: 1.8rem;line-height: 2.2;color: var(--text-dark);text-align: right;direction: rtl;font-weight: 400;}
+
+.english-text {font-family: 'Inter', sans-serif;font-size: 1.1rem;line-height: 1.8;color: var(--text-light);text-align: left;direction: ltr;}
+
+/* Font Classes */
+.font-aalmaghribi .arabic-text {font-family: 'Aalmaghribi', 'Amiri', serif;}
+.font-indopak .arabic-text {font-family: 'IndoPak', 'Amiri', serif;}
+.font-kolkatta .arabic-text {font-family: 'Kolkatta', 'Amiri', serif;}
+.font-uthmanic .arabic-text {font-family: 'Uthmanic', 'Amiri', serif;}
+.font-amiri .arabic-text {font-family: 'Amiri', serif;}
+.font-scheherazade .arabic-text {font-family: 'Scheherazade New', serif;}
+.font-lateef .arabic-text {font-family: 'Lateef', serif;}
+.font-aref .arabic-text {font-family: 'Aref Ruqaa', serif;}
+
+/* Update subtitle font based on selected font */
+.font-indopak .page-subtitle {font-family: 'IndoPak', 'Amiri', serif;}
+.font-kolkatta .page-subtitle {font-family: 'Kolkatta', 'Amiri', serif;}
+.font-aalmaghribi .page-subtitle {font-family: 'Aalmaghribi', 'Amiri', serif;}
+.font-uthmanic .page-subtitle {font-family: 'Uthmanic', 'Amiri', serif;}
+.font-amiri .page-subtitle {font-family: 'Amiri', serif;}
+.font-scheherazade .page-subtitle {font-family: 'Scheherazade New', serif;}
+.font-lateef .page-subtitle {font-family: 'Lateef', serif;}
+.font-aref .page-subtitle {font-family: 'Aref Ruqaa', serif;}
+
+/* Loading State */
+.loading {text-align: center;padding: 4rem 2rem;color: var(--text-light);font-size: 1.2rem;}
+
+.loading::after {content: '...';animation: dots 1.5s steps(4, end) infinite;}
+
+@keyframes dots {
+0%, 20% {content: '.';}
+40% {content: '..';}
+60%, 100% {content: '...';}
+}
+
+/* Error State */
+.error {text-align: center;padding: 4rem 2rem;color: #dc2626;font-size: 1.1rem;background: #fee;border-radius: 12px;margin: 2rem;}
+
+/* Footer */
+footer {margin-top: 4rem;padding: 2rem 1rem;text-align: center;color: var(--text-light);font-size: 0.95rem;border-top: 1px solid var(--medium-gray);background: white;}
+
+/* Responsive */
+@media (max-width: 768px) {
+.hamburger {display: block;}
+.nav-links {display: none;flex-direction: column;width: 100%;padding: 1rem 1.5rem;gap: 1.2rem;border-top: 1px solid #eee;}
+.nav-links.active {display: flex;}
+.page-header {padding: 60px 0 40px;}
+.header-actions {flex-direction: column;align-items: stretch;}
+.controls {flex-direction: column;}
+.btn-back-header {padding: 10px 18px;font-size: 0.9rem;justify-content: center;}
+.audio-player-wrapper {padding: 1rem;margin: -20px 1rem 1.5rem;}
+.dua-line {padding: 1.5rem;flex-direction: column;gap: 1rem;}
+.line-number {width: 36px;height: 36px;font-size: 0.85rem;}
+.arabic-text {font-size: 1.5rem;line-height: 2;}
+.english-text {font-size: 1rem;}
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+.navbar {display: flex;align-items: center;justify-content: space-between;}
+.nav-container {display: flex;align-items: center;gap: 1rem;}
+.nav-links {display: flex;align-items: center;gap: 2.5rem;padding-right: 2rem;}
+}
+
+/* Dark mode */
+body.dark-mode {--light-gray: #0f172a;--text-dark: #f9fafb;--text-light: #94a3b8;--white: #1e293b;--medium-gray: #334155;}
+body.dark-mode .dua-line {background: var(--white);}
+body.dark-mode .audio-player-wrapper {background: var(--white);}
+html {scroll-behavior: smooth;}
+.navbar{
+  background:white;
+  position:relative;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+
+/* top row only */
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:3rem 2rem;
+}
+
+/* logo */
 
 
-<link rel="stylesheet" href="../hadiths.css">
-  <style>
-      :root{
-    --green:#276540;
-    --bg: rgba(248,250,251,0.98);
-    --text:#1f2937;
-    --muted:#6b7280;
-    --card: rgba(255,255,255,0.86);
-    --border: rgba(15,23,36,0.06);
-    --radius:14px;
-    --shadow-3d: 0 18px 36px rgba(8,20,10,0.12);
-    --tap:52px;
-  }
-  
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  
-  body{
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-    background: linear-gradient(180deg, var(--bg), var(--bg));
-    color:var(--text); line-height:1.45;
-    padding-top:3.6rem; -webkit-font-smoothing:antialiased;
-    -webkit-tap-highlight-color: transparent;
-  }
+/* hamburger */
+.hamburger{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: #136f3c;
+}
 
-  header {
-    position: fixed; top: 0; left: 0; width: 100%;
-    display: flex; justify-content: space-between; align-items: center;
-    backdrop-filter: blur(14px) saturate(160%);
-    background: var(--green);
-    color: #FFFFFF;
-    padding: 0.75rem 1.25rem;
-    z-index: 1400;
-  }
-  
-  .brand h1 { font-size: 1.4rem; font-weight: 700; margin:0; }
-  .brand a { color: #fff; text-decoration: none; }
-  .hamburger { font-size: 1.5rem; background: transparent; color: #fff; border: none; padding: 0.1rem 0.7rem; cursor: pointer; }
+/* LINKS (desktop) */
+.nav-links{
+  display:flex;
+  gap:2.5rem;            /* ← bigger gap like you asked */
+  padding: 2rem 2rem 2rem 2rem; /* ← space on right edge */
+  list-style:none;
+}
 
-  #mainNav {
-    position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
-    background: #276540;
-    padding: 2rem 1.5rem;
-    display: flex; flex-direction: column; gap: 1rem;
-    border-radius: 0 0 0 24px;
-    transition: right 0.35s ease, opacity 0.35s ease;
-    opacity: 0; pointer-events: none; z-index: 1450;
-  }
-  
-  #mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
-  #mainNav a {
-    background: #fff; color: var(--green);
-    padding: 0.5rem 0.8rem; border-radius: 16px;
-    font-weight: 600; text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  }
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+}
 
-  .page { padding: 5.2rem 0.9rem 6.5rem 0.9rem; max-width:1100px; margin: 0 auto; }
-  
-  .surah-header { display:flex; flex-direction:column; align-items:center; gap:6px; margin-bottom:12px; text-align:center; padding:0 12px; }
-  .header-row { display:flex; align-items:center; gap:12px; width:100%; }
-  .back-home { margin-right:auto; color:#fff; text-decoration:none; background:var(--green); padding:.35rem .6rem; border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,0.08); font-size:.92rem; }
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:768px){
 
-  .surah-title-en { font-size:1.05rem; color:var(--muted); text-align:center;}
-  .surah-title-ar { font-size:1.6rem; font-weight:800; color:var(--green); line-height:1.05; font-family: 'Parastoo'; text-align:center; }
-
-  #bismillahWrap { text-align:center; margin:12px 0; }
-  #bismillahWrap img { max-width:360px; width:85%; filter: drop-shadow(0 8px 22px rgba(0,0,0,0.06)); }
-
-  #hadithContainer { margin-top:8px; display:flex; flex-direction:column; gap:12px; padding:0 6px 120px 6px; }
-  
-  .hadith-card {
-    display:flex; gap:12px; align-items:flex-start;
-    background: var(--card);
-    border-radius:12px;
-    border:1px solid var(--border);
-    padding:12px;
-    box-shadow: var(--shadow-3d);
-    position:relative;
-    overflow:hidden;
-    transition: transform .12s ease, box-shadow .12s ease;
-  }
-  
-  .hadith-card:active{ transform: translateY(2px); }
-  .hadith-meta { width:72px; text-align:center; color:var(--muted); font-weight:700; font-size:.9rem; flex-shrink:0; }
-  .hadith-body { flex:1; display:flex; gap:12px; align-items:flex-start; }
-  .hadith-col { flex:1; min-width:0; }
-  
-  .hadith-en { font-size:1rem; color:var(--text); margin-bottom:8px; text-align:left; }
-  .hadith-context { font-size:0.88rem; color:var(--muted); margin-bottom:8px; }
-  .hadith-ar { font-family: 'Parastoo'; direction:rtl; font-size: clamp(18px, 4vw, 27px); line-height:1.5; text-align:right; }
-
-  .three-dots { background: rgba(255,255,255,0.9); border:1px solid var(--border); padding:8px 10px; border-radius:10px; cursor:pointer; box-shadow:0 8px 26px rgba(0,0,0,0.08); min-width:44px; min-height:var(--tap); display:flex; align-items:center; justify-content:center; }
-  
-  .hadith-popup {
-    position:absolute; right:12px; top:56px;
-    background: white;
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:4px 0;
-    display:none;
-    z-index:1600;
-    width:max-content;
-    max-width:160px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  }
-  
-  .hadith-popup button {
+  .hamburger{
     display:block;
-    width:100%;
-    padding:.4rem .6rem;
-    border:0;
-    background:transparent;
-    text-align:left;
-    cursor:pointer;
-    font-weight:600;
-    color:var(--green);
-    border-radius:0;
-    font-size:.85rem;
-    white-space:nowrap;
-  }
-  
-  .hadith-popup button:hover{ background: rgba(39,101,64,0.06); }
-
-  .gradings { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
-  .grade-chip { padding:.25rem .5rem; border-radius:999px; font-size:.75rem; color:#fff; white-space:nowrap; }
-  .grade-good { background: #2b9348; }
-  .grade-mid { background: #ff9800; }
-  .grade-bad { background: #d9534f; }
-  .grade-none { background: #6b7280; }
-
-  .card-actions { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
-
-  .modal-backdrop { position:fixed; inset:0; background:rgba(2,6,23,0.6); display:none; align-items:center; justify-content:center; z-index:1700; padding:20px; }
-  
-  .modal { width:min(980px,96%); max-height:92vh; overflow:auto; background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9)); border-radius:12px; padding:18px; box-shadow:0 28px 80px rgba(0,0,0,0.28); color:var(--text); }
-  .modal-grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; align-items:start; }
-  
-  .modal-ar { font-family: 'Parastoo'; direction:rtl; font-size: clamp(18px, 3.5vw, 24px); line-height:1.7; text-align:right; }
-  .modal-en { font-size: clamp(14px, 2.5vw, 16px); color:#000; text-align:left; line-height:1.6; }
-  .modal-meta { margin-top:10px; color:var(--muted); font-size:.9rem; }
-
-  .bottom-actions { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); display:flex; gap:10px; z-index:1500; }
-
-  #savedPopup .saved-row { display:flex; justify-content:space-between; gap:8px; padding:8px 0; border-bottom:1px dashed var(--border); flex-wrap:wrap; }
-  .note-input { width:100%; min-height:70px; border:1px solid var(--border); padding:8px; border-radius:8px; font-size:.95rem; }
-
-  .btn-3d {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 0.9rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    color: var(--green);
   }
 
-  .btn-3d:hover {
-    background: rgba(39, 101, 64, 0.1);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-    transform: translateY(-1px);
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;          /* ← full device width */
+    padding:1rem 1.5rem;
+    gap:1.2rem;
+    border-top:1px solid #eee;
   }
 
-  .btn-3d:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  }
-
-  #backBeginning {
-    background: var(--green);
-    color: #fff;
-    padding: 0.5rem 1rem;
-  }
-
-  #backBeginning:hover {
-    background: #2d7f4b;
-  }
-
-  #openSaved {
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--green);
-  }
-
-  #openSaved:hover {
-    background: rgba(39, 101, 64, 0.15);
-  }
-
-  @media (max-width:920px){
-    .modal-grid { grid-template-columns: 1fr; }
-    .hadith-card { flex-direction:column; }
-    .hadith-meta { display:flex; width:100%; justify-content:flex-start; gap:8px; padding-bottom:6px; }
-    .header-row { flex-wrap:wrap; }
-  }
-
-  @media (max-width:720px){
-    body{ padding-top:3.2rem; }
-    .hadith-ar { font-size: clamp(16px, 4.5vw, 24px); }
-    .hadith-en { font-size: clamp(13px, 3.5vw, 16px); }
-    .hadith-context { font-size: clamp(11px, 3vw, 14px); }
-    .three-dots{ padding:6px 8px; }
-    .bottom-actions { bottom: 10px; }
-  }
-
-  @media (max-width:600px){
-    .hadith-card { flex-direction: column; }
-    .hadith-meta { width:100%; text-align:left; padding-bottom:6px; }
-    .hadith-body { flex-direction:column; gap:10px; }
-    
-    .hadith-ar { order: 1; }
-    .hadith-context { order: 2; }
-    .hadith-en { order: 3; }
-    .gradings { order: 4; }
-    .card-actions { order: 5; }
-    
-    .modal-grid { grid-template-columns: 1fr !important; }
-    .modal-ar { order: 1; }
-    .modal-en { order: 2; }
-    .hadith-popup { max-width: 70vw; transform: translateX(-8px); }
-    
-    .header-row { flex-direction:column; gap:8px; }
-    .back-home { margin-right:0; }
-    #openSaved { width:100%; }
-  }
-
-  @media (max-width:430px){
-    .modal-ar { font-size: clamp(12px, 5vw, 22px); }
-    .modal-en { font-size: clamp(10px, 3vw, 14px); }
-  }
-    @media (max-width:600px){
-    .hadith-card { flex-direction: column; }
-    .hadith-meta { width:100%; text-align:left; padding-bottom:6px; }
-    .hadith-body { flex-direction:column; gap:10px; }
-    
-    .hadith-ar { order: 1; }
-    .hadith-context { order: 2; }
-    .hadith-en { order: 3; }
-    .gradings { order: 4; }
-    .card-actions { order: 5; }
-    
-    .modal-grid { grid-template-columns: 1fr !important; }
-    .modal-ar { order: 1; }
-    .modal-en { order: 2; }
-    .hadith-popup { max-width: 70vw; transform: translateX(-8px); }
-    
-    .header-row { flex-direction:column; gap:8px; }
-    .back-home { margin-right:0; }
-    #openSaved { width:100%; }
-  }
-  @media (max-width:600px){
-  .modal-grid > div:first-child {
-    order: 2; /* English/Sanad goes second */
-  }
-  
-  .modal-grid > div:last-child {
-    order: 1; /* Arabic goes first */
+  .nav-links.active{
+    display:flex;
   }
 }
-@media (max-width:600px){
-  .hadith-body {
-    flex-direction: column;
-  }
-  
-  .hadith-col:first-child {
-    order: 2; /* English/Sanad goes second */
-  }
-  
-  .hadith-col:last-child {
-    order: 1; /* Arabic goes first */
-  }
+/* ===== DESKTOP LAYOUT ===== */
+.navbar{
+  background:white;
+  border-bottom:1px solid #eee;
 }
-.surah-header { display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:12px; text-align:center; padding:0 12px; }
-  .header-row { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; flex-wrap:wrap; }
-  .back-home { color:#fff; text-decoration:none; background:var(--green); padding:.4rem .7rem; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); font-size:.9rem; white-space:nowrap; }
 
-  .surah-title-en { font-size:0.95rem; color:var(--muted); text-align:center; margin:0; }
-  .surah-title-ar { font-size:1.4rem; font-weight:800; color:var(--green); line-height:1.1; font-family: 'Parastoo'; text-align:center; margin:0; }
+/* make navbar behave like one row on desktop */
+@media (min-width:769px){
 
-  @media (max-width:720px){
-    .surah-header { gap:10px; margin-bottom:10px; }
-    .header-row { flex-direction:column; gap:10px; }
-    .back-home { align-self:flex-start; padding:.35rem .6rem; font-size:.85rem; }
-    .openSaved { align-self:flex-start; padding:.35rem .6rem; font-size:.85rem; }
-    .surah-title-en { font-size:.9rem; }
-    .surah-title-ar { font-size:1.2rem; }
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
   }
 
-  @media (max-width:600px){
-    .surah-header { gap:8px; padding:0 8px; }
-    .header-row { gap:8px; }
-    .back-home { padding:.3rem .5rem; font-size:.8rem; }
-    .surah-title-en { font-size:.9rem; }
-    .surah-title-ar { font-size:1.2rem; }
-    .openSaved { padding:.3rem .5rem; font-size:.8rem; }
-  }
- .header-row {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-areas: "back title saved";
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  max-width: 1100px;
-}
-
-/* map elements into grid areas */
-.back-home { grid-area: back; justify-self: start; }
-.header-row > div { grid-area: title; justify-self: center; }
-#openSaved { grid-area: saved; justify-self: end; }
-
-/* Responsive: stack volume + saved on one row above the title for tablets/phones */
-@media (max-width:720px){
-  .header-row {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "back saved"
-      "title title";
-    gap: 8px;
-    padding: 0 12px;
+  .nav-container{
+    padding:1rem 1.5rem;
   }
 
-  .back-home { justify-self: start; }
-  #openSaved { justify-self: end; }
-  .surah-title-ar { font-size: 1.4rem; }
-  .surah-title-en { font-size: 1rem; color:var(--muted); }
-}
-
-/* Slightly smaller on small phones */
-@media (max-width:600px){
-  .header-row { gap: 6px; padding: 0 10px; }
-  #openSaved, .back-home { padding: .35rem .55rem; font-size: .85rem; }
-  .surah-title-ar { font-size: 1.2rem; }
-  .surah-title-en { font-size: 1rem; }
-}
-.grading-full { display: block; }
-.gradings-chips { display: none; }
-
-@media (max-width:720px) {
-  .grading-full { display: none; }    /* hide full details on phone */
-  .gradings-chips { display: flex; }  /* show compact chips on phone */
-  .gradings-chips .grade-chip { margin-right:6px; }
-}
-body.dark-mode {
-  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
-  --card:#1e293b; --border:#334155;
-}
-
-body.dark-mode .modal {
-  background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(30,41,59,0.9));
-  color: #f9fafb;
-}
-
-body.dark-mode .modal-ar,
-body.dark-mode .modal-en {
-  color: #f9fafb;
-}
-
-body.dark-mode .modal-meta {
-  color: #94a3b8;
-}
-
-body.dark-mode .modal-backdrop {
-  background: rgba(0,0,0,0.8);
-}
-
-body.dark-mode .btn-3d {
-  background: rgba(30,41,59,0.9);
-  color: #276540;
-  border: 1px solid #475569;
-}
-
-body.dark-mode .btn-3d:hover {
-  background: rgba(51,65,85,0.9);
-  border-color: #64748b;
-}
-
-body.dark-mode #modalGradings .grade-chip {
-  opacity: 0.9;
-}
-
-body.dark-mode .note-input {
-  background: #1e293b;
-  border: 1px solid #475569;
-  color: #f9fafb;
-}
-
-body.dark-mode .note-input::placeholder {
-  color: #94a3b8;
-}
-.book-meta {
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-top: 4px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-}
-
-@media (max-width:720px) {
-  .book-meta {
-    font-size: 0.75rem;
-    margin-top: 2px;
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2.5rem;
+    padding-right:2rem; /* bigger right gap like you wanted */
   }
 }
+/* =========================
+   NAVBAR BASE
+========================= */
 
-@media (max-width:600px) {
-  .book-meta {
-    font-size: 0.7rem;
-    margin-top: 2px;
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+/* this is the important fix */
+.nav-container,
+.nav-links{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 24px;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-container{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+
+  .hamburger{
+    display:none;
+    color: #136f3c;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2rem;
   }
 }
-
-@media (max-width:720px){
-  body { padding-top: 2.8rem; }
-  .surah-header { gap: 0; margin-bottom: 8px; padding: 0 10px; }
-  .header-row { gap: 6px; }
-  .back-home { padding: .3rem .5rem; font-size: .8rem; }
-  #openSaved { padding: .3rem .5rem; font-size: .75rem; width: auto; max-width: 70px; }
-  .surah-title-en { font-size: 1.2rem; margin: 0; }
-  .surah-title-ar { font-size: 1.4rem; margin: 0; }
-  .book-meta { font-size: 1.1rem; margin-top: 1px; }
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff; /* important so content doesn’t show through */
+}
+.hamburger{
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-@media (max-width:600px){
-  body { padding-top: 2.5rem; }
-  .surah-header { gap: 2px; margin-bottom: 6px; padding: 0 8px; }
-  .header-row { gap: 4px; }
-  #openSaved { max-width: 70px; padding: 0.5rem .5rem; font-size: 1.2rem; }
-  #bismillahWrap { margin: 6px 0; }
-  #hadithContainer { margin-top: 4px; padding: 0 4px 120px 4px; }
+/* when open */
+.hamburger.active{
+  font-size: 28px;
 }
-#partNav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-}
-
-#partNav .btn-3d {
-  margin: 0; /* keep margin zero so gap fully controls spacing */
-}
-#partButtons {
-  display: flex;
-  flex-wrap: wrap;      /* allows automatic wrapping */
-  gap: 10px;            /* controls spacing between buttons */
-  justify-content: center; /* optional: center them */
-  margin-bottom: 20px;
-}
-
-#partButtons button {
-  margin: 1;            /* ensures gap controls spacing */
-}
-.hadith-ar.sanad {
-  opacity: 0.65;
-  font-size: 1.4em;
-}
-
-.hadith-ar.matn {
-  margin-top: .4rem;
-}
-.modal-ar.sanad {
-  opacity: 0.65;
-  font-size: 1.4em;
-}
-
-.modal-ar.matn {
-  margin-top: .5rem;
-}
-.three-dots {
-  display: none !important;
-}
-
-  </style>
+</style>
 </head>
 <body>
-
-  <header>
-    <div class="brand"><h1><a href="https://nooralhuda.co.uk">Noor Al Huda</a></h1></div>
-    <button class="hamburger" aria-label="Open menu">☰</button>
-  </header>
-
-  <nav id="mainNav" aria-hidden="true">
-    <a href="https://nooralhuda.co.uk/quran">Quran</a>
-    <a href="https://nooralhuda.co.uk/duas">Duas</a>
-    <a href="https://nooralhuda.co.uk/hadiths-home">Hadiths</a>
-    <a href="https://nooralhuda.co.uk/calendar">Calendar</a>
-    <a href="https://nooralhuda.co.uk/salah">Salah</a>
-    <a href="https://tube.nooralhuda.co.uk/">ShiaTube</a>
-    <a href="https://nooralhuda.co.uk">Home</a>
-    <a href="https://nooralhuda.co.uk/settings">Settings</a>
-  </nav>
-
-  <main class="page" id="page">
-    <div class="surah-header" role="banner">
-  <div class="header-row">
-    <a class="back-home" href="duas">← Go Back</a>
-    <button id="openSaved" class="btn-3d">history</button>
-    <div style="text-align:center; flex:1;">
-      <div class="surah-title-en">دعاء كوميل</div>
-      <div class="surah-title-ar">Dua Kumayl</div>
-      <div class="book-meta">Reference: Misbah al-Mutahajjid by Shaykh al-Tusi (d. 460 A.H.)</div>
-    </div>
-  </div>
+<!-- Navigation -->
+<nav class="navbar">
+<div class="nav-container">
+<a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+<button class="hamburger" id="hamburger">☰</button>
 </div>
-        
-       
-      </div>
-    </div>
+<ul class="nav-links" id="navLinks">
+<li><a href="https://nooralhuda.co.uk/">Home</a></li>
+<li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+<li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+<li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
+</ul>
+</nav>
 
-    <div id="bismillahWrap">
-      <img src="../bismillah.png" alt="Bismillah" onerror="this.style.display='none'">
-    </div>
-
-    <div id="pageNav" style="text-align:center; margin:20px 0; border-bottom:1px solid var(--border); padding-bottom:10px;"></div>
-
-    <div id="hadithContainer" aria-live="polite"></div>
-  </main>
-
-  <div class="bottom-actions">
-    <button id="backBeginning" class="btn-3d">Back to Top</button>
-  </div>
-
-  <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal" role="dialog" aria-modal="true">
-      <div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap">
-        <div style="display:flex;gap:8px">
-          <button id="modalPrev" class="btn-3d">← Prev</button>
-          <button id="modalNext" class="btn-3d">Next →</button>
-        </div>
-        <button id="modalClose" class="btn-3d">Close</button>
-      </div>
-
-      <div class="modal-grid">
-        <div>
-          <div class="modal-meta" id="modalSanad"></div>
-          <div class="modal-en" id="modalEnglish"></div>
-        </div>
-        <div>
-          <div class="modal-ar" id="modalArabic"></div>
-        </div>
-      </div>
-
-
-      <div style="margin-top:12px">
-        <strong style="font-size:.95rem">Notes</strong>
-        <textarea id="modalNote" class="note-input" placeholder="Add a private note"></textarea>
-      </div>
-    </div>
-  </div>
-
-<div class="modal-backdrop" id="savedBackdrop" style="display:none">
-  <div class="modal" id="savedPopup">
-    <h3 style="margin-bottom:8px">History of Dua Kumayl</h3>
-
-    <div style="padding:10px 0; line-height:1.6; font-size:.95rem;">
-Kumayl Ibn Ziyad Nakha'i was a confidant amongst the companions of Imam Ali Ibn Abi Talib (as.) and this sublime Du'a was first heard from the beautiful, though anguished, voice of Imam Ali. According to Allama Majlisi (on whom be Allah's Mercy) Kumayl had attended an assembly in the Mosque at Basra which was addressed by Imam Ali in the course of which the night of the 15th of Shaban was mentioned. Imam Ali said-"Whosoever keeps awake in devoutness on this night and recites the Du'a of Prophet Khizr, undoubtedly that person's supplication will be responded to and granted. When the assembly at the Mosque had dispersed, Kumayl called at the house where Imam Ali was staying, and requested him to acquaint him with Prophet Khizr's "Du'a". Imam Ali asked Kumayl to sit down, record and memorise the "Du'a" which Imam Ali dictated to Kumayl. Imam Ali then advised Kumayl to recite this "Du'a" on the eve of (i.e. evening preceding) every Friday, or once a month or at least once in every year so that, added Imam Ali, "Allah may protect thee from the evils of the enemies and the plots contrived by impostors. O' Kumayl! in consideration of thy companionship and understanding, I grant thee this honour of entrusting this "Du'a" to thee."
-    </div>
-
-    <div style="text-align:right;margin-top:12px">
-      <button id="closeSaved" class="btn-3d">Close</button>
-    </div>
-  </div>
+<!-- Page Header -->
+<section class="page-header">
+<div class="header-content">
+<div class="header-actions">
+<a href="duas.html" class="btn-back-header">← Back to Duas</a>
+<div class="controls">
+<select class="font-selector" id="fontSelector">
+<option value="indopak">IndoPak</option>
+<option value="kolkatta">Kolkatta</option>
+<option value="uthmanic">Uthmanic</option>
+<option value="aalmaghribi">Aalmaghribi</option>
+<option value="amiri">Amiri</option>
+<option value="scheherazade">Scheherazade</option>
+<option value="lateef">Lateef</option>
+<option value="aref">Aref Ruqaa</option>
+</select>
 </div>
+</div>
+<h1 class="page-title" id="duaTitle">Dua Kumayl</h1>
+<p class="page-subtitle" id="duaSubtitle">دُعاء كميل</p>
+</div>
+</section>
+
+<!-- Audio Player -->
+<div class="audio-player-wrapper" id="audioPlayerWrapper" style="display: none;">
+<audio controls id="duaAudio">
+<source src="" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+</div>
+
+<!-- Main Content -->
+<main class="page">
+<div class="container" id="duaContainer">
+<div class="loading">Loading dua</div>
+</div>
+</main>
+
+<footer>
+© 2025 Noor Al Huda. All rights reserved. Illuminating the path to Islamic knowledge and spiritual growth through authentic resources
+</footer>
 
 <script>
-/* -------------------------
-   Configuration & Storage
-   ------------------------- */
-const API_URL = 'duas/kumayl.json'; // Local file
-const FILTER_VOLUME = 1;
-const FILTER_CATEGORY_ID = null;
+// ============================================
+// CONFIGURATION - CHANGE ONLY THESE VALUES
+// ============================================
+const DUA_NAME_EN = "Dua Kumayl";
+const DUA_NAME_AR = "دُعاء كميل";
+const DUA_JSON_URL = "https://nooralhuda.co.uk/duas/kumayl.json";
+const DUA_AUDIO_URL = "https://mp3.duas.org/kumayl_abdulhay.mp3";
+// ============================================
 
+// Update page title
+document.getElementById('duaTitle').textContent = DUA_NAME_EN;
+document.getElementById('duaSubtitle').textContent = DUA_NAME_AR;
+document.title = DUA_NAME_EN;
 
+// Hamburger Menu
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
 
-const STORAGE_SAVED = 'noor_saved_hadiths_v100';
-const STORAGE_PINNED = 'noor_pinned_hadith_v100';
-const STORAGE_NOTES = 'noor_hadith_notes_v100';
+if (hamburger) {
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+    hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+  });
 
-
-/* -------------------------
-   DOM refs & state
-   ------------------------- */
-const hadithContainer = document.getElementById('hadithContainer');
-const modalBackdrop = document.getElementById('modalBackdrop');
-const modalGradings = document.getElementById('modalGradings');
-const modalNote = document.getElementById('modalNote');
-const modalPrev = document.getElementById('modalPrev');
-const modalNext = document.getElementById('modalNext');
-const modalClose = document.getElementById('modalClose');
-const openSavedBtn = document.getElementById('openSaved');
-const savedBackdrop = document.getElementById('savedBackdrop');
-const savedPopup = document.getElementById('savedPopup');
-const closeSaved = document.getElementById('closeSaved');
-const backBeginning = document.getElementById('backBeginning');
-let ALL_HADITHS = [];
-
-let HADITHS = [];
-let visibleIndex = 0;
-let ALL_SAVED_CORPUS = null;
-let PAGES = {}; // Maps chapterInCategoryId to array of hadiths
-let currentPage = null; // Currently displayed page/chapter
-
-/* Ensure saved list container exists inside savedPopup 
-let savedList = document.getElementById('savedList');
-if (!savedList) {
-  savedList = document.createElement('div');
-  savedList.id = 'savedList';
-  savedList.style.marginTop = '12px';
-  savedPopup.insertBefore(savedList, savedPopup.querySelector('div[style*="text-align:right"]') || null);
-}
-*/
-/* -------------------------
-   Utilities
-   ------------------------- */
-function save(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
-function splitArabicSanadMatnByEnglish(arabicText, englishSanad = '') {
-  if (!arabicText) return { sanad: '', matn: '' };
-  const text = arabicText.trim();
-
-  // English word count
-  let englishWordCount = englishSanad ? englishSanad.trim().split(/\s+/).length : 0;
-
-  // Subtract 5 words to compensate for Arabic shorter length (minimum 1)
-  englishWordCount = Math.max(1, englishWordCount - 5);
-
-  // find all colons in Arabic text
-  const colonIndexes = [];
-  for (let i = 0; i < text.length; i++) {
-    if (text[i] === ':') colonIndexes.push(i);
-  }
-
-  // if no colon, return all as matn
-  if (!colonIndexes.length) return { sanad: '', matn: text };
-
-  if (!englishWordCount) {
-    // fallback: use last colon
-    const idx = colonIndexes[colonIndexes.length - 1];
-    return { sanad: text.slice(0, idx + 1).trim(), matn: text.slice(idx + 1).trim() };
-  }
-
-  // pick colon where Arabic word count up to it is closest to adjusted English word count
-  let bestIdx = colonIndexes[0];
-  let bestDiff = Infinity;
-  colonIndexes.forEach(idx => {
-    const words = text.slice(0, idx).trim().split(/\s+/).length;
-    const diff = Math.abs(words - englishWordCount);
-    if (diff < bestDiff) {
-      bestDiff = diff;
-      bestIdx = idx;
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+      navLinks.classList.remove('active');
+      hamburger.classList.remove('active');
+      hamburger.textContent = '☰';
     }
   });
 
-  return {
-    sanad: text.slice(0, bestIdx + 1).trim(),
-    matn: text.slice(bestIdx + 1).trim()
-  };
-}
-
-
-
-function load(key, fallback){ try{ const v = JSON.parse(localStorage.getItem(key)); return v === null ? fallback : (v || fallback); }catch(e){ return fallback; } }
-function el(tag, attrs = {}, text = ''){ const e = document.createElement(tag); for(const k in attrs) { if(k === 'style') e.style.cssText = attrs[k]; else e.setAttribute(k, attrs[k]); } if(text) e.innerText = text; return e; }
-function escapeHtml(s){ return String(s === undefined || s === null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function gradeClass(text){
-  if (!text) return 'grade-none';
-  const t = String(text).trim();
-
-  // ✅ GOOD / GREEN
-  if (/صحيح|حسن|معتبر|Sahih|Hasan|sound|authentic/i.test(t)) {
-    return 'grade-good';
-  }
-
-  // ❌ WEAK / RED
-  if (/ضعيف|weak|Daif/i.test(t)) {
-    return 'grade-bad';
-  }
-
-  // ⚠️ UNKNOWN / MID
-  return 'grade-mid';
-}
-
-
-function extractGradeOnly(fullText){
-  if(!fullText) return '';
-  const match = fullText.match(/^[^—]*?(?=\s*(?:—|$))/);
-  return match ? match[0].trim() : fullText.trim();
-}
-function splitArabicSanadMatn(arabicText) {
-  if (!arabicText) return { sanad: '', matn: '' };
-
-  const idx = arabicText.lastIndexOf(':');
-  if (idx === -1) {
-    return { sanad: '', matn: arabicText.trim() };
-  }
-
-  return {
-    sanad: arabicText.slice(0, idx + 1).trim(),
-    matn: arabicText.slice(idx + 1).trim()
-  };
-}
-
-
-/* -------------------------
-   Data loader
-   ------------------------- */
-async function loadHadiths(){
-  hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Loading hadiths…</div>';
-  try {
-    const res = await fetch(API_URL);
-    if(!res.ok) throw new Error('API fetch failed');
-    const arr = await res.json();
-
-    // Remove the old filter
-    ALL_HADITHS = arr.slice(); // copy all hadiths
-    HADITHS = ALL_HADITHS.slice();
-
-    renderList();
-
-  } catch (err) {
-    console.error(err);
-    hadithContainer.innerHTML = '<div style="padding:12px;color:var(--muted)">Failed to load hadiths.</div>';
-  }
-}
-
-
-
-/* -------------------------
-   Render list / cards
-   ------------------------- */
-function renderList(){
-  hadithContainer.innerHTML = '';
-  if(!HADITHS.length){ hadithContainer.innerHTML = '<em style="color:var(--muted);padding:12px">No hadiths found.</em>'; return; }
-
-  const currentPinned = load(STORAGE_PINNED, null);
-const chapterCounters = {};
-
-
-  HADITHS.forEach((h, i) => {
-    const ch = h.chapterInCategoryId;
-chapterCounters[ch] = (chapterCounters[ch] || 0) + 1;
-const chapterHadithNumber = chapterCounters[ch];
-
-    const card = el('div', {
-        class: 'hadith-card',
-        id: 'hadith-card-' + h.id,
-        'data-chapter': h.chapterInCategoryId
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      hamburger.classList.remove('active');
+      hamburger.textContent = '☰';
     });
-
-const meta = el('div', { class: 'hadith-meta' }, `#${h.id}`);
-
-    const body = el('div', { class: 'hadith-body' });
-    const leftCol = el('div', { class: 'hadith-col' });
-    const rightCol = el('div', { class: 'hadith-col' });
-
-    // Decide which content to show: prefer Thaqalayn sanad+matn when both exist,
-    // otherwise fallback to englishText or thaqalaynMatn
-    const hasSanad = h.thaqalaynSanad && String(h.thaqalaynSanad).trim() !== '';
-    const hasMatn = h.thaqalaynMatn && String(h.thaqalaynMatn).trim() !== '';
-
-let sanad = '';
-let english = '';
-let arabic = '';
-let arabicSanad = '';
-let arabicMatn = '';
-
-
-// Sanad (optional)
-sanad = h.thaqalaynSanad
-  ? String(h.thaqalaynSanad).trim()
-  : '';
-
-// English: Thaqalayn → fallback to englishText
-english =
-  h.thaqalaynMatn
-    ? String(h.thaqalaynMatn).trim()
-    : (h.englishText ? String(h.englishText).trim() : '');
-
-// Arabic
-const fullArabic = h.arabicText ? String(h.arabicText).trim() : '';
-
-if (fullArabic && sanad) {
-  const split = splitArabicSanadMatnByEnglish(fullArabic, sanad);
-  arabicSanad = split.sanad;
-  arabicMatn  = split.matn;
-} else {
-  arabicMatn = fullArabic;
-}
-
-
-    const contextP = el('div', { class: 'hadith-context' }, sanad ? `Sanad: ${sanad}` : '');
-    const enP = el('div', { class: 'hadith-en' }, english || '');
-
-
-    leftCol.appendChild(contextP);
-    if (english) leftCol.appendChild(enP);
-
-if (arabicSanad) {
-  rightCol.appendChild(
-    el('div', { class: 'hadith-ar sanad' }, arabicSanad)
-  );
-}
-
-if (arabicMatn) {
-  rightCol.appendChild(
-    el('div', { class: 'hadith-ar matn' }, arabicMatn)
-  );
-}
-
-
-    // gradings
-    const gradWrap = el('div', { class: 'gradings' });
-    (h.gradingsFull || []).slice(0,2).forEach(g => {
-      const grade = extractGradeOnly(g.grade_ar || g.grade || '—');
-      const chip = el('div', { class: 'grade-chip ' + gradeClass(grade) }, grade);
-      gradWrap.appendChild(chip);
-    });
-
-    const actions = el('div', { class: 'card-actions' });
-    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
-    openBtn.addEventListener('click', () => openHadithModal(i));
-    actions.appendChild(openBtn);
-
-    leftCol.appendChild(gradWrap);
-    leftCol.appendChild(actions);
-
-    // popup menu (pin/save/copy/open)
-    const rightWrap = el('div', { class: 'hadith-menu-wrap', style: 'position:absolute;top:6px;right:6px' });
-    const dot = el('button', { class: 'three-dots', 'aria-label': 'Menu' }, '⋯');
-    const popup = el('div', { class: 'hadith-popup', id: `popup-${h.id}` });
-
-    const pinBtn = el('button', {}, currentPinned && String(currentPinned.id) === String(h.id) ? 'Unpin' : 'Pin');
-    const saveBtn = el('button', {}, 'Save');
-    const copyBtn = el('button', {}, 'Copy');
-    const openFullBtn = el('button', {}, 'Open');
-
-    popup.append(pinBtn, saveBtn, copyBtn, openFullBtn);
-    rightWrap.append(dot, popup);
-
-    // toggle popup
-    dot.addEventListener('click', (ev) => {
-      ev.stopPropagation();
-      document.querySelectorAll('.hadith-popup').forEach(p => { if(p !== popup) p.style.display = 'none'; });
-      popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
-    });
-    document.addEventListener('click', (e) => {
-      if(!popup.contains(e.target) && e.target !== dot) popup.style.display = 'none';
-    });
-
-    // PIN / UNPIN: checks + confirmation
-    pinBtn.addEventListener('click', () => {
-      const currentPinnedNow = load(STORAGE_PINNED, null);
-
-      // if already pinned -> unpin
-      if (currentPinnedNow && String(currentPinnedNow.id) === String(h.id)) {
-        localStorage.removeItem(STORAGE_PINNED);
-        alert(`Unpinned hadith #${h.id}`);
-        popup.style.display = 'none';
-        renderList();
-        return;
-      }
-
-      // if another pinned exists -> confirm overwrite
-      if (currentPinnedNow && String(currentPinnedNow.id) !== String(h.id)) {
-        if (!confirm(`Hadith #${currentPinnedNow.id} is already pinned.\n\nReplace it with #${h.id}?`)) {
-          return;
-        }
-      }
-
-      // save pin (include volume so we know where it's pinned)
-      save(STORAGE_PINNED, { id: h.id, volume: FILTER_VOLUME });
-      alert(`Pinned hadith #${h.id}`);
-      popup.style.display = 'none';
-      const chapter = h.chapterInCategoryId;
-      showChapter(chapter); 
-    });
-
-    // SAVE (to saved list) + optional note
-    saveBtn.addEventListener('click', () => {
-      const notes = load(STORAGE_NOTES, {});
-      const currentNote = notes[h.id] || '';
-      const note = prompt('Add note (optional):', currentNote) || '';
-
-      const saved = load(STORAGE_SAVED, []);
-      const idx = saved.findIndex(x => String(x.id) === String(h.id));
-      if (idx === -1) {
-        saved.unshift({ id: h.id, snippet: (h.thaqalaynMatn || h.englishText || '').slice(0,160), note: note || '' });
-      } else {
-        saved[idx].note = note || '';
-        saved[idx].snippet = (h.thaqalaynMatn || h.englishText || '').slice(0,160);
-      }
-
-      if (note && note.trim()) {
-        notes[h.id] = note.trim();
-        save(STORAGE_NOTES, notes);
-      } else {
-        // remove note if blank
-        delete notes[h.id];
-        save(STORAGE_NOTES, notes);
-      }
-
-      save(STORAGE_SAVED, saved);
-      alert('Saved hadith #' + h.id);
-      popup.style.display = 'none';
-      populateSavedList();
-    });
-
-    // COPY
-    copyBtn.addEventListener('click', async () => {
-      const txt = `Hadith #${h.id}\n\n${arabic || ''}\n\n${english || ''}`;
-      try { await navigator.clipboard.writeText(txt); alert('Copied'); }
-      catch(e){ alert('Copy failed'); }
-      popup.style.display = 'none';
-    });
-
-    // Open modal
-    openFullBtn.addEventListener('click', () => { openHadithModal(i); popup.style.display = 'none'; });
-
-    // assemble
-    body.appendChild(leftCol);
-    body.appendChild(rightCol);
-
-    card.appendChild(meta);
-    card.appendChild(body);
-    card.appendChild(rightWrap);
-    hadithContainer.appendChild(card);
-  });
-
-  // Organize hadiths by chapter and show first chapter by default
-  organizeByChapter();
-  showFirstChapter();
-}
-
-// Organize hadiths by chapterInCategoryId
-function organizeByChapter() {
-  PAGES = {};
-  HADITHS.forEach(h => {
-    const chapter = h.chapterInCategoryId;
-    if (!PAGES[chapter]) {
-      PAGES[chapter] = [];
-    }
-    PAGES[chapter].push(h);
   });
 }
-function getChapterFromHash() {
-  const hash = window.location.hash.replace('#', '');
-  if (!hash) return null;
-  return isNaN(hash) ? null : String(hash);
-}
 
+// Font Selector
+const fontSelector = document.getElementById('fontSelector');
+const pageHeader = document.querySelector('.page-header');
+const container = document.getElementById('duaContainer');
 
-
-// Show/hide hadiths for a specific chapter
-function showChapter(chapterId) {
-  currentPage = chapterId;
-
-  document.querySelectorAll(".hadith-card").forEach(card => {
-    const ch = card.dataset.chapter;
-    card.style.display = (ch === String(chapterId)) ? "block" : "none";
-  });
-
-
-
-  updatePageNavigation();
-}
-
-
-
-// Show the first chapter by default
-function showFirstChapter() {
-  const chapters = Object.keys(PAGES).sort((a, b) => {
-    const numA = parseInt(a) || 0;
-    const numB = parseInt(b) || 0;
-    return numA - numB;
-  });
-
-  if (!chapters.length) return;
-
-  const fromHash = getChapterFromHash();
-
-  if (fromHash && PAGES[fromHash]) {
-    showChapter(fromHash);
-  } else {
-    showChapter(chapters[0]);
-  }
-}
-
-
-// Generate and update page navigation buttons
-function updatePageNavigation() {
-
-}
-
-
-function openHadithModal(idx){
-  if (idx < 0 || idx >= HADITHS.length) return;
-  visibleIndex = idx;
-  const h = HADITHS[idx];
-
-  const hasSanad = h.thaqalaynSanad && String(h.thaqalaynSanad).trim() !== '';
-  const hasMatn  = h.thaqalaynMatn  && String(h.thaqalaynMatn).trim() !== '';
-
-  let sanad = '';
-  let english = '';
-  let arabicSanad = '';
-  let arabicMatn = '';
-
-sanad = h.thaqalaynSanad
-  ? String(h.thaqalaynSanad).trim()
-  : '';
-
-// English: Thaqalayn → fallback to englishText
-english =
-  h.thaqalaynMatn
-    ? String(h.thaqalaynMatn).trim()
-    : (h.englishText ? String(h.englishText).trim() : '');
-
-// Arabic
-const fullArabic = h.arabicText ? String(h.arabicText).trim() : '';
-
-if (fullArabic && sanad) {
-  const split = splitArabicSanadMatnByEnglish(fullArabic, sanad);
-  arabicSanad = split.sanad;
-  arabicMatn  = split.matn;
-} else {
-  arabicMatn = fullArabic;
-}
-
-
-  /* main grid */
-  const modalGrid = document.querySelector('.modal-grid');
-  modalGrid.innerHTML = '';
-
-  const leftDiv = el('div');
-
-  if (sanad) {
-    leftDiv.appendChild(
-      el('div', { class: 'modal-meta' }, sanad)
-    );
-  }
-
-  if (english) {
-    leftDiv.appendChild(
-      el('div', { class: 'modal-en' }, english)
-    );
-  }
-
-  const rightDiv = el('div');
-
-  if (arabicSanad) {
-    rightDiv.appendChild(
-      el('div', { class: 'modal-ar sanad' }, arabicSanad)
-    );
-  }
-
-  if (arabicMatn) {
-    rightDiv.appendChild(
-      el('div', { class: 'modal-ar matn' }, arabicMatn)
-    );
-  }
-
-  modalGrid.appendChild(leftDiv);
-  modalGrid.appendChild(rightDiv);
-
-  /* gradings */
-  modalGradings.innerHTML = '';
-  (h.gradingsFull || []).forEach(g => {
-    const grade = extractGradeOnly(g.grade_ar || g.grade || '—');
-    modalGradings.appendChild(
-      el('div', { class: 'grade-chip ' + gradeClass(grade) }, grade)
-    );
-  });
-
-  /* notes */
-  const notes = load(STORAGE_NOTES, {});
-  modalNote.value = notes[h.id] || '';
-
-  modalBackdrop.style.display = 'flex';
-
-
-/* modal nav */
-modalPrev.addEventListener('click', () => { if(visibleIndex > 0) { visibleIndex--; openHadithModal(visibleIndex); scrollToCard(); }});
-modalNext.addEventListener('click', () => { if(visibleIndex < HADITHS.length - 1) { visibleIndex++; openHadithModal(visibleIndex); scrollToCard(); }});
-modalClose.addEventListener('click', () => modalBackdrop.style.display = 'none');
-modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) modalBackdrop.style.display = 'none'; });
-
-/* notes autosave */
-let noteTimer = null;
-modalNote.addEventListener('input', () => {
-  clearTimeout(noteTimer);
-  noteTimer = setTimeout(() => {
-    const h = HADITHS[visibleIndex];
-    if (!h) return;
-    const notes = load(STORAGE_NOTES, {});
-    if (modalNote.value && modalNote.value.trim()) notes[h.id] = modalNote.value.trim();
-    else delete notes[h.id];
-    save(STORAGE_NOTES, notes);
-
-    // reflect note in saved list if present
-    const saved = load(STORAGE_SAVED, []);
-    const sidx = saved.findIndex(x => String(x.id) === String(h.id));
-    if (sidx >= 0) {
-      saved[sidx].note = modalNote.value.trim();
-      save(STORAGE_SAVED, saved);
-      populateSavedList();
-    }
-  }, 400);
+fontSelector.addEventListener('change', (e) => {
+  const font = e.target.value;
+  container.className = container.className.replace(/font-\w+/g, '');
+  pageHeader.className = pageHeader.className.replace(/font-\w+/g, '');
+  container.classList.add(`font-${font}`);
+  pageHeader.classList.add(`font-${font}`);
+  localStorage.setItem('duaFont', font);
 });
-}
-/* -------------------------
-   Saved list modal
-   ------------------------- */
-openSavedBtn.addEventListener('click', () => { populateSavedList(); savedBackdrop.style.display = 'flex'; });
-closeSaved.addEventListener('click', () => savedBackdrop.style.display = 'none');
-savedBackdrop.addEventListener('click', (e) => { if (e.target === savedBackdrop) savedBackdrop.style.display = 'none'; });
 
-async function populateSavedList(){
-  const savedItems = load(STORAGE_SAVED, []);
-  savedList.innerHTML = '';
+// Load saved preferences
+const savedFont = localStorage.getItem('duaFont') || 'indopak';
+fontSelector.value = savedFont;
+container.classList.add(`font-${savedFont}`);
+pageHeader.classList.add(`font-${savedFont}`);
 
-  if (!savedItems.length) {
-    savedList.innerHTML = '<em style="color:var(--muted)">No saved hadiths</em>';
-    return;
-  }
+// Audio player setup
+const duaAudio = document.getElementById('duaAudio');
+const audioPlayerWrapper = document.getElementById('audioPlayerWrapper');
 
-  // try to reuse cached corpus
-  if (!ALL_SAVED_CORPUS) {
-    try {
-      const res = await fetch(API_URL);
-      ALL_SAVED_CORPUS = res.ok ? await res.json() : HADITHS.slice();
-    } catch (e) {
-      ALL_SAVED_CORPUS = HADITHS.slice();
+// Fetch and render dua
+async function loadDua() {
+  try {
+    const response = await fetch(DUA_JSON_URL);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to load dua: ${response.status}`);
     }
-  }
-
-  const notes = load(STORAGE_NOTES, {});
-  savedItems.forEach((item) => {
-    const hadith = ALL_SAVED_CORPUS.find(h => String(h.id) === String(item.id));
-    const row = el('div', { class: 'saved-row', style: 'display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed var(--border);flex-wrap:wrap' });
-
-    const left = el('div');
-    let metaHtml = '';
-    if (hadith) {
-      const book = escapeHtml(hadith.book || hadith.bookId || '(Unknown book)');
-      const vol = escapeHtml(hadith.volume || '(?)');
-      const ch = escapeHtml(hadith.chapter || hadith.category || hadith.categoryId || '(?)');
-      metaHtml = `<strong>${book}</strong><br>Vol. ${vol} — Ch. ${ch} — #${escapeHtml(hadith.id)}`;
-    } else {
-      metaHtml = `<strong>Hadith #${escapeHtml(item.id)}</strong><br><small style="color:var(--muted)">${escapeHtml(item.snippet || '')}</small>`;
+    
+    const data = await response.json();
+    
+    if (!data || data.length === 0) {
+      container.innerHTML = '<div class="error">No content available</div>';
+      return;
     }
-    const meta = el('div', { style: 'font-size:.85rem;color:var(--muted)' });
-    meta.innerHTML = metaHtml;
-
-    const noteText = notes[item.id] || item.note || '(no note)';
-    const noteEl = el('div', { style: 'margin-top:4px;font-size:.9rem' }, noteText);
-
-    left.append(meta, noteEl);
-
-    const right = el('div', { style: 'display:flex;gap:6px' });
-
-    const openBtn = el('button', { class: 'btn-3d' }, 'Open');
-    openBtn.addEventListener('click', async () => {
-      if (!hadith) { alert('Hadith data not found'); return; }
-
-      const indexInPage = HADITHS.findIndex(h => String(h.id) === String(hadith.id));
-      if (indexInPage >= 0) {
-        openHadithModal(indexInPage);
-        savedBackdrop.style.display = 'none';
-        return;
-      }
-
-      // navigate to proper page with id=open
-      const targetPage = getTargetPageFromHadith(hadith);
-      const hadithId = hadith.id;
-      const pathArray = window.location.pathname.split('/');
-      pathArray[pathArray.length - 1] = targetPage;
-      const newPath = pathArray.join('/');
-      const newUrl = window.location.origin + newPath + '?id=' + encodeURIComponent(hadithId) + '&open=true';
-      window.location.href = newUrl;
-    });
-
-    const editBtn = el('button', { class: 'btn-3d' }, 'Edit');
-    editBtn.addEventListener('click', () => {
-      const current = notes[item.id] || item.note || '';
-      const newNote = prompt('Edit note:', current) || '';
-      if (newNote.trim()) notes[item.id] = newNote.trim();
-      else delete notes[item.id];
-      save(STORAGE_NOTES, notes);
-
-      // Update saved list entry
-      const saved = load(STORAGE_SAVED, []);
-      const idx = saved.findIndex(x => String(x.id) === String(item.id));
-      if (idx >= 0) { saved[idx].note = newNote.trim(); save(STORAGE_SAVED, saved); }
-      populateSavedList();
-    });
-
-    const delBtn = el('button', { class: 'btn-3d' }, 'Delete');
-    delBtn.addEventListener('click', () => {
-      const updated = savedItems.filter(x => String(x.id) !== String(item.id));
-      save(STORAGE_SAVED, updated);
-      populateSavedList();
-    });
-
-    right.append(openBtn, editBtn, delBtn);
-    row.append(left, right);
-    savedList.appendChild(row);
-  });
-}
-modalPrev.onclick = () => {
-  if (visibleIndex > 0) {
-    visibleIndex--;
-    openHadithModal(visibleIndex);
-    scrollToCard();
-  }
-};
-
-modalNext.onclick = () => {
-  if (visibleIndex < HADITHS.length - 1) {
-    visibleIndex++;
-    openHadithModal(visibleIndex);
-    scrollToCard();
-  }
-};
-
-modalClose.onclick = () => modalBackdrop.style.display = 'none';
-
-/* -------------------------
-   Helper: target page mapping
-   ------------------------- */
-function getTargetPageFromHadith(hadith) {
-  // sensible fallback
-  let targetPage = 'hadiths.html';
-  if (!hadith) return targetPage;
-
-  // if BOOKS_CONFIG present, use it
-  if (window.BOOKS_CONFIG && Array.isArray(window.BOOKS_CONFIG)) {
-    const book = window.BOOKS_CONFIG.find(b =>
-      b.bookId === hadith.bookId || b.book === hadith.book || String(b.id) === String(hadith.bookId)
-    );
-    if (book && book.chapters) {
-      const chapter = book.chapters.find(ch =>
-        Number(ch.id) === Number(hadith.chapter) ||
-        Number(ch.categoryId) === Number(hadith.categoryId)
-      );
-      if (chapter && chapter.filename) return chapter.filename;
+    
+    // Clear loading state
+    container.innerHTML = '';
+    container.classList.add(`font-${savedFont}`);
+    
+    // Setup audio if URL is provided
+    if (DUA_AUDIO_URL) {
+      duaAudio.querySelector('source').src = DUA_AUDIO_URL;
+      duaAudio.load();
+      audioPlayerWrapper.style.display = 'block';
     }
+    
+    // Render each line
+    data.forEach(line => {
+      const lineDiv = document.createElement('div');
+      lineDiv.className = 'dua-line';
+      lineDiv.innerHTML = `
+        <div class="line-number">${line.id}</div>
+        <div class="line-content">
+          <div class="arabic-text">${line.arabicText || ''}</div>
+          <div class="english-text">${line.englishText || ''}</div>
+        </div>
+      `;
+      container.appendChild(lineDiv);
+    });
+    
+  } catch (error) {
+    console.error('Error loading dua:', error);
+    container.innerHTML = `<div class="error">Failed to load dua. Please try again later.<br><small>${error.message}</small></div>`;
   }
-
-  // Simple heuristics: use book/volume to infer local filenames (customize per your site)
-  const vol = Number(hadith.volume);
-  if (vol === 1) return 'alkafi-volume1.html';
-  if (vol === 2) return 'alkafi-volume2.html';
-  return targetPage;
 }
 
-/* -------------------------
-   Misc helpers & UI
-   ------------------------- */
-function scrollToCard(){
-  const id = HADITHS[visibleIndex] && HADITHS[visibleIndex].id;
-  if (!id) return;
-  const elCard = document.getElementById('hadith-card-' + id);
-  if (elCard) elCard.scrollIntoView({ behavior:'smooth', block:'center' });
-}
-
-backBeginning.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-/* hamburger/menu */
-document.querySelectorAll('.hamburger').forEach(h => h.addEventListener('click', (e) => { e.stopPropagation(); document.getElementById('mainNav').classList.toggle('open'); }));
-document.addEventListener('click', (e) => { if(!document.getElementById('mainNav').contains(e.target) && !e.target.closest('.hamburger')) document.getElementById('mainNav').classList.remove('open'); });
-
-/* theme apply */
+// Theme support
 function applyThemeClass(isDark) {
   if (isDark) {
-    document.body.classList.add('dark', 'dark-mode');
+    document.body.classList.add('dark-mode');
   } else {
-    document.body.classList.remove('dark', 'dark-mode');
+    document.body.classList.remove('dark-mode');
   }
 }
-applyThemeClass(localStorage.getItem('theme') === 'dark');
 
+const savedTheme = localStorage.getItem('theme');
+applyThemeClass(savedTheme === 'dark');
 
-
-window.addEventListener('hashchange', () => {
-  const ch = getChapterFromHash();
-  if (ch && PAGES[ch]) {
-    showChapter(ch);
-  }
+// Load dua on page load
+window.addEventListener('DOMContentLoaded', () => {
+  loadDua();
 });
-
-
-function checkAndOpenSavedHadith(){
-  const pinned = load(STORAGE_PINNED, null);
-  if(!pinned) return;
-
-  const index = HADITHS.findIndex(h => String(h.id) === String(pinned.id));
-  if(index === -1) return;
-
-  // Find the pinned hadith to get its chapter
-  const hadith = HADITHS[index];
-  
-
-  // Open modal AFTER switching to correct chapter
-  setTimeout(() => {
-    openHadithModal(index);
-  }, 30);
-}
-loadHadiths();
-
-
-
 </script>
 </body>
-
-
 </html>
-
