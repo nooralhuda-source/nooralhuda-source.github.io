@@ -1,434 +1,398 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <title>Duas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-/* === MATCHED TO QURAN.HTML — GREEN #2E7D32 === */
+<meta charset="UTF-8">
+<title>Duas & Ziyarat</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Parastoo:wght@400..700&display=swap" rel="stylesheet">
+<style>
 :root {
-  --green: #276540; /* 🎨 exact material green 800 */
-  --bg: #f8fafb;
-  --text: #1f2937;
-  --muted: #6b7280;
-  --card: #ffffff;
-  --border: #e5e7eb;
-  --radius: 20px;
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 10px 32px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.18);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+--primary-green: #136f3c;
+--secondary-green: #1a8049;
+--accent-gold: #d4af37;
+--light-gold: #f4e4a6;
+--dark-navy: #1a202c;
+--white: #ffffff;
+--light-gray: #f7fafc;
+--medium-gray: #e2e8f0;
+--text-dark: #2d3748;
+--text-light: #718096;
+--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+--shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+* {margin: 0;padding: 0;box-sizing: border-box;}
+body {font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;line-height: 1.6;color: var(--text-dark);overflow-x: hidden;background: var(--light-gray);}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Nunito', sans-serif;
-  background: var(--bg); color: var(--text); line-height: 1.6;
-  padding-top: 3.5rem;
-  transition: background 0.3s ease, color 0.3s ease;
-}
+/* Navigation */
+.navbar {position: sticky;top: 0;background: white;border-bottom: 1px solid #eee;z-index: 1000;}
+.nav-container {display: flex;justify-content: space-between;align-items: center;padding: 2rem 1.5rem;max-width: 1200px;margin: 0 auto;}
+.logo {display: flex;align-items: center;gap: 12px;font-size: 28px;font-weight: 700;color: var(--primary-green);text-decoration: none;}
+.hamburger {display: none;font-size: 26px;background: none;border: none;cursor: pointer;color: var(--primary-green);}
+.hamburger.active {font-size: 28px;}
+.nav-links {display: flex;gap: 2.5rem;padding: 0 2rem 0 0;list-style: none;align-items: center;}
+.nav-links a {text-decoration: none;color: #333;font-weight: 500;transition: var(--transition);}
+.nav-links a:hover {color: var(--primary-green);}
 
-/* ─── HEADER + NAV ─── */
-header {
-  position: fixed; top: 0; left: 0; width: 100%;
-  display: flex; justify-content: space-between; align-items: center;
-  backdrop-filter: blur(14px) saturate(160%);
-    background: #276540;
-  color: #FFFFFF;
-  padding: 16px;
-  font-weight: bold;
-  border-radius: 0px;
+/* Page Header */
+.page-header {background: linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),url('https://nooralhuda.co.uk/karbala.jpg') center/cover;padding: 100px 0 60px;text-align: center;color: white;position: relative;overflow: hidden;margin-top: 0;}
+.page-header::before {content: '';position: absolute;top: 0;left: 0;right: 0;bottom: 0;opacity: 0.6;}
+.header-content {max-width: 1200px;margin: 0 auto;padding: 0 2rem;position: relative;z-index: 2;}
+.page-title {font-size: clamp(2rem, 5vw, 3rem);font-weight: 800;margin-bottom: 1rem;text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);}
+.page-subtitle {font-size: clamp(1rem, 2vw, 1.2rem);opacity: 0.9;}
 
-  color: #fff;
-  padding: 0.75rem 1.25rem; box-shadow: var(--shadow-sm);
-  z-index: 1000;
-}
-header h1 { font-size: 1.4rem; font-weight: 700; }
-header h1 a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
-header h1 a:hover { opacity: 0.85; }
+/* Header Actions */
+.header-actions {display: flex;justify-content: space-between;align-items: center;margin-bottom: 1.5rem;gap: 1rem;}
 
-.hamburger {
-  font-size: 1.5rem; background: transparent; color: #fff;
-  border: none; border-radius: 6px; padding: 0.1rem 0.7rem;
-  cursor: pointer; backdrop-filter: blur(8px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  transition: transform 0.3s, background 0.3s;
-}
-.hamburger:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  background: #276540;
-}
+/* Back Button in Header */
+.btn-back-header {background: rgba(255, 255, 255, 0.15);color: white;padding: 12px 24px;border-radius: 50px;border: 2px solid rgba(255, 255, 255, 0.3);font-weight: 600;font-size: 1rem;cursor: pointer;transition: var(--transition);backdrop-filter: blur(10px);text-decoration: none;display: inline-flex;align-items: center;gap: 8px;}
+.btn-back-header:hover {background: rgba(255, 255, 255, 0.25);transform: translateY(-2px);box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);}
 
-/* Navigation Drawer */
-#mainNav {
-  position: fixed; top: 0; right: -240px; width: 200px; height: 100%;
-  background: #276540; /* ✅ */
-  padding: 2rem 1.5rem;
-  display: flex; flex-direction: column; gap: 1rem;
-  border-radius: 0 0 0 24px;
-  transition: right 0.35s ease, opacity 0.35s ease;
-  opacity: 0; pointer-events: none; z-index: 1050;
-}
-#mainNav.open { right: 0; opacity: 1; pointer-events: auto; }
-#mainNav a {
-  background: #fff; color: var(--green);
-  padding: 0.5rem 0.8rem; border-radius: 16px;
-  font-weight: 600; text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-#mainNav a:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
-}
+/* Main Content */
+.page {padding: 60px 0;background: white;}
+.container {max-width: 1200px;margin: 0 auto;padding: 0 2rem;}
 
 /* Search Bar */
-.surah-search {
-  max-width: 400px; margin: 2rem auto 1rem;
-  display: flex; align-items: center;
-  background: #fff; border-radius: 16px;
-  padding: 0.5rem 1rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  transition: box-shadow 0.3s, transform 0.2s;
-}
-.surah-search input {
-  border: none; outline: none; flex: 1;
-  font-size: 1rem; background: transparent; color: #1f2937;
-}
-.surah-search:hover { transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+.search-wrapper {max-width: 600px;margin: 0 auto 3rem;position: relative;}
+.search-input {width: 100%;padding: 1rem 1.5rem;font-size: 1rem;border: 2px solid var(--medium-gray);border-radius: 50px;outline: none;transition: var(--transition);font-family: inherit;}
+.search-input:focus {border-color: var(--primary-green);box-shadow: 0 0 0 4px rgba(19, 111, 60, 0.1);}
+
+/* Grid */
+.content-grid {display: grid;grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));gap: 1.5rem;margin-top: 2rem;}
+.content-card {background: white;border-radius: 16px;border: 1px solid var(--medium-gray);padding: 1.5rem;cursor: pointer;transition: var(--transition);position: relative;overflow: hidden;}
+.content-card::before {content: '';position: absolute;top: 0;left: 0;right: 0;height: 4px;background: linear-gradient(90deg, var(--primary-green), var(--accent-gold));transform: scaleX(0);transition: transform 0.3s ease;}
+.content-card:hover {transform: translateY(-8px);box-shadow: var(--shadow-xl);border-color: var(--primary-green);}
+.content-card:hover::before {transform: scaleX(1);}
+.content-card h3 {font-size: 1.2rem;font-weight: 700;color: var(--primary-green);font-family: 'Amiri', serif;}
+.content-card p {font-size: 1.2rem;font-weight: 700;color: var(--text-light);font-family: 'Amiri', serif;margin-top: 0.5rem;}
+
+/* Footer */
+footer {margin-top: 4rem;padding: 2rem 1rem;text-align: center;font-size: 0.95rem;border-top: 1px solid var(--medium-gray);}
+        .footer {
+            background: var(--dark-navy);
+       
+            padding: 30px 0 30px;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+/* Responsive */
+@media (max-width: 768px) {
+.hamburger {display: block;}
+.nav-links {display: none;flex-direction: column;width: 100%;padding: 1rem 1.5rem;gap: 1.2rem;border-top: 1px solid #eee;}
+.nav-links.active {display: flex;}
+.page-header {padding: 60px 0 40px;}
+.content-grid {grid-template-columns: 1fr;}
+.content-card h3 {font-size: 1rem;}
+.content-card p {font-size: 0.85rem;}
+.btn-back-header {padding: 10px 18px;font-size: 0.9rem;}
+.header-actions {flex-direction: row;justify-content: space-between;width: 100%;}
 }
 
-/* Cards */
-.surah-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem; margin: 2rem auto 4rem;
-  padding: 0 2rem; max-width: 1200px;
+/* Desktop */
+@media (min-width: 769px) {
+.navbar {display: flex;align-items: center;justify-content: space-between;}
+.nav-container {display: flex;align-items: center;gap: 1rem;}
+.nav-links {display: flex;align-items: center;gap: 2.5rem;padding-right: 2rem;}
 }
-.surah-card {
-  background: var(--card); border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  padding: 2rem 1.5rem; transition: var(--transition);
-  cursor: pointer; transform-style: preserve-3d;
-}
-.surah-card:hover {
-  transform: translateY(-10px) rotateX(5deg) rotateY(2deg) scale(1.03);
-  box-shadow: var(--shadow-lg);
-}
-.surah-card h3 { font-size: 1rem; font-weight: 700; color: var(--green); }
-.surah-card p { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
 
-footer {
-  margin-top: 4rem; padding: 2rem 1rem;
-  text-align: center; color: var(--muted);
-  font-size: 0.95rem; border-top: 1px solid var(--border);
+/* Dark mode */
+body.dark-mode {--light-gray: #0f172a;--text-dark: #f9fafb;--text-light: #94a3b8;--white: #1e293b;--medium-gray: #334155;}
+html {scroll-behavior: smooth;}
+ .navbar{
+  background:white;
+  position:relative;
+  z-index:1000;
+  border-bottom:1px solid #eee;
 }
-body.dark-mode {
-  --bg:#0f172a; --text:#f9fafb; --muted:#94a3b8;
-  --card:#1e293b; --border:#334155;
+
+/* top row only */
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:3rem 2rem;
 }
-  </style>
+
+/* logo */
+
+
+/* hamburger */
+.hamburger{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: #136f3c;
+}
+
+/* LINKS (desktop) */
+.nav-links{
+  display:flex;
+  gap:2.5rem;            /* ← bigger gap like you asked */
+  padding: 2rem 2rem 2rem 2rem; /* ← space on right edge */
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;          /* ← full device width */
+    padding:1rem 1.5rem;
+    gap:1.2rem;
+    border-top:1px solid #eee;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+}
+/* ===== DESKTOP LAYOUT ===== */
+.navbar{
+  background:white;
+  border-bottom:1px solid #eee;
+}
+
+/* make navbar behave like one row on desktop */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .nav-container{
+    padding:1rem 1.5rem;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2.5rem;
+    padding-right:2rem; /* bigger right gap like you wanted */
+  }
+}
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+/* this is the important fix */
+.nav-container,
+.nav-links{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 24px;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-container{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+
+  .hamburger{
+    display:none;
+    color: #136f3c;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+}
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff; /* important so content doesn’t show through */
+}
+.hamburger{
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* when open */
+.hamburger.active{
+  font-size: 28px;
+}
+</style>
 </head>
 <body>
-<header>
-  <div class="brand"><h1><a href="index.html" data-en="Noor Al Huda" data-ar="نور الهدى" data-fa="نور الهدی" data-ur="نور الہدی">Noor Al Huda</a></h1></div>
-  <button class="hamburger" aria-label="Open menu">☰</button>
-</header>
-
-<nav id="mainNav">
-  <a href="quran.html" data-en="Quran" data-ar="القرآن" data-fa="قرآن" data-ur="قرآن">Quran</a>
-  <a href="duas.html" data-en="Duas" data-ar="أدعية" data-fa="دعاها" data-ur="دعائیں">Duas</a>
-  <a href="hadiths-home.html" data-en="Hadiths" data-ar="الأحاديث" data-fa="احادیث" data-ur="احادیث">Hadiths</a>
-  <a href="calendar.html" data-en="Calendar" data-ar="التقويم" data-fa="تقویم" data-ur="تقویم">Calendar</a>
-  <a href="salah.html" data-en="Salah" data-ar="الصلاة" data-fa="نماز" data-ur="نماز">Salah</a>
-  <a href="shiatube/index.html" data-en="ShiaTube" data-ar="شيعة تيوب" data-fa="شیعه تیوب" data-ur="شیعہ ٹیوب">ShiaTube</a>
-  <a href="index.html" data-en="Home" data-ar="الرئيسية" data-fa="خانه" data-ur="ہوم">Home</a>
-  <a href="settings.html" data-en="Settings" data-ar="الإعدادات" data-fa="تنظیمات" data-ur="ترتیبات">Settings</a>
+<!-- Navigation -->
+<nav class="navbar">
+<div class="nav-container">
+<a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+<button class="hamburger" id="hamburger">☰</button>
+</div>
+<ul class="nav-links" id="navLinks">
+<li><a href="https://nooralhuda.co.uk/">Home</a></li>
+<li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+<li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+<li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
+</ul>
 </nav>
 
-<main class="container">
-  <h2 id="page-title" style="text-align:center; margin-top:2rem;" 
-      data-en="Select a Dua or Ziyarat" 
-      data-ar="اختر دعاءً أو زيارة" 
-      data-fa="یک دعا یا زیارت انتخاب کنید" 
-      data-ur="دعا یا زیارت کا انتخاب کریں۔">
-      Select a Dua or Ziyarats
-  </h2>
-  <div class="surah-search">
-    <input type="text" id="searchBook" 
-           placeholder="Search Dua or Ziyarat..." 
-           data-en-ph="Search Dua or Ziyarat..." 
-           data-ar-ph="ابحث عن دعاء أو زيارة..." 
-           data-fa-ph="جستجوی دعا یا زیارت..." 
-           data-ur-ph="دعا یا زیارت تلاش کریں...">
-  </div>
-  <div class="surah-grid" id="bookGrid"></div>
+<!-- Page Header -->
+<section class="page-header">
+<div class="header-content">
+<div class="header-actions">
+<a href="https://nooralhuda.co.uk/resources" class="btn-back-header">← Resources</a>
+</div>
+<h1 class="page-title">Select a Dua or Ziyarat</h1>
+<p class="page-subtitle">Explore authentic Shia duas and ziyarat</p>
+</div>
+</section>
+
+<!-- Main Content -->
+<main class="page">
+<div class="container">
+<div class="search-wrapper">
+<input type="text" id="searchBook" class="search-input" placeholder="Search Dua or Ziyarat...">
+</div>
+<div class="content-grid" id="bookGrid"></div>
+</div>
 </main>
 
-
-<div id="manarat-wrapper">
-    <div id="manarat-launcher" onclick="toggleManarat()" title="Ask Manarat AI (Beta)">
-    <span id="launcher-text" 
-      data-en="Manarat AI <b>Beta</b>" 
-      data-ar="منارات <b>بيتا</b>" 
-      data-fa="منارات <b>بتا</b>" 
-      data-ur="منارات <b>بیٹا</b>">
-    Manarat AI <b>Beta</b>
-</span>
-</div>
-<footer data-en="© 2025 Noor Al Huda — All in one Shia website" 
-        data-ar="© 2025 نور الهدى — موقع شيعي متكامل" 
-        data-fa="© 2025 نور الهدی — وب‌سایت جامع شیعه" 
-        data-ur="© 2025 نور الہدیٰ — ہمہ گیر شیعہ ویب سائٹ">
-    © 2025 Noor Al Huda — All in one Shia website
+<footer>
+© 2025 Noor Al Huda. All rights reserved. Illuminating the path to Islamic knowledge and spiritual growth through authentic resources
 </footer>
-    <div id="manarat-popup">
-        <div id="manarat-header">
-            
-            <button onclick="toggleManarat()" id="close-btn">&times;</button>
-        </div>
-        <iframe src="manarat-ai.html" id="manarat-iframe"></iframe>
-    </div>
-</div>
-
-<style>
-    /* Launcher Styling: Changed to a Pill Shape for text */
-    #manarat-launcher {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        padding: 12px 24px; /* Flexible width for text */
-        background: linear-gradient(135deg, #1b5e20, #2e7d32);
-        border-radius: 50px; /* Pill shape */
-        border: 2px solid #d4af37;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-        animation: pulse 3s infinite;
-    }
-
-    #manarat-launcher:hover { transform: scale(1.05); background: #2e7d32; }
-    
-    #launcher-text { 
-        color: white; 
-        font-family: 'Segoe UI', sans-serif; 
-        font-size: 16px; 
-        font-weight: 500;
-        white-space: nowrap;
-    }
-    
-    #launcher-text b { 
-        font-size: 10px; 
-        background: #d4af37; 
-        color: #1b5e20; 
-        padding: 2px 6px; 
-        border-radius: 4px; 
-        margin-left: 8px; 
-        text-transform: uppercase;
-    }
-
-    /* Popup Window Styling */
-    #manarat-popup {
-        display: none;
-        position: fixed;
-        bottom: 90px;
-        right: 25px;
-        width: 380px;
-        height: 600px;
-        max-height: 80vh;
-        background: white;
-        border-radius: 20px;
-        overflow: hidden;
-        border: 1px solid rgba(212, 175, 55, 0.3);
-        box-shadow: 0 15px 50px rgba(0,0,0,0.15);
-        z-index: 10000;
-        flex-direction: column;
-        animation: slideUp 0.4s ease-out;
-    }
-
-    #manarat-header {
-        background: #1b5e20;
-        color: white;
-        padding: 10px 18px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-family: 'Segoe UI', sans-serif;
-        font-weight: 600;
-        font-size: 13px;
-        border-bottom: 3px solid #d4af37;
-    }
-
-    #close-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
-
-    #manarat-iframe { width: 100%; flex: 1; border: none; }
-
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0.4); }
-        70% { box-shadow: 0 0 0 12px rgba(27, 94, 32, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
-    }
-</style>
 
 <script>
-function toggleManarat() {
-    const popup = document.getElementById('manarat-popup');
-    const text = document.getElementById('launcher-text');
-    const lang = localStorage.getItem('userLang') || 'en';
-
-    if (popup.style.display === 'none' || popup.style.display === '') {
-        popup.style.display = 'flex';
-        // Define translations for the "Close" state
-        const closeLabels = { 
-            en: 'Close ✕', 
-            ar: 'إغلاق ✕', 
-            fa: 'بستن ✕', 
-            ur: 'بند کریں ✕' 
-        };
-        // Use .innerText here because "Close" is just plain text
-        text.innerText = closeLabels[lang] || closeLabels['en'];
-    } else {
-        popup.style.display = 'none';
-        // Use .innerHTML here to render the <b> tag as a gold badge
-        const originalTranslation = text.getAttribute('data-' + lang);
-        text.innerHTML = originalTranslation; 
-    }
-}
-</script>
-<script>
-// 1. Define books at the TOP so all functions can see them
 const books = [
-    { name_en: "Dua Kumayl", name_ar: "دُعاء كميل", name_fa: "دعای کمیل", name_ur: "دعائے کمیل", href: "dua-kumayl.html" },
-    { name_en: "Dua Nudbah", name_ar: "دُعاء الندبة", name_fa: "دعای ندبه", name_ur: "دعائے ندبہ", href: "dua-nudbah.html" },
-    { name_en: "Ziyarat Ashura", name_ar: "زيارة عاشوراء", name_fa: "زیارت عاشورا", name_ur: "زیارتِ عاشورہ", href: "ziyarat-ashura.html" },
-    { name_en: "Dua Tawassul", name_ar: "دُعاء التوسل", name_fa: "دعای توسل", name_ur: "دعائے توسل", href: "dua-tawassul.html" },
-    { name_en: "Hadith Kisa", name_ar: "حديث الكساء", name_fa: "حدیث کساء", name_ur: "حدیثِ کساء", href: "hadith-kisa.html" },
-    { name_en: "Dua al-Sabah", name_ar: "دُعاء الصباح", name_fa: "دعای صباح", name_ur: "دعائے صباح", href: "dua-sabah.html" },
-    { name_en: "Dua Jowshan Kabeer", name_ar: "دُعاء الجوشن الكبير", name_fa: "دعای جوشن کبیر", name_ur: "دعائے جوشنِ کبیر", href: "dua-jowshn-kabir.html" },
-    { name_en: "Dua al-Iftitah", name_ar: "دُعاء الافتتاح", name_fa: "دعای افتتاح", name_ur: "دعائے افتتاح", href: "dua-iftitah.html" },
-    { name_en: "Dua al-Adeela", name_ar: "دُعاء العديلة", name_fa: "دعای عدیله", name_ur: "دعائے عدیلہ", href: "dua-adeela.html" },
-    { name_en: "Dua for Imam al-Hujjah", name_ar: "دُعاء الإمام الحجة", name_fa: "دعای سلامتی امام زمان", name_ur: "دعائے امامِ زمانہ", href: "dua-hujjah.html" },
-    { name_en: "Ziyarat Waritha", name_ar: "زيارة وارث", name_fa: "زیارت وارث", name_ur: "زیارتِ وارث", href: "ziyarat-waritha.html" },
-    { name_en: "Dua al-Faraj", name_ar: "دُعاء الفرج", name_fa: "دعای فرج", name_ur: "دعائے فرج", href: "dua-faraj.html" },
-    { name_en: "Ziyarat Ale Yasin", name_ar: "زيارة آل ياسين", name_fa: "زیارت آل یاسین", name_ur: "زیارتِ آلِ یٰسین", href: "ziyarat-ale-yasin.html" },
-    { name_en: "Ziyarat Ameenullah", name_ar: "زيارة أمين الله", name_fa: "زیارت امین الله", name_ur: "زیارتِ امین اللہ", href: "ziyarat-ameenullah.html" },
-    { name_en: "Ziyarat Jamia Kabeer", name_ar: "زيارة جامعة كبير", name_fa: "زیارت جامعه کبیره", name_ur: "زیارتِ جامعہ کبیرہ", href: "ziyarat-jamia-kabeer.html" }
+{ name_en: "Dua Kumayl", name_ar: "دُعاء كميل", href: "dua-kumayl.html" },
+{ name_en: "Dua Nudbah", name_ar: "دُعاء الندبة", href: "dua-nudbah.html" },
+{ name_en: "Ziyarat Ashura", name_ar: "زيارة عاشوراء", href: "ziyarat-ashura.html" },
+{ name_en: "Dua Tawassul", name_ar: "دُعاء التوسل", href: "dua-tawassul.html" },
+{ name_en: "Hadith Kisa", name_ar: "حديث الكساء", href: "hadith-kisa.html" },
+{ name_en: "Dua al-Sabah", name_ar: "دُعاء الصباح", href: "dua-sabah.html" },
+{ name_en: "Dua Jowshan Kabeer", name_ar: "دُعاء الجوشن الكبير", href: "dua-jowshn-kabir.html" },
+{ name_en: "Dua al-Iftitah", name_ar: "دُعاء الافتتاح", href: "dua-iftitah.html" },
+{ name_en: "Dua al-Adeela", name_ar: "دُعاء العديلة", href: "dua-adeela.html" },
+{ name_en: "Dua for Imam al-Hujjah", name_ar: "دُعاء الإمام الحجة", href: "dua-hujjah.html" },
+{ name_en: "Ziyarat Waritha", name_ar: "زيارة وارث", href: "ziyarat-waritha.html" },
+{ name_en: "Dua al-Faraj", name_ar: "دُعاء الفرج", href: "dua-faraj.html" },
+{ name_en: "Ziyarat Ale Yasin", name_ar: "زيارة آل ياسين", href: "ziyarat-ale-yasin.html" },
+{ name_en: "Ziyarat Ameenullah", name_ar: "زيارة أمين الله", href: "ziyarat-ameenullah.html" },
+{ name_en: "Ziyarat Jamia Kabeer", name_ar: "زيارة جامعة كبير", href: "ziyarat-jamia-kabeer.html" }
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
-    const savedLang = localStorage.getItem('userLang') || 'en';
-    
-    // Apply theme first
-    const savedTheme = localStorage.getItem("theme");
-    applyThemeClass(savedTheme === "dark");
+// Hamburger Menu
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
 
-    // Apply translations and load UI
-    applyLanguage(savedLang);
-    renderHadithCards(savedLang);
-    setupUI();
+if (hamburger) {
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+    hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+      navLinks.classList.remove('active');
+      hamburger.classList.remove('active');
+      hamburger.textContent = '☰';
+    }
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      hamburger.classList.remove('active');
+      hamburger.textContent = '☰';
+    });
+  });
+}
+
+// Render Books
+function renderBooks() {
+  const grid = document.getElementById('bookGrid');
+  grid.innerHTML = '';
+  
+  books.forEach(book => {
+    const card = document.createElement('div');
+    card.className = 'content-card';
+    card.innerHTML = `
+      <h3>${book.name_en}</h3>
+      <p>${book.name_ar}</p>
+    `;
+    card.addEventListener('click', () => {
+      window.location.href = book.href;
+    });
+    grid.appendChild(card);
+  });
+}
+
+// Search
+const searchInput = document.getElementById('searchBook');
+searchInput.addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase().trim();
+  const cards = document.getElementsByClassName('content-card');
+  Array.from(cards).forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(query) ? '' : 'none';
+  });
 });
 
-function applyLanguage(lang) {
-    const isRTL = ['ar', 'fa', 'ur'].includes(lang);
-    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-
-    document.querySelectorAll('[data-en]').forEach(el => {
-        const translation = el.getAttribute('data-' + lang);
-        if (translation) {
-            // Check for launcher text to keep the gold Beta badge
-            if (el.id === 'launcher-text') {
-                el.innerHTML = translation; 
-            } else {
-                el.innerText = translation;
-            }
-        }
-    });
-
-    const searchInput = document.getElementById('searchBook');
-    if (searchInput) {
-        const ph = searchInput.getAttribute(`data-${lang}-ph`);
-        if (ph) searchInput.placeholder = ph;
-    }
-}
-
-function renderHadithCards(lang) {
-    const grid = document.getElementById("bookGrid");
-    if (!grid) return;
-    grid.innerHTML = "";
-    
-    books.forEach(book => {
-        const card = document.createElement("div");
-        card.className = "surah-card";
-
-        // Logic: Main Title (Top) swaps based on language
-        let mainTitle;
-        if (lang === 'fa') {
-            mainTitle = book.name_fa;
-        } else if (lang === 'ur') {
-            mainTitle = book.name_ur;
-        } else {
-            mainTitle = book.name_en; // Default to English for 'en' and 'ar'
-        }
-
-        // Logic: Subtitle (Bottom) ALWAYS stays Arabic
-        const subTitle = book.name_ar;
-
-        card.innerHTML = `<h3>${mainTitle}</h3><p>${subTitle}</p>`;
-        card.onclick = () => window.location.href = book.href;
-        grid.appendChild(card);
-    });
-}
-
-function setupUI() {
-    const mainNav = document.getElementById("mainNav");
-    const hamburger = document.querySelector(".hamburger");
-    const searchInput = document.getElementById("searchBook");
-
-    if (hamburger && mainNav) {
-        hamburger.onclick = (e) => {
-            e.stopPropagation();
-            mainNav.classList.toggle("open");
-        };
-    }
-
-    document.onclick = (e) => {
-        if (mainNav && !mainNav.contains(e.target) && !hamburger.contains(e.target))
-            mainNav.classList.remove("open");
-    };
-
-    if (searchInput) {
-        searchInput.oninput = (e) => {
-            const q = e.target.value.toLowerCase();
-            document.querySelectorAll(".surah-card").forEach(card => {
-                card.style.display = card.textContent.toLowerCase().includes(q) ? "" : "none";
-            });
-        };
-    }
-}
-
+// Theme support
 function applyThemeClass(isDark) {
-    if (isDark) {
-        document.body.classList.add("dark-mode");
-    } else {
-        document.body.classList.remove("dark-mode");
-    }
+  if (isDark) {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
 }
+
+const savedTheme = localStorage.getItem('theme');
+applyThemeClass(savedTheme === 'dark');
+
+// Initial render
+window.addEventListener('DOMContentLoaded', () => {
+  renderBooks();
+});
 </script>
 </body>
 </html>
-
-
-
-
-
