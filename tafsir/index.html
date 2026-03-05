@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>Tafsir Al-Quran</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Parastoo:wght@400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #136f3c;
+            --secondary-green: #1a8049;
+            --accent-gold: #d4af37;
+            --light-gold: #f4e4a6;
+            --dark-navy: #1a202c;
+            --white: #ffffff;
+            --light-gray: #f7fafc;
+            --medium-gray: #e2e8f0;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--light-gray);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),
+                url('https://nooralhuda.co.uk/karbala.jpg') center/cover;
+            padding: 120px 0 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0px;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            animation: patternMove 60s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes patternMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-30px) translateY(-30px); }
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .back-home {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .back-home:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .surah-title-en {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .page {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        #bismillahWrap {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        #bismillahWrap img {
+            max-width: 400px;
+            width: 85%;
+            filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.06));
+        }
+
+        #verseContainer {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .verse-card {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid var(--medium-gray);
+            padding: 1rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verse-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-gold));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .verse-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .verse-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .verse-meta {
+            font-size: 0.9rem;
+            color: var(--primary-green);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .verse-body {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .verse-tafsir {
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--text-dark);
+        }
+
+        .btn-3d {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 10px;
+            background: var(--light-gray);
+            border: 1px solid var(--medium-gray);
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            color: var(--primary-green);
+        }
+
+        .btn-3d:hover {
+            background: rgba(19, 111, 60, 0.1);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .bottom-actions {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 500;
+        }
+
+        #backBeginning {
+            background: var(--primary-green);
+            color: white;
+            padding: 0.75rem 1.5rem;
+        }
+
+        #backBeginning:hover {
+            background: var(--secondary-green);
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--primary-green));
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 26px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #136f3c;
+        }
+
+        .hamburger.active {
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            padding: 2rem 2rem 2rem 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 1rem 1.5rem;
+                gap: 1.2rem;
+                border-top: 1px solid #eee;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .page-header {
+                padding: 100px 0 40px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .navbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .nav-container {
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: flex;
+                align-items: center;
+                gap: 2.5rem;
+                padding-right: 2rem;
+            }
+        }
+         .navbar{
+  background:white;
+  position:relative;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+
+/* top row only */
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:3rem 2rem;
+}
+
+/* logo */
+
+
+/* hamburger */
+.hamburger{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: #136f3c;
+}
+
+/* LINKS (desktop) */
+.nav-links{
+  display:flex;
+  gap:2.5rem;            /* ← bigger gap like you asked */
+  padding: 2rem 2rem 2rem 2rem; /* ← space on right edge */
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;          /* ← full device width */
+    padding:1rem 1.5rem;
+    gap:1.2rem;
+    border-top:1px solid #eee;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+}
+/* ===== DESKTOP LAYOUT ===== */
+.navbar{
+  background:white;
+  border-bottom:1px solid #eee;
+}
+
+/* make navbar behave like one row on desktop */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .nav-container{
+    padding:1rem 1.5rem;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2.5rem;
+    padding-right:2rem; /* bigger right gap like you wanted */
+  }
+}
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+/* this is the important fix */
+.nav-container,
+.nav-links{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 24px;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-container{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+
+  .hamburger{
+    display:none;
+    color: #136f3c;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+}
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff; /* important so content doesn’t show through */
+}
+.hamburger{
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* when open */
+.hamburger.active{
+  font-size: 28px;
+}
+    </style>
+</head>
+<body>
+    <div class="scroll-progress"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+            <button class="hamburger" id="hamburger">☰</button>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="https://nooralhuda.co.uk/">Home</a></li>
+            <li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+            <li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+            <li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="page-header">
+        <div class="header-content">
+            <div class="header-actions">
+                <a class="back-home" href="../home">← Go Back</a>
+            </div>
+            <h1 class="surah-title-en" id="surahTitle">Loading...</h1>
+        </div>
+    </section>
+
+    <main class="page">
+        <div class="container">
+            <div id="bismillahWrap">
+                <img src="https://nooralhuda.co.uk/bismillah.png" alt="Bismillah" onerror="this.style.display='none'">
+            </div>
+            <div id="verseContainer" aria-live="polite"></div>
+        </div>
+    </main>
+
+    <div class="bottom-actions">
+        <button id="backBeginning" class="btn-3d">Back to Top</button>
+    </div>
+
+    <script>
+        const SURAH_NAMES = ["Al-Fātiḥah","Al-Baqarah","Āl ʿImrān","An-Nisāʼ","Al-Māʼidah","Al-Anʿām","Al-Aʿrāf","Al-Anfāl","At-Tawbah","Yūnus","Hūd","Yūsuf","Ar-Raʻd","Ibrāhīm","Al-Ḥijr","An-Naḥl","Al-Isrāʼ","Al-Kahf","Maryam","Tā-Hā","Al-Anbiyāʼ","Al-Ḥajj","Al-Muʼminūn","An-Nūr","Al-Furqān","Ash-Shuʻarāʼ","An-Naml","Al-Qaṣaṣ","Al-ʻAnkabūt","Ar-Rūm","Luqmān","As-Sajdah","Al-Aḥzāb","Sabaʼ","Fāṭir","Yā-Sīn","Aṣ-Ṣāffāt","Sād","Az-Zumar","Ghāfir","Fussilat","Ash-Shūrā","Az-Zukhruf","Ad-Dukhān","Al-Jāthiyah","Al-Aḥqāf","Muḥammad","Al-Fatḥ","Al-Ḥujurāt","Qāf","Adh-Dhāriyāt","Aṭ-Ṭūr","An-Najm","Al-Qamar","Ar-Raḥmān","Al-Wāqiʻah","Al-Ḥadīd","Al-Mujādilah","Al-Ḥashr","Al-Mumtaḥanah","As-Saff","Al-Jumuʻah","Al-Munāfiqūn","At-Taghābun","Aṭ-Ṭalāq","At-Ṭahrīm","Al-Mulk","Al-Qalam","Al-Ḥāqqah","Al-Maʻārij","Nūḥ","Al-Jinn","Al-Muzzammil","Al-Muddaththir","Al-Qiyāmah","Al-Insān","Al-Mursalāt","An-Nabaʼ","An-Nāziʻāt","ʻAbasa","At-Takwīr","Al-Infiṭār","Al-Muṭaffifīn","Al-Inshiqāq","Al-Burūj","Aṭ-Ṭāriq","Al-Aʻlā","Al-Ghāshiyah","Al-Fajr","Al-Balad","Ash-Shams","Al-Layl","Aḍ-Ḍuḥā","Ash-Sharḥ","At-Tīn","Al-ʻAlaq","Al-Qadr","Al-Bayyinah","Az-Zalzalah","Al-ʻĀdiyāt","Al-Qāriʻah","At-Takāthur","Al-ʻAṣr","Al-Humazah","Al-Fīl","Quraysh","Al-Māʼūn","Al-Kawthar","Al-Kāfirūn","An-Naṣr","Al-Masad","Al-Ikhlāṣ","Al-Falaq","An-Nās"];
+
+        const STORAGE_VERSION = 1;
+        const STORAGE_PINNED = `tafsir_pinned_v${STORAGE_VERSION}`;
+
+        const verseContainer = document.getElementById('verseContainer');
+        const surahTitle = document.getElementById('surahTitle');
+        const backBeginning = document.getElementById('backBeginning');
+
+        let ALL_VERSES = [];
+        let currentSurah = null;
+
+        function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+        function load(key, fallback) { 
+            try { 
+                const v = JSON.parse(localStorage.getItem(key)); 
+                return v === null ? fallback : (v || fallback); 
+            } catch(e) { 
+                return fallback; 
+            } 
+        }
+
+        function getSurahFromHash() {
+            const hash = window.location.hash.replace('#', '');
+            return hash && !isNaN(hash) ? parseInt(hash) : null;
+        }
+
+        async function loadTafsir() {
+            verseContainer.innerHTML = '<div style="padding:12px;color:var(--text-light)">Loading tafsir…</div>';
+            
+            try {
+                const res = await fetch('https://nooralhuda.co.uk/quran/tafsir.json');
+                if (!res.ok) throw new Error('Failed to load tafsir');
+                const data = await res.json();
+                
+                ALL_VERSES = data;
+                
+                const targetSurah = getSurahFromHash();
+                if (targetSurah) {
+                    showSurah(targetSurah);
+                } else {
+                    restorePinned();
+                }
+            } catch (err) {
+                console.error(err);
+                verseContainer.innerHTML = '<div style="padding:12px;color:var(--text-light)">Failed to load tafsir.</div>';
+            }
+        }
+
+        function showSurah(surahNum) {
+            const surahData = ALL_VERSES.find(s => s.surah === surahNum);
+            if (!surahData) {
+                verseContainer.innerHTML = '<em style="color:var(--text-light);padding:12px">Surah not found.</em>';
+                return;
+            }
+
+            currentSurah = surahNum;
+            const surahName = SURAH_NAMES[surahNum - 1] || `Surah ${surahNum}`;
+            surahTitle.textContent = surahName;
+            document.title = `${surahName} - Tafsir`;
+
+            verseContainer.innerHTML = '';
+
+            surahData.verses.forEach((verse, idx) => {
+                const card = document.createElement('div');
+                card.className = 'verse-card';
+                card.id = `verse-${idx}`;
+
+                const meta = document.createElement('div');
+                meta.className = 'verse-meta';
+                meta.textContent = `Verses ${verse.reference}`;
+
+                const body = document.createElement('div');
+                body.className = 'verse-body';
+
+                const tafsir = document.createElement('div');
+                tafsir.className = 'verse-tafsir';
+                tafsir.innerHTML = verse.tafsir.replace(/<br\s*\/?>/gi, '<br><br>');
+
+                body.appendChild(tafsir);
+                card.appendChild(meta);
+                card.appendChild(body);
+                verseContainer.appendChild(card);
+            });
+
+            save(STORAGE_PINNED, { surah: surahNum });
+        }
+
+        function restorePinned() {
+            const pinned = load(STORAGE_PINNED, null);
+            if (pinned && pinned.surah) {
+                showSurah(pinned.surah);
+            } else if (ALL_VERSES.length > 0) {
+                showSurah(ALL_VERSES[0].surah);
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-progress').style.width = scrolled + '%';
+        });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        const burger = document.getElementById('hamburger');
+        const nav = document.getElementById('navLinks');
+        
+        burger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            nav.classList.toggle('active');
+            burger.classList.toggle('active');
+            burger.textContent = nav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target) && !burger.contains(e.target)) {
+                nav.classList.remove('active');
+                burger.classList.remove('active');
+                burger.textContent = '☰';
+            }
+        });
+
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                burger.classList.remove('active');
+                burger.textContent = '☰';
+            });
+        });
+
+        backBeginning.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        window.addEventListener('hashchange', () => {
+            const surah = getSurahFromHash();
+            if (surah) showSurah(surah);
+        });
+
+        function applyThemeClass(isDark) {
+            if (isDark) {
+                document.body.classList.add('dark', 'dark-mode');
+            } else {
+                document.body.classList.remove('dark', 'dark-mode');
+            }
+        }
+        
+        applyThemeClass(localStorage.getItem('theme') === 'dark');
+
+        loadTafsir();
+    </script>
+</body>
+</html>
