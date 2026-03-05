@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Islamic Knowledge Quiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="https://nooralhuda.co.uk/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #136f3c;
+            --secondary-green: #1a8049;
+            --accent-gold: #d4af37;
+            --light-gold: #f4e4a6;
+            --dark-navy: #1a202c;
+            --white: #ffffff;
+            --light-gray: #f7fafc;
+            --medium-gray: #e2e8f0;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-gray);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid #eee;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 26px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #136f3c;
+        }
+
+        .hamburger.active {
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            padding: 0 2rem 0 0;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),
+                url('https://nooralhuda.co.uk/karbala.jpg') center/cover;
+            padding: 100px 0 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            animation: patternMove 60s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes patternMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-30px) translateY(-30px); }
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .back-home {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .back-home:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--medium-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-gold));
+            transition: width 0.3s ease;
+        }
+
+        .question-number {
+            color: var(--primary-green);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            background: var(--light-gray);
+            border: 2px solid var(--medium-gray);
+            border-radius: 12px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        .option:hover {
+            background: rgba(19, 111, 60, 0.05);
+            border-color: var(--primary-green);
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: rgba(19, 111, 60, 0.1);
+            border-color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .option.correct {
+            background: rgba(43, 147, 72, 0.1);
+            border-color: #2b9348;
+            color: #2b9348;
+        }
+
+        .option.incorrect {
+            background: rgba(217, 83, 79, 0.1);
+            border-color: #d9534f;
+            color: #d9534f;
+        }
+
+        .quiz-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:disabled {
+            background: var(--medium-gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--text-dark);
+            border: 2px solid var(--medium-gray);
+        }
+
+        .btn-secondary:hover {
+            background: var(--medium-gray);
+        }
+
+        .score-display {
+            display: none;
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            margin: 2rem auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .score-inner {
+            width: 180px;
+            height: 180px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-green);
+        }
+
+        .score-label {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        .score-message {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 2rem 0 1rem;
+        }
+
+        .score-details {
+            background: var(--light-gray);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .score-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .score-stat:last-child {
+            border-bottom: none;
+        }
+
+        .score-stat-label {
+            color: var(--text-light);
+        }
+
+        .score-stat-value {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .restart-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 1rem 1.5rem;
+                gap: 1.2rem;
+                border-top: 1px solid #eee;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .quiz-card {
+                padding: 1.5rem;
+            }
+
+            .question-text {
+                font-size: 1.1rem;
+            }
+
+            .quiz-actions {
+                flex-direction: column;
+            }
+
+            .score-circle {
+                width: 160px;
+                height: 160px;
+            }
+
+            .score-inner {
+                width: 140px;
+                height: 140px;
+            }
+
+            .score-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .navbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .nav-container {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                display: flex;
+                align-items: center;
+                gap: 2.5rem;
+                padding-right: 2rem;
+            }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--primary-green));
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        .navbar{
+  background:white;
+  position:relative;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+
+/* top row only */
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:3rem 2rem;
+}
+
+/* logo */
+
+
+/* hamburger */
+.hamburger{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: #136f3c;
+}
+
+/* LINKS (desktop) */
+.nav-links{
+  display:flex;
+  gap:2.5rem;            /* ← bigger gap like you asked */
+  padding: 2rem 2rem 2rem 2rem; /* ← space on right edge */
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;          /* ← full device width */
+    padding:1rem 1.5rem;
+    gap:1.2rem;
+    border-top:1px solid #eee;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+}
+/* ===== DESKTOP LAYOUT ===== */
+.navbar{
+  background:white;
+  border-bottom:1px solid #eee;
+}
+
+/* make navbar behave like one row on desktop */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .nav-container{
+    padding:1rem 1.5rem;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2.5rem;
+    padding-right:2rem; /* bigger right gap like you wanted */
+  }
+}
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+/* this is the important fix */
+.nav-container,
+.nav-links{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 24px;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-container{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+
+  .hamburger{
+    display:none;
+    color: #136f3c;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+}
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff; /* important so content doesn’t show through */
+}
+.hamburger{
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* when open */
+.hamburger.active{
+  font-size: 28px;
+}
+    </style>
+</head>
+<body>
+    <div class="scroll-progress"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="https://nooralhuda.co.uk/">Home</a></li>
+            <li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+            <li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+            <li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="page-header">
+        <div class="header-content">
+            <div class="header-actions">
+                <a class="back-home" href="home">← Go Back</a>
+            </div>
+            <h1 class="page-title">Islamic Knowledge Quiz</h1>
+            <p class="page-subtitle">Test your knowledge of Shia Islam</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="quiz-card">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div id="quizContainer">
+                <div class="question-number" id="questionNumber"></div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options" id="optionsContainer"></div>
+            </div>
+
+            <div class="score-display" id="scoreDisplay">
+                <div class="score-circle">
+                    <div class="score-inner">
+                        <div class="score-number" id="finalScore"></div>
+                        <div class="score-label">Score</div>
+                    </div>
+                </div>
+                <div class="score-message" id="scoreMessage"></div>
+                <div class="score-details">
+                    <div class="score-stat">
+                        <span class="score-stat-label">Correct Answers</span>
+                        <span class="score-stat-value" id="correctCount"></span>
+                    </div>
+                    <div class="score-stat">
+                        <span class="score-stat-label">Incorrect Answers</span>
+                        <span class="score-stat-value" id="incorrectCount"></span>
+                    </div>
+                    <div class="score-stat">
+                        <span class="score-stat-label">Percentage</span>
+                        <span class="score-stat-value" id="percentage"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-actions" id="quizActions">
+                <button class="btn btn-secondary" id="prevBtn">← Previous</button>
+                <button class="btn btn-primary" id="nextBtn">Next →</button>
+            </div>
+
+            <div class="restart-actions" style="display: none;">
+                <button class="btn btn-primary" id="restartBtn">Try Again</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+       const QUESTIONS = [
+    {
+        question: "Which Imam is known as 'The Jewel of the Aal al-Muhammad' and was the youngest to attain the Imamate?",
+        options: ["Imam Muhammad al-Taqi (AS)", "Imam Ali al-Naqi (AS)", "Imam Muhammad al-Mahdi (AJ)", "Imam Musa al-Kadhim (AS)"],
+        correct: 0
+    },
+    {
+        question: "Who was the 'Safir' (representative) that served the 12th Imam for the longest period during the Minor Occultation (Ghaybat al-Sughra)?",
+        options: ["Uthman ibn Sa’id", "Abu Jafar Muhammad ibn Uthman", "Abul Qasim al-Husayn ibn Ruh", "Abu al-Hasan Ali ibn Muhammad"],
+        correct: 1
+    },
+    {
+        question: "The famous 'Dua al-Nudba' is traditionally recited during which specific times?",
+        options: ["Every Friday and Eid prayers", "Only on the night of Ashura", "During the month of Ramadan", "Daily after Fajr"],
+        correct: 0
+    },
+    {
+        question: "Which Imam authored the 'Sahifa al-Sajjadiyya', often referred to as the 'Psalms of Islam'?",
+        options: ["The 3rd Imam", "The 4th Imam", "The 5th Imam", "The 6th Imam"],
+        correct: 1
+    },
+    {
+        question: "In the context of 'Usul al-Din', which principle distinguishes Twelver Shia theology from most Sunni schools of thought?",
+        options: ["Tawhid", "Nubuwwah", "Adl (Justice of God)", "Ma'ad"],
+        correct: 2
+    },
+    {
+        question: "Who was the mother of the 12th Imam, Muhammad al-Mahdi (AJ)?",
+        options: ["Lady Narjis", "Lady Hakimah", "Lady Ummul Banin", "Lady Shahrbanu"],
+        correct: 0
+    },
+    {
+        question: "What was the primary reason for the 'Sulh' (Treaty) of Imam Hassan (AS) with Muawiyah?",
+        options: ["To gain political power", "To preserve the lives of the Shias and the Muslim Ummah", "To retire from public life", "To divide the treasury"],
+        correct: 1
+    },
+    {
+        question: "Which battle saw Imam Ali (AS) face the 'Kharijites' (the Seceders)?",
+        options: ["Battle of Siffin", "Battle of Jamal", "Battle of Nahrawan", "Battle of Karbala"],
+        correct: 2
+    },
+    {
+        question: "The 'Hadith of the Two Weighty Things' (Thaqalayn) mentions the Quran and what else?",
+        options: ["The Sunnah", "The Sahaba", "The Ahl al-Bayt", "The Ummah"],
+        correct: 2
+    },
+    {
+        question: "Which Imam was the first to be born inside the Kaaba in Mecca?",
+        options: ["Imam Ali (AS)", "Imam Hussain (AS)", "Imam Jafar al-Sadiq (AS)", "None of the above"],
+        correct: 0
+    },
+    {
+        question: "In Twelver jurisprudence, what is the term for the effort of a jurist to derive legal rulings from the sources of law?",
+        options: ["Ijtihad", "Taqlid", "Hadith", "Fiqh"],
+        correct: 0
+    },
+    {
+        question: "Who was the courageous sister of Imam Hussain (AS) who delivered the powerful sermon in Yazid's court?",
+        options: ["Lady Fatima (SA)", "Lady Zainab (SA)", "Lady Umm Kulthum (SA)", "Lady Sakina (SA)"],
+        correct: 1
+    },
+    {
+        question: "Which Imam established the vast university of knowledge in Medina, producing over 4,000 students?",
+        options: ["Imam Ali al-Rida (AS)", "Imam Muhammad al-Baqir (AS)", "Imam Jafar al-Sadiq (AS)", "Imam Musa al-Kadhim (AS)"],
+        correct: 2
+    },
+    {
+        question: "Which tragedy occurred on the 25th of Shawwal?",
+        options: ["Martyrdom of Imam Jafar al-Sadiq (AS)", "Martyrdom of Imam Ali (AS)", "Martyrdom of Imam Musa al-Kadhim (AS)", "The event of Mubahala"],
+        correct: 0
+    },
+    {
+        question: "What is the significance of the event of Mubahala?",
+        options: ["The victory of the Battle of Badr", "The spiritual challenge between the Prophet and the Christians of Najran", "The conquest of Mecca", "The change of Qibla"],
+        correct: 1
+    },
+    {
+        question: "Who is the 'Bab al-Hawa’ij' (Gate of Needs) known for his patience during long imprisonments?",
+        options: ["Imam Musa al-Kadhim (AS)", "Imam Ali al-Hadi (AS)", "Imam Hassan al-Askari (AS)", "Imam Ali al-Rida (AS)"],
+        correct: 0
+    },
+    {
+        question: "Which famous Shia scholar wrote 'Kitab al-Kafi', one of the four primary books of Hadith?",
+        options: ["Sheikh al-Saduq", "Sheikh al-Tusi", "Al-Kulayni", "Allama Tabataba'i"],
+        correct: 2
+    },
+    {
+        question: "The 'Ziyarat Ashura' is attributed to which Imam?",
+        options: ["Imam Hussain (AS)", "Imam Muhammad al-Baqir (AS)", "Imam Jafar al-Sadiq (AS)", "Imam Ali al-Rida (AS)"],
+        correct: 1
+    },
+    {
+        question: "What was the name of the place where Imam Ali al-Rida (AS) was forced to reside by Caliph al-Ma'mun?",
+        options: ["Baghdad", "Merv", "Samarra", "Rayy"],
+        correct: 1
+    },
+    {
+        question: "Which Imam spent the majority of his Imamate under house arrest in a military garrison in Samarra?",
+        options: ["Imam Ali al-Hadi (AS)", "Imam Hassan al-Askari (AS)", "Both A and B", "None of the above"],
+        correct: 2
+    },
+    {
+        question: "Which Imam is the common ancestor of all the 'Sayyid' lineages through his sons Zayd and Muhammad al-Baqir?",
+        options: ["Imam Hassan (AS)", "Imam Hussain (AS)", "Imam Ali ibn al-Hussain (AS)", "Imam Ali (AS)"],
+        correct: 2
+    },
+    {
+        question: "In which year and location did the 'Event of Mubahala' occur between the Prophet and the Christians of Najran?",
+        options: ["9 AH in Medina", "10 AH in Medina", "8 AH in Mecca", "11 AH in Najran"],
+        correct: 1
+    },
+    {
+        question: "Who was the first woman to embrace Islam and the only wife of the Prophet during her lifetime?",
+        options: ["Lady Aisha", "Lady Umm Salama", "Lady Khadija al-Kubra (SA)", "Lady Maria al-Qibtiyya"],
+        correct: 2
+    },
+    {
+        question: "Which Imam is buried in the Al-Askari Shrine in Samarra, Iraq, alongside his son?",
+        options: ["Imam Ali al-Hadi (AS)", "Imam Muhammad al-Taqi (AS)", "Imam Musa al-Kadhim (AS)", "Imam Ali al-Rida (AS)"],
+        correct: 0
+    },
+    {
+        question: "The 'Hadith al-Kisa' (Tradition of the Cloak) identifies which group of people as the 'Ahl al-Bayt'?",
+        options: ["The Prophet's wives only", "The Prophet, Ali, Fatima, Hassan, and Hussain", "The entire Hashimite clan", "All Muslims"],
+        correct: 1
+    },
+    {
+        question: "Who was the 'Alamdar' (Standard Bearer) of Imam Hussain's army in Karbala?",
+        options: ["Ali Akbar", "Abul Fadhl al-Abbas", "Habib ibn Muzahir", "Qasim ibn Hassan"],
+        correct: 1
+    },
+    {
+        question: "Which Imam was famously poisoned during the reign of the Abbasid Caliph Harun al-Rashid?",
+        options: ["Imam Jafar al-Sadiq (AS)", "Imam Musa al-Kadhim (AS)", "Imam Ali al-Rida (AS)", "Imam Muhammad al-Baqir (AS)"],
+        correct: 1
+    },
+    {
+        question: "What is the name of the last 'Safir' (Deputy) of the 12th Imam before the Major Occultation began?",
+        options: ["Ali ibn Muhammad al-Samarri", "Husayn ibn Ruh al-Nawbakhti", "Muhammad ibn Uthman", "Uthman ibn Sa'id"],
+        correct: 0
+    },
+    {
+        question: "Which surah of the Quran was revealed to the Prophet regarding the status of Lady Fatima (SA) as a 'Abundant Blessing'?",
+        options: ["Surah al-Ikhlas", "Surah al-Kawthar", "Surah al-Qadr", "Surah al-Fatiha"],
+        correct: 1
+    },
+    {
+        question: "What was the duration of the 'Minor Occultation' (Ghaybat al-Sughra)?",
+        options: ["Approximately 40 years", "Approximately 69 years", "Approximately 110 years", "Exactly 100 years"],
+        correct: 1
+    },
+    {
+        question: "Which Imam is known as 'Al-Zaki' and 'Al-Mujtaba'?",
+        options: ["Imam Hassan (AS)", "Imam Hussain (AS)", "Imam Ali al-Rida (AS)", "Imam Hassan al-Askari (AS)"],
+        correct: 0
+    },
+    {
+        question: "In the Battle of Khaybar, who was famously sent by the Prophet to conquer the fortress of Kamus after others failed?",
+        options: ["Umar ibn al-Khattab", "Khalid ibn al-Walid", "Imam Ali (AS)", "Hamza ibn Abdul-Muttalib"],
+        correct: 2
+    },
+    {
+        question: "What is the primary theme of the book 'Mafatih al-Jinan' by Sheikh Abbas Qummi?",
+        options: ["Rules of Fiqh", "A collection of Duas, Ziyarats, and A'maal", "History of the Caliphs", "Interpretation of the Quran"],
+        correct: 1
+    },
+    {
+        question: "Which Imam was martyred at the young age of 25 in Baghdad?",
+        options: ["Imam Muhammad al-Taqi (AS)", "Imam Ali al-Hadi (AS)", "Imam Hassan al-Askari (AS)", "Imam Jafar al-Sadiq (AS)"],
+        correct: 0
+    },
+    {
+        question: "Who was the mother of Imam Hussain's youngest martyr, Ali al-Asghar?",
+        options: ["Lady Shahrbanu", "Lady Rubab", "Lady Layla", "Lady Ummul Banin"],
+        correct: 1
+    },
+    {
+        question: "Which Imam holds the title 'Gharib al-Ghuraba' (The Stranger of Strangers)?",
+        options: ["Imam Hussain (AS)", "Imam Ali al-Rida (AS)", "Imam Musa al-Kadhim (AS)", "Imam Muhammad al-Mahdi (AJ)"],
+        correct: 1
+    },
+    {
+        question: "The 'Sermon of Fadak' was delivered by Lady Fatima (SA) in response to what event?",
+        options: ["The Battle of Jamal", "The confiscation of her inherited land", "The death of the Prophet", "The appointment of the Caliph"],
+        correct: 1
+    },
+    {
+        question: "Which Sahabi is known for being the 'Gate of the City of Knowledge' alongside the Prophet?",
+        options: ["Abu Bakr", "Salman al-Farsi", "Imam Ali (AS)", "Abu Dharr al-Ghifari"],
+        correct: 2
+    },
+    {
+        question: "Which Imam is credited with expanding the 'Ja'fari' school of jurisprudence?",
+        options: ["4th Imam", "5th Imam", "6th Imam", "7th Imam"],
+        correct: 2
+    },
+    {
+        question: "What is the meaning of the title 'Al-Sajjad' given to the 4th Imam?",
+        options: ["The Generous", "The One who prostrates excessively", "The Patient", "The Truthful"],
+        correct: 1
+    },
+    {
+        question: "Which Prophet is known as 'Khateeb al-Anbiya' (The Orator of the Prophets) for his eloquence?",
+        options: ["Prophet Shu'ayb (AS)", "Prophet Idris (AS)", "Prophet Salih (AS)", "Prophet Dawud (AS)"],
+        correct: 0
+    },
+    {
+        question: "In the Quranic narrative, which Prophet was given the ability to soften iron with his hands and was gifted the Zabur?",
+        options: ["Prophet Sulayman (AS)", "Prophet Dawud (AS)", "Prophet Musa (AS)", "Prophet Yusuf (AS)"],
+        correct: 1
+    },
+    {
+        question: "Prophet Idris (AS) is often identified in historical and genealogical texts with which figure?",
+        options: ["Enoch", "Noah", "Methuselah", "Hermes"],
+        correct: 0
+    },
+    {
+        question: "Which Prophet was sent to the people of 'Thamud' and provided a miraculous she-camel as a sign?",
+        options: ["Prophet Hud (AS)", "Prophet Salih (AS)", "Prophet Lut (AS)", "Prophet Ismail (AS)"],
+        correct: 1
+    },
+    {
+        question: "According to the Quran, which Prophet was swallowed by a large fish/whale after leaving his people in Nineveh?",
+        options: ["Prophet Yunus (AS)", "Prophet Ilyas (AS)", "Prophet Yahya (AS)", "Prophet Zakariyya (AS)"],
+        correct: 0
+    },
+    {
+        question: "Who were the two Prophets that rebuilt the foundations of the Kaaba in Mecca?",
+        options: ["Adam and Seth", "Ibrahim and Ismail", "Ibrahim and Ishaq", "Musa and Harun"],
+        correct: 1
+    },
+    {
+        question: "Which Prophet is described as having remained in a state of 'patience' (Sabr) during years of severe illness and loss of wealth and family?",
+        options: ["Prophet Ayub (AS)", "Prophet Yaqub (AS)", "Prophet Yusuf (AS) ", "Prophet Nuh (AS)"],
+        correct: 0
+    },
+    {
+        question: "Which two Prophets are mentioned in the Quran as having been granted kingship and power over the Jinn and animals?",
+        options: ["Musa and Harun", "Dawud and Sulayman", "Ibrahim and Ismail", "Yusuf and Benjamin"],
+        correct: 1
+    },
+    {
+        question: "Prophet Yahya (AS) was the contemporary and maternal cousin of which other Prophet?",
+        options: ["Prophet Isa (AS)", "Prophet Zakariyya (AS)", "Prophet Musa (AS)", "Prophet Ilyas (AS)"],
+        correct: 0
+    },
+    {
+        question: "What was the name of the mountain where Prophet Musa (AS) received the Commandments and spoke to Allah?",
+        options: ["Mount Safa", "Mount Sinai (Tur)", "Mount Uhud", "Mount Hira"],
+        correct: 1
+    },
+    {
+        question: "Which Prophet is mentioned as the 'First to write with a pen' and the first to sew clothing?",
+        options: ["Prophet Adam (AS)", "Prophet Idris (AS)", "Prophet Nuh (AS)", "Prophet Shem (AS)"],
+        correct: 1
+    },
+    {
+        question: "Prophet Ibrahim (AS) was born during the reign of which tyrannical king?",
+        options: ["Pharaoh", "Namrud (Nimrod)", "Abu Lahab", "Shaddad"],
+        correct: 1
+    },
+    {
+        question: "Which Prophet was miraculously born to a father who was elderly and a mother who was barren, as a result of a prayer in the Mihrab?",
+        options: ["Prophet Yahya (AS)", "Prophet Isa (AS)", "Prophet Ismail (AS)", "Prophet Ishaq (AS)"],
+        correct: 0
+    },
+    {
+        question: "Which Prophet's story is described in the Quran as 'Ahsan al-Qasas' (The Best of Stories)?",
+        options: ["Prophet Muhammad (PBUH)", "Prophet Yusuf (AS)", "Prophet Musa (AS)", "Prophet Ibrahim (AS)"],
+        correct: 1
+    },
+    {
+        question: "Which Prophet is known as 'Dhun-Nun' in the Quran?",
+        options: ["Prophet Yunus (AS)", "Prophet Lut (AS)", "Prophet Hud (AS)", "Prophet Uzair (AS)"],
+        correct: 0
+    },
+    {
+        question: "The people of 'Ad' were the nation to which which Prophet was sent?",
+        options: ["Prophet Salih (AS)", "Prophet Hud (AS)", "Prophet Shu'ayb (AS)", "Prophet Ibrahim (AS)"],
+        correct: 1
+    },
+    {
+        question: "Which Prophet is traditionally believed to be still alive and will reappear alongside Imam al-Mahdi (AJ)?",
+        options: ["Prophet Isa (AS)", "Prophet Khidr (AS)", "Both A and B", "None of the above"],
+        correct: 2
+    },
+    {
+        question: "Who was the brother of Prophet Musa (AS) who was also a Prophet and served as his spokesperson?",
+        options: ["Prophet Ishaq (AS)", "Prophet Harun (AS)", "Prophet Joshua (AS)", "Prophet Lut (AS)"],
+        correct: 1
+    },
+    {
+        question: "Which Prophet was safely placed in a chest in the river Nile as an infant to escape the decree of the Pharaoh?",
+        options: ["Prophet Musa (AS)", "Prophet Yusuf (AS)", "Prophet Isa (AS)", "Prophet Yahya (AS)"],
+        correct: 0
+    },
+    {
+        question: "What is the term for the group of five 'Arch-Prophets' who brought new divine laws (Sharia)?",
+        options: ["Ahl al-Kisa", "Ulul 'Azm", "Sadiqun", "Muhajirun"],
+        correct: 1
+    },
+    {
+        question: "In what year did the 'Am al-Huzn' (Year of Sorrow) occur, marked by the death of both Lady Khadija (SA) and Abu Talib (AS)?",
+        options: ["8th year of Be'that", "10th year of Be'that", "1st year of Hijra", "13th year of Be'that"],
+        correct: 1
+    },
+    {
+        question: "What was the name of the pact the Prophet joined in his youth to protect the oppressed in Mecca?",
+        options: ["Hilf al-Fudul", "Pact of Aqaba", "Treaty of Hudaybiyyah", "Covenant of Medina"],
+        correct: 0
+    },
+    {
+        question: "During the Hijra, who slept in the Prophet's bed to deceive the assassins, an event known as 'Laylat al-Mabit'?",
+        options: ["Abu Bakr", "Imam Ali (AS)", "Hamza ibn Abdul-Muttalib", "Zayd ibn Harithah"],
+        correct: 1
+    },
+    {
+        question: "Which battle is referred to in the Quran as 'Yawm al-Furqan' (The Day of Criterion)?",
+        options: ["Battle of Uhud", "Battle of Badr", "Battle of Khandaq", "Battle of Hunayn"],
+        correct: 1
+    },
+    {
+        question: "Who was the first martyr of Islam (female)?",
+        options: ["Lady Khadija", "Lady Sumayyah", "Lady Fatima", "Lady Umm Salama"],
+        correct: 1
+    },
+    {
+        question: "The 'Constitution of Medina' was a formal agreement between the Prophet and which primary groups?",
+        options: ["Only the Muhajirun and Ansar", "Muslims, Jews, and pagan tribes of Medina", "The Quraysh and the Muslims", "The Romans and the Persians"],
+        correct: 1
+    },
+    {
+        question: "At which location did the Prophet deliver his final public sermon during the Farewell Pilgrimage?",
+        options: ["Mount Arafat", "Mina", "Muzdalifah", "Ghadir Khumm"],
+        correct: 0
+    },
+    {
+        question: "Which nursing mother took care of the Prophet during his infancy in the desert?",
+        options: ["Aminah bint Wahb", "Halimah al-Sa'diyyah", "Thuwaybah", "Umm Ayman"],
+        correct: 1
+    },
+    {
+        question: "In the Battle of Khandaq (The Trench), whose suggestion was it to dig a trench around Medina?",
+        options: ["Imam Ali (AS)", "Salman al-Farsi", "Abu Dharr al-Ghifari", "Ammar ibn Yasir"],
+        correct: 1
+    },
+    {
+        question: "Which surah was being recited when the first migration to Abyssinia (Habasha) was defended in the court of Najashi?",
+        options: ["Surah al-Ikhlas", "Surah Maryam", "Surah al-Fath", "Surah al-Baqarah"],
+        correct: 1
+    },
+    {
+        question: "How many years did the Muslims spend in the social and economic boycott in the Valley of Abu Talib (Shi'b Abi Talib)?",
+        options: ["1 year", "3 years", "5 years", "10 years"],
+        correct: 1
+    },
+    {
+        question: "Who was the Prophet's companion during the actual journey of the Hijra from Mecca to Medina?",
+        options: ["Imam Ali (AS)", "Abu Bakr", "Umar ibn al-Khattab", "Uthman ibn Affan"],
+        correct: 1
+    },
+    {
+        question: "The Treaty of Hudaybiyyah was signed in which year of the Hijra?",
+        options: ["4 AH", "6 AH", "8 AH", "10 AH"],
+        correct: 1
+    },
+    {
+        question: "What was the name of the Prophet's camel that he rode during the Hijra and which eventually chose the site for his mosque?",
+        options: ["Al-Qaswa", "Al-Adba", "Duldul", "Zuljanah"],
+        correct: 0
+    },
+    {
+        question: "In the Battle of Uhud, who was the 'Lion of God' and the Prophet's uncle who was martyred?",
+        options: ["Abbas ibn Abdul-Muttalib", "Hamza ibn Abdul-Muttalib", "Abu Talib", "Ja'far ibn Abi Talib"],
+        correct: 1
+    },
+    {
+        question: "Which event took place on the 24th of Dhu al-Hijjah, involving a spiritual challenge with the Christians of Najran?",
+        options: ["Ghadir Khumm", "Mubahala", "Conquest of Mecca", "The Night Journey"],
+        correct: 1
+    },
+    {
+        question: "Who was sent by the Prophet as the first 'Ambassador of Islam' to Medina to teach the Quran before the Hijra?",
+        options: ["Mus'ab ibn Umayr", "Bilal al-Habashi", "Abdullah ibn Mas'ud", "Khalid ibn al-Walid"],
+        correct: 0
+    },
+    {
+        question: "The Prophet belonged to which specific clan of the Quraysh tribe?",
+        options: ["Banu Umayya", "Banu Hashim", "Banu Makhzum", "Banu Adi"],
+        correct: 1
+    },
+    {
+        question: "What was the name of the Christian monk who recognized the signs of prophethood in Muhammad (PBUH) during his caravan trip to Syria?",
+        options: ["Waraqa ibn Nawfal", "Bahira", "Nestorius", "Salman"],
+        correct: 1
+    },
+    {
+        question: "How old was the Prophet when he received the first revelation (Wahy) in the Cave of Hira?",
+        options: ["25", "33", "40", "63"],
+        correct: 2
+    }
+
+];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedAnswer = null;
+        let dailyQuestions = [];
+        let userAnswers = [];
+
+        const quizContainer = document.getElementById('quizContainer');
+        const questionNumber = document.getElementById('questionNumber');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const progressFill = document.getElementById('progressFill');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const finalScore = document.getElementById('finalScore');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctCount = document.getElementById('correctCount');
+        const incorrectCount = document.getElementById('incorrectCount');
+        const percentage = document.getElementById('percentage');
+        const restartBtn = document.getElementById('restartBtn');
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function initQuiz() {
+            dailyQuestions = shuffleArray(QUESTIONS).slice(0, 10);
+            userAnswers = new Array(dailyQuestions.length).fill(null);
+            currentQuestion = 0;
+            score = 0;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = dailyQuestions[currentQuestion];
+            questionNumber.textContent = `Question ${currentQuestion + 1} of ${dailyQuestions.length}`;
+            questionText.textContent = question.question;
+            
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option;
+                
+                if (userAnswers[currentQuestion] === index) {
+                    optionDiv.classList.add('selected');
+                }
+                
+                optionDiv.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            updateProgress();
+            updateButtons();
+        }
+
+        function selectOption(index) {
+            userAnswers[currentQuestion] = index;
+            
+            const options = optionsContainer.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                opt.classList.remove('selected');
+                if (i === index) {
+                    opt.classList.add('selected');
+                }
+            });
+            
+            updateButtons();
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / dailyQuestions.length) * 100;
+            progressFill.style.width = progress + '%';
+        }
+
+        function updateButtons() {
+            prevBtn.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === dailyQuestions.length - 1) {
+                nextBtn.textContent = 'Finish';
+            } else {
+                nextBtn.textContent = 'Next →';
+            }
+            
+            nextBtn.disabled = userAnswers[currentQuestion] === null;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < dailyQuestions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                calculateScore();
+                showFinalScore();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function calculateScore() {
+            score = 0;
+            dailyQuestions.forEach((question, index) => {
+                if (userAnswers[index] === question.correct) {
+                    score++;
+                }
+            });
+        }
+
+        function showFinalScore() {
+            quizContainer.style.display = 'none';
+            document.getElementById('quizActions').style.display = 'none';
+            scoreDisplay.style.display = 'block';
+            document.querySelector('.restart-actions').style.display = 'flex';
+            
+            const total = dailyQuestions.length;
+            const incorrect = total - score;
+            const percent = Math.round((score / total) * 100);
+            
+            finalScore.textContent = `${score}/${total}`;
+            correctCount.textContent = score;
+            incorrectCount.textContent = incorrect;
+            percentage.textContent = `${percent}%`;
+            
+            if (percent >= 90) {
+                scoreMessage.textContent = 'Excellent! Outstanding knowledge! 🌟';
+            } else if (percent >= 70) {
+                scoreMessage.textContent = 'Great job! Well done! 👏';
+            } else if (percent >= 50) {
+                scoreMessage.textContent = 'Good effort! Keep learning! 📚';
+            } else {
+                scoreMessage.textContent = 'Keep studying! You can do better! 💪';
+            }
+        }
+
+        function restartQuiz() {
+            scoreDisplay.style.display = 'none';
+            document.querySelector('.restart-actions').style.display = 'none';
+            quizContainer.style.display = 'block';
+            document.getElementById('quizActions').style.display = 'flex';
+            initQuiz();
+        }
+
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-progress').style.width = scrolled + '%';
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+                hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    hamburger.textContent = '☰';
+                }
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    hamburger.textContent = '☰';
+                });
+            });
+        }
+
+        initQuiz();
+    </script>
+</body>
+</html>
