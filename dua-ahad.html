@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Dua Ahad</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Lateef:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Aalmaghribi';
+  src: url('https://nooralhuda.co.uk/quran/Aalmaghribi-pg74r.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IndoPak';
+  src: url('https://nooralhuda.co.uk/quran/Al Majeed Quranic Font_shiped.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kolkatta';
+  src: url('https://nooralhuda.co.uk/quran/Al Qalam Kolkatta Quranic font Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Uthmanic';
+  src: url('https://nooralhuda.co.uk/quran/UthmanicHafs_V22.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+--primary-green: #136f3c;
+--secondary-green: #1a8049;
+--accent-gold: #d4af37;
+--light-gold: #f4e4a6;
+--dark-navy: #1a202c;
+--white: #ffffff;
+--light-gray: #f7fafc;
+--medium-gray: #e2e8f0;
+--text-dark: #2d3748;
+--text-light: #718096;
+--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+--shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {margin: 0;padding: 0;box-sizing: border-box;}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.8;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  background: var(--light-gray);
+}
+
+/* Navigation */
+.navbar {
+  position: sticky;
+  top: 0;
+  background: white;
+  border-bottom: 1px solid #eee;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-green);
+  text-decoration: none;
+}
+
+.hamburger {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-green);
+}
+
+.hamburger.active {font-size: 28px;}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  padding: 0 2rem 0 0;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.nav-links a:hover {color: var(--primary-green);}
+
+/* Page Header */
+.page-header {
+  background: linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),
+              url('https://nooralhuda.co.uk/karbala.jpg') center/cover;
+  padding: 80px 0 50px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.6;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.page-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.page-subtitle {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  opacity: 0.9;
+  font-family: 'IndoPak', 'Amiri', serif;
+}
+
+/* Header Actions */
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn-back-header, .btn-settings, .btn-summary {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-back-header:hover, .btn-settings:hover, .btn-summary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Audio Player */
+.audio-player-wrapper {
+  position: sticky;
+  top: 80px;
+  z-index: 999;
+  background: white;
+  padding: 1.5rem 2rem;
+  box-shadow: var(--shadow-md);
+  border-radius: 16px;
+  margin: -30px auto 2rem;
+  max-width: 900px;
+}
+
+.audio-player-wrapper audio {
+  width: 100%;
+  outline: none;
+}
+
+/* Bismillah Image */
+.bismillah-wrapper {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.bismillah-img {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  opacity: 0.9;
+}
+
+/* Summary Section */
+.summary-section {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, rgba(19, 111, 60, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+  border: 2px solid var(--primary-green);
+  border-radius: 16px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary-green), var(--accent-gold));
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+}
+
+.summary-icon {font-size: 2rem;}
+
+.summary-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin: 0;
+}
+
+.summary-content {
+  padding-left: 1rem;
+  line-height: 1.8;
+  color: var(--text-dark);
+  font-size: 1.05rem;
+}
+
+.summary-content p {margin-bottom: 1rem;}
+.summary-content p:last-child {margin-bottom: 0;}
+
+/* Main Content */
+.page {
+  padding: 60px 0;
+  background: white;
+  min-height: 60vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Dua Line */
+.dua-line {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--medium-gray);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  transition: var(--transition);
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.dua-line:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-green);
+}
+
+.line-number {
+  background: var(--primary-green);
+  color: white;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.line-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.arabic-text {
+  font-family: 'IndoPak', 'Amiri', serif;
+  font-size: 1.8rem;
+  line-height: 2.2;
+  color: var(--text-dark);
+  text-align: right;
+  direction: rtl;
+  font-weight: 400;
+}
+
+.english-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-light);
+  text-align: left;
+  direction: ltr;
+}
+
+/* Font Classes */
+.font-aalmaghribi .arabic-text {font-family: 'Aalmaghribi', 'Amiri', serif;}
+.font-indopak .arabic-text {font-family: 'IndoPak', 'Amiri', serif;}
+.font-kolkatta .arabic-text {font-family: 'Kolkatta', 'Amiri', serif;}
+.font-uthmanic .arabic-text {font-family: 'Uthmanic', 'Amiri', serif;}
+.font-amiri .arabic-text {font-family: 'Amiri', serif;}
+.font-scheherazade .arabic-text {font-family: 'Scheherazade New', serif;}
+.font-lateef .arabic-text {font-family: 'Lateef', serif;}
+.font-aref .arabic-text {font-family: 'Aref Ruqaa', serif;}
+
+.font-indopak .page-subtitle {font-family: 'IndoPak', 'Amiri', serif;}
+.font-kolkatta .page-subtitle {font-family: 'Kolkatta', 'Amiri', serif;}
+.font-aalmaghribi .page-subtitle {font-family: 'Aalmaghribi', 'Amiri', serif;}
+.font-uthmanic .page-subtitle {font-family: 'Uthmanic', 'Amiri', serif;}
+.font-amiri .page-subtitle {font-family: 'Amiri', serif;}
+.font-scheherazade .page-subtitle {font-family: 'Scheherazade New', serif;}
+.font-lateef .page-subtitle {font-family: 'Lateef', serif;}
+.font-aref .page-subtitle {font-family: 'Aref Ruqaa', serif;}
+
+/* Font size classes */
+.font-size-small .arabic-text {font-size: 1.4rem;line-height: 2;}
+.font-size-medium .arabic-text {font-size: 1.8rem;line-height: 2.2;}
+.font-size-large .arabic-text {font-size: 2.2rem;line-height: 2.4;}
+.font-size-xlarge .arabic-text {font-size: 2.6rem;line-height: 2.6;}
+
+/* Settings Modal */
+.settings-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.settings-modal.active {display: flex;}
+
+.settings-content {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--medium-gray);
+}
+
+.settings-header h2 {
+  font-size: 1.8rem;
+  color: var(--primary-green);
+  margin: 0;
+}
+
+.close-settings {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: var(--transition);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close-settings:hover {
+  background: var(--light-gray);
+  color: var(--text-dark);
+}
+
+.setting-group {margin-bottom: 2rem;}
+
+.setting-label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.setting-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--medium-gray);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transition);
+  background: white;
+}
+
+.setting-control:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(19, 111, 60, 0.1);
+}
+
+.font-size-display {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-green);
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-light);
+  font-size: 1.2rem;
+}
+
+.loading::after {
+  content: '...';
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% {content: '.';}
+  40% {content: '..';}
+  60%, 100% {content: '...';}
+}
+
+/* Error State */
+.error {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #dc2626;
+  font-size: 1.1rem;
+  background: #fee;
+  border-radius: 12px;
+  margin: 2rem;
+}
+
+/* Footer */
+footer {
+  margin-top: 4rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  border-top: 1px solid var(--medium-gray);
+  background: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hamburger {display: block;}
+  
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    gap: 1.2rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .nav-links.active {display: flex;}
+  
+  .page-header {padding: 60px 0 40px;}
+  
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .controls {
+    flex-direction: column;
+  }
+  
+  .btn-back-header, .btn-settings, .btn-summary {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    justify-content: center;
+  }
+  
+  .audio-player-wrapper {
+    padding: 1rem;
+    margin: -20px 1rem 1.5rem;
+  }
+  
+  .bismillah-img {max-width: 300px;}
+  
+  .summary-section {padding: 0 1rem;}
+  .summary-card {padding: 1.5rem;}
+  .summary-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .summary-icon {font-size: 1.5rem;}
+  .summary-title {font-size: 1.2rem;}
+  .summary-content {font-size: 1rem;}
+  
+  .dua-line {
+    padding: 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .line-number {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+  
+  .arabic-text {
+    font-size: 1.5rem;
+    line-height: 2;
+  }
+  
+  .english-text {font-size: 1rem;}
+  
+  .settings-content {padding: 1.5rem;}
+  .settings-header h2 {font-size: 1.4rem;}
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .nav-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Dark mode */
+body.dark-mode {
+  --light-gray: #0f172a;
+  --text-dark: #f9fafb;
+  --text-light: #94a3b8;
+  --white: #1e293b;
+  --medium-gray: #334155;
+}
+
+body.dark-mode .dua-line {background: var(--white);}
+body.dark-mode .audio-player-wrapper {background: var(--white);}
+body.dark-mode .summary-card {background: linear-gradient(135deg, rgba(19, 111, 60, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);}
+body.dark-mode .settings-content {background: var(--white);color: var(--text-dark);}
+body.dark-mode .setting-control {background: var(--light-gray);border-color: var(--medium-gray);color: var(--text-dark);}
+
+html {scroll-behavior: smooth;}
+.navbar{
+  background:white;
+  position:relative;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+
+/* top row only */
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:3rem 2rem;
+}
+
+/* logo */
+
+
+/* hamburger */
+.hamburger{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: #136f3c;
+}
+
+/* LINKS (desktop) */
+.nav-links{
+  display:flex;
+  gap:2.5rem;            /* ← bigger gap like you asked */
+  padding: 2rem 2rem 2rem 2rem; /* ← space on right edge */
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;          /* ← full device width */
+    padding:1rem 1.5rem;
+    gap:1.2rem;
+    border-top:1px solid #eee;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+}
+/* ===== DESKTOP LAYOUT ===== */
+.navbar{
+  background:white;
+  border-bottom:1px solid #eee;
+}
+
+/* make navbar behave like one row on desktop */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .nav-container{
+    padding:1rem 1.5rem;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2.5rem;
+    padding-right:2rem; /* bigger right gap like you wanted */
+  }
+}
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+/* this is the important fix */
+.nav-container,
+.nav-links{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 24px;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-container{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+
+  .hamburger{
+    display:none;
+    color: #136f3c;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+}
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff; /* important so content doesn’t show through */
+}
+.hamburger{
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* when open */
+.hamburger.active{
+  font-size: 28px;
+}
+</style>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="https://nooralhuda.co.uk/">Home</a></li>
+    <li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+    <li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+    <li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Page Header -->
+<section class="page-header">
+  <div class="header-content">
+    <div class="header-actions">
+      <a href="duas.html" class="btn-back-header">← Back to Duas</a>
+      <div class="controls">
+        <button class="btn-summary" id="summaryBtn" style="display: none;">📖 AI Summary</button>
+        <button class="btn-settings" id="settingsBtn">⚙️ Settings</button>
+      </div>
+    </div>
+    <h1 class="page-title" id="duaTitle">Dua Kumayl</h1>
+    <p class="page-subtitle" id="duaSubtitle">دُعاء كميل</p>
+  </div>
+</section>
+
+<!-- Audio Player -->
+<div class="audio-player-wrapper" id="audioPlayerWrapper" style="display: none;">
+  <audio controls id="duaAudio">
+    <source src="" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+<!-- Bismillah Image -->
+<div class="bismillah-wrapper">
+  <img src="bismillah.png" alt="Bismillah" class="bismillah-img">
+</div>
+
+<!-- Summary Section -->
+<section class="summary-section" id="summarySection" style="display: none;">
+  <div class="summary-card">
+    <div class="summary-header">
+      <span class="summary-icon">📖</span>
+      <h2 class="summary-title">Summary</h2>
+    </div>
+    <div class="summary-content" id="summaryContent"></div>
+  </div>
+</section>
+
+<!-- Main Content -->
+<main class="page">
+  <div class="container" id="duaContainer">
+    <div class="loading">Loading dua</div>
+  </div>
+</main>
+
+<!-- Settings Modal -->
+<div class="settings-modal" id="settingsModal">
+  <div class="settings-content">
+    <div class="settings-header">
+      <h2>Settings</h2>
+      <button class="close-settings" id="closeSettings">&times;</button>
+    </div>
+    
+    <div class="setting-group">
+      <label class="setting-label">Arabic Font</label>
+      <select class="setting-control" id="settingsFontSelector">
+        <option value="indopak">IndoPak</option>
+        <option value="kolkatta">Kolkatta</option>
+        <option value="uthmanic">Uthmanic</option>
+        <option value="aalmaghribi">Aalmaghribi</option>
+        <option value="amiri">Amiri</option>
+        <option value="scheherazade">Scheherazade</option>
+        <option value="lateef">Lateef</option>
+        <option value="aref">Aref Ruqaa</option>
+      </select>
+    </div>
+    
+    <div class="setting-group">
+      <label class="setting-label">Font Size</label>
+      <input type="range" min="0" max="3" value="1" class="setting-control" id="fontSizeSlider">
+      <div class="font-size-display" id="fontSizeDisplay">Medium</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2025 Noor Al Huda. All rights reserved. Illuminating the path to Islamic knowledge and spiritual growth through authentic resources
+</footer>
+
+<script>
+// ============================================
+// CONFIGURATION - CHANGE ONLY THESE VALUES
+// ============================================
+const DUA_NAME_EN = "Dua Ahad";
+const DUA_NAME_AR = "دُعاء أحد";
+const DUA_JSON_URL = "https://nooralhuda.co.uk/duas/ahad.json";
+const DUA_AUDIO_URL = "http://mp3.duas.org/Imam%20Mehdi/Ahad.mp3";
+
+// Summary text - paste your summary here
+const DUA_SUMMARY = ``;
+// ============================================
+
+// Update page title
+document.getElementById('duaTitle').textContent = DUA_NAME_EN;
+document.getElementById('duaSubtitle').textContent = DUA_NAME_AR;
+document.title = DUA_NAME_EN;
+
+// Get elements
+const pageHeader = document.querySelector('.page-header');
+const container = document.getElementById('duaContainer');
+const duaAudio = document.getElementById('duaAudio');
+const audioPlayerWrapper = document.getElementById('audioPlayerWrapper');
+const summarySection = document.getElementById('summarySection');
+const summaryContent = document.getElementById('summaryContent');
+const summaryBtn = document.getElementById('summaryBtn');
+
+// Hamburger Menu
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', (e) => {
+  e.stopPropagation();
+  navLinks.classList.toggle('active');
+  hamburger.classList.toggle('active');
+  hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+});
+
+document.addEventListener('click', (e) => {
+  if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+    navLinks.classList.remove('active');
+    hamburger.classList.remove('active');
+    hamburger.textContent = '☰';
+  }
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+    hamburger.classList.remove('active');
+    hamburger.textContent = '☰';
+  });
+});
+
+// Settings Modal
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsModal = document.getElementById('settingsModal');
+const closeSettings = document.getElementById('closeSettings');
+const settingsFontSelector = document.getElementById('settingsFontSelector');
+const fontSizeSlider = document.getElementById('fontSizeSlider');
+const fontSizeDisplay = document.getElementById('fontSizeDisplay');
+
+// Load saved preferences
+const savedFont = localStorage.getItem('duaFont') || 'indopak';
+const savedFontSize = localStorage.getItem('duaFontSize') || '1';
+
+// Apply saved preferences
+container.classList.add(`font-${savedFont}`);
+pageHeader.classList.add(`font-${savedFont}`);
+container.classList.add(`font-size-${['small', 'medium', 'large', 'xlarge'][savedFontSize]}`);
+
+// Open settings
+settingsBtn.addEventListener('click', () => {
+  settingsModal.classList.add('active');
+  settingsFontSelector.value = savedFont;
+  fontSizeSlider.value = savedFontSize;
+  updateFontSizeDisplay();
+});
+
+// Close settings
+closeSettings.addEventListener('click', () => {
+  settingsModal.classList.remove('active');
+});
+
+settingsModal.addEventListener('click', (e) => {
+  if (e.target === settingsModal) {
+    settingsModal.classList.remove('active');
+  }
+});
+
+// Font selector
+settingsFontSelector.addEventListener('change', (e) => {
+  const font = e.target.value;
+  container.className = container.className.replace(/font-\w+/g, '');
+  pageHeader.className = pageHeader.className.replace(/font-\w+/g, '');
+  container.classList.add(`font-${font}`);
+  pageHeader.classList.add(`font-${font}`);
+  
+  // Re-apply font size
+  const currentSize = fontSizeSlider.value;
+  container.classList.add(`font-size-${['small', 'medium', 'large', 'xlarge'][currentSize]}`);
+  
+  localStorage.setItem('duaFont', font);
+});
+
+// Font size slider
+function updateFontSizeDisplay() {
+  const labels = ['Small', 'Medium', 'Large', 'Extra Large'];
+  fontSizeDisplay.textContent = labels[fontSizeSlider.value];
+}
+
+fontSizeSlider.addEventListener('input', (e) => {
+  const sizeIndex = e.target.value;
+  const sizes = ['small', 'medium', 'large', 'xlarge'];
+  
+  container.className = container.className.replace(/font-size-\w+/g, '');
+  container.classList.add(`font-size-${sizes[sizeIndex]}`);
+  
+  updateFontSizeDisplay();
+  localStorage.setItem('duaFontSize', sizeIndex);
+});
+
+// Summary setup
+if (DUA_SUMMARY && DUA_SUMMARY.trim()) {
+  const paragraphs = DUA_SUMMARY.trim().split('\n\n').filter(p => p.trim());
+  summaryContent.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+  summaryBtn.style.display = 'inline-flex';
+  
+  summaryBtn.addEventListener('click', () => {
+    if (summarySection.style.display === 'none' || summarySection.style.display === '') {
+      summarySection.style.display = 'block';
+      summarySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      summaryBtn.textContent = '📖 Hide Summary';
+    } else {
+      summarySection.style.display = 'none';
+      summaryBtn.textContent = '📖 AI Summary';
+    }
+  });
+}
+
+// Fetch and render dua
+async function loadDua() {
+  try {
+    const response = await fetch(DUA_JSON_URL);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to load dua: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    if (!data || data.length === 0) {
+      container.innerHTML = '<div class="error">No content available</div>';
+      return;
+    }
+    
+    // Clear loading state
+    container.innerHTML = '';
+    
+    // Re-apply saved preferences
+    container.classList.add(`font-${savedFont}`);
+    container.classList.add(`font-size-${['small', 'medium', 'large', 'xlarge'][savedFontSize]}`);
+    
+    // Setup audio if URL is provided
+    if (DUA_AUDIO_URL) {
+      duaAudio.querySelector('source').src = DUA_AUDIO_URL;
+      duaAudio.load();
+      audioPlayerWrapper.style.display = 'block';
+    }
+    
+    // Render each line
+    data.forEach(line => {
+      const lineDiv = document.createElement('div');
+      lineDiv.className = 'dua-line';
+      lineDiv.innerHTML = `
+        <div class="line-number">${line.id}</div>
+        <div class="line-content">
+          <div class="arabic-text">${line.arabicText || ''}</div>
+          <div class="english-text">${line.englishText || ''}</div>
+        </div>
+      `;
+      container.appendChild(lineDiv);
+    });
+    
+  } catch (error) {
+    console.error('Error loading dua:', error);
+    container.innerHTML = `<div class="error">Failed to load dua. Please try again later.<br><small>${error.message}</small></div>`;
+  }
+}
+
+// Theme support
+function applyThemeClass(isDark) {
+  if (isDark) {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
+}
+
+const savedTheme = localStorage.getItem('theme');
+applyThemeClass(savedTheme === 'dark');
+
+// Load dua on page load
+window.addEventListener('DOMContentLoaded', () => {
+  loadDua();
+});
+</script>
+</body>
+</html>
