@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Islamic Historical Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="https://nooralhuda.co.uk/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        :root {
+            --primary-green: #136f3c;
+            --secondary-green: #1a8049;
+            --accent-gold: #d4af37;
+            --light-gold: #f4e4a6;
+            --dark-navy: #1a202c;
+            --white: #ffffff;
+            --light-gray: #f7fafc;
+            --medium-gray: #e2e8f0;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-gray);
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid #eee;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 26px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #136f3c;
+        }
+
+        .hamburger.active {
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            padding: 0 2rem 0 0;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),
+                url('https://nooralhuda.co.uk/karbala.jpg') center/cover;
+            padding: 80px 0 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            animation: patternMove 60s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes patternMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-30px) translateY(-30px); }
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-actions {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-home {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .back-home:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            opacity: 0.95;
+        }
+
+        .map-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .controls-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .filter-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.25rem;
+            border: 2px solid var(--medium-gray);
+            background: white;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover {
+            background: var(--light-gray);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+        }
+
+        #map {
+            height: 600px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--medium-gray);
+        }
+
+        .legend {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .legend-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .legend-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .legend-icon.prophet { background: #3b82f6; }
+        .legend-icon.imam { background: #10b981; }
+        .legend-icon.battle { background: #ef4444; }
+        .legend-icon.birth { background: #f59e0b; }
+        .legend-icon.death { background: #6b7280; }
+        .legend-icon.event { background: #8b5cf6; }
+
+        .legend-text {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .event-popup {
+            max-width: 300px;
+        }
+
+        .popup-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .popup-category {
+            display: inline-block;
+            background: var(--light-gold);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .popup-description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .popup-date {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 1rem 1.5rem;
+                gap: 1.2rem;
+                border-top: 1px solid #eee;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            #map {
+                height: 400px;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .legend-items {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .navbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .nav-container {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                display: flex;
+                align-items: center;
+                gap: 2.5rem;
+                padding-right: 2rem;
+            }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--primary-green));
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        .navbar{
+  background:white;
+  position:relative;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+
+/* top row only */
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:3rem 2rem;
+}
+
+/* logo */
+
+
+/* hamburger */
+.hamburger{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: #136f3c;
+}
+
+/* LINKS (desktop) */
+.nav-links{
+  display:flex;
+  gap:2.5rem;            /* ← bigger gap like you asked */
+  padding: 2rem 2rem 2rem 2rem; /* ← space on right edge */
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;          /* ← full device width */
+    padding:1rem 1.5rem;
+    gap:1.2rem;
+    border-top:1px solid #eee;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+}
+/* ===== DESKTOP LAYOUT ===== */
+.navbar{
+  background:white;
+  border-bottom:1px solid #eee;
+}
+
+/* make navbar behave like one row on desktop */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .nav-container{
+    padding:1rem 1.5rem;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2.5rem;
+    padding-right:2rem; /* bigger right gap like you wanted */
+  }
+}
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+/* this is the important fix */
+.nav-container,
+.nav-links{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 24px;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-container{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+
+  .hamburger{
+    display:none;
+    color: #136f3c;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+}
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff; /* important so content doesn’t show through */
+}
+.hamburger{
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* when open */
+.hamburger.active{
+  font-size: 28px;
+}
+.navbar{
+  background:white;
+  position:relative;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+
+/* top row only */
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:3rem 2rem;
+}
+
+/* logo */
+
+
+/* hamburger */
+.hamburger{
+  display:none;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: #136f3c;
+}
+
+/* LINKS (desktop) */
+.nav-links{
+  display:flex;
+  gap:2.5rem;            /* ← bigger gap like you asked */
+  padding: 2rem 2rem 2rem 2rem; /* ← space on right edge */
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:768px){
+
+  .hamburger{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    width:100%;          /* ← full device width */
+    padding:1rem 1.5rem;
+    gap:1.2rem;
+    border-top:1px solid #eee;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+}
+/* ===== DESKTOP LAYOUT ===== */
+.navbar{
+  background:white;
+  border-bottom:1px solid #eee;
+}
+
+/* make navbar behave like one row on desktop */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .nav-container{
+    padding:1rem 1.5rem;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2.5rem;
+    padding-right:2rem; /* bigger right gap like you wanted */
+  }
+}
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.navbar{
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+/* this is the important fix */
+.nav-container,
+.nav-links{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 24px;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width:769px){
+
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-container{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+
+  .hamburger{
+    display:none;
+    color: #136f3c;
+  }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:2rem;
+  }
+}
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff; /* important so content doesn’t show through */
+}
+.hamburger{
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* when open */
+.hamburger.active{
+  font-size: 28px;
+}
+    </style>
+</head>
+<body>
+    <div class="scroll-progress"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="https://nooralhuda.co.uk/">Home</a></li>
+            <li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+            <li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+            <li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="page-header">
+        <div class="header-content">
+            <div class="header-actions">
+                <a class="back-home" href="home">← Go Back</a>
+            </div>
+            <h1 class="page-title">Islamic Historical Map</h1>
+            <p class="page-subtitle">Explore the locations of Prophets, Imams, and significant events</p>
+        </div>
+    </section>
+
+    <main class="map-container">
+        <div class="controls-panel">
+            <div class="filter-section">
+                <span class="filter-label">Filter by:</span>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Events</button>
+                    <button class="filter-btn" data-filter="prophet">Prophets</button>
+                    <button class="filter-btn" data-filter="imam">Imams</button>
+                    <button class="filter-btn" data-filter="battle">Battles</button>
+                    <button class="filter-btn" data-filter="birth">Births</button>
+                    <button class="filter-btn" data-filter="death">Deaths</button>
+                    <button class="filter-btn" data-filter="event">Major Events</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="map"></div>
+
+        <div class="legend">
+            <div class="legend-title">Map Legend</div>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-icon prophet"></div>
+                    <span class="legend-text">Prophet Events</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon imam"></div>
+                    <span class="legend-text">Imam Events</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon battle"></div>
+                    <span class="legend-text">Battles</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon birth"></div>
+                    <span class="legend-text">Births</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon death"></div>
+                    <span class="legend-text">Deaths</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon event"></div>
+                    <span class="legend-text">Major Events</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const LOCATIONS = [
+            // Prophet Muhammad (PBUH)
+           // --- Prophet Muhammad (PBUH) - Early Life & Mecca ---
+{
+    name: "Birthplace of Prophet Muhammad (PBUH) - Mawlid House",
+    lat: 21.42589,
+    lng: 39.82621, 
+    category: "prophet",
+    type: "birth",
+    description: "Traditional site of the birth of the Prophet Muhammad in Mecca in the Year of the Elephant.",
+    date: "570 CE"
+},
+{
+    name: "Cave Hira - First Revelation",
+    lat: 21.45833,
+    lng: 39.85917,
+    category: "prophet",
+    type: "event",
+    description: "The cave on Jabal al-Nour where the first revelation of the Quran was received.",
+    date: "610 CE"
+},
+{
+    name: "Hijra Arrival - Al-Masjid an-Nabawi",
+    lat: 24.46786,
+    lng: 39.61105,
+    category: "prophet",
+    type: "event",
+    description: "Arrival of the Prophet in Medina, marking the beginning of the Hijri calendar.",
+    date: "622 CE"
+},
+{
+    name: "Battle of Badr",
+    lat: 23.78333,
+    lng: 38.78333,
+    category: "prophet",
+    type: "battle",
+    description: "Site of the first major battle between the Muslims and Quraysh.",
+    date: "624 CE"
+},
+{
+    name: "Battle of Uhud",
+    lat: 24.50172,
+    lng: 39.61639,
+    category: "prophet",
+    type: "battle",
+    description: "Battle fought near Mount Uhud outside Medina.",
+    date: "625 CE"
+},
+{
+    name: "Ghadir Khumm",
+    lat: 22.83194,
+    lng: 39.11083,
+    category: "imam",
+    type: "event",
+    description: "Location where the Prophet declared 'Man kuntu mawlahu fa Aliyyun mawlahu'.",
+    date: "632 CE"
+},
+
+// --- Imam Ali (AS) & Lady Fatima (SA) ---
+{
+    name: "Birth of Imam Ali (AS) - Kaaba",
+    lat: 21.42252,
+    lng: 39.82621,
+    category: "imam",
+    type: "birth",
+    description: "Imam Ali was born inside the Kaaba.",
+    date: "600 CE"
+},
+{
+    name: "Martyrdom of Lady Fatima (SA)",
+    lat: 24.46861,
+    lng: 39.61488,
+    category: "imam",
+    type: "death",
+    description: "Approximate location near the house of Fatima and the Prophet’s mosque.",
+    date: "632 CE"
+},
+{
+    name: "Martyrdom of Imam Ali (AS) - Great Mosque of Kufa",
+    lat: 32.02917,
+    lng: 44.40167,
+    category: "imam",
+    type: "death",
+    description: "Location where Imam Ali was struck while praying Fajr.",
+    date: "661 CE"
+},
+{
+    name: "Shrine of Imam Ali (AS) - Najaf",
+    lat: 31.99556,
+    lng: 44.31417,
+    category: "imam",
+    type: "event",
+    description: "Holy shrine containing the grave of Imam Ali.",
+    date: "661 CE"
+},
+{
+    name: "Grave of Prophet Muhammad (PBUH) - Al-Masjid an-Nabawi",
+    lat: 24.46750,
+    lng: 39.61120,
+    category: "prophet",
+    type: "death",
+    description: "Final resting place of the Prophet Muhammad.",
+    date: "632 CE"
+},
+
+
+// --- Imams Buried in Jannat al-Baqi ---
+{
+    name: "Jannat al-Baqi - Four Imams",
+    lat: 24.46828,
+    lng: 39.61419,
+    category: "imam",
+    type: "death",
+    description: "Graves of Imam Hassan, Imam Sajjad, Imam Baqir and Imam Sadiq.",
+    date: "Various"
+},
+
+// --- Imam Hussain (AS) ---
+{
+    name: "Shrine of Imam Hussain (AS) - Karbala",
+    lat: 32.61603,
+    lng: 44.03253,
+    category: "imam",
+    type: "event",
+    description: "Shrine of Imam Hussain in Karbala.",
+    date: "680 CE"
+},
+
+// --- Later Imams ---
+{
+    name: "Shrine of Imam Ridha (AS) - Mashhad",
+    lat: 36.28785,
+    lng: 59.61586,
+    category: "imam",
+    type: "event",
+    description: "Shrine of Imam Ali al-Ridha in Mashhad.",
+    date: "818 CE"
+},
+{
+    name: "Al-Askari Shrine - Samarra",
+    lat: 34.19872,
+    lng: 43.87389,
+    category: "imam",
+    type: "event",
+    description: "Shrine of Imam al-Hadi and Imam Hasan al-Askari.",
+    date: "874 CE"
+},
+
+// --- Other Prophets ---
+{
+    name: "Mount Sinai - Prophet Musa (AS)",
+    lat: 28.53972,
+    lng: 33.97500,
+    category: "prophet",
+    type: "event",
+    description: "Mountain where Musa received the tablets.",
+    date: "~1300 BCE"
+},
+{
+    name: "Mount Judi - Ark of Nuh (AS)",
+    lat: 37.37361,
+    lng: 42.48944,
+    category: "prophet",
+    type: "event",
+    description: "Traditional location where the Ark rested.",
+    date: "Ancient"
+},
+
+// --- Additional Early Islamic Sites ---
+{
+    name: "Dar al-Arqam",
+    lat: 21.42203,
+    lng: 39.82778,
+    category: "prophet",
+    type: "event",
+    description: "House where early Muslims secretly learned Islam.",
+    date: "613 CE"
+},
+{
+    name: "Shi'b Abi Talib",
+    lat: 21.42500,
+    lng: 39.82972,
+    category: "prophet",
+    type: "event",
+    description: "Valley where Banu Hashim endured the boycott.",
+    date: "617 CE"
+},
+{
+    name: "Cave Thawr",
+    lat: 21.37611,
+    lng: 39.85083,
+    category: "prophet",
+    type: "event",
+    description: "Cave where the Prophet hid during the Hijra.",
+    date: "622 CE"
+},
+{
+    name: "Masjid al-Qiblatayn",
+    lat: 24.48472,
+    lng: 39.57944,
+    category: "prophet",
+    type: "event",
+    description: "Mosque where the Qibla direction changed.",
+    date: "624 CE"
+},
+// --- First Hijra to Abyssinia ---
+{
+    name: "Port of Shu'aybah (Early Meccan Port)",
+    lat: 20.6756,
+    lng: 39.5200,
+    category: "prophet",
+    type: "event",
+    description: "Historic port used by early Muslims when departing Mecca during the first migration to Abyssinia.",
+    date: "615 CE"
+},
+{
+    name: "Massawa Port - Arrival in Abyssinia",
+    lat: 15.6081,
+    lng: 39.4746,
+    category: "prophet",
+    type: "event",
+    description: "Traditional landing point of the Muslim migrants who fled persecution in Mecca.",
+    date: "615 CE"
+},
+{
+    name: "Negus Royal Court - Aksum",
+    lat: 14.1300,
+    lng: 38.7200,
+    category: "prophet",
+    type: "event",
+    description: "Court of the Christian king Najashi who granted protection to the Muslim refugees.",
+    date: "615 CE"
+},
+{
+    name: "Al-Nejashi Mosque",
+    lat: 14.1319,
+    lng: 38.7244,
+    category: "prophet",
+    type: "event",
+    description: "Historic mosque believed to be associated with the early Muslim community in Abyssinia.",
+    date: "7th century"
+},
+// --- Prophet Yusuf (AS) ---
+{
+    name: "Well of Prophet Yusuf",
+    lat: 32.2211,
+    lng: 35.2620,
+    category: "prophet",
+    type: "event",
+    description: "Traditional location where Prophet Yusuf was thrown into a well by his brothers.",
+    date: "Ancient"
+},
+{
+    name: "Tomb of Prophet Yusuf",
+    lat: 32.2217,
+    lng: 35.2617,
+    category: "prophet",
+    type: "death",
+    description: "Traditional burial place of Prophet Yusuf near Nablus.",
+    date: "Ancient"
+},
+{
+    name: "Egyptian Palace of Al-Aziz (Zulaikha)",
+    lat: 30.0444,
+    lng: 31.2357,
+    category: "prophet",
+    type: "event",
+    description: "Traditional region associated with Yusuf's service in the household of the Egyptian minister.",
+    date: "Ancient"
+},
+// --- Imams Buried in Medina ---
+{
+    name: "Grave of Imam Hasan (AS) - Jannat al-Baqi",
+    lat: 24.4683,
+    lng: 39.6142,
+    category: "imam",
+    type: "death",
+    description: "Resting place of Imam Hasan ibn Ali.",
+    date: "670 CE"
+},
+{
+    name: "Grave of Imam Zayn al-Abidin (AS)",
+    lat: 24.4683,
+    lng: 39.6142,
+    category: "imam",
+    type: "death",
+    description: "Resting place of the fourth Imam.",
+    date: "713 CE"
+},
+{
+    name: "Grave of Imam Muhammad al-Baqir (AS)",
+    lat: 24.4683,
+    lng: 39.6142,
+    category: "imam",
+    type: "death",
+    description: "Resting place of the fifth Imam.",
+    date: "733 CE"
+},
+{
+    name: "Grave of Imam Ja'far al-Sadiq (AS)",
+    lat: 24.4683,
+    lng: 39.6142,
+    category: "imam",
+    type: "death",
+    description: "Resting place of the sixth Imam.",
+    date: "765 CE"
+},
+{
+    name: "Shrine of Imam Musa al-Kadhim (AS)",
+    lat: 33.3782,
+    lng: 44.3442,
+    category: "imam",
+    type: "event",
+    description: "Shrine in Kadhimiya containing the grave of the seventh Imam.",
+    date: "799 CE"
+},
+{
+    name: "Shrine of Imam Muhammad al-Taqi (AS)",
+    lat: 33.3782,
+    lng: 44.3442,
+    category: "imam",
+    type: "event",
+    description: "Burial place of the ninth Imam in Kadhimiya.",
+    date: "835 CE"
+},
+{
+    name: "Shrine of Imam Ali al-Hadi (AS)",
+    lat: 34.1987,
+    lng: 43.8739,
+    category: "imam",
+    type: "event",
+    description: "Shrine in Samarra containing the grave of the tenth Imam.",
+    date: "868 CE"
+},
+{
+    name: "Shrine of Imam Hasan al-Askari (AS)",
+    lat: 34.1987,
+    lng: 43.8739,
+    category: "imam",
+    type: "event",
+    description: "Burial place of the eleventh Imam.",
+    date: "874 CE"
+},
+{
+    name: "Tomb of Prophet Yaqub (AS)",
+    lat: 31.5244,
+    lng: 35.1106,
+    category: "prophet",
+    type: "death",
+    description: "Traditional burial place of Prophet Yaqub in Hebron.",
+    date: "Ancient"
+},
+{
+    name: "Tomb of Prophet Ibrahim (AS)",
+    lat: 31.5244,
+    lng: 35.1106,
+    category: "prophet",
+    type: "death",
+    description: "Traditional burial place of Prophet Ibrahim in Hebron.",
+    date: "Ancient"
+}
+
+
+
+        ];
+
+        let map;
+        let markers = [];
+        let currentFilter = 'all';
+
+        const markerColors = {
+            prophet: '#3b82f6',
+            imam: '#10b981',
+            battle: '#ef4444',
+            birth: '#f59e0b',
+            death: '#6b7280',
+            event: '#8b5cf6'
+        };
+function initMap() {
+            map = L.map('map').setView([30, 45], 5);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 18
+            }).addTo(map);
+
+            addMarkers();
+        }
+        function createCustomIcon(color) {
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="background-color: ${color}; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>`,
+                iconSize: [24, 24],
+                iconAnchor: [12, 12]
+            });
+        }
+
+        function addMarkers() {
+            LOCATIONS.forEach(location => {
+                const color = markerColors[location.type];
+                const icon = createCustomIcon(color);
+
+                const marker = L.marker([location.lat, location.lng], { icon })
+                    .bindPopup(`
+                        <div class="event-popup">
+                            <div class="popup-title">${location.name}</div>
+                            <div class="popup-category">${location.category.toUpperCase()} - ${location.type.toUpperCase()}</div>
+                            <div class="popup-description">${location.description}</div>
+                            <div class="popup-date">${location.date}</div>
+                        </div>
+                    `);
+
+                marker.locationData = location;
+                markers.push(marker);
+                marker.addTo(map);
+            });
+        }
+
+        function filterMarkers(filter) {
+            currentFilter = filter;
+
+            markers.forEach(marker => {
+                const location = marker.locationData;
+                
+                if (filter === 'all') {
+                    marker.addTo(map);
+                } else if (filter === location.category || filter === location.type) {
+                    marker.addTo(map);
+                } else {
+                    map.removeLayer(marker);
+                }
+            });
+        }
+
+        // Filter button handlers
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                filterMarkers(filter);
+            });
+        });
+
+        // Scroll progress
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-progress').style.width = scrolled + '%';
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+                hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    hamburger.textContent = '☰';
+                }
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    hamburger.textContent = '☰';
+                });
+            });
+        }
+
+        // Initialize map when page loads
+        window.addEventListener('DOMContentLoaded', initMap);
+    </script>
+</body>
+</html>

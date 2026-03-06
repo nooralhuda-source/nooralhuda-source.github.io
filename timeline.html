@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Islamic Historical Timeline</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="https://nooralhuda.co.uk/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #136f3c;
+            --secondary-green: #1a8049;
+            --accent-gold: #d4af37;
+            --light-gold: #f4e4a6;
+            --dark-navy: #1a202c;
+            --white: #ffffff;
+            --light-gray: #f7fafc;
+            --medium-gray: #e2e8f0;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-gray);
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid #eee;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 26px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #136f3c;
+        }
+
+        .hamburger.active {
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            padding: 0 2rem 0 0;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),
+                url('https://nooralhuda.co.uk/karbala.jpg') center/cover;
+            padding: 100px 0 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            animation: patternMove 60s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes patternMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-30px) translateY(-30px); }
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-actions {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .back-home {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .back-home:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .controls {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1.25rem;
+            border: 2px solid var(--medium-gray);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 4px rgba(19, 111, 60, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.25rem;
+            border: 2px solid var(--medium-gray);
+            background: white;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover {
+            background: var(--light-gray);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-green), var(--accent-gold));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 3rem);
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 3rem);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 4px solid var(--primary-green);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 0 8px rgba(19, 111, 60, 0.1);
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover .timeline-marker {
+            transform: translateX(-50%) scale(1.3);
+            box-shadow: 0 0 0 12px rgba(19, 111, 60, 0.15);
+        }
+
+        .timeline-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--medium-gray);
+            cursor: pointer;
+        }
+
+        .timeline-content:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-4px);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-gold));
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-category {
+            display: inline-block;
+            background: var(--light-gold);
+            color: var(--text-dark);
+            padding: 0.35rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-details {
+            display: none;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--medium-gray);
+        }
+
+        .timeline-details.expanded {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 1000px;
+            }
+        }
+
+        .detail-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 0.75rem;
+        }
+
+        .detail-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+        }
+
+        .detail-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .detail-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .detail-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        .expand-btn {
+            background: var(--light-gray);
+            border: 2px solid var(--medium-gray);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .expand-btn:hover {
+            background: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 1rem 1.5rem;
+                gap: 1.2rem;
+                border-top: 1px solid #eee;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 60px;
+                padding-right: 0;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+
+            .timeline-item:hover .timeline-marker {
+                transform: translateX(0) scale(1.3);
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .navbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .nav-container {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                display: flex;
+                align-items: center;
+                gap: 2.5rem;
+                padding-right: 2rem;
+            }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--primary-green));
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="https://nooralhuda.co.uk/">Home</a></li>
+            <li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+            <li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+            <li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="page-header">
+        <div class="header-content">
+            <div class="header-actions">
+                <a class="back-home" href="home">← Go Back</a>
+            </div>
+            <h1 class="page-title">Islamic Historical Timeline</h1>
+            <p class="page-subtitle">From Abdul Muttalib to the Ghaybah of Imam Mahdi (AS)</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search events...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="birth">Births</button>
+                <button class="filter-btn" data-filter="death">Deaths</button>
+                <button class="filter-btn" data-filter="battle">Battles</button>
+                <button class="filter-btn" data-filter="event">Events</button>
+            </div>
+        </div>
+
+        <div class="timeline" id="timeline"></div>
+        <div class="no-results" id="noResults" style="display: none;">No events found matching your search.</div>
+    </main>
+
+    <script>
+        const TIMELINE_EVENTS = [
+            {
+                year: "497 CE",
+                title: "Birth of Abdul Muttalib",
+                category: "birth",
+                description: "Abdul Muttalib ibn Hashim, grandfather of Prophet Muhammad (PBUH), was born in Mecca.",
+                details: {
+                    significance: "Abdul Muttalib ibn Hashim became the respected leader of the Banu Hashim clan in Mecca and guardian of the Kaaba. His rediscovery of the Well of Zamzam restored an important religious and economic centre for pilgrims. During the Year of the Elephant, when Abraha attempted to destroy the Kaaba, Abdul Muttalib showed unwavering trust in God, declaring that the Kaaba had its own Lord who would protect it. His leadership ensured the prestige and stability of the Prophet’s family in Meccan society.",
+                    keyEvents: [
+                        "Rediscovered the well of Zamzam",
+                        "Defended the Kaaba from Abraha's army (Year of the Elephant)",
+                        "Father of Abdullah (father of Prophet Muhammad)"
+                    ],
+                    legacy: "He preserved the honour of the Hashimite lineage, which would later become the household of the Prophet. His devotion to the Kaaba and moral authority prepared the environment in which Prophet Muhammad was born and raised. His family line produced the Ahl al-Bayt, central figures in Islamic history."
+                }
+            },
+            {
+                year: "545 CE",
+                title: "Birth of Abdullah ibn Abdul Muttalib",
+                category: "birth",
+                description: "Abdullah, the father of Prophet Muhammad (PBUH), was born.",
+                details: {
+                    significance: "Abdullah was known for his piety, noble character, and purity of lineage. His marriage to Aminah bint Wahb, who came from a respected Qurayshi family, united two noble lineages in Mecca. His early death before the Prophet’s birth meant that Muhammad would grow up as an orphan, a condition that deeply shaped his compassion for the poor and vulnerable.",
+                    keyEvents: [
+                        "Married Aminah bint Wahb",
+                        "Died before the birth of Prophet Muhammad"
+                    ],
+                    legacy: "Although he died young, Abdullah’s lineage became honoured as the direct father of the final Prophet. The Qur'an later emphasised the protection of orphans, reflecting the life experience of the Prophet who grew up without his father."
+                }
+            },
+            {
+                year: "570 CE",
+                title: "Year of the Elephant & Birth of Prophet Muhammad (PBUH)",
+                category: "birth",
+                description: "Prophet Muhammad (PBUH) was born in Mecca on 17th Rabi' al-Awwal. This year is known as the Year of the Elephant when Abraha's army attempted to destroy the Kaaba.",
+                details: {
+                    significance: "The birth of Prophet Muhammad marked the arrival of the final messenger of God. The same year, Abraha’s army attempted to destroy the Kaaba but was miraculously defeated, reinforcing the sacred protection of Mecca. His birth in the Banu Hashim family, known for honesty and service to pilgrims, prepared him to later guide humanity.",
+                    keyEvents: [
+                        "Abraha's army destroyed by miraculous birds",
+                        "Born orphaned as his father had died",
+                        "Cared for by his mother Aminah and grandfather Abdul Muttalib"
+                    ],
+                    legacy: "His life and message produced the Qur’an, the final divine revelation, and established Islam as a global religion. His teachings on justice, monotheism, and moral conduct shaped civilizations across the world."
+                }
+            },
+            {
+                year: "576 CE",
+                title: "Death of Aminah (Mother of Prophet)",
+                category: "death",
+                description: "Aminah bint Wahb, mother of Prophet Muhammad (PBUH), passed away when he was 6 years old.",
+                details: {
+                    significance: "The death of the Prophet’s mother when he was six years old left him completely orphaned. This hardship exposed him early to vulnerability and dependence on family support, strengthening his emotional resilience.",
+                    keyEvents: [
+                        "Prophet Muhammad became an orphan",
+                        "Taken into care of Abdul Muttalib"
+                    ],
+                    legacy: "The Prophet’s experiences as an orphan influenced his later teachings emphasising care for the poor, widows, and orphans. The Qur’an repeatedly commands kindness toward those without protection in society."
+                }
+            },
+            {
+                year: "578 CE",
+                title: "Death of Abdul Muttalib",
+                category: "death",
+                description: "Abdul Muttalib passed away, and Prophet Muhammad (PBUH) was taken into the care of his uncle Abu Talib.",
+                details: {
+                    significance: "After Abdul Muttalib’s death, guardianship of the young Prophet passed to Abu Talib, his uncle. Abu Talib became a lifelong protector of Muhammad, supporting him during the most dangerous years of the early Islamic mission.",
+                    keyEvents: [
+                        "Abu Talib protected Prophet Muhammad throughout his life",
+                        "Continued the legacy of Banu Hashim"
+                    ],
+                    legacy: "Abu Talib’s protection ensured the survival of the Prophet during the early years of opposition. His household would also produce Imam Ali, who became one of the central figures of Islamic history."
+                }
+            },
+            {
+                year: "595 CE",
+                title: "Marriage of Prophet Muhammad (PBUH) and Lady Khadija",
+                category: "event",
+                description: "Prophet Muhammad (PBUH) married Lady Khadija bint Khuwaylid when he was 25 and she was 40.",
+                details: {
+                    significance: "This marriage created a strong emotional and financial support system for the Prophet. Lady Khadija was the first person to believe in his message, offering unwavering support during the earliest years of revelation.",
+                    keyEvents: [
+                        "Lady Khadija hired Prophet Muhammad for trade",
+                        "She proposed marriage through her servant",
+                        "They had 6 children together"
+                    ],
+                    legacy: "Their marriage represents an ideal of mutual respect, loyalty, and spiritual partnership. Their household produced Lady Fatima, through whom the lineage of the Prophet continued."
+                }
+            },
+            {
+                year: "600 CE",
+                title: "Birth of Imam Ali (AS) in the Kaaba",
+                category: "birth",
+                description: "Imam Ali ibn Abi Talib (AS) was born inside the Holy Kaaba on 13th Rajab. He is the only person born in the House of Allah.",
+                details: {
+                    significance: "Imam Ali’s birth inside the Kaaba is considered a unique honour in Islamic tradition. Raised directly in the Prophet’s household, he developed exceptional knowledge, bravery, and devotion.",
+                    keyEvents: [
+                        "Born to Abu Talib and Fatima bint Asad",
+                        "Raised in the household of Prophet Muhammad",
+                        "First male to accept Islam"
+                    ],
+                    legacy: "Imam Ali became one of the most influential figures in Islamic history: the first male believer, a central defender of Islam in battles, the first Imam and rightful successor of the Prophet."
+                }
+            },
+            {
+                year: "605 CE",
+                title: "Birth of Lady Fatima al-Zahra (AS)",
+                category: "birth",
+                description: "Lady Fatima (AS), daughter of Prophet Muhammad (PBUH) and Lady Khadija, was born on 20th Jumada al-Thani.",
+                details: {
+                    significance: "Lady Fatima became the only surviving child of the Prophet whose lineage continued. Known for her spiritual devotion, purity, and moral strength, she held a unique status among Muslims.",
+                    keyEvents: [
+                        "Youngest daughter of the Prophet",
+                        "Known for her piety and devotion",
+                        "Mother of Imam Hassan and Imam Hussain"
+                    ],
+                    legacy: "She became the mother of the Imams Hasan and Husayn, through whom the Prophet’s family line continued. Her life is remembered as a model of faith, sacrifice, and resistance to injustice."
+                }
+            },
+           {
+    year: "610 CE",
+    title: "First Revelation in Cave Hira",
+    category: "event",
+    description: "Prophet Muhammad (PBUH) received the first revelation from Angel Jibrael in Cave Hira on 27th Rajab (Laylat al-Qadr).",
+    details: {
+        significance: "Marks the beginning of Prophethood (Bi'thah). The first verses of Surah Al-Alaq initiated the revelation of the Qur'an and began the 23-year prophetic mission to guide humanity.",
+        keyEvents: [
+            "First verses of Surah Al-Alaq revealed",
+            "Lady Khadija was the first to believe",
+            "Imam Ali was the first male to accept Islam"
+        ],
+        legacy: "Began the final prophetic mission and the revelation of the Qur'an. This event marks the birth of Islam as a divine message for humanity."
+    }
+},
+{
+    year: "613 CE",
+    title: "Public Declaration of Islam",
+    category: "event",
+    description: "Prophet Muhammad (PBUH) publicly declared his message and invited people to Islam.",
+    details: {
+        significance: "The Prophet openly called people to Islam after years of private preaching. At Dawat Dhul Ashira he invited his relatives and declared Imam Ali as his supporter and successor.",
+        keyEvents: [
+            "Gathering at Mount Safa",
+            "Declaration of Imam Ali as successor at Dawat Dhul Ashira",
+            "Beginning of persecution by Quraysh"
+        ],
+        legacy: "Marked the beginning of open Islamic preaching and the struggle against idolatry in Mecca. It also publicly established the special status of Imam Ali in the Prophet’s mission."
+    }
+},
+{
+    year: "615 CE",
+    title: "Migration to Abyssinia",
+    category: "event",
+    description: "First group of Muslims migrated to Abyssinia to escape persecution.",
+    details: {
+        significance: "The first migration in Islamic history, undertaken to protect early Muslims from severe persecution in Mecca. The Christian king Najashi granted them refuge and justice.",
+        keyEvents: [
+            "King Najashi provided protection",
+            "Jafar ibn Abi Talib led the migration"
+        ],
+        legacy: "Demonstrated Islam’s respect for justice and coexistence with other faiths. It preserved the early Muslim community during a time of extreme oppression."
+    }
+},
+{
+    year: "619 CE",
+    title: "Year of Sorrow - Deaths of Lady Khadija and Abu Talib",
+    category: "death",
+    description: "Both Lady Khadija and Abu Talib passed away in the same year, known as the Year of Sorrow (Aam al-Huzn).",
+    details: {
+        significance: "The Prophet lost his greatest emotional supporter, Lady Khadija, and his protector, Abu Talib. Their deaths left him vulnerable to intensified persecution from Quraysh.",
+        keyEvents: [
+            "Lady Khadija died after 25 years of marriage",
+            "Abu Talib died protecting the Prophet",
+            "Increased persecution after their deaths"
+        ],
+        legacy: "Demonstrated the sacrifices of the earliest supporters of Islam. Their loyalty and support were crucial in protecting the Prophet during the earliest years of the mission."
+    }
+},
+{
+    year: "620 CE",
+    title: "Isra and Mi'raj (Night Journey)",
+    category: "event",
+    description: "Prophet Muhammad (PBUH) was taken on a miraculous night journey from Mecca to Jerusalem and then to the heavens.",
+    details: {
+        significance: "A divine miracle where the Prophet traveled to Masjid al-Aqsa and ascended through the heavens, meeting earlier prophets and receiving spiritual knowledge.",
+        keyEvents: [
+            "Journey to Masjid al-Aqsa",
+            "Ascension through seven heavens",
+            "Five daily prayers made obligatory"
+        ],
+        legacy: "Established the importance of prayer in Islam and demonstrated the Prophet’s spiritual rank among all prophets."
+    }
+},
+{
+    year: "622 CE",
+    title: "Hijra to Medina",
+    category: "event",
+    description: "Prophet Muhammad (PBUH) migrated from Mecca to Medina. Imam Ali (AS) slept in the Prophet's bed to protect him.",
+    details: {
+        significance: "Marked the migration that allowed Muslims to establish a secure community and Islamic governance in Medina.",
+        keyEvents: [
+            "Imam Ali's sacrifice sleeping in Prophet's bed",
+            "Quraysh plot to assassinate the Prophet failed",
+            "Establishment of first Islamic state in Medina"
+        ],
+        legacy: "The Hijra marks the beginning of the Islamic calendar and the formation of the first Islamic society based on justice, faith, and brotherhood."
+    }
+},
+{
+    year: "623 CE",
+    title: "Marriage of Imam Ali (AS) and Lady Fatima (AS)",
+    category: "event",
+    description: "Imam Ali (AS) married Lady Fatima (AS) in Medina.",
+    details: {
+        significance: "The marriage united two of the purest personalities in Islam and formed the blessed household of Ahl al-Bayt.",
+        keyEvents: [
+            "Simple wedding ceremony",
+            "Prophet Muhammad gave his blessings",
+            "Beginning of the blessed household"
+        ],
+        legacy: "Their family became the lineage of the Imams and the spiritual center of the Ahl al-Bayt in Islamic history."
+    }
+},
+{
+    year: "624 CE",
+    title: "Battle of Badr",
+    category: "battle",
+    description: "First major battle between Muslims and Quraysh. Muslims achieved victory despite being outnumbered.",
+    details: {
+        significance: "The first decisive military victory for Muslims and a demonstration of divine support for the believers.",
+        keyEvents: [
+            "313 Muslims vs 1000 Quraysh",
+            "Imam Ali killed many enemy leaders",
+            "Angels assisted the Muslims"
+        ],
+        legacy: "Strengthened the Muslim community and established the legitimacy of the Islamic state in Medina."
+    }
+},
+{
+    year: "625 CE",
+    title: "Battle of Uhud & Birth of Imam Hassan (AS)",
+    category: "battle",
+    description: "Second major battle. Imam Hassan (AS) was born on 15th Ramadan.",
+    details: {
+        significance: "Uhud taught the Muslim community the importance of discipline and obedience. The birth of Imam Hassan brought great joy to the Prophet.",
+        keyEvents: [
+            "Muslims initially winning but faced setback",
+            "Imam Ali protected the Prophet",
+            "Birth of first grandson of Prophet Muhammad"
+        ],
+        legacy: "Uhud became a lesson in faith and perseverance, while Imam Hassan later became a central leader of the Ahl al-Bayt."
+    }
+},
+{
+    year: "626 CE",
+    title: "Birth of Imam Hussain (AS)",
+    category: "birth",
+    description: "Imam Hussain (AS) was born on 3rd Sha'ban in Medina.",
+    details: {
+        significance: "The Prophet loved Imam Hussain deeply and declared him a leader of the youth of Paradise.",
+        keyEvents: [
+            "Prophet Muhammad loved him dearly",
+            "Prophesied his martyrdom",
+            "Part of Ahl al-Kisa"
+        ],
+        legacy: "Imam Hussain would later sacrifice his life at Karbala to preserve Islam and stand against tyranny."
+    }
+},
+{
+    year: "627 CE",
+    title: "Battle of Khandaq (Trench)",
+    category: "battle",
+    description: "Muslims dug a trench to defend Medina. Imam Ali (AS) killed the champion Amr ibn Abd Wudd.",
+    details: {
+        significance: "The trench strategy saved Medina from invasion, and Imam Ali’s duel protected the entire Muslim community.",
+        keyEvents: [
+            "Salman al-Farsi suggested digging trench",
+            "Imam Ali's duel with Amr ibn Abd Wudd",
+            "Prophet said one strike of Ali equals worship of mankind and jinn"
+        ],
+        legacy: "This battle demonstrated strategic unity and the bravery of Imam Ali in defending Islam."
+    }
+},
+            {
+    year: "628 CE",
+    title: "Treaty of Hudaybiyyah & Battle of Khaybar",
+    category: "event",
+    description: "Peace treaty signed with Quraysh. Imam Ali (AS) conquered the fortress of Khaybar.",
+    details: {
+        significance: "The Treaty of Hudaybiyyah established a temporary peace between Muslims and Quraysh, allowing Islam to spread without constant conflict. At Khaybar, Imam Ali demonstrated extraordinary courage when he defeated the fortress defenders and removed the gate, securing victory for the Muslims.",
+        keyEvents: [
+            "Treaty allowed Muslims to perform Umrah next year",
+            "Imam Ali given the flag at Khaybar",
+            "Conquered the fortress single-handedly"
+        ],
+        legacy: "Hudaybiyyah became a turning point that allowed Islam to expand rapidly through peaceful outreach. The victory at Khaybar reinforced the reputation of Imam Ali’s bravery and leadership in defending the Muslim community."
+    }
+},
+{
+    year: "629 CE",
+    title: "Battle of Mu'tah",
+    category: "battle",
+    description: "Muslims fought against Byzantine Empire. Jafar ibn Abi Talib was martyred.",
+    details: {
+        significance: "This was the first major confrontation between Muslims and the Byzantine Empire. Ja'far ibn Abi Talib displayed immense bravery by carrying the Muslim banner until he was martyred after losing both arms.",
+        keyEvents: [
+            "Jafar held the flag until martyrdom",
+            "Khalid ibn Walid led retreat",
+            "Prophet mourned Jafar"
+        ],
+        legacy: "Ja'far became known as 'Ja'far al-Tayyar' (the one who flies in Paradise with two wings). His sacrifice symbolized loyalty and courage in the early Muslim struggles."
+    }
+},
+{
+    year: "630 CE",
+    title: "Conquest of Mecca",
+    category: "event",
+    description: "Muslims peacefully conquered Mecca. Imam Ali (AS) destroyed idols in the Kaaba.",
+    details: {
+        significance: "The peaceful conquest of Mecca ended the dominance of idolatry in Arabia. The Kaaba was purified from idols, restoring it to the monotheistic worship established by Prophet Ibrahim.",
+        keyEvents: [
+            "10,000 Muslims entered Mecca peacefully",
+            "Imam Ali climbed on Prophet's shoulders to break idols",
+            "General amnesty declared for Meccans",
+            "Kaaba purified from idolatry"
+        ],
+        legacy: "The conquest established Islam as the dominant faith in Arabia and demonstrated the Prophet’s mercy by granting forgiveness to former enemies."
+    }
+},
+{
+    year: "630 CE",
+    title: "Battle of Hunayn",
+    category: "battle",
+    description: "Muslims fought against the tribes of Hawazin and Thaqif. Imam Ali (AS) showed great bravery.",
+    details: {
+        significance: "This battle tested the Muslims after the conquest of Mecca. Despite an initial retreat caused by a surprise attack, the Prophet and a small group including Imam Ali remained firm.",
+        keyEvents: [
+            "Surprise attack caused initial panic",
+            "Imam Ali and few companions stood with Prophet",
+            "Muslims regrouped and won decisively"
+        ],
+        legacy: "The battle reminded Muslims that victory comes from faith and reliance on Allah rather than numbers or strength alone."
+    }
+},
+{
+    year: "631 CE",
+    title: "Event of Mubahala",
+    category: "event",
+    description: "Prophet Muhammad (PBUH) brought Imam Ali, Lady Fatima, Imam Hassan, and Imam Hussain to challenge Christians of Najran.",
+    details: {
+        significance: "This event demonstrated the unique spiritual status of the Ahl al-Bayt. The Prophet brought only his closest family members, indicating their purity and closeness to Allah.",
+        keyEvents: [
+            "Christians of Najran challenged Prophet's message",
+            "Prophet brought his closest family (Ahl al-Kisa)",
+            "Christians recognized their status and withdrew",
+            "Quranic verse 3:61 revealed about this event"
+        ],
+        legacy: "The event is considered strong Qur'anic evidence for the elevated status of the Ahl al-Bayt and their central role in Islam."
+    }
+},
+{
+    year: "632 CE",
+    title: "Ghadir Khumm - Declaration of Imam Ali's Succession",
+    category: "event",
+    description: "On 18th Dhul Hijjah, after Hajjat al-Wida, Prophet Muhammad (PBUH) declared Imam Ali (AS) as his successor at Ghadir Khumm.",
+    details: {
+        significance: "At Ghadir Khumm the Prophet publicly declared Imam Ali as the Mawla of the believers, affirming his leadership after the Prophet.",
+        keyEvents: [
+            "Prophet stopped caravan of 100,000+ pilgrims",
+            "Raised Imam Ali's hand and declared him Mawla",
+            "Verse of completion of religion (5:3) revealed",
+            "Companions congratulated Imam Ali",
+            "Celebrated as Eid al-Ghadir by Shia Muslims"
+        ],
+        legacy: "Ghadir Khumm is regarded as the formal declaration of Imam Ali’s succession and the foundation of the doctrine of Imamate in Shia Islam."
+    }
+},
+{
+    year: "632 CE",
+    title: "Death of Prophet Muhammad (PBUH)",
+    category: "death",
+    description: "Prophet Muhammad (PBUH) passed away on 28th Safar in Medina at age 63.",
+    details: {
+        significance: "The passing of the Prophet marked the end of Prophethood and the completion of the Qur’anic revelation.",
+        keyEvents: [
+            "Imam Ali was by his side during final moments",
+            "Imam Ali prepared and buried the Prophet",
+            "Saqifah incident occurred while Imam Ali was burying Prophet",
+            "Beginning of trials for Ahl al-Bayt"
+        ],
+        legacy: "His life and teachings established the foundations of Islamic belief, law, and ethics that continue to guide Muslims worldwide."
+    }
+},
+{
+    year: "632 CE",
+    title: "Martyrdom of Lady Fatima al-Zahra (AS)",
+    category: "death",
+    description: "Lady Fatima (AS) was martyred 75-95 days after Prophet's death due to injuries sustained during attack on her house.",
+    details: {
+        significance: "Her martyrdom occurred during the political turmoil following the Prophet’s death. She defended the rights of Imam Ali and the Ahl al-Bayt.",
+        keyEvents: [
+            "House attacked to force allegiance",
+            "Door crushed her causing rib fractures",
+            "Miscarried her son Muhsin",
+            "Died from injuries at young age",
+            "Buried secretly at night by Imam Ali",
+            "Grave location kept hidden as per her wish"
+        ],
+        legacy: "Lady Fatima became a symbol of resistance, purity, and devotion, and remains one of the most revered figures in Islamic history."
+    }
+},
+{
+    year: "656 CE",
+    title: "Imam Ali (AS) Becomes Caliph",
+    category: "event",
+    description: "After 25 years, Imam Ali (AS) was finally chosen as the fourth Caliph by public demand.",
+    details: {
+        significance: "Imam Ali accepted leadership during a period of deep political crisis to restore justice and moral governance.",
+        keyEvents: [
+            "People insisted on his leadership",
+            "Accepted to prevent further bloodshed",
+            "Began implementing justice and equality",
+            "Faced immediate opposition from power-seekers"
+        ],
+        legacy: "His leadership became an enduring example of justice, humility, and principled governance in Islamic political thought."
+    }
+},
+{
+    year: "656 CE",
+    title: "Battle of Jamal (Camel)",
+    category: "battle",
+    description: "Imam Ali (AS) fought against rebels led by Aisha, Talha, and Zubayr near Basra.",
+    details: {
+        significance: "This was the first major internal conflict among Muslims after the Prophet’s death, testing the unity of the Muslim community.",
+        keyEvents: [
+            "Rebels sought revenge for Uthman's death",
+            "Battle named after Aisha's camel",
+            "Imam Ali tried to avoid bloodshed",
+            "Victory for Imam Ali's forces",
+            "Talha and Zubayr killed in battle"
+        ],
+        legacy: "The battle marked the beginning of major political divisions within the Muslim community."
+    }
+},
+{
+    year: "657 CE",
+    title: "Battle of Siffin",
+    category: "battle",
+    description: "Imam Ali (AS) fought against Muawiya ibn Abu Sufyan who refused to accept his caliphate.",
+    details: {
+        significance: "This battle represented the rebellion of Muawiya against the legitimate authority of Imam Ali.",
+        keyEvents: [
+            "Lasted several months with skirmishes",
+            "Imam Ali's army was winning decisively",
+            "Muawiya's forces raised Qurans on spears",
+            "Forced arbitration through deception",
+            "Malik al-Ashtar was close to victory"
+        ],
+        legacy: "The forced arbitration weakened Imam Ali’s position and led to the emergence of the Khawarij faction."
+    }
+},
+{
+    year: "658 CE",
+    title: "Battle of Nahrawan",
+    category: "battle",
+    description: "Imam Ali (AS) fought against Khawarij who had broken away from his army.",
+    details: {
+        significance: "The Khawarij represented an extremist faction that declared other Muslims unbelievers and rejected legitimate authority.",
+        keyEvents: [
+            "Khawarij rejected arbitration and Imam Ali",
+            "Declared all Muslims as disbelievers",
+            "Imam Ali defeated them decisively",
+            "Fulfilled Prophet's prophecy about them"
+        ],
+        legacy: "The battle exposed the dangers of religious extremism and division within the Muslim community."
+    }
+},
+{
+    year: "661 CE",
+    title: "Martyrdom of Imam Ali (AS)",
+    category: "death",
+    description: "Imam Ali (AS) was struck with a poisoned sword by Ibn Muljam while praying in Kufa mosque on 19th Ramadan. He died on 21st Ramadan.",
+    details: {
+        significance: "Imam Ali was martyred while in prayer, demonstrating his lifelong devotion to worship and justice.",
+        keyEvents: [
+            "Struck while in prostration during Fajr prayer",
+            "Famous last words about winning by Lord of Kaaba",
+            "Advised his sons about justice and mercy",
+            "Forgave his killer but ordered justice",
+            "Buried in Najaf (location kept secret initially)"
+        ],
+        legacy: "His martyrdom marked the end of the era of the Rightly Guided leadership and left a profound legacy of justice, knowledge, and spiritual guidance."
+    }
+},
+           {
+    year: "661 CE",
+    title: "Imamate of Imam Hassan (AS)",
+    category: "event",
+    description: "Imam Hassan (AS) became the second Imam after his father's martyrdom.",
+    details: {
+        significance: "Imam Hassan assumed leadership of the Muslim community during a time of deep political division after the martyrdom of Imam Ali. His Imamate represented the continuation of the divinely guided leadership of Ahl al-Bayt.",
+        keyEvents: [
+            "People pledged allegiance to him",
+            "Faced Muawiya's large army",
+            "Made peace treaty to save Muslim lives",
+            "Preserved Islam from destruction"
+        ],
+        legacy: "His leadership demonstrated patience, wisdom, and concern for the unity of Muslims. His actions preserved the true teachings of Islam and protected the followers of Ahl al-Bayt during a dangerous period."
+    }
+},
+{
+    year: "661 CE",
+    title: "Treaty of Peace with Muawiya",
+    category: "event",
+    description: "Imam Hassan (AS) signed a peace treaty with Muawiya to prevent bloodshed and preserve Islam.",
+    details: {
+        significance: "The treaty was a strategic decision to protect the Muslim community from a devastating civil war. Imam Hassan prioritized the preservation of lives and the long-term survival of Islam over political power.",
+        keyEvents: [
+            "Army commanders were bribed by Muawiya",
+            "Imam Hassan's camp was in disarray",
+            "Treaty prevented massacre of Muslims",
+            "Muawiya violated all terms of treaty",
+            "Caliphate to return to Imam Hassan after Muawiya"
+        ],
+        legacy: "The treaty exposed Muawiya's political ambitions and hypocrisy when he later violated its conditions. It also set the stage for the later uprising of Imam Hussain against tyranny."
+    }
+},
+{
+    year: "670 CE",
+    title: "Martyrdom of Imam Hassan (AS)",
+    category: "death",
+    description: "Imam Hassan (AS) was poisoned by his wife Ja'da at the instigation of Muawiya. He died on 28th Safar.",
+    details: {
+        significance: "His martyrdom was the result of political plots by Muawiya who sought to eliminate the rightful leader of the Muslim community and secure the throne for his son Yazid.",
+        keyEvents: [
+            "Ja'da was promised marriage to Yazid",
+            "Poison caused his liver to come out in pieces",
+            "Died at age 47 after 10 years of Imamate",
+            "Buried in Jannat al-Baqi in Medina",
+            "Muawiya broke promise to Ja'da"
+        ],
+        legacy: "Imam Hassan is remembered as the 'Leader of the Youth of Paradise' and a symbol of patience and sacrifice. His martyrdom further revealed the injustice of the Umayyad rule."
+    }
+},
+{
+    year: "670 CE",
+    title: "Imamate of Imam Hussain (AS)",
+    category: "event",
+    description: "Imam Hussain (AS) became the third Imam after his brother's martyrdom.",
+    details: {
+        significance: "His Imamate continued the divine leadership of Ahl al-Bayt and prepared the Muslim community for a decisive stand against oppression and corruption in the Umayyad regime.",
+        keyEvents: [
+            "Lived under Muawiya's oppressive rule",
+            "Maintained dignity and Islamic values",
+            "Prepared for ultimate sacrifice"
+        ],
+        legacy: "Imam Hussain's leadership ultimately led to the stand of Karbala, which preserved the true spirit of Islam and became the greatest symbol of resistance against injustice."
+    }
+},
+{
+    year: "680 CE",
+    title: "Death of Muawiya & Rise of Yazid",
+    category: "event",
+    description: "Muawiya died and his son Yazid illegally claimed caliphate, demanding allegiance from Imam Hussain (AS).",
+    details: {
+        significance: "Yazid's rule marked the transformation of the caliphate into a hereditary monarchy characterized by corruption and oppression, creating a moral crisis for the Muslim community.",
+        keyEvents: [
+            "Yazid was known for drinking and immorality",
+            "Demanded forced allegiance from Imam Hussain",
+            "Imam Hussain refused to legitimize tyranny",
+            "People of Kufa invited Imam to lead them"
+        ],
+        legacy: "This moment triggered the chain of events that led to Karbala, where Imam Hussain would make the ultimate sacrifice to defend Islam."
+    }
+},
+{
+    year: "680 CE",
+    title: "Journey from Medina to Karbala",
+    category: "event",
+    description: "Imam Hussain (AS) left Medina for Mecca, then towards Kufa, ultimately reaching Karbala.",
+    details: {
+        significance: "The journey symbolized a conscious stand against injustice. Imam Hussain left Medina knowing the dangers ahead in order to protect the true values of Islam.",
+        keyEvents: [
+            "Left Medina on 28th Rajab",
+            "Stayed in Mecca during Hajj season",
+            "Received letters from Kufa",
+            "Sent Muslim ibn Aqeel as envoy",
+            "Left Mecca on 8th Dhul Hijjah",
+            "Reached Karbala on 2nd Muharram"
+        ],
+        legacy: "The journey represents the beginning of the Karbala movement and the path of sacrifice taken by Imam Hussain and his companions."
+    }
+},
+{
+    year: "680 CE",
+    title: "Martyrdom of Muslim ibn Aqeel",
+    category: "death",
+    description: "Muslim ibn Aqeel, cousin and envoy of Imam Hussain, was martyred in Kufa.",
+    details: {
+        significance: "His martyrdom marked the first major sacrifice in the movement that would culminate in Karbala and revealed the betrayal of the people of Kufa.",
+        keyEvents: [
+            "Sent to Kufa to assess situation",
+            "18,000 people pledged allegiance",
+            "Ibn Ziyad arrived and spread terror",
+            "People abandoned Muslim",
+            "Fought bravely before martyrdom",
+            "His young sons also martyred"
+        ],
+        legacy: "Muslim ibn Aqeel is remembered as a symbol of loyalty and courage. His martyrdom foreshadowed the tragedy of Karbala."
+    }
+},
+{
+    year: "680 CE",
+    title: "Battle of Karbala - Day of Ashura",
+    category: "battle",
+    description: "On 10th Muharram 61 AH, Imam Hussain (AS) and 72 companions were martyred in Karbala by Yazid's army of 30,000.",
+    details: {
+        significance: "Karbala represents the ultimate stand of truth against tyranny. Imam Hussain sacrificed everything to protect the authentic message of Islam.",
+        keyEvents: [
+            "Water blocked from 7th Muharram",
+            "Imam Hussain offered prayers despite battle",
+            "Companions martyred one by one",
+            "Ali Akbar, Abbas, and all men martyred",
+            "6-month-old Ali Asghar killed in Imam's arms",
+            "Imam Hussain martyred in afternoon",
+            "Bodies left on hot sand for 3 days",
+            "Tents burned and women taken captive"
+        ],
+        legacy: "The sacrifice of Karbala became the eternal symbol of resistance against injustice. The message 'Every day is Ashura and every land is Karbala' continues to inspire Muslims to stand for justice."
+    }
+},
+{
+    year: "680 CE",
+    title: "Captivity of Ahl al-Bayt",
+    category: "event",
+    description: "After Karbala, the women and children of Ahl al-Bayt were taken as prisoners to Kufa and Damascus.",
+    details: {
+        significance: "Despite the tragedy of Karbala, the message of Imam Hussain was preserved and spread through the courage and speeches of Lady Zainab and Imam Sajjad.",
+        keyEvents: [
+            "Caravan traveled without shelter",
+            "Lady Zainab delivered powerful speeches",
+            "Exposed Yazid's crimes in his court",
+            "Imam Sajjad gave sermon despite chains",
+            "Eventually released and returned to Medina"
+        ],
+        legacy: "Their speeches exposed Yazid's tyranny and ensured that the truth of Karbala spread throughout the Muslim world."
+    }
+},
+{
+    year: "680 CE",
+    title: "Imamate of Imam Sajjad (AS)",
+    category: "event",
+    description: "Imam Ali ibn Hussain (AS), known as Sajjad and Zayn al-Abidin, became the fourth Imam.",
+    details: {
+        significance: "Imam Sajjad survived Karbala and carried the responsibility of preserving the teachings of Islam and the legacy of Karbala through knowledge, worship, and guidance.",
+        keyEvents: [
+            "Was ill during battle of Karbala",
+            "Witnessed entire tragedy",
+            "Preserved Islam through knowledge and worship",
+            "Authored Sahifa Sajjadiya (Psalms of Islam)"
+        ],
+        legacy: "His supplications and teachings became foundational spiritual texts in Islam and helped rebuild the intellectual and spiritual legacy of Ahl al-Bayt."
+    }
+},
+{
+    year: "713 CE",
+    title: "Martyrdom of Imam Sajjad (AS)",
+    category: "death",
+    description: "Imam Sajjad (AS) was poisoned by Walid ibn Abdul Malik on 25th Muharram at age 57.",
+    details: {
+        significance: "His martyrdom came after decades of spiritual leadership in which he revived Islamic teachings and preserved the legacy of Karbala under oppressive Umayyad rule.",
+        keyEvents: [
+            "Lived 34 years after Karbala",
+            "Spread teachings through prayers and supplications",
+            "Buried in Jannat al-Baqi in Medina",
+            "Left legacy of Sahifa Sajjadiya"
+        ],
+        legacy: "His works, especially Sahifa Sajjadiya, remain among the most important spiritual texts in Islam and continue to guide believers in worship and ethics."
+    }
+},
+            {
+    year: "713 CE",
+    title: "Imamate of Imam Baqir (AS)",
+    category: "event",
+    description: "Imam Muhammad al-Baqir (AS) became the fifth Imam. Known for 'splitting open' knowledge.",
+    details: {
+        significance: "The title 'al-Baqir' means the one who opens or splits knowledge. During a period when political pressure briefly weakened, Imam Baqir revived authentic Islamic scholarship and laid the foundations of the intellectual tradition of Ahl al-Bayt.",
+        keyEvents: [
+            "Established school of Islamic jurisprudence",
+            "Taught thousands of students",
+            "Explained deep meanings of Quran",
+            "Preserved authentic Islamic teachings"
+        ],
+        legacy: "He rebuilt the scholarly tradition of the Ahl al-Bayt after the tragedy of Karbala and prepared the foundation for the great educational movement that would flourish under his son, Imam Ja'far al-Sadiq."
+    }
+},
+{
+    year: "733 CE",
+    title: "Martyrdom of Imam Baqir (AS)",
+    category: "death",
+    description: "Imam Baqir (AS) was poisoned by Hisham ibn Abdul Malik on 7th Dhul Hijjah at age 57.",
+    details: {
+        significance: "His martyrdom reflected the Umayyad fear of the growing influence of the Imam and the spread of authentic knowledge from the household of the Prophet.",
+        keyEvents: [
+            "Poisoned through a saddle",
+            "Buried in Jannat al-Baqi next to his father",
+            "Left vast knowledge for future generations"
+        ],
+        legacy: "His teachings formed the intellectual base of Shia theology, Quranic interpretation, and jurisprudence that would later be expanded by Imam Ja'far al-Sadiq."
+    }
+},
+{
+    year: "733 CE",
+    title: "Imamate of Imam Sadiq (AS)",
+    category: "event",
+    description: "Imam Jafar al-Sadiq (AS) became the sixth Imam. Established the Jafari school of Islamic jurisprudence.",
+    details: {
+        significance: "His Imamate coincided with the collapse of the Umayyad dynasty and the rise of the Abbasids, creating a rare opportunity for intellectual freedom and the flourishing of Islamic scholarship.",
+        keyEvents: [
+            "Taught over 4,000 students",
+            "Established formal school in Medina",
+            "Students included Abu Hanifa and Malik",
+            "Preserved authentic hadith and Islamic sciences",
+            "Lived during transition from Umayyad to Abbasid"
+        ],
+        legacy: "The Ja'fari school of jurisprudence and a vast body of hadith and scientific knowledge are attributed to him, making him one of the most influential scholars in Islamic history."
+    }
+},
+{
+    year: "765 CE",
+    title: "Martyrdom of Imam Sadiq (AS)",
+    category: "death",
+    description: "Imam Sadiq (AS) was poisoned by Mansur al-Abbasi on 25th Shawwal at age 65.",
+    details: {
+        significance: "His growing influence and large scholarly following alarmed the Abbasid ruler al-Mansur, who viewed the Imam as a political and intellectual threat.",
+        keyEvents: [
+            "Poisoned through grapes",
+            "Buried in Jannat al-Baqi next to his father and grandfather",
+            "Left comprehensive body of Islamic knowledge",
+            "Jafari fiqh named after him"
+        ],
+        legacy: "His teachings shaped Islamic theology, jurisprudence, and spiritual thought, leaving a scholarly legacy that continues to guide millions of Muslims."
+    }
+},
+{
+    year: "765 CE",
+    title: "Imamate of Imam Kadhim (AS)",
+    category: "event",
+    description: "Imam Musa al-Kadhim (AS) became the seventh Imam. Known for patience and forbearance.",
+    details: {
+        significance: "The title 'al-Kadhim' refers to one who restrains anger. Imam Musa al-Kadhim exemplified patience and moral strength during intense persecution from the Abbasid rulers.",
+        keyEvents: [
+            "Faced severe persecution from Abbasids",
+            "Imprisoned multiple times",
+            "Known for extreme patience and worship",
+            "Continued teaching despite restrictions"
+        ],
+        legacy: "He became a symbol of patience, endurance, and spiritual strength, inspiring followers to remain steadfast despite oppression."
+    }
+},
+{
+    year: "799 CE",
+    title: "Martyrdom of Imam Kadhim (AS)",
+    category: "death",
+    description: "Imam Kadhim (AS) was poisoned in prison by Harun al-Rashid on 25th Rajab after 14 years of imprisonment.",
+    details: {
+        significance: "His death in prison revealed the extreme fear Abbasid rulers had of the spiritual authority of the Ahl al-Bayt.",
+        keyEvents: [
+            "Imprisoned in various dungeons for 14 years",
+            "Poisoned through dates",
+            "Died at age 55",
+            "Buried in Kadhimiya, Baghdad",
+            "Shrine became major pilgrimage site"
+        ],
+        legacy: "His shrine in Kadhimiya became a major center of devotion and remembrance, symbolizing resistance against tyranny."
+    }
+},
+{
+    year: "799 CE",
+    title: "Imamate of Imam Ridha (AS)",
+    category: "event",
+    description: "Imam Ali al-Ridha (AS) became the eighth Imam.",
+    details: {
+        significance: "The Abbasid caliph al-Mamun attempted to control the Imam by forcing him to accept the position of crown prince, hoping to gain legitimacy through association with the Ahl al-Bayt.",
+        keyEvents: [
+            "Mamun forced him to accept heir apparency",
+            "Used position to spread Islamic teachings",
+            "Famous debates with scholars of other religions",
+            "Maintained dignity despite political pressure"
+        ],
+        legacy: "His debates and teachings strengthened Islamic scholarship and demonstrated the intellectual authority of the Imams."
+    }
+},
+{
+    year: "818 CE",
+    title: "Martyrdom of Imam Ridha (AS)",
+    category: "death",
+    description: "Imam Ridha (AS) was poisoned by Mamun in Tus (Mashhad) on 29th or 30th Safar at age 55.",
+    details: {
+        significance: "When the Imam's popularity grew among the people, al-Mamun viewed him as a threat and arranged for his poisoning.",
+        keyEvents: [
+            "Mamun poisoned him when he became too popular",
+            "Buried in Mashhad, Iran",
+            "Shrine became largest mosque complex in world",
+            "Millions visit annually"
+        ],
+        legacy: "His shrine in Mashhad became one of the most visited pilgrimage sites in the Muslim world and a major center of Shia devotion."
+    }
+},
+{
+    year: "818 CE",
+    title: "Imamate of Imam Jawad (AS)",
+    category: "event",
+    description: "Imam Muhammad al-Jawad (AS) became the ninth Imam at age 7, youngest to assume Imamate.",
+    details: {
+        significance: "His Imamate demonstrated that divine leadership is based on knowledge granted by Allah rather than age or worldly experience.",
+        keyEvents: [
+            "Proved his knowledge to scholars",
+            "Married Mamun's daughter",
+            "Continued mission despite young age",
+            "Faced opposition due to age"
+        ],
+        legacy: "He proved that the Imamate is divinely guided, and his scholarly debates confirmed his extraordinary knowledge despite his young age."
+    }
+},
+{
+    year: "835 CE",
+    title: "Martyrdom of Imam Jawad (AS)",
+    category: "death",
+    description: "Imam Jawad (AS) was poisoned by his wife (Mamun's daughter) at instigation of Mutasim on 29th Dhul Qadah at age 25.",
+    details: {
+        significance: "His early martyrdom reflected continued Abbasid hostility toward the leadership of the Ahl al-Bayt.",
+        keyEvents: [
+            "Poisoned in Baghdad",
+            "Died at young age of 25",
+            "Buried in Kadhimiya next to his grandfather",
+            "Shortest Imamate period"
+        ],
+        legacy: "Despite his short life, he left behind important teachings and strengthened the network of followers devoted to the Imams."
+    }
+},
+{
+    year: "835 CE",
+    title: "Imamate of Imam Hadi (AS)",
+    category: "event",
+    description: "Imam Ali al-Hadi (AS) became the tenth Imam at age 8.",
+    details: {
+        significance: "Like Imam Jawad before him, Imam Hadi demonstrated divine knowledge from a young age while facing strict surveillance by the Abbasid rulers.",
+        keyEvents: [
+            "Forced to move from Medina to Samarra",
+            "Lived under house arrest",
+            "Continued teaching despite restrictions",
+            "Maintained network of representatives"
+        ],
+        legacy: "He strengthened the system of representatives that allowed the Shia community to remain connected to the Imam even under severe political control."
+    }
+},
+{
+    year: "868 CE",
+    title: "Martyrdom of Imam Hadi (AS)",
+    category: "death",
+    description: "Imam Hadi (AS) was poisoned by Mutaz al-Abbasi on 3rd Rajab at age 42.",
+    details: {
+        significance: "His martyrdom occurred while he lived under close surveillance in Samarra due to the Abbasids' fear of the influence of the Imams.",
+        keyEvents: [
+            "Poisoned in Samarra",
+            "Buried in his house in Samarra",
+            "Shrine shared with his son Imam Askari"
+        ],
+        legacy: "His shrine later became one of the important pilgrimage sites for followers of Ahl al-Bayt."
+    }
+},
+{
+    year: "868 CE",
+    title: "Imamate of Imam Askari (AS)",
+    category: "event",
+    description: "Imam Hassan al-Askari (AS) became the eleventh Imam.",
+    details: {
+        significance: "He lived under intense Abbasid surveillance because authorities feared the birth of the promised Mahdi from his lineage.",
+        keyEvents: [
+            "Lived under severe restrictions in Samarra",
+            "House constantly monitored",
+            "Prepared ground for occultation of his son",
+            "Maintained connection with Shia through representatives"
+        ],
+        legacy: "He prepared the Shia community for the coming occultation of the twelfth Imam and strengthened the system of communication through trusted deputies."
+    }
+},
+{
+    year: "869 CE",
+    title: "Birth of Imam Mahdi (AS)",
+    category: "birth",
+    description: "Imam Muhammad al-Mahdi (AS) was born on 15th Sha'ban in Samarra. The twelfth and final Imam.",
+    details: {
+        significance: "His birth fulfilled prophetic traditions that a descendant of the Prophet would arise as the Mahdi to establish justice on earth.",
+        keyEvents: [
+            "Born to Imam Askari and Narjis Khatun",
+            "Birth kept secret from Abbasid authorities",
+            "Shown only to close companions",
+            "Promised Mahdi who will fill earth with justice"
+        ],
+        legacy: "Belief in the living Imam Mahdi remains a central doctrine, symbolizing hope for the final triumph of justice and truth."
+    }
+},
+{
+    year: "874 CE",
+    title: "Martyrdom of Imam Askari (AS)",
+    category: "death",
+    description: "Imam Askari (AS) was poisoned by Mutamid al-Abbasi on 8th Rabi al-Awwal at age 28.",
+    details: {
+        significance: "His martyrdom intensified Abbasid attempts to locate and eliminate his son, the awaited Mahdi.",
+        keyEvents: [
+            "Poisoned in Samarra",
+            "Buried next to his father",
+            "Authorities searched for his son",
+            "Imam Mahdi went into occultation"
+        ],
+        legacy: "After his death the leadership of the Muslim community passed to the hidden Imam Mahdi."
+    }
+},
+{
+    year: "874 CE",
+    title: "Beginning of Minor Occultation (Ghaybat al-Sughra)",
+    category: "event",
+    description: "Imam Mahdi (AS) went into minor occultation at age 5, communicating through four special deputies.",
+    details: {
+        significance: "The minor occultation protected the Imam from Abbasid persecution while still allowing communication with the Shia community through appointed deputies.",
+        keyEvents: [
+            "First Deputy: Uthman ibn Said al-Amri",
+            "Second Deputy: Muhammad ibn Uthman al-Amri",
+            "Third Deputy: Husayn ibn Ruh al-Nawbakhti",
+            "Fourth Deputy: Ali ibn Muhammad al-Samarri",
+            "Lasted 69 years (874-941 CE)",
+            "Imam communicated through signed letters (Tawqi)"
+        ],
+        legacy: "This period gradually prepared the community for living without direct access to the Imam."
+    }
+},
+{
+    year: "941 CE",
+    title: "Beginning of Major Occultation (Ghaybat al-Kubra)",
+    category: "event",
+    description: "After death of fourth deputy, Imam Mahdi (AS) entered major occultation which continues until his reappearance.",
+    details: {
+        significance: "During the major occultation the Imam remains hidden by the will of Allah while believers await his reappearance to establish justice across the world.",
+        keyEvents: [
+            "Fourth deputy received letter announcing major occultation",
+            "No specific deputy appointed after him",
+            "Scholars became general representatives",
+            "Imam will reappear when Allah wills",
+            "Will fill earth with justice as it was filled with oppression",
+            "Shia Muslims await his return (Intidhar)"
+        ],
+        legacy: "The belief in the return of Imam Mahdi continues to inspire Muslims to remain patient, uphold justice, and preserve the teachings of the Prophet and Ahl al-Bayt."
+    }
+}
+        ];
+
+        let filteredEvents = [...TIMELINE_EVENTS];
+
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            const noResults = document.getElementById('noResults');
+            
+            timeline.innerHTML = '';
+            
+            if (filteredEvents.length === 0) {
+                timeline.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            timeline.style.display = 'block';
+            noResults.style.display = 'none';
+            
+            filteredEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+                item.style.animationDelay = `${index * 0.1}s`;
+                
+                const detailsHtml = event.details ? `
+                    <div class="timeline-details" id="details-${index}">
+                        <div class="detail-section">
+                            <div class="detail-title">Significance</div>
+                            <div class="detail-text">${event.details.significance}</div>
+                        </div>
+                        ${event.details.keyEvents && event.details.keyEvents.length > 0 ? `
+                            <div class="detail-section">
+                                <div class="detail-title">Key Events</div>
+                                <ul class="detail-list">
+                                    ${event.details.keyEvents.map(e => `<li>${e}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                        ${event.details.legacy ? `
+                            <div class="detail-section">
+                                <div class="detail-title">Legacy</div>
+                                <div class="detail-text">${event.details.legacy}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                ` : '';
+                
+                item.innerHTML = `
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content" onclick="toggleDetails(${index})">
+                        <div class="timeline-date">${event.year}</div>
+                        <div class="timeline-category">${event.category.toUpperCase()}</div>
+                        <h3 class="timeline-title">${event.title}</h3>
+                        <p class="timeline-description">${event.description}</p>
+                        ${detailsHtml}
+                        ${event.details ? '<button class="expand-btn">Read More</button>' : ''}
+                    </div>
+                `;
+                
+                timeline.appendChild(item);
+            });
+        }
+
+        function toggleDetails(index) {
+            const details = document.getElementById(`details-${index}`);
+            if (details) {
+                details.classList.toggle('expanded');
+                const btn = details.parentElement.querySelector('.expand-btn');
+                if (btn) {
+                    btn.textContent = details.classList.contains('expanded') ? 'Show Less' : 'Read More';
+                }
+            }
+        }
+
+        function filterEvents(category) {
+            if (category === 'all') {
+                filteredEvents = [...TIMELINE_EVENTS];
+            } else {
+                filteredEvents = TIMELINE_EVENTS.filter(e => e.category === category);
+            }
+            renderTimeline();
+        }
+
+        function searchEvents(query) {
+            const searchTerm = query.toLowerCase().trim();
+            
+            if (!searchTerm) {
+                filteredEvents = [...TIMELINE_EVENTS];
+            } else {
+                filteredEvents = TIMELINE_EVENTS.filter(event => 
+                    event.title.toLowerCase().includes(searchTerm) ||
+                    event.description.toLowerCase().includes(searchTerm) ||
+                    event.year.toLowerCase().includes(searchTerm) ||
+                    event.category.toLowerCase().includes(searchTerm) ||
+                    (event.details && (
+                        event.details.significance.toLowerCase().includes(searchTerm) ||
+                        (event.details.keyEvents && event.details.keyEvents.some(e => e.toLowerCase().includes(searchTerm))) ||
+                        (event.details.legacy && event.details.legacy.toLowerCase().includes(searchTerm))
+                    ))
+                );
+            }
+            
+            renderTimeline();
+        }
+
+        // Filter button handlers
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                filterEvents(filter);
+            });
+        });
+
+        // Search input handler
+        const searchInput = document.getElementById('searchInput');
+        let searchTimeout;
+        
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                searchEvents(this.value);
+            }, 300);
+        });
+
+        // Scroll progress
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-progress').style.width = scrolled + '%';
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+                hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    hamburger.textContent = '☰';
+                }
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    hamburger.textContent = '☰';
+                });
+            });
+        }
+
+        // Initialize timeline on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTimeline();
+        });
+    </script>
+</body>
+</html>
