@@ -1,834 +1,766 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <title>Kitab Al-Duafa</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="https://nooralhuda.co.uk/logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&family=Parastoo:wght@400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --primary-green: #136f3c;
-      --secondary-green: #1a8049;
-      --accent-gold: #d4af37;
-      --light-gold: #f4e4a6;
-      --dark-navy: #1a202c;
-      --white: #ffffff;
-      --light-gray: #f7fafc;
-      --medium-gray: #e2e8f0;
-      --text-dark: #2d3748;
-      --text-light: #718096;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    <meta charset="UTF-8">
+    <title>Shia Scholars</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="https://nooralhuda.co.uk/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #136f3c;
+            --secondary-green: #1a8049;
+            --accent-gold: #d4af37;
+            --light-gold: #f4e4a6;
+            --dark-navy: #1a202c;
+            --white: #ffffff;
+            --light-gray: #f7fafc;
+            --medium-gray: #e2e8f0;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.6;
-      color: var(--text-dark);
-      overflow-x: hidden;
-      background: var(--light-gray);
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-gray);
+        }
 
-    /* Navigation */
-    .navbar {
-      position: sticky;
-      top: 0;
-      background: white;
-      border-bottom: 1px solid #eee;
-      z-index: 1000;
-    }
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid #eee;
+            z-index: 1000;
+        }
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2rem 1.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--primary-green);
-      text-decoration: none;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
 
-    .hamburger {
-      display: none;
-      font-size: 26px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #136f3c;
-    }
+        .hamburger {
+            display: none;
+            font-size: 26px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #136f3c;
+        }
 
-    .hamburger.active {
-      font-size: 28px;
-    }
+        .hamburger.active {
+            font-size: 28px;
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      padding: 0 2rem 0 0;
-      list-style: none;
-      align-items: center;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            padding: 0 2rem 0 0;
+            list-style: none;
+            align-items: center;
+        }
 
-    .nav-links a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      transition: var(--transition);
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: var(--transition);
+        }
 
-    .nav-links a:hover {
-      color: var(--primary-green);
-    }
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
 
-    /* Page Header */
-    .page-header {
-      background: 
-        linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),
-        url('https://nooralhuda.co.uk/karbala.jpg') center/cover;
-      padding: 200px 0 60px;
-      text-align: center;
-      color: white;
-      position: relative;
-      overflow: hidden;
-      margin-top: 0;
-    }
-
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      animation: patternMove 60s linear infinite;
-      opacity: 0.6;
-    }
-
-    @keyframes patternMove {
-      0% { transform: translateX(0) translateY(0); }
-      100% { transform: translateX(-30px) translateY(-30px); }
-    }
-
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .header-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .back-home {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: var(--transition);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .back-home:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-    }
-
-    .category-title {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Main Content */
-    .page {
-      padding: 60px 0;
-      background: white;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* Search Bar */
-    .search-wrapper {
-      max-width: 600px;
-      margin: 0 auto 3rem;
-      position: relative;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 1rem 1.5rem;
-      font-size: 1rem;
-      border: 2px solid var(--medium-gray);
-      border-radius: 50px;
-      outline: none;
-      transition: var(--transition);
-      font-family: inherit;
-    }
-
-    .search-input:focus {
-      border-color: var(--primary-green);
-      box-shadow: 0 0 0 4px rgba(19, 111, 60, 0.1);
-    }
-
-    /* Chapter Grid */
-    .chapter-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .chapter-card {
-      background: white;
-      border-radius: 16px;
-      border: 1px solid var(--medium-gray);
-      padding: 1.5rem;
-      cursor: pointer;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .chapter-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary-green), var(--accent-gold));
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .chapter-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-xl);
-      border-color: var(--primary-green);
-    }
-
-    .chapter-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .chapter-number {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .chapter-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      line-height: 1.5;
-      margin-top: 0.5rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block;
-      }
-      
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        padding: 1rem 1.5rem;
-        gap: 1.2rem;
-        border-top: 1px solid #eee;
-      }
-      
-      .nav-links.active {
-        display: flex;
-      }
-
-      .page-header {
-        padding: 60px 0 40px;
-      }
-
-      .chapter-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Desktop */
-    @media (min-width: 769px) {
-      .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .nav-container {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 2.5rem;
-        padding-right: 2rem;
-      }
-    }
-
-    /* Scroll Progress Bar */
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent-gold), var(--primary-green));
-      z-index: 1001;
-      transition: width 0.1s ease;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-        .footer {
-            background: var(--dark-navy);
-            color: white;
-            padding: 30px 0 30px;
+        .page-header {
+            background: linear-gradient(135deg, rgba(19, 111, 60, 0.9) 0%, rgba(26, 128, 73, 0.8) 100%),
+                url('https://nooralhuda.co.uk/karbala.jpg') center/cover;
+            padding: 120px 0 60px;
             text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
         }
 
-        .footer p {
-            opacity: 0.8;
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            animation: patternMove 60s linear infinite;
+            opacity: 0.6;
         }
-                .navbar{
-  background:white;
-  position:relative;
-  z-index:1000;
-  border-bottom:1px solid #eee;
-}
 
-/* top row only */
-.nav-container{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:3rem 2rem;
-}
+        @keyframes patternMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-30px) translateY(-30px); }
+        }
 
-/* logo */
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
 
+        .header-actions {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 2rem;
+        }
 
-/* hamburger */
-.hamburger{
-  display:none;
-  font-size:26px;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color: #136f3c;
-}
+        .back-home {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-/* LINKS (desktop) */
-.nav-links{
-  display:flex;
-  gap:2.5rem;            /* ← bigger gap like you asked */
-  padding: 2rem 2rem 2rem 2rem; /* ← space on right edge */
-  list-style:none;
-}
+        .back-home:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
 
-.nav-links a{
-  text-decoration:none;
-  color:#333;
-}
+        .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
 
-/* =========================
-   MOBILE
-========================= */
-@media (max-width:768px){
+        .page-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            opacity: 0.95;
+        }
 
-  .hamburger{
-    display:block;
-  }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
 
-  .nav-links{
-    display:none;
-    flex-direction:column;
-    width:100%;          /* ← full device width */
-    padding:1rem 1.5rem;
-    gap:1.2rem;
-    border-top:1px solid #eee;
-  }
+        .search-wrapper {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
 
-  .nav-links.active{
-    display:flex;
-  }
-}
-/* ===== DESKTOP LAYOUT ===== */
-.navbar{
-  background:white;
-  border-bottom:1px solid #eee;
-}
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid var(--medium-gray);
+            border-radius: 50px;
+            outline: none;
+            transition: var(--transition);
+        }
 
-/* make navbar behave like one row on desktop */
-@media (min-width:769px){
+        .search-input:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 4px rgba(19, 111, 60, 0.1);
+        }
 
-  .navbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-  }
+        .scholars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
 
-  .nav-container{
-    padding:1rem 1.5rem;
-  }
+        .scholar-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--medium-gray);
+            position: relative;
+            overflow: hidden;
+        }
 
-  .nav-links{
-    display:flex;
-    align-items:center;
-    gap:2.5rem;
-    padding-right:2rem; /* bigger right gap like you wanted */
-  }
-}
-/* =========================
-   NAVBAR BASE
-========================= */
+        .scholar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-gold));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
 
-.navbar{
-  background:#fff;
-  border-bottom:1px solid #eee;
-}
+        .scholar-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
 
-/* this is the important fix */
-.nav-container,
-.nav-links{
-  max-width:1200px;
-  margin:0 auto;
-  padding:20px 24px;
-}
+        .scholar-card:hover::before {
+            transform: scaleX(1);
+        }
 
+        .scholar-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
 
-/* =========================
-   DESKTOP
-========================= */
-@media (min-width:769px){
+        .scholar-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
 
-  .navbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
+        .scholar-title {
+            flex: 1;
+        }
 
-  .nav-container{
-    display:flex;
-    align-items:center;
-    gap:2rem;
-  }
+        .scholar-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
 
-  .hamburger{
-    display:none;
-    color: #136f3c;
-  }
+        .scholar-dates {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
 
-  .nav-links{
-    display:flex;
-    align-items:center;
-    gap:2rem;
-  }
-}
-.navbar{
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #fff; /* important so content doesn’t show through */
-}
-.hamburger{
-  font-size: 26px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
+        .scholar-bio {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
 
-/* when open */
-.hamburger.active{
-  font-size: 28px;
-}
-.navbar{
-  background:white;
-  position:relative;
-  z-index:1000;
-  border-bottom:1px solid #eee;
-}
+        .works-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--medium-gray);
+        }
 
-/* top row only */
-.nav-container{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:3rem 2rem;
-}
+        .works-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
 
-/* logo */
+        .works-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
 
+        .works-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
 
-/* hamburger */
-.hamburger{
-  display:none;
-  font-size:26px;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color: #136f3c;
-}
+        .works-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+        }
 
-/* LINKS (desktop) */
-.nav-links{
-  display:flex;
-  gap:2.5rem;            /* ← bigger gap like you asked */
-  padding: 2rem 2rem 2rem 2rem; /* ← space on right edge */
-  list-style:none;
-}
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
 
-.nav-links a{
-  text-decoration:none;
-  color:#333;
-}
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 1rem 1.5rem;
+                gap: 1.2rem;
+                border-top: 1px solid #eee;
+            }
 
-/* =========================
-   MOBILE
-========================= */
-@media (max-width:768px){
+            .nav-links.active {
+                display: flex;
+            }
 
-  .hamburger{
-    display:block;
-  }
+            .scholars-grid {
+                grid-template-columns: 1fr;
+            }
 
-  .nav-links{
-    display:none;
-    flex-direction:column;
-    width:100%;          /* ← full device width */
-    padding:1rem 1.5rem;
-    gap:1.2rem;
-    border-top:1px solid #eee;
-  }
+            .page-header {
+                padding: 100px 0 40px;
+            }
+        }
 
-  .nav-links.active{
-    display:flex;
-  }
-}
-/* ===== DESKTOP LAYOUT ===== */
-.navbar{
-  background:white;
-  border-bottom:1px solid #eee;
-}
+        @media (min-width: 769px) {
+            .navbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
 
-/* make navbar behave like one row on desktop */
-@media (min-width:769px){
+            .nav-container {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
 
-  .navbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-  }
+            .nav-links {
+                display: flex;
+                align-items: center;
+                gap: 2.5rem;
+                padding-right: 2rem;
+            }
+        }
 
-  .nav-container{
-    padding:1rem 1.5rem;
-  }
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--primary-green));
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
 
-  .nav-links{
-    display:flex;
-    align-items:center;
-    gap:2.5rem;
-    padding-right:2rem; /* bigger right gap like you wanted */
-  }
-}
-/* =========================
-   NAVBAR BASE
-========================= */
-
-.navbar{
-  background:#fff;
-  border-bottom:1px solid #eee;
-}
-
-/* this is the important fix */
-.nav-container,
-.nav-links{
-  max-width:1200px;
-  margin:0 auto;
-  padding:20px 24px;
-}
-
-
-/* =========================
-   DESKTOP
-========================= */
-@media (min-width:769px){
-
-  .navbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
-
-  .nav-container{
-    display:flex;
-    align-items:center;
-    gap:2rem;
-  }
-
-  .hamburger{
-    display:none;
-    color: #136f3c;
-  }
-
-  .nav-links{
-    display:flex;
-    align-items:center;
-    gap:2rem;
-  }
-}
-.navbar{
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #fff; /* important so content doesn’t show through */
-}
-.hamburger{
-  font-size: 26px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* when open */
-.hamburger.active{
-  font-size: 28px;
-}
-  </style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
-  <!-- Scroll Progress Bar -->
-  <div class="scroll-progress"></div>
+    <div class="scroll-progress"></div>
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
-      
-      <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
-       </div>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="https://nooralhuda.co.uk/">Home</a></li>
-        <li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
-        <li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
-  
-        <li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
-      </ul>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="https://nooralhuda.co.uk/">Home</a></li>
+            <li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+            <li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+            <li><a href="https://nooralhuda.co.uk/contact">Contact</a></li>
+        </ul>
+    </nav>
 
-  </nav>
+    <section class="page-header">
+        <div class="header-content">
+            <div class="header-actions">
+                <a class="back-home" href="home">← Go Back</a>
+            </div>
+            <h1 class="page-title">Shia Scholars</h1>
+            <p class="page-subtitle">Biographies and works of major Islamic scholars</p>
+        </div>
+    </section>
 
-  <!-- Page Header -->
-  <section class="page-header">
-    <div class="header-content">
-      <div class="header-actions">
-        <a class="back-home" href="../home">← Go Back</a>
-      </div>
-      <h1 class="category-title" id="categoryTitle">Loading...</h1>
-    </div>
-  </section>
+    <main class="container">
+        <div class="search-wrapper">
+            <input type="text" id="searchScholar" class="search-input" placeholder="Search scholars...">
+        </div>
 
-  <!-- Main Content -->
-  <main class="page">
-    <div class="container">
-      <div class="search-wrapper">
-        <input type="text" id="searchBook" class="search-input" placeholder="Search chapters...">
-      </div>
-      
-      <div class="chapter-grid" id="bookGrid"></div>
-    </div>
-  </main>
+        <div class="scholars-grid" id="scholarsGrid"></div>
+    </main>
 
-  <footer class="footer">
-    © 2025 Noor Al Huda. All rights reserved. Illuminating the path to Islamic knowledge and spiritual growth through authentic resources
-  </footer>
+    <script>
+        const SCHOLARS = [
+            {
+        name: "Sheikh al-Kulayni",
+        dates: "(864-941 CE)",
+        bio: "Living during the Minor Occultation, Sheikh al-Kulayni was the most prominent Shia hadith scholar of his time. He spent over 20 years traveling to collect traditions, culminating in the most important of the Four Books of Twelver Shi'ism.",
+        works: [
+            "Al-Kafi (The Sufficient)",
+            "Rasail al-A'immah (Letters of the Imams)",
+            "Kitab al-Rijal"
+        ]
+    },
+    {
+        name: "Sheikh al-Saduq (Ibn Babawayh)",
+        dates: "(923-991 CE)",
+        bio: "A towering figure of the Qom theological school, he is credited with writing around 300 books. He was known for his strict adherence to textual tradition (Hadith) over rationalist philosophy.",
+        works: [
+            "Man La Yahduruhu al-Faqih (For Him Who is Not in the Presence of a Jurisprudent)",
+            "Kitab al-Tawhid",
+            "Kamal al-Din wa Tamam al-Ni'mah",
+            "Uyun Akhbar al-Rida"
+        ]
+    },
+    {
+        name: "Sheikh al-Tusi",
+        dates: "(995-1067 CE)",
+        bio: "Known as 'Shaykh al-Ta'ifah' (Chief of the Sect), he synthesized rational theology with tradition. After his library in Baghdad was burned, he moved to Najaf and founded its famous Hawza (seminary).",
+        works: [
+            "Tahdhib al-Ahkam",
+            "Al-Istibsar",
+            "Al-Tibyan fi Tafsir al-Quran",
+            "Al-Nihayah"
+        ]
+    },
+    {
+        name: "Ayatollah Ali Khamenei",
+        dates: "(1939-2026 CE)",
+        bio: "The late Supreme Leader of Iran since 1989, succeeding Ayatollah Khomeini, and a prominent Marja. Beyond his political leadership, he has taught advanced jurisprudence (Dars-e Kharij) for decades and authored works focusing on Quranic exegesis and the interconnected political history of the Imams.",
+        works: [
+            "Ajwibat al-Istifta'at (Answers to Inquiries)",
+            "A 250-Year-Old Person (The Political and Intellectual Life of the Imams)",
+            "An Outline of Islamic Thought in the Quran",
+            "Tafsir of Surah al-Bara'at"
+        ]
+    },
+    {
+        name: "Allama al-Hilli",
+        dates: "(1250-1325 CE)",
+        bio: "A child prodigy who became a definitive authority in jurisprudence (Fiqh) and theology (Kalam). His debates and writings were instrumental in the Ilkhanid ruler Oljeitu converting to Shi'ism.",
+        works: [
+            "Tadhkirat al-Fuqaha",
+            "Minhaj al-Karamah",
+            "Kashf al-Murad",
+            "Bab al-Hadi 'Ashar"
+        ]
+    },
+    {
+        name: "Sheikh al-Mufid",
+        dates: "(948-1022 CE)",
+        bio: "The preeminent theologian of Baghdad during the Buyid dynasty. He shaped Twelver rationalist theology and successfully defended Shia doctrines in public debates against other Islamic sects.",
+        works: [
+            "Kitab al-Irshad (The Book of Guidance)",
+            "Al-Muqni'ah",
+            "Awa'il al-Maqalat"
+        ]
+    },
+    {
+        name: "Sharif al-Radi",
+        dates: "(970-1016 CE)",
+        bio: "A brilliant poet, scholar, and descendant of the Prophet. He is most famous for compiling the literary masterpiece that collected the sermons, letters, and aphorisms of Imam Ali (AS).",
+        works: [
+            "Nahj al-Balagha (The Peak of Eloquence)",
+            "Haqa'iq al-Ta'wil",
+            "Khasa'is al-A'immah"
+        ]
+    },
+    {
+        name: "Allama Majlisi",
+        dates: "(1616-1698 CE)",
+        bio: "The most influential scholar of the late Safavid era. He undertook the monumental task of compiling the largest encyclopedia of Shia Hadith to preserve knowledge from being lost.",
+        works: [
+            "Bihar al-Anwar (Oceans of Light)",
+            "Mir'at al-Uqul",
+            "Hilyat al-Muttaqin",
+            "Hayat al-Qulub"
+        ]
+    },
+    {
+        name: "Sheikh al-Hurr al-Amili",
+        dates: "(1624-1693 CE)",
+        bio: "A prominent scholar from Jabal Amel (Lebanon) who later resided in Mashhad. He was a leading figure in the Akhbari school, focusing intensely on compiling practical legal traditions.",
+        works: [
+            "Wasa'il al-Shia",
+            "Amal al-Amil",
+            "Al-Jawahir al-Saniyya"
+        ]
+    },
+    {
+        name: "Sheikh Abbas al-Qummi",
+        dates: "(1877-1941 CE)",
+        bio: "A revered modern scholar and historian known for his extreme piety. His compilation of Duas (supplications) and Ziyarats became the most widely used prayer manual in the Shia world.",
+        works: [
+            "Mafatih al-Jinan (Keys to the Heavens)",
+            "Safinat al-Bihar",
+            "Muntaha al-Amal"
+        ]
+    },
+    {
+        name: "Ayatollah Abu al-Qasim al-Khoei",
+        dates: "(1899-1992 CE)",
+        bio: "One of the most influential Maraji (religious authorities) of the 20th century. He trained a generation of grand ayatollahs in Najaf and revolutionized the science of Rijal (evaluating hadith narrators).",
+        works: [
+            "Mu'jam Rijal al-Hadith (24 volumes)",
+            "Al-Bayan fi Tafsir al-Quran",
+            "Minhaj al-Salihin"
+        ]
+    },
+    {
+        name: "Ayatollah Ruhollah Khomeini",
+        dates: "(1902-1989 CE)",
+        bio: "A Marja, philosopher, and political leader who developed the theory of Wilayat al-Faqih (Guardianship of the Islamic Jurist) and led the 1979 Islamic Revolution in Iran.",
+        works: [
+            "Tahrir al-Wasilah",
+            "Wilayat al-Faqih (Islamic Government)",
+            "Forty Hadith",
+            "Adab al-Salat (The Disciplines of the Prayer)"
+        ]
+    },
+    {
+        name: "Ayatollah Ali al-Sistani",
+        dates: "(1930-Present)",
+        bio: "The current supreme Marja of the Najaf Hawza. Known for his quietist approach to politics, his historic fatwas played a critical role in stabilizing Iraq and defeating ISIS.",
+        works: [
+            "Islamic Laws (Tawdhih al-Masa'il)",
+            "Minhaj al-Salihin",
+            "A Code of Practice for Muslims in the West"
+        ]
+    },
+    {
+        name: "Allamah Muhammad Husayn Tabatabai",
+        dates: "(1904-1981 CE)",
+        bio: "A monumental philosopher and exegete who revived the study of Islamic philosophy in Qom. His masterwork is a 20-volume Quranic exegesis interpreting 'the Quran by the Quran'.",
+        works: [
+            "Tafsir al-Mizan",
+            "Shi'ite Islam",
+            "Bidayat al-Hikmah (The Elements of Islamic Metaphysics)",
+            "Nihayat al-Hikmah"
+        ]
+    },
+    {
+        name: "Shahid al-Awwal (The First Martyr)",
+        dates: "(1334-1384 CE)",
+        bio: "Muhammad Jamāl al-Dīn al-Makkī al-ʿĀmilī was a brilliant Lebanese jurist who formalized Shia fiqh. He was imprisoned and executed in Damascus due to sectarian prejudice.",
+        works: [
+            "Al-Lum'ah al-Dimashqiyyah (The Damascene Glitter)",
+            "Al-Qawa'id wa al-Fawa'id",
+            "Al-Dhikra"
+        ]
+    },
+    {
+        name: "Shahid al-Thani (The Second Martyr)",
+        dates: "(1506-1558 CE)",
+        bio: "Zayn al-Din al-Juba'i al-'Amili was a major jurist whose commentary on Shahid al-Awwal's work remains standard textbook material in Hawzas today. He was martyred on his way to Istanbul.",
+        works: [
+            "Sharh al-Lum'ah (Al-Rawdah al-Bahiyyah)",
+            "Masalik al-Afham",
+            "Munyat al-Murid"
+        ]
+    },
+    {
+        name: "Sheikh Murtada al-Ansari",
+        dates: "(1781-1864 CE)",
+        bio: "Known as 'Khatam al-Fuqaha' (Seal of the Jurists). He profoundly revolutionized Usul al-Fiqh (principles of jurisprudence). His textbooks are considered the highest level of study in seminaries.",
+        works: [
+            "Al-Makasib (The Earning)",
+            "Fara'id al-Usul (Al-Rasa'il)"
+        ]
+    },
+    {
+        name: "Ayatollah Hossein Borujerdi",
+        dates: "(1875-1961 CE)",
+        bio: "For over a decade, he was the sole absolute Marja of the Shia world. He was known for his efforts toward Islamic unity and his unique historical methodology in studying Hadith and Fiqh.",
+        works: [
+            "Jami' Ahadith al-Shia",
+            "Tajrid Asanid al-Kafi"
+        ]
+    },
+    {
+        name: "Sheikh al-Tabarsi",
+        dates: "(1073-1154 CE)",
+        bio: "A renowned exegete (Mufassir) whose balanced, linguistic, and rationalist approach to Quranic commentary made his works highly respected among both Shia and Sunni scholars.",
+        works: [
+            "Majma' al-Bayan fi Tafsir al-Quran",
+            "Jawami' al-Jami'",
+            "I'lam al-Wara bi A'lam al-Huda"
+        ]
+    },
+    // --- NEWLY ADDED SCHOLARS ---
+    {
+        name: "Sayyid Murtada (Alam al-Huda)",
+        dates: "(965-1044 CE)",
+        bio: "The older brother of Sharif al-Radi and a student of Sheikh al-Mufid. He was the leading theologian and jurist in Baghdad, known for his strong defense of rationalism in Islamic thought.",
+        works: [
+            "Al-Intisar",
+            "Al-Shafi fi al-Imamah",
+            "Amali al-Murtada"
+        ]
+    },
+    {
+        name: "Nasir al-Din al-Tusi",
+        dates: "(1201-1274 CE)",
+        bio: "A legendary polymath, astronomer, and philosopher who built the Maragheh observatory. He systematically formulated Twelver theology into the language of Avicennian philosophy.",
+        works: [
+            "Tajrid al-I'tiqad (The Catharsis of Doctrine)",
+            "Akhlaq-i Nasiri (Nasirean Ethics)",
+            "Zij-i Ilkhani"
+        ]
+    },
+    {
+        name: "Sheikh Baha'i (Baha al-Din al-Amili)",
+        dates: "(1547-1621 CE)",
+        bio: "A Safavid-era polymath, architect, mathematician, and poet. He played a major role in designing the glorious architecture of Isfahan, including the Naqsh-e Jahan Square.",
+        works: [
+            "Al-Kashkul",
+            "Jami-i Abbasi (A manual of Islamic law)",
+            "Khulasat al-Hisab"
+        ]
+    },
+    {
+        name: "Mulla Sadra (Sadr al-Din al-Shirazi)",
+        dates: "(1571-1640 CE)",
+        bio: "Arguably the most important Islamic philosopher of the last 400 years. He founded the school of 'Transcendent Theosophy' (Al-Hikmat al-Muta'aliyah), blending philosophy, mysticism, and theology.",
+        works: [
+            "Al-Asfar al-Arba'ah (The Four Journeys)",
+            "Al-Shawahid al-Rububiyyah",
+            "Mafatih al-Ghayb"
+        ]
+    },
+    {
+        name: "Sayyid Muhammad Baqir al-Sadr",
+        dates: "(1935-1980 CE)",
+        bio: "A genius thinker from Iraq who modernized Islamic economics, philosophy, and jurisprudence to counter Marxist and Capitalist ideologies. He was martyred by Saddam Hussein's regime.",
+        works: [
+            "Iqtisaduna (Our Economics)",
+            "Falsafatuna (Our Philosophy)",
+            "Al-Ma'alim al-Jadida lil-Usul"
+        ]
+    },
+    {
+        name: "Ayatollah Morteza Mutahhari",
+        dates: "(1919-1979 CE)",
+        bio: "A brilliant student of Allamah Tabatabai and a key intellectual architect of the Islamic Revolution. He was gifted at translating complex philosophical concepts into language accessible to modern university students.",
+        works: [
+            "Man and Destiny",
+            "Divine Justice (Adl-e Elahi)",
+            "Master and Mastership"
+        ]
+    }
+        ];
 
-  <script>
-    // Scroll Progress Bar
-    window.addEventListener('scroll', () => {
-      const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-      document.querySelector('.scroll-progress').style.width = scrolled + '%';
-    });
+        const scholarsGrid = document.getElementById('scholarsGrid');
+        const searchInput = document.getElementById('searchScholar');
 
-    // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-      const navbar = document.querySelector('.navbar');
-      if (window.scrollY > 100) {
-        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-      } else {
-        navbar.style.boxShadow = 'none';
-      }
-    });
-
-    // Hamburger Menu
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-
-    if (hamburger) {
-      hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navLinks.classList.toggle('active');
-        hamburger.classList.toggle('active');
-        hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
-      });
-
-      // Close menu when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-          navLinks.classList.remove('active');
-          hamburger.classList.remove('active');
-          hamburger.textContent = '☰';
+        function renderScholars(scholars = SCHOLARS) {
+            scholarsGrid.innerHTML = '';
+            
+            scholars.forEach(scholar => {
+                const card = document.createElement('div');
+                card.className = 'scholar-card';
+                
+                const initials = scholar.name.split(' ').map(n => n[0]).join('').slice(0, 2);
+                
+                card.innerHTML = `
+                    <div class="scholar-header">
+                        <div class="scholar-icon">${initials}</div>
+                        <div class="scholar-title">
+                            <div class="scholar-name">${scholar.name}</div>
+                            <div class="scholar-dates">${scholar.dates}</div>
+                        </div>
+                    </div>
+                    <div class="scholar-bio">${scholar.bio}</div>
+                    <div class="works-section">
+                        <div class="works-title">Major Works</div>
+                        <ul class="works-list">
+                            ${scholar.works.map(work => `<li>${work}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                
+                scholarsGrid.appendChild(card);
+            });
         }
-      });
 
-      // Close menu after clicking a link
-      navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('active');
-          hamburger.classList.remove('active');
-          hamburger.textContent = '☰';
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            
+            if (!query) {
+                renderScholars();
+                return;
+            }
+            
+            const filtered = SCHOLARS.filter(scholar => 
+                scholar.name.toLowerCase().includes(query) ||
+                scholar.bio.toLowerCase().includes(query) ||
+                scholar.works.some(work => work.toLowerCase().includes(query))
+            );
+            
+            renderScholars(filtered);
         });
-      });
-    }
 
-    // Load Chapters
-    async function loadChapters() {
-      const grid = document.getElementById("bookGrid");
-      const searchInput = document.getElementById("searchBook");
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-progress').style.width = scrolled + '%';
+        });
 
-      const res = await fetch(
-        "https://raw.githubusercontent.com/MohammedArab1/ThaqalaynAPI/refs/heads/main/V2/ThaqalaynData/17.json"
-      );
-      let data = await res.json();
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        });
 
-      // Filter categoryId = 1
-      data = data.filter(h => h.categoryId === 1);
-      const categoryTitle = document.getElementById("categoryTitle");
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+                hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
 
-      // Update title
-      if (data.length > 0 && data[0].category) {
-        categoryTitle.innerText = data[0].category;
-      } else {
-        categoryTitle.innerText = "Chapters";
-      }
+            document.addEventListener('click', (e) => {
+                if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    hamburger.textContent = '☰';
+                }
+            });
 
-      // Get unique chapters
-      const uniqueChapters = [];
-      const seen = new Set();
-
-      data.forEach(h => {
-        const chapterKey = h.chapterInCategoryId;
-
-        if (!seen.has(chapterKey)) {
-          seen.add(chapterKey);
-
-          uniqueChapters.push({
-            key: chapterKey,
-            title: h.chapter || ""
-          });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    hamburger.textContent = '☰';
+                });
+            });
         }
-      });
 
-      // Numeric sort
-      uniqueChapters.sort((a, b) => Number(a.key) - Number(b.key));
-
-      // Render chapters
-      uniqueChapters.forEach(ch => {
-        const card = document.createElement("div");
-        card.className = "chapter-card";
-
-        card.innerHTML = `
-          <span class="chapter-number">Chapter ${ch.key}</span>
-          <div class="chapter-title">${ch.title}</div>
-        `;
-
-        card.onclick = () => {
-          window.location.href = `./#${ch.key}`;
-        };
-
-        grid.appendChild(card);
-      });
-
-      // Search functionality
-      searchInput.addEventListener("input", function() {
-        const query = this.value.toLowerCase().trim();
-        const cards = grid.getElementsByClassName("chapter-card");
-
-        Array.from(cards).forEach(card => {
-          const title = card.querySelector(".chapter-title").innerText.toLowerCase();
-          const number = card.querySelector(".chapter-number").innerText.toLowerCase();
-          card.style.display = (title.includes(query) || number.includes(query)) ? "" : "none";
-        });
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", loadChapters);
-
-    // Theme support
-    function applyThemeClass(isDark) {
-      if (isDark) {
-        document.body.classList.add("dark");
-        document.body.classList.add("dark-mode");
-      } else {
-        document.body.classList.remove("dark");
-        document.body.classList.remove("dark-mode");
-      }
-    }
-    
-    var savedTheme = localStorage.getItem("theme");
-    applyThemeClass(savedTheme === "dark");
-  </script>
+        renderScholars();
+    </script>
 </body>
 </html>
