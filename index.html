@@ -1830,6 +1830,49 @@
 .resource-card:hover::before {
     width: 70%;
 }
+@media (max-width: 768px) {
+  /* Nav */
+  .nav-container { padding: 0 1rem; height: 60px; }
+  .logo { font-size: 20px; gap: 8px; }
+  .logo-icon { width: 30px; height: 30px; font-size: 15px; }
+
+  /* Hero */
+  .hero-content { padding: 0 1rem; }
+  .hero h1 { font-size: 2rem; margin-bottom: 1rem; }
+  .hero-subtitle { font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .hero-buttons { gap: 0.75rem; }
+  .btn-primary, .btn-secondary { padding: 11px 20px; font-size: 0.9rem; }
+  .bismillah-img { max-width: 220px; }
+  .bismillah-container { margin-bottom: 1.5rem; }
+
+  /* Daily cards */
+  .daily-content { padding: 40px 0; }
+  .daily-grid { grid-template-columns: 1fr; gap: 1rem; padding: 0 0.75rem; }
+  .daily-card { padding: 1.25rem; border-radius: 16px; }
+  .daily-title { font-size: 1.1rem !important; }
+  .daily-content-text { font-size: 1rem !important; padding: 0.75rem !important; margin-bottom: 0.75rem !important; }
+  .daily-translation { font-size: 0.85rem !important; margin-bottom: 0.5rem !important; }
+  .daily-source { font-size: 0.8rem; }
+  .daily-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+
+  /* Horizontal scroll panels */
+  #hscroll-wrapper [style*="font-size:22vw"] { font-size: 35vw; }
+
+  /* CTA */
+  .cta-section { padding: 60px 0; }
+  .cta-title { font-size: 1.5rem; }
+
+  /* Footer */
+  .footer { padding: 40px 0 20px; }
+  .footer-content { gap: 1.5rem; }
+  .footer-section h3 { font-size: 1rem; margin-bottom: 0.75rem; }
+  .footer-links li { margin-bottom: 0.4rem; }
+  .footer-links a { font-size: 0.9rem; }
+
+  /* General spacing */
+  .container { padding: 0 1rem; }
+  section { border-radius: 0 !important; margin: 0 !important; }
+}
 
 
 
@@ -1966,7 +2009,7 @@
   </div>
 
   <!-- Scroll space (3 panels worth) -->
-  <div style="height:300vh;"></div>
+  <div style="height:400vh;"></div>
 </div>
 
 
@@ -2474,6 +2517,9 @@ document.addEventListener('DOMContentLoaded', loadDailyHadith);
   let targetX  = 0;
   let rafId    = null;
 
+  // Extra scroll distance (px) needed to enter/exit the section
+  const BUFFER = 300;
+
   function lerp(a, b, t) { return a + (b - a) * t; }
 
   function tick() {
@@ -2496,39 +2542,37 @@ document.addEventListener('DOMContentLoaded', loadDailyHadith);
 
   function onScroll() {
     const wrapTop    = wrapper.offsetTop;
-    const wrapH      = wrapper.offsetHeight;          // 300vh + 100vh sticky = effectively 300vh spacer
-    const scrollable = wrapH - window.innerHeight;    // the full scrollable distance inside the block
+    const wrapH      = wrapper.offsetHeight;
+    const scrollable = wrapH - window.innerHeight;
     const scrolled   = window.scrollY - wrapTop;
 
-    // Before section: nothing to do
     if (scrolled < 0) return;
-
-    // Past section: clamp and make sure track sits at end
     if (scrolled > scrollable) {
       targetX = window.innerWidth * (panels - 1);
       if (!rafId) rafId = requestAnimationFrame(tick);
       return;
     }
 
-    // Inside section: map scroll progress to horizontal progress
-    // Add easing so the end of each panel "locks" slightly longer
-    const raw      = scrolled / scrollable;                    // 0 → 1 linear
-    const eased    = raw < 0.5
+    // Clamp scrolled into the active range (after entry buffer, before exit buffer)
+    const activeScrolled  = Math.max(0, scrolled - BUFFER);
+    const activeScrollable = Math.max(1, scrollable - BUFFER * 2);
+    const raw   = Math.min(activeScrolled / activeScrollable, 1);
+
+    // Ease in-out quad
+    const eased = raw < 0.5
       ? 2 * raw * raw
-      : 1 - Math.pow(-2 * raw + 2, 2) / 2;                   // ease-in-out quad
+      : 1 - Math.pow(-2 * raw + 2, 2) / 2;
 
     targetX = eased * window.innerWidth * (panels - 1);
     if (!rafId) rafId = requestAnimationFrame(tick);
   }
 
-  /* dot click */
   window.hGoTo = function (i) {
     const wrapTop    = wrapper.offsetTop;
     const scrollable = wrapper.offsetHeight - window.innerHeight;
     window.scrollTo({ top: wrapTop + (i / (panels - 1)) * scrollable, behavior: 'smooth' });
   };
 
-  /* resize */
   window.addEventListener('resize', () => {
     const wrapTop    = wrapper.offsetTop;
     const scrollable = wrapper.offsetHeight - window.innerHeight;
@@ -2542,7 +2586,6 @@ document.addEventListener('DOMContentLoaded', loadDailyHadith);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
-
 
 </script>
 </body>
