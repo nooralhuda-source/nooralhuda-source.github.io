@@ -1361,7 +1361,479 @@
 .hamburger.active{
   font-size: 28px;
 }
-    </style>
+.nav-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.25);
+}
+.nav-card:hover .card-arrow {
+  transform: translateX(5px);
+}
+.card-shine {
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  transform: skewX(-15deg);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+.nav-card:hover .card-shine {
+  left: 130%;
+}
+@media (max-width: 768px) {
+  #nav-cards { grid-template-columns: 1fr !important; }
+}
+
+/* Compact daily cards */
+.daily-card { padding: 1.75rem !important; }
+.daily-content-text { font-size: 1.15rem !important; padding: 1rem !important; margin-bottom: 1rem !important; }
+.daily-translation { margin-bottom: 0.75rem !important; font-size: 0.95rem !important; }
+.daily-title { font-size: 1.4rem !important; }
+.daily-grid { gap: 1.5rem !important; }
+
+/* Resource section */
+
+.resource-section {
+  --resource-green: #285747;
+  --resource-green-dark: #1d4035;
+  --resource-text: #242c28;
+  --resource-muted: #656d67;
+  --resource-border: #e5e7df;
+  --resource-background: #faf9f5;
+
+  padding: 76px 24px;
+  background: var(--resource-background);
+  color: var(--resource-text);
+  font-family: inherit;
+}
+
+.resource-container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* Section heading */
+
+.resource-intro {
+  max-width: 650px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
+
+.resource-eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: var(--resource-green);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+}
+
+.resource-intro h2 {
+  margin: 0 0 14px;
+  color: var(--resource-text);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+}
+
+.resource-intro > p {
+  max-width: 560px;
+  margin: 0 auto;
+  color: var(--resource-muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* Card layout */
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+/* Individual cards */
+
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 270px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid var(--resource-border);
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgb(25 45 35 / 3%);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-4px);
+  border-color: #b9cbbf;
+  box-shadow: 0 10px 28px rgb(25 45 35 / 8%);
+}
+
+.resource-card:focus-visible {
+  outline: 3px solid var(--resource-green);
+  outline-offset: 4px;
+}
+
+/* Simple inline icons */
+
+.resource-icon {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  place-items: center;
+  margin-bottom: 24px;
+  border-radius: 10px;
+  background: #edf3ee;
+  color: var(--resource-green);
+}
+
+.resource-icon svg {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+
+/* Card text */
+
+.resource-content h3 {
+  margin: 0 0 10px;
+  color: var(--resource-text);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.resource-content p {
+  margin: 0;
+  color: var(--resource-muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* Bottom link */
+
+.resource-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--resource-green);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.resource-link span {
+  font-size: 19px;
+  transition: transform 180ms ease;
+}
+
+.resource-card:hover .resource-link span {
+  transform: translateX(4px);
+}
+
+/* Tablets */
+
+@media (max-width: 850px) {
+  .resource-section {
+    padding: 60px 22px;
+  }
+
+  .resource-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .resource-card {
+    min-height: 260px;
+    padding: 24px;
+  }
+
+  .resource-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Phones */
+
+@media (max-width: 560px) {
+  .resource-section {
+    padding: 36px 10px;
+  }
+
+  .resource-intro {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .resource-intro h2 {
+    font-size: 30px;
+    letter-spacing: -0.5px;
+  }
+
+  .resource-intro > p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .resource-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .resource-card,
+  .resource-card:last-child {
+    grid-column: auto;
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .resource-icon {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 18px;
+  }
+
+  .resource-icon svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .resource-content h3 {
+    font-size: 20px;
+  }
+
+  .resource-content p {
+    font-size: 15px;
+  }
+
+  .resource-link {
+    padding-top: 20px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  .resource-card,
+  .resource-link span {
+    transition: none;
+  }
+
+  .resource-card:hover {
+    transform: none;
+  }
+}
+
+/* Reduce space around the daily sections */
+.daily-quran,
+.daily-hadith,
+.daily-content {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+/* Remove excess space inside the cards */
+.daily-quran .card,
+.daily-hadith .card {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Make the sections wider on phones */
+@media (max-width: 600px) {
+  .daily-quran,
+  .daily-hadith,
+  .daily-content {
+    margin: 12px 0;
+    padding: 12px 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .daily-quran .card,
+  .daily-hadith .card {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+}
+
+/* Make Daily Qur'an Ayah and Hadith text fit their containers */
+.daily-quran,
+.daily-hadith,
+.daily-ayah,
+.daily-hadith-card,
+.daily-ayah-card {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+}
+
+.daily-quran *,
+.daily-hadith *,
+.daily-ayah *,
+.daily-hadith-card *,
+.daily-ayah-card * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Keep text readable and prevent overflow */
+.daily-quran p,
+.daily-hadith p,
+.daily-ayah p,
+.daily-hadith-card p,
+.daily-ayah-card p {
+  font-size: clamp(14px, 2vw, 16px);
+  line-height: 1.7;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Arabic text */
+.daily-quran .arabic,
+.daily-hadith .arabic,
+.daily-ayah .arabic,
+.daily-hadith-card .arabic,
+.daily-ayah-card .arabic {
+  font-size: clamp(22px, 4vw, 30px);
+  line-height: 2;
+  direction: rtl;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  .daily-quran,
+  .daily-hadith,
+  .daily-ayah,
+  .daily-hadith-card,
+  .daily-ayah-card {
+    padding: 14px;
+    margin: 8px 0;
+  }
+
+  .daily-quran p,
+  .daily-hadith p,
+  .daily-ayah p,
+  .daily-hadith-card p,
+  .daily-ayah-card p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+}
+/* ===== Noor Al Huda Resource Cards ===== */ .resource-section { background: #f1faf7; padding: 42px 24px 48px; font-family: inherit; color: #303b39; } .resource-container { width: 100%; max-width: 1230px; margin: 0 auto; } .resource-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; align-items: stretch; } /* Individual cards */ .resource-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding: 30px 27px 26px; overflow: hidden; background: #ffffff; border: 1px solid #e1eae4; border-radius: 20px; color: inherit; text-decoration: none; box-sizing: border-box; box-shadow: 0 4px 18px rgba(34, 91, 63, 0.045); transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease; } /* Decorative green and gold accent */ .resource-card::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 35%; height: 5px; background: linear-gradient( 90deg, #21804d 0%, #21804d 52%, #d8b52b 52%, #d8b52b 100% ); border-radius: 0 0 4px 4px; transition: width 0.25s ease; } /* Subtle mint glow in the bottom corner */ .resource-card::after { content: ""; position: absolute; right: -45px; bottom: -65px; width: 150px; height: 150px; border-radius: 50%; background: rgba(223, 243, 233, 0.4); pointer-events: none; transition: transform 0.3s ease; } .resource-content, .resource-link { position: relative; z-index: 1; } .resource-content { width: 100%; } .resource-content h3 { margin: 0 0 12px; color: #243c32; font-family: inherit; font-size: 22px; font-weight: 650; line-height: 1.4; letter-spacing: -0.3px; transition: color 0.2s ease; } .resource-content p { margin: 0; color: #66756d; font-size: 15px; line-height: 1.8; } /* Call to action */ .resource-link { display: inline-flex; align-items: center; gap: 9px; margin-top: auto; padding-top: 28px; color: #197647; font-size: 14px; font-weight: 650; line-height: 1.5; transition: color 0.2s ease; } .resource-link span { display: inline-block; font-size: 19px; transition: transform 0.25s ease; } /* Interactive hover */ .resource-card:hover { transform: translateY(-7px); border-color: #b8d9c4; box-shadow: 0 14px 32px rgba(34, 91, 63, 0.11); background-color: #fff; } .resource-card:hover::before { width: 55%; } .resource-card:hover::after { transform: scale(1.3); } .resource-card:hover h3 { color: #197647; } .resource-card:hover .resource-link span { transform: translateX(6px); } /* Keyboard accessibility */ .resource-card:focus-visible { outline: 3px solid #23834f; outline-offset: 4px; } /* Tablet */ @media (max-width: 900px) { .resource-section { padding: 32px 20px; } .resource-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } .resource-card { padding: 27px 23px 23px; } .resource-content h3 { font-size: 20px; } } /* Mobile */ @media (max-width: 600px) { .resource-section { padding: 24px 16px 30px; } .resource-grid { grid-template-columns: 1fr; gap: 14px; } .resource-card { padding: 25px 22px 22px; border-radius: 16px; } .resource-content h3 { font-size: 19px; margin-bottom: 8px; } .resource-content p { font-size: 14px; line-height: 1.75; } .resource-link { padding-top: 18px; } } /* Respect reduced-motion preferences */ @media (prefers-reduced-motion: reduce) { .resource-card, .resource-card::before, .resource-card::after, .resource-card h3, .resource-link, .resource-link span { transition: none; } .resource-card:hover { transform: none; } } 
+
+/* Match the existing Noor Al Huda palette */
+
+.resource-section {
+    background: #ffffff;
+    color: #303b39;
+}
+
+.resource-card {
+    background: #ffffff;
+    border: 1px solid #e5e5dd;
+    box-shadow: 0 2px 8px rgba(35, 55, 43, 0.025);
+}
+
+.resource-card::before {
+    background: linear-gradient(
+        90deg,
+        #287b50 0%,
+        #287b50 50%,
+        #d9b52c 50%,
+        #d9b52c 100%
+    );
+}
+
+.resource-card::after {
+    background: rgba(230, 241, 233, 0.35);
+}
+
+.resource-content h3 {
+    color: #303b39;
+}
+
+.resource-content p {
+    color: #66756d;
+}
+
+.resource-link {
+    color: #176b48;
+}
+
+.resource-card:hover {
+    background: #ffffff;
+    border-color: #d9c16c;
+    box-shadow: 0 6px 18px rgba(35, 55, 43, 0.07);
+}
+
+.resource-card:hover h3,
+.resource-card:hover .resource-link {
+    color: #176b48;
+}
+
+/* Always show the green-and-gold accent */
+.resource-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 55%;
+    height: 5px;
+
+    background: linear-gradient(
+        to right,
+        #287b50 0%,
+        #287b50 50%,
+        #d9b52c 50%,
+        #d9b52c 100%
+    );
+
+    border-radius: 0 0 3px 3px;
+    opacity: 1;
+    transition: width 0.25s ease;
+}
+
+/* Make the accent slightly longer on hover */
+.resource-card:hover::before {
+    width: 70%;
+}
+
+
+
+</style>
 </head>
 <body>
     <!-- Scroll Progress Bar -->
@@ -1387,14 +1859,14 @@
 <!-- Hero Section -->
 <section id="home" class="hero">
     <!-- Floating Elements -->
-    <div class="floating-element floating-element-1"></div>
+
     <div class="floating-element floating-element-2"></div>
     <div class="floating-element floating-element-3"></div>
     
     <div class="hero-content">
    
-        <h1 class="typewriter-text">Illuminating the Path</h1>
-        <p class="hero-subtitle">Your comprehensive digital hub for Islamic knowledge, Quranic studies, authentic Hadith, and spiritual guidance</p>
+        <h1 class="typewriter-text">Guidance through the Ahlulbayt</h1>
+        <p class="hero-subtitle">Read the Quran, explore Shia hadith collections, discover duas, and deepen your understanding of Islam</p>
         <div class="hero-buttons">
             <a href="resources" class="btn-primary">Explore Resources</a>
             <a href="learn" class="btn-secondary">Learn More</a>
@@ -1434,56 +1906,71 @@
         </div>
     </div>
 </section>
-<!-- Noble Hadith Section -->
-<section class="morphing-section noble-hadith" id="noble-hadith" onclick="window.location.href='hadiths-home'">
-    <div class="section-content">
-        <div class="section-text">
-            <h2 class="section-title">Hadith Books</h2>
-            <p class="section-description">One of the largest online Shia Hadith collections in the world, featuring authentic narrations from the Ahlulbayt and their companions. such as Al-Kafi, Man La Yahduruhu Al-Faqih and Wasail Al-Shia</p>
+<!-- Horizontal Scroll Section -->
+<div id="hscroll-wrapper" style="position:relative;">
+  <div id="hscroll-sticky" style="position:sticky;top:0;height:100vh;overflow:hidden;">
+    <div id="hscroll-track" style="display:flex;height:100%;width:300vw;transition:transform 0.1s linear;will-change:transform;">
 
+      <!-- Panel 1: Hadiths -->
+      <a href="hadiths-home" id="hpanel-0" style="flex:0 0 100vw;height:100%;text-decoration:none;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a2535 0%,#0d1520 100%);position:relative;overflow:hidden;cursor:pointer;">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(212,175,55,0.12) 0%,transparent 60%);"></div>
+        <div style="position:absolute;right:8%;top:50%;transform:translateY(-50%);font-size:22vw;font-family:'Amiri',serif;color:rgba(212,175,55,0.06);line-height:1;user-select:none;pointer-events:none;">الحديث</div>
+        <div style="position:relative;z-index:2;max-width:700px;padding:0 3rem;">
+          <p style="color:rgba(212,175,55,0.8);font-size:0.85rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;">01 / 03</p>
+          <h2 style="color:white;font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:1;margin-bottom:1.5rem;letter-spacing:-0.02em;">Hadith<br>Books</h2>
+          <p style="color:rgba(255,255,255,0.55);font-size:1.15rem;line-height:1.7;max-width:480px;margin-bottom:2.5rem;">Narrations from the Ahlulbayt — explore Al-Kafi and major Shia collections.</p>
+          <span style="display:inline-flex;align-items:center;gap:0.75rem;color:white;font-weight:600;font-size:1rem;border-bottom:2px solid rgba(212,175,55,0.6);padding-bottom:0.3rem;">Browse collection <span id="ha">→</span></span>
         </div>
-        <div class="section-image">
-            <img src="https://images.pexels.com/photos/31679266/pexels-photo-31679266.jpeg?_gl=1*17cfigf*_ga*MTczNTc1MDQ0Ni4xNzcxNzA1NzQ5*_ga_8JE65Q40S6*czE3NzE3MDU3NDkkbzEkZzEkdDE3NzE3MDU4MzgkajU5JGwwJGgw" alt="Islamic Scholar Reading Hadith">
+      </a>
+
+      <!-- Panel 2: Quran -->
+      <a href="quran/home" id="hpanel-1" style="flex:0 0 100vw;height:100%;text-decoration:none;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a2016 0%,#051209 100%);position:relative;overflow:hidden;cursor:pointer;">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(26,128,73,0.2) 0%,transparent 60%);"></div>
+        <div style="position:absolute;right:8%;top:50%;transform:translateY(-50%);font-size:22vw;font-family:'Amiri',serif;color:rgba(26,128,73,0.1);line-height:1;user-select:none;pointer-events:none;">قرآن</div>
+        <div style="position:relative;z-index:2;max-width:700px;padding:0 3rem;">
+          <p style="color:rgba(74,222,128,0.8);font-size:0.85rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;">02 / 03</p>
+          <h2 style="color:white;font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:1;margin-bottom:1.5rem;letter-spacing:-0.02em;">The<br>Quran</h2>
+          <p style="color:rgba(255,255,255,0.55);font-size:1.15rem;line-height:1.7;max-width:480px;margin-bottom:2.5rem;">Read, listen to recitations, and explore tafsir and translations.</p>
+          <span style="display:inline-flex;align-items:center;gap:0.75rem;color:white;font-weight:600;font-size:1rem;border-bottom:2px solid rgba(74,222,128,0.6);padding-bottom:0.3rem;">Open Quran <span>→</span></span>
         </div>
+      </a>
+
+      <!-- Panel 3: Duas -->
+      <a href="duas" id="hpanel-2" style="flex:0 0 100vw;height:100%;text-decoration:none;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#130d2a 0%,#0a0814 100%);position:relative;overflow:hidden;cursor:pointer;">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(124,58,237,0.18) 0%,transparent 60%);"></div>
+        <div style="position:absolute;right:8%;top:50%;transform:translateY(-50%);font-size:22vw;font-family:'Amiri',serif;color:rgba(124,58,237,0.08);line-height:1;user-select:none;pointer-events:none;">دعاء</div>
+        <div style="position:relative;z-index:2;max-width:700px;padding:0 3rem;">
+          <p style="color:rgba(167,139,250,0.8);font-size:0.85rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;">03 / 03</p>
+          <h2 style="color:white;font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:1;margin-bottom:1.5rem;letter-spacing:-0.02em;">Duas &<br>Prayers</h2>
+          <p style="color:rgba(255,255,255,0.55);font-size:1.15rem;line-height:1.7;max-width:480px;margin-bottom:2.5rem;">Daily supplications and duas transmitted from the Ahlulbayt.</p>
+          <span style="display:inline-flex;align-items:center;gap:0.75rem;color:white;font-weight:600;font-size:1rem;border-bottom:2px solid rgba(167,139,250,0.6);padding-bottom:0.3rem;">View duas <span>→</span></span>
+        </div>
+      </a>
+
     </div>
-    <div class="section-arrow">→</div>
-</section>
 
-<!-- Learn Shia Islam Section -->
-
-<section class="morphing-section quran-study" id="quran-study" onclick="window.location.href='quran'">
-    <div class="section-content">
-        <div class="section-text">
-            <h2 class="section-title">Quran</h2>
-            <p class="section-description">The entire Quran, with many reciters, and translations in multiple languages. 5 Shia translations ranging from English, Farsi and Urdu as well as a single Sunni english translation.</p>
-
-        </div>
-        <div class="section-image">
-            <img src="https://islamonline.net/wp-content/uploads/2022/09/benefit-from-the-Quran.jpg" alt="Beautiful Quran with Golden Calligraphy">
-        </div>
+    <!-- Progress bar -->
+    <div style="position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:1.5rem;z-index:10;">
+      <div style="width:180px;height:2px;background:rgba(255,255,255,0.15);border-radius:2px;overflow:hidden;">
+        <div id="hscroll-progress" style="height:100%;width:0%;background:white;border-radius:2px;transition:width 0.1s linear;"></div>
+      </div>
+      <span id="hscroll-label" style="color:rgba(255,255,255,0.4);font-size:0.8rem;font-weight:500;letter-spacing:0.1em;">SCROLL</span>
     </div>
-    <div class="section-arrow">→</div>
-</section>
-<!-- Books Library Section -->
 
-
-<!-- Quran Study Section -->
-
-
-<!-- Duas Collection Section -->
-<section class="morphing-section duas-collection" id="duas-collection" onclick="window.location.href='duas'">
-    <div class="section-content">
-        <div class="section-text">
-            <h2 class="section-title">Duas</h2>
-            <p class="section-description">Sacred supplications and prayers from the Ahlulbayt tradition. Connect with Allah through authentic duas for every occasion, spiritual state, and life circumstance.</p>
-
-        </div>
-        <div class="section-image">
-            <img src="https://i.pinimg.com/736x/c6/26/d2/c626d295f48864b81c650b4ccccfffad.jpg" alt="Hands Raised in Islamic Prayer">
-        </div>
+    <!-- Side dots -->
+    <div style="position:absolute;right:2rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0.6rem;z-index:10;">
+      <div class="hdot" onclick="hGoTo(0)" style="width:6px;height:6px;border-radius:50%;background:white;opacity:1;cursor:pointer;transition:all 0.3s ease;"></div>
+      <div class="hdot" onclick="hGoTo(1)" style="width:6px;height:6px;border-radius:50%;background:white;opacity:0.3;cursor:pointer;transition:all 0.3s ease;"></div>
+      <div class="hdot" onclick="hGoTo(2)" style="width:6px;height:6px;border-radius:50%;background:white;opacity:0.3;cursor:pointer;transition:all 0.3s ease;"></div>
     </div>
-    <div class="section-arrow">→</div>
-</section>
+  </div>
+
+  <!-- Scroll space (3 panels worth) -->
+  <div style="height:300vh;"></div>
+</div>
+
+
+
 
     <!-- Stats Section -->
 
@@ -1492,9 +1979,9 @@
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
-                <h2 class="cta-title">Begin Your Spiritual Journey</h2>
+                <h2 class="cta-title">Explore the Library</h2>
                
-                <a href="resources" class="btn-primary">Start Your Journey</a>
+                <a href="resources" class="btn-primary">View All Resources</a>
             </div>
         </div>
     </section>
@@ -1505,7 +1992,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Noor Al Huda</h3>
-                    <p>Illuminating the path to Islamic knowledge and spiritual growth through authentic resources</p>
+                    <p>Guidance through the Ahlulbayt</p>
                 </div>
                 <div class="footer-section">
                     <h3>Resources</h3>
@@ -1520,7 +2007,7 @@
                 <div class="footer-section">
                     <h3>Contact</h3>
                     <ul class="footer-links">
-                        <li><a href="aboutus">About Development</a></li>
+                        <li><a href="aboutus">About Us</a></li>
                         <li><a href="contact">Contact</a></li>
                         <li><a href="learn">Learn More</a></li>
 
@@ -1528,7 +2015,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Noor Al Huda. All rights reserved. Illuminating the path to Islamic knowledge and spiritual growth through authentic resources</p>
+                <p>&copy; 2026 Noor Al Huda. Guidance through the Ahlulbayt.</p>
             </div>
         </div>
     </footer>
@@ -1891,9 +2378,7 @@ function parseQuranFile(text) {
 
 // deterministic "daily" verse (same for everyone each day)
 function dailyIndex(total) {
-  const today = new Date();
-  const dayNumber = Math.floor(today.getTime() / 86400000);
-  return dayNumber % total;
+  return Math.floor(Math.random() * total);
 }
 
 
@@ -1940,9 +2425,7 @@ const HADITH_URL =
 /* ---------- helpers ---------- */
 
 function dailyIndex(total) {
-  const today = new Date();
-  const dayNumber = Math.floor(today.getTime() / 86400000);
-  return dayNumber % total;
+  return Math.floor(Math.random() * total);
 }
 
 function clean(str) {
@@ -1979,6 +2462,82 @@ async function loadDailyHadith() {
 }
 
 document.addEventListener('DOMContentLoaded', loadDailyHadith);
+
+(function () {
+  const wrapper = document.getElementById('hscroll-wrapper');
+  const track   = document.getElementById('hscroll-track');
+  const bar     = document.getElementById('hscroll-progress');
+  const label   = document.getElementById('hscroll-label');
+  const hdots   = document.querySelectorAll('.hdot');
+  const panels  = 3;
+
+  let currentPanel = 0;
+  let currentX     = 0;
+  let targetX      = 0;
+  let rafId        = null;
+
+  /* ── smooth lerp loop ── */
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function tick() {
+    currentX = lerp(currentX, targetX, 0.07);
+    track.style.transform = `translateX(-${currentX}px)`;
+
+    const maxX     = window.innerWidth * (panels - 1);
+    const progress = maxX > 0 ? currentX / maxX : 0;
+
+    bar.style.width = (progress * 100) + '%';
+
+    const idx = Math.min(panels - 1, Math.round(progress * (panels - 1)));
+    if (idx !== currentPanel) {
+      currentPanel = idx;
+      hdots.forEach((d, i) => {
+        d.style.opacity = i === currentPanel ? '1' : '0.3';
+      });
+      label.textContent = currentPanel === panels - 1 ? 'EXPLORE' : 'SCROLL';
+    }
+
+    rafId = Math.abs(currentX - targetX) > 0.3
+      ? requestAnimationFrame(tick)
+      : null;
+  }
+
+  /* ── scroll handler ── */
+  function onScroll() {
+    const wrapTop    = wrapper.offsetTop;
+    const wrapH      = wrapper.offsetHeight;
+    const scrollable = wrapH - window.innerHeight;
+    const scrolled   = window.scrollY - wrapTop;
+
+    if (scrolled < 0 || scrolled > scrollable) return;
+
+    const progress = Math.min(Math.max(scrolled / scrollable, 0), 1);
+    targetX = progress * window.innerWidth * (panels - 1);
+
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  }
+
+  /* ── dot click ── */
+  function hGoTo(i) {
+    const wrapTop = wrapper.offsetTop;
+    const segH    = (wrapper.offsetHeight - window.innerHeight) / (panels - 1);
+    window.scrollTo({ top: wrapTop + i * segH, behavior: 'smooth' });
+  }
+  window.hGoTo = hGoTo;
+
+  /* ── recalc on resize ── */
+  window.addEventListener('resize', () => {
+    targetX  = (targetX / (window.innerWidth * (panels - 1))) * window.innerWidth * (panels - 1);
+    currentX = targetX;
+    if (track) track.style.transform = `translateX(-${currentX}px)`;
+  });
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+
+
 </script>
 </body>
 </html>
