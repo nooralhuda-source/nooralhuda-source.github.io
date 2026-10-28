@@ -660,7 +660,80 @@
   /* --- Floating/animation elements --- */
   .floating-element { display: none; }
 }
+/* =========================================
+   Mobile Responsiveness Fixes for Resources
+   ========================================= */
 
+/* Navbar Mobile Layout */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block !important;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #ffffff;
+        padding: 1.5rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--medium-gray);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-container {
+        padding: 0.75rem 1rem;
+        height: 70px;
+    }
+
+    /* Header adjustments for phones */
+    .header {
+        padding: 90px 1rem 60px;
+    }
+
+    .header h1 {
+        font-size: 2rem !important;
+    }
+
+    .header-subtitle {
+        font-size: 0.95rem !important;
+    }
+
+    /* Grid & Cards optimization for small screens */
+    .container {
+        padding: 0 1rem;
+    }
+
+    .resources-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem;
+        margin-top: 1rem;
+    }
+
+    .card {
+        padding: 1.5rem !important;
+    }
+
+    .card h4 {
+        font-size: 1.25rem !important;
+    }
+
+    .card p {
+        font-size: 0.95rem !important;
+    }
+
+    /* Footer adjustments */
+    .footer {
+        padding: 40px 0 20px;
+    }
+}
     </style>
 </head>
 <body>
