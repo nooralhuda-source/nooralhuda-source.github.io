@@ -121,9 +121,7 @@
 
         /* Header Section */
         .header {
-            background: 
-            
-                url('karbala.jpg') center/cover;
+            background: url('karbala.jpg') center/cover;
             padding: 150px 0 100px;
             text-align: center;
             color: white;
@@ -138,7 +136,6 @@
             left: 0;
             right: 0;
             bottom: 0;
-            
             animation: patternMove 60s linear infinite;
             opacity: 0.6;
         }
@@ -172,7 +169,7 @@
 
         /* Main Content */
         .main-content {
-            padding: 100px 0;
+            padding: 100px 0 0;
             background: white;
         }
 
@@ -330,23 +327,24 @@
             color: white;
             padding: 80px 0;
             text-align: center;
-            border-radius: 20px;
-            margin: 4rem 0;
+            margin: 4rem 0 0 0;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .cta-title {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
             margin-bottom: 1.5rem;
         }
 
         .cta-description {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin-bottom: 2.5rem;
             opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .cta-button {
@@ -398,7 +396,7 @@
             }
             
             .main-content {
-                padding: 60px 0;
+                padding: 60px 0 0;
             }
         }
 
@@ -418,6 +416,66 @@
         html {
             scroll-behavior: smooth;
         }
+
+        .nav-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 24px 50px rgba(0,0,0,0.25);
+        }
+        .nav-card:hover .card-arrow {
+            transform: translateX(5px);
+        }
+        .card-shine {
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            transform: skewX(-15deg);
+            transition: left 0.5s ease;
+            pointer-events: none;
+        }
+        .nav-card:hover .card-shine {
+            left: 130%;
+        }
+        @media (max-width: 768px) {
+            #nav-cards { grid-template-columns: 1fr !important; }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold), #f4e4a6);
+            color: var(--dark-navy);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -428,13 +486,11 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="index" class="logo">
-                
                 Noor Al Huda
             </a>
             <ul class="nav-links">
                 <li><a href="index">Home</a></li>
                 <li><a href="resources">Resources</a></li>
-     
                 <li><a href="contact">Contact</a></li>
                 <li><a href="index" class="back-button">← Back to Home</a></li>
             </ul>
@@ -445,19 +501,19 @@
     <section class="header">
         <div class="header-content">
             <h1>About Noor Al Huda</h1>
-            <p class="header-subtitle">Discover the comprehensive Islamic knowledge platform designed to illuminate your spiritual journey</p>
+            <p class="header-subtitle">Guidance through the Ahlulbayt.</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <section class="main-content">
         <div class="container">
+        
             <!-- What is Noor Al Huda -->
             <div class="content-section">
                 <h2 class="section-title">What is Noor Al Huda?</h2>
                 <div class="section-content">
-                    <p>Noor Al Huda, meaning "Light of Guidance," is a comprehensive digital platform dedicated to providing authentic Islamic knowledge and resources to Muslims worldwide. Our mission is to make Islamic knowledge, Quranic studies, and spiritual guidance accessible to everyone, regardless of their location or background.</p>
-                    <p>Built with modern technology and rooted in traditional Islamic knowledge, we bridge the gap between classical Islamic texts and contemporary digital accessibility. Our platform serves as a beacon of authentic knowledge, carefully curated to ensure accuracy and authenticity in all our resources.</p>
+                    <p>Discover a growing collection of Quranic resources, narrations from the Ahlulbayt, duas, and educational tools designed to make Islamic knowledge more accessible.</p>
                 </div>
             </div>
 
@@ -465,75 +521,70 @@
             <div class="content-section">
                 <h2 class="section-title">Our Mission</h2>
                 <div class="section-content">
-                    <p>We are committed to preserving and sharing the rich heritage of Islamic knowledge through:</p>
                     <div class="features-grid">
                         <div class="feature-item">
                             <div class="feature-icon"></div>
-                            <h3 class="feature-title">All in one Platform</h3>
-                            <p class="feature-description">Providing access to Hadiths, Duas, Quran and more all in one place.</p>
+                            <h3 class="feature-title">One place for Islamic Knowledge</h3>
+                            <p class="feature-description">Explore Quranic studies, hadith collections, duas, and useful Islamic resources in one organised platform.</p>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon"></div>
                             <h3 class="feature-title">Global Accessibility</h3>
-                            <p class="feature-description">Making Islamic knowledge available to Shias worldwide, breaking down geographical barriers.</p>
+                            <p class="feature-description">Access Islamic learning resources online, wherever you are.</p>
                         </div>
                         <div class="feature-item">
                             <div class="feature-icon"></div>
-                            <h3 class="feature-title">Educational Excellence</h3>
-                            <p class="feature-description">Offering structured learning paths and comprehensive study materials for all levels.</p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"></div>
-                            <h3 class="feature-title">User-Friendly experience</h3>
-                            <p class="feature-description">lots of websites are either non-user-friendly or dont have enough content for users.</p>
+                            <h3 class="feature-title">Rooted in Tradition</h3>
+                            <p class="feature-description">Explore the Quran and the teachings of the Ahlulbayt through classical sources and educational resources.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- What We Offer -->
             <div class="content-section">
                 <h2 class="section-title">What We Offer</h2>
-                <div class="section-content">
-                    <p>Noor Al Huda provides a comprehensive suite of Islamic resources and tools:</p>
-                    
-                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Quranic Studies</h3>
-                    <p>Complete Quran with multiple translations and audio recitations from renowned Qaris.</p>
-                    
-                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Hadith Collections</h3>
-                    <p>Extensive database of authentic hadiths from major collections including Al-Kafi, Man la Yahduruhu al-Faqih, and other trusted Shia sources. Each hadith is carefully verified and includes chain of narration details.</p>
-                    
-                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Duas and Ziyarahs</h3>
-                    <p>Comprehensive collection of daily duas, special occasion prayers, and supplications from the Ahlulbayt tradition, including famous duas like Dua Kumayl, Dua Tawassul, and Ziyarah Ashura.</p>
-                    
-                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">Prayer Resources</h3>
-                    <p>Accurate prayer times for locations worldwide, Qibla direction finder, Islamic calendar with important dates.</p>
-                    
-                    <h3 style="color: var(--primary-green); margin: 2rem 0 1rem 0; font-size: 1.5rem;">AI-Powered Learning</h3>
-                    <p>With Multiple AI tools to ask questions and understand shia beliefs and practices more deeply.</p>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2rem;">
+
+                    <a href="quran/home" style="text-decoration:none;display:block;padding:2rem;border-radius:20px;border:1.5px solid rgba(19,111,60,0.12);background:#fff;transition:all 0.3s ease;box-shadow:0 2px 12px rgba(19,111,60,0.06);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(19,111,60,0.14)';this.style.borderColor='rgba(19,111,60,0.3)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 12px rgba(19,111,60,0.06)';this.style.borderColor='rgba(19,111,60,0.12)'">
+                        <h3 style="color:#1a202c;font-size:1.15rem;font-weight:700;margin-bottom:0.6rem;">The Holy Quran</h3>
+                        <p style="color:#718096;font-size:0.95rem;line-height:1.6;margin-bottom:1.25rem;">Explore Qur'anic text, translations, recitations, and available study resources.</p>
+                        <span style="color:#136f3c;font-size:0.9rem;font-weight:600;">Explore →</span>
+                    </a>
+
+                    <a href="hadiths-home" style="text-decoration:none;display:block;padding:2rem;border-radius:20px;border:1.5px solid rgba(19,111,60,0.12);background:#fff;transition:all 0.3s ease;box-shadow:0 2px 12px rgba(19,111,60,0.06);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(19,111,60,0.14)';this.style.borderColor='rgba(19,111,60,0.3)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 12px rgba(19,111,60,0.06)';this.style.borderColor='rgba(19,111,60,0.12)'">
+                        <h3 style="color:#1a202c;font-size:1.15rem;font-weight:700;margin-bottom:0.6rem;">Hadith Collections</h3>
+                        <p style="color:#718096;font-size:0.95rem;line-height:1.6;margin-bottom:1.25rem;">Discover narrations from major Shia hadith collections.</p>
+                        <span style="color:#136f3c;font-size:0.9rem;font-weight:600;">Explore →</span>
+                    </a>
+
+                    <a href="duas" style="text-decoration:none;display:block;padding:2rem;border-radius:20px;border:1.5px solid rgba(19,111,60,0.12);background:#fff;transition:all 0.3s ease;box-shadow:0 2px 12px rgba(19,111,60,0.06);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 30px rgba(19,111,60,0.14)';this.style.borderColor='rgba(19,111,60,0.3)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 12px rgba(19,111,60,0.06)';this.style.borderColor='rgba(19,111,60,0.12)'">
+                        <h3 style="color:#1a202c;font-size:1.15rem;font-weight:700;margin-bottom:0.6rem;">Duas and Ziyarahs</h3>
+                        <p style="color:#718096;font-size:0.95rem;line-height:1.6;margin-bottom:1.25rem;">Find supplications and ziyarah associated with the Ahlulbayt (عليهم السلام).</p>
+                        <span style="color:#136f3c;font-size:0.9rem;font-weight:600;">Explore →</span>
+                    </a>
+
                 </div>
             </div>
-
-            <!-- Statistics -->
-
 
             <!-- Why Choose Us -->
             <div class="content-section">
                 <h2 class="section-title">Why Choose Noor Al Huda?</h2>
                 <div class="section-content">
-                    <p>Noor Al Huda is built to provide reliable, accessible access to authentic Islamic sources in one place. Our focus is not entertainment or trends, but preserving and presenting knowledge directly from the Qur’an, Ahl al-Bayt (ʿalayhim al-salām), and trusted classical books.</p>
-
-<p>Instead of scattered PDFs or difficult websites, you get structured libraries, searchable hadith collections, translations, and study tools which are designed for serious learning, research, and daily reflection. Everything is organised, so students, teachers, and families can quickly find what they need without distraction.</p>
-
-<p>If you want clarity, authenticity, and a clean space to study Islam properly, Noor Al Huda is made for you. A simple hub for knowledge, remembrance, and growth.</p>
+                    <p>Noor Al Huda brings together Islamic resources to help users explore the Quran, study narrations from the Ahlulbayt, and discover supplications and other materials for learning and reflection.</p>
+                    <p>Our aim is to make these resources easier to find and explore through clear navigation, searchable collections, and accessible digital tools.</p>
+                    <p>Whether you're looking for a particular narration, exploring a dua, or deepening your understanding of Islamic teachings, Noor Al Huda is designed to help you find relevant resources in one place.</p>
                 </div>
             </div>
 
-            <!-- Call to Action -->
-            <div class="cta-section">
-                <h2 class="cta-title">Begin Your Journey Today</h2>
-                <p class="cta-description">Join our growing community of learners and discover the wealth of Islamic knowledge waiting for you.</p>
-                <a href="resources" class="cta-button">Explore Our Resources</a>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Explore the Library</h2>
+                <a href="resources" class="btn-primary">View All Resources</a>
             </div>
         </div>
     </section>
@@ -541,7 +592,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Noor Al Huda. All rights reserved. Built with dedication to serve the Muslim community.</p>
+            <p>&copy; 2026 Noor Al Huda. Guidance through the Ahlulbayt.</p>
         </div>
     </footer>
 
@@ -585,4 +636,3 @@
     </script>
 </body>
 </html>
-
