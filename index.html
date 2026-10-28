@@ -2462,7 +2462,6 @@ async function loadDailyHadith() {
 }
 
 document.addEventListener('DOMContentLoaded', loadDailyHadith);
-
 (function () {
   const wrapper = document.getElementById('hscroll-wrapper');
   const track   = document.getElementById('hscroll-track');
@@ -2471,12 +2470,10 @@ document.addEventListener('DOMContentLoaded', loadDailyHadith);
   const hdots   = document.querySelectorAll('.hdot');
   const panels  = 3;
 
-  let currentPanel = 0;
-  let currentX     = 0;
-  let targetX      = 0;
-  let rafId        = null;
+  let currentX = 0;
+  let targetX  = 0;
+  let rafId    = null;
 
-  /* ── smooth lerp loop ── */
   function lerp(a, b, t) { return a + (b - a) * t; }
 
   function tick() {
@@ -2489,53 +2486,62 @@ document.addEventListener('DOMContentLoaded', loadDailyHadith);
     bar.style.width = (progress * 100) + '%';
 
     const idx = Math.min(panels - 1, Math.round(progress * (panels - 1)));
-    if (idx !== currentPanel) {
-      currentPanel = idx;
-      hdots.forEach((d, i) => {
-        d.style.opacity = i === currentPanel ? '1' : '0.3';
-      });
-      label.textContent = currentPanel === panels - 1 ? 'EXPLORE' : 'SCROLL';
-    }
+    hdots.forEach((d, i) => d.style.opacity = i === idx ? '1' : '0.3');
+    label.textContent = idx === panels - 1 ? 'EXPLORE' : 'SCROLL';
 
     rafId = Math.abs(currentX - targetX) > 0.3
       ? requestAnimationFrame(tick)
       : null;
   }
 
-  /* ── scroll handler ── */
   function onScroll() {
     const wrapTop    = wrapper.offsetTop;
-    const wrapH      = wrapper.offsetHeight;
-    const scrollable = wrapH - window.innerHeight;
+    const wrapH      = wrapper.offsetHeight;          // 300vh + 100vh sticky = effectively 300vh spacer
+    const scrollable = wrapH - window.innerHeight;    // the full scrollable distance inside the block
     const scrolled   = window.scrollY - wrapTop;
 
-    if (scrolled < 0 || scrolled > scrollable) return;
+    // Before section: nothing to do
+    if (scrolled < 0) return;
 
-    const progress = Math.min(Math.max(scrolled / scrollable, 0), 1);
-    targetX = progress * window.innerWidth * (panels - 1);
+    // Past section: clamp and make sure track sits at end
+    if (scrolled > scrollable) {
+      targetX = window.innerWidth * (panels - 1);
+      if (!rafId) rafId = requestAnimationFrame(tick);
+      return;
+    }
 
+    // Inside section: map scroll progress to horizontal progress
+    // Add easing so the end of each panel "locks" slightly longer
+    const raw      = scrolled / scrollable;                    // 0 → 1 linear
+    const eased    = raw < 0.5
+      ? 2 * raw * raw
+      : 1 - Math.pow(-2 * raw + 2, 2) / 2;                   // ease-in-out quad
+
+    targetX = eased * window.innerWidth * (panels - 1);
     if (!rafId) rafId = requestAnimationFrame(tick);
   }
 
-  /* ── dot click ── */
-  function hGoTo(i) {
-    const wrapTop = wrapper.offsetTop;
-    const segH    = (wrapper.offsetHeight - window.innerHeight) / (panels - 1);
-    window.scrollTo({ top: wrapTop + i * segH, behavior: 'smooth' });
-  }
-  window.hGoTo = hGoTo;
+  /* dot click */
+  window.hGoTo = function (i) {
+    const wrapTop    = wrapper.offsetTop;
+    const scrollable = wrapper.offsetHeight - window.innerHeight;
+    window.scrollTo({ top: wrapTop + (i / (panels - 1)) * scrollable, behavior: 'smooth' });
+  };
 
-  /* ── recalc on resize ── */
+  /* resize */
   window.addEventListener('resize', () => {
-    targetX  = (targetX / (window.innerWidth * (panels - 1))) * window.innerWidth * (panels - 1);
-    currentX = targetX;
+    const wrapTop    = wrapper.offsetTop;
+    const scrollable = wrapper.offsetHeight - window.innerHeight;
+    const scrolled   = Math.max(0, window.scrollY - wrapTop);
+    const raw        = Math.min(scrolled / scrollable, 1);
+    currentX = raw * window.innerWidth * (panels - 1);
+    targetX  = currentX;
     if (track) track.style.transform = `translateX(-${currentX}px)`;
   });
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
-
 
 
 </script>
