@@ -2398,6 +2398,254 @@ body.reading-mode .ayah-tafsir {
   cursor: pointer;
   accent-color: var(--primary-green);
 }
+.settings-drawer {
+  position: fixed;
+  top: 0;
+  right: -380px;
+  width: 380px;
+  max-width: 93vw;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 32px rgba(0,0,0,0.10);
+  transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+  z-index: 2000;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.settings-drawer.open { right: 0; }
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--medium-gray);
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
+}
+.settings-header h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: 0.01em;
+}
+.close-btn {
+  background: var(--light-gray);
+  color: var(--text-dark);
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.close-btn:hover {
+  background: var(--medium-gray);
+  transform: none;
+}
+
+.settings-section {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--medium-gray);
+}
+.settings-section-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.setting-row:last-child { margin-bottom: 0; }
+.setting-row-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+.setting-row-label small {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  font-weight: 400;
+  margin-top: 0.1rem;
+}
+
+.setting-group {
+  margin-bottom: 0;
+}
+.setting-group label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+.setting-group select {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: 1.5px solid var(--medium-gray);
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: white;
+  color: var(--text-dark);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23718096' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  padding-right: 2.2rem;
+  cursor: pointer;
+}
+.setting-group select:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(19,111,60,0.08);
+}
+
+/* Size slider */
+.size-slider-wrap { width: 100%; }
+.size-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-bottom: 0.4rem;
+}
+.size-labels strong {
+  color: var(--primary-green);
+  font-size: 0.85rem;
+}
+.setting-group input[type="range"] {
+  width: 100%;
+  accent-color: var(--primary-green);
+  cursor: pointer;
+  height: 4px;
+  border: none;
+  padding: 0;
+}
+
+/* Translation checkboxes */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--medium-gray);
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: var(--text-dark);
+}
+.checkbox-item:last-child { border-bottom: none; }
+.checkbox-item input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  accent-color: var(--primary-green);
+  order: 2;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+  .page {
+  padding: 40px 0 120px;
+  background: white;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+#ayahContainer {
+  margin-top: 1rem;
+}
+
+.ayah-card {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--medium-gray);
+  border-radius: 0;
+  padding: 1.75rem 0;
+  margin-bottom: 0;
+  box-shadow: none;
+  transition: background 0.2s ease;
+  position: relative;
+  overflow: visible;
+}
+.ayah-card::before { display: none; }
+.ayah-card:hover {
+  transform: none;
+  box-shadow: none;
+  background: rgba(19,111,60,0.025);
+  border-radius: 8px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.ayah-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(19,111,60,0.3);
+  color: var(--primary-green);
+  background: transparent;
+  font-weight: 700;
+  font-size: 0.78rem;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+.ayah-arabic {
+  font-family: 'IndoPak', serif;
+  direction: rtl;
+  font-size: 2.2rem;
+  line-height: 2.2;
+  text-align: right;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.ayah-translation {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #4a5568;
+  margin-bottom: 0.25rem;
+  padding-left: 0.25rem;
+  border-left: 3px solid rgba(19,111,60,0.15);
+  padding-left: 0.85rem;
+}
+
+.translation-source {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  font-style: italic;
+  padding-left: 1.1rem;
+  margin-bottom: 0;
+  margin-top: 0.2rem;
+}
 
 </style>
 </head>
@@ -2421,7 +2669,7 @@ body.reading-mode .ayah-tafsir {
 <a href="home" class="back-home">← Back to Surahs</a>
 <div style="flex: 1;"></div>
 <div class="action-buttons" style="position: relative;">
-<button class="action-btn" id="settingsBtn">⚙️ Settings</button>
+<button class="action-btn" id="settingsBtn">Settings</button>
 <button class="action-btn" id="bookmarksBtn">Bookmarks</button>
 </div>
 </div>
@@ -2466,43 +2714,46 @@ body.reading-mode .ayah-tafsir {
 <button class="bottom-nav-btn" id="backToTopBtn">⬆ Beginning</button>
 <button class="bottom-nav-btn primary" id="nextBtn">Next →</button>
 </div>
-
 <div class="settings-drawer" id="settingsDrawer">
   <div class="settings-header">
-    <h2>Settings</h2>
+    <h2>Display Settings</h2>
     <button class="close-btn" id="closeSettings">✕</button>
   </div>
-  <div class="settings-body">
-  <div class="setting-group">
 
+  <div class="settings-section">
+    <div class="settings-section-title">Arabic</div>
+    <div class="setting-group" style="margin-bottom:1rem;">
+      <label>Font</label>
+      <select id="arabicFontSelect">
+        <option value="IndoPak" selected>IndoPak</option>
+        <option value="Kolkatta">Kolkatta</option>
+        <option value="Uthmani">Uthmani</option>
+        <option value="maghrebi">Maghrebi</option>
+      </select>
+    </div>
+    <div class="setting-group">
+      <label>Text Size</label>
+      <div class="size-slider-wrap">
+        <div class="size-labels"><span>Small</span><strong><span id="sizeValue">32</span>px</strong><span>Large</span></div>
+        <input type="range" id="arabicSizeRange" min="18" max="48" value="32">
+      </div>
+    </div>
+  </div>
 
-<div class="setting-group">
-<label>Arabic Font</label>
-<select id="arabicFontSelect">
-<option value="IndoPak" selected>IndoPak</option>
-<option value="Kolkatta">Kolkatta</option>
-<option value="Uthmani">Uthmani</option>
-<option value="maghrebi">Maghrebi</option>
-</select>
+  <div class="settings-section">
+    <div class="settings-section-title">Audio</div>
+    <div class="setting-group">
+      <label>Reciter</label>
+      <select id="reciterSelect"></select>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-section-title">Translations</div>
+    <div class="checkbox-group" id="translationCheckboxes"></div>
+  </div>
 </div>
 
-<div class="setting-group">
-<label>Arabic Text Size</label>
-<input type="range" id="arabicSizeRange" min="18" max="48" value="32">
-<div class="size-preview"><span>Size</span><span id="sizeValue">32</span>px</div>
-
-</div>
-
-<div class="setting-group">
-<label>Reciter</label>
-<select id="reciterSelect"></select>
-</div>
-
-<div class="setting-group">
-<label>Translations</label>
-<div class="checkbox-group" id="translationCheckboxes"></div>
-</div>
-</div>
 
 <div class="modal-backdrop" id="bookmarksModal">
 <div class="modal">
