@@ -2499,11 +2499,11 @@ body.reading-mode .ayah-tafsir {
 </div>
 <div class="setting-group">
 <label>Arabic Font</label>
-<select id="arabicFontSelect">
-<option value="IndoPak" selected>IndoPak</option>
-<option value="Kolkatta">Kolkatta</option>
-<option value="Uthmani">Uthmani</option>
-<option value="maghrebi">Maghrebi</option>
+<select id="scriptSelect">
+  <option value="indopak" selected>IndoPak (Default)</option>
+  <option value="uthmani">Uthmani</option>
+  <option value="kolkatta">Kolkatta</option>
+  <option value="maghrebi">Maghrebi</option>
 </select>
 </div>
 <div class="setting-group">
@@ -2549,33 +2549,34 @@ const SOURCES = {
 };
 const JUZ_API_BASE = 'https://api.alquran.cloud/v1/juz';
 const RECITER_PATTERNS = {
-"Abdul Basit": "https://download.quranicaudio.com/quran/abdul_basit_murattal/{ch3}.mp3",
-"Maher Al-Muaiqly": "https://download.quranicaudio.com/quran/maher_256/{ch3}.mp3",
-"Saad Al-Ghamdi": "https://download.quranicaudio.com/quran/sa3d_al-ghaamidi/complete/{ch3}.mp3",
-"Yasser Al-Dosari": "https://download.quranicaudio.com/quran/yasser_ad-dussary/{ch3}.mp3",
-"Abdurrahman as-Sudais": "https://download.quranicaudio.com/quran/abdurrahmaan_as-sudays/{ch3}.mp3"
+  "Abdul Basit": "https://download.quranicaudio.com/quran/abdul_basit_murattal/{ch3}.mp3",
+  "Maher Al-Muaiqly": "https://download.quranicaudio.com/quran/maher_256/{ch3}.mp3",
+  "Saad Al-Ghamdi": "https://download.quranicaudio.com/quran/sa3d_al-ghaamidi/complete/{ch3}.mp3",
+  "Yasser Al-Dosari": "https://download.quranicaudio.com/quran/yasser_ad-dussary/{ch3}.mp3",
+  "Abdurrahman as-Sudais": "https://download.quranicaudio.com/quran/abdurrahmaan_as-sudays/{ch3}.mp3"
 };
 let RECITERS = Object.assign({}, RECITER_PATTERNS);
-const SURAH_NAMES = ["Al-Fātiḥah","Al-Baqarah","Āl ʿImrān","An-Nisāʼ","Al-Māʼidah","Al-Anʿām","Al-Aʿrāf","Al-Anfāl","At-Tawbah","Yūnus","Hūd","Yūsuf","Ar-Raʻd","Ibrāhīm","Al-Ḥijr","An-Naḥl","Al-Isrāʼ","Al-Kahf","Maryam","Tā-Hā","Al-Anbiyāʼ","Al-Ḥajj","Al-Muʼminūn","An-Nūr","Al-Furqān","Ash-Shuʻarāʼ","An-Naml","Al-Qaṣaṣ","Al-ʻAnkabūt","Ar-Rūm","Luqmān","As-Sajdah","Al-Aḥzāb","Sabaʼ","Fāṭir","Yā-Sīn","Aṣ-Ṣāffāt","Sād","Az-Zumar","Ghāfir","Fussilat","Ash-Shūrā","Az-Zukhruf","Ad-Dukhān","Al-Jāthiyah","Al-Aḥqāf","Muḥammad","Al-Fatḥ","Al-Ḥujurāt","Qāf","Adh-Dhāriyāt","Aṭ-Ṭūr","An-Najm","Al-Qamar","Ar-Raḥmān","Al-Wāqiʻah","Al-Ḥadīd","Al-Mujādilah","Al-Ḥashr","Al-Mumtaḥanah","As-Saff","Al-Jumuʻah","Al-Munāfiqūn","At-Taghābun","Aṭ-Ṭalāq","At-Ṭahrīm","Al-Mulk","Al-Qalam","Al-Ḥāqqah","Al-Maʻārij","Nūḥ","Al-Jinn","Al-Muzzammil","Al-Muddaththir","Al-Qiyāmah","Al-Insān","Al-Mursalāt","An-Nabaʼ","An-Nāziʻāt","ʻAbasa","At-Takwīr","Al-Infiṭār","Al-Muṭaffifīn","Al-Inshiqāq","Al-Burūj","Aṭ-Ṭāriq","Al-Aʻlā","Al-Ghāshiyah","Al-Fajr","Al-Balad","Ash-Shams","Al-Layl","Aḍ-Ḍuḥā","Ash-Sharḥ","At-Tīn","Al-ʻAlaq","Al-Qadr","Al-Bayyinah","Az-Zalzalah","Al-ʻĀdiyāt","Al-Qāriʻah","At-Takāthur","Al-ʻAṣr","Al-Humazah","Al-Fīl","Quraysh","Al-Māʼūn","Al-Kawthar","Al-Kāfirūn","An-Naṣr","Al-Masad","Al-Ikhlāṣ","Al-Falaq","An-Nās"];
+const SURAH_NAMES = ["Al-Fātiḥah","Al-Baqarah","Āl ʿImrān","An-Nisāʼ","Al-Māʼidah","Al-Anʿām","Al-Aʿrāf","Al-Anfāl","At-Tawbah","Yūnus","Hūd","Yūsuf","Ar-Raʻd","Ibrāhīm","Al-Ḥijr","An-Naḥl","Al-Isrāʼ","Al-Kahf","Maryam","Tā-Hā","Al-Anbiyāʼ","Al-Ḥajj","Al-Muʼminūn","An-Nūr","Al-Furqān","Ash-Shuʻarāʼ","An-Naml","Al-Qaṣaṣ","Al-ʻAnkabūt","Ar-Rūm","Luqmān","As-Sajdah","Al-Aḥzāb","Sabaʼ","Fāṭir","Yā-Sīn","Aṣ-Ṣāffāt","Sād","Az-Zumar","Ghāfir","Fussilat","Ash-Shūrā","Az-Zukhruf","Ad-Dukhān","Al-Jāthiyah","Al-Aḥqāf","Muḥammad","Al-Fatḥ","Al-Ḥujurāt","Qāf","Adh-Dhāriyāt","Aṭ-Ṭūr","An-Najm","Al-Qamar","Ar-Raḥmān","Al-Wāqiʻah","Al-Ḥadīd","Al-Mujādilah","Al-Ḥashr","Al-Mumtaḥanah","As-Saff","Al-Jumuʻah","Al-Munāfiqūn","At-Taghābun","Aṭ-Ṭalāq","At-Ṭahrīm","Al-Mulk","Al-Qalam","Al-Ḥāqqah","Al-Maʻārij","Nūḥ","Al-Jinn","Al-Muzzammil","Al-Muddaththir","Al-Qiyāmah","Al-Insān","Al-Mursalāt","An-Nabaʼ","An-Nāziʻāt","ʻAbasa","At-Takwīr","Al-Infiṭār","Al-Muṭaffifīn","Al-Inshiqāق","Al-Burūj","Aṭ-Ṭāriq","Al-Aʻlā","Al-Ghāshiyah","Al-Fajr","Al-Balad","Ash-Shams","Al-Layl","Aḍ-Ḍuḥā","Ash-Sharḥ","At-Tīn","Al-ʻAlaq","Al-Qadr","Al-Bayyinah","Az-Zalzalah","Al-ʻĀdiyāt","Al-Qāriʻah","At-Takāthur","Al-ʻAṣr","Al-Humazah","Al-Fīl","Quraysh","Al-Māʼūn","Al-Kawthar","Al-Kāfirūn","An-Naṣr","Al-Masad","Al-Ikhlāṣ","Al-Falaq","An-Nās"];
 const SURAH_NAMES_AR = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","قاف","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
-// Tafsir data
+
 let TAFSIR_DATA = {};
-// State
 let currentSurah = 1;
 let currentJuz = 1;
 let currentViewType = 'surah';
 let currentMode = 'translation';
-let arabicFont = localStorage.getItem('arabicFont') || 'IndoPak';
 
+function getSelectedScript() {
+  return localStorage.getItem('quran_script') || 'indopak';
+}
+let arabicFont = getSelectedScript();
 let selectedReciter = localStorage.getItem('selectedReciter') || 'Abdul Basit';
 
-// Responsive default font size (smaller on phones, standard on desktop)
 let defaultInitialSize = window.innerWidth <= 768 ? 24 : 32;
 let arabicSize = localStorage.getItem('arabicSize') || defaultInitialSize;
 let visibleTranslations = JSON.parse(localStorage.getItem('visibleTranslations') || '["Ali Quli Qarai (eng)"]');
 const CACHE = {};
 const MAPS = {};
-// Elements
+
 const loadingOverlay = document.getElementById('loadingOverlay');
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('navLinks');
@@ -2604,213 +2605,254 @@ const sizeValue = document.getElementById('sizeValue');
 const reciterSelect = document.getElementById('reciterSelect');
 const translationCheckboxes = document.getElementById('translationCheckboxes');
 const bookmarksList = document.getElementById('bookmarksList');
-// Loading functions
+
 function showLoading() {
-loadingOverlay.classList.add('show');
+  if (loadingOverlay) loadingOverlay.classList.add('show');
 }
 function hideLoading() {
-loadingOverlay.classList.remove('show');
+  if (loadingOverlay) loadingOverlay.classList.remove('show');
 }
-// Utility Functions
 function pad3(n) {
-return String(n).padStart(3, '0');
+  return String(n).padStart(3, '0');
 }
+
 function parseSourceText(txt) {
-const map = {};
-if (!txt) return map;
-const lines = txt.split(/\r?\n/);
-for (let raw of lines) {
-raw = raw.trim();
-if (!raw) continue;
-const parts = raw.split('|');
-if (parts.length < 3) continue;
-const ch = parseInt(parts[0], 10);
-const v = parseInt(parts[1], 10);
-if (!isFinite(ch) || !isFinite(v)) continue;
-const content = parts.slice(2).join('|').trim();
-map[`${ch}:${v}`] = content;
+  const map = {};
+  if (!txt) return map;
+  const lines = txt.split(/\r?\n/);
+  for (let raw of lines) {
+    raw = raw.trim();
+    if (!raw) continue;
+    const parts = raw.split('|');
+    if (parts.length < 3) continue;
+    const ch = parseInt(parts[0], 10);
+    const v = parseInt(parts[1], 10);
+    if (!isFinite(ch) || !isFinite(v)) continue;
+    const content = parts.slice(2).join('|').trim();
+    map[`${ch}:${v}`] = content;
+  }
+  return map;
 }
-return map;
-}
+
 async function fetchAllSources() {
-const names = Object.keys(SOURCES);
-for (const name of names) {
-try {
-const url = SOURCES[name];
-if (!url) {
-MAPS[name] = {};
-continue;
+  if (typeof SOURCES === 'undefined') return;
+  const names = Object.keys(SOURCES);
+  for (const name of names) {
+    try {
+      const url = SOURCES[name];
+      if (!url) { MAPS[name] = {}; continue; }
+      if (CACHE[url]) { MAPS[name] = CACHE[url]; continue; }
+      const res = await fetch(url);
+      if (!res.ok) { MAPS[name] = {}; continue; }
+      const txt = await res.text();
+      const parsed = parseSourceText(txt);
+      MAPS[name] = parsed;
+      CACHE[url] = parsed;
+    } catch (e) {
+      MAPS[name] = {};
+    }
+  }
 }
-if (CACHE[url]) {
-MAPS[name] = CACHE[url];
-continue;
+
+async function fetchSurahData(surahNumber) {
+  const scriptType = getSelectedScript();
+  let apiUrl = '';
+  
+  if (scriptType === 'uthmani' || scriptType === 'indopak') {
+    apiUrl = `https://ummahapi.com/api/quran/surah/${surahNumber}?script=${scriptType}`;
+  } else {
+    apiUrl = `https://ummahapi.com/api/quran/surah/${surahNumber}?script=indopak`; 
+  }
+  
+  try {
+    const response = await fetch(apiUrl);
+    const result = await response.json();
+    
+    // Handle various possible UmmahAPI response wrappers safely
+    if (result.data) {
+      return result.data.ayahs || result.data.verses || result.data;
+    }
+    return result.ayahs || result.verses || result;
+  } catch (error) {
+    console.error("Error fetching surah data:", error);
+    return [];
+  }
 }
-const res = await fetch(url);
-if (!res.ok) {
-MAPS[name] = {};
-continue;
+
+
+
+const scriptSelectElement = document.getElementById('scriptSelect') || arabicFontSelect;
+if (scriptSelectElement) {
+  scriptSelectElement.addEventListener('change', async (e) => {
+    const selectedScript = e.target.value;
+    localStorage.setItem('quran_script', selectedScript);
+    arabicFont = selectedScript;
+    
+    if (currentViewType === 'juz') {
+      await renderJuz(currentJuz);
+    } else {
+      await renderSurah(currentSurah);
+    }
+  });
 }
-const txt = await res.text();
-const parsed = parseSourceText(txt);
-MAPS[name] = parsed;
-CACHE[url] = parsed;
-} catch (e) {
-MAPS[name] = {};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const currentScript = getSelectedScript();
+  if (scriptSelectElement) {
+    scriptSelectElement.value = currentScript;
+  }
+});
+
+function applyScriptStyles(arabicSpan, scriptType) {
+  arabicSpan.style.letterSpacing = 'normal';
+  arabicSpan.style.wordSpacing = 'normal';
+
+  if (scriptType === 'indopak') {
+    arabicSpan.style.fontFamily = "'Al Mushaf', 'IndoPak', 'Nastaleeq', serif";
+  } else if (scriptType === 'uthmani') {
+    arabicSpan.style.fontFamily = "'Amiri', 'Uthmanic Hafs', serif";
+  } else if (scriptType === 'kolkatta') {
+    arabicSpan.style.fontFamily = "'Kolkata', 'Traditional Arabic', serif";
+  } else if (scriptType === 'maghrebi') {
+    arabicSpan.style.fontFamily = "'Maghribi', 'Kufi', serif";
+  }
 }
-}
-}
-// Load Tafsir Data
-// Load Tafsir Data
+
 async function loadTafsirData() {
     try {
         const res = await fetch('tafsir.json');
-        if (!res.ok) {
-            console.warn('Tafsir file not found');
-            return;
-        }
+        if (!res.ok) return;
         const data = await res.json();
-        // Convert array to lookup object
         data.forEach(surahData => {
             TAFSIR_DATA[surahData.surah] = {};
             surahData.verses.forEach(verseData => {
                 TAFSIR_DATA[surahData.surah][verseData.reference] = verseData.tafsir;
             });
         });
-        console.log('Tafsir data loaded successfully');
     } catch (e) {
         console.warn('Failed to load tafsir data:', e);
     }
 }
-// Get tafsir for a specific verse
-// Get tafsir for a specific verse
+
 function getTafsir(surah, verse) {
     if (!TAFSIR_DATA[surah]) return null;
-    // Check exact match first (e.g., "1", "2")
-    if (TAFSIR_DATA[surah][String(verse)]) {
-        return TAFSIR_DATA[surah][String(verse)];
-    }
-    // Check for range matches with dash (e.g., "1-3" contains verses 1, 2, 3)
+    if (TAFSIR_DATA[surah][String(verse)]) return TAFSIR_DATA[surah][String(verse)];
     for (const ref in TAFSIR_DATA[surah]) {
         if (ref.includes('-')) {
             const [start, end] = ref.split('-').map(Number);
-            if (verse >= start && verse <= end) {
-                return TAFSIR_DATA[surah][ref];
-            }
-        }
-    }
-    // Check for ampersand matches (e.g., "3&4" contains verse 3 or 4)
-    for (const ref in TAFSIR_DATA[surah]) {
-        if (ref.includes('&')) {
-            const verses = ref.split('&').map(Number);
-            if (verses.includes(verse)) {
-                return TAFSIR_DATA[surah][ref];
-            }
-        }
-    }
-    // Check for comma-separated matches (e.g., "1,2,3")
-    for (const ref in TAFSIR_DATA[surah]) {
-        if (ref.includes(',')) {
-            const verses = ref.split(',').map(Number);
-            if (verses.includes(verse)) {
-                return TAFSIR_DATA[surah][ref];
-            }
+            if (verse >= start && verse <= end) return TAFSIR_DATA[surah][ref];
         }
     }
     return null;
 }
+
 async function loadRecitersFromJson() {
-try {
-const res = await fetch('https://raw.githubusercontent.com/rzkytmgr/quran-api/refs/heads/master/src/db/EntireReciters.db.json');
-if (!res.ok) return;
-const arr = await res.json();
-for (const r of arr) {
-if (r && r.folder && r.folder.surah && r.name) {
-const folder = r.folder.surah;
-RECITERS[r.name] = `https://download.quranicaudio.com${folder}{ch3}.mp3`;
+  try {
+    const res = await fetch('https://raw.githubusercontent.com/rzkytmgr/quran-api/refs/heads/master/src/db/EntireReciters.db.json');
+    if (!res.ok) return;
+    const arr = await res.json();
+    for (const r of arr) {
+      if (r && r.folder && r.folder.surah && r.name) {
+        const folder = r.folder.surah;
+        RECITERS[r.name] = `https://download.quranicaudio.com${folder}{ch3}.mp3`;
+      }
+    }
+    populateReciterSelect();
+  } catch (e) {
+    console.warn('reciters json load failed', e);
+  }
 }
-}
-populateReciterSelect();
-} catch (e) {
-console.warn('reciters json load failed', e);
-}
-}
+
 async function fetchJuzData(juzNumber) {
-try {
-const url = `${JUZ_API_BASE}/${juzNumber}/quran-uthmani`;
-const res = await fetch(url);
-if (!res.ok) return null;
-const data = await res.json();
-return data.data;
-} catch (e) {
-console.error('Failed to fetch juz:', e);
-return null;
+  try {
+    const url = `${JUZ_API_BASE}/${juzNumber}/quran-uthmani`;
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.data;
+  } catch (e) {
+    console.error('Failed to fetch juz:', e);
+    return null;
+  }
 }
-}
+
 function parseJuzData(juzData) {
-const ayahs = [];
-if (!juzData || !juzData.ayahs) return ayahs;
-juzData.ayahs.forEach(ayah => {
-ayahs.push({
-surah: ayah.surah.number,
-verse: ayah.numberInSurah,
-surahName: ayah.surah.englishName,
-surahNameAr: ayah.surah.name
-});
-});
-return ayahs;
+  const ayahs = [];
+  if (!juzData || !juzData.ayahs) return ayahs;
+  juzData.ayahs.forEach(ayah => {
+    ayahs.push({
+      surah: ayah.surah.number,
+      verse: ayah.numberInSurah,
+      surahName: ayah.surah.englishName,
+      surahNameAr: ayah.surah.name
+    });
+  });
+  return ayahs;
 }
-function getVersesForSurah(surah) {
-const primary = MAPS[arabicFont] || MAPS['IndoPak'] || {};
-const verses = [];
-Object.keys(primary).forEach(k => {
-const [c, v] = k.split(':').map(Number);
-if (c === surah && Number.isFinite(v)) verses.push(v);
-});
-verses.sort((a, b) => a - b);
-return verses;
-}
+
 function getText(mapName, ch, v) {
-return (MAPS[mapName] && MAPS[mapName][`${ch}:${v}`]) || '';
+  return (MAPS[mapName] && MAPS[mapName][`${ch}:${v}`]) || '';
 }
-function getArabicFontFamily() {
-return `'${arabicFont}', serif`;
+
+async function renderSurah(surah) {
+  currentSurah = surah;
+  currentViewType = 'surah';
+  showLoading();
+  
+  const nameEn = SURAH_NAMES[surah - 1] || `Surah ${surah}`;
+  const nameAr = SURAH_NAMES_AR[surah - 1] || '';
+  const type = surah === 9 ? 'Medinan' : 'Meccan';
+  
+  if (surahTitleAr) surahTitleAr.textContent = nameAr;
+  if (surahTitleEn) surahTitleEn.textContent = nameEn;
+  
+  // Fetch ayahs from UmmahAPI
+  const ayahsList = await fetchSurahData(surah);
+  const validAyahs = Array.isArray(ayahsList) ? ayahsList : (ayahsList.ayahs || []);
+  
+  const displayCount = surah === 1 ? validAyahs.length - 1 : validAyahs.length;
+  if (surahMeta) surahMeta.textContent = `Surah ${surah} - ${type} - ${displayCount} Ayahs`;
+  document.title = `${nameEn} - Noor Al Huda`;
+  
+  if (bismillahWrap) {
+    bismillahWrap.innerHTML = '';
+    if (surah !== 9) {
+      const img = document.createElement('img');
+      img.src = 'bismillah.png';
+      img.alt = 'Bismillah';
+      img.onerror = () => img.style.display = 'none';
+      bismillahWrap.appendChild(img);
+    }
+  }
+  
+  const pattern = RECITERS[selectedReciter] || RECITERS[Object.keys(RECITERS)[0]];
+  if (pattern && surahAudio) {
+    surahAudio.src = pattern.replace('{ch3}', pad3(surah));
+    if (audioPlayer) audioPlayer.style.display = 'block';
+  }
+  
+  if (ayahContainer) {
+    ayahContainer.innerHTML = '';
+    if (validAyahs.length > 0) {
+      if (currentMode === 'reading') {
+        renderReadingMode(surah, validAyahs);
+      } else {
+        renderTranslationMode(surah, validAyahs);
+      }
+    } else {
+      ayahContainer.innerHTML = '<p style="text-align: center; color: var(--text-light);">Failed to load verses for this script.</p>';
+    }
+  }
+  hideLoading();
 }
-// Render Functions
-function renderSurah(surah) {
-currentSurah = surah;
-const nameEn = SURAH_NAMES[surah - 1] || `Surah ${surah}`;
-const nameAr = SURAH_NAMES_AR[surah - 1] || '';
-const verses = getVersesForSurah(surah);
-const type = surah === 9 ? 'Medinan' : 'Meccan';
-surahTitleAr.textContent = nameAr;
-surahTitleEn.textContent = nameEn;
-const displayCount = surah === 1 ? verses.length - 1 : verses.length;
-surahMeta.textContent = `Surah ${surah} • ${type} • ${displayCount} Ayahs`;
-document.title = `${nameEn} - Noor Al Huda`;
-bismillahWrap.innerHTML = '';
-if (surah !== 9) {
-const img = document.createElement('img');
-img.src = 'bismillah.png';
-img.alt = 'Bismillah';
-img.onerror = () => img.style.display = 'none';
-bismillahWrap.appendChild(img);
-}
-const pattern = RECITERS[selectedReciter] || RECITERS[Object.keys(RECITERS)[0]];
-if (pattern) {
-const audioSrc = pattern.replace('{ch3}', pad3(surah));
-surahAudio.src = audioSrc;
-audioPlayer.style.display = 'block';
-}
-ayahContainer.innerHTML = '';
-if (currentMode === 'reading') {
-renderReadingMode(surah, verses);
-} else {
-renderTranslationMode(surah, verses);
-}
-}
-function renderReadingMode(surah, verses) {
-    verses.forEach(v => {
-        if (surah === 1 && v === 1) return;
+
+function renderReadingMode(surah, ayahsData) {
+    ayahsData.forEach(item => {
+        // Fallback checks for verse number and text keys across different API formats
+        const v = item.numberInSurah || item.number || item.ayah;
+        const textContent = item.text || item.arabic || '';
+
+        if (!v || (surah === 1 && v === 1)) return;
 
         const card = document.createElement('div');
         card.className = 'ayah-card';
@@ -2822,12 +2864,9 @@ function renderReadingMode(surah, verses) {
 
         const arabic = document.createElement('span');
         arabic.className = 'ayah-arabic';
-        arabic.style.fontFamily = getArabicFontFamily();
-        
-        // Forcefully apply the slider value with !important so it updates correctly on phones
+        applyScriptStyles(arabic, arabicFont);
         arabic.style.setProperty('font-size', arabicSize + 'px', 'important');
-        
-        arabic.textContent = getText(arabicFont, surah, v) + ' ';
+        arabic.textContent = textContent + ' ';
 
         card.appendChild(arabic);
         card.appendChild(number);
@@ -2835,687 +2874,677 @@ function renderReadingMode(surah, verses) {
         ayahContainer.appendChild(card);
     });
 }
-function renderTranslationMode(surah, verses) {
-verses.forEach(v => {
-if (surah === 1 && v === 1) return;
-const card = document.createElement('div');
-card.className = 'ayah-card';
-card.id = `ayah-${v}`;
-const actionsDiv = document.createElement('div');
-actionsDiv.className = 'ayah-actions';
-const dotsBtn = document.createElement('button');
-dotsBtn.className = 'ayah-dots-btn';
-dotsBtn.innerHTML = '⋯';
-dotsBtn.setAttribute('aria-label', 'Ayah options');
-const menu = document.createElement('div');
-menu.className = 'ayah-menu';
-const bookmarkItem = document.createElement('button');
-bookmarkItem.className = 'ayah-menu-item';
-bookmarkItem.innerHTML = `<span class="ayah-menu-icon icon-bookmark"></span><span>Bookmark</span>`;
-const shareItem = document.createElement('button');
-shareItem.className = 'ayah-menu-item';
-shareItem.innerHTML = `<span class="ayah-menu-icon icon-share"></span><span>Share</span>`;
-const copyItem = document.createElement('button');
-copyItem.className = 'ayah-menu-item';
-copyItem.innerHTML = `<span class="ayah-menu-icon icon-copy"></span><span>Copy</span>`;
-menu.appendChild(bookmarkItem);
-menu.appendChild(shareItem);
-menu.appendChild(copyItem);
-actionsDiv.appendChild(dotsBtn);
-actionsDiv.appendChild(menu);
-const number = document.createElement('div');
-number.className = 'ayah-number';
-number.textContent = `Ayah ${surah === 1 ? v - 1 : v}`;
-const arabic = document.createElement('div');
-arabic.className = 'ayah-arabic';
-arabic.style.fontFamily = getArabicFontFamily();
-arabic.style.fontSize = arabicSize + 'px';
-arabic.textContent = getText(arabicFont, surah, v);
-card.appendChild(actionsDiv);
-card.appendChild(number);
-card.appendChild(arabic);
-visibleTranslations.forEach(source => {
-const text = getText(source, surah, v);
-if (text) {
-const translation = document.createElement('div');
-translation.className = 'ayah-translation';
-translation.textContent = text;
-const sourceLabel = document.createElement('div');
-sourceLabel.className = 'translation-source';
-sourceLabel.textContent = `— ${source}`;
-card.appendChild(translation);
-card.appendChild(sourceLabel);
+
+function renderTranslationMode(surah, ayahsData) {
+  ayahsData.forEach(item => {
+    const v = item.numberInSurah || item.number || item.ayah;
+    const textContent = item.text || item.arabic || '';
+
+    if (!v || (surah === 1 && v === 1)) return;
+    
+    const card = document.createElement('div');
+    card.className = 'ayah-card';
+    card.id = `ayah-${v}`;
+    
+    const actionsDiv = document.createElement('div');
+    actionsDiv.className = 'ayah-actions';
+    
+    const dotsBtn = document.createElement('button');
+    dotsBtn.className = 'ayah-dots-btn';
+    dotsBtn.innerHTML = '⋯';
+    dotsBtn.setAttribute('aria-label', 'Ayah options');
+    
+    const menu = document.createElement('div');
+    menu.className = 'ayah-menu';
+    
+    const bookmarkItem = document.createElement('button');
+    bookmarkItem.className = 'ayah-menu-item';
+    bookmarkItem.innerHTML = `<span class="ayah-menu-icon icon-bookmark"></span><span>Bookmark</span>`;
+    
+    const shareItem = document.createElement('button');
+    shareItem.className = 'ayah-menu-item';
+    shareItem.innerHTML = `<span class="ayah-menu-icon icon-share"></span><span>Share</span>`;
+    
+    const copyItem = document.createElement('button');
+    copyItem.className = 'ayah-menu-item';
+    copyItem.innerHTML = `<span class="ayah-menu-icon icon-copy"></span><span>Copy</span>`;
+    
+    menu.appendChild(bookmarkItem);
+    menu.appendChild(shareItem);
+    menu.appendChild(copyItem);
+    actionsDiv.appendChild(dotsBtn);
+    actionsDiv.appendChild(menu);
+    
+    const number = document.createElement('div');
+    number.className = 'ayah-number';
+    number.textContent = `Ayah ${surah === 1 ? v - 1 : v}`;
+    
+    const arabic = document.createElement('div');
+    arabic.className = 'ayah-arabic';
+    applyScriptStyles(arabic, arabicFont);
+    arabic.style.fontSize = arabicSize + 'px';
+    arabic.textContent = textContent;
+    
+    card.appendChild(actionsDiv);
+    card.appendChild(number);
+    card.appendChild(arabic);
+    
+    visibleTranslations.forEach(source => {
+      const text = getText(source, surah, v);
+      if (text) {
+        const translation = document.createElement('div');
+        translation.className = 'ayah-translation';
+        translation.textContent = text;
+        const sourceLabel = document.createElement('div');
+        sourceLabel.className = 'translation-source';
+        sourceLabel.textContent = `— ${source}`;
+        card.appendChild(translation);
+        card.appendChild(sourceLabel);
+      }
+    });
+    
+    const tafsirText = getTafsir(surah, v);
+    if (tafsirText) {
+      const tafsirBtn = document.createElement('button');
+      tafsirBtn.className = 'tafsir-dropdown-btn';
+      tafsirBtn.innerHTML = `<span>View Tafsir</span><span class="tafsir-arrow">▼</span>`;
+      const tafsirDiv = document.createElement('div');
+      tafsirDiv.className = 'ayah-tafsir';
+      const tafsirHeader = document.createElement('div');
+      tafsirHeader.className = 'tafsir-header';
+      tafsirHeader.textContent = 'Tafsir (Commentary)';
+      const tafsirContent = document.createElement('div');
+      tafsirContent.textContent = tafsirText;
+      tafsirDiv.appendChild(tafsirHeader);
+      tafsirDiv.appendChild(tafsirContent);
+      card.appendChild(tafsirBtn);
+      card.appendChild(tafsirDiv);
+      
+      tafsirBtn.addEventListener('click', () => {
+        tafsirBtn.classList.toggle('active');
+        tafsirDiv.classList.toggle('show');
+      });
+    }
+    
+    ayahContainer.appendChild(card);
+    
+    dotsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('.ayah-menu').forEach(m => {
+        if (m !== menu) m.classList.remove('show');
+      });
+      menu.classList.toggle('show');
+    });
+    
+    bookmarkItem.addEventListener('click', () => {
+      addBookmark(surah, v);
+      menu.classList.remove('show');
+    });
+    
+    copyItem.addEventListener('click', async () => {
+      const nameEn = SURAH_NAMES[surah - 1];
+      let copyText = `${nameEn} ${surah}:${v}\n\n${textContent}\n\n`;
+      visibleTranslations.forEach(source => {
+        const text = getText(source, surah, v);
+        if (text) copyText += `${text}\n— ${source}\n\n`;
+      });
+      try {
+        await navigator.clipboard.writeText(copyText);
+        alert('Ayah copied to clipboard!');
+      } catch (e) {
+        alert('Failed to copy');
+      }
+      menu.classList.remove('show');
+    });
+    
+    shareItem.addEventListener('click', async () => {
+      const nameEn = SURAH_NAMES[surah - 1];
+      const url = `${location.origin}${location.pathname}#${surah}`;
+      let shareText = `${nameEn} ${surah}:${v}\n\n${textContent}\n\n`;
+      visibleTranslations.forEach(source => {
+        const text = getText(source, surah, v);
+        if (text) shareText += `${text}\n— ${source}\n\n`;
+      });
+      shareText += `\n${url}`;
+      if (navigator.share) {
+        try { await navigator.share({ title: `${nameEn} ${surah}:${v}`, text: shareText }); } catch (e) {}
+      } else {
+        try {
+          await navigator.clipboard.writeText(shareText);
+          alert('Link copied to clipboard!');
+        } catch (e) {
+          alert('Failed to share');
+        }
+      }
+      menu.classList.remove('show');
+    });
+  });
+  
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.ayah-actions')) {
+      document.querySelectorAll('.ayah-menu').forEach(m => m.classList.remove('show'));
+    }
+  });
 }
-});
-// Add Tafsir Dropdown Button
-const tafsirText = getTafsir(surah, v);
-if (tafsirText) {
-const tafsirBtn = document.createElement('button');
-tafsirBtn.className = 'tafsir-dropdown-btn';
-tafsirBtn.innerHTML = `<span>View Tafsir</span><span class="tafsir-arrow">▼</span>`;
-const tafsirDiv = document.createElement('div');
-tafsirDiv.className = 'ayah-tafsir';
-const tafsirHeader = document.createElement('div');
-tafsirHeader.className = 'tafsir-header';
-tafsirHeader.textContent = 'Tafsir (Commentary)';
-const tafsirContent = document.createElement('div');
-tafsirContent.textContent = tafsirText;
-tafsirDiv.appendChild(tafsirHeader);
-tafsirDiv.appendChild(tafsirContent);
-card.appendChild(tafsirBtn);
-card.appendChild(tafsirDiv);
-// Toggle tafsir visibility
-tafsirBtn.addEventListener('click', () => {
-tafsirBtn.classList.toggle('active');
-tafsirDiv.classList.toggle('show');
-});
-}
-ayahContainer.appendChild(card);
-// Event listeners for menu
-dotsBtn.addEventListener('click', (e) => {
-e.stopPropagation();
-document.querySelectorAll('.ayah-menu').forEach(m => {
-if (m !== menu) m.classList.remove('show');
-});
-menu.classList.toggle('show');
-});
-bookmarkItem.addEventListener('click', () => {
-addBookmark(surah, v);
-menu.classList.remove('show');
-});
-copyItem.addEventListener('click', async () => {
-const nameEn = SURAH_NAMES[surah - 1];
-const arabicText = getText(arabicFont, surah, v);
-let copyText = `${nameEn} ${surah}:${v}\n\n${arabicText}\n\n`;
-visibleTranslations.forEach(source => {
-const text = getText(source, surah, v);
-if (text) {
-copyText += `${text}\n— ${source}\n\n`;
-}
-});
-try {
-await navigator.clipboard.writeText(copyText);
-alert('Ayah copied to clipboard!');
-} catch (e) {
-alert('Failed to copy');
-}
-menu.classList.remove('show');
-});
-shareItem.addEventListener('click', async () => {
-const nameEn = SURAH_NAMES[surah - 1];
-const arabicText = getText(arabicFont, surah, v);
-const url = `${location.origin}${location.pathname}#${surah}`;
-let shareText = `${nameEn} ${surah}:${v}\n\n${arabicText}\n\n`;
-visibleTranslations.forEach(source => {
-const text = getText(source, surah, v);
-if (text) {
-shareText += `${text}\n— ${source}\n\n`;
-}
-});
-shareText += `\n${url}`;
-if (navigator.share) {
-try {
-await navigator.share({
-title: `${nameEn} ${surah}:${v}`,
-text: shareText
-});
-} catch (e) {}
-} else {
-try {
-await navigator.clipboard.writeText(shareText);
-alert('Link copied to clipboard!');
-} catch (e) {
-alert('Failed to share');
-}
-}
-menu.classList.remove('show');
-});
-});
-document.addEventListener('click', (e) => {
-if (!e.target.closest('.ayah-actions')) {
-document.querySelectorAll('.ayah-menu').forEach(m => m.classList.remove('show'));
-}
-});
-}
+
 async function renderJuz(juzNumber) {
-currentJuz = juzNumber;
-currentViewType = 'juz';
-showLoading();
-surahTitleAr.textContent = `الجزء ${juzNumber}`;
-surahTitleEn.textContent = `Juz ${juzNumber}`;
-surahMeta.textContent = `Part ${juzNumber} of 30`;
-document.title = `Juz ${juzNumber} - Noor Al Huda`;
-bismillahWrap.innerHTML = '';
-audioPlayer.style.display = 'none';
-const juzData = await fetchJuzData(juzNumber);
-if (!juzData) {
-ayahContainer.innerHTML = '<p style="text-align: center; color: var(--text-light);">Failed to load Juz data</p>';
-hideLoading();
-return;
+  currentJuz = juzNumber;
+  currentViewType = 'juz';
+  showLoading();
+  if (surahTitleAr) surahTitleAr.textContent = `الجزء ${juzNumber}`;
+  if (surahTitleEn) surahTitleEn.textContent = `Juz ${juzNumber}`;
+  if (surahMeta) surahMeta.textContent = `Part ${juzNumber} of 30`;
+  document.title = `Juz ${juzNumber} - Noor Al Huda`;
+  
+  if (bismillahWrap) bismillahWrap.innerHTML = '';
+  if (audioPlayer) audioPlayer.style.display = 'none';
+  
+  const juzData = await fetchJuzData(juzNumber);
+  if (!juzData) {
+    if (ayahContainer) ayahContainer.innerHTML = '<p style="text-align: center; color: var(--text-light);">Failed to load Juz data</p>';
+    hideLoading();
+    return;
+  }
+  const ayahs = parseJuzData(juzData);
+  if (Object.keys(MAPS).length === 0) {
+    await fetchAllSources();
+  }
+  if (ayahContainer) {
+    ayahContainer.innerHTML = '';
+    if (currentMode === 'reading') {
+      renderJuzReadingMode(ayahs);
+    } else {
+      renderJuzTranslationMode(ayahs);
+    }
+  }
+  hideLoading();
 }
-const ayahs = parseJuzData(juzData);
-if (Object.keys(MAPS).length === 0) {
-await fetchAllSources();
-}
-ayahContainer.innerHTML = '';
-if (currentMode === 'reading') {
-renderJuzReadingMode(ayahs);
-} else {
-renderJuzTranslationMode(ayahs);
-}
-hideLoading();
-}
+
 function renderJuzReadingMode(ayahs) {
-let lastSurah = null;
-ayahs.forEach((ayah, index) => {
-if (ayah.surah !== lastSurah) {
-const surahHeader = document.createElement('div');
-surahHeader.style.cssText = 'text-align: center; margin: 2rem 0 1rem; padding: 1rem; background: var(--light-gray); border-radius: 12px;';
-surahHeader.innerHTML = `<h3 style="color: var(--primary-green); margin: 0;">${ayah.surahNameAr} - ${ayah.surahName}</h3>`;
-ayahContainer.appendChild(surahHeader);
-if (ayah.surah !== 9) {
-const bismillahDiv = document.createElement('div');
-bismillahDiv.style.cssText = 'text-align: center; margin: 1.5rem 0;';
-const img = document.createElement('img');
-img.src = 'bismillah.png';
-img.alt = 'Bismillah';
-img.style.cssText = 'max-width: 400px; width: 85%; filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.06));';
-img.onerror = () => bismillahDiv.style.display = 'none';
-bismillahDiv.appendChild(img);
-ayahContainer.appendChild(bismillahDiv);
+  let lastSurah = null;
+  ayahs.forEach((ayah, index) => {
+    if (ayah.surah !== lastSurah) {
+      const surahHeader = document.createElement('div');
+      surahHeader.style.cssText = 'text-align: center; margin: 2rem 0 1rem; padding: 1rem; background: var(--light-gray); border-radius: 12px;';
+      surahHeader.innerHTML = `<h3 style="color: var(--primary-green); margin: 0;">${ayah.surahNameAr} - ${ayah.surahName}</h3>`;
+      ayahContainer.appendChild(surahHeader);
+      
+      if (ayah.surah !== 9) {
+        const bismillahDiv = document.createElement('div');
+        bismillahDiv.style.cssText = 'text-align: center; margin: 1.5rem 0;';
+        const img = document.createElement('img');
+        img.src = 'bismillah.png';
+        img.alt = 'Bismillah';
+        img.style.cssText = 'max-width: 400px; width: 85%; filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.06));';
+        img.onerror = () => bismillahDiv.style.display = 'none';
+        bismillahDiv.appendChild(img);
+        ayahContainer.appendChild(bismillahDiv);
+      }
+      lastSurah = ayah.surah;
+    }
+    if (ayah.surah === 1 && ayah.verse === 1) return;
+    
+    const card = document.createElement('div');
+    card.className = 'ayah-card';
+    card.id = `ayah-${index}`;
+    
+    const number = document.createElement('span');
+    number.className = 'ayah-number';
+    number.textContent = ayah.surah === 1 ? ayah.verse - 1 : ayah.verse;
+    
+    const arabic = document.createElement('span');
+    arabic.className = 'ayah-arabic';
+    applyScriptStyles(arabic, arabicFont);
+    arabic.style.fontSize = arabicSize + 'px';
+    arabic.textContent = getText(arabicFont, ayah.surah, ayah.verse) + ' ';
+    
+    card.appendChild(arabic);
+    card.appendChild(number);
+    card.appendChild(document.createTextNode(' '));
+    ayahContainer.appendChild(card);
+  });
 }
-lastSurah = ayah.surah;
-}
-if (ayah.surah === 1 && ayah.verse === 1) return;
-const card = document.createElement('div');
-card.className = 'ayah-card';
-card.id = `ayah-${index}`;
-const number = document.createElement('span');
-number.className = 'ayah-number';
-number.textContent = ayah.surah === 1 ? ayah.verse - 1 : ayah.verse;
-const arabic = document.createElement('span');
-arabic.className = 'ayah-arabic';
-arabic.style.fontFamily = getArabicFontFamily();
-arabic.style.fontSize = arabicSize + 'px';
-arabic.textContent = getText(arabicFont, ayah.surah, ayah.verse) + ' ';
-card.appendChild(arabic);
-card.appendChild(number);
-card.appendChild(document.createTextNode(' '));
-ayahContainer.appendChild(card);
-});
-}
+
 function renderJuzTranslationMode(ayahs) {
-let lastSurah = null;
-ayahs.forEach((ayah, index) => {
-if (ayah.surah !== lastSurah) {
-const surahHeader = document.createElement('div');
-surahHeader.style.cssText = 'text-align: center; margin: 2rem 0 1rem; padding: 1rem; background: var(--light-gray); border-radius: 12px;';
-surahHeader.innerHTML = `<h3 style="color: var(--primary-green); margin: 0;">${ayah.surahNameAr} - ${ayah.surahName}</h3>`;
-ayahContainer.appendChild(surahHeader);
-if (ayah.surah !== 9) {
-const bismillahDiv = document.createElement('div');
-bismillahDiv.style.cssText = 'text-align: center; margin: 1.5rem 0;';
-const img = document.createElement('img');
-img.src = 'bismillah.png';
-img.alt = 'Bismillah';
-img.style.cssText = 'max-width: 400px; width: 85%; filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.06));';
-img.onerror = () => bismillahDiv.style.display = 'none';
-bismillahDiv.appendChild(img);
-ayahContainer.appendChild(bismillahDiv);
+  let lastSurah = null;
+  ayahs.forEach((ayah, index) => {
+    if (ayah.surah !== lastSurah) {
+      const surahHeader = document.createElement('div');
+      surahHeader.style.cssText = 'text-align: center; margin: 2rem 0 1rem; padding: 1rem; background: var(--light-gray); border-radius: 12px;';
+      surahHeader.innerHTML = `<h3 style="color: var(--primary-green); margin: 0;">${ayah.surahNameAr} - ${ayah.surahName}</h3>`;
+      ayahContainer.appendChild(surahHeader);
+      
+      if (ayah.surah !== 9) {
+        const bismillahDiv = document.createElement('div');
+        bismillahDiv.style.cssText = 'text-align: center; margin: 1.5rem 0;';
+        const img = document.createElement('img');
+        img.src = 'bismillah.png';
+        img.alt = 'Bismillah';
+        img.style.cssText = 'max-width: 400px; width: 85%; filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.06));';
+        img.onerror = () => bismillahDiv.style.display = 'none';
+        bismillahDiv.appendChild(img);
+        ayahContainer.appendChild(bismillahDiv);
+      }
+      lastSurah = ayah.surah;
+    }
+    if (ayah.surah === 1 && ayah.verse === 1) return;
+    
+    const card = document.createElement('div');
+    card.className = 'ayah-card';
+    card.id = `ayah-${index}`;
+    
+    const actionsDiv = document.createElement('div');
+    actionsDiv.className = 'ayah-actions';
+    
+    const dotsBtn = document.createElement('button');
+    dotsBtn.className = 'ayah-dots-btn';
+    dotsBtn.innerHTML = '⋯';
+    dotsBtn.setAttribute('aria-label', 'Ayah options');
+    
+    const menu = document.createElement('div');
+    menu.className = 'ayah-menu';
+    
+    const bookmarkItem = document.createElement('button');
+    bookmarkItem.className = 'ayah-menu-item';
+    bookmarkItem.innerHTML = `<span class="ayah-menu-icon icon-bookmark">🔖</span><span>Bookmark</span>`;
+    
+    const shareItem = document.createElement('button');
+    shareItem.className = 'ayah-menu-item';
+    shareItem.innerHTML = `<span class="ayah-menu-icon icon-share">🔗</span><span>Share</span>`;
+    
+    const copyItem = document.createElement('button');
+    copyItem.className = 'ayah-menu-item';
+    copyItem.innerHTML = `<span class="ayah-menu-icon icon-copy">📋</span><span>Copy</span>`;
+    
+    menu.appendChild(bookmarkItem);
+    menu.appendChild(shareItem);
+    menu.appendChild(copyItem);
+    actionsDiv.appendChild(dotsBtn);
+    actionsDiv.appendChild(menu);
+    
+    const number = document.createElement('div');
+    number.className = 'ayah-number';
+    const displayVerse = ayah.surah === 1 ? ayah.verse - 1 : ayah.verse;
+    number.textContent = `${ayah.surahName} ${displayVerse}`;
+    
+    const arabic = document.createElement('div');
+    arabic.className = 'ayah-arabic';
+    applyScriptStyles(arabic, arabicFont);
+    arabic.style.fontSize = arabicSize + 'px';
+    arabic.textContent = getText(arabicFont, ayah.surah, ayah.verse);
+    
+    card.appendChild(actionsDiv);
+    card.appendChild(number);
+    card.appendChild(arabic);
+    
+    visibleTranslations.forEach(source => {
+      const text = getText(source, ayah.surah, ayah.verse);
+      if (text) {
+        const translation = document.createElement('div');
+        translation.className = 'ayah-translation';
+        translation.textContent = text;
+        const sourceLabel = document.createElement('div');
+        sourceLabel.className = 'translation-source';
+        sourceLabel.textContent = `— ${source}`;
+        card.appendChild(translation);
+        card.appendChild(sourceLabel);
+      }
+    });
+    
+    const tafsirText = getTafsir(ayah.surah, ayah.verse);
+    if (tafsirText) {
+      const tafsirBtn = document.createElement('button');
+      tafsirBtn.className = 'tafsir-dropdown-btn';
+      tafsirBtn.innerHTML = `<span>View Tafsir</span><span class="tafsir-arrow">▼</span>`;
+      const tafsirDiv = document.createElement('div');
+      tafsirDiv.className = 'ayah-tafsir';
+      const tafsirHeader = document.createElement('div');
+      tafsirHeader.className = 'tafsir-header';
+      tafsirHeader.textContent = 'Tafsir (Commentary)';
+      const tafsirContent = document.createElement('div');
+      tafsirContent.textContent = tafsirText;
+      tafsirDiv.appendChild(tafsirHeader);
+      tafsirDiv.appendChild(tafsirContent);
+      card.appendChild(tafsirBtn);
+      card.appendChild(tafsirDiv);
+      
+      tafsirBtn.addEventListener('click', () => {
+        tafsirBtn.classList.toggle('active');
+        tafsirDiv.classList.toggle('show');
+      });
+    }
+    
+    ayahContainer.appendChild(card);
+    
+    dotsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.querySelectorAll('.ayah-menu').forEach(m => {
+        if (m !== menu) m.classList.remove('show');
+      });
+      menu.classList.toggle('show');
+    });
+    
+    bookmarkItem.addEventListener('click', () => {
+      addBookmark(ayah.surah, ayah.verse);
+      menu.classList.remove('show');
+    });
+    
+    copyItem.addEventListener('click', async () => {
+      const arabicText = getText(arabicFont, ayah.surah, ayah.verse);
+      let copyText = `${ayah.surahName} ${ayah.surah}:${displayVerse}\n\n${arabicText}\n\n`;
+      visibleTranslations.forEach(source => {
+        const text = getText(source, ayah.surah, ayah.verse);
+        if (text) copyText += `${text}\n— ${source}\n\n`;
+      });
+      try {
+        await navigator.clipboard.writeText(copyText);
+        alert('Ayah copied to clipboard!');
+      } catch (e) {
+        alert('Failed to copy');
+      }
+      menu.classList.remove('show');
+    });
+    
+    shareItem.addEventListener('click', async () => {
+      const arabicText = getText(arabicFont, ayah.surah, ayah.verse);
+      const url = `${location.origin}${location.pathname}#${ayah.surah}`;
+      let shareText = `${ayah.surahName} ${ayah.surah}:${displayVerse}\n\n${arabicText}\n\n`;
+      visibleTranslations.forEach(source => {
+        const text = getText(source, ayah.surah, ayah.verse);
+        if (text) shareText += `${text}\n— ${source}\n\n`;
+      });
+      shareText += `\n${url}`;
+      if (navigator.share) {
+        try { await navigator.share({ title: `${ayah.surahName} ${ayah.surah}:${displayVerse}`, text: shareText }); } catch (e) {}
+      } else {
+        try {
+          await navigator.clipboard.writeText(shareText);
+          alert('Link copied to clipboard!');
+        } catch (e) {
+          alert('Failed to share');
+        }
+      }
+      menu.classList.remove('show');
+    });
+  });
 }
-lastSurah = ayah.surah;
+
+if (translationModeBtn) {
+  translationModeBtn.addEventListener('click', async () => {
+    currentMode = 'translation';
+    document.body.classList.remove('reading-mode');
+    translationModeBtn.classList.add('active');
+    readingModeBtn.classList.remove('active');
+    if (currentViewType === 'juz') await renderJuz(currentJuz);
+    else await renderSurah(currentSurah);
+  });
 }
-if (ayah.surah === 1 && ayah.verse === 1) return;
-const card = document.createElement('div');
-card.className = 'ayah-card';
-card.id = `ayah-${index}`;
-const actionsDiv = document.createElement('div');
-actionsDiv.className = 'ayah-actions';
-const dotsBtn = document.createElement('button');
-dotsBtn.className = 'ayah-dots-btn';
-dotsBtn.innerHTML = '⋯';
-dotsBtn.setAttribute('aria-label', 'Ayah options');
-const menu = document.createElement('div');
-menu.className = 'ayah-menu';
-const bookmarkItem = document.createElement('button');
-bookmarkItem.className = 'ayah-menu-item';
-bookmarkItem.innerHTML = `<span class="ayah-menu-icon icon-bookmark">🔖</span><span>Bookmark</span>`;
-const shareItem = document.createElement('button');
-shareItem.className = 'ayah-menu-item';
-shareItem.innerHTML = `<span class="ayah-menu-icon icon-share">🔗</span><span>Share</span>`;
-const copyItem = document.createElement('button');
-copyItem.className = 'ayah-menu-item';
-copyItem.innerHTML = `<span class="ayah-menu-icon icon-copy">📋</span><span>Copy</span>`;
-menu.appendChild(bookmarkItem);
-menu.appendChild(shareItem);
-menu.appendChild(copyItem);
-actionsDiv.appendChild(dotsBtn);
-actionsDiv.appendChild(menu);
-const number = document.createElement('div');
-number.className = 'ayah-number';
-const displayVerse = ayah.surah === 1 ? ayah.verse - 1 : ayah.verse;
-number.textContent = `${ayah.surahName} ${displayVerse}`;
-const arabic = document.createElement('div');
-arabic.className = 'ayah-arabic';
-arabic.style.fontFamily = getArabicFontFamily();
-arabic.style.fontSize = arabicSize + 'px';
-arabic.textContent = getText(arabicFont, ayah.surah, ayah.verse);
-card.appendChild(actionsDiv);
-card.appendChild(number);
-card.appendChild(arabic);
-visibleTranslations.forEach(source => {
-const text = getText(source, ayah.surah, ayah.verse);
-if (text) {
-const translation = document.createElement('div');
-translation.className = 'ayah-translation';
-translation.textContent = text;
-const sourceLabel = document.createElement('div');
-sourceLabel.className = 'translation-source';
-sourceLabel.textContent = `— ${source}`;
-card.appendChild(translation);
-card.appendChild(sourceLabel);
+
+if (readingModeBtn) {
+  readingModeBtn.addEventListener('click', async () => {
+    currentMode = 'reading';
+    document.body.classList.add('reading-mode');
+    readingModeBtn.classList.add('active');
+    translationModeBtn.classList.remove('active');
+    if (currentViewType === 'juz') await renderJuz(currentJuz);
+    else await renderSurah(currentSurah);
+  });
 }
-});
-// Add Tafsir Dropdown Button for Juz
-const tafsirText = getTafsir(ayah.surah, ayah.verse);
-if (tafsirText) {
-const tafsirBtn = document.createElement('button');
-tafsirBtn.className = 'tafsir-dropdown-btn';
-tafsirBtn.innerHTML = `<span>View Tafsir</span><span class="tafsir-arrow">▼</span>`;
-const tafsirDiv = document.createElement('div');
-tafsirDiv.className = 'ayah-tafsir';
-const tafsirHeader = document.createElement('div');
-tafsirHeader.className = 'tafsir-header';
-tafsirHeader.textContent = 'Tafsir (Commentary)';
-const tafsirContent = document.createElement('div');
-tafsirContent.textContent = tafsirText;
-tafsirDiv.appendChild(tafsirHeader);
-tafsirDiv.appendChild(tafsirContent);
-card.appendChild(tafsirBtn);
-card.appendChild(tafsirDiv);
-// Toggle tafsir visibility
-tafsirBtn.addEventListener('click', () => {
-tafsirBtn.classList.toggle('active');
-tafsirDiv.classList.toggle('show');
-});
+
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navLinks.classList.toggle('active');
+    hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+  });
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+      navLinks.classList.remove('active');
+      hamburger.textContent = '☰';
+    }
+  });
 }
-ayahContainer.appendChild(card);
-dotsBtn.addEventListener('click', (e) => {
-e.stopPropagation();
-document.querySelectorAll('.ayah-menu').forEach(m => {
-if (m !== menu) m.classList.remove('show');
-});
-menu.classList.toggle('show');
-});
-bookmarkItem.addEventListener('click', () => {
-addBookmark(ayah.surah, ayah.verse);
-menu.classList.remove('show');
-});
-copyItem.addEventListener('click', async () => {
-const arabicText = getText(arabicFont, ayah.surah, ayah.verse);
-let copyText = `${ayah.surahName} ${ayah.surah}:${displayVerse}\n\n${arabicText}\n\n`;
-visibleTranslations.forEach(source => {
-const text = getText(source, ayah.surah, ayah.verse);
-if (text) {
-copyText += `${text}\n— ${source}\n\n`;
+
+if (settingsBtn && settingsDrawer) {
+  settingsBtn.addEventListener('click', () => {
+    settingsDrawer.classList.add('open');
+    if (settingsBackdrop) settingsBackdrop.classList.add('show');
+  });
 }
-});
-try {
-await navigator.clipboard.writeText(copyText);
-alert('Ayah copied to clipboard!');
-} catch (e) {
-alert('Failed to copy');
+if (closeSettings && settingsDrawer) {
+  closeSettings.addEventListener('click', () => {
+    settingsDrawer.classList.remove('open');
+    if (settingsBackdrop) settingsBackdrop.classList.remove('show');
+  });
 }
-menu.classList.remove('show');
-});
-shareItem.addEventListener('click', async () => {
-const arabicText = getText(arabicFont, ayah.surah, ayah.verse);
-const url = `${location.origin}${location.pathname}#${ayah.surah}`;
-let shareText = `${ayah.surahName} ${ayah.surah}:${displayVerse}\n\n${arabicText}\n\n`;
-visibleTranslations.forEach(source => {
-const text = getText(source, ayah.surah, ayah.verse);
-if (text) {
-shareText += `${text}\n— ${source}\n\n`;
+
+if (arabicSizeRange) {
+  arabicSizeRange.value = arabicSize;
+  if (sizeValue) sizeValue.textContent = arabicSize;
+  arabicSizeRange.addEventListener('input', async (e) => {
+    arabicSize = e.target.value;
+    if (sizeValue) sizeValue.textContent = arabicSize;
+    localStorage.setItem('arabicSize', arabicSize);
+    if (currentViewType === 'juz') await renderJuz(currentJuz);
+    else await renderSurah(currentSurah);
+  });
 }
-});
-shareText += `\n${url}`;
-if (navigator.share) {
-try {
-await navigator.share({
-title: `${ayah.surahName} ${ayah.surah}:${displayVerse}`,
-text: shareText
-});
-} catch (e) {}
-} else {
-try {
-await navigator.clipboard.writeText(shareText);
-alert('Link copied to clipboard!');
-} catch (e) {
-alert('Failed to share');
-}
-}
-menu.classList.remove('show');
-});
-});
-}
-// Mode Toggle
-translationModeBtn.addEventListener('click', async () => {
-currentMode = 'translation';
-document.body.classList.remove('reading-mode');
-translationModeBtn.classList.add('active');
-readingModeBtn.classList.remove('active');
-if (currentViewType === 'juz') {
-await renderJuz(currentJuz);
-} else {
-renderSurah(currentSurah);
-}
-});
-readingModeBtn.addEventListener('click', async () => {
-currentMode = 'reading';
-document.body.classList.add('reading-mode');
-readingModeBtn.classList.add('active');
-translationModeBtn.classList.remove('active');
-if (currentViewType === 'juz') {
-await renderJuz(currentJuz);
-} else {
-renderSurah(currentSurah);
-}
-});
-// Navigation
-if (hamburger) {
-hamburger.addEventListener('click', (e) => {
-e.stopPropagation();
-navLinks.classList.toggle('active');
-hamburger.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
-});
-document.addEventListener('click', (e) => {
-if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-navLinks.classList.remove('active');
-hamburger.textContent = '☰';
-}
-});
-}
-// Settings
-settingsBtn.addEventListener('click', () => {
-settingsDrawer.classList.add('open');
-settingsBackdrop.classList.add('show');
-});
-closeSettings.addEventListener('click', () => {
-settingsDrawer.classList.remove('open');
-settingsBackdrop.classList.remove('show');
-});
-settingsBackdrop.addEventListener('click', () => {
-settingsDrawer.classList.remove('open');
-settingsBackdrop.classList.remove('show');
-});
-arabicFontSelect.value = arabicFont;
-arabicFontSelect.addEventListener('change', async (e) => {
-arabicFont = e.target.value;
-localStorage.setItem('arabicFont', arabicFont);
-if (currentViewType === 'juz') {
-await renderJuz(currentJuz);
-} else {
-renderSurah(currentSurah);
-}
-});
-arabicSizeRange.value = arabicSize;
-sizeValue.textContent = arabicSize;
-arabicSizeRange.addEventListener('input', async (e) => {
-arabicSize = e.target.value;
-sizeValue.textContent = arabicSize;
-localStorage.setItem('arabicSize', arabicSize);
-if (currentViewType === 'juz') {
-await renderJuz(currentJuz);
-} else {
-renderSurah(currentSurah);
-}
-});
+
 function populateReciterSelect() {
-reciterSelect.innerHTML = '';
-Object.keys(RECITERS).forEach(name => {
-const option = document.createElement('option');
-option.value = name;
-option.textContent = name;
-reciterSelect.appendChild(option);
-});
-reciterSelect.value = selectedReciter;
+  if (!reciterSelect) return;
+  reciterSelect.innerHTML = '';
+  Object.keys(RECITERS).forEach(name => {
+    const option = document.createElement('option');
+    option.value = name;
+    option.textContent = name;
+    reciterSelect.appendChild(option);
+  });
+  reciterSelect.value = selectedReciter;
 }
 populateReciterSelect();
-reciterSelect.addEventListener('change', (e) => {
-selectedReciter = e.target.value;
-localStorage.setItem('selectedReciter', selectedReciter);
-const pattern = RECITERS[selectedReciter];
-if (pattern && currentViewType === 'surah') {
-surahAudio.src = pattern.replace('{ch3}', pad3(currentSurah));
+
+if (reciterSelect) {
+  reciterSelect.addEventListener('change', (e) => {
+    selectedReciter = e.target.value;
+    localStorage.setItem('selectedReciter', selectedReciter);
+    const pattern = RECITERS[selectedReciter];
+    if (pattern && currentViewType === 'surah' && surahAudio) {
+      surahAudio.src = pattern.replace('{ch3}', pad3(currentSurah));
+    }
+  });
 }
-});
-// Translation checkboxes
-const translationSources = Object.keys(SOURCES).filter(s => !['IndoPak', 'Uthmani', 'Kolkatta', 'maghrebi'].includes(s));
-translationSources.forEach(source => {
-const label = document.createElement('label');
-label.className = 'checkbox-item';
-const checkbox = document.createElement('input');
-checkbox.type = 'checkbox';
-checkbox.checked = visibleTranslations.includes(source);
-checkbox.addEventListener('change', async (e) => {
-if (e.target.checked) {
-if (!visibleTranslations.includes(source)) {
-visibleTranslations.push(source);
+
+if (typeof SOURCES !== 'undefined' && translationCheckboxes) {
+  const translationSources = Object.keys(SOURCES).filter(s => !['indopak', 'uthmani', 'kolkatta', 'maghrebi'].includes(s));
+  translationSources.forEach(source => {
+    const label = document.createElement('label');
+    label.className = 'checkbox-item';
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = visibleTranslations.includes(source);
+    checkbox.addEventListener('change', async (e) => {
+      if (e.target.checked) {
+        if (!visibleTranslations.includes(source)) visibleTranslations.push(source);
+      } else {
+        visibleTranslations = visibleTranslations.filter(s => s !== source);
+      }
+      localStorage.setItem('visibleTranslations', JSON.stringify(visibleTranslations));
+      if (currentViewType === 'juz') await renderJuz(currentJuz);
+      else await renderSurah(currentSurah);
+    });
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(source));
+    translationCheckboxes.appendChild(label);
+  });
 }
-} else {
-visibleTranslations = visibleTranslations.filter(s => s !== source);
+
+if (playBtn) playBtn.addEventListener('click', () => surahAudio?.play());
+if (pauseBtn) pauseBtn.addEventListener('click', () => surahAudio?.pause());
+if (stopBtn) {
+  stopBtn.addEventListener('click', () => {
+    if (surahAudio) {
+      surahAudio.pause();
+      surahAudio.currentTime = 0;
+    }
+  });
 }
-localStorage.setItem('visibleTranslations', JSON.stringify(visibleTranslations));
-if (currentViewType === 'juz') {
-await renderJuz(currentJuz);
-} else {
-renderSurah(currentSurah);
+if (speedSelect && surahAudio) {
+  speedSelect.addEventListener('change', (e) => {
+    surahAudio.playbackRate = parseFloat(e.target.value);
+  });
 }
-});
-const text = document.createTextNode(source);
-label.appendChild(checkbox);
-label.appendChild(text);
-translationCheckboxes.appendChild(label);
-});
-// Audio Controls
-playBtn.addEventListener('click', () => surahAudio.play());
-pauseBtn.addEventListener('click', () => surahAudio.pause());
-stopBtn.addEventListener('click', () => {
-surahAudio.pause();
-surahAudio.currentTime = 0;
-});
-speedSelect.addEventListener('change', (e) => {
-surahAudio.playbackRate = parseFloat(e.target.value);
-});
-// Bookmarks
-function addBookmark(surah, verse) {
-const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-const key = `${surah}:${verse}`;
-if (bookmarks.find(b => b.key === key)) {
-alert('Already bookmarked!');
-return;
-}
-const nameEn = SURAH_NAMES[surah - 1];
-const translation = getText('Ali Quli Qarai (eng)', surah, verse).substring(0, 100);
-bookmarks.unshift({
-key,
-surah,
-verse,
-nameEn,
-translation,
-timestamp: Date.now()
-});
-localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-alert('Ayah bookmarked!');
-}
+
 function renderBookmarks() {
-const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-bookmarksList.innerHTML = '';
-if (bookmarks.length === 0) {
-bookmarksList.innerHTML = '<p style="text-align: center; color: var(--text-light);">No saved ayahs yet</p>';
-return;
+  if (!bookmarksList) return;
+  const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+  bookmarksList.innerHTML = '';
+  if (bookmarks.length === 0) {
+    bookmarksList.innerHTML = '<p style="text-align: center; color: var(--text-light);">No saved ayahs yet</p>';
+    return;
+  }
+  bookmarks.forEach(b => {
+    const item = document.createElement('div');
+    item.className = 'bookmark-item';
+    const text = document.createElement('div');
+    text.className = 'bookmark-text';
+    text.innerHTML = `<strong>${b.nameEn} ${b.surah}:${b.verse}</strong><br><span style="color: var(--text-light); font-size: 0.9rem;">${b.translation || ''}...</span>`;
+    const actions = document.createElement('div');
+    actions.className = 'bookmark-actions';
+    const openBtn = document.createElement('button');
+    openBtn.className = 'bookmark-btn';
+    openBtn.textContent = 'Open';
+    openBtn.onclick = () => {
+      window.location.hash = `#${b.surah}`;
+      if (bookmarksModal) bookmarksModal.classList.remove('open');
+      setTimeout(() => {
+        document.getElementById(`ayah-${b.verse}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 500);
+    };
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'bookmark-btn delete';
+    deleteBtn.textContent = '✕';
+    deleteBtn.onclick = () => {
+      const updated = JSON.parse(localStorage.getItem('bookmarks') || '[]').filter(x => x.key !== b.key);
+      localStorage.setItem('bookmarks', JSON.stringify(updated));
+      renderBookmarks();
+    };
+    actions.appendChild(openBtn);
+    actions.appendChild(deleteBtn);
+    item.appendChild(text);
+    item.appendChild(actions);
+    bookmarksList.appendChild(item);
+  });
 }
-bookmarks.forEach(b => {
-const item = document.createElement('div');
-item.className = 'bookmark-item';
-const text = document.createElement('div');
-text.className = 'bookmark-text';
-text.innerHTML = `<strong>${b.nameEn} ${b.surah}:${b.verse}</strong><br><span style="color: var(--text-light); font-size: 0.9rem;">${b.translation || b.arabic}...</span>`;
-const actions = document.createElement('div');
-actions.className = 'bookmark-actions';
-const openBtn = document.createElement('button');
-openBtn.className = 'bookmark-btn';
-openBtn.textContent = 'Open';
-openBtn.onclick = () => {
-window.location.hash = `#${b.surah}`;
-bookmarksModal.classList.remove('open');
-setTimeout(() => {
-document.getElementById(`ayah-${b.verse}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}, 500);
-};
-const deleteBtn = document.createElement('button');
-deleteBtn.className = 'bookmark-btn delete';
-deleteBtn.textContent = '✕';
-deleteBtn.onclick = () => {
-const updated = JSON.parse(localStorage.getItem('bookmarks') || '[]').filter(x => x.key !== b.key);
-localStorage.setItem('bookmarks', JSON.stringify(updated));
-renderBookmarks();
-};
-actions.appendChild(openBtn);
-actions.appendChild(deleteBtn);
-item.appendChild(text);
-item.appendChild(actions);
-bookmarksList.appendChild(item);
-});
+
+if (bookmarksBtn) {
+  bookmarksBtn.addEventListener('click', () => {
+    renderBookmarks();
+    if (bookmarksModal) bookmarksModal.classList.add('open');
+  });
 }
-bookmarksBtn.addEventListener('click', () => {
-renderBookmarks();
-bookmarksModal.classList.add('open');
-});
-closeBookmarks.addEventListener('click', () => {
-bookmarksModal.classList.remove('open');
-});
-bookmarksModal.addEventListener('click', (e) => {
-if (e.target === bookmarksModal) {
-bookmarksModal.classList.remove('open');
+if (closeBookmarks && bookmarksModal) {
+  closeBookmarks.addEventListener('click', () => bookmarksModal.classList.remove('open'));
 }
-});
+
 document.addEventListener("DOMContentLoaded", () => {
   if (window.innerWidth <= 768) {
     const bottomNav = document.getElementById('bottomNav');
-    const audioPlayer = document.getElementById('audioPlayer');
+    const audioPlayerContainer = document.getElementById('audioPlayer');
 
-    if (bottomNav && audioPlayer) {
-      // Grab only the playback buttons
-      const playBtn = audioPlayer.querySelector('#playBtn');
-      const pauseBtn = audioPlayer.querySelector('#pauseBtn');
-      const stopBtn = audioPlayer.querySelector('#stopBtn');
+    if (bottomNav && audioPlayerContainer) {
+      const playBtnEl = audioPlayerContainer.querySelector('#playBtn');
+      const pauseBtnEl = audioPlayerContainer.querySelector('#pauseBtn');
 
-      // Insert them neatly at the start of the bottom bar
-      if (stopBtn) bottomNav.insertBefore(stopBtn, bottomNav.firstChild);
-      if (pauseBtn) bottomNav.insertBefore(pauseBtn, bottomNav.firstChild);
-      if (playBtn) bottomNav.insertBefore(playBtn, bottomNav.firstChild);
+      if (pauseBtnEl) bottomNav.insertBefore(pauseBtnEl, bottomNav.firstChild);
+      if (playBtnEl) bottomNav.insertBefore(playBtnEl, bottomNav.firstChild);
 
-      // Hide the old standalone audio container
-      audioPlayer.style.display = 'none';
+      audioPlayerContainer.style.display = 'none';
     }
   }
 });
-// Bottom Navigation
+
 const backToIndexBtn = document.getElementById('backToIndexBtn');
 const backToTopBtn = document.getElementById('backToTopBtn');
 const nextBtn = document.getElementById('nextBtn');
-backToIndexBtn.addEventListener('click', () => {
-window.location.href = 'home';
-});
-backToTopBtn.addEventListener('click', () => {
-window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-nextBtn.addEventListener('click', () => {
-if (currentViewType === 'juz') {
-if (currentJuz < 30) {
-window.location.href = `?${currentJuz + 1}`;
-} else {
-alert('This is the last Juz');
+
+if (backToIndexBtn) backToIndexBtn.addEventListener('click', () => { window.location.href = 'home'; });
+if (backToTopBtn) backToTopBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+if (nextBtn) {
+  nextBtn.addEventListener('click', () => {
+    if (currentViewType === 'juz') {
+      if (currentJuz < 30) window.location.href = `?${currentJuz + 1}`;
+      else alert('This is the last Juz');
+    } else {
+      if (currentSurah < 114) window.location.href = `#${currentSurah + 1}`;
+      else alert('This is the last Surah');
+    }
+  });
 }
-} else {
-if (currentSurah < 114) {
-window.location.href = `#${currentSurah + 1}`;
-} else {
-alert('This is the last Surah');
-}
-}
-});
-// Hash Navigation
+
 window.addEventListener('hashchange', async () => {
-if (location.hash && location.hash.length > 1) {
-const hashNum = Number(location.hash.substring(1));
-if (Number.isFinite(hashNum) && hashNum >= 1 && hashNum <= 114) {
-currentViewType = 'surah';
-showLoading();
-if (Object.keys(MAPS).length === 0) {
-await fetchAllSources();
-}
-renderSurah(hashNum);
-hideLoading();
-window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-}
+  if (location.hash && location.hash.length > 1) {
+    const hashNum = Number(location.hash.substring(1));
+    if (Number.isFinite(hashNum) && hashNum >= 1 && hashNum <= 114) {
+      if (Object.keys(MAPS).length === 0) await fetchAllSources();
+      await renderSurah(hashNum);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
 });
-// Initialize
+
 (async function init() {
-let id = 1;
-let viewType = 'surah';
-const searchParams = location.search;
-if (searchParams && searchParams.startsWith('?')) {
-const queryString = searchParams.substring(1);
-if (/^\d+$/.test(queryString)) {
-const juzNum = Number(queryString);
-if (juzNum >= 1 && juzNum <= 30) {
-viewType = 'juz';
-id = juzNum;
-}
-} else {
-const params = new URLSearchParams(searchParams);
-const juzParam = params.get('juz');
-if (juzParam) {
-const juzNum = Number(juzParam);
-if (juzNum >= 1 && juzNum <= 30) {
-viewType = 'juz';
-id = juzNum;
-}
-} else {
-const idParam = params.get('id');
-if (idParam) {
-const surahNum = Number(idParam);
-if (surahNum >= 1 && surahNum <= 114) {
-viewType = 'surah';
-id = surahNum;
-}
-}
-}
-}
-} else if (location.hash && location.hash.length > 1) {
-const hashNum = Number(location.hash.substring(1));
-if (Number.isFinite(hashNum) && hashNum >= 1 && hashNum <= 114) {
-viewType = 'surah';
-id = hashNum;
-}
-}
-currentViewType = viewType;
-loadRecitersFromJson();
-loadTafsirData();
-if (viewType === 'juz') {
-currentJuz = id;
-await fetchAllSources();
-await renderJuz(id);
-} else {
-currentSurah = id;
-showLoading();
-await fetchAllSources();
-renderSurah(currentSurah);
-hideLoading();
-}
+  let id = 1;
+  let viewType = 'surah';
+  const searchParams = location.search;
+  if (searchParams && searchParams.startsWith('?')) {
+    const queryString = searchParams.substring(1);
+    if (/^\d+$/.test(queryString)) {
+      const juzNum = Number(queryString);
+      if (juzNum >= 1 && juzNum <= 30) {
+        viewType = 'juz';
+        id = juzNum;
+      }
+    } else {
+      const params = new URLSearchParams(searchParams);
+      const juzParam = params.get('juz');
+      if (juzParam) {
+        const juzNum = Number(juzParam);
+        if (juzNum >= 1 && juzNum <= 30) {
+          viewType = 'juz';
+          id = juzNum;
+        }
+      } else {
+        const idParam = params.get('id');
+        if (idParam) {
+          const surahNum = Number(idParam);
+          if (surahNum >= 1 && surahNum <= 114) {
+            viewType = 'surah';
+            id = surahNum;
+          }
+        }
+      }
+    }
+  } else if (location.hash && location.hash.length > 1) {
+    const hashNum = Number(location.hash.substring(1));
+    if (Number.isFinite(hashNum) && hashNum >= 1 && hashNum <= 114) {
+      viewType = 'surah';
+      id = hashNum;
+    }
+  }
+  
+  currentViewType = viewType;
+  loadRecitersFromJson();
+  loadTafsirData();
+  
+  if (viewType === 'juz') {
+    currentJuz = id;
+    await fetchAllSources();
+    await renderJuz(id);
+  } else {
+    currentSurah = id;
+    await fetchAllSources();
+    await renderSurah(currentSurah);
+  }
 })();
 </script>
 </body>
