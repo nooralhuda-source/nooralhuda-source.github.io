@@ -2369,6 +2369,69 @@ body.reading-mode .ayah-tafsir {
     padding-bottom: 60px !important;
   }
 }
+.ayah-arabic {
+  direction: rtl;
+  font-feature-settings: "liga" on, "calt" on;
+  -webkit-font-smoothing: antialiased;
+  text-align: right;
+  letter-spacing: normal !important; /* Prevents letters from splitting apart */
+  word-spacing: normal !important;
+}
+@media (max-width: 768px) {
+  /* A. Make "Back to Surahs" button smaller */
+  .back-btn, 
+  a[href*="surah"], 
+  .back-to-surahs {
+    font-size: 0.75rem !important;
+    padding: 0.3rem 0.6rem !important;
+    border-radius: 6px !important;
+  }
+
+  /* B. Make Translation Mode and Reading Mode toggle buttons smaller */
+  .mode-toggle, 
+  .mode-btn {
+    font-size: 0.75rem !important;
+    padding: 0.35rem 0.7rem !important;
+    height: auto !important;
+  }
+
+  /* C. Ensure old audio bit below Bismillah is completely hidden on mobile */
+  #audioPlayer, 
+  .audio-player-container {
+    display: none !important;
+  }
+
+  /* D. Remove stop button (⏹) from bottom nav and give room to Beginning/Index/Next */
+  #stopBtn {
+    display: none !important;
+  }
+
+  /* E. Clean spacing for bottom navigation bar */
+  .bottom-nav {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0.35rem 0.5rem !important;
+    gap: 4px !important;
+  }
+
+  /* Make remaining buttons (Index, Play, Pause, Beginning, Next) share space comfortably */
+  .bottom-nav button, 
+  .bottom-nav .bottom-nav-btn {
+    flex: 1 !important;
+    font-size: 0.65rem !important;
+    padding: 0.3rem 0.1rem !important;
+    height: 34px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Give the 'Beginning' and 'Next' buttons a bit more breathing room */
+  .bottom-nav button#backToTopBtn,
+  .bottom-nav button#nextBtn {
+    flex: 1.2 !important;
+    font-weight: 600;
+  }
+}
 </style>
 </head>
 <body>
