@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -527,7 +528,138 @@ body.dark-mode {
         .footer p {
             opacity: 0.8;
         }
-        
+        @media (min-width: 1200px) {
+  .container {
+    max-width: 1350px !important;
+  }
+}
+
+/* Mobile & Small Screen Adjustments */
+@media (max-width: 768px) {
+  /* Nav */
+  .nav-container { 
+    padding: 0 1rem; 
+    height: 60px; 
+    max-width: 100%; 
+  }
+  
+  .logo { 
+    font-size: 20px; 
+    gap: 8px; 
+  }
+  
+  .hamburger {
+    display: block !important;
+  }
+  
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    padding: 1rem 1.5rem;
+    gap: 1.2rem;
+    border-top: 1px solid #eee;
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .nav-links.active {
+    display: flex;
+  }
+
+  /* Header */
+  .page-header {
+    padding: 60px 0 40px;
+  }
+
+  .page-title {
+    font-size: 2rem !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.95rem !important;
+  }
+
+  /* Grid & Content Cards */
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 0.25rem;
+  }
+
+  .content-card {
+    padding: 1.25rem;
+    border-radius: 14px;
+  }
+
+  /* Toggles & Search */
+  .view-toggle {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .toggle-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .search-wrapper {
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+  }
+
+  .search-input {
+    padding: 0.75rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  /* Spacing */
+  .container { 
+    padding: 0 1rem !important; 
+    max-width: 100% !important;
+  }
+  
+  section { 
+    border-radius: 0 !important; 
+  }
+}
+     @media (max-width: 768px) {
+  /* Reduce gap between header background image and the Surah/Juz toggle buttons */
+  .page-header {
+    padding: 40px 0 25px !important;
+  }
+
+  .view-toggle {
+    margin-bottom: 1.25rem !important;
+  }
+
+  /* Make the grid gap tighter between blocks */
+  .content-grid {
+    gap: 0.6rem !important;
+  }
+
+  /* Make individual surah/juz blocks smaller with smaller padding and text */
+  .content-card {
+    padding: 0.85rem 1rem !important;
+    border-radius: 10px !important;
+  }
+
+  .content-card h3 {
+    font-size: 1rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .content-card p {
+    font-size: 0.85rem !important;
+    line-height: 1.2 !important;
+  }
+}   
 </style>
 </head>
 <body>
