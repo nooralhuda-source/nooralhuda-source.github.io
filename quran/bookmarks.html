@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bookmarks | Noor Al Huda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--green:#136f3c;--green2:#1a8049;--gold:#d4af37;--ink:#2d3748;--muted:#718096;--line:#e2e8f0;--pale:#f7fafc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);background:var(--pale);line-height:1.6;overflow-x:hidden}
+/* Header — match the Qur'an Index page */
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#fff;
+  border-bottom:1px solid #eee;
+  min-height:88px;
+}
+.nav-container{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  position:absolute;
+  left:max(calc((100% - 1200px)/2), 24px);
+  width:auto;
+  margin:0;
+  padding:1rem 0;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:28px;
+  font-weight:700;
+  color:var(--green);
+  text-decoration:none;
+  white-space:nowrap;
+}
+.hamburger{display:none;font-size:26px;background:none;border:0;color:#136f3c;cursor:pointer}
+.nav-links{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:2.5rem;
+  list-style:none;
+  width:auto;
+  position:absolute;
+  right:max(calc((100% - 1200px)/2), 24px);
+  margin:0;
+  padding:1rem 0;
+}
+.nav-links a{color:#333;text-decoration:none;font-weight:500;white-space:nowrap}
+.nav-links a:hover{color:var(--green)}
+.page-header{
+  background:linear-gradient(135deg,rgba(19,111,60,.9),rgba(26,128,73,.8)),url('https://nooralhuda.co.uk/karbala.jpg') center/cover;
+  padding:100px 0 60px;
+  text-align:center;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  margin:0;
+}
+.header-content{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:2}
+.page-title{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin-bottom:1rem;text-shadow:0 4px 20px rgba(0,0,0,.3)}
+.page-subtitle{font-size:clamp(1rem,2vw,1.2rem);opacity:.9}
+@media(max-width:768px){
+  .navbar{display:block;min-height:0}
+  .nav-container{position:relative;left:auto;width:100%;max-width:100%;margin:0;padding:0 1rem;height:60px;justify-content:space-between}
+  .logo{font-size:20px}
+  .hamburger{display:block}
+  .nav-links{
+    display:none;
+    position:absolute;
+    right:auto;
+    width:100%;
+    margin:0;
+    top:100%;
+    left:0;
+    width:100%;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:1.2rem;
+    padding:1rem 1.5rem;
+    background:#fff;
+    border-top:1px solid #eee;
+    box-shadow:0 10px 15px rgba(0,0,0,.1);
+  }
+  .nav-links.show{display:flex}
+  .page-header{padding:60px 0 40px}
+}
+main{background:#fff;min-height:65vh;padding:52px 0 76px}
+ .container{max-width:1100px;margin:auto;padding:0 28px}
+ .toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:30px;padding:9px 18px;font:600 14px Inter;cursor:pointer}
+.tab.active{background:var(--green);border-color:var(--green);color:#fff}
+.primary-btn{border:1px solid var(--green);background:var(--green);color:#fff;border-radius:8px;padding:10px 16px;font:600 14px Inter;cursor:pointer}
+.primary-btn:hover{background:#0e5c32}
+.search{display:block;width:100%;max-width:440px;margin-bottom:34px;border:1px solid var(--line);border-radius:30px;padding:12px 17px;font:14px Inter;outline:none}
+.search:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(19,111,60,.09)}
+.collection-form{display:none;background:#f8fbf8;border:1px solid #e4ece5;border-radius:12px;padding:15px;margin:0 0 20px;gap:10px;align-items:center}
+.collection-form.show{display:flex}
+.collection-form input{flex:1;min-width:0;border:1px solid var(--line);border-radius:7px;padding:10px 12px;font:14px Inter}
+.section-heading{font-size:17px;color:var(--green);font-weight:700;margin:24px 0 13px}
+ .bookmark-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:stretch}
+ .bookmark-card,.collection-card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px;min-width:0;transition:border-color .2s,box-shadow .2s}
+.bookmark-card{position:relative;border-top:3px solid var(--green)}
+.bookmark-card:hover,.collection-card:hover{border-color:#b7cdbd;box-shadow:0 5px 16px rgba(20,60,40,.07)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.reference{font-size:14px;font-weight:700;color:var(--green)}
+ .arabic{font-family:Amiri,serif;font-size:22px;line-height:1.8;color:#173b32;text-align:right;direction:rtl;margin:10px 0 5px;overflow-wrap:anywhere}
+ .translation{font-size:12px;line-height:1.55;color:#58645c;margin-top:4px}
+ .card-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap;border-top:1px solid #edf1ed;margin-top:10px;padding-top:9px}
+.small-btn{border:1px solid var(--line);background:#fff;color:#405047;border-radius:7px;padding:6px 8px;font:600 11px Inter;cursor:pointer}
+.small-btn.open{background:var(--green);border-color:var(--green);color:#fff}
+.small-btn.remove{color:#92564c}
+.collection-select{margin-left:auto;max-width:155px;min-width:0;border:1px solid var(--line);border-radius:7px;padding:7px 8px;background:#fff;color:#46534a;font:12px Inter}
+.collection-card{cursor:pointer}
+.collection-card h3{color:var(--green);font-size:16px;margin-bottom:4px}
+.collection-card p{font-size:13px;color:var(--muted)}
+.collection-card .collection-actions{display:flex;gap:8px;margin-top:12px}
+.empty{padding:45px 18px;text-align:center;color:var(--muted);border:1px dashed #d9e3dc;border-radius:12px;grid-column:1/-1}
+.empty strong{display:block;color:#486253;margin-bottom:5px}
+footer{padding:26px 16px;text-align:center;color:var(--muted);font-size:13px;background:#fff;border-top:1px solid var(--line)}
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(15,30,22,.42);z-index:2000;align-items:center;justify-content:center;padding:18px}
+.modal-backdrop.show{display:flex}
+.modal{background:#fff;border-radius:14px;width:min(440px,100%);padding:22px;box-shadow:0 20px 55px rgba(0,0,0,.18)}
+.modal h2{font-size:18px;color:var(--green);margin-bottom:8px}
+.modal p{font-size:13px;color:var(--muted);margin-bottom:16px}
+.modal input{width:100%;padding:11px;border:1px solid var(--line);border-radius:7px;font:14px Inter}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+@media(min-width:761px) and (max-width:1100px){
+ .bookmark-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ .nav-inner{min-height:60px;padding:8px 16px;flex-wrap:wrap}.logo{font-size:20px}.hamburger{display:block}
+ .nav-links{display:none;flex-direction:column;align-items:flex-start;width:100%;padding:12px 4px 16px;gap:13px}
+ .nav-links.show{display:flex}.page-header{padding:48px 16px 34px}main{padding:26px 0 45px}.container{padding:0 15px}
+ .toolbar{align-items:stretch}.toolbar .tabs{width:100%}.tab{flex:1;padding:9px 10px}.search{max-width:none}
+ .bookmark-grid{grid-template-columns:1fr;gap:10px}.bookmark-card,.collection-card{padding:13px}
+ .arabic{font-size:23px}.collection-form{flex-wrap:wrap}.collection-form input{flex-basis:100%}
+ .collection-select{margin-left:0;flex:1}
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="https://nooralhuda.co.uk/" class="logo">Noor Al Huda</a>
+    <button class="hamburger" id="hamburger" aria-label="Open navigation">☰</button>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="https://nooralhuda.co.uk/">Home</a></li>
+    <li><a href="https://nooralhuda.co.uk/resources">Resources</a></li>
+    <li><a href="https://nooralhuda.co.uk/learn">Learn More</a></li>
+    <li><a href="https://nooralhuda.co.uk/aboutus">About Us</a></li>
+  </ul>
+</nav>
+<section class="page-header">
+  <div class="header-content">
+    <h1 class="page-title">Bookmarks</h1>
+    <p class="page-subtitle">Save and organise your Qur'an bookmarks</p>
+  </div>
+</section>
+<main>
+  <div class="container">
+    <div class="toolbar">
+      <div class="tabs">
+        <button class="tab active" data-view="all">All Bookmarks</button>
+        <button class="tab" data-view="collections">Collections</button>
+      </div>
+      <button class="primary-btn" id="newCollectionBtn">＋ New Collection</button>
+    </div>
+    <div class="collection-form" id="collectionForm">
+      <input id="collectionName" type="text" maxlength="50" placeholder="Collection name (e.g. Patience, Duas, Reflection)">
+      <button class="primary-btn" id="saveCollectionBtn">Create</button>
+      <button class="small-btn" id="cancelCollectionBtn">Cancel</button>
+    </div>
+    <input class="search" id="searchInput" type="search" placeholder="Search bookmarks or collections…" aria-label="Search">
+    <div id="contentArea"></div>
+  </div>
+</main>
+<footer>© 2026 Noor Al Huda. Knowledge from the Qur'an. Guidance through the Ahlulbayt (عليهم السلام).</footer>
+<div class="modal-backdrop" id="collectionModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="collectionModalTitle">
+    <h2 id="collectionModalTitle">Collection</h2>
+    <p id="collectionModalText">Manage this collection.</p>
+    <div class="modal-actions"><button class="small-btn" id="closeCollectionModal">Close</button></div>
+  </div>
+</div>
+<script>
+const BOOKMARK_KEY='bookmarks';
+const COLLECTION_KEY='noorBookmarkCollections';
+const contentArea=document.getElementById('contentArea');
+const searchInput=document.getElementById('searchInput');
+let activeView='all';
+
+function readJSON(key,fallback=[]){try{const v=JSON.parse(localStorage.getItem(key)||'null');return Array.isArray(v)?v:fallback}catch(e){return fallback}}
+function getBookmarks(){return readJSON(BOOKMARK_KEY).map((b,i)=>({...b,key:b.key||`${b.surah}:${b.verse||b.v||i}`,verse:Number(b.verse||b.v||0),surah:Number(b.surah||1)}))}
+function saveBookmarks(list){localStorage.setItem(BOOKMARK_KEY,JSON.stringify(list))}
+function getCollections(){return readJSON(COLLECTION_KEY)}
+function saveCollections(list){localStorage.setItem(COLLECTION_KEY,JSON.stringify(list))}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function label(b){return `${b.nameEn||`Surah ${b.surah}`} ${b.surah}:${b.verse}`}
+function setView(view){activeView=view;document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===view));render()}
+function openAyah(b){
+  sessionStorage.setItem('noorPendingBookmark',JSON.stringify({surah:b.surah,verse:b.verse,mode:'translation'}));
+  // The Qur'an reader page is index.html. The hash selects the Surah.
+  window.location.href=`./index.html#${b.surah}`;
+}
+function render(){
+  const q=searchInput.value.trim().toLowerCase();
+  contentArea.innerHTML='';
+  if(activeView==='all'){
+    const list=getBookmarks().filter(b=>`${label(b)} ${b.arabic||''} ${b.translation||''}`.toLowerCase().includes(q));
+    const grid=document.createElement('div');grid.className='bookmark-grid';
+    if(!list.length){grid.innerHTML='<div class="empty"><strong>No bookmarks found</strong>Save an ayah from the Qur’an reader and it will appear here.</div>'}
+    list.forEach(b=>{
+      const card=document.createElement('article');card.className='bookmark-card';
+      card.innerHTML=`<div class="card-top"><div class="reference">${esc(label(b))}</div></div>
+        ${b.arabic?`<div class="arabic" lang="ar" dir="rtl">${esc(b.arabic)}</div>`:''}
+        ${b.translation?`<div class="translation">${esc(b.translation)}</div>`:''}
+        <div class="card-actions">
+          <button class="small-btn open" data-action="open">Open ayah</button>
+          <button class="small-btn remove" data-action="remove">Remove</button>
+          <select class="collection-select" aria-label="Add to collection"><option value="">＋ Collection</option>${getCollections().map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('')}</select>
+        </div>`;
+      card.querySelector('[data-action="open"]').addEventListener('click',()=>openAyah(b));
+      card.querySelector('[data-action="remove"]').addEventListener('click',()=>{saveBookmarks(getBookmarks().filter(x=>x.key!==b.key));render()});
+      card.querySelector('select').addEventListener('change',e=>{
+        if(!e.target.value)return;
+        const collections=getCollections();const c=collections.find(x=>x.id===e.target.value);
+        if(c){c.bookmarkKeys=[...new Set([...(c.bookmarkKeys||[]),b.key])];saveCollections(collections);e.target.value=''}
+      });
+      grid.appendChild(card);
+    });
+    contentArea.appendChild(grid);
+  }else{
+    const collections=getCollections().filter(c=>c.name.toLowerCase().includes(q));
+    const grid=document.createElement('div');grid.className='bookmark-grid';
+    if(!collections.length){grid.innerHTML='<div class="empty"><strong>No collections yet</strong>Create a collection, then add saved ayahs to it.</div>'}
+    collections.forEach(c=>{
+      const count=(c.bookmarkKeys||[]).length;
+      const card=document.createElement('article');card.className='collection-card';
+      card.innerHTML=`<h3>${esc(c.name)}</h3><p>${count} saved ${count===1?'ayah':'ayahs'}</p><div class="collection-actions"><button class="small-btn open" data-action="view">Open collection</button><button class="small-btn remove" data-action="delete">Delete</button></div>`;
+      card.querySelector('[data-action="view"]').addEventListener('click',()=>renderCollection(c.id));
+      card.querySelector('[data-action="delete"]').addEventListener('click',()=>{if(confirm(`Delete the collection “${c.name}”? Bookmarks will not be deleted.`)){saveCollections(getCollections().filter(x=>x.id!==c.id));render()}});
+      grid.appendChild(card);
+    });
+    contentArea.appendChild(grid);
+  }
+}
+function renderCollection(id){
+  const c=getCollections().find(x=>x.id===id);if(!c)return;
+  contentArea.innerHTML=`<div class="toolbar"><button class="small-btn" id="backCollections">← All collections</button><h2 class="section-heading">${esc(c.name)}</h2></div>`;
+  document.getElementById('backCollections').addEventListener('click',render);
+  const keys=new Set(c.bookmarkKeys||[]);
+  const list=getBookmarks().filter(b=>keys.has(b.key));
+  const grid=document.createElement('div');grid.className='bookmark-grid';
+  if(!list.length)grid.innerHTML='<div class="empty"><strong>This collection is empty</strong>Add ayahs using the collection menu on a bookmark card.</div>';
+  list.forEach(b=>{
+    const card=document.createElement('article');card.className='bookmark-card';
+    card.innerHTML=`<div class="reference">${esc(label(b))}</div>${b.arabic?`<div class="arabic" lang="ar" dir="rtl">${esc(b.arabic)}</div>`:''}${b.translation?`<div class="translation">${esc(b.translation)}</div>`:''}<div class="card-actions"><button class="small-btn open">Open ayah</button><button class="small-btn remove">Remove from collection</button></div>`;
+    card.querySelector('.open').addEventListener('click',()=>openAyah(b));
+    card.querySelector('.remove').addEventListener('click',()=>{const all=getCollections();const target=all.find(x=>x.id===id);target.bookmarkKeys=(target.bookmarkKeys||[]).filter(k=>k!==b.key);saveCollections(all);renderCollection(id)});
+    grid.appendChild(card);
+  });
+  contentArea.appendChild(grid);
+}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>setView(t.dataset.view)));
+searchInput.addEventListener('input',render);
+document.getElementById('newCollectionBtn').addEventListener('click',()=>{document.getElementById('collectionForm').classList.add('show');document.getElementById('collectionName').focus()});
+document.getElementById('cancelCollectionBtn').addEventListener('click',()=>document.getElementById('collectionForm').classList.remove('show'));
+document.getElementById('saveCollectionBtn').addEventListener('click',()=>{
+  const input=document.getElementById('collectionName');const name=input.value.trim();if(!name){input.focus();return}
+  const collections=getCollections();if(collections.some(c=>c.name.toLowerCase()===name.toLowerCase())){alert('A collection with that name already exists.');return}
+  collections.push({id:`collection-${Date.now()}`,name,bookmarkKeys:[]});saveCollections(collections);input.value='';document.getElementById('collectionForm').classList.remove('show');setView('collections');
+});
+document.getElementById('hamburger').addEventListener('click',function(){
+  document.getElementById('navLinks').classList.toggle('show');
+  this.classList.toggle('active');
+});
+render();
+</script>
+</body>
+</html>
