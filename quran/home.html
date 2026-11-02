@@ -660,6 +660,60 @@ body.dark-mode {
     line-height: 1.2 !important;
   }
 }   
+/* Header Actions & Top Buttons Layout */
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+/* 3D Frosted Glass Pill Button Style */
+.btn-back-header, 
+.btn-saved-header {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-back-header:hover, 
+.btn-saved-header:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.25), inset 0 1px 2px 0 rgba(255, 255, 255, 0.6);
+}
+
+.btn-back-header:active, 
+.btn-saved-header:active {
+  transform: translateY(0);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .btn-saved-header, .btn-back-header {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+  .header-actions {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
 </style>
 </head>
 <body>
@@ -683,9 +737,18 @@ body.dark-mode {
 
 </nav>
 
-<!-- Page Header -->
+
 <section class="page-header">
   <div class="header-content">
+    <div class="header-actions">
+      <!-- Resources Back Button on Top Left -->
+      <a href="https://nooralhuda.co.uk/resources" class="btn-back-header">&larr; Resources</a>
+      
+      <!-- Bookmarks Button on Top Right -->
+      <a href="https://nooralhuda.co.uk/quran/bookmarks" class="btn-saved-header">
+        Bookmarks
+      </a>
+    </div>
     <h1 class="page-title" id="pageTitle">Select a Surah</h1>
     <p class="page-subtitle">Read the Holy Quran</p>
   </div>
