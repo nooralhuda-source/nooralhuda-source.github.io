@@ -271,7 +271,7 @@
       border-radius: var(--radius-pill);
       padding: 3px;
       width: fit-content;
-      margin: 0 auto 1.5rem;
+      margin: 0 auto 1rem;
       gap: 2px;
     }
     .mode-btn {
@@ -297,7 +297,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0 auto 1.5rem;
+      margin: 0 auto 1rem;
       width: 100%;
     }
     #bismillahWrap img {
@@ -321,17 +321,17 @@
       border: 1px solid var(--border);
       border-left: 4px solid var(--green);
       border-radius: var(--radius-md);
-      padding: 1.5rem 1.25rem 1.25rem;
-      margin-bottom: 1.1rem;
+      padding: 1rem 1.1rem .9rem;
+      margin-bottom: .6rem;
       position: relative;
       transition: box-shadow .2s, border-color .2s, transform .2s, background .3s;
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(10px);
     }
     .quran-verse.revealed {
       opacity: 1;
       transform: translateY(0);
-      transition: opacity .4s ease, transform .4s ease, box-shadow .2s, background .3s;
+      transition: opacity .35s ease, transform .35s ease, box-shadow .2s, background .3s;
     }
     .quran-verse:hover {
       box-shadow: var(--shadow-md);
@@ -341,23 +341,23 @@
     .ayah-number {
       display: inline-flex;
       align-items: center;
-      gap: .35rem;
+      gap: .3rem;
       background: var(--green-light);
       color: var(--green);
       border: 1px solid rgba(19,111,60,.2);
-      padding: .28rem .75rem;
+      padding: .2rem .6rem;
       border-radius: var(--radius-pill);
-      font-size: .78rem;
+      font-size: .73rem;
       font-weight: 700;
-      margin-bottom: 1rem;
+      margin-bottom: .6rem;
       letter-spacing: .02em;
     }
 
     .ayah-arabic {
       direction: rtl;
       text-align: right;
-      line-height: 2.3;
-      margin-bottom: 1rem;
+      line-height: 2.0;
+      margin-bottom: .7rem;
       color: var(--text);
       font-feature-settings: "liga" on, "calt" on;
       -webkit-font-smoothing: antialiased;
@@ -367,38 +367,38 @@
 
     .ayah-translation {
       font-family: 'Merriweather', serif;
-      font-size: clamp(.88rem, 2vw, 1rem);
-      line-height: 1.85;
+      font-size: clamp(.82rem, 1.8vw, .93rem);
+      line-height: 1.65;
       color: var(--text);
-      margin-bottom: .4rem;
+      margin-bottom: .3rem;
     }
     .translation-source {
-      font-size: .78rem;
+      font-size: .72rem;
       color: var(--text-faint);
       font-style: italic;
-      margin-bottom: .6rem;
+      margin-bottom: .4rem;
     }
 
     /* Tafsir */
     .tafsir-btn {
       display: inline-flex;
       align-items: center;
-      gap: .4rem;
-      padding: .38rem .85rem;
+      gap: .35rem;
+      padding: .28rem .7rem;
       border: 1.5px solid var(--green);
       border-radius: var(--radius-pill);
       background: transparent;
       color: var(--green);
-      font-size: .8rem;
+      font-size: .75rem;
       font-weight: 600;
-      margin-top: .5rem;
+      margin-top: .35rem;
       transition: var(--transition);
     }
     .tafsir-btn:hover, .tafsir-btn.open {
       background: var(--green);
       color: #fff;
     }
-    .tafsir-arrow { font-size: .65rem; transition: transform .3s; }
+    .tafsir-arrow { font-size: .6rem; transition: transform .3s; }
     .tafsir-btn.open .tafsir-arrow { transform: rotate(180deg); }
 
     .tafsir-body {
@@ -412,24 +412,24 @@
       opacity: 1;
     }
     .tafsir-inner {
-      margin-top: .9rem;
-      padding: 1rem 1.1rem;
+      margin-top: .6rem;
+      padding: .75rem .9rem;
       background: var(--green-light);
       border-radius: var(--radius-sm);
       border-left: 3px solid var(--green);
     }
     .tafsir-label {
-      font-size: .78rem;
+      font-size: .72rem;
       font-weight: 700;
       color: var(--green);
       text-transform: uppercase;
       letter-spacing: .06em;
-      margin-bottom: .5rem;
+      margin-bottom: .35rem;
     }
     .tafsir-text {
       font-family: 'Merriweather', serif;
-      font-size: .88rem;
-      line-height: 1.8;
+      font-size: .83rem;
+      line-height: 1.7;
       color: var(--text);
     }
 
@@ -507,7 +507,7 @@
     #ayahContainer.continuous-reading {
       direction: rtl;
       text-align: right;
-      line-height: 2.9;
+      line-height: 2.2;
       padding: 1.25rem 1.75rem;
       background: var(--surface);
       border-radius: var(--radius-lg);
@@ -1203,7 +1203,7 @@
       .tafsir-text { font-size: .82rem; line-height: 1.65; }
       .tafsir-inner { padding: .75rem .85rem; }
 
-      #ayahContainer.continuous-reading { padding: .75rem .85rem; line-height: 2.45; }
+      #ayahContainer.continuous-reading { padding: .75rem .85rem; line-height: 2.1; }
       #ayahContainer.continuous-reading .ayah-number { width: 1.8em; height: 1.8em; }
 
       #bottomBar { padding: 0 .5rem; gap: .25rem; }
